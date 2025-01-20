@@ -39,66 +39,148 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
       initialOpen={false}
       useAsTriggerOnly={true}
     >
-      <StyledContainer className="flex flex-col p-2 rounded-lg w-44 lg:w-64 bg-whitetrans">
-        <div className="flex flex-row items-center">
-          <StyledButton onClick={controller.onMainMenuButtonClicked}>
-            <img src={engineLogo} alt="" />
-          </StyledButton>
-          <p className="pl-2 text-sm font-bold lg:text-xl text-adlerdarkblue text-outline">
-            {translate("sidebar_mainMenu")}
-          </p>
-        </div>
+      {/*<StyledContainer className="flex flex-col p-2 rounded-lg w-44 lg:w-64 border-8 border-black bg-whitetrans "> <img src={engineLogo} alt="inventory background" className="w-10 absolute bottom-3 right-3" />*/}
+      <StyledContainer className="relative w-60 border-8 rounded-2xl border-adlerdarkblue bg-white flex flex-col">
+        <header className="flex justify-between w-full items-center mt-1 relative">
+          <span className="ml-1 text-xs font-bold lg:text-md text-adlerdarkblue">
+            Mo. 12.01.25
+          </span>
+          <span className="bg-adlerdarkblue h-2 w-2 rounded-full absolute left-[calc(50%-0.25rem)]"></span>
+          <span className="mr-1 text-xs text-right font-bold lg:text-md text-adlerdarkblue">
+            16:01 Uhr
+          </span>
+        </header>
+        <div className="grid grid-flow-row-dense auto-rows-max min-h-[45vh] gap-1 p-1 rounded-lg grid-cols-3">
+          <div className="flex flex-col justify-start items-center max-h-[25%]">
+            <StyledButton onClick={controller.onMainMenuButtonClicked}>
+              <img src={engineLogo} alt="" />
+            </StyledButton>
+            <p className="pl-2 text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+              {translate("sidebar_mainMenu")}
+            </p>
+          </div>
 
-        <div className="flex flex-row items-center">
-          <StyledButton onClick={controller.onWorldMenuButtonClicked}>
-            <img src={worldIcon} alt="" />
-          </StyledButton>
-          <p className="pl-2 text-sm font-bold lg:text-xl text-adlerdarkblue text-outline">
-            {translate("sidebar_learningWorldMenu")}
-          </p>
-        </div>
+          <div className="flex flex-col justify-start items-center max-h-[25%]">
+            <StyledButton onClick={controller.onWorldMenuButtonClicked}>
+              <img src={worldIcon} alt="" />
+            </StyledButton>
+            <p className="pl-2 text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+              {translate("sidebar_learningWorldMenu")}
+            </p>
+          </div>
 
-        <div className="flex flex-row items-center">
-          <StyledButton onClick={controller.onSpaceMenuButtonClicked}>
-            <img src={spaceMenuIcon} alt="" />
-          </StyledButton>
-          <p className="pl-2 text-sm font-bold lg:text-xl text-adlerdarkblue text-outline">
-            {translate("sidebar_learningSpaceMenu")}
-          </p>
-        </div>
+          <div className="flex flex-col justify-startr items-center max-h-[25%]">
+            <StyledButton onClick={controller.onSpaceMenuButtonClicked}>
+              <img src={spaceMenuIcon} alt="" />
+            </StyledButton>
+            <p className="pl-2 text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+              {translate("sidebar_learningSpaceMenu")}
+            </p>
+          </div>
 
-        {/* <div className="flex flex-row items-center">
-          <StyledButton onClick={controller.onBreakTimeButtonClicked}>
-            <img src={pauseIcon} alt="" />
-          </StyledButton>
-          <p className="pl-2 text-sm font-bold lg:text-xl text-adlerdarkblue text-outline">
-            {translate("sidebar_breakTime")}
-          </p>
-        </div> */}
+          {/* <div className="flex flex-col justify-start items-center max-h-[25%]">
+            <StyledButton onClick={controller.onBreakTimeButtonClicked}>
+              <img src={pauseIcon} alt="" />
+            </StyledButton>
+            <p className="pl-2 text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+              {translate("sidebar_breakTime")}
+            </p>
+          </div> */}
 
-        <div className="flex flex-row items-center">
-          <StyledButton onClick={controller.onControlsExplanationButtonClicked}>
-            <img src={controlsIcon} alt="Steuerungserklärung" />
-          </StyledButton>
-          <p className="pl-2 text-sm font-bold lg:text-xl text-adlerdarkblue text-outline">
-            {translate("sidebar_controls")}
-          </p>
-        </div>
+          <div className="flex flex-col justify-start items-center max-h-[25%]">
+            <StyledButton
+              onClick={controller.onControlsExplanationButtonClicked}
+            >
+              <img src={controlsIcon} alt="Steuerungserklärung" />
+            </StyledButton>
+            <p className="pl-2 text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+              {translate("sidebar_controls")}
+            </p>
+          </div>
 
-        <div className="flex flex-row items-center">
-          <FullscreenSwitch />
-          <p className="pl-2 text-sm font-bold lg:text-xl text-adlerdarkblue text-outline">
-            {translate("sidebar_fullScreen")}
-          </p>
-        </div>
+          <div className="flex flex-col justify-startr items-center max-h-[25%]">
+            <FullscreenSwitch />
+            <p className="pl-2 text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+              {translate("sidebar_fullScreen")}
+            </p>
+          </div>
 
-        <div className="flex flex-row items-center">
-          <HelpDeskButton />
-          <HelpDeskModal />
-          <p className="pl-2 text-sm font-bold lg:text-xl text-adlerdarkblue text-outline">
-            {translate("sidebar_help")}
-          </p>
+          <div className="flex flex-col justify-start items-center max-h-[25%]">
+            <HelpDeskButton />
+            <HelpDeskModal />
+            <p className="pl-2 text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+              {translate("sidebar_help")}
+            </p>
+          </div>
+
+          <div className="flex flex-col justify-start items-center max-h-[25%] invisible">
+            <StyledButton
+              onClick={controller.onControlsExplanationButtonClicked}
+            >
+              <img src={controlsIcon} alt="Steuerungserklärung" />
+            </StyledButton>
+            <p className="pl-2 text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+              {translate("sidebar_controls")}
+            </p>
+          </div>
+          {/* Empty placeholder containers for future functions/buttons */}
+          <div className="flex flex-col justify-start items-center max-h-[25%] invisible">
+            <StyledButton
+              onClick={controller.onControlsExplanationButtonClicked}
+            >
+              <img src={controlsIcon} alt="Steuerungserklärung" />
+            </StyledButton>
+            <p className="pl-2 text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+              {translate("sidebar_controls")}
+            </p>
+          </div>
+
+          <div className="flex flex-col justify-start items-center max-h-[25%] invisible">
+            <StyledButton
+              onClick={controller.onControlsExplanationButtonClicked}
+            >
+              <img src={controlsIcon} alt="Steuerungserklärung" />
+            </StyledButton>
+            <p className="pl-2 text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+              {translate("sidebar_controls")}
+            </p>
+          </div>
+
+          <div className="flex flex-col justify-start items-center max-h-[25%] invisible">
+            <StyledButton
+              onClick={controller.onControlsExplanationButtonClicked}
+            >
+              <img src={controlsIcon} alt="Steuerungserklärung" />
+            </StyledButton>
+            <p className="pl-2 text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+              {translate("sidebar_controls")}
+            </p>
+          </div>
+
+          <div className="flex flex-col justify-start items-center max-h-[25%] invisible">
+            <StyledButton
+              onClick={controller.onControlsExplanationButtonClicked}
+            >
+              <img src={controlsIcon} alt="Steuerungserklärung" />
+            </StyledButton>
+            <p className="pl-2 text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+              {translate("sidebar_controls")}
+            </p>
+          </div>
+
+          <div className="flex flex-col justify-start items-center max-h-[25%] invisible">
+            <StyledButton
+              onClick={controller.onControlsExplanationButtonClicked}
+            >
+              <img src={controlsIcon} alt="Steuerungserklärung" />
+            </StyledButton>
+            <p className="pl-2 text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+              {translate("sidebar_controls")}
+            </p>
+          </div>
+          {/* End of empty placeholder containers*/}
         </div>
+        <footer className="bg-adlerdarkblue h-2 w-1/4 rounded-sm self-center m-1"></footer>
       </StyledContainer>
     </CustomDropdown>
   );
