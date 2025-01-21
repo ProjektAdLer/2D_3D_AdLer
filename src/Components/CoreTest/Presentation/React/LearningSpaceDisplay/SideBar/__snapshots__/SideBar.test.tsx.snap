@@ -17,7 +17,7 @@ exports[`SideBar should render 1`] = `
           <img
             alt="EngineLogo"
             class="lg:w-20 md:w-16 sm:w-14"
-            src="hamburger-menu.svg"
+            src="smartphone.svg"
           />
         </button>
       </div>
