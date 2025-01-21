@@ -12,6 +12,7 @@ import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import worldIcon from "../../../../../../Assets/icons/world-menu.svg";
 import spaceMenuIcon from "../../../../../../Assets/icons/space-menu.svg";
 import controlsIcon from "../../../../../../Assets/icons/controls.svg";
+import smartphoneIcon from "../../../../../../Assets/icons/smartphone.svg";
 // import pauseIcon from "../../../../../../Assets/icons/pause.svg";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
@@ -40,7 +41,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
       headerPart={
         <StyledButton>
           <img
-            src={hamburgerButton}
+            src={smartphoneIcon}
             className="lg:w-20 md:w-16 sm:w-14"
             alt="EngineLogo"
           ></img>
@@ -50,7 +51,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
       useAsTriggerOnly={true}
     >
       {/*<StyledContainer className="flex flex-col p-2 rounded-lg w-44 lg:w-64 border-8 border-black bg-whitetrans ">*/}
-      <StyledContainer className="relative w-64 border-8 rounded-2xl border-adlerdarkblue bg-white flex flex-col z-0">
+      <StyledContainer className="relative w-60 border-8 rounded-2xl border-adlerdarkblue bg-white flex flex-col z-0">
         <header className="flex justify-between w-full items-center mt-1 relative z-20">
           <span className="ml-1 text-xs font-bold lg:text-md text-adlerdarkblue">
             {time.toLocaleDateString()}
