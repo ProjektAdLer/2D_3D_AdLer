@@ -4,8 +4,8 @@ import {
   AvatarBeardModels,
   AvatarHairModels,
   AvatarPantsModels,
-  AvatarShirtModels,
   AvatarShoesModels,
+  AvatarShirtModels,
 } from "../../../../../Core/Domain/AvatarModels/AvatarModelTypes";
 import Observable from "../../../../../../Lib/Observable";
 

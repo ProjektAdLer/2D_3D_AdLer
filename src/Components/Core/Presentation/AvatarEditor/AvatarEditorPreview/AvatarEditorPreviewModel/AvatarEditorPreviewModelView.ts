@@ -1,5 +1,5 @@
 import AvatarEditorPreviewModelViewModel from "./AvatarEditorPreviewModelViewModel";
-import { Mesh, Texture, TransformNode } from "@babylonjs/core";
+import { AnimationGroup, Mesh, Texture, TransformNode } from "@babylonjs/core";
 import IScenePresenter from "../../../Babylon/SceneManagement/IScenePresenter";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import SCENE_TYPES, {
@@ -9,10 +9,10 @@ import AvatarEditorPreviewSceneDefinition from "../AvatarEditorPreviewSceneDefin
 import {
   AvatarBeardModels,
   AvatarHairModels,
-  AvatarShirtModels,
   AvatarPantsModels,
   AvatarShoesModels,
   AvatarNoneModel,
+  AvatarShirtModels,
 } from "src/Components/Core/Domain/AvatarModels/AvatarModelTypes";
 import ILoadAvatarConfigUseCase from "src/Components/Core/Application/UseCases/LoadAvatarConfig/ILoadAvatarConfigUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
@@ -28,6 +28,10 @@ const baseModelLink = require("../../../../../../Assets/3dModels/sharedModels/av
 export default class AvatarEditorPreviewModelView {
   private scenePresenter: IScenePresenter;
 
+  private baseAnimatonGroups: AnimationGroup[];
+
+  private idleAnimationName: string = "ac_anim_idle2";
+
   constructor(private viewModel: AvatarEditorPreviewModelViewModel) {
     this.scenePresenter = CoreDIContainer.get<ScenePresenterFactory>(
       SCENE_TYPES.ScenePresenterFactory,
@@ -41,6 +45,8 @@ export default class AvatarEditorPreviewModelView {
   async asyncSetup(): Promise<void> {
     // load base model and position it
     const result = await this.scenePresenter.loadGLTFModel(baseModelLink);
+    this.baseAnimatonGroups = result.animationGroups;
+
     this.viewModel.baseModelMeshes = result.meshes as Mesh[];
     this.viewModel.baseModelMeshes[0].position.y = -1;
 
@@ -70,6 +76,16 @@ export default class AvatarEditorPreviewModelView {
     this.viewModel.shoesAnchorNode = result.transformNodes.find(
       (node) => node.name === "anker_shoes",
     )!;
+    this.viewModel.shirtAnchorNode = result.transformNodes.find(
+      (node) => node.name === "anker_top",
+    )!;
+
+    this.viewModel.baseModelMeshes.forEach((mesh) => {
+      if (mesh.name === "defaultTop") {
+        mesh.dispose();
+        this.updateShirt("shirts-sweatshirt");
+      }
+    });
 
     await CoreDIContainer.get<ILoadAvatarConfigUseCase>(
       USECASE_TYPES.ILoadAvatarConfigUseCase,
@@ -109,6 +125,7 @@ export default class AvatarEditorPreviewModelView {
   }
 
   private updateModelHair(hair?: AvatarHairModels | undefined) {
+    if (!hair) return;
     this.updateModel(
       hair,
       "hair/hairstyle",
@@ -118,11 +135,23 @@ export default class AvatarEditorPreviewModelView {
   }
 
   private updateModelBeard(beard?: AvatarBeardModels | undefined) {
+    if (!beard) return;
     this.updateModel(
       beard,
       "hair/beards",
       this.viewModel.beardMeshes,
       this.viewModel.beardAnchorNode,
+    );
+  }
+
+  private async updateShirt(shirt?: AvatarShirtModels | undefined) {
+    if (!shirt) return;
+
+    await this.updateModel(
+      shirt,
+      "clothing/shirts",
+      this.viewModel.shirtMeshes,
+      this.viewModel.shirtAnchorNode,
     );
   }
 
@@ -159,45 +188,49 @@ export default class AvatarEditorPreviewModelView {
   }
 
   private updateEyeBrows(eyebrow?: number) {
+    if (eyebrow === undefined || eyebrow === null) return;
     let eyebrowMat = this.viewModel.baseModelMeshes.find((mesh) =>
       mesh.material?.name.includes("Eyebrow_mat"),
     )?.material!;
 
     let texture = eyebrowMat.getActiveTextures()[0] as Texture;
-    const tmp = AvatarEyeBrowTexture[eyebrow!];
+    const tmp = AvatarEyeBrowTexture[eyebrow];
     texture.uOffset = tmp.uOffset;
     texture.vOffset = tmp.vOffset;
   }
 
   private updateEyes(eyes?: number) {
+    if (eyes === undefined || eyes === null) return;
     let eyeMat = this.viewModel.baseModelMeshes.find((mesh) =>
       mesh.material?.name.includes("Eyes_mat"),
     )?.material!;
 
     let texture = eyeMat.getActiveTextures()[0] as Texture;
-    const tmp = AvatarEyeTexture[eyes!];
+    const tmp = AvatarEyeTexture[eyes];
     texture.uOffset = tmp.uOffset;
     texture.vOffset = tmp.vOffset;
   }
 
   private updateNose(nose?: number) {
+    if (nose === undefined || nose === null) return;
     let noseMat = this.viewModel.baseModelMeshes.find((mesh) =>
       mesh.material?.name.includes("Nose_mat"),
     )?.material!;
 
     let texture = noseMat.getActiveTextures()[0] as Texture;
-    const tmp = AvatarNoseTexture[nose!];
+    const tmp = AvatarNoseTexture[nose];
     texture.uOffset = tmp.uOffset;
     texture.vOffset = tmp.vOffset;
   }
 
   private updateMouth(mouth?: number) {
+    if (mouth === undefined || mouth === null) return;
     let mouthMat = this.viewModel.baseModelMeshes.find((mesh) =>
       mesh.material?.name.includes("Mouth_mat"),
     )?.material!;
 
     let texture = mouthMat.getActiveTextures()[0] as Texture;
-    const tmp = AvatarMouthTexture[mouth!];
+    const tmp = AvatarMouthTexture[mouth];
     texture.uOffset = tmp.uOffset;
     texture.vOffset = tmp.vOffset;
   }
@@ -217,7 +250,8 @@ export default class AvatarEditorPreviewModelView {
     }
 
     // load model if not already loaded
-    if (!modelMap.has(newModel)) {
+    //if (!modelMap.has(newModel))
+    {
       const result = await this.scenePresenter.loadGLTFModel(
         require(
           `../../../../../../Assets/3dModels/sharedModels/avatar/${modelFolder}/aa-${newModel}.glb`,
@@ -225,12 +259,41 @@ export default class AvatarEditorPreviewModelView {
       );
       modelMap.set(newModel, result.meshes as Mesh[]);
       result.meshes[0].parent = anchorNode;
+
+      let idleAnim: AnimationGroup;
+      let syncFrame: number;
+      this.baseAnimatonGroups.forEach((animation) => {
+        if (animation.name.includes(this.idleAnimationName)) {
+          idleAnim = animation;
+        }
+      });
+
+      result.animationGroups.forEach((animation) => {
+        if (animation.name.includes(this.idleAnimationName)) {
+          idleAnim.pause();
+          syncFrame = idleAnim.getCurrentFrame();
+
+          idleAnim.restart();
+          animation.goToFrame(syncFrame);
+        }
+      });
+
+      console.log("BaseModel-Animations");
+      this.baseAnimatonGroups.forEach((animation) => {
+        console.log(animation.name, ", isPlaying: ", animation.isPlaying);
+      });
+      console.log("Current-animations");
+      result.animationGroups.forEach((animation) => {
+        console.log(animation.name, ", isPlaying: ", animation.isPlaying);
+      });
     }
 
     // set all meshes to invisible except the new model
     modelMap.forEach((meshes, type) => {
       const newIsVisible = type === newModel;
-      meshes.forEach((mesh) => (mesh.isVisible = newIsVisible));
+      meshes.forEach((mesh) => {
+        mesh.isVisible = newIsVisible;
+      });
     });
   }
 }
