@@ -9,6 +9,9 @@ import AvatarEditorPreviewSceneDefinition from "../AvatarEditorPreviewSceneDefin
 import {
   AvatarBeardModels,
   AvatarHairModels,
+  AvatarShirtModels,
+  AvatarPantsModels,
+  AvatarShoesModels,
   AvatarNoneModel,
 } from "src/Components/Core/Domain/AvatarModels/AvatarModelTypes";
 import ILoadAvatarConfigUseCase from "src/Components/Core/Application/UseCases/LoadAvatarConfig/ILoadAvatarConfigUseCase";
@@ -41,12 +44,31 @@ export default class AvatarEditorPreviewModelView {
     this.viewModel.baseModelMeshes = result.meshes as Mesh[];
     this.viewModel.baseModelMeshes[0].position.y = -1;
 
+    // Default-Meshes ausblenden
+    ["defaultPants", "defaultShoes", "defaultTop"].forEach((meshName) => {
+      const meshToHide = this.viewModel.baseModelMeshes.find(
+        (m) => m.name === meshName,
+      );
+      if (meshToHide) {
+        meshToHide.setEnabled(false);
+      }
+    });
+
     // find anchor nodes
     this.viewModel.hairAnchorNode = result.transformNodes.find(
       (node) => node.name === "anker_hair",
     )!;
     this.viewModel.beardAnchorNode = result.transformNodes.find(
       (node) => node.name === "anker_beard",
+    )!;
+    this.viewModel.shirtAnchorNode = result.transformNodes.find(
+      (node) => node.name === "anker_top",
+    )!;
+    this.viewModel.pantsAnchorNode = result.transformNodes.find(
+      (node) => node.name === "anker_pants",
+    )!;
+    this.viewModel.shoesAnchorNode = result.transformNodes.find(
+      (node) => node.name === "anker_shoes",
     )!;
 
     await CoreDIContainer.get<ILoadAvatarConfigUseCase>(
@@ -59,6 +81,9 @@ export default class AvatarEditorPreviewModelView {
     this.updateEyes(this.viewModel.currentAvatarConfig.Value.eyes);
     this.updateNose(this.viewModel.currentAvatarConfig.Value.nose);
     this.updateMouth(this.viewModel.currentAvatarConfig.Value.mouth);
+    this.updateModelShirt(this.viewModel.currentAvatarConfig.Value.shirt);
+    this.updateModelPants(this.viewModel.currentAvatarConfig.Value.pants);
+    this.updateModelShoes(this.viewModel.currentAvatarConfig.Value.shoes);
   }
 
   private onAvatarConfigChanged(): void {
@@ -75,6 +100,12 @@ export default class AvatarEditorPreviewModelView {
       this.updateNose(this.viewModel.avatarConfigDiff.Value.nose);
     if (this.viewModel.avatarConfigDiff.Value.mouth !== undefined)
       this.updateMouth(this.viewModel.avatarConfigDiff.Value.mouth);
+    if (this.viewModel.avatarConfigDiff.Value.shirt !== undefined)
+      this.updateModelShirt(this.viewModel.avatarConfigDiff.Value.shirt);
+    if (this.viewModel.avatarConfigDiff.Value.pants !== undefined)
+      this.updateModelPants(this.viewModel.avatarConfigDiff.Value.pants);
+    if (this.viewModel.avatarConfigDiff.Value.shoes !== undefined)
+      this.updateModelShoes(this.viewModel.avatarConfigDiff.Value.shoes);
   }
 
   private updateModelHair(hair?: AvatarHairModels | undefined) {
@@ -92,6 +123,38 @@ export default class AvatarEditorPreviewModelView {
       "hair/beards",
       this.viewModel.beardMeshes,
       this.viewModel.beardAnchorNode,
+    );
+  }
+
+  private updateModelShirt(shirt?: AvatarShirtModels | undefined) {
+    this.updateModel(
+      shirt,
+      "clothing/shirts",
+      this.viewModel.shirtMeshes,
+      this.viewModel.shirtAnchorNode,
+    );
+    this.viewModel.shirtMeshes.forEach((meshes) => {
+      meshes.forEach((mesh) => {
+        mesh.skeleton = this.viewModel.baseModelMeshes[0].skeleton;
+      });
+    });
+  }
+
+  private updateModelPants(pants?: AvatarPantsModels | undefined) {
+    this.updateModel(
+      pants,
+      "clothing/pants",
+      this.viewModel.pantsMeshes,
+      this.viewModel.pantsAnchorNode,
+    );
+  }
+
+  private updateModelShoes(shirt?: AvatarShoesModels | undefined) {
+    this.updateModel(
+      shirt,
+      "clothing/shoes",
+      this.viewModel.shoesMeshes,
+      this.viewModel.shoesAnchorNode,
     );
   }
 

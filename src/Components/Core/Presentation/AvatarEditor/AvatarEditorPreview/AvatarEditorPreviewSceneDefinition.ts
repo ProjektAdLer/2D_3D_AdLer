@@ -126,5 +126,7 @@ export default class AvatarEditorPreviewSceneDefinition extends AbstractSceneDef
     shadowGenerator.useBlurExponentialShadowMap = true;
     shadowGenerator.blurScale = 10;
     shadowGenerator.darkness = 0.6;
+
+    this.scene.debugLayer.show();
   }
 }
