@@ -4,7 +4,7 @@ import StyledButton from "../../ReactRelated/ReactBaseComponents/StyledButton";
 import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledContainer";
 import FullscreenSwitch from "~ReactComponents/LearningSpaceDisplay/FullscreenSwitch/FullscreenSwitch";
 import engineLogo from "../../../../../../Assets/icons/adler-engine.svg";
-import hamburgerButton from "../../../../../../Assets/icons/hamburger-menu.svg";
+// import hamburgerButton from "../../../../../../Assets/icons/hamburger-menu.svg";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import SideBarViewModel from "./SideBarViewModel";
 import SideBarController from "./SideBarController";
@@ -193,7 +193,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
           </div>
           {/* End of empty placeholder containers*/}
         </div>
-        <footer className="bg-adlerdarkblue h-2 w-1/4 rounded-sm self-center m-1 z-20"></footer>
+        <footer className="z-20 self-center w-1/4 h-2 m-1 rounded-sm bg-adlerdarkblue"></footer>
         <img
           src={engineLogo}
           alt="inventory background"
