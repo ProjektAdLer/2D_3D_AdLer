@@ -18,6 +18,8 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+- SideBarMenu is now a smartphone for better, more immersive implementation of future game-based learning concepts
+
 ### Removed
 
 ### Fixed
