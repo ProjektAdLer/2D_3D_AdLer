@@ -11,13 +11,23 @@ module.exports = {
       xl: "1280px",
       "2xl": "1536px",
       ultraWide: "3400px",
+      "mobile-landscape": {
+        raw: `only screen and (max-height: 600px) and (orientation: landscape)`,
+      },
     },
+
     extend: {
       backgroundImage: {
         learningworldbg:
           "url('/src/Assets/misc/WelcomeScreenButtonBackgrounds/LearningWorldButtonBackground.jpg')",
         avatarcreatorbg:
           "url('/src/Assets/misc/WelcomeScreenButtonBackgrounds/AvatarEditorButtonBackground.jpg')",
+      },
+      fontSize: {
+        "2xs": "0.625rem", // 10px
+        "2xl": "1.75rem", // 28px
+        "3xl": "2rem", // 32px
+        "4xl": "2.5rem", // 40px
       },
       keyframes: {
         wiggle: {

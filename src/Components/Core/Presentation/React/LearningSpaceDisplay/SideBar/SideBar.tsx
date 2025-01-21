@@ -51,22 +51,23 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
       useAsTriggerOnly={true}
     >
       {/*<StyledContainer className="flex flex-col p-2 rounded-lg w-44 lg:w-64 border-8 border-black bg-whitetrans ">*/}
-      <StyledContainer className="relative w-60 border-8 rounded-2xl border-adlerdarkblue bg-white flex flex-col z-0">
+      <StyledContainer className="relative w-[11rem] md:w-[13rem] lg:w-60 border-8 rounded-2xl mobile-landscape:w-[60vw] border-adlerdarkblue bg-white flex flex-col z-0">
         <header className="flex justify-between w-full items-center mt-1 relative z-20">
-          <span className="ml-1 text-xs font-bold lg:text-md text-adlerdarkblue">
+          <span className="ml-1 text-2xs font-bold lg:text-md text-adlerdarkblue">
             {time.toLocaleDateString()}
           </span>
-          <span className="bg-adlerdarkblue h-2 w-2 rounded-full absolute left-[calc(50%-0.25rem)]"></span>
-          <span className="mr-1 text-xs text-right font-bold lg:text-md text-adlerdarkblue">
+          <span className="bg-adlerdarkblue h-2 w-2 rounded-full absolute left-[calc(50%-0.25rem)] mobile-landscape:hidden"></span>
+          <span className="mr-1 text-2xs text-right font-bold lg:text-md text-adlerdarkblue">
             {time.toLocaleTimeString()} Uhr
           </span>
         </header>
-        <div className="grid grid-flow-row auto-rows-max min-h-[45vh] gap-1 p-1 rounded-lg grid-cols-3 z-20">
+        <span className="bg-adlerdarkblue h-2 w-2 rounded-full absolute left-[calc(50%-0.25rem)] mobile-landscape:left-2 mobile-landscape:top-[calc(50%-0.25rem)]"></span>
+        <div className="grid mobile-landscape:ml-4 mobile-landscape:grid-flow-col mobile-landscape:auto-cols-max mobile-landscape:grid-rows-2 mobile-landscape:grid-cols-auto grid-flow-row auto-rows-max gap-1 p-1 rounded-lg grid-cols-3 z-20">
           <div className="flex flex-col justify-start items-center max-h-[25%]">
             <StyledButton onClick={controller.onMainMenuButtonClicked}>
               <img src={engineLogo} alt="" />
             </StyledButton>
-            <p className="text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="text-2xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_mainMenu")}
             </p>
           </div>
@@ -75,7 +76,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
             <StyledButton onClick={controller.onWorldMenuButtonClicked}>
               <img src={worldIcon} alt="" />
             </StyledButton>
-            <p className="text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="text-2xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_learningWorldMenu")}
             </p>
           </div>
@@ -84,7 +85,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
             <StyledButton onClick={controller.onSpaceMenuButtonClicked}>
               <img src={spaceMenuIcon} alt="" />
             </StyledButton>
-            <p className="text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="text-2xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_learningSpaceMenu")}
             </p>
           </div>
@@ -93,7 +94,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
             <StyledButton onClick={controller.onBreakTimeButtonClicked}>
               <img src={pauseIcon} alt="" />
             </StyledButton>
-            <p className="text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="text-2xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_breakTime")}
             </p>
           </div> */}
@@ -104,14 +105,14 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
             >
               <img src={controlsIcon} alt="Steuerungserklärung" />
             </StyledButton>
-            <p className="text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="text-2xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_controls")}
             </p>
           </div>
 
           <div className="flex flex-col justify-startr items-center max-h-[25%]">
             <FullscreenSwitch />
-            <p className="text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="text-2xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_fullScreen")}
             </p>
           </div>
@@ -119,73 +120,74 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
           <div className="flex flex-col justify-start items-center max-h-[25%]">
             <HelpDeskButton />
             <HelpDeskModal />
-            <p className="text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="text-2xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_help")}
             </p>
           </div>
 
-          <div className="flex flex-col justify-start items-center max-h-[25%] invisible">
-            <StyledButton
-              onClick={controller.onControlsExplanationButtonClicked}
-            >
-              <img src={controlsIcon} alt="Steuerungserklärung" />
-            </StyledButton>
-            <p className="text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
-              {translate("sidebar_controls")}
-            </p>
-          </div>
           {/* Empty placeholder containers for future functions/buttons */}
-          <div className="flex flex-col justify-start items-center max-h-[25%] invisible">
+          <div className="flex flex-col justify-start items-center max-h-[25%] invisible ">
             <StyledButton
               onClick={controller.onControlsExplanationButtonClicked}
             >
               <img src={controlsIcon} alt="Steuerungserklärung" />
             </StyledButton>
-            <p className="text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="text-2xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_controls")}
             </p>
           </div>
 
-          <div className="flex flex-col justify-start items-center max-h-[25%] invisible">
+          <div className="flex flex-col justify-start items-center max-h-[25%] invisible ">
             <StyledButton
               onClick={controller.onControlsExplanationButtonClicked}
             >
               <img src={controlsIcon} alt="Steuerungserklärung" />
             </StyledButton>
-            <p className="text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="text-2xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_controls")}
             </p>
           </div>
 
-          <div className="flex flex-col justify-start items-center max-h-[25%] invisible">
+          <div className="flex flex-col justify-start items-center max-h-[25%] invisible ">
             <StyledButton
               onClick={controller.onControlsExplanationButtonClicked}
             >
               <img src={controlsIcon} alt="Steuerungserklärung" />
             </StyledButton>
-            <p className="text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="text-2xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_controls")}
             </p>
           </div>
 
-          <div className="flex flex-col justify-start items-center max-h-[25%] invisible">
+          <div className="flex flex-col justify-start items-center max-h-[25%] invisible ">
             <StyledButton
               onClick={controller.onControlsExplanationButtonClicked}
             >
               <img src={controlsIcon} alt="Steuerungserklärung" />
             </StyledButton>
-            <p className="text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="text-2xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_controls")}
             </p>
           </div>
 
-          <div className="flex flex-col justify-start items-center max-h-[25%] invisible">
+          <div className="flex flex-col justify-start items-center max-h-[25%] invisible ">
             <StyledButton
               onClick={controller.onControlsExplanationButtonClicked}
             >
               <img src={controlsIcon} alt="Steuerungserklärung" />
             </StyledButton>
-            <p className="text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="text-2xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+              {translate("sidebar_controls")}
+            </p>
+          </div>
+
+          <div className="flex flex-col justify-start items-center max-h-[25%] invisible ">
+            <StyledButton
+              onClick={controller.onControlsExplanationButtonClicked}
+            >
+              <img src={controlsIcon} alt="Steuerungserklärung" />
+            </StyledButton>
+            <p className="text-2xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_controls")}
             </p>
           </div>
@@ -195,7 +197,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
         <img
           src={engineLogo}
           alt="inventory background"
-          className="w-64 opacity-20 absolute bottom-24 right-0 z-10"
+          className="mobile-landscape:w-48 mobile-landscape:bottom-4 w-64 opacity-20 absolute bottom-24 right-0 z-10"
         />
       </StyledContainer>
     </CustomDropdown>
