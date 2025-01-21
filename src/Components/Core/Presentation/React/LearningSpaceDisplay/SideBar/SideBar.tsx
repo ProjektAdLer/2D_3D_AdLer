@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import CustomDropdown from "../../ReactRelated/ReactBaseComponents/CustomDropdown";
 import StyledButton from "../../ReactRelated/ReactBaseComponents/StyledButton";
 import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledContainer";
@@ -23,6 +24,15 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
     BUILDER_TYPES.IMenuBarBuilder,
   );
   const { t: translate } = useTranslation("learningSpace");
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <CustomDropdown
@@ -40,17 +50,17 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
       useAsTriggerOnly={true}
     >
       {/*<StyledContainer className="flex flex-col p-2 rounded-lg w-44 lg:w-64 border-8 border-black bg-whitetrans ">*/}
-      <StyledContainer className="relative w-64 border-8 rounded-2xl border-adlerdarkblue bg-white flex flex-col">
-        <header className="flex justify-between w-full items-center mt-1 relative">
+      <StyledContainer className="relative w-64 border-8 rounded-2xl border-adlerdarkblue bg-white flex flex-col z-0">
+        <header className="flex justify-between w-full items-center mt-1 relative z-20">
           <span className="ml-1 text-xs font-bold lg:text-md text-adlerdarkblue">
-            Mo. 12.01.25
+            {time.toLocaleDateString()}
           </span>
           <span className="bg-adlerdarkblue h-2 w-2 rounded-full absolute left-[calc(50%-0.25rem)]"></span>
           <span className="mr-1 text-xs text-right font-bold lg:text-md text-adlerdarkblue">
-            16:01 Uhr
+            {time.toLocaleTimeString()} Uhr
           </span>
         </header>
-        <div className="grid grid-flow-row auto-rows-max min-h-[45vh] gap-1 p-1 rounded-lg grid-cols-3">
+        <div className="grid grid-flow-row auto-rows-max min-h-[45vh] gap-1 p-1 rounded-lg grid-cols-3 z-20">
           <div className="flex flex-col justify-start items-center max-h-[25%]">
             <StyledButton onClick={controller.onMainMenuButtonClicked}>
               <img src={engineLogo} alt="" />
@@ -180,11 +190,11 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
           </div>
           {/* End of empty placeholder containers*/}
         </div>
-        <footer className="bg-adlerdarkblue h-2 w-1/4 rounded-sm self-center m-1"></footer>
+        <footer className="bg-adlerdarkblue h-2 w-1/4 rounded-sm self-center m-1 z-20"></footer>
         <img
           src={engineLogo}
           alt="inventory background"
-          className="w-10 absolute bottom-3 right-10"
+          className="w-64 opacity-20 absolute bottom-24 right-0 z-10"
         />
       </StyledContainer>
     </CustomDropdown>
