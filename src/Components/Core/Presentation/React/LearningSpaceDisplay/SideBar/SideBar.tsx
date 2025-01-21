@@ -39,8 +39,8 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
       initialOpen={false}
       useAsTriggerOnly={true}
     >
-      {/*<StyledContainer className="flex flex-col p-2 rounded-lg w-44 lg:w-64 border-8 border-black bg-whitetrans "> <img src={engineLogo} alt="inventory background" className="w-10 absolute bottom-3 right-3" />*/}
-      <StyledContainer className="relative w-60 border-8 rounded-2xl border-adlerdarkblue bg-white flex flex-col">
+      {/*<StyledContainer className="flex flex-col p-2 rounded-lg w-44 lg:w-64 border-8 border-black bg-whitetrans ">*/}
+      <StyledContainer className="relative w-64 border-8 rounded-2xl border-adlerdarkblue bg-white flex flex-col">
         <header className="flex justify-between w-full items-center mt-1 relative">
           <span className="ml-1 text-xs font-bold lg:text-md text-adlerdarkblue">
             Mo. 12.01.25
@@ -50,7 +50,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
             16:01 Uhr
           </span>
         </header>
-        <div className="grid grid-flow-row-dense auto-rows-max min-h-[45vh] gap-1 p-1 rounded-lg grid-cols-3">
+        <div className="grid grid-flow-row auto-rows-max min-h-[45vh] gap-1 p-1 rounded-lg grid-cols-3">
           <div className="flex flex-col justify-start items-center max-h-[25%]">
             <StyledButton onClick={controller.onMainMenuButtonClicked}>
               <img src={engineLogo} alt="" />
@@ -181,6 +181,11 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
           {/* End of empty placeholder containers*/}
         </div>
         <footer className="bg-adlerdarkblue h-2 w-1/4 rounded-sm self-center m-1"></footer>
+        <img
+          src={engineLogo}
+          alt="inventory background"
+          className="w-10 absolute bottom-3 right-10"
+        />
       </StyledContainer>
     </CustomDropdown>
   );
