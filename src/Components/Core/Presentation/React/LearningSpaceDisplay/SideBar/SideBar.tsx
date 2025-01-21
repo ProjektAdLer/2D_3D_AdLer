@@ -66,7 +66,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
             <StyledButton onClick={controller.onMainMenuButtonClicked}>
               <img src={engineLogo} alt="" />
             </StyledButton>
-            <p className="pl-2 text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_mainMenu")}
             </p>
           </div>
@@ -75,7 +75,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
             <StyledButton onClick={controller.onWorldMenuButtonClicked}>
               <img src={worldIcon} alt="" />
             </StyledButton>
-            <p className="pl-2 text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_learningWorldMenu")}
             </p>
           </div>
@@ -84,7 +84,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
             <StyledButton onClick={controller.onSpaceMenuButtonClicked}>
               <img src={spaceMenuIcon} alt="" />
             </StyledButton>
-            <p className="pl-2 text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_learningSpaceMenu")}
             </p>
           </div>
@@ -93,7 +93,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
             <StyledButton onClick={controller.onBreakTimeButtonClicked}>
               <img src={pauseIcon} alt="" />
             </StyledButton>
-            <p className="pl-2 text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_breakTime")}
             </p>
           </div> */}
@@ -104,14 +104,14 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
             >
               <img src={controlsIcon} alt="Steuerungserklärung" />
             </StyledButton>
-            <p className="pl-2 text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_controls")}
             </p>
           </div>
 
           <div className="flex flex-col justify-startr items-center max-h-[25%]">
             <FullscreenSwitch />
-            <p className="pl-2 text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_fullScreen")}
             </p>
           </div>
@@ -119,7 +119,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
           <div className="flex flex-col justify-start items-center max-h-[25%]">
             <HelpDeskButton />
             <HelpDeskModal />
-            <p className="pl-2 text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_help")}
             </p>
           </div>
@@ -130,7 +130,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
             >
               <img src={controlsIcon} alt="Steuerungserklärung" />
             </StyledButton>
-            <p className="pl-2 text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_controls")}
             </p>
           </div>
@@ -141,7 +141,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
             >
               <img src={controlsIcon} alt="Steuerungserklärung" />
             </StyledButton>
-            <p className="pl-2 text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_controls")}
             </p>
           </div>
@@ -152,7 +152,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
             >
               <img src={controlsIcon} alt="Steuerungserklärung" />
             </StyledButton>
-            <p className="pl-2 text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_controls")}
             </p>
           </div>
@@ -163,7 +163,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
             >
               <img src={controlsIcon} alt="Steuerungserklärung" />
             </StyledButton>
-            <p className="pl-2 text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_controls")}
             </p>
           </div>
@@ -174,7 +174,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
             >
               <img src={controlsIcon} alt="Steuerungserklärung" />
             </StyledButton>
-            <p className="pl-2 text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_controls")}
             </p>
           </div>
@@ -185,7 +185,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
             >
               <img src={controlsIcon} alt="Steuerungserklärung" />
             </StyledButton>
-            <p className="pl-2 text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="text-xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_controls")}
             </p>
           </div>
