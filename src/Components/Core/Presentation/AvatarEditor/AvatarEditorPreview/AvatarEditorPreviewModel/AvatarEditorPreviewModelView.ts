@@ -1,5 +1,11 @@
 import AvatarEditorPreviewModelViewModel from "./AvatarEditorPreviewModelViewModel";
-import { AnimationGroup, Mesh, Texture, TransformNode } from "@babylonjs/core";
+import {
+  AnimationGroup,
+  Mesh,
+  Skeleton,
+  Texture,
+  TransformNode,
+} from "@babylonjs/core";
 import IScenePresenter from "../../../Babylon/SceneManagement/IScenePresenter";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import SCENE_TYPES, {
@@ -30,6 +36,8 @@ export default class AvatarEditorPreviewModelView {
 
   private baseAnimatonGroups: AnimationGroup[];
 
+  private baseModelSkeleton: Skeleton;
+
   private idleAnimationName: string = "ac_anim_idle2";
 
   constructor(private viewModel: AvatarEditorPreviewModelViewModel) {
@@ -46,6 +54,7 @@ export default class AvatarEditorPreviewModelView {
     // load base model and position it
     const result = await this.scenePresenter.loadGLTFModel(baseModelLink);
     this.baseAnimatonGroups = result.animationGroups;
+    this.baseModelSkeleton = result.skeletons[0];
 
     this.viewModel.baseModelMeshes = result.meshes as Mesh[];
     this.viewModel.baseModelMeshes[0].position.y = -1;
@@ -83,7 +92,15 @@ export default class AvatarEditorPreviewModelView {
     this.viewModel.baseModelMeshes.forEach((mesh) => {
       if (mesh.name === "defaultTop") {
         mesh.dispose();
-        this.updateShirt("shirts-sweatshirt");
+        this.updateModelShirt("shirts-sweatshirt");
+      }
+      if (mesh.name === "defaultPants") {
+        mesh.dispose();
+        this.updateModelPants("pants-jeans");
+      }
+      if (mesh.name === "defaultShoes") {
+        mesh.dispose();
+        this.updateModelShoes("shoes-trainers");
       }
     });
 
@@ -144,17 +161,6 @@ export default class AvatarEditorPreviewModelView {
     );
   }
 
-  private async updateShirt(shirt?: AvatarShirtModels | undefined) {
-    if (!shirt) return;
-
-    await this.updateModel(
-      shirt,
-      "clothing/shirts",
-      this.viewModel.shirtMeshes,
-      this.viewModel.shirtAnchorNode,
-    );
-  }
-
   private updateModelShirt(shirt?: AvatarShirtModels | undefined) {
     this.updateModel(
       shirt,
@@ -162,11 +168,6 @@ export default class AvatarEditorPreviewModelView {
       this.viewModel.shirtMeshes,
       this.viewModel.shirtAnchorNode,
     );
-    this.viewModel.shirtMeshes.forEach((meshes) => {
-      meshes.forEach((mesh) => {
-        mesh.skeleton = this.viewModel.baseModelMeshes[0].skeleton;
-      });
-    });
   }
 
   private updateModelPants(pants?: AvatarPantsModels | undefined) {
@@ -250,42 +251,21 @@ export default class AvatarEditorPreviewModelView {
     }
 
     // load model if not already loaded
-    //if (!modelMap.has(newModel))
-    {
+    if (!modelMap.has(newModel)) {
       const result = await this.scenePresenter.loadGLTFModel(
         require(
           `../../../../../../Assets/3dModels/sharedModels/avatar/${modelFolder}/aa-${newModel}.glb`,
         ),
       );
+      result.meshes.forEach((mesh) => {
+        if (mesh instanceof Mesh) {
+          // Stelle sicher, dass es ein Mesh ist
+          mesh.skeleton = this.baseModelSkeleton;
+        }
+      });
+
       modelMap.set(newModel, result.meshes as Mesh[]);
       result.meshes[0].parent = anchorNode;
-
-      let idleAnim: AnimationGroup;
-      let syncFrame: number;
-      this.baseAnimatonGroups.forEach((animation) => {
-        if (animation.name.includes(this.idleAnimationName)) {
-          idleAnim = animation;
-        }
-      });
-
-      result.animationGroups.forEach((animation) => {
-        if (animation.name.includes(this.idleAnimationName)) {
-          idleAnim.pause();
-          syncFrame = idleAnim.getCurrentFrame();
-
-          idleAnim.restart();
-          animation.goToFrame(syncFrame);
-        }
-      });
-
-      console.log("BaseModel-Animations");
-      this.baseAnimatonGroups.forEach((animation) => {
-        console.log(animation.name, ", isPlaying: ", animation.isPlaying);
-      });
-      console.log("Current-animations");
-      result.animationGroups.forEach((animation) => {
-        console.log(animation.name, ", isPlaying: ", animation.isPlaying);
-      });
     }
 
     // set all meshes to invisible except the new model
