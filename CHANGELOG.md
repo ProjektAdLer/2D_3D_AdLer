@@ -25,6 +25,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 ### Fixed
 
 - fixed only showing short break time content
+- fixed mobile portrait view in avatar editor
 
 ### Deprecated
 
