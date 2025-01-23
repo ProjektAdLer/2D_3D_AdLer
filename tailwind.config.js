@@ -14,6 +14,9 @@ module.exports = {
       "mobile-landscape": {
         raw: `only screen and (max-height: 600px) and (orientation: landscape)`,
       },
+      "tablet-portrait": {
+        raw: `only screen and (max-width: 850px) and (orientation: portrait)`,
+      },
     },
 
     extend: {

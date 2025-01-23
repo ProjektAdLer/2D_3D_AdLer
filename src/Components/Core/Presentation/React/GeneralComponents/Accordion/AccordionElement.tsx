@@ -54,7 +54,7 @@ export default function AccordionElement(props: AccordionProps) {
         >
           <h1
             className={tailwindMerge(
-              "text-2xl font-bold",
+              "text-2xl portrait:text-lg font-bold",
               props.headerClassName ? props.headerClassName : "",
             )}
           >
