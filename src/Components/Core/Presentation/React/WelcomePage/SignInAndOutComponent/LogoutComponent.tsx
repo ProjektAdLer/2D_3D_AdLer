@@ -58,7 +58,7 @@ export default function LogoutComponent({
           onClick={() => controller.logout()}
           data-testid="logout"
         >
-          <p className="text-xs rounded-lg">Ausloggen</p>
+          <p className="text-xs portrait:text-2xs rounded-lg">Ausloggen</p>
         </StyledButton>
       )}
     </div>

@@ -14,6 +14,7 @@ import { useTranslation } from "react-i18next";
 
 type WelcomePageButtonProps = {
   backgroundVideo: string;
+  backgroundPicture: string;
   historyPath: string;
   label: string;
   isPlaceholder?: boolean;
@@ -34,6 +35,7 @@ export default function WelcomePageButton(props: WelcomePageButtonProps) {
   const translate = useTranslation("start").t;
 
   const videoRef = useRef<HTMLVideoElement>(null);
+  const pictureRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     setUserLoggedIn(getLoginStatusUseCase.execute().isLoggedIn);
@@ -42,7 +44,7 @@ export default function WelcomePageButton(props: WelcomePageButtonProps) {
   return (
     <StyledButton
       shape="freeFloatCenterNoPadding"
-      containerClassName=" h-full portrait:w-1/2 aspect-square"
+      containerClassName="h-full portrait:w-1/2 mobile-landscape:w-1/3 aspect-square"
       onClick={() => history.push(props.historyPath)}
       disabled={props.isPlaceholder ?? !userLoggedIn}
       feedback="nothing"
@@ -60,10 +62,17 @@ export default function WelcomePageButton(props: WelcomePageButtonProps) {
             onMouseEnter={() => videoRef.current?.play()}
             onMouseLeave={() => videoRef.current?.pause()}
             loop={true}
-            className="object-cover w-full h-full"
+            muted={true}
+            className="object-cover w-full h-full mobile-landscape:hidden"
           >
             <track kind="captions"></track>
           </video>
+          <img
+            className="landscape:hidden w-full h-full object-cover"
+            ref={pictureRef}
+            src={props.backgroundPicture}
+            alt="Avatar Editor"
+          />
           <p
             className="absolute p-4 mx-auto font-bold rounded-lg !text-xs lg:text-2xl text-center bg-buttonbgblue lg:bottom-[42%] portrait:bottom-[20%] bottom-32 text-adlerdarkblue "
             onMouseEnter={() => videoRef.current?.play()}

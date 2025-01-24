@@ -14,8 +14,11 @@ module.exports = {
       "mobile-landscape": {
         raw: `only screen and (max-height: 600px) and (orientation: landscape)`,
       },
+      "mobile-portrait": {
+        raw: `only screen and (max-width: 400px) and (orientation: portrait)`,
+      },
       "tablet-portrait": {
-        raw: `only screen and (max-width: 850px) and (orientation: portrait)`,
+        raw: `only screen and (max-width: 850px) and (min-width: 500px) and (orientation: portrait)`,
       },
     },
 
@@ -31,6 +34,10 @@ module.exports = {
         "2xl": "1.75rem", // 28px
         "3xl": "2rem", // 32px
         "4xl": "2.5rem", // 40px
+        "5xl": "3rem", // 48px
+        "6xl": "3.5rem", // 56px
+        "7xl": "4rem", // 64px
+        "8xl": "4.5rem", // 72px
       },
       keyframes: {
         wiggle: {
