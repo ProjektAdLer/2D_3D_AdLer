@@ -4,6 +4,7 @@ import LearningWorldCompletionModalViewModel from "./LearningWorldCompletionModa
 import ISetWorldCompletionModalToShownUseCase from "src/Components/Core/Application/UseCases/SetWorldCompletionModalToShown/ISetWorldCompletionModalToShownUseCase";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+import LearningSpaceScoreTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceScoreTO";
 
 export default class LearningWorldCompletionModalPresenter
   implements ILearningWorldCompletionModalPresenter
@@ -11,17 +12,22 @@ export default class LearningWorldCompletionModalPresenter
   private setWorldCompletionModalToShown: ISetWorldCompletionModalToShownUseCase;
   constructor(private viewModel: LearningWorldCompletionModalViewModel) {
     this.setWorldCompletionModalToShown = CoreDIContainer.get(
-      USECASE_TYPES.ISetWorldCompletionModalToShownUseCase
+      USECASE_TYPES.ISetWorldCompletionModalToShownUseCase,
     );
   }
 
   onLearningWorldLoaded(world: LearningWorldTO): void {
     if (!world.completionModalShown) {
       this.viewModel.showModal.Value = world.spaces.every(
-        (space) => space.currentScore >= space.requiredScore
+        (space) => space.currentScore >= space.requiredScore,
       );
       this.viewModel.evaluationLink.Value = world.evaluationLink;
       this.viewModel.currentWorldId.Value = world.id;
     }
+  }
+
+  onLearningSpaceScored(learningSpaceScoreTO: LearningSpaceScoreTO): void {
+    this.viewModel.showModal.Value =
+      learningSpaceScoreTO.currentScore >= learningSpaceScoreTO.requiredScore;
   }
 }

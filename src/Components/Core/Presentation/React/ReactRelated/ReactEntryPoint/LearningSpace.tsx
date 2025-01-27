@@ -14,6 +14,7 @@ import LearningSpaceGoalPanel from "~ReactComponents/LearningSpaceDisplay/Learni
 import StoryElement from "~ReactComponents/LearningSpaceDisplay/StoryElement/StoryElement";
 import ControlsExplanationModal from "~ReactComponents/GeneralComponents/ControlsExplanationModal/ControlsExplanationModal";
 import BreakTimeNotificationOverview from "~ReactComponents/GeneralComponents/BreakTimeNotificationOverview/BreakTimeNotificationOverview";
+import LearningWorldCompletionModal from "~ReactComponents/LearningSpaceMenu/LearningWorldCompletionModal/LearningWorldCompletionModal";
 
 export default function LearningSpace() {
   return (
@@ -42,6 +43,7 @@ export default function LearningSpace() {
       {/* Der Error Manager sollte immer auf oberster Ebene sein, damit Error-Modals immer angezeigt werden */}
       {/* Generell sollten Modals immer direkt unter dem Error Manager sein */}
       <NotificationManager className="z-50" />
+      <LearningWorldCompletionModal />
     </div>
   );
 }
