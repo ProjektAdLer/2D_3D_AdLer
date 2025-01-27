@@ -1,11 +1,5 @@
 import AvatarEditorPreviewModelViewModel from "./AvatarEditorPreviewModelViewModel";
-import {
-  AnimationGroup,
-  Mesh,
-  Skeleton,
-  Texture,
-  TransformNode,
-} from "@babylonjs/core";
+import { Mesh, Skeleton, Texture, TransformNode } from "@babylonjs/core";
 import IScenePresenter from "../../../Babylon/SceneManagement/IScenePresenter";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import SCENE_TYPES, {
@@ -13,8 +7,11 @@ import SCENE_TYPES, {
 } from "~DependencyInjection/Scenes/SCENE_TYPES";
 import AvatarEditorPreviewSceneDefinition from "../AvatarEditorPreviewSceneDefinition";
 import {
+  AvatarBackpackModels,
   AvatarBeardModels,
+  AvatarGlassesModels,
   AvatarHairModels,
+  AvatarHeadgearModels,
   AvatarPantsModels,
   AvatarShoesModels,
   AvatarNoneModel,
@@ -34,11 +31,7 @@ const baseModelLink = require("../../../../../../Assets/3dModels/sharedModels/av
 export default class AvatarEditorPreviewModelView {
   private scenePresenter: IScenePresenter;
 
-  private baseAnimatonGroups: AnimationGroup[];
-
   private baseModelSkeleton: Skeleton;
-
-  private idleAnimationName: string = "ac_anim_idle2";
 
   constructor(private viewModel: AvatarEditorPreviewModelViewModel) {
     this.scenePresenter = CoreDIContainer.get<ScenePresenterFactory>(
@@ -53,7 +46,6 @@ export default class AvatarEditorPreviewModelView {
   async asyncSetup(): Promise<void> {
     // load base model and position it
     const result = await this.scenePresenter.loadGLTFModel(baseModelLink);
-    this.baseAnimatonGroups = result.animationGroups;
     this.baseModelSkeleton = result.skeletons[0];
 
     this.viewModel.baseModelMeshes = result.meshes as Mesh[];
@@ -65,7 +57,7 @@ export default class AvatarEditorPreviewModelView {
         (m) => m.name === meshName,
       );
       if (meshToHide) {
-        meshToHide.setEnabled(false);
+        meshToHide.dispose();
       }
     });
 
@@ -85,22 +77,33 @@ export default class AvatarEditorPreviewModelView {
     this.viewModel.shoesAnchorNode = result.transformNodes.find(
       (node) => node.name === "anker_shoes",
     )!;
-    this.viewModel.shirtAnchorNode = result.transformNodes.find(
-      (node) => node.name === "anker_top",
+    this.viewModel.headGearAnchorNode = result.transformNodes.find(
+      (node) => node.name === "anker_hat",
     )!;
+    this.viewModel.glassesAnchorNode = result.transformNodes.find(
+      (node) => node.name === "anker_glasses",
+    )!;
+    this.viewModel.backpackAnchorNode = result.transformNodes.find(
+      (node) => node.name === "Spine",
+    )!;
+    this.viewModel.otherAnchorNode = result.transformNodes.find(
+      (node) => node.name === "anker_acessories",
+    )!;
+
+    console.log(this.viewModel.backpackAnchorNode);
+    result.transformNodes.forEach((node) => {
+      console.log(node.name, " / ", node.parent?.name);
+    });
 
     this.viewModel.baseModelMeshes.forEach((mesh) => {
       if (mesh.name === "defaultTop") {
         mesh.dispose();
-        this.updateModelShirt("shirts-sweatshirt");
       }
       if (mesh.name === "defaultPants") {
         mesh.dispose();
-        this.updateModelPants("pants-jeans");
       }
       if (mesh.name === "defaultShoes") {
         mesh.dispose();
-        this.updateModelShoes("shoes-trainers");
       }
     });
 
@@ -117,10 +120,13 @@ export default class AvatarEditorPreviewModelView {
     this.updateModelShirt(this.viewModel.currentAvatarConfig.Value.shirt);
     this.updateModelPants(this.viewModel.currentAvatarConfig.Value.pants);
     this.updateModelShoes(this.viewModel.currentAvatarConfig.Value.shoes);
+    this.updateHeadGear(this.viewModel.currentAvatarConfig.Value.headgear);
+    this.updateGlasses(this.viewModel.currentAvatarConfig.Value.glasses);
+    this.updateBackPack(this.viewModel.currentAvatarConfig.Value.backpack);
   }
 
   private onAvatarConfigChanged(): void {
-    console.log(this.viewModel.avatarConfigDiff.Value);
+    //console.log(this.viewModel.avatarConfigDiff.Value);
     if (this.viewModel.avatarConfigDiff.Value.beard)
       this.updateModelBeard(this.viewModel.avatarConfigDiff.Value.beard);
     if (this.viewModel.avatarConfigDiff.Value.hair)
@@ -139,6 +145,12 @@ export default class AvatarEditorPreviewModelView {
       this.updateModelPants(this.viewModel.avatarConfigDiff.Value.pants);
     if (this.viewModel.avatarConfigDiff.Value.shoes !== undefined)
       this.updateModelShoes(this.viewModel.avatarConfigDiff.Value.shoes);
+    if (this.viewModel.avatarConfigDiff.Value.headgear !== undefined)
+      this.updateHeadGear(this.viewModel.avatarConfigDiff.Value.headgear);
+    if (this.viewModel.avatarConfigDiff.Value.glasses !== undefined)
+      this.updateGlasses(this.viewModel.avatarConfigDiff.Value.glasses);
+    if (this.viewModel.avatarConfigDiff.Value.backpack !== undefined)
+      this.updateBackPack(this.viewModel.avatarConfigDiff.Value.backpack);
   }
 
   private updateModelHair(hair?: AvatarHairModels | undefined) {
@@ -156,6 +168,36 @@ export default class AvatarEditorPreviewModelView {
       "hair/beards",
       this.viewModel.beardMeshes,
       this.viewModel.beardAnchorNode,
+    );
+  }
+
+  private updateHeadGear(headgear?: AvatarHeadgearModels | undefined) {
+    this.updateModel(
+      headgear,
+      "accessoires/headgear",
+      this.viewModel.headGearMeshes,
+      this.viewModel.headGearAnchorNode,
+    );
+  }
+
+  private updateGlasses(glasses?: AvatarGlassesModels | undefined) {
+    this.updateModel(
+      glasses,
+      "accessoires/glasses",
+      this.viewModel.glassesMeshes,
+      this.viewModel.glassesAnchorNode,
+    );
+  }
+
+  private updateBackPack(backpack?: AvatarBackpackModels | undefined) {
+    this.updateModel(
+      backpack,
+      "accessoires/backpack",
+      this.viewModel.backpackMeshes,
+      this.viewModel.backpackAnchorNode,
+      (mesh) => {
+        mesh.position = this.viewModel.backpackPositionOffset;
+      },
     );
   }
 
@@ -239,8 +281,9 @@ export default class AvatarEditorPreviewModelView {
     modelFolder: string,
     modelMap: Map<T, Mesh[]>,
     anchorNode: TransformNode,
+    onMeshLoad?: (mesh: Mesh) => void,
   ): Promise<void> {
-    if (newModel === undefined) return;
+    if (newModel === undefined || newModel === null) return;
     // hide all meshes and return if no model is selected
     if (newModel === AvatarNoneModel.None) {
       modelMap.forEach((meshes) => {
@@ -265,6 +308,7 @@ export default class AvatarEditorPreviewModelView {
 
       modelMap.set(newModel, result.meshes as Mesh[]);
       result.meshes[0].parent = anchorNode;
+      if (onMeshLoad) onMeshLoad(result.meshes[0] as Mesh);
     }
 
     // set all meshes to invisible except the new model
