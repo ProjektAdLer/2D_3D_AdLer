@@ -142,7 +142,6 @@ export default class AvatarEditorPreviewModelView {
   }
 
   private updateModelHair(hair?: AvatarHairModels | undefined) {
-    if (!hair) return;
     this.updateModel(
       hair,
       "hair/hairstyle",
@@ -152,7 +151,6 @@ export default class AvatarEditorPreviewModelView {
   }
 
   private updateModelBeard(beard?: AvatarBeardModels | undefined) {
-    if (!beard) return;
     this.updateModel(
       beard,
       "hair/beards",
@@ -179,9 +177,9 @@ export default class AvatarEditorPreviewModelView {
     );
   }
 
-  private updateModelShoes(shirt?: AvatarShoesModels | undefined) {
+  private updateModelShoes(shoes?: AvatarShoesModels | undefined) {
     this.updateModel(
-      shirt,
+      shoes,
       "clothing/shoes",
       this.viewModel.shoesMeshes,
       this.viewModel.shoesAnchorNode,
@@ -242,6 +240,7 @@ export default class AvatarEditorPreviewModelView {
     modelMap: Map<T, Mesh[]>,
     anchorNode: TransformNode,
   ): Promise<void> {
+    if (newModel === undefined) return;
     // hide all meshes and return if no model is selected
     if (newModel === AvatarNoneModel.None) {
       modelMap.forEach((meshes) => {
