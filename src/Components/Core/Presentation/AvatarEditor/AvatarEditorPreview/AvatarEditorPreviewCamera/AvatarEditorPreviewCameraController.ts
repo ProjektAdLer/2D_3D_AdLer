@@ -15,6 +15,11 @@ export default class AvatarEditorPreviewCameraController
     // attach controls
     camera.inputs.attached.mousewheel.attachControl();
     camera.inputs.attached.pointers.attachControl();
+
+    // Empfindlichkeit für Pinch/Zoom verringern
+    camera.pinchPrecision = 200; // höherer Wert = geringeres Zoom pro Geste
+    // oder: camera.pinchDeltaPercentage = 0.002; // anpassen nach Bedarf
+
     const pointersInput = camera.inputs.attached
       .pointers as ArcRotateCameraPointersInput;
     pointersInput.multiTouchPanAndZoom = true;
