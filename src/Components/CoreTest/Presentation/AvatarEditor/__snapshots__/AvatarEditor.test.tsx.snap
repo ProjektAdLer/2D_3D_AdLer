@@ -3,7 +3,7 @@
 exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = `
 <div>
   <div
-    class="flex flex-col h-[100svh] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto overflow-hidden text-adlerdarkblue"
+    class="flex flex-col portrait:flex-col h-[100svh] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto overflow-hidden text-adlerdarkblue"
   >
     <div
       class="self-center w-full p-2 font-semibold flex place-content-stretch"
@@ -57,10 +57,10 @@ exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = 
       </div>
     </div>
     <div
-      class="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-2 grow lg:rounded-lg"
+      class="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-3 grow lg:rounded-lg"
     >
       <div
-        class="flex flex-col portrait:order-2"
+        class="flex flex-col portrait:h-full portrait:order-2"
       >
         <div
           class="flex flex-row items-center justify-center"
@@ -69,14 +69,14 @@ exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = 
             class="flex flex-col items-center justify-center"
           >
             <div
-              class="text-2xl font-bold text-darkblue"
+              class="text-2xl font-bold text-darkblue portrait:text-xl"
             >
               Haare
             </div>
           </div>
         </div>
         <div
-          class="flex flex-row justify-center p-2 space-x-4 "
+          class="flex flex-row justify-center p-2 space-x-4"
         >
           <div
             class=""
@@ -150,7 +150,7 @@ exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = 
           </div>
         </div>
         <div
-          class="p-4 max-h-[77vh] portrait:max-h-[30vh] overflow-auto"
+          class="p-4 max-h-[77vh] portrait:max-h-[35svh] overflow-auto"
         >
           <mockedavatareditorhaircategory
             controller="undefined"
@@ -159,7 +159,7 @@ exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = 
         </div>
       </div>
       <div
-        class="p-4"
+        class="p-4 flex justify-start items-start portrait:w-full portrait:max-h-[40svh] portrait:order-1"
       >
         <mockedavatareditorpreview
           class="relative z-10 w-full h-full"
@@ -173,7 +173,7 @@ exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = 
 exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = `
 <div>
   <div
-    class="flex flex-col h-[100svh] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto overflow-hidden text-adlerdarkblue"
+    class="flex flex-col portrait:flex-col h-[100svh] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto overflow-hidden text-adlerdarkblue"
   >
     <div
       class="self-center w-full p-2 font-semibold flex place-content-stretch"
@@ -227,10 +227,10 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
       </div>
     </div>
     <div
-      class="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-2 grow lg:rounded-lg"
+      class="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-3 grow lg:rounded-lg"
     >
       <div
-        class="flex flex-col portrait:order-2"
+        class="flex flex-col portrait:h-full portrait:order-2"
       >
         <div
           class="flex flex-row items-center justify-center"
@@ -239,14 +239,14 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
             class="flex flex-col items-center justify-center"
           >
             <div
-              class="text-2xl font-bold text-darkblue"
+              class="text-2xl font-bold text-darkblue portrait:text-xl"
             >
               Gesicht
             </div>
           </div>
         </div>
         <div
-          class="flex flex-row justify-center p-2 space-x-4 "
+          class="flex flex-row justify-center p-2 space-x-4"
         >
           <div
             class=""
@@ -320,7 +320,7 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
           </div>
         </div>
         <div
-          class="p-4 max-h-[77vh] portrait:max-h-[30vh] overflow-auto"
+          class="p-4 max-h-[77vh] portrait:max-h-[35svh] overflow-auto"
         >
           <mockedavatareditorfacecategory
             controller="undefined"
@@ -329,7 +329,7 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
         </div>
       </div>
       <div
-        class="p-4"
+        class="p-4 flex justify-start items-start portrait:w-full portrait:max-h-[40svh] portrait:order-1"
       >
         <mockedavatareditorpreview
           class="relative z-10 w-full h-full"
@@ -343,7 +343,7 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
 exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = `
 <div>
   <div
-    class="flex flex-col h-[100svh] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto overflow-hidden text-adlerdarkblue"
+    class="flex flex-col portrait:flex-col h-[100svh] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto overflow-hidden text-adlerdarkblue"
   >
     <div
       class="self-center w-full p-2 font-semibold flex place-content-stretch"
@@ -397,10 +397,10 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
       </div>
     </div>
     <div
-      class="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-2 grow lg:rounded-lg"
+      class="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-3 grow lg:rounded-lg"
     >
       <div
-        class="flex flex-col portrait:order-2"
+        class="flex flex-col portrait:h-full portrait:order-2"
       >
         <div
           class="flex flex-row items-center justify-center"
@@ -409,14 +409,14 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
             class="flex flex-col items-center justify-center"
           >
             <div
-              class="text-2xl font-bold text-darkblue"
+              class="text-2xl font-bold text-darkblue portrait:text-xl"
             >
               Accessoires
             </div>
           </div>
         </div>
         <div
-          class="flex flex-row justify-center p-2 space-x-4 "
+          class="flex flex-row justify-center p-2 space-x-4"
         >
           <div
             class=""
@@ -490,7 +490,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
           </div>
         </div>
         <div
-          class="p-4 max-h-[77vh] portrait:max-h-[30vh] overflow-auto"
+          class="p-4 max-h-[77vh] portrait:max-h-[35svh] overflow-auto"
         >
           <div
             class="flex flex-col"
@@ -502,7 +502,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
                 class="content-start w-full text-left"
               >
                 <h1
-                  class="text-2xl font-bold"
+                  class="text-2xl portrait:text-lg font-bold"
                 >
                   ▼ Kopfbedeckung
                 </h1>
@@ -696,7 +696,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
                 class="content-start w-full text-left"
               >
                 <h1
-                  class="text-2xl font-bold"
+                  class="text-2xl portrait:text-lg font-bold"
                 >
                   ▶ Brille
                 </h1>
@@ -714,7 +714,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
                 class="content-start w-full text-left"
               >
                 <h1
-                  class="text-2xl font-bold"
+                  class="text-2xl portrait:text-lg font-bold"
                 >
                   ▶ Rucksack
                 </h1>
@@ -732,7 +732,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
                 class="content-start w-full text-left"
               >
                 <h1
-                  class="text-2xl font-bold"
+                  class="text-2xl portrait:text-lg font-bold"
                 >
                   ▶ Sonstiges
                 </h1>
@@ -747,7 +747,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
         </div>
       </div>
       <div
-        class="p-4"
+        class="p-4 flex justify-start items-start portrait:w-full portrait:max-h-[40svh] portrait:order-1"
       >
         <mockedavatareditorpreview
           class="relative z-10 w-full h-full"
@@ -761,7 +761,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
 exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = `
 <div>
   <div
-    class="flex flex-col h-[100svh] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto overflow-hidden text-adlerdarkblue"
+    class="flex flex-col portrait:flex-col h-[100svh] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto overflow-hidden text-adlerdarkblue"
   >
     <div
       class="self-center w-full p-2 font-semibold flex place-content-stretch"
@@ -815,10 +815,10 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
       </div>
     </div>
     <div
-      class="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-2 grow lg:rounded-lg"
+      class="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-3 grow lg:rounded-lg"
     >
       <div
-        class="flex flex-col portrait:order-2"
+        class="flex flex-col portrait:h-full portrait:order-2"
       >
         <div
           class="flex flex-row items-center justify-center"
@@ -827,14 +827,14 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
             class="flex flex-col items-center justify-center"
           >
             <div
-              class="text-2xl font-bold text-darkblue"
+              class="text-2xl font-bold text-darkblue portrait:text-xl"
             >
               Kleidung
             </div>
           </div>
         </div>
         <div
-          class="flex flex-row justify-center p-2 space-x-4 "
+          class="flex flex-row justify-center p-2 space-x-4"
         >
           <div
             class=""
@@ -908,7 +908,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
           </div>
         </div>
         <div
-          class="p-4 max-h-[77vh] portrait:max-h-[30vh] overflow-auto"
+          class="p-4 max-h-[77vh] portrait:max-h-[35svh] overflow-auto"
         >
           <div
             class="flex flex-col"
@@ -920,7 +920,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
                 class="content-start w-full text-left"
               >
                 <h1
-                  class="text-2xl font-bold"
+                  class="text-2xl portrait:text-lg font-bold"
                 >
                   ▼ Oberteil
                 </h1>
@@ -1116,7 +1116,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
                 class="content-start w-full text-left"
               >
                 <h1
-                  class="text-2xl font-bold"
+                  class="text-2xl portrait:text-lg font-bold"
                 >
                   ▶ Hose
                 </h1>
@@ -1134,7 +1134,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
                 class="content-start w-full text-left"
               >
                 <h1
-                  class="text-2xl font-bold"
+                  class="text-2xl portrait:text-lg font-bold"
                 >
                   ▶ Schuhe
                 </h1>
@@ -1149,7 +1149,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
         </div>
       </div>
       <div
-        class="p-4"
+        class="p-4 flex justify-start items-start portrait:w-full portrait:max-h-[40svh] portrait:order-1"
       >
         <mockedavatareditorpreview
           class="relative z-10 w-full h-full"
@@ -1163,7 +1163,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
 exports[`AvatarEditor should render 4 category when tab button is clicked 1`] = `
 <div>
   <div
-    class="flex flex-col h-[100svh] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto overflow-hidden text-adlerdarkblue"
+    class="flex flex-col portrait:flex-col h-[100svh] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto overflow-hidden text-adlerdarkblue"
   >
     <div
       class="self-center w-full p-2 font-semibold flex place-content-stretch"
@@ -1217,10 +1217,10 @@ exports[`AvatarEditor should render 4 category when tab button is clicked 1`] = 
       </div>
     </div>
     <div
-      class="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-2 grow lg:rounded-lg"
+      class="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-3 grow lg:rounded-lg"
     >
       <div
-        class="flex flex-col portrait:order-2"
+        class="flex flex-col portrait:h-full portrait:order-2"
       >
         <div
           class="flex flex-row items-center justify-center"
@@ -1229,14 +1229,14 @@ exports[`AvatarEditor should render 4 category when tab button is clicked 1`] = 
             class="flex flex-col items-center justify-center"
           >
             <div
-              class="text-2xl font-bold text-darkblue"
+              class="text-2xl font-bold text-darkblue portrait:text-xl"
             >
               Körperform
             </div>
           </div>
         </div>
         <div
-          class="flex flex-row justify-center p-2 space-x-4 "
+          class="flex flex-row justify-center p-2 space-x-4"
         >
           <div
             class=""
@@ -1310,7 +1310,7 @@ exports[`AvatarEditor should render 4 category when tab button is clicked 1`] = 
           </div>
         </div>
         <div
-          class="p-4 max-h-[77vh] portrait:max-h-[30vh] overflow-auto"
+          class="p-4 max-h-[77vh] portrait:max-h-[35svh] overflow-auto"
         >
           <div
             class="flex flex-col"
@@ -1486,7 +1486,7 @@ exports[`AvatarEditor should render 4 category when tab button is clicked 1`] = 
         </div>
       </div>
       <div
-        class="p-4"
+        class="p-4 flex justify-start items-start portrait:w-full portrait:max-h-[40svh] portrait:order-1"
       >
         <mockedavatareditorpreview
           class="relative z-10 w-full h-full"
@@ -1500,7 +1500,7 @@ exports[`AvatarEditor should render 4 category when tab button is clicked 1`] = 
 exports[`AvatarEditor should renders 1`] = `
 <div>
   <div
-    class="flex flex-col h-[100svh] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto overflow-hidden text-adlerdarkblue"
+    class="flex flex-col portrait:flex-col h-[100svh] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto overflow-hidden text-adlerdarkblue"
   >
     <div
       class="self-center w-full p-2 font-semibold flex place-content-stretch"
@@ -1554,10 +1554,10 @@ exports[`AvatarEditor should renders 1`] = `
       </div>
     </div>
     <div
-      class="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-2 grow lg:rounded-lg"
+      class="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-3 grow lg:rounded-lg"
     >
       <div
-        class="flex flex-col portrait:order-2"
+        class="flex flex-col portrait:h-full portrait:order-2"
       >
         <div
           class="flex flex-row items-center justify-center"
@@ -1566,14 +1566,14 @@ exports[`AvatarEditor should renders 1`] = `
             class="flex flex-col items-center justify-center"
           >
             <div
-              class="text-2xl font-bold text-darkblue"
+              class="text-2xl font-bold text-darkblue portrait:text-xl"
             >
               Haare
             </div>
           </div>
         </div>
         <div
-          class="flex flex-row justify-center p-2 space-x-4 "
+          class="flex flex-row justify-center p-2 space-x-4"
         >
           <div
             class=""
@@ -1647,7 +1647,7 @@ exports[`AvatarEditor should renders 1`] = `
           </div>
         </div>
         <div
-          class="p-4 max-h-[77vh] portrait:max-h-[30vh] overflow-auto"
+          class="p-4 max-h-[77vh] portrait:max-h-[35svh] overflow-auto"
         >
           <mockedavatareditorhaircategory
             controller="undefined"
@@ -1656,7 +1656,7 @@ exports[`AvatarEditor should renders 1`] = `
         </div>
       </div>
       <div
-        class="p-4"
+        class="p-4 flex justify-start items-start portrait:w-full portrait:max-h-[40svh] portrait:order-1"
       >
         <mockedavatareditorpreview
           class="relative z-10 w-full h-full"

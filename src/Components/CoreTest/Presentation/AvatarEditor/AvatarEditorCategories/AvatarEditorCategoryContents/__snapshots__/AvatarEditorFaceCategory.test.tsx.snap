@@ -12,7 +12,7 @@ exports[`AvatarEditorFaceCategory should render 1`] = `
         class="content-start w-full text-left"
       >
         <h1
-          class="text-2xl font-bold"
+          class="text-2xl portrait:text-lg font-bold"
         >
           ▼ eyebrowsTitle
         </h1>
@@ -263,7 +263,7 @@ exports[`AvatarEditorFaceCategory should render 1`] = `
         class="content-start w-full text-left"
       >
         <h1
-          class="text-2xl font-bold"
+          class="text-2xl portrait:text-lg font-bold"
         >
           ▼ eyesTitle
         </h1>
@@ -970,7 +970,7 @@ exports[`AvatarEditorFaceCategory should render 1`] = `
         class="content-start w-full text-left"
       >
         <h1
-          class="text-2xl font-bold"
+          class="text-2xl portrait:text-lg font-bold"
         >
           ▼ noseTitle
         </h1>
@@ -1335,7 +1335,7 @@ exports[`AvatarEditorFaceCategory should render 1`] = `
         class="content-start w-full text-left"
       >
         <h1
-          class="text-2xl font-bold"
+          class="text-2xl portrait:text-lg font-bold"
         >
           ▼ mouthTitle
         </h1>

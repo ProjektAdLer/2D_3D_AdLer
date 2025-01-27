@@ -12,7 +12,7 @@ Object {
           class="content-start w-full text-left"
         >
           <h1
-            class="text-2xl font-bold"
+            class="text-2xl portrait:text-lg font-bold"
           >
             ▼ undefined
           </h1>
@@ -33,7 +33,7 @@ Object {
         class="content-start w-full text-left"
       >
         <h1
-          class="text-2xl font-bold"
+          class="text-2xl portrait:text-lg font-bold"
         >
           ▼ undefined
         </h1>
