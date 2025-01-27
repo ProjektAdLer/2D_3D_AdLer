@@ -63,31 +63,31 @@ export default class AvatarEditorPreviewModelView {
 
     // find anchor nodes
     this.viewModel.hairAnchorNode = result.transformNodes.find(
-      (node) => node.name === "anker_hair",
+      (node) => node.name === "anchor_hair",
     )!;
     this.viewModel.beardAnchorNode = result.transformNodes.find(
-      (node) => node.name === "anker_beard",
+      (node) => node.name === "anchor_beard",
     )!;
     this.viewModel.shirtAnchorNode = result.transformNodes.find(
-      (node) => node.name === "anker_top",
+      (node) => node.name === "anchor_top",
     )!;
     this.viewModel.pantsAnchorNode = result.transformNodes.find(
-      (node) => node.name === "anker_pants",
+      (node) => node.name === "anchor_pants",
     )!;
     this.viewModel.shoesAnchorNode = result.transformNodes.find(
-      (node) => node.name === "anker_shoes",
+      (node) => node.name === "anchor_shoes",
     )!;
     this.viewModel.headGearAnchorNode = result.transformNodes.find(
-      (node) => node.name === "anker_hat",
+      (node) => node.name === "anchor_hat",
     )!;
     this.viewModel.glassesAnchorNode = result.transformNodes.find(
-      (node) => node.name === "anker_glasses",
+      (node) => node.name === "anchor_glasses",
     )!;
     this.viewModel.backpackAnchorNode = result.transformNodes.find(
       (node) => node.name === "Spine",
     )!;
     this.viewModel.otherAnchorNode = result.transformNodes.find(
-      (node) => node.name === "anker_acessories",
+      (node) => node.name === "anchor_acessories",
     )!;
 
     console.log(this.viewModel.backpackAnchorNode);
@@ -231,7 +231,7 @@ export default class AvatarEditorPreviewModelView {
   private updateEyeBrows(eyebrow?: number) {
     if (eyebrow === undefined || eyebrow === null) return;
     let eyebrowMat = this.viewModel.baseModelMeshes.find((mesh) =>
-      mesh.material?.name.includes("Eyebrow_mat"),
+      mesh.material?.name.includes("mat_Eyebrows"),
     )?.material!;
 
     let texture = eyebrowMat.getActiveTextures()[0] as Texture;
@@ -243,7 +243,7 @@ export default class AvatarEditorPreviewModelView {
   private updateEyes(eyes?: number) {
     if (eyes === undefined || eyes === null) return;
     let eyeMat = this.viewModel.baseModelMeshes.find((mesh) =>
-      mesh.material?.name.includes("Eyes_mat"),
+      mesh.material?.name.includes("mat_Eyes"),
     )?.material!;
 
     let texture = eyeMat.getActiveTextures()[0] as Texture;
@@ -255,7 +255,7 @@ export default class AvatarEditorPreviewModelView {
   private updateNose(nose?: number) {
     if (nose === undefined || nose === null) return;
     let noseMat = this.viewModel.baseModelMeshes.find((mesh) =>
-      mesh.material?.name.includes("Nose_mat"),
+      mesh.material?.name.includes("mat_Nose"),
     )?.material!;
 
     let texture = noseMat.getActiveTextures()[0] as Texture;
@@ -267,7 +267,7 @@ export default class AvatarEditorPreviewModelView {
   private updateMouth(mouth?: number) {
     if (mouth === undefined || mouth === null) return;
     let mouthMat = this.viewModel.baseModelMeshes.find((mesh) =>
-      mesh.material?.name.includes("Mouth_mat"),
+      mesh.material?.name.includes("mat_Mouth"),
     )?.material!;
 
     let texture = mouthMat.getActiveTextures()[0] as Texture;
