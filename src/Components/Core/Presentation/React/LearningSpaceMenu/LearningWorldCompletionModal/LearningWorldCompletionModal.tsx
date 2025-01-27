@@ -8,7 +8,6 @@ import SolutionIcon from "../../../../../../Assets/icons/world-completed.svg";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
 
 export default function LearningWorldCompletionModal({
   className,
@@ -61,9 +60,10 @@ export default function LearningWorldCompletionModal({
           <p>
             {translate("link_Homepage")}
             <a
-              className=" font-bold underline text-adlergreen"
+              className="font-bold underline  text-adlergreen"
               href="https://projekt-adler.eu"
               target="_blank"
+              rel="noreferrer"
             >
               Homepage
             </a>
