@@ -60,29 +60,26 @@ export const AvatarEyeTexture: AvatarUVOffset[] = [
 ];
 
 export const AvatarNoseTexture: AvatarUVOffset[] = [
-  { id: 0, name: "Nose_1", uOffset: 0, vOffset: -0.232 },
-  { id: 1, name: "Nose_2", uOffset: 0.09, vOffset: -0.234 },
-  { id: 2, name: "Nose_3", uOffset: 0.18, vOffset: -0.234 },
+  { id: 0, name: "Nose_1", uOffset: 0, vOffset: 0 },
+  { id: 1, name: "Nose_2", uOffset: 0.1665, vOffset: 0 },
+  { id: 2, name: "Nose_3", uOffset: 0.333, vOffset: 0 },
+  { id: 3, name: "Nose_4", uOffset: 0.4995, vOffset: 0 },
+  { id: 4, name: "Nose_5", uOffset: 0.666, vOffset: 0 },
+  { id: 5, name: "Nose_6", uOffset: 0.8325, vOffset: 0 },
 
-  { id: 3, name: "Nose_4", uOffset: 0, vOffset: -0.178 },
-  { id: 4, name: "Nose_5", uOffset: 0.09, vOffset: -0.178 },
-  { id: 5, name: "Nose_6", uOffset: 0.18, vOffset: -0.178 },
+  { id: 6, name: "Nose_7", uOffset: 0, vOffset: 0.249 },
+  { id: 7, name: "Nose_8", uOffset: 0.1665, vOffset: 0.249 },
+  { id: 8, name: "Nose_9", uOffset: 0.333, vOffset: 0.249 },
+  { id: 9, name: "Nose_10", uOffset: 0.4995, vOffset: 0.249 },
+  { id: 10, name: "Nose_11", uOffset: 0.666, vOffset: 0.249 },
+  { id: 11, name: "Nose_12", uOffset: 0.8325, vOffset: 0.249 },
 
-  { id: 6, name: "Nose_7", uOffset: 0, vOffset: -0.135 },
-  { id: 7, name: "Nose_8", uOffset: 0.09, vOffset: -0.135 },
-  { id: 8, name: "Nose_9", uOffset: 0.18, vOffset: -0.135 },
-
-  { id: 9, name: "Nose_10", uOffset: 0, vOffset: -0.085 },
-  { id: 10, name: "Nose_11", uOffset: 0.09, vOffset: -0.085 },
-  { id: 11, name: "Nose_12", uOffset: 0.18, vOffset: -0.085 },
-
-  { id: 12, name: "Nose_13", uOffset: 0, vOffset: -0.04 },
-  { id: 13, name: "Nose_14", uOffset: 0.09, vOffset: -0.04 },
-  { id: 14, name: "Nose_15", uOffset: 0.18, vOffset: -0.04 },
-
-  { id: 15, name: "Nose_16", uOffset: 0, vOffset: 0 },
-  { id: 16, name: "Nose_17", uOffset: 0.09, vOffset: 0 },
-  { id: 17, name: "Nose_18", uOffset: 0.18, vOffset: 0 },
+  { id: 12, name: "Nose_13", uOffset: 0, vOffset: 0.498 },
+  { id: 13, name: "Nose_14", uOffset: 0.1665, vOffset: 0.498 },
+  { id: 14, name: "Nose_15", uOffset: 0.333, vOffset: 0.498 },
+  { id: 15, name: "Nose_16", uOffset: 0.4995, vOffset: 0.498 },
+  { id: 16, name: "Nose_17", uOffset: 0.666, vOffset: 0.498 },
+  { id: 17, name: "Nose_18", uOffset: 0.8325, vOffset: 0.498 },
 ];
 
 export const AvatarMouthTexture: AvatarUVOffset[] = [
