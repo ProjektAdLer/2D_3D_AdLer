@@ -7,17 +7,17 @@ interface AvatarUVOffset {
 
 export const AvatarEyeBrowTexture: AvatarUVOffset[] = [
   { id: 0, name: "Brows_1", uOffset: 0, vOffset: 0 },
-  { id: 1, name: "Brows_2", uOffset: 0.09, vOffset: 0 },
-  { id: 2, name: "Brows_3", uOffset: 0.18, vOffset: 0 },
-  { id: 3, name: "Brows_4", uOffset: 0.27, vOffset: 0 },
-  { id: 4, name: "Brows_5", uOffset: 0.357, vOffset: 0 },
-  { id: 5, name: "Brows_6", uOffset: 0.447, vOffset: 0 },
-  { id: 6, name: "Brows_7", uOffset: 0, vOffset: 0.05 },
-  { id: 7, name: "Brows_8", uOffset: 0.09, vOffset: 0.05 },
-  { id: 8, name: "Brows_9", uOffset: 0.18, vOffset: 0.05 },
-  { id: 9, name: "Brows_10", uOffset: 0.27, vOffset: 0.05 },
-  { id: 10, name: "Brows_11", uOffset: 0.36, vOffset: 0.05 },
-  { id: 11, name: "Brows_12", uOffset: 0.45, vOffset: 0.05 },
+  { id: 1, name: "Brows_2", uOffset: 0.2497, vOffset: 0 },
+  { id: 2, name: "Brows_3", uOffset: 0.4994, vOffset: 0 },
+  { id: 3, name: "Brows_4", uOffset: 0.7491, vOffset: 0 },
+  { id: 4, name: "Brows_5", uOffset: 0, vOffset: 0.249 },
+  { id: 5, name: "Brows_6", uOffset: 0.2497, vOffset: 0.249 },
+  { id: 6, name: "Brows_7", uOffset: 0.4994, vOffset: 0.249 },
+  { id: 7, name: "Brows_8", uOffset: 0.7491, vOffset: 0.249 },
+  { id: 8, name: "Brows_9", uOffset: 0, vOffset: 0.498 },
+  { id: 9, name: "Brows_10", uOffset: 0.2497, vOffset: 0.498 },
+  { id: 10, name: "Brows_11", uOffset: 0.4994, vOffset: 0.498 },
+  { id: 11, name: "Brows_12", uOffset: 0.7491, vOffset: 0.498 },
 ];
 
 export const AvatarEyeTexture: AvatarUVOffset[] = [
