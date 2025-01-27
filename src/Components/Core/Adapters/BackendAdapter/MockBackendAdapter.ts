@@ -366,8 +366,15 @@ export default class MockBackendAdapter implements IBackendPort {
       hairColor: { id: 8, nameKey: "Blue 1", hexColor: "#043675" },
 
       // Accessories
+      headgear: "none",
+      glasses: "glasses-browline",
+      backpack: "none",
+      other: "none",
 
       // Clothes
+      shirt: "shirts-sweatshirt",
+      pants: "pants-jeans",
+      shoes: "shoes-trainers",
 
       // Body
       skinColor: { id: 24, nameKey: "Orange 1", hexColor: "#b76000" },
