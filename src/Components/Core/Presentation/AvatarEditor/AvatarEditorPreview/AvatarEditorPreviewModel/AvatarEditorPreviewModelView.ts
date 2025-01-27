@@ -52,7 +52,13 @@ export default class AvatarEditorPreviewModelView {
     this.viewModel.baseModelMeshes[0].position.y = -1;
 
     // Default-Meshes ausblenden
-    ["defaultPants", "defaultShoes", "defaultTop"].forEach((meshName) => {
+    [
+      "defaultPants_primitive0",
+      "defaultPants_primitive1",
+      "defaultShoes_primitive0",
+      "defaultShoes_primitive1",
+      "defaultTop",
+    ].forEach((meshName) => {
       const meshToHide = this.viewModel.baseModelMeshes.find(
         (m) => m.name === meshName,
       );
@@ -95,17 +101,17 @@ export default class AvatarEditorPreviewModelView {
       console.log(node.name, " / ", node.parent?.name);
     });
 
-    this.viewModel.baseModelMeshes.forEach((mesh) => {
-      if (mesh.name === "defaultTop") {
-        mesh.dispose();
-      }
-      if (mesh.name === "defaultPants") {
-        mesh.dispose();
-      }
-      if (mesh.name === "defaultShoes") {
-        mesh.dispose();
-      }
-    });
+    // this.viewModel.baseModelMeshes.forEach((mesh) => {
+    //   if (mesh.name === "defaultTop") {
+    //     mesh.dispose();
+    //   }
+    //   if (mesh.name === "defaultPants") {
+    //     mesh.dispose();
+    //   }
+    //   if (mesh.name === "defaultShoes") {
+    //     mesh.dispose();
+    //   }
+    // });
 
     await CoreDIContainer.get<ILoadAvatarConfigUseCase>(
       USECASE_TYPES.ILoadAvatarConfigUseCase,
