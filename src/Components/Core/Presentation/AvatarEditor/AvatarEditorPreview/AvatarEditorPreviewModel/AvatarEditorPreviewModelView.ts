@@ -1,5 +1,11 @@
 import AvatarEditorPreviewModelViewModel from "./AvatarEditorPreviewModelViewModel";
-import { Mesh, Skeleton, Texture, TransformNode } from "@babylonjs/core";
+import {
+  Mesh,
+  Skeleton,
+  Texture,
+  TransformNode,
+  Vector3,
+} from "@babylonjs/core";
 import IScenePresenter from "../../../Babylon/SceneManagement/IScenePresenter";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import SCENE_TYPES, {
@@ -16,6 +22,7 @@ import {
   AvatarShoesModels,
   AvatarNoneModel,
   AvatarShirtModels,
+  AvatarOtherModels,
 } from "src/Components/Core/Domain/AvatarModels/AvatarModelTypes";
 import ILoadAvatarConfigUseCase from "src/Components/Core/Application/UseCases/LoadAvatarConfig/ILoadAvatarConfigUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
@@ -93,7 +100,7 @@ export default class AvatarEditorPreviewModelView {
       (node) => node.name === "Spine",
     )!;
     this.viewModel.otherAnchorNode = result.transformNodes.find(
-      (node) => node.name === "anchor_acessories",
+      (node) => node.name === "Spine",
     )!;
 
     console.log(this.viewModel.backpackAnchorNode);
@@ -129,6 +136,7 @@ export default class AvatarEditorPreviewModelView {
     this.updateHeadGear(this.viewModel.currentAvatarConfig.Value.headgear);
     this.updateGlasses(this.viewModel.currentAvatarConfig.Value.glasses);
     this.updateBackPack(this.viewModel.currentAvatarConfig.Value.backpack);
+    this.updateOther(this.viewModel.currentAvatarConfig.Value.other);
   }
 
   private onAvatarConfigChanged(): void {
@@ -157,6 +165,8 @@ export default class AvatarEditorPreviewModelView {
       this.updateGlasses(this.viewModel.avatarConfigDiff.Value.glasses);
     if (this.viewModel.avatarConfigDiff.Value.backpack !== undefined)
       this.updateBackPack(this.viewModel.avatarConfigDiff.Value.backpack);
+    if (this.viewModel.avatarConfigDiff.Value.other !== undefined)
+      this.updateOther(this.viewModel.avatarConfigDiff.Value.other);
   }
 
   private updateModelHair(hair?: AvatarHairModels | undefined) {
@@ -203,6 +213,18 @@ export default class AvatarEditorPreviewModelView {
       this.viewModel.backpackAnchorNode,
       (mesh) => {
         mesh.position = this.viewModel.backpackPositionOffset;
+      },
+    );
+  }
+
+  private updateOther(other?: AvatarOtherModels) {
+    this.updateModel(
+      other,
+      "accessoires/other",
+      this.viewModel.otherMeshes,
+      this.viewModel.otherAnchorNode,
+      (mesh) => {
+        mesh.position = new Vector3(0, 0.28, 0.04);
       },
     );
   }
