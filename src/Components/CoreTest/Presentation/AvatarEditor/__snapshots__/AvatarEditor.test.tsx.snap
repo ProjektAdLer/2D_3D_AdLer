@@ -60,7 +60,7 @@ exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = 
       class="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-3 grow lg:rounded-lg"
     >
       <div
-        class="flex flex-col portrait:h-full portrait:order-2"
+        class="flex flex-col portrait:order-2 portrait:row-span-2"
       >
         <div
           class="flex flex-row items-center justify-center"
@@ -230,7 +230,7 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
       class="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-3 grow lg:rounded-lg"
     >
       <div
-        class="flex flex-col portrait:h-full portrait:order-2"
+        class="flex flex-col portrait:order-2 portrait:row-span-2"
       >
         <div
           class="flex flex-row items-center justify-center"
@@ -400,7 +400,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
       class="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-3 grow lg:rounded-lg"
     >
       <div
-        class="flex flex-col portrait:h-full portrait:order-2"
+        class="flex flex-col portrait:order-2 portrait:row-span-2"
       >
         <div
           class="flex flex-row items-center justify-center"
@@ -818,7 +818,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
       class="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-3 grow lg:rounded-lg"
     >
       <div
-        class="flex flex-col portrait:h-full portrait:order-2"
+        class="flex flex-col portrait:order-2 portrait:row-span-2"
       >
         <div
           class="flex flex-row items-center justify-center"
@@ -1220,7 +1220,7 @@ exports[`AvatarEditor should render 4 category when tab button is clicked 1`] = 
       class="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-3 grow lg:rounded-lg"
     >
       <div
-        class="flex flex-col portrait:h-full portrait:order-2"
+        class="flex flex-col portrait:order-2 portrait:row-span-2"
       >
         <div
           class="flex flex-row items-center justify-center"
@@ -1557,7 +1557,7 @@ exports[`AvatarEditor should renders 1`] = `
       class="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-3 grow lg:rounded-lg"
     >
       <div
-        class="flex flex-col portrait:h-full portrait:order-2"
+        class="flex flex-col portrait:order-2 portrait:row-span-2"
       >
         <div
           class="flex flex-row items-center justify-center"
