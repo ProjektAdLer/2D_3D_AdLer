@@ -6,7 +6,7 @@ Object {
   "baseElement": <body>
     <div>
       <div
-        class="fixed top-0 bottom-0 left-0 right-0 z-10 flex items-center justify-center h-full bg-blacktrans"
+        class="fixed top-0 bottom-0 left-0 right-0 z-20 flex items-center justify-center h-full bg-blacktrans"
       >
         <div
           class="flex items-center justify-center w-full h-full portrait:flex-col"
@@ -680,7 +680,7 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="fixed top-0 bottom-0 left-0 right-0 z-10 flex items-center justify-center h-full bg-blacktrans"
+      class="fixed top-0 bottom-0 left-0 right-0 z-20 flex items-center justify-center h-full bg-blacktrans"
     >
       <div
         class="flex items-center justify-center w-full h-full portrait:flex-col"

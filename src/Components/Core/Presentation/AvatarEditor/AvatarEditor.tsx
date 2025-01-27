@@ -49,7 +49,7 @@ export default function AvatarEditor() {
       />
       <div className="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-3 grow lg:rounded-lg">
         {/* Categories (Left Side) */}
-        <div className="flex flex-col portrait:h-full portrait:order-2">
+        <div className="flex flex-col portrait:order-2 portrait:row-span-2">
           {/* Category Tabs */}
           {/* Category Header */}
           <div className="flex flex-row items-center justify-center">
