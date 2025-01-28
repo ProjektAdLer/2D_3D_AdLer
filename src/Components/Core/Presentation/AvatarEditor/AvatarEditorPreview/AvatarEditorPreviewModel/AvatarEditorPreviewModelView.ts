@@ -187,7 +187,6 @@ export default class AvatarEditorPreviewModelView {
     let hairMesh = this.viewModel.hairMeshes.get(
       this.viewModel.currentAvatarConfig.Value.hair,
     );
-    console.log(hairMesh);
     let hairMaterial = hairMesh?.[1].material as Material;
     let hairTexture = hairMaterial?.getActiveTextures()[0] as Texture;
 
@@ -198,6 +197,7 @@ export default class AvatarEditorPreviewModelView {
     let hairColorUOffeset = hairColor?.uOffset ?? 0;
     let hairColorVOffset = hairColor?.vOffset ?? 0;
 
+    if (hairTexture === undefined) return;
     hairTexture.uOffset = hairColorUOffeset - uDisplacement;
     hairTexture.vOffset = hairColorVOffset - vDisplacement;
   }
