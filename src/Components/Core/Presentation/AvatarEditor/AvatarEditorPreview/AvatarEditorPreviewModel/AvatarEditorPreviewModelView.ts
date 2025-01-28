@@ -32,6 +32,7 @@ import {
   AvatarMouthTexture,
   AvatarNoseTexture,
 } from "src/Components/Core/Domain/AvatarModels/AvatarFaceUVTexture";
+import { AvatarColor } from "src/Components/Core/Domain/AvatarModels/AvatarColorPalette";
 
 const baseModelLink = require("../../../../../../Assets/3dModels/sharedModels/avatar/a-avatar-skeleton.glb");
 
@@ -125,6 +126,7 @@ export default class AvatarEditorPreviewModelView {
     ).executeAsync();
 
     this.updateModelHair(this.viewModel.currentAvatarConfig.Value.hair);
+    this.updateHairColor(this.viewModel.currentAvatarConfig.Value.hairColor);
     this.updateModelBeard(this.viewModel.currentAvatarConfig.Value.beard);
     this.updateEyeBrows(this.viewModel.currentAvatarConfig.Value.eyebrows);
     this.updateEyes(this.viewModel.currentAvatarConfig.Value.eyes);
@@ -145,6 +147,8 @@ export default class AvatarEditorPreviewModelView {
       this.updateModelBeard(this.viewModel.avatarConfigDiff.Value.beard);
     if (this.viewModel.avatarConfigDiff.Value.hair)
       this.updateModelHair(this.viewModel.avatarConfigDiff.Value.hair);
+    if (this.viewModel.avatarConfigDiff.Value.hairColor)
+      this.updateHairColor(this.viewModel.avatarConfigDiff.Value.hairColor);
     if (this.viewModel.avatarConfigDiff.Value.eyebrows !== undefined)
       this.updateEyeBrows(this.viewModel.avatarConfigDiff.Value.eyebrows);
     if (this.viewModel.avatarConfigDiff.Value.eyes !== undefined)
@@ -176,6 +180,23 @@ export default class AvatarEditorPreviewModelView {
       this.viewModel.hairMeshes,
       this.viewModel.hairAnchorNode,
     );
+  }
+
+  private async updateHairColor(hairColor?: AvatarColor) {
+    let hairRoot = this.viewModel.hairAnchorNode?.getChildMeshes();
+    let hairMesh = hairRoot?.[0]?.getChildMeshes();
+    let hairMaterial = hairMesh?.[0].material;
+    let hairTexture = hairMaterial?.getActiveTextures()[0] as Texture;
+
+    // Set Displacement of current mesh UV Map
+    const uDisplacement = 0.125;
+    const vDisplacement = 0.5;
+
+    let hairColorUOffeset = hairColor?.uOffset ?? 0;
+    let hairColorVOffset = hairColor?.vOffset ?? 0;
+
+    hairTexture.uOffset = hairColorUOffeset - uDisplacement;
+    hairTexture.vOffset = hairColorVOffset - vDisplacement;
   }
 
   private updateModelBeard(beard?: AvatarBeardModels | undefined) {
