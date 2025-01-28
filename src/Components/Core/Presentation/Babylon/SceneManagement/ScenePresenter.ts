@@ -20,6 +20,7 @@ import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILogge
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import { Inspector } from "@babylonjs/inspector";
+import {HTMLTwinRenderer} from "@babylonjs/accessibility";
 
 /**
  * @description This class is responsible for creating the Scene and managing the NavMesh navigation.
@@ -110,6 +111,7 @@ export default class ScenePresenter implements IScenePresenter {
     sceneOptions?: SceneOptions,
   ): Promise<void> {
     await this.sceneDefinition.createScene(engine, sceneOptions);
+    
   }
 
   disposeScene(): void {

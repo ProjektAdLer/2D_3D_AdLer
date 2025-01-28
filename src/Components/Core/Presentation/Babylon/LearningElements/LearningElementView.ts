@@ -88,6 +88,17 @@ export default class LearningElementView {
       true,
     )) as Mesh[];
 
+    
+    this.viewModel.modelMeshes[0].accessibilityTag = {
+      description: this.viewModel.name + " " + this.viewModel.id,
+      // @ts-ignore
+      eventHandler: {
+        click: () => console.log("Easter egg clicked"),
+      }
+      
+    }
+    console.log(this.viewModel.modelMeshes[0].accessibilityTag);
+
     // position and rotate model
     this.viewModel.modelMeshes[0].position = this.viewModel.position;
     this.viewModel.modelMeshes[0].rotate(
