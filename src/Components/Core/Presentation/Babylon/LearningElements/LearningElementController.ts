@@ -42,9 +42,10 @@ export default class LearningElementController
     }
   }
 
+
   @bind
-  picked(): void {
-    if (this.viewModel.isInteractable.Value) {
+  picked(overrideIsInteractable?: boolean): void {
+    if (this.viewModel.isInteractable.Value || overrideIsInteractable) {
       this.bottomTooltipPresenter.hideAll();
       if (this.viewModel.type === LearningElementTypes.adaptivity) {
         this.startLoadAdaptivityElementUseCase();

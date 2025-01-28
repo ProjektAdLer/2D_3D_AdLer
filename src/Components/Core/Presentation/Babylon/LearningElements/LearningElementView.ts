@@ -1,4 +1,5 @@
 import {
+  ActionEvent,
   ActionManager,
   Color3,
   ExecuteCodeAction,
@@ -92,12 +93,28 @@ export default class LearningElementView {
     this.viewModel.modelMeshes[0].accessibilityTag = {
       description: this.viewModel.name + " " + this.viewModel.id,
       // @ts-ignore
-      eventHandler: {
-        click: () => console.log("Easter egg clicked"),
+      eventHandler:{
+        click: () => {
+          // this.viewModel.isInteractable.Value = true;
+           this.controller.picked(true);
+          
+          // get position on screen
+          const canvas = this.scenePresenter.Scene.getEngine().getRenderingCanvas();
+          const position = this.viewModel.modelMeshes[0].getPositionInCameraSpace(this.scenePresenter.Scene.activeCamera!);
+          
+          // simulate click on that position
+          const event = new MouseEvent('click', {
+            view: window,
+            bubbles: true,
+            cancelable: true,
+            clientX: position.x,
+            clientY: position.y
+          });
+          canvas!.dispatchEvent(event);
+
+        }
       }
-      
     }
-    console.log(this.viewModel.modelMeshes[0].accessibilityTag);
 
     // position and rotate model
     this.viewModel.modelMeshes[0].position = this.viewModel.position;
@@ -162,7 +179,7 @@ export default class LearningElementView {
     actionManager.registerAction(
       new ExecuteCodeAction(
         ActionManager.OnPickTrigger,
-        this.controller.picked,
+        (e) => this.controller.picked(false),
       ),
     );
     actionManager.registerAction(
