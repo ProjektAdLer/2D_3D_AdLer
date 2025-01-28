@@ -11,6 +11,7 @@
     "@types/node": "^22.5.4",
     "@xapi/xapi": "^2.2.8",
     "axios": "^1.7.7",
+    "babylonjs": "^7.45.0",
     "bind-decorator": "^1.0.11",
     "clsx": "^2.1.1",
     "earcut": "^3.0.0",
