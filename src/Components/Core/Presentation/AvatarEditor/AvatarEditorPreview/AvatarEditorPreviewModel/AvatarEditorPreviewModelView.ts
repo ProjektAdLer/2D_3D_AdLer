@@ -184,9 +184,11 @@ export default class AvatarEditorPreviewModelView {
   }
 
   private async updateHairColor(hairColor?: AvatarColor) {
-    let hairRoot = this.viewModel.hairAnchorNode?.getChildMeshes();
-    console.log(hairRoot);
-    let hairMaterial = hairRoot?.[hairRoot.length - 1].material as Material;
+    let hairMesh = this.viewModel.hairMeshes.get(
+      this.viewModel.currentAvatarConfig.Value.hair,
+    );
+    console.log(hairMesh);
+    let hairMaterial = hairMesh?.[1].material as Material;
     let hairTexture = hairMaterial?.getActiveTextures()[0] as Texture;
 
     // Set Displacement of current mesh UV Map
