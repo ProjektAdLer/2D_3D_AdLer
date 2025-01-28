@@ -3,6 +3,8 @@ import { Inspector } from "@babylonjs/inspector";
 import { injectable } from "inversify";
 import { config } from "src/config";
 import { Semaphore } from "src/Lib/Semaphore";
+import {HTMLTwinRenderer} from "@babylonjs/accessibility";
+
 
 /**
  * @description This class is responsible for creating a Scene.
@@ -47,6 +49,8 @@ export default abstract class AbstractSceneDefinition {
     let lock = await this.semaphore.acquire();
 
     this.scene = new Scene(engine, sceneOptions);
+
+    HTMLTwinRenderer.Render(this.Scene);
 
     // execute pretasks in order, waiting inbetween
     await Promise.all(
