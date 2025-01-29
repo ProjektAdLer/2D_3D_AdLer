@@ -301,15 +301,15 @@ export default class AvatarEditorPreviewModelView {
     let shirtTexture = shirtMaterial?.getActiveTextures()[0] as Texture;
 
     // Set Displacement of current mesh UV Map
-    const uDisplacement = 0;
-    const vDisplacement = 0.875;
+    // const uDisplacement = 0;
+    // const vDisplacement = 0.875;
 
     let shirtColorUOffeset = shirtColor?.uOffset ?? 0;
     let shirtColorVOffset = shirtColor?.vOffset ?? 0;
 
     if (shirtTexture === undefined) return;
-    shirtTexture.uOffset = shirtColorUOffeset - uDisplacement;
-    shirtTexture.vOffset = shirtColorVOffset - vDisplacement;
+    shirtTexture.uOffset = shirtColorUOffeset; //- uDisplacement;
+    shirtTexture.vOffset = shirtColorVOffset; //- vDisplacement;
   }
 
   private updateModelPants(pants?: AvatarPantsModels | undefined) {
