@@ -64,6 +64,7 @@ export default class AvatarEditorPreviewModelView {
 
     // Default-Meshes ausblenden
     [
+      "skeletonPullover",
       "defaultPants_primitive0",
       "defaultPants_primitive1",
       "defaultShoes_primitive0",
@@ -106,7 +107,6 @@ export default class AvatarEditorPreviewModelView {
     this.updateEyes(this.viewModel.currentAvatarConfig.Value.eyes);
     this.updateNose(this.viewModel.currentAvatarConfig.Value.nose);
     this.updateMouth(this.viewModel.currentAvatarConfig.Value.mouth);
-    this.updateModelShirt(this.viewModel.currentAvatarConfig.Value.shirt);
     this.updateShirtColor(this.viewModel.currentAvatarConfig.Value.shirtColor);
     this.updateModelPants(this.viewModel.currentAvatarConfig.Value.pants);
     this.updatePantsColor(this.viewModel.currentAvatarConfig.Value.pantsColor);
@@ -273,7 +273,7 @@ export default class AvatarEditorPreviewModelView {
 
     // Set Displacement of current mesh UV Map
     const uDisplacement = 0;
-    const vDisplacement = 0.875;
+    const vDisplacement = 0;
 
     let shirtColorUOffeset = shirtColor?.uOffset ?? 0;
     let shirtColorVOffset = shirtColor?.vOffset ?? 0;
@@ -300,8 +300,8 @@ export default class AvatarEditorPreviewModelView {
     let pantsTexture = pantsMaterial?.getActiveTextures()[0] as Texture;
 
     // Set Displacement of current mesh UV Map
-    const uDisplacement = 0.375;
-    const vDisplacement = 0.125;
+    const uDisplacement = 0;
+    const vDisplacement = 0;
 
     let pantsColorUOffeset = pantsColor?.uOffset ?? 0;
     let pantsColorVOffset = pantsColor?.vOffset ?? 0;
