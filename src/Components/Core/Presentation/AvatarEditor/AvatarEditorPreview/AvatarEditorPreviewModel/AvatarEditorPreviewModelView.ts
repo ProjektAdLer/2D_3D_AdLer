@@ -29,8 +29,6 @@ import {
 import AvatarEditorUtils from "../../AvatarEditorUtils";
 import AvatarModelAssetPaths from "src/Components/Core/Domain/AvatarModels/AvatarModelPaths";
 import AvatarModelTransforms from "src/Components/Core/Domain/AvatarModels/AvatarModelTransforms";
-import AvatarModelMaterialNames from "src/Components/Core/Domain/AvatarModels/AvatarModelMaterialNames";
-
 const baseModelLink = require("../../../../../../Assets/3dModels/sharedModels/avatar/a-avatar-skeleton.glb");
 
 export default class AvatarEditorPreviewModelView {

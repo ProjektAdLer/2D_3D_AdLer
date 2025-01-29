@@ -9,6 +9,7 @@ import type {
   AnimationGroup,
   ISceneLoaderAsyncResult,
   Nullable,
+  Texture,
 } from "@babylonjs/core";
 import SCENE_TYPES, {
   ScenePresenterFactory,
@@ -131,11 +132,11 @@ export default class AvatarView {
 
   @bind
   private setupBlinkAnimation(): void {
-    // const eyeMaterial = this.viewModel.meshes.find(
-    //   (mesh) => mesh.material?.name === "Eyes_mat",
-    // )?.material!;
-    // this.viewModel.eyeTextures = eyeMaterial.getActiveTextures() as Texture[];
-    // this.setBlinkTimeout();
+    const eyeMaterial = this.viewModel.meshes.find(
+      (mesh) => mesh.material?.name === AvatarModelMaterialNames.eyes,
+    )?.material!;
+    this.viewModel.eyeTextures = eyeMaterial.getActiveTextures() as Texture[];
+    this.setBlinkTimeout();
   }
 
   @bind
@@ -227,11 +228,11 @@ export default class AvatarView {
   private async loadCustomizedAvatarAssets(
     result: ISceneLoaderAsyncResult,
   ): Promise<void> {
-    const userDataEntity = CoreDIContainer.get<IEntityContainer>(
+    const entityContainer = CoreDIContainer.get<IEntityContainer>(
       CORE_TYPES.IEntityContainer,
     );
     const avatarEntity =
-      userDataEntity.getEntitiesOfType(UserDataEntity)[0].avatar;
+      entityContainer.getEntitiesOfType(UserDataEntity)[0].avatar;
     const anchorNodes = AvatarEditorUtils.getAvatarAnchorNodes(
       result.transformNodes,
     );
