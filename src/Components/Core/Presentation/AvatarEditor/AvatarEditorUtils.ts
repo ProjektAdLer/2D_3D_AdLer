@@ -1,0 +1,103 @@
+import {
+  ISceneLoaderAsyncResult,
+  Mesh,
+  Skeleton,
+  Texture,
+  TransformNode,
+  Vector3,
+} from "@babylonjs/core";
+import IScenePresenter from "../Babylon/SceneManagement/IScenePresenter";
+import { AvatarNoneModel } from "../../Domain/AvatarModels/AvatarModelTypes";
+import { AvatarUVOffset } from "../../Domain/AvatarModels/AvatarFaceUVTexture";
+
+export default class AvatarEditorUtils {
+  public static async setupAvatarAssetModel<T>(
+    scenePresenter: IScenePresenter,
+    avatartSkeleton: Skeleton,
+    newModel: T,
+    modelFolder: string,
+    anchorNode: TransformNode,
+    onMeshLoaded?: (mesh: Mesh) => void,
+  ): Promise<ISceneLoaderAsyncResult | void> {
+    if (
+      newModel === undefined ||
+      newModel === null ||
+      newModel === AvatarNoneModel.None
+    )
+      return;
+
+    const result = await scenePresenter.loadGLTFModel(
+      require(
+        `src/Assets/3dModels/sharedModels/avatar/${modelFolder}/aa-${newModel}.glb`,
+      ),
+    );
+    result.animationGroups.forEach((animation) => {
+      animation.dispose();
+    });
+    result.meshes.forEach((mesh) => {
+      if (mesh instanceof Mesh) {
+        mesh.skeleton?.dispose();
+        mesh.skeleton = avatartSkeleton;
+      }
+    });
+    result.meshes[0].parent = anchorNode;
+    if (onMeshLoaded) onMeshLoaded(result.meshes[0] as Mesh);
+    return result;
+  }
+
+  public static getAvatarAnchorNodes(nodes: TransformNode[]): {
+    hairNode: TransformNode;
+    beardNode: TransformNode;
+    shirtNode: TransformNode;
+    pantsNode: TransformNode;
+    shoesNode: TransformNode;
+    headGearNode: TransformNode;
+    glassesNode: TransformNode;
+    backpackNode: TransformNode;
+    otherNode: TransformNode;
+  } {
+    const hairAnchorNode = nodes.find((node) => node.name === "anchor_hair")!;
+    const beardAnchorNode = nodes.find((node) => node.name === "anchor_beard")!;
+    const shirtAnchorNode = nodes.find((node) => node.name === "anchor_top")!;
+    const pantsAnchorNode = nodes.find((node) => node.name === "anchor_pants")!;
+    const shoesAnchorNode = nodes.find((node) => node.name === "anchor_shoes")!;
+    const headGearAnchorNode = nodes.find(
+      (node) => node.name === "anchor_hat",
+    )!;
+    const glassesAnchorNode = nodes.find(
+      (node) => node.name === "anchor_glasses",
+    )!;
+    const backpackAnchorNode = nodes.find((node) => node.name === "Spine")!;
+    const otherAnchorNode = nodes.find((node) => node.name === "Spine")!;
+    // models are per default mirrored
+    shirtAnchorNode.scaling = new Vector3(-1, 1, 1);
+    pantsAnchorNode.scaling = new Vector3(-1, 1, 1);
+    shoesAnchorNode.scaling = new Vector3(-1, 1, 1);
+
+    return {
+      hairNode: hairAnchorNode,
+      beardNode: beardAnchorNode,
+      shirtNode: shirtAnchorNode,
+      pantsNode: pantsAnchorNode,
+      shoesNode: shoesAnchorNode,
+      headGearNode: headGearAnchorNode,
+      glassesNode: glassesAnchorNode,
+      backpackNode: backpackAnchorNode,
+      otherNode: otherAnchorNode,
+    };
+  }
+
+  public static setupAvatarTextures(
+    textureIndex: number,
+    meshes: Mesh[],
+    materialName: string,
+    textureOffset: AvatarUVOffset[],
+  ) {
+    if (textureIndex === undefined || textureIndex === null) return;
+    const texture = meshes
+      .find((mesh) => mesh.material?.name.includes(materialName))
+      ?.material!.getActiveTextures()[0] as Texture;
+    texture.uOffset = textureOffset[textureIndex].uOffset;
+    texture.vOffset = textureOffset[textureIndex].vOffset;
+  }
+}

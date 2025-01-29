@@ -1,4 +1,4 @@
-interface AvatarUVOffset {
+export interface AvatarUVOffset {
   id: number;
   name: string;
   uOffset: number;
@@ -39,7 +39,6 @@ for (let y = 0; y < 9; y++) {
       vOffset: y * 0.09975,
     });
   }
-  console.log("hello");
 }
 export { AvatarEyeTexture };
 

@@ -5,7 +5,11 @@ import {
   TransformNode,
   Vector3,
 } from "@babylonjs/core";
-import type { AnimationGroup, Nullable, Texture } from "@babylonjs/core";
+import type {
+  AnimationGroup,
+  ISceneLoaderAsyncResult,
+  Nullable,
+} from "@babylonjs/core";
 import SCENE_TYPES, {
   ScenePresenterFactory,
 } from "~DependencyInjection/Scenes/SCENE_TYPES";
@@ -22,8 +26,21 @@ import { config } from "src/config";
 import bind from "bind-decorator";
 import ICharacterAnimator from "../CharacterAnimator/ICharacterAnimator";
 import ICharacterNavigator from "../CharacterNavigator/ICharacterNavigator";
+import IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
+import CORE_TYPES from "~DependencyInjection/CoreTypes";
+import UserDataEntity from "src/Components/Core/Domain/Entities/UserDataEntity";
+import AvatarEditorUtils from "../../AvatarEditor/AvatarEditorUtils";
+import AvatarModelAssetPaths from "src/Components/Core/Domain/AvatarModels/AvatarModelPaths";
+import AvatarModelTransforms from "src/Components/Core/Domain/AvatarModels/AvatarModelTransforms";
+import {
+  AvatarEyeBrowTexture,
+  AvatarEyeTexture,
+  AvatarMouthTexture,
+  AvatarNoseTexture,
+} from "src/Components/Core/Domain/AvatarModels/AvatarFaceUVTexture";
+import AvatarModelMaterialNames from "src/Components/Core/Domain/AvatarModels/AvatarModelMaterialNames";
 
-const modelLink = require("../../../../../Assets/3dModels/sharedModels/a_avatar_standardmale.glb");
+const modelLink = require("../../../../../Assets/3dModels/sharedModels/avatar/a-avatar-skeleton.glb");
 
 export default class AvatarView {
   private scenePresenter: IScenePresenter;
@@ -59,8 +76,25 @@ export default class AvatarView {
     this.viewModel.parentNode =
       this.scenePresenter.Scene.getTransformNodeByName("AvatarParentNode")!;
 
-    let result = await this.scenePresenter.loadGLTFModel(modelLink);
+    const result = await this.scenePresenter.loadGLTFModel(modelLink);
+
+    // Default-Meshes ausblenden
+    [
+      "defaultPants_primitive0",
+      "defaultPants_primitive1",
+      "defaultShoes_primitive0",
+      "defaultShoes_primitive1",
+      "defaultTop",
+    ].forEach((meshName) => {
+      const meshToHide = result.meshes.find((m) => m.name === meshName);
+      if (meshToHide) {
+        meshToHide.dispose();
+      }
+    });
+
     this.viewModel.meshes = result.meshes as Mesh[];
+
+    await this.loadCustomizedAvatarAssets(result);
 
     // create separate root node for model
     // so that it can be rotated without affecting gltf coordinate system conversions in __root__ node created by Babylon
@@ -97,12 +131,11 @@ export default class AvatarView {
 
   @bind
   private setupBlinkAnimation(): void {
-    const eyeMaterial = this.viewModel.meshes.find(
-      (mesh) => mesh.material?.name === "Eyes_mat",
-    )?.material!;
-    this.viewModel.eyeTextures = eyeMaterial.getActiveTextures() as Texture[];
-
-    this.setBlinkTimeout();
+    // const eyeMaterial = this.viewModel.meshes.find(
+    //   (mesh) => mesh.material?.name === "Eyes_mat",
+    // )?.material!;
+    // this.viewModel.eyeTextures = eyeMaterial.getActiveTextures() as Texture[];
+    // this.setBlinkTimeout();
   }
 
   @bind
@@ -189,5 +222,121 @@ export default class AvatarView {
       clearTimeout(this.viewModel.resetEyeTimer);
       clearTimeout(this.viewModel.setEyeTimer);
     });
+  }
+
+  private async loadCustomizedAvatarAssets(
+    result: ISceneLoaderAsyncResult,
+  ): Promise<void> {
+    const userDataEntity = CoreDIContainer.get<IEntityContainer>(
+      CORE_TYPES.IEntityContainer,
+    );
+    const avatarEntity =
+      userDataEntity.getEntitiesOfType(UserDataEntity)[0].avatar;
+    const anchorNodes = AvatarEditorUtils.getAvatarAnchorNodes(
+      result.transformNodes,
+    );
+    const baseSkeleton = result.skeletons[0];
+    // hair
+    AvatarEditorUtils.setupAvatarAssetModel(
+      this.scenePresenter,
+      baseSkeleton,
+      avatarEntity.hair,
+      AvatarModelAssetPaths.hairPath,
+      anchorNodes.hairNode,
+    );
+    // beard
+    AvatarEditorUtils.setupAvatarAssetModel(
+      this.scenePresenter,
+      baseSkeleton,
+      avatarEntity.beard,
+      AvatarModelAssetPaths.beardPath,
+      anchorNodes.beardNode,
+    );
+    // headgear
+    AvatarEditorUtils.setupAvatarAssetModel(
+      this.scenePresenter,
+      baseSkeleton,
+      avatarEntity.headgear,
+      AvatarModelAssetPaths.headGearPath,
+      anchorNodes.headGearNode,
+    );
+    // glasses
+    AvatarEditorUtils.setupAvatarAssetModel(
+      this.scenePresenter,
+      baseSkeleton,
+      avatarEntity.glasses,
+      AvatarModelAssetPaths.glassesPath,
+      anchorNodes.glassesNode,
+    );
+    // backpack
+    AvatarEditorUtils.setupAvatarAssetModel(
+      this.scenePresenter,
+      baseSkeleton,
+      avatarEntity.backpack,
+      AvatarModelAssetPaths.backpackPath,
+      anchorNodes.backpackNode,
+      AvatarModelTransforms.backpack,
+    );
+    // other
+    AvatarEditorUtils.setupAvatarAssetModel(
+      this.scenePresenter,
+      baseSkeleton,
+      avatarEntity.other,
+      AvatarModelAssetPaths.otherPath,
+      anchorNodes.otherNode,
+      AvatarModelTransforms.sheriffStar,
+    );
+    // shirt
+    AvatarEditorUtils.setupAvatarAssetModel(
+      this.scenePresenter,
+      baseSkeleton,
+      avatarEntity.shirt,
+      AvatarModelAssetPaths.shirtPath,
+      anchorNodes.shirtNode,
+    );
+    // pants
+    AvatarEditorUtils.setupAvatarAssetModel(
+      this.scenePresenter,
+      baseSkeleton,
+      avatarEntity.pants,
+      AvatarModelAssetPaths.pantsPath,
+      anchorNodes.pantsNode,
+    );
+    // shoes
+    AvatarEditorUtils.setupAvatarAssetModel(
+      this.scenePresenter,
+      baseSkeleton,
+      avatarEntity.shoes,
+      AvatarModelAssetPaths.shoesPath,
+      anchorNodes.shoesNode,
+    );
+    // eyebrows
+    AvatarEditorUtils.setupAvatarTextures(
+      avatarEntity.eyebrows,
+      result.meshes as Mesh[],
+      AvatarModelMaterialNames.eyebrows,
+      AvatarEyeBrowTexture,
+    );
+    // eyes
+    AvatarEditorUtils.setupAvatarTextures(
+      avatarEntity.eyes,
+      result.meshes as Mesh[],
+      AvatarModelMaterialNames.eyes,
+      AvatarEyeTexture,
+    );
+    // nose
+    AvatarEditorUtils.setupAvatarTextures(
+      avatarEntity.nose,
+      result.meshes as Mesh[],
+      AvatarModelMaterialNames.nose,
+      AvatarNoseTexture,
+    );
+    // mouth
+    AvatarEditorUtils.setupAvatarTextures(
+      avatarEntity.mouth,
+      result.meshes as Mesh[],
+      AvatarModelMaterialNames.mouth,
+      AvatarMouthTexture,
+    );
   }
 }
