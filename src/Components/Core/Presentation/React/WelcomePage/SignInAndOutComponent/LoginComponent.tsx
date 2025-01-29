@@ -13,6 +13,7 @@ import tailwindMerge from "../../../Utils/TailwindMerge";
 import StyledInputField from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledInputField";
 import StyledPasswordField from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledPasswordField";
 import { useTranslation } from "react-i18next";
+import ILoadAvatarConfigUseCase from "src/Components/Core/Application/UseCases/LoadAvatarConfig/ILoadAvatarConfigUseCase";
 
 /**
  * React Component that displays a login button. When clicked, a modal will be overlayed.
@@ -25,7 +26,10 @@ export default function LoginComponent({
     SignInAndOutComponentController
   >(BUILDER_TYPES.ISignInAndOutComponentBuilder);
   const getLoginStatusUseCase = useInjection<IGetLoginStatusUseCase>(
-    USECASE_TYPES.IGetLoginStatusUseCase
+    USECASE_TYPES.IGetLoginStatusUseCase,
+  );
+  const loadAvatarConfigUseCase = useInjection<ILoadAvatarConfigUseCase>(
+    USECASE_TYPES.ILoadAvatarConfigUseCase,
   );
   const { t: translate } = useTranslation("start");
 
@@ -38,14 +42,25 @@ export default function LoginComponent({
 
   const [, setModalVisible] = useObservable<boolean>(viewModel?.modalVisible);
   const [userLoggedIn, setUserLoggedIn] = useObservable<boolean>(
-    viewModel?.userLoggedIn
+    viewModel?.userLoggedIn,
   );
   const [loginFailed] = useObservable<boolean>(viewModel?.loginFailed);
 
   useEffect(() => {
     const loginStatus = getLoginStatusUseCase.execute();
     setUserLoggedIn(loginStatus.isLoggedIn);
-  }, [getLoginStatusUseCase, setUserLoggedIn, setModalVisible]);
+    if (loginStatus.isLoggedIn) {
+      const loadConfig = async () => {
+        await loadAvatarConfigUseCase.executeAsync();
+      };
+      loadConfig();
+    }
+  }, [
+    getLoginStatusUseCase,
+    loadAvatarConfigUseCase,
+    setUserLoggedIn,
+    setModalVisible,
+  ]);
 
   if (!controller || !viewModel) return null;
 

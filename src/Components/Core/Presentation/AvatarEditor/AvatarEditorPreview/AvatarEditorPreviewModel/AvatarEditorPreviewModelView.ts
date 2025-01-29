@@ -34,6 +34,10 @@ import {
   AvatarNoseTexture,
 } from "src/Components/Core/Domain/AvatarModels/AvatarFaceUVTexture";
 import { AvatarColor } from "src/Components/Core/Domain/AvatarModels/AvatarColorPalette";
+import AvatarEditorUtils from "../../AvatarEditorUtils";
+import AvatarModelAssetPaths from "src/Components/Core/Domain/AvatarModels/AvatarModelPaths";
+import AvatarModelTransforms from "src/Components/Core/Domain/AvatarModels/AvatarModelTransforms";
+import AvatarModelMaterialNames from "src/Components/Core/Domain/AvatarModels/AvatarModelMaterialNames";
 
 const baseModelLink = require("../../../../../../Assets/3dModels/sharedModels/avatar/a-avatar-skeleton.glb");
 
@@ -77,59 +81,29 @@ export default class AvatarEditorPreviewModelView {
     });
 
     // find anchor nodes
-    this.viewModel.hairAnchorNode = result.transformNodes.find(
-      (node) => node.name === "anchor_hair",
-    )!;
-    this.viewModel.beardAnchorNode = result.transformNodes.find(
-      (node) => node.name === "anchor_beard",
-    )!;
-    this.viewModel.shirtAnchorNode = result.transformNodes.find(
-      (node) => node.name === "anchor_top",
-    )!;
-    this.viewModel.pantsAnchorNode = result.transformNodes.find(
-      (node) => node.name === "anchor_pants",
-    )!;
-    this.viewModel.shoesAnchorNode = result.transformNodes.find(
-      (node) => node.name === "anchor_shoes",
-    )!;
-    this.viewModel.headGearAnchorNode = result.transformNodes.find(
-      (node) => node.name === "anchor_hat",
-    )!;
-    this.viewModel.glassesAnchorNode = result.transformNodes.find(
-      (node) => node.name === "anchor_glasses",
-    )!;
-    this.viewModel.backpackAnchorNode = result.transformNodes.find(
-      (node) => node.name === "Spine",
-    )!;
-    this.viewModel.otherAnchorNode = result.transformNodes.find(
-      (node) => node.name === "Spine",
-    )!;
-
-    console.log(this.viewModel.backpackAnchorNode);
-    result.transformNodes.forEach((node) => {
-      console.log(node.name, " / ", node.parent?.name);
-    });
-
-    // this.viewModel.baseModelMeshes.forEach((mesh) => {
-    //   if (mesh.name === "defaultTop") {
-    //     mesh.dispose();
-    //   }
-    //   if (mesh.name === "defaultPants") {
-    //     mesh.dispose();
-    //   }
-    //   if (mesh.name === "defaultShoes") {
-    //     mesh.dispose();
-    //   }
-    // });
+    const anchorNodes = AvatarEditorUtils.getAvatarAnchorNodes(
+      result.transformNodes,
+    );
+    this.viewModel.hairAnchorNode = anchorNodes.hairNode;
+    this.viewModel.beardAnchorNode = anchorNodes.beardNode;
+    this.viewModel.shirtAnchorNode = anchorNodes.shirtNode;
+    this.viewModel.pantsAnchorNode = anchorNodes.pantsNode;
+    this.viewModel.shoesAnchorNode = anchorNodes.shoesNode;
+    this.viewModel.headGearAnchorNode = anchorNodes.headGearNode;
+    this.viewModel.glassesAnchorNode = anchorNodes.glassesNode;
+    this.viewModel.backpackAnchorNode = anchorNodes.backpackNode;
+    this.viewModel.otherAnchorNode = anchorNodes.otherNode;
 
     await CoreDIContainer.get<ILoadAvatarConfigUseCase>(
       USECASE_TYPES.ILoadAvatarConfigUseCase,
     ).executeAsync();
 
+    // hair
     this.updateModelHair(this.viewModel.currentAvatarConfig.Value.hair);
     this.updateHairColor(this.viewModel.currentAvatarConfig.Value.hairColor);
     this.updateModelBeard(this.viewModel.currentAvatarConfig.Value.beard);
     this.updateBeardColor(this.viewModel.currentAvatarConfig.Value.hairColor);
+    // face
     this.updateEyeBrows(this.viewModel.currentAvatarConfig.Value.eyebrows);
     this.updateEyes(this.viewModel.currentAvatarConfig.Value.eyes);
     this.updateNose(this.viewModel.currentAvatarConfig.Value.nose);
@@ -144,10 +118,13 @@ export default class AvatarEditorPreviewModelView {
     this.updateGlasses(this.viewModel.currentAvatarConfig.Value.glasses);
     this.updateBackPack(this.viewModel.currentAvatarConfig.Value.backpack);
     this.updateOther(this.viewModel.currentAvatarConfig.Value.other);
+    // clothing
+    this.updateModelShirt(this.viewModel.currentAvatarConfig.Value.shirt);
+    this.updateModelPants(this.viewModel.currentAvatarConfig.Value.pants);
+    this.updateModelShoes(this.viewModel.currentAvatarConfig.Value.shoes);
   }
 
   private onAvatarConfigChanged(): void {
-    //console.log(this.viewModel.avatarConfigDiff.Value);
     if (this.viewModel.avatarConfigDiff.Value.beard)
       this.updateModelBeard(this.viewModel.avatarConfigDiff.Value.beard);
     if (this.viewModel.avatarConfigDiff.Value.hair)
@@ -189,7 +166,7 @@ export default class AvatarEditorPreviewModelView {
   private updateModelHair(hair?: AvatarHairModels | undefined) {
     this.updateModel(
       hair,
-      "hair/hairstyle",
+      AvatarModelAssetPaths.hairPath,
       this.viewModel.hairMeshes,
       this.viewModel.hairAnchorNode,
     );
@@ -217,7 +194,7 @@ export default class AvatarEditorPreviewModelView {
   private updateModelBeard(beard?: AvatarBeardModels | undefined) {
     this.updateModel(
       beard,
-      "hair/beards",
+      AvatarModelAssetPaths.beardPath,
       this.viewModel.beardMeshes,
       this.viewModel.beardAnchorNode,
     );
@@ -245,7 +222,7 @@ export default class AvatarEditorPreviewModelView {
   private updateHeadGear(headgear?: AvatarHeadgearModels | undefined) {
     this.updateModel(
       headgear,
-      "accessoires/headgear",
+      AvatarModelAssetPaths.headGearPath,
       this.viewModel.headGearMeshes,
       this.viewModel.headGearAnchorNode,
     );
@@ -254,7 +231,7 @@ export default class AvatarEditorPreviewModelView {
   private updateGlasses(glasses?: AvatarGlassesModels | undefined) {
     this.updateModel(
       glasses,
-      "accessoires/glasses",
+      AvatarModelAssetPaths.glassesPath,
       this.viewModel.glassesMeshes,
       this.viewModel.glassesAnchorNode,
     );
@@ -263,31 +240,27 @@ export default class AvatarEditorPreviewModelView {
   private updateBackPack(backpack?: AvatarBackpackModels | undefined) {
     this.updateModel(
       backpack,
-      "accessoires/backpack",
+      AvatarModelAssetPaths.backpackPath,
       this.viewModel.backpackMeshes,
       this.viewModel.backpackAnchorNode,
-      (mesh) => {
-        mesh.position = this.viewModel.backpackPositionOffset;
-      },
+      AvatarModelTransforms.backpack,
     );
   }
 
   private updateOther(other?: AvatarOtherModels) {
     this.updateModel(
       other,
-      "accessoires/other",
+      AvatarModelAssetPaths.otherPath,
       this.viewModel.otherMeshes,
       this.viewModel.otherAnchorNode,
-      (mesh) => {
-        mesh.position = new Vector3(0, 0.28, 0.04);
-      },
+      AvatarModelTransforms.sheriffStar,
     );
   }
 
   private updateModelShirt(shirt?: AvatarShirtModels | undefined) {
     this.updateModel(
       shirt,
-      "clothing/shirts",
+      AvatarModelAssetPaths.shirtPath,
       this.viewModel.shirtMeshes,
       this.viewModel.shirtAnchorNode,
     );
@@ -315,7 +288,7 @@ export default class AvatarEditorPreviewModelView {
   private updateModelPants(pants?: AvatarPantsModels | undefined) {
     this.updateModel(
       pants,
-      "clothing/pants",
+      AvatarModelAssetPaths.pantsPath,
       this.viewModel.pantsMeshes,
       this.viewModel.pantsAnchorNode,
     );
@@ -343,7 +316,7 @@ export default class AvatarEditorPreviewModelView {
   private updateModelShoes(shoes?: AvatarShoesModels | undefined) {
     this.updateModel(
       shoes,
-      "clothing/shoes",
+      AvatarModelAssetPaths.shoesPath,
       this.viewModel.shoesMeshes,
       this.viewModel.shoesAnchorNode,
     );
@@ -434,21 +407,15 @@ export default class AvatarEditorPreviewModelView {
 
     // load model if not already loaded
     if (!modelMap.has(newModel)) {
-      const result = await this.scenePresenter.loadGLTFModel(
-        require(
-          `../../../../../../Assets/3dModels/sharedModels/avatar/${modelFolder}/aa-${newModel}.glb`,
-        ),
+      const result = await AvatarEditorUtils.setupAvatarAssetModel(
+        this.scenePresenter,
+        this.baseModelSkeleton,
+        newModel,
+        modelFolder,
+        anchorNode,
+        onMeshLoad,
       );
-      result.meshes.forEach((mesh) => {
-        if (mesh instanceof Mesh) {
-          // Stelle sicher, dass es ein Mesh ist
-          mesh.skeleton = this.baseModelSkeleton;
-        }
-      });
-
-      modelMap.set(newModel, result.meshes as Mesh[]);
-      result.meshes[0].parent = anchorNode;
-      if (onMeshLoad) onMeshLoad(result.meshes[0] as Mesh);
+      modelMap.set(newModel, result!.meshes as Mesh[]);
     }
 
     // set all meshes to invisible except the new model
