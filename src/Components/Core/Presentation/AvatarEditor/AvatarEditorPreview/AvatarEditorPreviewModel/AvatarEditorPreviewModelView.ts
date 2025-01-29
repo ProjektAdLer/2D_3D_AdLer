@@ -107,11 +107,7 @@ export default class AvatarEditorPreviewModelView {
     this.updateEyes(this.viewModel.currentAvatarConfig.Value.eyes);
     this.updateNose(this.viewModel.currentAvatarConfig.Value.nose);
     this.updateMouth(this.viewModel.currentAvatarConfig.Value.mouth);
-    this.updateShirtColor(this.viewModel.currentAvatarConfig.Value.shirtColor);
-    this.updateModelPants(this.viewModel.currentAvatarConfig.Value.pants);
-    this.updatePantsColor(this.viewModel.currentAvatarConfig.Value.pantsColor);
-    this.updateModelShoes(this.viewModel.currentAvatarConfig.Value.shoes);
-    this.updateShoesColor(this.viewModel.currentAvatarConfig.Value.shoesColor);
+
     this.updateHeadGear(this.viewModel.currentAvatarConfig.Value.headgear);
     this.updateGlasses(this.viewModel.currentAvatarConfig.Value.glasses);
     this.updateBackPack(this.viewModel.currentAvatarConfig.Value.backpack);
@@ -120,6 +116,9 @@ export default class AvatarEditorPreviewModelView {
     this.updateModelShirt(this.viewModel.currentAvatarConfig.Value.shirt);
     this.updateModelPants(this.viewModel.currentAvatarConfig.Value.pants);
     this.updateModelShoes(this.viewModel.currentAvatarConfig.Value.shoes);
+    this.updateShirtColor(this.viewModel.currentAvatarConfig.Value.shirtColor);
+    this.updatePantsColor(this.viewModel.currentAvatarConfig.Value.pantsColor);
+    this.updateShoesColor(this.viewModel.currentAvatarConfig.Value.shoesColor);
   }
 
   private onAvatarConfigChanged(): void {
@@ -271,16 +270,9 @@ export default class AvatarEditorPreviewModelView {
     let shirtMaterial = shirtMesh?.[1].material as Material;
     let shirtTexture = shirtMaterial?.getActiveTextures()[0] as Texture;
 
-    // Set Displacement of current mesh UV Map
-    const uDisplacement = 0;
-    const vDisplacement = 0;
-
-    let shirtColorUOffeset = shirtColor?.uOffset ?? 0;
-    let shirtColorVOffset = shirtColor?.vOffset ?? 0;
-
     if (shirtTexture === undefined) return;
-    shirtTexture.uOffset = shirtColorUOffeset - uDisplacement;
-    shirtTexture.vOffset = shirtColorVOffset - vDisplacement;
+    shirtTexture.uOffset = shirtColor?.uOffset ?? 0;
+    shirtTexture.vOffset = shirtColor?.vOffset ?? 0;
   }
 
   private updateModelPants(pants?: AvatarPantsModels | undefined) {
@@ -299,16 +291,9 @@ export default class AvatarEditorPreviewModelView {
     let pantsMaterial = pantsMesh?.[1].material as Material;
     let pantsTexture = pantsMaterial?.getActiveTextures()[0] as Texture;
 
-    // Set Displacement of current mesh UV Map
-    const uDisplacement = 0;
-    const vDisplacement = 0;
-
-    let pantsColorUOffeset = pantsColor?.uOffset ?? 0;
-    let pantsColorVOffset = pantsColor?.vOffset ?? 0;
-
     if (pantsTexture === undefined) return;
-    pantsTexture.uOffset = pantsColorUOffeset - uDisplacement;
-    pantsTexture.vOffset = pantsColorVOffset - vDisplacement;
+    pantsTexture.uOffset = pantsColor?.uOffset ?? 0;
+    pantsTexture.vOffset = pantsColor?.vOffset ?? 0;
   }
 
   private updateModelShoes(shoes?: AvatarShoesModels | undefined) {
@@ -327,16 +312,9 @@ export default class AvatarEditorPreviewModelView {
     let shoesMaterial = shoesMesh?.[1].material as Material;
     let shoesTexture = shoesMaterial?.getActiveTextures()[0] as Texture;
 
-    // Set Displacement of current mesh UV Map
-    const uDisplacement = 0;
-    const vDisplacement = 0;
-
-    let shoesColorUOffeset = shoesColor?.uOffset ?? 0;
-    let shoesColorVOffset = shoesColor?.vOffset ?? 0;
-
     if (shoesTexture === undefined) return;
-    shoesTexture.uOffset = shoesColorUOffeset - uDisplacement;
-    shoesTexture.vOffset = shoesColorVOffset - vDisplacement;
+    shoesTexture.uOffset = shoesColor?.uOffset ?? 0;
+    shoesTexture.vOffset = shoesColor?.vOffset ?? 0;
   }
 
   private updateEyeBrows(eyebrow?: number) {
