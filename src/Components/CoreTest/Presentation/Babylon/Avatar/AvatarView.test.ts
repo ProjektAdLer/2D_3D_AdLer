@@ -1,3 +1,4 @@
+import AvatarModelMaterialNames from "../../../../Core/Domain/AvatarModels/AvatarModelMaterialNames";
 import {
   AnimationGroup,
   ISceneLoaderAsyncResult,
@@ -5,6 +6,7 @@ import {
   Mesh,
   NullEngine,
   Scene,
+  Skeleton,
   Texture,
   TransformNode,
   Vector3,
@@ -22,6 +24,11 @@ import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/Learnin
 import ICharacterAnimator from "../../../../Core/Presentation/Babylon/CharacterAnimator/ICharacterAnimator";
 import ICharacterNavigator from "../../../../Core/Presentation/Babylon/CharacterNavigator/ICharacterNavigator";
 import { IReadyable } from "../../../../../Lib/Readyable";
+import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityContainer";
+import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
+import AvatarEntity from "../../../../Core/Domain/Entities/AvatarEntity";
+import AvatarEditorUtils from "../../../../Core/Presentation/AvatarEditor/AvatarEditorUtils";
+import UserDataEntity from "../../../../Core/Domain/Entities/UserDataEntity";
 
 const movementIndicatorMock = mock<IMovementIndicator>();
 const characterAnimatorMock = mock<ICharacterAnimator>();
@@ -32,6 +39,24 @@ const characterNavigatorMock = mock<ICharacterNavigator>();
 // setup scene presenter mock
 const scenePresenterMock = mockDeep<IScenePresenter>();
 const scenePresenterFactoryMock = () => scenePresenterMock;
+
+const entityContainerMock = mock<IEntityContainer>();
+const transformNodeMock = mock<TransformNode>();
+
+jest
+  .spyOn(AvatarEditorUtils, "setupAvatarAssetModel")
+  .mockImplementation(
+    async (
+      scenePresenter: IScenePresenter,
+      avatartSkeleton: Skeleton,
+      newModel: unknown,
+      modelFolder: string,
+      anchorNode: TransformNode,
+      onMeshLoaded?: (mesh: Mesh) => void,
+    ) => {},
+  );
+
+jest.spyOn(AvatarEditorUtils, "setupAvatarTextures");
 
 // util function to create system under test
 function createAvatarView(): [AvatarView, AvatarViewModel] {
@@ -45,7 +70,7 @@ function createAvatarView(): [AvatarView, AvatarViewModel] {
 function setupScenePresenterLoadGTLFModelMock(): Mesh {
   const mockMesh = mockDeep<Mesh>();
   mockMesh.material = mockDeep<Material>();
-  mockMesh.material.name = "Eyes_mat";
+  mockMesh.material.name = AvatarModelMaterialNames.eyes;
   mockMesh.material.getActiveTextures.mockReturnValue([]);
   const mockLoadingResult = mockDeep<ISceneLoaderAsyncResult>();
   // @ts-ignore
@@ -54,6 +79,32 @@ function setupScenePresenterLoadGTLFModelMock(): Mesh {
   scenePresenterMock.loadGLTFModel.mockResolvedValue(mockLoadingResult);
 
   return mockMesh;
+}
+
+function setupAvatarEditorDataConfiguration() {
+  jest.spyOn(AvatarEditorUtils, "getAvatarAnchorNodes").mockReturnValue({
+    hairNode: transformNodeMock,
+    beardNode: transformNodeMock,
+    shirtNode: transformNodeMock,
+    pantsNode: transformNodeMock,
+    shoesNode: transformNodeMock,
+    headGearNode: transformNodeMock,
+    glassesNode: transformNodeMock,
+    backpackNode: transformNodeMock,
+    otherNode: transformNodeMock,
+  });
+  entityContainerMock.getEntitiesOfType.mockReturnValueOnce([
+    {
+      userToken: "",
+      username: "",
+      isLoggedIn: true,
+      availableWorlds: [{ worldID: 0, worldName: "" }],
+      currentWorldID: undefined,
+      currentSpaceID: undefined,
+      lastVisitedWorldID: undefined,
+      avatar: new AvatarEntity(),
+    },
+  ] as UserDataEntity[]);
 }
 
 describe("AvatarView", () => {
@@ -75,6 +126,9 @@ describe("AvatarView", () => {
     CoreDIContainer.rebind<ICharacterNavigator>(
       PRESENTATION_TYPES.ICharacterNavigator,
     ).toConstantValue(characterNavigatorMock);
+    CoreDIContainer.rebind(CORE_TYPES.IEntityContainer).toConstantValue(
+      entityContainerMock,
+    );
   });
 
   beforeEach(() => {
@@ -94,7 +148,7 @@ describe("AvatarView", () => {
         new TransformNode("AvatarParentNode", new Scene(new NullEngine())),
       );
       setupScenePresenterLoadGTLFModelMock();
-
+      setupAvatarEditorDataConfiguration();
       await systemUnderTest.asyncSetup();
 
       expect(viewModel.characterAnimator).toBe(characterAnimatorMock);
@@ -104,8 +158,9 @@ describe("AvatarView", () => {
       scenePresenterMock.Scene.getTransformNodeByName.mockReturnValue(
         new TransformNode("AvatarParentNode", new Scene(new NullEngine())),
       );
-      setupScenePresenterLoadGTLFModelMock();
+      setupAvatarEditorDataConfiguration();
 
+      setupScenePresenterLoadGTLFModelMock();
       await systemUnderTest.asyncSetup();
 
       expect(viewModel.characterNavigator).toBe(characterNavigatorMock);
@@ -138,7 +193,7 @@ describe("AvatarView", () => {
   describe("blink animation", () => {
     test("setupBlinkAnimation gets the eye texture from the loaded meshes", () => {
       const mockEyeMaterial = mockDeep<Material>();
-      mockEyeMaterial.name = "Eyes_mat";
+      mockEyeMaterial.name = AvatarModelMaterialNames.eyes;
       const mockMesh = new Mesh("mockMesh", new Scene(new NullEngine()));
       mockMesh.material = mockEyeMaterial;
       const mockEyeTexture = mock<Texture>();
@@ -223,6 +278,7 @@ describe("AvatarView", () => {
         new TransformNode("AvatarParentNode", new Scene(new NullEngine())),
       );
       setupScenePresenterLoadGTLFModelMock();
+      setupAvatarEditorDataConfiguration();
 
       await systemUnderTest["loadAvatarAsync"]();
 
@@ -234,6 +290,7 @@ describe("AvatarView", () => {
         new TransformNode("AvatarParentNode", new Scene(new NullEngine())),
       );
       setupScenePresenterLoadGTLFModelMock();
+      setupAvatarEditorDataConfiguration();
 
       await systemUnderTest["loadAvatarAsync"]();
 
@@ -269,6 +326,7 @@ describe("AvatarView", () => {
       // @ts-ignore
       mockLoadingResult.animationGroups = [mockAnimationGroup];
       scenePresenterMock.loadGLTFModel.mockResolvedValue(mockLoadingResult);
+      setupAvatarEditorDataConfiguration();
 
       await systemUnderTest["loadAvatarAsync"]();
 
@@ -285,6 +343,7 @@ describe("AvatarView", () => {
       // @ts-ignore
       mockLoadingResult.animationGroups = [mockAnimationGroup];
       scenePresenterMock.loadGLTFModel.mockResolvedValue(mockLoadingResult);
+      setupAvatarEditorDataConfiguration();
 
       await systemUnderTest["loadAvatarAsync"]();
 
@@ -301,6 +360,7 @@ describe("AvatarView", () => {
       // @ts-ignore
       mockLoadingResult.animationGroups = [mockAnimationGroup];
       scenePresenterMock.loadGLTFModel.mockResolvedValue(mockLoadingResult);
+      setupAvatarEditorDataConfiguration();
 
       await systemUnderTest["loadAvatarAsync"]();
 
