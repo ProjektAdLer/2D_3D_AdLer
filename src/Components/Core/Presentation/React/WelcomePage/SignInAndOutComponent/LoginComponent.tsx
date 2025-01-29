@@ -55,7 +55,12 @@ export default function LoginComponent({
       };
       loadConfig();
     }
-  }, [getLoginStatusUseCase, setUserLoggedIn, setModalVisible]);
+  }, [
+    getLoginStatusUseCase,
+    loadAvatarConfigUseCase,
+    setUserLoggedIn,
+    setModalVisible,
+  ]);
 
   if (!controller || !viewModel) return null;
 
