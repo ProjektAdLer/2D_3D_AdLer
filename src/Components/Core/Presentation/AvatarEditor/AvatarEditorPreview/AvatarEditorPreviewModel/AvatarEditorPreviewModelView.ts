@@ -1,5 +1,12 @@
 import AvatarEditorPreviewModelViewModel from "./AvatarEditorPreviewModelViewModel";
-import { Mesh, Skeleton, Texture, TransformNode } from "@babylonjs/core";
+import {
+  Material,
+  Mesh,
+  Skeleton,
+  Texture,
+  TransformNode,
+  Vector3,
+} from "@babylonjs/core";
 import IScenePresenter from "../../../Babylon/SceneManagement/IScenePresenter";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import SCENE_TYPES, {
@@ -26,6 +33,7 @@ import {
   AvatarMouthTexture,
   AvatarNoseTexture,
 } from "src/Components/Core/Domain/AvatarModels/AvatarFaceUVTexture";
+import { AvatarColor } from "src/Components/Core/Domain/AvatarModels/AvatarColorPalette";
 import AvatarEditorUtils from "../../AvatarEditorUtils";
 import AvatarModelAssetPaths from "src/Components/Core/Domain/AvatarModels/AvatarModelPaths";
 import AvatarModelTransforms from "src/Components/Core/Domain/AvatarModels/AvatarModelTransforms";
@@ -56,6 +64,7 @@ export default class AvatarEditorPreviewModelView {
 
     // Default-Meshes ausblenden
     [
+      "skeletonPullover",
       "defaultPants_primitive0",
       "defaultPants_primitive1",
       "defaultShoes_primitive0",
@@ -90,13 +99,19 @@ export default class AvatarEditorPreviewModelView {
 
     // hair
     this.updateModelHair(this.viewModel.currentAvatarConfig.Value.hair);
+    this.updateHairColor(this.viewModel.currentAvatarConfig.Value.hairColor);
     this.updateModelBeard(this.viewModel.currentAvatarConfig.Value.beard);
+    this.updateBeardColor(this.viewModel.currentAvatarConfig.Value.hairColor);
     // face
     this.updateEyeBrows(this.viewModel.currentAvatarConfig.Value.eyebrows);
     this.updateEyes(this.viewModel.currentAvatarConfig.Value.eyes);
     this.updateNose(this.viewModel.currentAvatarConfig.Value.nose);
     this.updateMouth(this.viewModel.currentAvatarConfig.Value.mouth);
-    // accessoires
+    this.updateShirtColor(this.viewModel.currentAvatarConfig.Value.shirtColor);
+    this.updateModelPants(this.viewModel.currentAvatarConfig.Value.pants);
+    this.updatePantsColor(this.viewModel.currentAvatarConfig.Value.pantsColor);
+    this.updateModelShoes(this.viewModel.currentAvatarConfig.Value.shoes);
+    this.updateShoesColor(this.viewModel.currentAvatarConfig.Value.shoesColor);
     this.updateHeadGear(this.viewModel.currentAvatarConfig.Value.headgear);
     this.updateGlasses(this.viewModel.currentAvatarConfig.Value.glasses);
     this.updateBackPack(this.viewModel.currentAvatarConfig.Value.backpack);
@@ -112,6 +127,10 @@ export default class AvatarEditorPreviewModelView {
       this.updateModelBeard(this.viewModel.avatarConfigDiff.Value.beard);
     if (this.viewModel.avatarConfigDiff.Value.hair)
       this.updateModelHair(this.viewModel.avatarConfigDiff.Value.hair);
+    if (this.viewModel.avatarConfigDiff.Value.hairColor) {
+      this.updateHairColor(this.viewModel.avatarConfigDiff.Value.hairColor);
+      this.updateBeardColor(this.viewModel.avatarConfigDiff.Value.hairColor);
+    }
     if (this.viewModel.avatarConfigDiff.Value.eyebrows !== undefined)
       this.updateEyeBrows(this.viewModel.avatarConfigDiff.Value.eyebrows);
     if (this.viewModel.avatarConfigDiff.Value.eyes !== undefined)
@@ -122,10 +141,16 @@ export default class AvatarEditorPreviewModelView {
       this.updateMouth(this.viewModel.avatarConfigDiff.Value.mouth);
     if (this.viewModel.avatarConfigDiff.Value.shirt !== undefined)
       this.updateModelShirt(this.viewModel.avatarConfigDiff.Value.shirt);
+    if (this.viewModel.avatarConfigDiff.Value.shirtColor !== undefined)
+      this.updateShirtColor(this.viewModel.avatarConfigDiff.Value.shirtColor);
     if (this.viewModel.avatarConfigDiff.Value.pants !== undefined)
       this.updateModelPants(this.viewModel.avatarConfigDiff.Value.pants);
+    if (this.viewModel.avatarConfigDiff.Value.pantsColor !== undefined)
+      this.updatePantsColor(this.viewModel.avatarConfigDiff.Value.pantsColor);
     if (this.viewModel.avatarConfigDiff.Value.shoes !== undefined)
       this.updateModelShoes(this.viewModel.avatarConfigDiff.Value.shoes);
+    if (this.viewModel.avatarConfigDiff.Value.shoesColor !== undefined)
+      this.updateShoesColor(this.viewModel.avatarConfigDiff.Value.shoesColor);
     if (this.viewModel.avatarConfigDiff.Value.headgear !== undefined)
       this.updateHeadGear(this.viewModel.avatarConfigDiff.Value.headgear);
     if (this.viewModel.avatarConfigDiff.Value.glasses !== undefined)
@@ -145,6 +170,25 @@ export default class AvatarEditorPreviewModelView {
     );
   }
 
+  private async updateHairColor(hairColor?: AvatarColor) {
+    let hairMesh = this.viewModel.hairMeshes.get(
+      this.viewModel.currentAvatarConfig.Value.hair,
+    );
+    let hairMaterial = hairMesh?.[1].material as Material;
+    let hairTexture = hairMaterial?.getActiveTextures()[0] as Texture;
+
+    // Set Displacement of current mesh UV Map
+    const uDisplacement = 0.125;
+    const vDisplacement = 0.5;
+
+    let hairColorUOffeset = hairColor?.uOffset ?? 0;
+    let hairColorVOffset = hairColor?.vOffset ?? 0;
+
+    if (hairTexture === undefined) return;
+    hairTexture.uOffset = hairColorUOffeset - uDisplacement;
+    hairTexture.vOffset = hairColorVOffset - vDisplacement;
+  }
+
   private updateModelBeard(beard?: AvatarBeardModels | undefined) {
     this.updateModel(
       beard,
@@ -152,6 +196,25 @@ export default class AvatarEditorPreviewModelView {
       this.viewModel.beardMeshes,
       this.viewModel.beardAnchorNode,
     );
+  }
+
+  private async updateBeardColor(beardColor?: AvatarColor) {
+    let beardMesh = this.viewModel.beardMeshes.get(
+      this.viewModel.currentAvatarConfig.Value.beard,
+    );
+    let beardMaterial = beardMesh?.[1].material as Material;
+    let beardTexture = beardMaterial?.getActiveTextures()[0] as Texture;
+
+    // Set Displacement of current mesh UV Map
+    const uDisplacement = 0.125;
+    const vDisplacement = 0.5;
+
+    let beardColorUOffeset = beardColor?.uOffset ?? 0;
+    let beardColorVOffset = beardColor?.vOffset ?? 0;
+
+    if (beardTexture === undefined) return;
+    beardTexture.uOffset = beardColorUOffeset - uDisplacement;
+    beardTexture.vOffset = beardColorVOffset - vDisplacement;
   }
 
   private updateHeadGear(headgear?: AvatarHeadgearModels | undefined) {
@@ -201,6 +264,25 @@ export default class AvatarEditorPreviewModelView {
     );
   }
 
+  private async updateShirtColor(shirtColor?: AvatarColor) {
+    let shirtMesh = this.viewModel.shirtMeshes.get(
+      this.viewModel.currentAvatarConfig.Value.shirt,
+    );
+    let shirtMaterial = shirtMesh?.[1].material as Material;
+    let shirtTexture = shirtMaterial?.getActiveTextures()[0] as Texture;
+
+    // Set Displacement of current mesh UV Map
+    const uDisplacement = 0;
+    const vDisplacement = 0;
+
+    let shirtColorUOffeset = shirtColor?.uOffset ?? 0;
+    let shirtColorVOffset = shirtColor?.vOffset ?? 0;
+
+    if (shirtTexture === undefined) return;
+    shirtTexture.uOffset = shirtColorUOffeset - uDisplacement;
+    shirtTexture.vOffset = shirtColorVOffset - vDisplacement;
+  }
+
   private updateModelPants(pants?: AvatarPantsModels | undefined) {
     this.updateModel(
       pants,
@@ -210,6 +292,25 @@ export default class AvatarEditorPreviewModelView {
     );
   }
 
+  private async updatePantsColor(pantsColor?: AvatarColor) {
+    let pantsMesh = this.viewModel.pantsMeshes.get(
+      this.viewModel.currentAvatarConfig.Value.pants,
+    );
+    let pantsMaterial = pantsMesh?.[1].material as Material;
+    let pantsTexture = pantsMaterial?.getActiveTextures()[0] as Texture;
+
+    // Set Displacement of current mesh UV Map
+    const uDisplacement = 0;
+    const vDisplacement = 0;
+
+    let pantsColorUOffeset = pantsColor?.uOffset ?? 0;
+    let pantsColorVOffset = pantsColor?.vOffset ?? 0;
+
+    if (pantsTexture === undefined) return;
+    pantsTexture.uOffset = pantsColorUOffeset - uDisplacement;
+    pantsTexture.vOffset = pantsColorVOffset - vDisplacement;
+  }
+
   private updateModelShoes(shoes?: AvatarShoesModels | undefined) {
     this.updateModel(
       shoes,
@@ -217,6 +318,25 @@ export default class AvatarEditorPreviewModelView {
       this.viewModel.shoesMeshes,
       this.viewModel.shoesAnchorNode,
     );
+  }
+
+  private async updateShoesColor(shoesColor?: AvatarColor) {
+    let shoesMesh = this.viewModel.shoesMeshes.get(
+      this.viewModel.currentAvatarConfig.Value.shoes,
+    );
+    let shoesMaterial = shoesMesh?.[1].material as Material;
+    let shoesTexture = shoesMaterial?.getActiveTextures()[0] as Texture;
+
+    // Set Displacement of current mesh UV Map
+    const uDisplacement = 0;
+    const vDisplacement = 0;
+
+    let shoesColorUOffeset = shoesColor?.uOffset ?? 0;
+    let shoesColorVOffset = shoesColor?.vOffset ?? 0;
+
+    if (shoesTexture === undefined) return;
+    shoesTexture.uOffset = shoesColorUOffeset - uDisplacement;
+    shoesTexture.vOffset = shoesColorVOffset - vDisplacement;
   }
 
   private updateEyeBrows(eyebrow?: number) {
