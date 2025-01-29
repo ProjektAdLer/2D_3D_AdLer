@@ -1,4 +1,4 @@
-interface AvatarUVOffset {
+export interface AvatarUVOffset {
   id: number;
   name: string;
   uOffset: number;
