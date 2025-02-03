@@ -46,25 +46,25 @@ export default class AvatarEditorViewModel {
     "none",
   );
   shirtColor: Observable<AvatarColor> = new Observable<AvatarColor>({
-    id: 33,
-    nameKey: "Brown 2",
-    hexColor: "#4b2a1a",
+    id: 1,
+    nameKey: "Black 1",
+    hexColor: "#000000",
   });
   pants: Observable<AvatarPantsModels> = new Observable<AvatarPantsModels>(
     "none",
   );
   pantsColor: Observable<AvatarColor> = new Observable<AvatarColor>({
-    id: 33,
-    nameKey: "Brown 2",
-    hexColor: "#4b2a1a",
+    id: 1,
+    nameKey: "Black 1",
+    hexColor: "#000000",
   });
   shoes: Observable<AvatarShoesModels> = new Observable<AvatarShoesModels>(
     "none",
   );
   shoesColor: Observable<AvatarColor> = new Observable<AvatarColor>({
-    id: 33,
-    nameKey: "Brown 2",
-    hexColor: "#4b2a1a",
+    id: 1,
+    nameKey: "Black 1",
+    hexColor: "#000000",
   });
 
   // Body
