@@ -178,13 +178,11 @@ export default class BackendAdapter implements IBackendPort {
   }
 
   async loginUser(userCredentials: UserCredentialParams): Promise<string> {
-    const token = await axios.get<{
+    const token = await axios.post<{
       lmsToken: string;
     }>("/Users/Login", {
-      params: {
-        UserName: userCredentials.username,
-        Password: userCredentials.password,
-      },
+      UserName: userCredentials.username,
+      Password: userCredentials.password,
     });
 
     return token.data.lmsToken;
