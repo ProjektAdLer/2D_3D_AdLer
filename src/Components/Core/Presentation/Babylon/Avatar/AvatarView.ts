@@ -238,21 +238,35 @@ export default class AvatarView {
     );
     const baseSkeleton = result.skeletons[0];
     // hair
-    AvatarEditorUtils.setupAvatarAssetModel(
+    let hairResult = await AvatarEditorUtils.setupAvatarAssetModel(
       this.scenePresenter,
       baseSkeleton,
       avatarEntity.hair,
       AvatarModelAssetPaths.hairPath,
       anchorNodes.hairNode,
     );
+    // hair color
+    if (hairResult) {
+      AvatarEditorUtils.setupAvatarColor(
+        hairResult.meshes[1],
+        avatarEntity.hairColor,
+      );
+    }
     // beard
-    AvatarEditorUtils.setupAvatarAssetModel(
+    let beardResult = await AvatarEditorUtils.setupAvatarAssetModel(
       this.scenePresenter,
       baseSkeleton,
       avatarEntity.beard,
       AvatarModelAssetPaths.beardPath,
       anchorNodes.beardNode,
     );
+    // beard color
+    if (beardResult) {
+      AvatarEditorUtils.setupAvatarColor(
+        beardResult.meshes[1],
+        avatarEntity.hairColor,
+      );
+    }
     // headgear
     AvatarEditorUtils.setupAvatarAssetModel(
       this.scenePresenter,
@@ -288,29 +302,50 @@ export default class AvatarView {
       AvatarModelTransforms.sheriffStar,
     );
     // shirt
-    AvatarEditorUtils.setupAvatarAssetModel(
+    let shirtResult = await AvatarEditorUtils.setupAvatarAssetModel(
       this.scenePresenter,
       baseSkeleton,
       avatarEntity.shirt,
       AvatarModelAssetPaths.shirtPath,
       anchorNodes.shirtNode,
     );
+    //shirt color
+    if (shirtResult) {
+      AvatarEditorUtils.setupAvatarColor(
+        shirtResult.meshes[1],
+        avatarEntity.shirtColor,
+      );
+    }
     // pants
-    AvatarEditorUtils.setupAvatarAssetModel(
+    let pantsResult = await AvatarEditorUtils.setupAvatarAssetModel(
       this.scenePresenter,
       baseSkeleton,
       avatarEntity.pants,
       AvatarModelAssetPaths.pantsPath,
       anchorNodes.pantsNode,
     );
+    // pants color
+    if (pantsResult) {
+      AvatarEditorUtils.setupAvatarColor(
+        pantsResult.meshes[1],
+        avatarEntity.pantsColor,
+      );
+    }
     // shoes
-    AvatarEditorUtils.setupAvatarAssetModel(
+    let shoesResult = await AvatarEditorUtils.setupAvatarAssetModel(
       this.scenePresenter,
       baseSkeleton,
       avatarEntity.shoes,
       AvatarModelAssetPaths.shoesPath,
       anchorNodes.shoesNode,
     );
+    // shoes color
+    if (shoesResult) {
+      AvatarEditorUtils.setupAvatarColor(
+        shoesResult.meshes[1],
+        avatarEntity.shoesColor,
+      );
+    }
     // eyebrows
     AvatarEditorUtils.setupAvatarTextures(
       avatarEntity.eyebrows,

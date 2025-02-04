@@ -121,11 +121,13 @@ export default class AvatarEditorPreviewModelView {
     this.updateShoesColor(this.viewModel.currentAvatarConfig.Value.shoesColor);
   }
 
-  private onAvatarConfigChanged(): void {
+  private async onAvatarConfigChanged(): Promise<void> {
     if (this.viewModel.avatarConfigDiff.Value.beard)
-      this.updateModelBeard(this.viewModel.avatarConfigDiff.Value.beard);
+      await this.updateModelBeard(this.viewModel.avatarConfigDiff.Value.beard);
+    this.updateBeardColor(this.viewModel.currentAvatarConfig.Value.hairColor);
     if (this.viewModel.avatarConfigDiff.Value.hair)
-      this.updateModelHair(this.viewModel.avatarConfigDiff.Value.hair);
+      await this.updateModelHair(this.viewModel.avatarConfigDiff.Value.hair);
+    this.updateHairColor(this.viewModel.currentAvatarConfig.Value.hairColor);
     if (this.viewModel.avatarConfigDiff.Value.hairColor) {
       this.updateHairColor(this.viewModel.avatarConfigDiff.Value.hairColor);
       this.updateBeardColor(this.viewModel.avatarConfigDiff.Value.hairColor);
@@ -139,15 +141,18 @@ export default class AvatarEditorPreviewModelView {
     if (this.viewModel.avatarConfigDiff.Value.mouth !== undefined)
       this.updateMouth(this.viewModel.avatarConfigDiff.Value.mouth);
     if (this.viewModel.avatarConfigDiff.Value.shirt !== undefined)
-      this.updateModelShirt(this.viewModel.avatarConfigDiff.Value.shirt);
+      await this.updateModelShirt(this.viewModel.avatarConfigDiff.Value.shirt);
+    this.updateShirtColor(this.viewModel.currentAvatarConfig.Value.shirtColor);
     if (this.viewModel.avatarConfigDiff.Value.shirtColor !== undefined)
       this.updateShirtColor(this.viewModel.avatarConfigDiff.Value.shirtColor);
     if (this.viewModel.avatarConfigDiff.Value.pants !== undefined)
-      this.updateModelPants(this.viewModel.avatarConfigDiff.Value.pants);
+      await this.updateModelPants(this.viewModel.avatarConfigDiff.Value.pants);
+    this.updatePantsColor(this.viewModel.currentAvatarConfig.Value.pantsColor);
     if (this.viewModel.avatarConfigDiff.Value.pantsColor !== undefined)
       this.updatePantsColor(this.viewModel.avatarConfigDiff.Value.pantsColor);
     if (this.viewModel.avatarConfigDiff.Value.shoes !== undefined)
-      this.updateModelShoes(this.viewModel.avatarConfigDiff.Value.shoes);
+      await this.updateModelShoes(this.viewModel.avatarConfigDiff.Value.shoes);
+    this.updateShoesColor(this.viewModel.currentAvatarConfig.Value.shoesColor);
     if (this.viewModel.avatarConfigDiff.Value.shoesColor !== undefined)
       this.updateShoesColor(this.viewModel.avatarConfigDiff.Value.shoesColor);
     if (this.viewModel.avatarConfigDiff.Value.headgear !== undefined)
@@ -160,8 +165,8 @@ export default class AvatarEditorPreviewModelView {
       this.updateOther(this.viewModel.avatarConfigDiff.Value.other);
   }
 
-  private updateModelHair(hair?: AvatarHairModels | undefined) {
-    this.updateModel(
+  private async updateModelHair(hair?: AvatarHairModels | undefined) {
+    await this.updateModel(
       hair,
       AvatarModelAssetPaths.hairPath,
       this.viewModel.hairMeshes,
@@ -169,7 +174,7 @@ export default class AvatarEditorPreviewModelView {
     );
   }
 
-  private async updateHairColor(hairColor?: AvatarColor) {
+  private updateHairColor(hairColor?: AvatarColor) {
     let hairMesh = this.viewModel.hairMeshes.get(
       this.viewModel.currentAvatarConfig.Value.hair,
     );
@@ -188,8 +193,8 @@ export default class AvatarEditorPreviewModelView {
     hairTexture.vOffset = hairColorVOffset - vDisplacement;
   }
 
-  private updateModelBeard(beard?: AvatarBeardModels | undefined) {
-    this.updateModel(
+  private async updateModelBeard(beard?: AvatarBeardModels | undefined) {
+    await this.updateModel(
       beard,
       AvatarModelAssetPaths.beardPath,
       this.viewModel.beardMeshes,
@@ -197,7 +202,7 @@ export default class AvatarEditorPreviewModelView {
     );
   }
 
-  private async updateBeardColor(beardColor?: AvatarColor) {
+  private updateBeardColor(beardColor?: AvatarColor) {
     let beardMesh = this.viewModel.beardMeshes.get(
       this.viewModel.currentAvatarConfig.Value.beard,
     );
@@ -254,8 +259,8 @@ export default class AvatarEditorPreviewModelView {
     );
   }
 
-  private updateModelShirt(shirt?: AvatarShirtModels | undefined) {
-    this.updateModel(
+  private async updateModelShirt(shirt?: AvatarShirtModels | undefined) {
+    await this.updateModel(
       shirt,
       AvatarModelAssetPaths.shirtPath,
       this.viewModel.shirtMeshes,
@@ -275,8 +280,8 @@ export default class AvatarEditorPreviewModelView {
     shirtTexture.vOffset = shirtColor?.vOffset ?? 0;
   }
 
-  private updateModelPants(pants?: AvatarPantsModels | undefined) {
-    this.updateModel(
+  private async updateModelPants(pants?: AvatarPantsModels | undefined) {
+    await this.updateModel(
       pants,
       AvatarModelAssetPaths.pantsPath,
       this.viewModel.pantsMeshes,
@@ -296,8 +301,8 @@ export default class AvatarEditorPreviewModelView {
     pantsTexture.vOffset = pantsColor?.vOffset ?? 0;
   }
 
-  private updateModelShoes(shoes?: AvatarShoesModels | undefined) {
-    this.updateModel(
+  private async updateModelShoes(shoes?: AvatarShoesModels | undefined) {
+    await this.updateModel(
       shoes,
       AvatarModelAssetPaths.shoesPath,
       this.viewModel.shoesMeshes,

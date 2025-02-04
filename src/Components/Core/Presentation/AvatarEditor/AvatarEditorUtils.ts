@@ -1,5 +1,7 @@
 import {
+  AbstractMesh,
   ISceneLoaderAsyncResult,
+  Material,
   Mesh,
   Skeleton,
   Texture,
@@ -9,6 +11,7 @@ import {
 import IScenePresenter from "../Babylon/SceneManagement/IScenePresenter";
 import { AvatarNoneModel } from "../../Domain/AvatarModels/AvatarModelTypes";
 import { AvatarUVOffset } from "../../Domain/AvatarModels/AvatarFaceUVTexture";
+import { AvatarColor } from "../../Domain/AvatarModels/AvatarColorPalette";
 
 export default class AvatarEditorUtils {
   public static async setupAvatarAssetModel<T>(
@@ -99,5 +102,16 @@ export default class AvatarEditorUtils {
       ?.material!.getActiveTextures()[0] as Texture;
     texture.uOffset = textureOffset[textureIndex].uOffset;
     texture.vOffset = textureOffset[textureIndex].vOffset;
+  }
+
+  public static setupAvatarColor(mesh: AbstractMesh, meshColor: AvatarColor) {
+    if (meshColor === undefined || meshColor === null) return;
+
+    let meshMaterial = mesh.material as Material;
+    let meshTexture = meshMaterial?.getActiveTextures()[0] as Texture;
+
+    if (meshTexture === undefined) return;
+    meshTexture.uOffset = meshColor?.uOffset ?? 0;
+    meshTexture.vOffset = meshColor?.vOffset ?? 0;
   }
 }
