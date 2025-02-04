@@ -8,6 +8,8 @@ import { LogLevelTypes } from "../../../Domain/Types/LogLevelTypes";
 import type IEntityContainer from "../../../Domain/EntityContainer/IEntityContainer";
 import UserDataEntity from "../../../Domain/Entities/UserDataEntity";
 import type IBackendPort from "../../Ports/Interfaces/IBackendPort";
+import BackendAdapterUtils from "src/Components/Core/Adapters/BackendAdapter/BackendAdapterUtils";
+import AvatarConfigTO from "../../DataTransferObjects/AvatarConfigTO";
 
 @injectable()
 export default class LoadAvatarConfigUseCase
@@ -35,12 +37,35 @@ export default class LoadAvatarConfigUseCase
 
     // load avatar config from backend
     if (!userDataEntities[0].avatar) {
-      userDataEntities[0].avatar = await this.backend.getAvatarConfig(
+      const backendAvatarConfigTO = await this.backend.getAvatarConfig(
         userDataEntities[0].userToken,
       );
+      const avatarConfigTO =
+        BackendAdapterUtils.convertBackendAvatarConfigToAvatarConfig(
+          backendAvatarConfigTO,
+        );
+
+      this.fillEmptyAttributes(avatarConfigTO);
+      userDataEntities[0].avatar = avatarConfigTO;
+      console.log("BACKEND CALL: ", backendAvatarConfigTO);
+      console.log("LOAD AVATAR CONFIG: ", avatarConfigTO);
     }
+
     this.avatarPort.onAvatarConfigLoaded(
       Object.assign({}, userDataEntities[0].avatar),
     );
+  }
+
+  private fillEmptyAttributes(config: AvatarConfigTO) {
+    if (!config.hair) config.hair = "none";
+    if (!config.beard) config.beard = "none";
+    if (!config.headgear) config.headgear = "none";
+    if (!config.glasses) config.glasses = "none";
+    if (!config.backpack) config.backpack = "none";
+    if (!config.other) config.other = "none";
+    if (!config.shirt) config.shirt = "shirts-sweatshirt";
+    if (!config.pants) config.pants = "pants-jeans";
+    if (!config.shoes) config.shoes = "shoes-trainers";
+    if (!config.roundness) config.roundness = 50;
   }
 }

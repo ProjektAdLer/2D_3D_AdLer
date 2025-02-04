@@ -1,3 +1,4 @@
+import { BackendAvatarConfigTO } from "./../../Application/DataTransferObjects/BackendAvatarConfigTO";
 import axios from "axios";
 import { injectable } from "inversify";
 import { config } from "../../../../config";
@@ -25,7 +26,6 @@ import { LogLevelTypes } from "../../Domain/Types/LogLevelTypes";
 import AdaptivityElementQuestionSubmissionTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionSubmissionTO";
 import AdaptivityElementQuestionResponse from "./Types/AdaptivityElementQuestionResponse";
 import AdaptivtyElementStatusResponse from "./Types/AdaptivityElementStatusResponse";
-import AvatarConfigTO from "../../Application/DataTransferObjects/AvatarConfigTO";
 
 @injectable()
 export default class BackendAdapter implements IBackendPort {
@@ -228,20 +228,22 @@ export default class BackendAdapter implements IBackendPort {
     return response.data;
   }
 
-  async getAvatarConfig(userToken: string): Promise<AvatarConfigTO> {
-    const response = await axios.get<AvatarConfigTO>("/Player/Avatar", {
+  async getAvatarConfig(userToken: string): Promise<BackendAvatarConfigTO> {
+    const response = await axios.get<BackendAvatarConfigTO>("/Player/Avatar", {
       headers: {
         token: userToken,
       },
     });
+    console.log("GET AVATAR CONFIG", response.data);
 
     return response.data;
   }
 
   async updateAvatarConfig(
     userToken: string,
-    avatarConfig: AvatarConfigTO,
+    avatarConfig: BackendAvatarConfigTO,
   ): Promise<boolean> {
+    console.log("UPDATE CONFIG", avatarConfig);
     const response = await axios.post<boolean>("/Player/Avatar", avatarConfig, {
       headers: {
         token: userToken,

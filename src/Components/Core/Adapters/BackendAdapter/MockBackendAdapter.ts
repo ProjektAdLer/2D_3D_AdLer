@@ -23,7 +23,7 @@ import SmallWorldAWT from "./MockBackendData/SmallWorldAWT";
 import BigWorldAWT from "./MockBackendData/BigWorldAWT";
 import NewWorldAWT from "./MockBackendData/NewWorldAWT";
 import AWT from "./Types/AWT";
-import AvatarConfigTO from "../../Application/DataTransferObjects/AvatarConfigTO";
+import { BackendAvatarConfigTO } from "../../Application/DataTransferObjects/BackendAvatarConfigTO";
 
 @injectable()
 export default class MockBackendAdapter implements IBackendPort {
@@ -352,18 +352,18 @@ export default class MockBackendAdapter implements IBackendPort {
 
   // Avatar Config
 
-  async getAvatarConfig(userToken: string): Promise<AvatarConfigTO> {
+  async getAvatarConfig(userToken: string): Promise<BackendAvatarConfigTO> {
     return Promise.resolve({
       // Face (all texture indices)
-      eyes: 0,
-      nose: 0,
-      mouth: 0,
-      eyebrows: 0,
+      eyes: "Neural_Eyes_1",
+      nose: "Nose_1",
+      mouth: "Mouth_1",
+      eyebrows: "Brows_1",
 
       // Hair
       hair: "hair-medium-ponytail",
       beard: "beard-medium-anchor",
-      hairColor: { id: 8, nameKey: "Blue 1", hexColor: "#043675" },
+      hairColor: 8,
 
       // Accessories
       headgear: "none",
@@ -377,15 +377,15 @@ export default class MockBackendAdapter implements IBackendPort {
       shoes: "shoes-trainers",
 
       // Body
-      skinColor: { id: 24, nameKey: "Orange 1", hexColor: "#b76000" },
+      skinColor: "24",
       roundness: 0.5, // 0-1 morph target weight
       // TODO: add more body features
-    } as AvatarConfigTO);
+    } as BackendAvatarConfigTO);
   }
 
   async updateAvatarConfig(
     userToken: string,
-    avatarConfig: AvatarConfigTO,
+    avatarConfig: BackendAvatarConfigTO,
   ): Promise<boolean> {
     return true;
   }

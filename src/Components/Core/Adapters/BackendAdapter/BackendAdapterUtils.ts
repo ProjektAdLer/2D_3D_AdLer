@@ -1,3 +1,4 @@
+import { BackendAvatarConfigTO } from "./../../Application/DataTransferObjects/BackendAvatarConfigTO";
 import { BackendAdaptivityElementTO } from "./../../Application/DataTransferObjects/BackendElementTO";
 import { AdaptivityElementQuestionTypes } from "./../../Domain/Types/Adaptivity/AdaptivityElementQuestionTypes";
 import { AdaptivityElementQuestionDifficultyTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementQuestionDifficultyTypes";
@@ -34,6 +35,15 @@ import AdaptivityElementQuestionTO from "../../Application/DataTransferObjects/A
 import AdaptivityElementTaskTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementTaskTO";
 import { AdaptivityElementActionTypes } from "../../Domain/Types/Adaptivity/AdaptivityElementActionTypes";
 import BackendStoryTO from "../../Application/DataTransferObjects/BackendStoryTO";
+import AvatarConfigTO from "../../Application/DataTransferObjects/AvatarConfigTO";
+import {
+  AvatarEyeBrowTexture,
+  AvatarEyeTexture,
+  AvatarMouthTexture,
+  AvatarNoseTexture,
+} from "../../Domain/AvatarModels/AvatarFaceUVTexture";
+import AvatarColorPalette from "../../Domain/AvatarModels/AvatarColorPalette";
+import AvatarSkinColorPalette from "../../Domain/AvatarModels/AvatarSkinColorPalette";
 
 type BackendTO =
   | BackendBaseElementTO
@@ -56,7 +66,7 @@ export default class BackendAdapterUtils {
           e instanceof BackendLearningElementTO === false &&
           e instanceof BackendAdaptivityElementTO === false
         );
-      }
+      },
     );
 
     const response: BackendWorldTO = {
@@ -74,14 +84,14 @@ export default class BackendAdapterUtils {
   // maps the spaces from the AWT to BackendSpaceTOs and connects them with their elements
   private static mapSpaces(
     spaces: APISpace[],
-    elements: BackendTO[]
+    elements: BackendTO[],
   ): BackendSpaceTO[] {
     return spaces.map((space) => {
       // compare template type to supported templates
       let template: string;
       if (
         !Object.values<string>(LearningSpaceTemplateType).includes(
-          space.spaceTemplate.toUpperCase()
+          space.spaceTemplate.toUpperCase(),
         )
       ) {
         template = LearningSpaceTemplateType.None;
@@ -92,7 +102,7 @@ export default class BackendAdapterUtils {
       let templateStyle: LearningSpaceThemeType;
       if (
         !Object.values<string>(LearningSpaceThemeType).includes(
-          space.spaceTemplateStyle.toUpperCase()
+          space.spaceTemplateStyle.toUpperCase(),
         )
       ) {
         templateStyle = LearningSpaceThemeType.Campus;
@@ -122,14 +132,14 @@ export default class BackendAdapterUtils {
   }
 
   private static mapStoryElement(
-    storyElement: APIStoryElement | null
+    storyElement: APIStoryElement | null,
   ): BackendStoryTO | null {
     if (storyElement === null || storyElement === undefined) return null;
     else {
       let backendStoryTO = new BackendStoryTO();
       backendStoryTO.storyTexts = storyElement.storyTexts;
       backendStoryTO.elementModel = this.extractModelData(
-        storyElement.elementModel
+        storyElement.elementModel,
       ) as LearningElementModel;
       return backendStoryTO;
     }
@@ -153,7 +163,7 @@ export default class BackendAdapterUtils {
         this.assignLearningTOData(adaptiv, element);
         adaptiv.adaptivity = this.extractAdaptivityData(
           element.elementId,
-          element.adaptivityContent!
+          element.adaptivityContent!,
         );
         return adaptiv;
       } else return [];
@@ -162,7 +172,7 @@ export default class BackendAdapterUtils {
 
   private static assignBasicTOData(
     elementTO: BackendTO,
-    apiElement: APIElement
+    apiElement: APIElement,
   ): void {
     elementTO.id = apiElement.elementId;
     elementTO.name = apiElement.elementName;
@@ -171,13 +181,13 @@ export default class BackendAdapterUtils {
 
   private static assignLearningTOData(
     elementTO: BackendLearningElementTO | BackendAdaptivityElementTO,
-    apiElement: APIElement
+    apiElement: APIElement,
   ): void {
     elementTO.description = apiElement.elementDescription ?? "";
     elementTO.value = apiElement.elementMaxScore ?? 0;
     elementTO.goals = apiElement.elementGoals ?? [""];
     elementTO.model = this.extractModelData(
-      apiElement.elementModel
+      apiElement.elementModel,
     ) as LearningElementModel;
   }
   private static extractModelData(modelData?: string): string | undefined {
@@ -193,7 +203,7 @@ export default class BackendAdapterUtils {
 
   private static extractAdaptivityData(
     id: number,
-    adaptivitydata: APIAdaptivity
+    adaptivitydata: APIAdaptivity,
   ): AdaptivityElementDataTO {
     const newAdaptivityTO = new AdaptivityElementDataTO();
     newAdaptivityTO.introText = adaptivitydata.introText;
@@ -202,7 +212,7 @@ export default class BackendAdapterUtils {
 
     this.mapAdaptivityTasks(
       newAdaptivityTO.tasks,
-      adaptivitydata.adaptivityTasks
+      adaptivitydata.adaptivityTasks,
     );
 
     return newAdaptivityTO;
@@ -210,7 +220,7 @@ export default class BackendAdapterUtils {
 
   private static mapAdaptivityTasks(
     tasks: AdaptivityElementTaskTO[],
-    apiTasks: APIAdaptivityTask[]
+    apiTasks: APIAdaptivityTask[],
   ) {
     apiTasks.forEach((task) => {
       tasks.push({
@@ -221,21 +231,21 @@ export default class BackendAdapterUtils {
             ? task.optional
             : true,
         requiredDifficulty: this.mapAdaptivityElementQuestionDifficulty(
-          task.requiredDifficulty
+          task.requiredDifficulty,
         ),
         questions: [],
       } as AdaptivityElementTaskTO);
 
       this.mapAdaptivityQuestions(
         tasks.at(-1)!.questions,
-        task.adaptivityQuestions
+        task.adaptivityQuestions,
       );
     });
   }
 
   private static mapAdaptivityQuestions(
     questions: AdaptivityElementQuestionTO[],
-    apiQuestions: APIAdaptivityQuestion[]
+    apiQuestions: APIAdaptivityQuestion[],
   ) {
     apiQuestions.forEach((question) => {
       questions.push({
@@ -245,7 +255,7 @@ export default class BackendAdapterUtils {
             question.questionType as keyof typeof AdaptivityElementQuestionTypes
           ],
         questionDifficulty: this.mapAdaptivityElementQuestionDifficulty(
-          question.questionDifficulty
+          question.questionDifficulty,
         ),
         questionText: question.questionText,
         questionAnswers: [],
@@ -254,18 +264,18 @@ export default class BackendAdapterUtils {
 
       this.mapAdaptivityAnswers(
         questions.at(-1)!.questionAnswers,
-        question.choices
+        question.choices,
       );
 
       this.mapAdaptivityTrigger(
         questions.at(-1)!.triggers,
-        question.adaptivityRules
+        question.adaptivityRules,
       );
     });
   }
 
   private static mapAdaptivityElementQuestionDifficulty(
-    difficulty: number | undefined
+    difficulty: number | undefined,
   ): AdaptivityElementQuestionDifficultyTypes | undefined {
     if (difficulty === undefined) {
       return AdaptivityElementQuestionDifficultyTypes.easy;
@@ -280,7 +290,7 @@ export default class BackendAdapterUtils {
 
   private static mapAdaptivityAnswers(
     answers: AdaptivityElementAnswerTO[],
-    possibleAnswers: APIAdaptivityAnswers[]
+    possibleAnswers: APIAdaptivityAnswers[],
   ) {
     let answerID = 0; // ID for communication with backend's index of answer
     possibleAnswers.forEach((answer) => {
@@ -295,7 +305,7 @@ export default class BackendAdapterUtils {
 
   private static mapAdaptivityTrigger(
     trigger: AdaptivityElementTriggerTO[],
-    rules: APIAdaptivityTrigger[]
+    rules: APIAdaptivityTrigger[],
   ) {
     rules.forEach((rule) => {
       trigger.push({
@@ -310,7 +320,7 @@ export default class BackendAdapterUtils {
   }
 
   private static mapAdaptivityAction(
-    triggerAction: APIAdaptivityAction
+    triggerAction: APIAdaptivityAction,
   ): AdaptivityElementActionTO {
     let actionType;
     switch (triggerAction.$type) {
@@ -340,5 +350,67 @@ export default class BackendAdapterUtils {
       idData: triggerAction.elementId ? triggerAction.elementId : undefined,
       textData: textData,
     } as AdaptivityElementActionTO;
+  }
+
+  public static convertBackendAvatarConfigToAvatarConfig(
+    backendConfig: BackendAvatarConfigTO,
+  ): AvatarConfigTO {
+    const config = new AvatarConfigTO();
+    Object.assign(config, backendConfig);
+
+    // face textures
+    config.eyebrows =
+      AvatarEyeBrowTexture.find(
+        (eyebrow) => eyebrow.name === backendConfig.eyebrows,
+      )?.id ?? 0;
+    config.eyes =
+      AvatarEyeTexture.find((eye) => eye.name === backendConfig.eyes)?.id ?? 0;
+    config.nose =
+      AvatarNoseTexture.find((nose) => nose.name === backendConfig.nose)?.id ??
+      0;
+    config.mouth =
+      AvatarMouthTexture.find((mouth) => mouth.name === backendConfig.mouth)
+        ?.id ?? 0;
+    // colors
+    config.hairColor =
+      AvatarColorPalette.find(
+        (hairColor) => hairColor.id === backendConfig.hairColor,
+      ) ?? AvatarColorPalette[0];
+    config.shirtColor =
+      AvatarColorPalette.find(
+        (shirtColor) => shirtColor.id === backendConfig.shirtColor,
+      ) ?? AvatarColorPalette[0];
+    config.pantsColor =
+      AvatarColorPalette.find(
+        (pantsColor) => pantsColor.id === backendConfig.pantsColor,
+      ) ?? AvatarColorPalette[0];
+    config.shoesColor =
+      AvatarColorPalette.find(
+        (shoesColor) => shoesColor.id === backendConfig.shoesColor,
+      ) ?? AvatarColorPalette[0];
+    config.skinColor =
+      AvatarSkinColorPalette.find(
+        (skinColor) => skinColor.id === Number(backendConfig.skinColor),
+      ) ?? AvatarSkinColorPalette[0];
+    return config;
+  }
+
+  public static convertAvatarConfigToBackendAvatarConfig(
+    config: AvatarConfigTO,
+  ): BackendAvatarConfigTO {
+    let backendavatarConfig = new BackendAvatarConfigTO();
+    Object.assign(backendavatarConfig, config);
+    // face
+    backendavatarConfig.eyebrows = AvatarEyeBrowTexture[config.eyebrows].name;
+    backendavatarConfig.eyes = AvatarEyeTexture[config.eyes].name;
+    backendavatarConfig.nose = AvatarNoseTexture[config.nose].name;
+    backendavatarConfig.mouth = AvatarMouthTexture[config.mouth].name;
+    // colors
+    backendavatarConfig.hairColor = config.hairColor.id;
+    backendavatarConfig.shirtColor = config.shirtColor.id;
+    backendavatarConfig.pantsColor = config.pantsColor.id;
+    backendavatarConfig.shoesColor = config.shoesColor.id;
+    backendavatarConfig.skinColor = config.skinColor.id.toString();
+    return backendavatarConfig;
   }
 }

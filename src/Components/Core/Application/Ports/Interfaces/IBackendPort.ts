@@ -7,7 +7,7 @@ import { XAPIEvent } from "../../UseCases/ScoreH5PLearningElement/IScoreH5PLearn
 import AdaptivityElementQuestionSubmissionTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionSubmissionTO";
 import AdaptivityElementQuestionResponse from "src/Components/Core/Adapters/BackendAdapter/Types/AdaptivityElementQuestionResponse";
 import AdaptivtyElementStatusResponse from "../../../Adapters/BackendAdapter/Types/AdaptivityElementStatusResponse";
-import AvatarConfigTO from "../../DataTransferObjects/AvatarConfigTO";
+import { BackendAvatarConfigTO } from "../../DataTransferObjects/BackendAvatarConfigTO";
 
 export type GetWorldDataParams = {
   userToken: string;
@@ -79,10 +79,10 @@ export default interface IBackendPort {
     worldID,
   }: ElementDataParams): Promise<AdaptivtyElementStatusResponse>;
 
-  getAvatarConfig(userToken: string): Promise<AvatarConfigTO>;
+  getAvatarConfig(userToken: string): Promise<BackendAvatarConfigTO>;
 
   updateAvatarConfig(
     userToken: string,
-    avatarConfig: AvatarConfigTO,
+    avatarConfig: BackendAvatarConfigTO,
   ): Promise<boolean>;
 }
