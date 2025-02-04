@@ -377,7 +377,7 @@ export default class MockBackendAdapter implements IBackendPort {
       shoes: "shoes-trainers",
 
       // Body
-      skinColor: "24",
+      skinColor: 24,
       roundness: 0.5, // 0-1 morph target weight
       // TODO: add more body features
     } as BackendAvatarConfigTO);

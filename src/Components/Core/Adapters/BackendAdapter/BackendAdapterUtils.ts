@@ -410,7 +410,7 @@ export default class BackendAdapterUtils {
     backendavatarConfig.shirtColor = config.shirtColor.id;
     backendavatarConfig.pantsColor = config.pantsColor.id;
     backendavatarConfig.shoesColor = config.shoesColor.id;
-    backendavatarConfig.skinColor = config.skinColor.id.toString();
+    backendavatarConfig.skinColor = config.skinColor.id;
     return backendavatarConfig;
   }
 }

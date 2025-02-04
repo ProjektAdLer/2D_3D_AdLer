@@ -37,7 +37,7 @@ export class BackendAvatarConfigTO {
   public shoesColor: number;
 
   // Body
-  public skinColor: string;
+  public skinColor: number;
   public roundness: number; // 0-1 morph target weight
   // TODO: add more body features
 }
