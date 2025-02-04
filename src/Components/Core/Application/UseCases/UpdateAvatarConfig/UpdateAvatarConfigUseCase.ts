@@ -62,18 +62,16 @@ export default class UpdateAvatarConfigUseCase
       newAvatarConfig,
     );
 
-    const backendAvatarConfigTO =
-      BackendAdapterUtils.convertAvatarConfigToBackendAvatarConfig(
-        userDataEntities[0].avatar as AvatarConfigTO,
-      );
+    // const backendAvatarConfigTO =
+    //   BackendAdapterUtils.convertAvatarConfigToBackendAvatarConfig(
+    //     userDataEntities[0].avatar as AvatarConfigTO,
+    //   );
 
-    console.log("UPDATE AVATAR CONFIG: ", backendAvatarConfigTO);
-
-    //Post new (complete) avatar config to backend
-    this.backend.updateAvatarConfig(
-      userDataEntities[0].userToken,
-      backendAvatarConfigTO,
-    );
+    // //Post new (complete) avatar config to backend
+    // this.backend.updateAvatarConfig(
+    //   userDataEntities[0].userToken,
+    //   backendAvatarConfigTO,
+    // );
 
     this.logger.log(
       LogLevelTypes.TRACE,

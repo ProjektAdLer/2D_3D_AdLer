@@ -13,6 +13,7 @@ import {
 } from "../../Domain/AvatarModels/AvatarModelTypes";
 
 export default class AvatarEditorViewModel {
+  hasChanged = new Observable<boolean>(false);
   // Face
   eyebrows: Observable<number> = new Observable<number>(0);
   eyes: Observable<number> = new Observable<number>(0);

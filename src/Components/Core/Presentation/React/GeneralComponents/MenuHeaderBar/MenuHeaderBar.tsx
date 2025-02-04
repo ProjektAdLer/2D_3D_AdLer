@@ -13,15 +13,16 @@ import HelpDeskModal from "../HelpDeskModal/HelpDeskModal";
 import HelpDeskButton from "../HelpDeskButton/HelpDeskButton";
 import { useTranslation } from "react-i18next";
 
-interface MenuHeaderBarProps extends React.HTMLAttributes<HTMLDivElement> {
+type MenuHeaderBarProps = {
+  className: string;
   location: "world" | "space" | "editor";
-}
+  externContent?: {
+    contentLocation: "world" | "space" | "editor";
+    content: JSX.Element;
+  };
+};
 
-export default function MenuHeaderBar({
-  className,
-  location,
-  ...rest
-}: React.DetailedHTMLProps<MenuHeaderBarProps, HTMLDivElement>) {
+export default function MenuHeaderBar(props: Readonly<MenuHeaderBarProps>) {
   const [viewModel, controller] = useBuilder<
     MenuHeaderBarViewModel,
     MenuHeaderBarController
@@ -34,27 +35,32 @@ export default function MenuHeaderBar({
   if (!viewModel || !controller) return null;
 
   return (
-    <div className={tailwindMerge(className, "flex place-content-stretch")}>
+    <div
+      className={tailwindMerge(props.className, "flex place-content-stretch")}
+    >
       <div className="flex items-center w-1/2 place-content-stretch justify-self-start ">
         <StyledButton onClick={controller.onHomeButtonClicked} className="mr-4">
           <img className="w-10 xl:w-12 " src={homeIcon} alt="Home Icon" />
         </StyledButton>
-        {location === "space" && (
+        {props.location === "space" && (
           <StyledButton onClick={controller.onLearningWorldButtonClicked}>
             <img className="w-10 xl:w-12" src={worldIcon} alt="World Icon" />
           </StyledButton>
         )}
+        {props.externContent &&
+          props.location === props.externContent.contentLocation &&
+          props.externContent.content}
       </div>
       <div className="flex justify-center w-full">
         <StyledContainer
           className="text-xl truncate lg:text-4xl font-[roboto]"
           textColor="darkblue"
         >
-          {location === "space" ? currentWorldName : null}
-          {location === "world"
+          {props.location === "space" ? currentWorldName : null}
+          {props.location === "world"
             ? translate("learningWorldMenuTitle").toString()
             : null}
-          {location === "editor"
+          {props.location === "editor"
             ? translate("avatarEditorTitle").toString()
             : null}
         </StyledContainer>

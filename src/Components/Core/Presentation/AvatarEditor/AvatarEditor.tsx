@@ -20,6 +20,7 @@ import { useInjection } from "inversify-react";
 import ILoadAvatarConfigUseCase from "../../Application/UseCases/LoadAvatarConfig/ILoadAvatarConfigUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import AvatarEditorFaceCategory from "./AvatarEditorCategories/AvatarEditorCategoryContents/AvatarEditorFaceCategory";
+import AvatarEditorSaveButton from "./AvatarEditorSaveButton";
 
 export default function AvatarEditor() {
   const [viewModel, controller] = useBuilder<
@@ -46,6 +47,15 @@ export default function AvatarEditor() {
       <MenuHeaderBar
         location="editor"
         className="self-center w-full p-2 font-semibold"
+        externContent={{
+          contentLocation: "editor",
+          content: (
+            <AvatarEditorSaveButton
+              controller={controller}
+              viewModel={viewModel}
+            />
+          ),
+        }}
       />
       <div className="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-3 grow lg:rounded-lg">
         {/* Categories (Left Side) */}
