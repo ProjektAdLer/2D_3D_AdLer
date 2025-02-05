@@ -117,7 +117,7 @@ export default class AvatarView {
     // animation setup
     result.animationGroups.forEach((animationGroup) => {
       switch (animationGroup.name) {
-        case "ac_anim_idle":
+        case "ac_anim_idle2":
           this.idleAnimation = animationGroup;
           break;
         case "ac_anim_walkcycle":

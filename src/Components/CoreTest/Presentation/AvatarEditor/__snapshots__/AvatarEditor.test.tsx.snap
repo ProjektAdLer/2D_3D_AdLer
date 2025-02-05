@@ -24,6 +24,15 @@ exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = 
             />
           </button>
         </div>
+        <div
+          class=""
+        >
+          <button
+            class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+          >
+            SAVE
+          </button>
+        </div>
       </div>
       <div
         class="flex justify-center w-full"
@@ -194,6 +203,15 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
             />
           </button>
         </div>
+        <div
+          class=""
+        >
+          <button
+            class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+          >
+            SAVE
+          </button>
+        </div>
       </div>
       <div
         class="flex justify-center w-full"
@@ -362,6 +380,15 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
               class="w-10 xl:w-12 "
               src="home.svg"
             />
+          </button>
+        </div>
+        <div
+          class=""
+        >
+          <button
+            class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+          >
+            SAVE
           </button>
         </div>
       </div>
@@ -782,6 +809,15 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
             />
           </button>
         </div>
+        <div
+          class=""
+        >
+          <button
+            class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+          >
+            SAVE
+          </button>
+        </div>
       </div>
       <div
         class="flex justify-center w-full"
@@ -1184,6 +1220,15 @@ exports[`AvatarEditor should render 4 category when tab button is clicked 1`] = 
             />
           </button>
         </div>
+        <div
+          class=""
+        >
+          <button
+            class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+          >
+            SAVE
+          </button>
+        </div>
       </div>
       <div
         class="flex justify-center w-full"
@@ -1519,6 +1564,15 @@ exports[`AvatarEditor should renders 1`] = `
               class="w-10 xl:w-12 "
               src="home.svg"
             />
+          </button>
+        </div>
+        <div
+          class=""
+        >
+          <button
+            class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+          >
+            SAVE
           </button>
         </div>
       </div>

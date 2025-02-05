@@ -11,7 +11,6 @@ import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type ILoadAvatarConfigUseCase from "../LoadAvatarConfig/ILoadAvatarConfigUseCase";
 import type IBackendPort from "../../Ports/Interfaces/IBackendPort";
-import BackendAdapterUtils from "src/Components/Core/Adapters/BackendAdapter/BackendAdapterUtils";
 
 @injectable()
 export default class UpdateAvatarConfigUseCase
@@ -62,18 +61,16 @@ export default class UpdateAvatarConfigUseCase
       newAvatarConfig,
     );
 
-    const backendAvatarConfigTO =
-      BackendAdapterUtils.convertAvatarConfigToBackendAvatarConfig(
-        userDataEntities[0].avatar as AvatarConfigTO,
-      );
+    // const backendAvatarConfigTO =
+    //   BackendAdapterUtils.convertAvatarConfigToBackendAvatarConfig(
+    //     userDataEntities[0].avatar as AvatarConfigTO,
+    //   );
 
-    console.log("UPDATE AVATAR CONFIG: ", backendAvatarConfigTO);
-
-    //Post new (complete) avatar config to backend
-    this.backend.updateAvatarConfig(
-      userDataEntities[0].userToken,
-      backendAvatarConfigTO,
-    );
+    // //Post new (complete) avatar config to backend
+    // this.backend.updateAvatarConfig(
+    //   userDataEntities[0].userToken,
+    //   backendAvatarConfigTO,
+    // );
 
     this.logger.log(
       LogLevelTypes.TRACE,

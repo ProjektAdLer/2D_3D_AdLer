@@ -118,7 +118,7 @@ describe("BackendAdapter", () => {
     const userName = "userName";
     const password = "password";
 
-    mockedAxios.get.mockResolvedValue({
+    mockedAxios.post.mockResolvedValue({
       data: {
         lmsToken: token,
       },
@@ -128,12 +128,10 @@ describe("BackendAdapter", () => {
       password: password,
     });
 
-    expect(mockedAxios.get).toHaveBeenCalledTimes(1);
-    expect(mockedAxios.get).toHaveBeenCalledWith("/Users/Login", {
-      params: {
-        UserName: userName,
-        Password: password,
-      },
+    expect(mockedAxios.post).toHaveBeenCalledTimes(1);
+    expect(mockedAxios.post).toHaveBeenCalledWith("/Users/Login", {
+      UserName: userName,
+      Password: password,
     });
     expect(returnedVal).toBe(token);
   });

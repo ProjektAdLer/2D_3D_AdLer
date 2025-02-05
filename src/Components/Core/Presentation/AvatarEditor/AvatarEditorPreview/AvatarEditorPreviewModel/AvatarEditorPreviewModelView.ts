@@ -5,7 +5,6 @@ import {
   Skeleton,
   Texture,
   TransformNode,
-  Vector3,
 } from "@babylonjs/core";
 import IScenePresenter from "../../../Babylon/SceneManagement/IScenePresenter";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
@@ -98,9 +97,9 @@ export default class AvatarEditorPreviewModelView {
     ).executeAsync();
 
     // hair
-    this.updateModelHair(this.viewModel.currentAvatarConfig.Value.hair);
+    await this.updateModelHair(this.viewModel.currentAvatarConfig.Value.hair);
     this.updateHairColor(this.viewModel.currentAvatarConfig.Value.hairColor);
-    this.updateModelBeard(this.viewModel.currentAvatarConfig.Value.beard);
+    await this.updateModelBeard(this.viewModel.currentAvatarConfig.Value.beard);
     this.updateBeardColor(this.viewModel.currentAvatarConfig.Value.hairColor);
     // face
     this.updateEyeBrows(this.viewModel.currentAvatarConfig.Value.eyebrows);
@@ -113,25 +112,30 @@ export default class AvatarEditorPreviewModelView {
     this.updateBackPack(this.viewModel.currentAvatarConfig.Value.backpack);
     this.updateOther(this.viewModel.currentAvatarConfig.Value.other);
     // clothing
-    this.updateModelShirt(this.viewModel.currentAvatarConfig.Value.shirt);
-    this.updateModelPants(this.viewModel.currentAvatarConfig.Value.pants);
-    this.updateModelShoes(this.viewModel.currentAvatarConfig.Value.shoes);
+    await this.updateModelShirt(this.viewModel.currentAvatarConfig.Value.shirt);
     this.updateShirtColor(this.viewModel.currentAvatarConfig.Value.shirtColor);
+    await this.updateModelPants(this.viewModel.currentAvatarConfig.Value.pants);
     this.updatePantsColor(this.viewModel.currentAvatarConfig.Value.pantsColor);
+    await this.updateModelShoes(this.viewModel.currentAvatarConfig.Value.shoes);
     this.updateShoesColor(this.viewModel.currentAvatarConfig.Value.shoesColor);
   }
 
   private async onAvatarConfigChanged(): Promise<void> {
-    if (this.viewModel.avatarConfigDiff.Value.beard)
+    if (this.viewModel.avatarConfigDiff.Value.beard) {
       await this.updateModelBeard(this.viewModel.avatarConfigDiff.Value.beard);
-    this.updateBeardColor(this.viewModel.currentAvatarConfig.Value.hairColor);
-    if (this.viewModel.avatarConfigDiff.Value.hair)
+      this.updateBeardColor(this.viewModel.currentAvatarConfig.Value.hairColor);
+    }
+
+    if (this.viewModel.avatarConfigDiff.Value.hair) {
       await this.updateModelHair(this.viewModel.avatarConfigDiff.Value.hair);
-    this.updateHairColor(this.viewModel.currentAvatarConfig.Value.hairColor);
+      this.updateHairColor(this.viewModel.currentAvatarConfig.Value.hairColor);
+    }
+
     if (this.viewModel.avatarConfigDiff.Value.hairColor) {
       this.updateHairColor(this.viewModel.avatarConfigDiff.Value.hairColor);
       this.updateBeardColor(this.viewModel.avatarConfigDiff.Value.hairColor);
     }
+
     if (this.viewModel.avatarConfigDiff.Value.eyebrows !== undefined)
       this.updateEyeBrows(this.viewModel.avatarConfigDiff.Value.eyebrows);
     if (this.viewModel.avatarConfigDiff.Value.eyes !== undefined)
@@ -140,8 +144,10 @@ export default class AvatarEditorPreviewModelView {
       this.updateNose(this.viewModel.avatarConfigDiff.Value.nose);
     if (this.viewModel.avatarConfigDiff.Value.mouth !== undefined)
       this.updateMouth(this.viewModel.avatarConfigDiff.Value.mouth);
+
     if (this.viewModel.avatarConfigDiff.Value.shirt !== undefined)
       await this.updateModelShirt(this.viewModel.avatarConfigDiff.Value.shirt);
+
     this.updateShirtColor(this.viewModel.currentAvatarConfig.Value.shirtColor);
     if (this.viewModel.avatarConfigDiff.Value.shirtColor !== undefined)
       this.updateShirtColor(this.viewModel.avatarConfigDiff.Value.shirtColor);

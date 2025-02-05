@@ -67,6 +67,7 @@ const USECASE_TYPES = {
     "IGetUnseenBreakTimeNotificationUseCase",
   ),
   IUpdateAvatarConfigUseCase: Symbol("IUpdateAvatarConfigUseCase"),
+  ISaveAvatarConfigUseCase: Symbol("ISaveAvatarConfigUseCase"),
 };
 
 export default USECASE_TYPES;
