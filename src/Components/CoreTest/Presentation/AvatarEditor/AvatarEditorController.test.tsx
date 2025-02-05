@@ -4,14 +4,16 @@ import AvatarEditorController from "../../../Core/Presentation/AvatarEditor/Avat
 import IUpdateAvatarConfigUseCase from "../../../Core/Application/UseCases/UpdateAvatarConfig/IUpdateAvatarConfigUseCase";
 import { AvatarHairModels } from "../../../Core/Domain/AvatarModels/AvatarModelTypes";
 import USECASE_TYPES from "../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
+import AvatarEditorViewModel from "../../../Core/Presentation/AvatarEditor/AvatarEditorViewModel";
 
 const updateAvatarConfigUseCaseMock = mock<IUpdateAvatarConfigUseCase>();
+const avatarEditorViewModelMock = mock<AvatarEditorViewModel>();
 
 describe("AvatarEditorController", () => {
   let systemUnderTest: AvatarEditorController;
 
   beforeEach(() => {
-    systemUnderTest = new AvatarEditorController();
+    systemUnderTest = new AvatarEditorController(avatarEditorViewModelMock);
   });
   beforeAll(() => {
     CoreDIContainer.snapshot();
