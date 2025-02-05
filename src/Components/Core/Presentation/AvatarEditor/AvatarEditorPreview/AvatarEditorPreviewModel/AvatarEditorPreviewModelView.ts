@@ -47,7 +47,6 @@ export default class AvatarEditorPreviewModelView {
     this.scenePresenter = CoreDIContainer.get<ScenePresenterFactory>(
       SCENE_TYPES.ScenePresenterFactory,
     )(AvatarEditorPreviewSceneDefinition);
-
     viewModel.avatarConfigDiff.subscribe(() => {
       this.onAvatarConfigChanged();
     });
@@ -118,6 +117,7 @@ export default class AvatarEditorPreviewModelView {
     this.updatePantsColor(this.viewModel.currentAvatarConfig.Value.pantsColor);
     await this.updateModelShoes(this.viewModel.currentAvatarConfig.Value.shoes);
     this.updateShoesColor(this.viewModel.currentAvatarConfig.Value.shoesColor);
+    this.updateSkinColor(this.viewModel.currentAvatarConfig.Value.skinColor);
   }
 
   private async onAvatarConfigChanged(): Promise<void> {
@@ -147,17 +147,29 @@ export default class AvatarEditorPreviewModelView {
 
     if (this.viewModel.avatarConfigDiff.Value.shirt !== undefined)
       await this.updateModelShirt(this.viewModel.avatarConfigDiff.Value.shirt);
-
     this.updateShirtColor(this.viewModel.currentAvatarConfig.Value.shirtColor);
+    this.updateSkinColor(
+      this.viewModel.currentAvatarConfig.Value.skinColor,
+      this.viewModel.shirtAnchorNode.getChildMeshes(),
+    );
     if (this.viewModel.avatarConfigDiff.Value.shirtColor !== undefined)
       this.updateShirtColor(this.viewModel.avatarConfigDiff.Value.shirtColor);
+
     if (this.viewModel.avatarConfigDiff.Value.pants !== undefined)
       await this.updateModelPants(this.viewModel.avatarConfigDiff.Value.pants);
     this.updatePantsColor(this.viewModel.currentAvatarConfig.Value.pantsColor);
+    this.updateSkinColor(
+      this.viewModel.currentAvatarConfig.Value.skinColor,
+      this.viewModel.pantsAnchorNode.getChildMeshes(),
+    );
     if (this.viewModel.avatarConfigDiff.Value.pantsColor !== undefined)
       this.updatePantsColor(this.viewModel.avatarConfigDiff.Value.pantsColor);
     if (this.viewModel.avatarConfigDiff.Value.shoes !== undefined)
       await this.updateModelShoes(this.viewModel.avatarConfigDiff.Value.shoes);
+    this.updateSkinColor(
+      this.viewModel.currentAvatarConfig.Value.skinColor,
+      this.viewModel.shoesAnchorNode.getChildMeshes(),
+    );
     this.updateShoesColor(this.viewModel.currentAvatarConfig.Value.shoesColor);
     if (this.viewModel.avatarConfigDiff.Value.shoesColor !== undefined)
       this.updateShoesColor(this.viewModel.avatarConfigDiff.Value.shoesColor);
@@ -169,6 +181,11 @@ export default class AvatarEditorPreviewModelView {
       this.updateBackPack(this.viewModel.avatarConfigDiff.Value.backpack);
     if (this.viewModel.avatarConfigDiff.Value.other !== undefined)
       this.updateOther(this.viewModel.avatarConfigDiff.Value.other);
+    if (this.viewModel.avatarConfigDiff.Value.skinColor !== undefined)
+      this.updateSkinColor(
+        this.viewModel.avatarConfigDiff.Value.skinColor,
+        this.viewModel.baseModelMeshes,
+      );
   }
 
   private async updateModelHair(hair?: AvatarHairModels | undefined) {
@@ -374,6 +391,29 @@ export default class AvatarEditorPreviewModelView {
     const tmp = AvatarMouthTexture[mouth];
     texture.uOffset = tmp.uOffset;
     texture.vOffset = tmp.vOffset;
+  }
+
+  private async updateSkinColor(skinColor?: AvatarColor, skinMeshes?: Mesh[]) {
+    if (skinColor === undefined || skinColor === null) return;
+    if (skinMeshes === undefined || skinMeshes === null) return;
+    let skinMat = skinMeshes.find((mesh) =>
+      mesh.material?.name.includes("mat_Skin"),
+    )?.material!;
+
+    // Set Displacement of current mesh UV Map
+    const uDisplacement = 0.625;
+    const vDisplacement = 0;
+
+    let skinUOffset = skinColor?.uOffset ?? 0;
+    let skinVOffset = skinColor?.vOffset ?? 0;
+
+    if (skinMat === undefined) return;
+    let textures = skinMat.getActiveTextures() as Texture[];
+    textures.forEach((texture) => {
+      if (texture === undefined) return;
+      texture.uOffset = skinUOffset - uDisplacement;
+      texture.vOffset = skinVOffset - vDisplacement;
+    });
   }
 
   private async updateModel<T>(

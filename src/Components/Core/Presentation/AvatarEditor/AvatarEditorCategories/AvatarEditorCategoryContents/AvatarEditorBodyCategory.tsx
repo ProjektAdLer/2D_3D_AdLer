@@ -8,6 +8,7 @@ import ColorPickerModal from "~ReactComponents/GeneralComponents/ColorPicker/Col
 import bodySmallIcon from "../../../../../../Assets/icons/body-small.svg";
 import bodyBigIcon from "../../../../../../Assets/icons/body-big.svg";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
+import AvatarSkinColorPalette from "src/Components/Core/Domain/AvatarModels/AvatarSkinColorPalette";
 
 export default function AvatarEditorBodyCategory(
   props: AvatarEditorCategoryContentProps,
@@ -31,6 +32,7 @@ export default function AvatarEditorBodyCategory(
         />
         <ColorPickerModal
           title={translate("bodyColorTitle")}
+          colorPalette={AvatarSkinColorPalette}
           showModal={showModal}
           onClose={() => setShowModal(false)}
           onColorClickFunction={(color) => {
@@ -40,7 +42,7 @@ export default function AvatarEditorBodyCategory(
           }}
         />
       </div>
-      <div className="pb-2 border-b border-gray-500">
+      {/* <div className="pb-2 border-b border-gray-500">
         <h1 className="text-2xl font-bold">
           {translate("bodyProportionsTitle")}
         </h1>
@@ -78,7 +80,7 @@ export default function AvatarEditorBodyCategory(
             buttons={{ imageLeft: bodySmallIcon, imageRight: bodyBigIcon }}
           />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

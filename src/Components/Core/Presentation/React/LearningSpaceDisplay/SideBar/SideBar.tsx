@@ -126,7 +126,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
           </div>
 
           {/* Empty placeholder containers for future functions/buttons */}
-          <div className="flex flex-col justify-start items-center max-h-[25%] invisible ">
+          <div className="flex flex-col justify-start items-center max-h-[25%]">
             <StyledButton
               onClick={controller.onControlsExplanationButtonClicked}
             >
