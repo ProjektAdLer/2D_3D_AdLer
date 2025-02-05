@@ -10,6 +10,22 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+### Changed
+
+### Removed
+
+### Fixed
+
+### Deprecated
+
+### Security
+
+</details>
+
+## Version 2.7.0 - 05.02.25
+
+### Added
+
 - added avatar editor to customize player character
 - new icons for avatar creator categories
 - added completion button in modal for h5p elements
@@ -27,12 +43,6 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 - fixed only showing short break time content
 - fixed mobile portrait view in avatar editor
-
-### Deprecated
-
-### Security
-
-</details>
 
 ## Version 2.6.0 - 17.12.24
 
