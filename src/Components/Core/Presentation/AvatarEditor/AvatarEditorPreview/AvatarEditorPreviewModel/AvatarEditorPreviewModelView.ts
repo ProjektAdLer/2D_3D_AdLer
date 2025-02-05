@@ -165,7 +165,9 @@ export default class AvatarEditorPreviewModelView {
     this.updateShirtColor(this.viewModel.currentAvatarConfig.Value.shirtColor);
     this.updateSkinColor(
       this.viewModel.currentAvatarConfig.Value.skinColor,
-      this.viewModel.shirtAnchorNode.getChildMeshes(),
+      this.viewModel.shirtMeshes.get(
+        this.viewModel.currentAvatarConfig.Value.shirt,
+      ),
     );
     if (this.viewModel.avatarConfigDiff.Value.shirtColor !== undefined)
       this.updateShirtColor(this.viewModel.avatarConfigDiff.Value.shirtColor);
@@ -175,7 +177,9 @@ export default class AvatarEditorPreviewModelView {
     this.updatePantsColor(this.viewModel.currentAvatarConfig.Value.pantsColor);
     this.updateSkinColor(
       this.viewModel.currentAvatarConfig.Value.skinColor,
-      this.viewModel.pantsAnchorNode.getChildMeshes(),
+      this.viewModel.pantsMeshes.get(
+        this.viewModel.currentAvatarConfig.Value.pants,
+      ),
     );
     if (this.viewModel.avatarConfigDiff.Value.pantsColor !== undefined)
       this.updatePantsColor(this.viewModel.avatarConfigDiff.Value.pantsColor);
@@ -413,7 +417,7 @@ export default class AvatarEditorPreviewModelView {
     if (skinMeshes === undefined || skinMeshes === null) return;
     let skinMat = skinMeshes.find((mesh) =>
       mesh.material?.name.includes("mat_Skin"),
-    )?.material!;
+    )?.material;
 
     // Set Displacement of current mesh UV Map
     const uDisplacement = 0.625;
@@ -422,7 +426,7 @@ export default class AvatarEditorPreviewModelView {
     let skinUOffset = skinColor?.uOffset ?? 0;
     let skinVOffset = skinColor?.vOffset ?? 0;
 
-    if (skinMat === undefined) return;
+    if (skinMat === undefined || skinMat === null) return;
     let textures = skinMat.getActiveTextures() as Texture[];
     textures.forEach((texture) => {
       if (texture === undefined) return;

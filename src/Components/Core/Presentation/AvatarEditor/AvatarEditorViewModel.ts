@@ -11,6 +11,7 @@ import {
   AvatarBackpackModels,
   AvatarOtherModels,
 } from "../../Domain/AvatarModels/AvatarModelTypes";
+import AvatarSkinColorPalette from "../../Domain/AvatarModels/AvatarSkinColorPalette";
 
 export default class AvatarEditorViewModel {
   hasChanged = new Observable<boolean>(false);
@@ -69,11 +70,9 @@ export default class AvatarEditorViewModel {
   });
 
   // Body
-  skinColor: Observable<AvatarColor> = new Observable<AvatarColor>({
-    id: 33,
-    nameKey: "Brown 2",
-    hexColor: "#4b2a1a",
-  });
+  skinColor: Observable<AvatarColor> = new Observable<AvatarColor>(
+    AvatarSkinColorPalette[4],
+  );
   roundness: Observable<number>; // 0-1 morph target weight
 
   // --------------------------------------------------------------

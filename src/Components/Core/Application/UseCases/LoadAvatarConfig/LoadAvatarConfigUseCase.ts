@@ -10,6 +10,7 @@ import UserDataEntity from "../../../Domain/Entities/UserDataEntity";
 import type IBackendPort from "../../Ports/Interfaces/IBackendPort";
 import BackendAdapterUtils from "src/Components/Core/Adapters/BackendAdapter/BackendAdapterUtils";
 import AvatarConfigTO from "../../DataTransferObjects/AvatarConfigTO";
+import AvatarSkinColorPalette from "src/Components/Core/Domain/AvatarModels/AvatarSkinColorPalette";
 
 @injectable()
 export default class LoadAvatarConfigUseCase
@@ -65,5 +66,6 @@ export default class LoadAvatarConfigUseCase
     if (!config.pants) config.pants = "pants-jeans";
     if (!config.shoes) config.shoes = "shoes-trainers";
     if (!config.roundness) config.roundness = 50;
+    if (!config.skinColor) config.skinColor = AvatarSkinColorPalette[4];
   }
 }
