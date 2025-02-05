@@ -104,14 +104,25 @@ export default class AvatarEditorUtils {
     texture.vOffset = textureOffset[textureIndex].vOffset;
   }
 
-  public static setupAvatarColor(mesh: AbstractMesh, meshColor: AvatarColor) {
+  public static setupAvatarColor(
+    mesh: AbstractMesh,
+    meshColor: AvatarColor,
+    displacementU: number,
+    displacementV: number,
+  ) {
     if (meshColor === undefined || meshColor === null) return;
 
     let meshMaterial = mesh.material as Material;
     let meshTexture = meshMaterial?.getActiveTextures()[0] as Texture;
 
     if (meshTexture === undefined) return;
-    meshTexture.uOffset = meshColor?.uOffset ?? 0;
-    meshTexture.vOffset = meshColor?.vOffset ?? 0;
+    // Set Displacement of current mesh UV Map
+
+    let meshColorUOffeset = meshColor?.uOffset ?? 0;
+    let meshColorVOffset = meshColor?.vOffset ?? 0;
+
+    if (meshTexture === undefined) return;
+    meshTexture.uOffset = meshColorUOffeset - displacementU;
+    meshTexture.vOffset = meshColorVOffset - displacementV;
   }
 }
