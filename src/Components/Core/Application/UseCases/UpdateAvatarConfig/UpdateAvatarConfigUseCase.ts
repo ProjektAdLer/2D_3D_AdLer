@@ -11,7 +11,6 @@ import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type ILoadAvatarConfigUseCase from "../LoadAvatarConfig/ILoadAvatarConfigUseCase";
 import type IBackendPort from "../../Ports/Interfaces/IBackendPort";
-import BackendAdapterUtils from "src/Components/Core/Adapters/BackendAdapter/BackendAdapterUtils";
 
 @injectable()
 export default class UpdateAvatarConfigUseCase
