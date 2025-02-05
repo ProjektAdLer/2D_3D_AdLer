@@ -6,7 +6,6 @@ import ColorPickerModal from "~ReactComponents/GeneralComponents/ColorPicker/Col
 import { useState } from "react";
 import AccordionElement from "~ReactComponents/GeneralComponents/Accordion/AccordionElement";
 import {
-  AvatarNoneModel,
   OAvatarPantsModels,
   AvatarPantsModels,
   OAvatarShirtModels,
@@ -14,13 +13,7 @@ import {
   OAvatarShoesModels,
   AvatarShoesModels,
 } from "src/Components/Core/Domain/AvatarModels/AvatarModelTypes";
-import noneIcon from "../../../../../../Assets/avatarEditorThumbnails/aa-none_Thumbnail.png";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
-
-const noneThumbnail = {
-  type: AvatarNoneModel.None,
-  image: noneIcon,
-};
 
 const shirtThumbnails = Object.values(OAvatarShirtModels).map<{
   type: AvatarShirtModels;
@@ -31,7 +24,7 @@ const shirtThumbnails = Object.values(OAvatarShirtModels).map<{
     `../../../../../../Assets/avatarEditorThumbnails/clothing/shirts/aa-${type}.png`,
   ),
 }));
-shirtThumbnails.unshift(noneThumbnail);
+//shirtThumbnails.unshift(noneThumbnail);
 
 const pantsThumbnails = Object.values(OAvatarPantsModels).map<{
   type: AvatarPantsModels;
@@ -42,7 +35,7 @@ const pantsThumbnails = Object.values(OAvatarPantsModels).map<{
     `../../../../../../Assets/avatarEditorThumbnails/clothing/pants/aa-${type}.png`,
   ),
 }));
-pantsThumbnails.unshift(noneThumbnail);
+//pantsThumbnails.unshift(noneThumbnail);
 
 const shoesThumbnails = Object.values(OAvatarShoesModels).map<{
   type: AvatarShoesModels;
@@ -53,7 +46,7 @@ const shoesThumbnails = Object.values(OAvatarShoesModels).map<{
     `../../../../../../Assets/avatarEditorThumbnails/clothing/shoes/aa-${type}.png`,
   ),
 }));
-shoesThumbnails.unshift(noneThumbnail);
+//shoesThumbnails.unshift(noneThumbnail);
 
 export default function AvatarEditorClothingCategory(
   props: AvatarEditorCategoryContentProps,
