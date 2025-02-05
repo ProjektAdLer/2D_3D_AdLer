@@ -125,4 +125,32 @@ export default class AvatarEditorUtils {
     meshTexture.uOffset = meshColorUOffeset - displacementU;
     meshTexture.vOffset = meshColorVOffset - displacementV;
   }
+
+  public static setupSkinColor(
+    skinMeshes: Mesh[],
+    skinColor: AvatarColor,
+    displacementU: number = 0,
+    displacementV: number = 0,
+  ) {
+    if (skinColor === undefined || skinColor === null) return;
+    if (skinMeshes === undefined || skinMeshes === null) return;
+    let skinMat = skinMeshes.find((mesh) =>
+      mesh.material?.name.includes("mat_Skin"),
+    )?.material!;
+
+    // Set Displacement of current mesh UV Map
+    const uDisplacement = 0.625;
+    const vDisplacement = 0;
+
+    let skinUOffset = skinColor?.uOffset ?? 0;
+    let skinVOffset = skinColor?.vOffset ?? 0;
+
+    if (skinMat === undefined) return;
+    let textures = skinMat.getActiveTextures() as Texture[];
+    textures.forEach((texture) => {
+      if (texture === undefined) return;
+      texture.uOffset = skinUOffset - uDisplacement;
+      texture.vOffset = skinVOffset - vDisplacement;
+    });
+  }
 }

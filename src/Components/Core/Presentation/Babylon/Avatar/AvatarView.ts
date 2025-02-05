@@ -319,6 +319,10 @@ export default class AvatarView {
         shirtResult.meshes[1],
         avatarEntity.shirtColor,
       );
+      AvatarEditorUtils.setupSkinColor(
+        shirtResult.meshes as Mesh[],
+        avatarEntity.skinColor,
+      );
     }
     // pants
     let pantsResult = await AvatarEditorUtils.setupAvatarAssetModel(
@@ -334,6 +338,10 @@ export default class AvatarView {
         pantsResult.meshes[1],
         avatarEntity.pantsColor,
       );
+      AvatarEditorUtils.setupSkinColor(
+        pantsResult.meshes as Mesh[],
+        avatarEntity.skinColor,
+      );
     }
     // shoes
     let shoesResult = await AvatarEditorUtils.setupAvatarAssetModel(
@@ -348,6 +356,10 @@ export default class AvatarView {
       AvatarEditorUtils.setupAvatarColor(
         shoesResult.meshes[1],
         avatarEntity.shoesColor,
+      );
+      AvatarEditorUtils.setupSkinColor(
+        shoesResult.meshes as Mesh[],
+        avatarEntity.skinColor,
       );
     }
     // eyebrows
@@ -377,6 +389,11 @@ export default class AvatarView {
       result.meshes as Mesh[],
       AvatarModelMaterialNames.mouth,
       AvatarMouthTexture,
+    );
+    // skin color
+    AvatarEditorUtils.setupSkinColor(
+      this.viewModel.meshes,
+      avatarEntity.skinColor,
     );
   }
 }

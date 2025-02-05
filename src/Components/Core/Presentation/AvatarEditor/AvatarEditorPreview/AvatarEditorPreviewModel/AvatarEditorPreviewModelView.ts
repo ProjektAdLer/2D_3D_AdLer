@@ -117,7 +117,22 @@ export default class AvatarEditorPreviewModelView {
     this.updatePantsColor(this.viewModel.currentAvatarConfig.Value.pantsColor);
     await this.updateModelShoes(this.viewModel.currentAvatarConfig.Value.shoes);
     this.updateShoesColor(this.viewModel.currentAvatarConfig.Value.shoesColor);
-    this.updateSkinColor(this.viewModel.currentAvatarConfig.Value.skinColor);
+    this.updateSkinColor(
+      this.viewModel.currentAvatarConfig.Value.skinColor,
+      this.viewModel.baseModelMeshes,
+    );
+    this.updateSkinColor(
+      this.viewModel.currentAvatarConfig.Value.skinColor,
+      this.viewModel.shirtAnchorNode.getChildMeshes(),
+    );
+    this.updateSkinColor(
+      this.viewModel.currentAvatarConfig.Value.skinColor,
+      this.viewModel.pantsAnchorNode.getChildMeshes(),
+    );
+    this.updateSkinColor(
+      this.viewModel.currentAvatarConfig.Value.skinColor,
+      this.viewModel.shoesAnchorNode.getChildMeshes(),
+    );
   }
 
   private async onAvatarConfigChanged(): Promise<void> {
