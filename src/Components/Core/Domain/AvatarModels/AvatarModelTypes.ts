@@ -123,8 +123,7 @@ export const OAvatarPantsModels = {
 } as const;
 
 export type AvatarPantsModels =
-  | (typeof AvatarNoneModel)[keyof typeof AvatarNoneModel]
-  | (typeof OAvatarPantsModels)[keyof typeof OAvatarPantsModels];
+  (typeof OAvatarPantsModels)[keyof typeof OAvatarPantsModels];
 
 export const OAvatarShirtModels = {
   ShirtsDress: "shirts-dress",
@@ -137,8 +136,7 @@ export const OAvatarShirtModels = {
 } as const;
 
 export type AvatarShirtModels =
-  | (typeof AvatarNoneModel)[keyof typeof AvatarNoneModel]
-  | (typeof OAvatarShirtModels)[keyof typeof OAvatarShirtModels];
+  (typeof OAvatarShirtModels)[keyof typeof OAvatarShirtModels];
 
 export const OAvatarShoesModels = {
   ShoesBoots: "shoes-boots",
@@ -148,5 +146,4 @@ export const OAvatarShoesModels = {
 } as const;
 
 export type AvatarShoesModels =
-  | (typeof AvatarNoneModel)[keyof typeof AvatarNoneModel]
-  | (typeof OAvatarShoesModels)[keyof typeof OAvatarShoesModels];
+  (typeof OAvatarShoesModels)[keyof typeof OAvatarShoesModels];
