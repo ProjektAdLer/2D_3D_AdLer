@@ -10,6 +10,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+- added avatar editor to customize player character
 - new icons for avatar creator categories
 - added completion button in modal for h5p elements
 - added translated tooltips on avatarEditor thumbnails
