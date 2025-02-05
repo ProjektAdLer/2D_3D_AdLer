@@ -232,7 +232,6 @@ export default class BackendAdapter implements IBackendPort {
         token: userToken,
       },
     });
-    console.log("GET AVATAR CONFIG", response.data);
 
     return response.data;
   }

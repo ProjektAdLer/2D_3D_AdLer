@@ -47,8 +47,6 @@ export default class LoadAvatarConfigUseCase
 
       this.fillEmptyAttributes(avatarConfigTO);
       userDataEntities[0].avatar = avatarConfigTO;
-      console.log("BACKEND CALL: ", backendAvatarConfigTO);
-      console.log("LOAD AVATAR CONFIG: ", avatarConfigTO);
     }
 
     this.avatarPort.onAvatarConfigLoaded(

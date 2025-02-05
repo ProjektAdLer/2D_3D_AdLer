@@ -33,15 +33,12 @@ export default class SaveAvatarConfigUseCase
       return;
     }
 
-    // load avatar config if not already loaded
     if (!userDataEntities[0].avatar) return;
 
     const backendAvatarConfigTO =
       BackendAdapterUtils.convertAvatarConfigToBackendAvatarConfig(
         userDataEntities[0].avatar as AvatarConfigTO,
       );
-
-    console.log("UPDATE AVATAR CONFIG: ", backendAvatarConfigTO);
 
     //Post new (complete) avatar config to backend
     const result = await this.backend.updateAvatarConfig(
