@@ -318,8 +318,6 @@ export default class AvatarView {
       AvatarEditorUtils.setupAvatarColor(
         shirtResult.meshes[1],
         avatarEntity.shirtColor,
-        0,
-        0,
       );
     }
     // pants
@@ -335,8 +333,6 @@ export default class AvatarView {
       AvatarEditorUtils.setupAvatarColor(
         pantsResult.meshes[1],
         avatarEntity.pantsColor,
-        0,
-        0,
       );
     }
     // shoes
@@ -352,8 +348,6 @@ export default class AvatarView {
       AvatarEditorUtils.setupAvatarColor(
         shoesResult.meshes[1],
         avatarEntity.shoesColor,
-        0,
-        0,
       );
     }
     // eyebrows

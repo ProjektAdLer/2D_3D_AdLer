@@ -107,8 +107,8 @@ export default class AvatarEditorUtils {
   public static setupAvatarColor(
     mesh: AbstractMesh,
     meshColor: AvatarColor,
-    displacementU: number,
-    displacementV: number,
+    displacementU: number = 0,
+    displacementV: number = 0,
   ) {
     if (meshColor === undefined || meshColor === null) return;
 
