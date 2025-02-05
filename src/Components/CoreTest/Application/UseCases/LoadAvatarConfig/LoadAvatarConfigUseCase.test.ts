@@ -1,3 +1,4 @@
+import { BackendAvatarConfigTO } from "./../../../../Core/Application/DataTransferObjects/BackendAvatarConfigTO";
 import mock from "jest-mock-extended/lib/Mock";
 import Logger from "../../../../Core/Adapters/Logger/Logger";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
@@ -8,10 +9,13 @@ import IEntityContainer from "../../../../Core/Domain/EntityContainer/IEntityCon
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
 import AvatarEntity from "../../../../Core/Domain/Entities/AvatarEntity";
+import BackendAdapter from "../../../../Core/Adapters/BackendAdapter/BackendAdapter";
+import UserDataEntity from "../../../../Core/Domain/Entities/UserDataEntity";
 
 const loggerMock = mock<Logger>();
 const avatarPortMock = mock<IAvatarPort>();
 const entityContainerMock = mock<IEntityContainer>();
+const backendAdapterMock = mock<BackendAdapter>();
 
 describe("LoadAvatarUseCase", () => {
   let systemUnderTest: LoadAvatarConfigUseCase;
@@ -26,6 +30,9 @@ describe("LoadAvatarUseCase", () => {
     CoreDIContainer.rebind<IEntityContainer>(
       CORE_TYPES.IEntityContainer,
     ).toConstantValue(entityContainerMock);
+    CoreDIContainer.rebind<BackendAdapter>(
+      CORE_TYPES.IBackendAdapter,
+    ).toConstantValue(backendAdapterMock);
   });
 
   beforeEach(() => {
@@ -69,5 +76,38 @@ describe("LoadAvatarUseCase", () => {
     expect(avatarPortMock.onAvatarConfigLoaded).toHaveBeenCalledWith(
       avatarConfig,
     );
+  });
+
+  test("calls getAvatarConfig if no avatar data exists", async () => {
+    let avatarEntityMock = {
+      eyebrows: 0,
+      eyes: 1,
+      nose: 2,
+      mouth: 3,
+      hair: "none",
+      beard: "none",
+      hairColor: { id: 4, nameKey: "black", hexColor: "x" },
+      headgear: "none",
+      glasses: "none",
+      backpack: "none",
+      other: "none",
+      shirt: "shirts-dress",
+      shirtColor: { id: 4, nameKey: "black", hexColor: "x" },
+      pants: "pants-cargo",
+      pantsColor: { id: 4, nameKey: "black", hexColor: "x" },
+      shoes: "shoes-boots",
+      shoesColor: { id: 4, nameKey: "black", hexColor: "x" },
+      skinColor: { id: 4, nameKey: "black", hexColor: "x" },
+      roundness: 30,
+    } as AvatarEntity;
+    const userDataEntity = { avatar: undefined } as unknown as UserDataEntity;
+    entityContainerMock.getEntitiesOfType.mockReturnValue([userDataEntity]);
+    backendAdapterMock.getAvatarConfig.mockResolvedValue(
+      {} as BackendAvatarConfigTO,
+    );
+
+    await systemUnderTest.executeAsync();
+
+    expect(backendAdapterMock.getAvatarConfig).toHaveBeenCalled();
   });
 });
