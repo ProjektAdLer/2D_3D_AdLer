@@ -66,16 +66,16 @@ export default function LoginComponent({
 
   return (
     <div className={tailwindMerge(className)}>
-      <h2 className="col-span-6 col-start-2 row-start-2 pt-2 text-xl font-extrabold text-center justify-self-center portrait:text-sm lg:text-xl text-adlerdarkblue portrait:row-start-1 portrait:col-start-1 portrait:col-span-8">
+      <h2 className="col-span-6 col-start-2 row-start-2 mt-8 pt-2 text-xl font-extrabold text-center justify-self-center portrait:text-sm lg:text-xl text-adlerdarkblue portrait:row-start-1 portrait:col-start-1 portrait:col-span-8">
         {userLoggedIn
           ? translate("loginSuccessfullSubheading")
           : translate("moodleLoginSubheading")}
       </h2>
 
       {!userLoggedIn && (
-        <div>
+        <div className="flex flex-col items-start justify-center">
           <form
-            className="flex items-center justify-center col-span-6 col-start-2 row-start-2 gap-2 m-4 text-xl font-bold text-center rounded-lg portrait:self-end portrait:row-start-1 portrait:scale-50 portrait:col-start-1 portrait:col-span-8"
+            className="flex items-center justify-center col-span-6 col-start-2 row-start-2 gap-2 m-4 text-xl font-bold text-center rounded-lg portrait:self-end portrait:row-start-1 mobile-landscape:scale-75 portrait:scale-50 portrait:col-start-1 portrait:col-span-8"
             onSubmit={(e) => {
               e.preventDefault();
               handleSubmit();
@@ -107,7 +107,7 @@ export default function LoginComponent({
           </form>
 
           {loginFailed && (
-            <div className="bg-red-100 rounded-lg">
+            <div className="bg-red-100 rounded-lg mobile-landscape:w-64 self-center z-50">
               <p className="m-1 text-xs font-bold text-center text-red-500">
                 {viewModel.errorMessage.Value}
               </p>

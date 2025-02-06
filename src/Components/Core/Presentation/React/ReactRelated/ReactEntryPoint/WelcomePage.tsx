@@ -26,7 +26,7 @@ export default function WelcomePage() {
       <HelpDeskButton className="col-start-8 row-start-1 justify-self-end" />
       <HelpDeskModal />
 
-      <section className="flex flex-col items-center portrait:row-start-1 portrait:row-span-2 portrait:self-center portrait:col-start-2 portrait:col-span-6 tablet-portrait:col-start-1 tablet-portrait:col-span-8 landscape:col-span-6 landscape:col-start-2 landscape:row-start-1 text-adlerdarkblue lg:landscape:col-span-7 lg:landscape:col-start-1 xl:landscape:col-start-2 xl:landscape:col-span-6 lg:landscape:row-start-1 mobile-portrait:mt-10">
+      <section className="flex flex-col items-center portrait:row-start-1 portrait:row-span-2 portrait:self-center portrait:col-start-2 portrait:col-span-6 tablet-portrait:col-start-1 tablet-portrait:col-span-8 landscape:col-span-6 landscape:col-start-2 landscape:row-start-1 text-adlerdarkblue lg:landscape:col-span-6 lg:landscape:col-start-2 xl:landscape:col-start-2 xl:landscape:col-span-6 lg:landscape:row-start-1 mobile-portrait:mt-10">
         {/*<h1 className="p-2 text-xl font-extrabold text-center landscape:hidden justify-self-center mobile-portrait:text-2xl tablet-portrait:text-8xl lg:text-4xl 2xl:text-6xl">
           {translate("welcome")}
         </h1>*/}
@@ -51,7 +51,7 @@ export default function WelcomePage() {
         <LoginComponent className="flex flex-col items-center justify-around col-span-6 col-start-2 tablet-portrait:col-start-1 tablet-portrait:col-span-8 xl:pt-8 lg:pt-4" />
       </section>
 
-      <section className="flex items-center justify-center col-span-6 col-start-2 row-span-3 row-start-3 gap-4 mb-4 portrait:h-3/4 mobile-landscape:h-1/2 mobile-landscape:row-start-4 portrait:row-start-3 portrait:row-span-3 portrait:col-start-2 portrait:self-center portrait-col-span-6 portrait:gap-6">
+      <section className="flex items-center justify-center col-span-6 col-start-2 row-span-3 row-start-3 gap-4 mb-4 portrait:h-3/4 mobile-landscape:items-end mobile-landscape:h-1/2 mobile-landscape:row-start-4 portrait:row-start-3 portrait:row-span-3 portrait:col-start-2 portrait:self-center portrait-col-span-6 portrait:gap-6">
         <WelcomePageButton
           backgroundVideo={learningWorldButtonBackgroundVideo}
           backgroundPicture={learningWorldMenuButtonBackground}
@@ -69,11 +69,11 @@ export default function WelcomePage() {
       <LogoutComponent className="relative z-0 flex flex-col self-end col-span-2 col-start-7 row-start-6 gap-2 justify-self-end" />
 
       {/* <CookieModal /> */}
-      <LMSButton className="w-32 mobile-portrait:w-28" />
+      <LMSButton className="w-32 mobile-portrait:w-28 col-start-1 row-start-1 col-span-1 row-span-1" />
 
       <p
         className="self-end p-2 text-xs text-center rounded-lg portrait:row-start-6 portrait:col-start-1
-       portrait:col-span-6 portrait:text-2xs landscape:col-span-4 landscape:col-start-3 landscape:row-start-6 text-adlerdarkblue lg:text-md lg:font-semibold font-regular justify-self-center lg:landscape:row-start-6"
+       portrait:col-span-6 portrait:text-2xs mobile-landscape:col-start-2 mobile-landscape:col-span-5 landscape:col-span-4 landscape:col-start-3 landscape:row-start-6 text-adlerdarkblue lg:text-md lg:font-semibold font-regular justify-self-center lg:landscape:row-start-6"
       >
         {translate("copyright")}
       </p>
