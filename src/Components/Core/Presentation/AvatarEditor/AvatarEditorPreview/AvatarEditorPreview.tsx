@@ -6,7 +6,10 @@ import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import AvatarEditorPreviewViewModel from "./AvatarEditorPreviewViewModel";
 import IAvatarEditorPreviewController from "./IAvatarEditorPreviewController";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
-
+import plusIcon from "../../../../../Assets/icons/plus.svg";
+import minusIcon from "../../../../../Assets/icons/minus.svg";
+import leftIcon from "../../../../../Assets/icons/left.svg";
+import rightIcon from "../../../../../Assets/icons/right.svg";
 type AvatarEditorPreviewProps = {
   className?: string;
 };
@@ -30,7 +33,7 @@ export default function AvatarEditorPreview(props: AvatarEditorPreviewProps) {
           onPointerOut={controller.onTurnLeftUp}
           onPointerUp={controller.onTurnLeftUp}
         >
-          {"<"}
+          <img className="w-10 xl:w-12 " src={leftIcon} alt="Left Icon" />
         </StyledButton>
         <StyledButton
           data-testid="zoom-in-button"
@@ -38,7 +41,7 @@ export default function AvatarEditorPreview(props: AvatarEditorPreviewProps) {
           onPointerOut={controller.onZoomInUp}
           onPointerUp={controller.onZoomInUp}
         >
-          {"+"}
+          <img className="w-10 xl:w-12 " src={plusIcon} alt="Plus Icon" />
         </StyledButton>
         <StyledButton
           data-testid="zoom-out-button"
@@ -46,7 +49,7 @@ export default function AvatarEditorPreview(props: AvatarEditorPreviewProps) {
           onPointerOut={controller.onZoomOutUp}
           onPointerUp={controller.onZoomOutUp}
         >
-          {"-"}
+          <img className="w-10 xl:w-12 " src={minusIcon} alt="Minus Icon" />
         </StyledButton>
         <StyledButton
           data-testid="right-turn-button"
@@ -54,7 +57,7 @@ export default function AvatarEditorPreview(props: AvatarEditorPreviewProps) {
           onPointerOut={controller.onTurnRightUp}
           onPointerUp={controller.onTurnRightUp}
         >
-          {">"}
+          <img className="w-10 xl:w-12 " src={rightIcon} alt="Right Icon" />
         </StyledButton>
       </div>
     </div>

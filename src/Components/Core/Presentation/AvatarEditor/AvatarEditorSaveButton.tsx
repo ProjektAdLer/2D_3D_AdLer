@@ -2,6 +2,7 @@ import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/Styl
 import IAvatarEditorController from "./IAvatarEditorController";
 import AvatarEditorViewModel from "./AvatarEditorViewModel";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
+import saveIcon from "../../../../Assets/icons/save.svg";
 
 interface AvatarEditorSaveButtonProps {
   controller: IAvatarEditorController;
@@ -20,7 +21,7 @@ export default function AvatarEditorSaveButton(
           props.controller.saveAvatarConfig();
         }}
       >
-        SAVE
+        <img className="w-10 xl:w-12 " src={saveIcon} alt="Save Icon" />
       </StyledButton>
       {hasChanged && (
         <>
