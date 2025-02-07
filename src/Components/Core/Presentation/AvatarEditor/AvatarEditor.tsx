@@ -70,7 +70,7 @@ export default function AvatarEditor() {
                 {activeTab === OAvatarEditorCategory.ACCESSOIRE &&
                   "Accessoires"}
                 {activeTab === OAvatarEditorCategory.CLOTHING && "Kleidung"}
-                {activeTab === OAvatarEditorCategory.BODY && "Körperform"}
+                {activeTab === OAvatarEditorCategory.BODY && "Körper"}
               </div>
             </div>
           </div>
