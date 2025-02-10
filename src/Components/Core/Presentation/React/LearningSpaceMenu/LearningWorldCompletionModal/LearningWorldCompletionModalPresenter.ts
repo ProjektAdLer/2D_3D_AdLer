@@ -5,6 +5,7 @@ import ISetWorldCompletionModalToShownUseCase from "src/Components/Core/Applicat
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import LearningSpaceScoreTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceScoreTO";
+import LearningWorldScoreTO from "src/Components/Core/Application/DataTransferObjects/LearningWorldScoreTO";
 
 export default class LearningWorldCompletionModalPresenter
   implements ILearningWorldCompletionModalPresenter
@@ -26,8 +27,8 @@ export default class LearningWorldCompletionModalPresenter
     }
   }
 
-  onLearningSpaceScored(learningSpaceScoreTO: LearningSpaceScoreTO): void {
+  onLearningWorldScored(learningWorldScoreTO: LearningWorldScoreTO): void {
     this.viewModel.showModal.Value =
-      learningSpaceScoreTO.currentScore >= learningSpaceScoreTO.requiredScore;
+      learningWorldScoreTO.currentScore >= learningWorldScoreTO.requiredScore;
   }
 }
