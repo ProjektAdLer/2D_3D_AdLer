@@ -10,6 +10,10 @@ assignees: ""
 
 Erklärung wofür ein Prototype erstellt werden soll.
 
+**Zusatzinformationen**
+
+-
+
 **Akzeptanzkriterien**
 
 - [ ] Akzeptanzkriterium 1

@@ -10,6 +10,10 @@ assignees: ""
 
 Als _Benutzerrolle_ möchte ich _Funktionalität_ sodass _Wert_ für den Nutzer
 
+**Zusatzinformationen**
+
+-
+
 **Akzeptanzkriterien**
 
 - [ ] Akzeptanzkriterium 1
