@@ -31,7 +31,7 @@ export default function LearningWorldCompletionModal({
         "flex flex-col items-center justify-center",
       )}
       title={translate("learningWorldCompleted").toString()}
-      showModal={showModal && !viewModel.wasClosedOnce}
+      showModal={showModal}
       onClose={() => {
         controller.CloseButtonClicked();
       }}
@@ -60,7 +60,7 @@ export default function LearningWorldCompletionModal({
           <p>
             {translate("link_Homepage")}
             <a
-              className="font-bold underline  text-adlergreen"
+              className="font-bold underline text-adlergreen"
               href="https://projekt-adler.eu"
               target="_blank"
               rel="noreferrer"

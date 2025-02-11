@@ -5,6 +5,11 @@ import SideBarViewModel from "./SideBarViewModel";
 import SideBarPresenter from "./SideBarPresenter";
 import ISideBarController from "./ISideBarController";
 import ISideBarPresenter from "./ISideBarPresenter";
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+import AbstractPort from "src/Components/Core/Application/Ports/AbstractPort/AbstractPort";
+import ILearningWorldAdapter from "src/Components/Core/Application/Ports/LearningWorldPort/ILearningWorldAdapter";
+import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
+import { HistoryWrapper } from "~ReactComponents/ReactRelated/ReactEntryPoint/HistoryWrapper";
 
 @injectable()
 export default class SideBarBuilder extends PresentationBuilder<
@@ -15,5 +20,13 @@ export default class SideBarBuilder extends PresentationBuilder<
 > {
   constructor() {
     super(SideBarViewModel, SideBarController, undefined, SideBarPresenter);
+  }
+
+  buildPresenter(): void {
+    super.buildPresenter();
+
+    CoreDIContainer.get<AbstractPort<ILearningWorldAdapter>>(
+      PORT_TYPES.ILearningWorldPort,
+    ).registerAdapter(this.presenter!, HistoryWrapper.currentLocationScope());
   }
 }

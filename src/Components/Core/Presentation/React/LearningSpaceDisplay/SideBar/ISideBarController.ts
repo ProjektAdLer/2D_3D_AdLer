@@ -4,4 +4,5 @@ export default interface ISideBarController {
   onSpaceMenuButtonClicked(): void;
   onControlsExplanationButtonClicked(): void;
   onBreakTimeButtonClicked(): void;
+  onWorldCompletionModalButtonClicked(): void;
 }

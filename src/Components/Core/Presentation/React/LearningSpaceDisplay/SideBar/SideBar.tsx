@@ -12,6 +12,7 @@ import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import worldIcon from "../../../../../../Assets/icons/world-menu.svg";
 import spaceMenuIcon from "../../../../../../Assets/icons/space-menu.svg";
 import controlsIcon from "../../../../../../Assets/icons/controls.svg";
+import worldCompletedIcon from "../../../../../../Assets/icons/world-completed.svg";
 import smartphoneIcon from "../../../../../../Assets/icons/smartphone.svg";
 // import pauseIcon from "../../../../../../Assets/icons/pause.svg";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
@@ -21,9 +22,10 @@ import HelpDeskModal from "~ReactComponents/GeneralComponents/HelpDeskModal/Help
 import { useTranslation } from "react-i18next";
 
 export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
-  const [, controller] = useBuilder<SideBarViewModel, SideBarController>(
-    BUILDER_TYPES.IMenuBarBuilder,
-  );
+  const [viewModel, controller] = useBuilder<
+    SideBarViewModel,
+    SideBarController
+  >(BUILDER_TYPES.IMenuBarBuilder);
   const { t: translate } = useTranslation("learningSpace");
   const [time, setTime] = useState(new Date());
 
@@ -50,24 +52,24 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
       initialOpen={false}
       useAsTriggerOnly={true}
     >
-      {/*<StyledContainer className="flex flex-col p-2 rounded-lg w-44 lg:w-64 border-8 border-black bg-whitetrans ">*/}
+      {/*<StyledContainer className="flex flex-col p-2 border-8 border-black rounded-lg w-44 lg:w-64 bg-whitetrans ">*/}
       <StyledContainer className="relative w-[11rem] md:w-[13rem] lg:w-60 border-8 rounded-2xl mobile-landscape:w-[60vw] border-adlerdarkblue bg-white flex flex-col z-0">
-        <header className="flex justify-between w-full items-center mt-1 relative z-20">
-          <span className="ml-1 text-2xs font-bold lg:text-md text-adlerdarkblue">
+        <header className="relative z-20 flex items-center justify-between w-full mt-1">
+          <span className="ml-1 font-bold text-2xs lg:text-md text-adlerdarkblue">
             {time.toLocaleDateString()}
           </span>
           <span className="bg-adlerdarkblue h-2 w-2 rounded-full absolute left-[calc(50%-0.25rem)] mobile-landscape:hidden"></span>
-          <span className="mr-1 text-2xs text-right font-bold lg:text-md text-adlerdarkblue">
+          <span className="mr-1 font-bold text-right text-2xs lg:text-md text-adlerdarkblue">
             {time.toLocaleTimeString()} Uhr
           </span>
         </header>
         <span className="bg-adlerdarkblue h-2 w-2 rounded-full absolute left-[calc(50%-0.25rem)] mobile-landscape:left-2 mobile-landscape:top-[calc(50%-0.25rem)]"></span>
-        <div className="grid mobile-landscape:ml-4 mobile-landscape:grid-flow-col mobile-landscape:auto-cols-max mobile-landscape:grid-rows-2 mobile-landscape:grid-cols-auto grid-flow-row auto-rows-max gap-1 p-1 rounded-lg grid-cols-3 z-20">
+        <div className="z-20 grid grid-flow-row grid-cols-3 gap-1 p-1 rounded-lg mobile-landscape:ml-4 mobile-landscape:grid-flow-col mobile-landscape:auto-cols-max mobile-landscape:grid-rows-2 mobile-landscape:grid-cols-auto auto-rows-max">
           <div className="flex flex-col justify-start items-center max-h-[25%]">
             <StyledButton onClick={controller.onMainMenuButtonClicked}>
               <img src={engineLogo} alt="" />
             </StyledButton>
-            <p className="text-2xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="font-bold text-center text-2xs lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_mainMenu")}
             </p>
           </div>
@@ -76,7 +78,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
             <StyledButton onClick={controller.onWorldMenuButtonClicked}>
               <img src={worldIcon} alt="" />
             </StyledButton>
-            <p className="text-2xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="font-bold text-center text-2xs lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_learningWorldMenu")}
             </p>
           </div>
@@ -85,7 +87,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
             <StyledButton onClick={controller.onSpaceMenuButtonClicked}>
               <img src={spaceMenuIcon} alt="" />
             </StyledButton>
-            <p className="text-2xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="font-bold text-center text-2xs lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_learningSpaceMenu")}
             </p>
           </div>
@@ -94,7 +96,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
             <StyledButton onClick={controller.onBreakTimeButtonClicked}>
               <img src={pauseIcon} alt="" />
             </StyledButton>
-            <p className="text-2xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="font-bold text-center text-2xs lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_breakTime")}
             </p>
           </div> */}
@@ -105,14 +107,14 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
             >
               <img src={controlsIcon} alt="Steuerungserklärung" />
             </StyledButton>
-            <p className="text-2xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="font-bold text-center text-2xs lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_controls")}
             </p>
           </div>
 
           <div className="flex flex-col justify-startr items-center max-h-[25%]">
             <FullscreenSwitch />
-            <p className="text-2xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="font-bold text-center text-2xs lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_fullScreen")}
             </p>
           </div>
@@ -120,19 +122,31 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
           <div className="flex flex-col justify-start items-center max-h-[25%]">
             <HelpDeskButton />
             <HelpDeskModal />
-            <p className="text-2xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="font-bold text-center text-2xs lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_help")}
             </p>
           </div>
 
+          <div className="flex flex-col justify-start items-center max-h-[25%]">
+            <StyledButton
+              disabled={!viewModel.allowWorldCompletionModalButtonClick}
+              onClick={controller.onWorldCompletionModalButtonClicked}
+            >
+              <img src={worldCompletedIcon} alt="Weltabschlussmodal" />
+            </StyledButton>
+            <p className="font-bold text-center text-2xs lg:text-md text-adlerdarkblue text-outline">
+              {translate("sidebar_worldCompleted")}
+            </p>
+          </div>
+
           {/* Empty placeholder containers for future functions/buttons */}
-          <div className="flex flex-col justify-start items-center max-h-[25%] invisible">
+          <div className="flex flex-col justify-start items-center max-h-[25%] invisible ">
             <StyledButton
               onClick={controller.onControlsExplanationButtonClicked}
             >
               <img src={controlsIcon} alt="Steuerungserklärung" />
             </StyledButton>
-            <p className="text-2xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="font-bold text-center text-2xs lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_controls")}
             </p>
           </div>
@@ -143,7 +157,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
             >
               <img src={controlsIcon} alt="Steuerungserklärung" />
             </StyledButton>
-            <p className="text-2xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="font-bold text-center text-2xs lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_controls")}
             </p>
           </div>
@@ -154,7 +168,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
             >
               <img src={controlsIcon} alt="Steuerungserklärung" />
             </StyledButton>
-            <p className="text-2xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="font-bold text-center text-2xs lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_controls")}
             </p>
           </div>
@@ -165,7 +179,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
             >
               <img src={controlsIcon} alt="Steuerungserklärung" />
             </StyledButton>
-            <p className="text-2xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="font-bold text-center text-2xs lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_controls")}
             </p>
           </div>
@@ -176,18 +190,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
             >
               <img src={controlsIcon} alt="Steuerungserklärung" />
             </StyledButton>
-            <p className="text-2xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
-              {translate("sidebar_controls")}
-            </p>
-          </div>
-
-          <div className="flex flex-col justify-start items-center max-h-[25%] invisible ">
-            <StyledButton
-              onClick={controller.onControlsExplanationButtonClicked}
-            >
-              <img src={controlsIcon} alt="Steuerungserklärung" />
-            </StyledButton>
-            <p className="text-2xs text-center font-bold lg:text-md text-adlerdarkblue text-outline">
+            <p className="font-bold text-center text-2xs lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_controls")}
             </p>
           </div>
@@ -197,7 +200,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
         <img
           src={engineLogo}
           alt="inventory background"
-          className="mobile-landscape:w-48 mobile-landscape:bottom-4 w-64 opacity-20 absolute bottom-24 right-0 z-10"
+          className="absolute right-0 z-10 w-64 mobile-landscape:w-48 mobile-landscape:bottom-4 opacity-20 bottom-24"
         />
       </StyledContainer>
     </CustomDropdown>

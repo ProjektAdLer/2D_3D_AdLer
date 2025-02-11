@@ -1,1 +1,3 @@
-export default class SideBarViewModel {}
+export default class SideBarViewModel {
+  allowWorldCompletionModalButtonClick: boolean = false;
+}

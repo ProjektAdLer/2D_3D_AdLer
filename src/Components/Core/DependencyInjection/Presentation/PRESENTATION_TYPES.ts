@@ -19,6 +19,9 @@ const PRESENTATION_TYPES = {
   IBreakTimeNotificationOverviewPresenter: Symbol(
     "IBreakTimeNotificationOverviewPresenter",
   ),
+  ILearningWorldCompletionModalPresenter: Symbol(
+    "ILearningWorldCompletionModalPresenter",
+  ),
 };
 
 export default PRESENTATION_TYPES;

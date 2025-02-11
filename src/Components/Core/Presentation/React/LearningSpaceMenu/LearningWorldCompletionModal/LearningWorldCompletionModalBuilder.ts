@@ -10,6 +10,7 @@ import AbstractPort from "src/Components/Core/Application/Ports/AbstractPort/Abs
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import ILearningWorldAdapter from "src/Components/Core/Application/Ports/LearningWorldPort/ILearningWorldAdapter";
 import { HistoryWrapper } from "~ReactComponents/ReactRelated/ReactEntryPoint/HistoryWrapper";
+import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
 
 @injectable()
 export default class LearningWorldCompletionModalBuilder extends PresentationBuilder<
@@ -23,15 +24,28 @@ export default class LearningWorldCompletionModalBuilder extends PresentationBui
       LearningWorldCompletionModalViewModel,
       LearningWorldCompletionModalController,
       undefined,
-      LearningWorldCompletionModalPresenter
+      LearningWorldCompletionModalPresenter,
     );
   }
 
   override buildPresenter(): void {
     super.buildPresenter();
 
+    if (
+      CoreDIContainer.isBound(
+        PRESENTATION_TYPES.ILearningWorldCompletionModalPresenter,
+      )
+    )
+      CoreDIContainer.unbind(
+        PRESENTATION_TYPES.ILearningWorldCompletionModalPresenter,
+      );
+
+    CoreDIContainer.bind<ILearningWorldCompletionModalPresenter>(
+      PRESENTATION_TYPES.ILearningWorldCompletionModalPresenter,
+    ).toConstantValue(this.presenter!);
+
     CoreDIContainer.get<AbstractPort<ILearningWorldAdapter>>(
-      PORT_TYPES.ILearningWorldPort
+      PORT_TYPES.ILearningWorldPort,
     ).registerAdapter(this.presenter!, HistoryWrapper.currentLocationScope());
   }
 }

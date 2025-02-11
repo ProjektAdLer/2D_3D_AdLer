@@ -10,15 +10,17 @@ export default class LearningWorldCompletionModalController
   private setWorldCompletionModalToShown: ISetWorldCompletionModalToShownUseCase;
   constructor(private viewModel: LearningWorldCompletionModalViewModel) {
     this.setWorldCompletionModalToShown = CoreDIContainer.get(
-      USECASE_TYPES.ISetWorldCompletionModalToShownUseCase
+      USECASE_TYPES.ISetWorldCompletionModalToShownUseCase,
     );
   }
 
   CloseButtonClicked(): void {
-    this.viewModel.showModal.Value = false;
-    this.viewModel.wasClosedOnce = true;
-    this.setWorldCompletionModalToShown.execute({
-      worldID: this.viewModel.currentWorldId.Value,
-    });
+    if ((this.viewModel.wasClosedOnce = true)) {
+      this.viewModel.showModal.Value = false;
+      this.viewModel.wasClosedOnce = true;
+      this.setWorldCompletionModalToShown.execute({
+        worldID: this.viewModel.currentWorldId.Value,
+      });
+    }
   }
 }
