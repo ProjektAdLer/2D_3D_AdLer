@@ -18,7 +18,7 @@ describe("LearningWorldCompletionModalPresenter", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind(
-      USECASE_TYPES.ISetWorldCompletionModalToShownUseCase
+      USECASE_TYPES.ISetWorldCompletionModalToShownUseCase,
     ).toConstantValue(setWorldCompletionModalToShownMock);
   });
   beforeEach(() => {
@@ -93,6 +93,48 @@ describe("LearningWorldCompletionModalPresenter", () => {
     } as LearningWorldTO;
 
     systemUnderTest.onLearningWorldLoaded(worldTO);
+
+    expect(vm.showModal.Value).toEqual(false);
+  });
+
+  test("onLearningWorldScored should set canShowModal true, if currentScore is equal/greater to requiredScore", () => {
+    const worldScoreTO = {
+      worldID: 1,
+      currentScore: 1,
+      requiredScore: 1,
+    };
+
+    systemUnderTest.onLearningWorldScored(worldScoreTO);
+
+    expect(vm.canShowModal).toEqual(true);
+  });
+
+  test("onLearningWorldScored should not set canShowModal true, if currentScore is less than requiredScore", () => {
+    const worldScoreTO = {
+      worldID: 1,
+      currentScore: 1,
+      requiredScore: 2,
+    };
+
+    systemUnderTest.onLearningWorldScored(worldScoreTO);
+
+    expect(vm.canShowModal).toEqual(false);
+  });
+
+  test("openModal should set showModal true, if canShowModal is true", () => {
+    vm.canShowModal = true;
+    vm.showModal.Value = false;
+
+    systemUnderTest.openModal();
+
+    expect(vm.showModal.Value).toEqual(true);
+  });
+
+  test("openModal should not set showModal true, if canShowModal is false", () => {
+    vm.canShowModal = false;
+    vm.showModal.Value = false;
+
+    systemUnderTest.openModal();
 
     expect(vm.showModal.Value).toEqual(false);
   });
