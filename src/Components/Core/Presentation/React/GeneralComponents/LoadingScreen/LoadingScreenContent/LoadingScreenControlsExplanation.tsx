@@ -11,8 +11,8 @@ export default function LoadingScreenControlsExplanation() {
       </h1>
       <div className="flex flex-col">
         <ControlsExplanationContent />
-        <div className="relative mobile-portrait:pt-10 mobile-landscape:pt-10">
-          <p className="w-full text-xs font-bold text-center absolute bottom-5 mobile-landscape:text-2xs mobile-landscape:bottom-1 portrait:bottom-1">
+        <div className="relative mobile-portrait:pt-12 mobile-landscape:pt-10">
+          <p className="w-full text-xs font-bold text-center absolute bottom-5 mobile-landscape:text-2xs mobile-landscape:bottom-1 portrait:bottom-1 text-adlerdarkblue">
             {translate("hint_controlsExplanationModal")}
           </p>
         </div>

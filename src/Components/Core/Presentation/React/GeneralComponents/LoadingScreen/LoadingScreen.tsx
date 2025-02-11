@@ -60,12 +60,12 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
       <div className="grid max-h-[1000px]">
         <section className="flex items-center justify-center w-full gap-8 portrait:flex mobile-landscape:pt-10">
           <img
-            className="w-full m-4 xs:w-16 md:w-24 lg:w-32 xl:w-48 portrait:w-16 animate-wiggle place-self-end mobile-landscape:w-10"
+            className="w-full m-4 xs:w-16 md:w-24 lg:w-32 xl:w-48 portrait:w-16 animate-wiggle place-self-end mobile-landscape:w-12 mobile-landscape:m-2"
             src={logo}
             alt="AdlerEngine Logo"
           />
           {loadingText && (
-            <p className="text-sm font-bold lg:text-lg xl:text-xl text-adlerdarkblue">
+            <p className="text-sm font-bold lg:text-lg xl:text-xl mobile-landscape:text-lg text-adlerdarkblue">
               {loadingText}
             </p>
           )}

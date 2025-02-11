@@ -22,7 +22,7 @@ export default function ControlsExplanationContent({
     <div
       className={tailwindMerge(
         className,
-        "grid grid-rows-6 grid-flow-col mobile-landscape:justify-center mobile-landscape:grid-cols-1 mobile-landscape:grid-rows-auto mobile-landscape:grid-flow-row-dense mobile-landscape:gap-y-1 mobile-landscape:pb-0 mobile-landscape:text-2xs mobile-landscape:gap-x-1 portrait:grid-flow-row portrait:grid-cols-1 portrait:grid-rows-auto gap-x-8 gap-y-3 portrait:gap-2 pb-4 text-xs lg:text-sm max-w-[85vw]",
+        "grid grid-rows-6 grid-flow-col mobile-landscape:justify-center mobile-landscape:grid-cols-1 mobile-landscape:grid-rows-auto mobile-landscape:grid-flow-row-dense mobile-landscape:gap-y-1 mobile-landscape:pb-0 mobile-landscape:text-2xs mobile-landscape:gap-x-1 portrait:grid-flow-row portrait:grid-cols-1 portrait:grid-rows-auto gap-x-8 gap-y-3 pb-4 portrait:pb-1 portrait-gap-y-1 text-xs lg:text-sm max-w-[85vw]",
       )}
     >
       {/* Avatar Controls */}
@@ -37,7 +37,7 @@ export default function ControlsExplanationContent({
         <img className="w-6" alt="Einfacher Touch" src={touchIcon}></img>
         <p>{translate("controlAvatarTouch")}</p>
       </div>
-      <div className="flex flex-row items-start justify-start gap-2 row-span-3 mobile-landscape:row-auto portrait:row-auto portrait:pb-6">
+      <div className="flex flex-row items-start justify-start gap-2 row-span-3 mobile-landscape:row-auto portrait:row-auto portrait:pb-3">
         <img className="w-6" alt="Icon" src={hintIcon}></img>
         <p>{translate("controlAvatarHint")}</p>
       </div>
@@ -54,7 +54,7 @@ export default function ControlsExplanationContent({
         <img className="w-6" alt="Icon" src={touchIcon}></img>
         <p>{translate("openContentTouch")}</p>
       </div>
-      <div className="flex flex-row items-start justify-start gap-2 row-span-3 mobile-landscape:row-auto portrait:row-auto portrait:pb-6">
+      <div className="flex flex-row items-start justify-start gap-2 row-span-3 mobile-landscape:row-auto portrait:row-auto portrait:pb-3">
         <img className="w-6" alt="Icon" src={hintIcon}></img>
         <div className="flex flex-col gap-1">
           <p>{translate("openContentHint1")}</p>
@@ -66,7 +66,7 @@ export default function ControlsExplanationContent({
       <h3 className="self-center font-bold text-adlerdarkblue">
         {translate("rotateCamera")}
       </h3>
-      <div className="flex flex-row items-start justify-start gap-2 min-h-10 portrait:min-h-0">
+      <div className="flex flex-row items-start justify-start gap-2">
         <img className="w-6" alt="Icon" src={middleMouseDragIcon}></img>
         <p>{translate("rotateCameraMouse")}</p>
       </div>
@@ -74,7 +74,7 @@ export default function ControlsExplanationContent({
         <img className="w-6" alt="Icon" src={touchDragIcon}></img>
         <p>{translate("rotateCameraTouch")}</p>
       </div>
-      <div className="flex flex-row items-start justify-start gap-2 row-span-3 mobile-landscape:row-auto portrait:row-auto portrait:pb-6">
+      <div className="flex flex-row items-start justify-start gap-2 row-span-3 mobile-landscape:row-auto portrait:row-auto portrait:pb-3">
         <img className="w-6" alt="Icon" src={hintIcon}></img>
         <p>{translate("rotateCameraHint")}</p>
       </div>
@@ -83,7 +83,7 @@ export default function ControlsExplanationContent({
       <h3 className="self-center font-bold text-adlerdarkblue">
         {translate("zoomCamera")}
       </h3>
-      <div className="flex flex-row items-start justify-start gap-2 min-h-10 portrait:min-h-0">
+      <div className="flex flex-row items-start justify-start gap-2">
         <img className="w-6" alt="Icon" src={middleMouseIcon}></img>
         <p>{translate("zoomCameraMouse")}</p>
       </div>
@@ -91,7 +91,7 @@ export default function ControlsExplanationContent({
         <img className="w-6" alt="Icon" src={touchZoomIcon}></img>
         <p>{translate("zoomCameraTouch")}</p>
       </div>
-      <div className="flex flex-row items-start justify-start gap-2 row-span-3 mobile-landscape:row-auto portrait:row-auto portrait:pb-6">
+      <div className="flex flex-row items-start justify-start gap-2 row-span-3 mobile-landscape:row-auto portrait:row-auto portrait:pb-3">
         <img className="w-6" alt="Icon" src={hintIcon}></img>
         <p>{translate("zoomCameraHint")}</p>
       </div>
@@ -100,7 +100,7 @@ export default function ControlsExplanationContent({
       <h3 className="self-center font-bold text-adlerdarkblue">
         {"Highlight Farben"}
       </h3>
-      <div className="flex flex-row items-start justify-start gap-2 min-h-10 portrait:min-h-0">
+      <div className="flex flex-row items-start justify-start gap-2">
         <img className="w-6" alt="Icon" src={LearningElementUnsolvedIcon}></img>
         <p>{translate("LearningElementUnsolvedIcon")}</p>
       </div>

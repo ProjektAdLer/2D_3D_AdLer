@@ -58,7 +58,7 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
       <article className="flex flex-row portrait:flex-col portrait:items-between portrait:justify-center portrait:h-[25%] portrait:gap-2 items-center justify-between h-[10%] p-1 pb-4 border-b border-gray-500">
         <div className="flex flex-row">
           <img src={spaceIcon} className="w-6 xl:w-8" alt="Lernraum-Icon"></img>
-          <div className="flex-wrap ml-2 overflow-x-auto font-black break-words text-md text-adlerdarkblue lg:text-2xl">
+          <div className="flex-wrap ml-2 overflow-x-auto font-black break-words text-md text-adlerdarkblue lg:text-2xl mobile-landscape:text-sm">
             {name}
           </div>
         </div>
@@ -76,20 +76,20 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
       <article className="flex flex-col w-full gap-2 h-[75%] overflow-auto">
         {description !== "" && (
           <section className="pb-2 border-b border-gray-500">
-            <h3 className="self-center ml-2 font-black portrait:text-sm text-adlerdarkblue lg:mb-2">
+            <h3 className="self-center ml-2 font-black portrait:text-sm mobile-landscape:text-sm text-adlerdarkblue lg:mb-2">
               {translate("description")}
             </h3>
-            <div className="items-start ml-6 font-medium portrait:ml-3 portrait:text-xs">
+            <div className="items-start ml-6 font-medium portrait:ml-3 portrait:text-xs mobile-landscape:text-xs">
               <TextWithLineBreaks text={description} />
             </div>
           </section>
         )}
         {goals.length > 0 && goals[0] !== "" && (
           <section className="pb-2 border-b border-gray-500">
-            <h3 className="self-center ml-2 font-black portrait:text-sm text-adlerdarkblue lg:mb-2">
+            <h3 className="self-center ml-2 font-black portrait:text-sm text-adlerdarkblue lg:mb-2 mobile-landscape:text-sm">
               {translate("goal", { count: goals?.length })}
             </h3>
-            <div className="items-start ml-6 font-medium portrait:text-xs portrait:ml-3 lg:text:lg">
+            <div className="items-start ml-6 font-medium portrait:text-xs portrait:ml-3 lg:text:lg mobile-landscape:text-xs">
               <ul className="ml-4 list-disc">
                 {goals.map((goal, index) => {
                   return (
@@ -104,10 +104,10 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
         )}
         {elements.length > 0 && (
           <section className="pb-2 border-b border-gray-500">
-            <h3 className="self-center ml-2 font-black portrait:text-sm text-adlerdarkblue lg:mb-2">
+            <h3 className="self-center ml-2 font-black portrait:text-sm text-adlerdarkblue lg:mb-2 mobile-landscape:text-sm">
               {translate("learningElement", { count: elements?.length })}
             </h3>
-            <div className="flex flex-col items-start ml-6 font-medium portrait:ml-3 portrait:text-xs lg:text-lg">
+            <div className="flex flex-col items-start ml-6 font-medium portrait:ml-3 portrait:text-xs lg:text-lg mobile-landscape:text-xs">
               {elements.map((element) => {
                 return (
                   <div key={element[1]} className="w-full">
@@ -150,10 +150,10 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
         {!!requiredPoints && (
           <section className="flex flex-col gap-2">
             <div className="flex flex-row items-center justify-between w-full xl:w-3/4">
-              <h3 className="self-center max-w-[75%] ml-2 text-lg font-black portrait:text-sm text-adlerdarkblue">
+              <h3 className="self-center max-w-[75%] ml-2 text-lg font-black portrait:text-sm mobile-landscape:text-sm text-adlerdarkblue">
                 {translate("requiredPoints")}
               </h3>
-              <div className="flex flex-row ml-6 text-lg font-medium portrait:text-xs portrait:ml-2">
+              <div className="flex flex-row ml-6 text-lg font-medium portrait:text-xs portrait:ml-2 mobile-landscape:text-sm">
                 {requiredPoints}
                 <img
                   src={coinIcon}
@@ -163,10 +163,10 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
               </div>
             </div>
             <div className="flex flex-row items-center justify-between w-full xl:w-3/4">
-              <h3 className="max-w-[75%] self-center ml-2 text-lg font-black portrait:text-sm text-adlerdarkblue">
+              <h3 className="max-w-[75%] self-center ml-2 text-lg font-black portrait:text-sm  text-adlerdarkblue">
                 {translate("maximumPoints")}
               </h3>
-              <div className="flex flex-row items-start ml-6 text-lg font-medium portrait:text-xs portrait:ml-2">
+              <div className="flex flex-row items-start ml-6 text-lg font-medium portrait:text-xs mobile-landscape:text-sm portrait:ml-2">
                 {elements.reduce((acc, element) => acc + element[3], 0)}
                 <img
                   src={coinIcon}
