@@ -12,7 +12,7 @@ exports[`ControlsExplanationModal should render 1`] = `
         class="z-50 p-2 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto max-w-[95%] max-h-[95%] overflow-hidden flex flex-col"
       >
         <div
-          class="flex items-center justify-center w-full gap-2 p-1 pb-3 text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl h-fit"
+          class="flex items-center justify-center w-full gap-2 p-1 pb-3 text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl h-fit mobile-landscape:text-sm mobile-portrait:text-sm"
         >
           <div
             class="w-full"
@@ -20,7 +20,7 @@ exports[`ControlsExplanationModal should render 1`] = `
             3D-Steuerung
           </div>
           <button
-            class="justify-center p-1 md:w-7 md:h-7 sm:w-6 sm:h-6 w-4 h-4 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+            class="justify-center p-1 md:w-7 md:h-7 w-6 h-6 mobile-portrait:rounded-md aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
           >
             <img
               alt="CloseButton"
@@ -30,10 +30,10 @@ exports[`ControlsExplanationModal should render 1`] = `
           </button>
         </div>
         <div
-          class="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter"
+          class="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter mobile-portrait:text-xs mobile-landscape:text-xs"
         >
           <div
-            class="portrait:max-w-[90vw] max-h-[80vh] max-w-6xl grid landscape:grid-rows-6 landscape:grid-flow-col portrait:grid-flow-row portrait:grid-cols-1 portrait:grid-rows-auto gap-x-8 landscape:gap-y-3 portrait:gap-6 pb-4 text-xs lg:text-sm"
+            class="portrait:max-w-[90vw] max-h-[80vh] grid grid-rows-6 grid-flow-col mobile-landscape:justify-center mobile-landscape:grid-cols-1 mobile-landscape:grid-rows-auto mobile-landscape:grid-flow-row-dense mobile-landscape:gap-y-1 mobile-landscape:pb-0 mobile-landscape:text-2xs mobile-landscape:gap-x-1 portrait:grid-flow-row portrait:grid-cols-1 portrait:grid-rows-auto gap-x-8 gap-y-3 pb-4 portrait:pb-1 portrait-gap-y-1 text-xs lg:text-sm max-w-[85vw]"
           >
             <h3
               class="self-center font-bold text-adlerdarkblue"
@@ -41,7 +41,7 @@ exports[`ControlsExplanationModal should render 1`] = `
               Avatar bewegen
             </h3>
             <div
-              class="flex flex-row items-start justify-start gap-2 min-h-10 portrait:min-h-0"
+              class="flex flex-row items-start justify-start gap-2"
             >
               <img
                 alt="Linksklick"
@@ -65,7 +65,7 @@ exports[`ControlsExplanationModal should render 1`] = `
               </p>
             </div>
             <div
-              class="flex flex-row items-start justify-start gap-2 landscape:row-span-3 portrait:pb-6"
+              class="flex flex-row items-start justify-start gap-2 row-span-3 mobile-landscape:row-auto portrait:row-auto portrait:pb-3"
             >
               <img
                 alt="Icon"
@@ -82,7 +82,7 @@ exports[`ControlsExplanationModal should render 1`] = `
               Inhalte öffnen
             </h3>
             <div
-              class="flex flex-row items-start justify-start gap-2 min-h-10 portrait:min-h-0"
+              class="flex flex-row items-start justify-start gap-2"
             >
               <img
                 alt="Icon"
@@ -106,7 +106,7 @@ exports[`ControlsExplanationModal should render 1`] = `
               </p>
             </div>
             <div
-              class="flex flex-row items-start justify-start gap-2 landscape:row-span-3 portrait:pb-6"
+              class="flex flex-row items-start justify-start gap-2 row-span-3 mobile-landscape:row-auto portrait:row-auto portrait:pb-3"
             >
               <img
                 alt="Icon"
@@ -130,7 +130,7 @@ exports[`ControlsExplanationModal should render 1`] = `
               Kamera drehen
             </h3>
             <div
-              class="flex flex-row items-start justify-start gap-2 min-h-10 portrait:min-h-0"
+              class="flex flex-row items-start justify-start gap-2"
             >
               <img
                 alt="Icon"
@@ -154,7 +154,7 @@ exports[`ControlsExplanationModal should render 1`] = `
               </p>
             </div>
             <div
-              class="flex flex-row items-start justify-start gap-2 landscape:row-span-3 portrait:pb-6"
+              class="flex flex-row items-start justify-start gap-2 row-span-3 mobile-landscape:row-auto portrait:row-auto portrait:pb-3"
             >
               <img
                 alt="Icon"
@@ -171,7 +171,7 @@ exports[`ControlsExplanationModal should render 1`] = `
               Kamera zoomen
             </h3>
             <div
-              class="flex flex-row items-start justify-start gap-2 min-h-10 portrait:min-h-0"
+              class="flex flex-row items-start justify-start gap-2"
             >
               <img
                 alt="Icon"
@@ -195,7 +195,7 @@ exports[`ControlsExplanationModal should render 1`] = `
               </p>
             </div>
             <div
-              class="flex flex-row items-start justify-start gap-2 landscape:row-span-3 portrait:pb-6"
+              class="flex flex-row items-start justify-start gap-2 row-span-3 mobile-landscape:row-auto portrait:row-auto portrait:pb-3"
             >
               <img
                 alt="Icon"
@@ -212,7 +212,7 @@ exports[`ControlsExplanationModal should render 1`] = `
               Highlight Farben
             </h3>
             <div
-              class="flex flex-row items-start justify-start gap-2 min-h-10 portrait:min-h-0"
+              class="flex flex-row items-start justify-start gap-2"
             >
               <img
                 alt="Icon"

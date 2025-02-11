@@ -12,7 +12,7 @@ exports[`BreakTimeNotificationOverview should render 1`] = `
         class="z-50 p-2 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto max-w-[95%] max-h-[95%] overflow-hidden flex flex-col"
       >
         <div
-          class="flex items-center justify-center w-full gap-2 p-1 pb-3 text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl h-fit"
+          class="flex items-center justify-center w-full gap-2 p-1 pb-3 text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl h-fit mobile-landscape:text-sm mobile-portrait:text-sm"
         >
           <div
             class="w-full"
@@ -20,7 +20,7 @@ exports[`BreakTimeNotificationOverview should render 1`] = `
             Pausenhinweise
           </div>
           <button
-            class="justify-center p-1 md:w-7 md:h-7 sm:w-6 sm:h-6 w-4 h-4 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
+            class="justify-center p-1 md:w-7 md:h-7 w-6 h-6 mobile-portrait:rounded-md aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue"
           >
             <img
               alt="CloseButton"
@@ -30,7 +30,7 @@ exports[`BreakTimeNotificationOverview should render 1`] = `
           </button>
         </div>
         <div
-          class="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter"
+          class="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter mobile-portrait:text-xs mobile-landscape:text-xs"
         >
           <div
             class="text-md font-bold text-adlerdarkblue pl-1 overflow-y-auto max-h-[90vh] lg:max-h-[85vh]"
