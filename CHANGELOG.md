@@ -24,6 +24,16 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 </details>
 
+## Version 2.7.1 - 11.02.25
+
+### Added
+
+- Button in SideBarMenu to show LearningWorldCompletionModal again
+
+### Fixed
+
+- Show LearningWorldCompletionModal only on completion of LearningWorld
+
 ## Version 2.7.0 - 05.02.25
 
 ### Added
