@@ -5,7 +5,7 @@ import IControlsExplanationModalPresenter from "../../../../../Core/Presentation
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import PRESENTATION_TYPES from "../../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 import IBreakTimeNotificationOverviewPresenter from "../../../../../Core/Presentation/React/GeneralComponents/BreakTimeNotificationOverview/IBreakTimeNotificationOverviewPresenter";
-
+import ILearningWorldCompletionModalPresenter from "../../../../../Core/Presentation/React/LearningSpaceMenu/LearningWorldCompletionModal/ILearningWorldCompletionModalPresenter";
 const historyPushMock = jest.spyOn(history, "push");
 
 describe("SideBarController", () => {
@@ -48,6 +48,17 @@ describe("SideBarController", () => {
     ).toConstantValue(presenterMock);
 
     systemUnderTest.onBreakTimeButtonClicked();
+
+    expect(presenterMock.openModal).toHaveBeenCalledTimes(1);
+  });
+
+  test("onWorldCompletionModalButtonClicked calls openModal on DI-bound ILearningWorldCompletionModalPresenter", () => {
+    const presenterMock = mock<ILearningWorldCompletionModalPresenter>();
+    CoreDIContainer.bind<ILearningWorldCompletionModalPresenter>(
+      PRESENTATION_TYPES.ILearningWorldCompletionModalPresenter,
+    ).toConstantValue(presenterMock);
+
+    systemUnderTest.onWorldCompletionModalButtonClicked();
 
     expect(presenterMock.openModal).toHaveBeenCalledTimes(1);
   });
