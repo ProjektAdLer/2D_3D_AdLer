@@ -37,8 +37,14 @@ export default function LearningWorldCompletionModal({
       }}
     >
       <div className="flex flex-col items-center justify-center">
-        {<img className="w-32 mb-4" src={SolutionIcon} alt=""></img>}
-        <div className="w-96">
+        {
+          <img
+            className="w-32 mb-4 mobile-landscape:w-16 mobile-portrait:w-16"
+            src={SolutionIcon}
+            alt=""
+          ></img>
+        }
+        <div className="w-full max-w-96">
           <p className="mb-4">{translate("congratulation")}</p>
           {evaluationLink && (
             <div>

@@ -41,11 +41,11 @@ export default function LogoutComponent({
           color={userLoggedIn ? "success" : "default"}
           shape="freeFloatLeft"
           data-testid="login-button"
-          className="flex h-10 gap-2 m-1 !border-b-[1px] !border-r-[1px] pointer-events-none w-fit"
+          className="flex h-10 gap-2 m-1 !border-b-[1px] !border-r-[1px] pointer-events-none w-fit mobile-landscape:w-32 border-none"
         >
           <img className="w-10" src={moodleIcon} alt="Moodle-Icon"></img>
           {userLoggedIn && (
-            <p className="text-sm font-regular portrait:hidden">
+            <p className="text-sm mobile-landscape:text-xs font-regular portrait:hidden">
               {"Eingeloggt als " + userName}
             </p>
           )}
@@ -54,7 +54,7 @@ export default function LogoutComponent({
       {userLoggedIn && (
         <StyledButton
           shape="freeFloatLeft"
-          className="h-6 !bg-red-300 w-fit absolute bottom-[45px] right-1 portrait:-left-2 portrait:-top-4"
+          className="h-6 !bg-red-300 w-fit absolute bottom-12 right-1 portrait:-left-2 portrait:-top-4"
           onClick={() => controller.logout()}
           data-testid="logout"
         >

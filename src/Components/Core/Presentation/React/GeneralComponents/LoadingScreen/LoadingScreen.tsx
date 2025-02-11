@@ -58,9 +58,9 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
   return (
     <div className=" fixed top-0 left-0 w-screen h-screen z-[20000] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto flex justify-center items-center pb-24">
       <div className="grid max-h-[1000px]">
-        <section className="grid items-center justify-center w-full grid-cols-2 row-span-2 gap-8 portrait:row-span-2 portrait:flex ">
+        <section className="flex items-center justify-center w-full gap-8 portrait:flex mobile-landscape:pt-10">
           <img
-            className="w-full m-4 xs:w-16 md:w-24 lg:w-32 xl:w-48 portrait:w-16 animate-wiggle place-self-end"
+            className="w-full m-4 xs:w-16 md:w-24 lg:w-32 xl:w-48 portrait:w-16 animate-wiggle place-self-end mobile-landscape:w-10"
             src={logo}
             alt="AdlerEngine Logo"
           />
@@ -74,7 +74,7 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
         {/* Loading screen content */}
         {props.content}
 
-        <div className="flex flex-col items-center justify-center h-16 pt-16 portrait:pt-8">
+        <div className="flex flex-col items-center justify-center h-16 pt-16 portrait:pt-8 mobile-landscape:pt-4">
           {!canClose && (
             <div className="flex gap-1 border-4 border-white rounded-lg ">
               <div className="w-6 h-6 animateColor"></div>
@@ -104,7 +104,7 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
         </div>
       </div>
       <div className="fixed flex flex-col items-center justify-center w-full gap-2 px-4 bottom-4">
-        <p className="text-sm portrait:text-[10px] font-medium  text-adlerdarkblue portrait:leading-normal">
+        <p className="text-sm portrait:text-[10px] font-medium mobile-landscape:text-xs text-adlerdarkblue portrait:leading-normal">
           <Trans
             i18nKey="projectInformation"
             ns="learningSpace"
@@ -124,7 +124,7 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
           />
         </p>
 
-        <p className="text-xs portrait:text-[8px] portrait:leading-normal">
+        <p className="text-xs portrait:text-[8px] portrait:leading-normal mobile-landscape:text-2xs text-center">
           {translate("copyright", { ns: "start" })}
         </p>
       </div>

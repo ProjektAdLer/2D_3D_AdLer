@@ -61,7 +61,7 @@ export default function StyledModal({
           }}
           className="z-50 p-2 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto max-w-[95%] max-h-[95%] overflow-hidden flex flex-col"
         >
-          <div className="flex items-center justify-center w-full gap-2 p-1 pb-3 text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl h-fit">
+          <div className="flex items-center justify-center w-full gap-2 p-1 pb-3 text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl h-fit mobile-landscape:text-sm mobile-portrait:text-sm">
             <div className="w-full">{title}</div>
             {canClose && (
               <CloseButton
@@ -78,7 +78,7 @@ export default function StyledModal({
             )}
           </div>
           {/*Content*/}
-          <div className="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter">
+          <div className="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter mobile-portrait:text-xs mobile-landscape:text-xs">
             {children}
           </div>
           {/*Optional Footer*/}

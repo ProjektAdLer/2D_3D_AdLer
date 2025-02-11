@@ -39,7 +39,7 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
       <article className="flex flex-row portrait:flex-col portrait:items-between portrait:justify-center portrait:h-[25%] portrait:gap-2 items-center justify-between h-[10%] p-1 pb-4 border-b border-gray-500">
         <div className="flex flex-row">
           <img src={worldIcon} className="w-6 xl:w-8" alt="Lernwelt-Icon"></img>
-          <div className="flex-wrap ml-2 overflow-x-auto font-black break-words text-md text-adlerdarkblue lg:text-2xl">
+          <div className="flex-wrap ml-2 overflow-x-auto font-black break-words text-md text-adlerdarkblue lg:text-2xl mobile-landscape:text-sm">
             {name}
           </div>
         </div>
@@ -56,10 +56,10 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
         {description === undefined ||
           (description !== "" && (
             <div className="pb-2 border-b border-gray-500">
-              <h3 className="self-center ml-2 font-black portrait:text-sm text-adlerdarkblue lg:mb-2">
+              <h3 className="self-center ml-2 font-black portrait:text-sm text-adlerdarkblue lg:mb-2 mobile-landscape:text-sm">
                 {translate("description")}
               </h3>
-              <div className="items-start ml-6 font-medium portrait:text-xs">
+              <div className="items-start ml-6 font-medium portrait:text-xs mobile-landscape:text-xs">
                 <TextWithLineBreaks text={description} />
               </div>
             </div>
@@ -67,10 +67,10 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
         {goals === undefined ||
           (goals.length > 0 && (
             <div className="pb-2 border-b border-gray-500">
-              <h3 className="self-center ml-2 font-black text-adlerdarkblue portrait:text-sm lg:mb-2">
+              <h3 className="self-center ml-2 font-black text-adlerdarkblue portrait:text-sm lg:mb-2 mobile-landscape:text-sm">
                 {translate("goal", { count: goals?.length })}
               </h3>
-              <div className="items-start ml-6 font-medium portrait:text-xs lg:text:lg">
+              <div className="items-start ml-6 font-medium mobile-landscape:text-xs portrait:text-xs lg:text:lg">
                 {goals.map((goal) => {
                   return <TextWithLineBreaks text={goal} key={goal} />;
                 })}
@@ -78,15 +78,15 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
             </div>
           ))}
         <section className="pb-2 border-b border-gray-500">
-          <h3 className="self-center ml-2 font-black portrait:text-sm text-adlerdarkblue lg:mb-2">
+          <h3 className="self-center ml-2 font-black portrait:text-sm text-adlerdarkblue lg:mb-2 mobile-landscape:text-sm">
             {translate("rooms", { count: spaces?.length })}
           </h3>
-          <div className="items-start ml-6 font-medium portrait:ml-3 portrait:text-xs lg:text:lg">
+          <div className="items-start ml-6 font-medium portrait:ml-3 mobile-landscape:text-xs portrait:text-xs lg:text:lg">
             {spaces?.map((space) => {
               return (
                 <div key={space.id}>
                   <div className="flex flex-row items-center lg:text-lg">
-                    <div className="relative flex my-2 ml-2">
+                    <div className="relative flex my-2 ml-2 mobile-landscape:my-1">
                       <img
                         src={spaceIcon}
                         alt=""
@@ -109,10 +109,10 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
           </div>
         </section>
         <section className="pb-2 border-b border-gray-500">
-          <h3 className="self-center ml-2 font-black text-adlerdarkblue portrait:text-sm lg:mb-2">
+          <h3 className="self-center ml-2 font-black text-adlerdarkblue portrait:text-sm lg:mb-2 mobile-landscape:text-sm">
             {translate("roomCount")}
           </h3>
-          <div className="items-start ml-6 font-medium portrait:text-xs lg:text:lg">
+          <div className="items-start ml-6 font-medium portrait:text-xs lg:text:lg mobile-landscape:text-xs">
             {spaces?.length}
           </div>
         </section>

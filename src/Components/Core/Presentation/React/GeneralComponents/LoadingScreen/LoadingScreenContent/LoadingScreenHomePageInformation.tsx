@@ -16,7 +16,7 @@ export default function LoadingScreenHomePageInformation({
       </h1>
       <StyledButton
         shape="freeFloatCenterNoPadding"
-        containerClassName="col-span-4 col-start-4 p-2 portrait:col-span-8 portrait:col-start-2"
+        containerClassName="col-span-4 col-start-4 p-2 portrait:col-span-8 portrait:col-start-2 mobile-landscape:h-[20vh]"
         feedback="nothing"
       >
         <div className="bg-slate-400">

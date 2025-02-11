@@ -5,14 +5,18 @@ export default function LoadingScreenControlsExplanation() {
   const { t: translate } = useTranslation("learningSpace");
 
   return (
-    <div className="row-span-4 w-[90vw] relative max-w-[80vw] portrait:h-[50vh] max-h-[45vh] bg-buttonbgblue p-4 rounded-xl overflow-y-auto">
+    <div className="row-span-4 flex flex-col w-[90vw] max-w-[90vw] portrait:h-[50vh] lg:max-h-[60vh] max-h-[45vh] mobile-portrait:h-[60vh] mobile-portrait:max-h-[65vh] bg-buttonbgblue p-4 rounded-xl overflow-y-auto overflow-x-hidden">
       <h1 className="font-bold portrait:pb-6 text-adlerdarkblue">
         {translate("sidebar_controls")}
       </h1>
-      <ControlsExplanationContent />
-      <p className="w-full text-xs text-center absolute bottom-5">
-        {translate("hint_controlsExplanationModal")}
-      </p>
+      <div className="flex flex-col">
+        <ControlsExplanationContent />
+        <div className="relative mobile-portrait:pt-10 mobile-landscape:pt-10">
+          <p className="w-full text-xs font-bold text-center absolute bottom-5 mobile-landscape:text-2xs mobile-landscape:bottom-1 portrait:bottom-1">
+            {translate("hint_controlsExplanationModal")}
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
