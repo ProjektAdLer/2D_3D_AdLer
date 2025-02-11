@@ -18,7 +18,11 @@ exports[`AvatarEditorPreview should render 1`] = `
           class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
           data-testid="left-turn-button"
         >
-          &lt;
+          <img
+            alt="Left Icon"
+            class="w-10 xl:w-12 "
+            src="left.svg"
+          />
         </button>
       </div>
       <div
@@ -28,7 +32,11 @@ exports[`AvatarEditorPreview should render 1`] = `
           class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
           data-testid="zoom-in-button"
         >
-          +
+          <img
+            alt="Plus Icon"
+            class="w-10 xl:w-12 "
+            src="plus.svg"
+          />
         </button>
       </div>
       <div
@@ -38,7 +46,11 @@ exports[`AvatarEditorPreview should render 1`] = `
           class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
           data-testid="zoom-out-button"
         >
-          -
+          <img
+            alt="Minus Icon"
+            class="w-10 xl:w-12 "
+            src="minus.svg"
+          />
         </button>
       </div>
       <div
@@ -48,7 +60,11 @@ exports[`AvatarEditorPreview should render 1`] = `
           class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
           data-testid="right-turn-button"
         >
-          &gt;
+          <img
+            alt="Right Icon"
+            class="w-10 xl:w-12 "
+            src="right.svg"
+          />
         </button>
       </div>
     </div>
