@@ -1,7 +1,9 @@
 import {
   AbstractMesh,
   ActionManager,
+  AnimationGroup,
   Color3,
+  ISceneLoaderAsyncResult,
   Mesh,
   NullEngine,
   Quaternion,
@@ -52,7 +54,7 @@ describe("DoorView", () => {
   });
 
   test("constructor injects scenePresenter", () => {
-    scenePresenterMock.loadModel.mockResolvedValue([
+    scenePresenterMock.loadGLTFModel.mockResolvedValue([
       new AbstractMesh("TestMesh", new Scene(new NullEngine())),
     ]);
 
@@ -74,9 +76,13 @@ describe("DoorView", () => {
 
   //ANF-ID: [ELG0033]
   test("constructor does not subscribe to viewModel.isOpen when isOpen is true, calls animation instead", async () => {
-    scenePresenterMock.loadModel.mockResolvedValue([
-      new AbstractMesh("TestMesh", new Scene(new NullEngine())),
-    ]);
+    scenePresenterMock.loadGLTFModel.mockResolvedValue({
+      meshes: [new AbstractMesh("TestMesh", new Scene(new NullEngine()))],
+      animationGroups: [
+        new AnimationGroup("TestAnimation"),
+        new Scene(new NullEngine()),
+      ],
+    } as ISceneLoaderAsyncResult);
     const viewModel = new DoorViewModel();
     viewModel.isOpen.Value = true;
     viewModel.position = new Vector3(1, 2, 3);
