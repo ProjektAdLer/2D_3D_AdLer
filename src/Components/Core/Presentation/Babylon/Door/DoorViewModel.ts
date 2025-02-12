@@ -1,4 +1,4 @@
-import { Mesh, Vector3 } from "@babylonjs/core";
+import { AnimationGroup, Mesh, Vector3 } from "@babylonjs/core";
 import Observable from "../../../../../Lib/Observable";
 import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/LearningSpaceThemeTypes";
@@ -6,10 +6,14 @@ import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/Learnin
 export default class DoorViewModel {
   //constants
   public readonly iconYOffset: number = 3;
+  public readonly iconScaleUpOnHover: number = 1.05;
 
   //meshes
   public meshes: Mesh[];
   public iconMeshes: Mesh[];
+
+  // animations
+  public iconFloatingAnimation: AnimationGroup;
 
   //door properties
   public position: Vector3;

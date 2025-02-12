@@ -9,6 +9,7 @@ import IGetLearningSpacePrecursorAndSuccessorUseCase from "src/Components/Core/A
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import i18next from "i18next";
 import { DoorTypes } from "src/Components/Core/Domain/Types/DoorTypes";
+import { Vector3 } from "@babylonjs/core";
 
 export default class DoorController implements IDoorController {
   private bottomTooltipPresenter: IBottomTooltipPresenter;
@@ -31,11 +32,13 @@ export default class DoorController implements IDoorController {
   pointerOver(): void {
     if (this.proximityToolTipId === -1 && this.hoverToolTipId === -1)
       this.hoverToolTipId = this.displayTooltip();
+    this.scaleUpIcon();
   }
 
   @bind
   pointerOut(): void {
     if (this.hoverToolTipId !== -1) {
+      this.resetIconScale();
       this.bottomTooltipPresenter.hide(this.hoverToolTipId);
       this.hoverToolTipId = -1;
     }
@@ -58,8 +61,10 @@ export default class DoorController implements IDoorController {
   private onAvatarInteractableChange(isInteractable: boolean): void {
     if (isInteractable && this.proximityToolTipId === -1) {
       this.proximityToolTipId = this.displayTooltip();
+      this.scaleUpIcon();
     } else if (!isInteractable && this.proximityToolTipId !== -1) {
       this.bottomTooltipPresenter.hide(this.proximityToolTipId);
+      this.resetIconScale();
       this.proximityToolTipId = -1;
     }
   }
@@ -74,5 +79,21 @@ export default class DoorController implements IDoorController {
       undefined,
       this.picked,
     );
+  }
+
+  private scaleUpIcon(): void {
+    this.viewModel.iconMeshes?.forEach((mesh) => {
+      mesh.scaling = new Vector3(
+        this.viewModel.iconScaleUpOnHover,
+        this.viewModel.iconScaleUpOnHover,
+        this.viewModel.iconScaleUpOnHover,
+      );
+    });
+  }
+
+  private resetIconScale(): void {
+    this.viewModel.iconMeshes?.forEach((mesh) => {
+      mesh.scaling = Vector3.One();
+    });
   }
 }
