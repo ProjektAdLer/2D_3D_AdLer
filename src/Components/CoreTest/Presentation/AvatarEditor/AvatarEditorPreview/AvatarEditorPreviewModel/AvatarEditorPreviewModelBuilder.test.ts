@@ -6,6 +6,9 @@ import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES
 import AvatarEditorPreviewModelView from "../../../../../Core/Presentation/AvatarEditor/AvatarEditorPreview/AvatarEditorPreviewModel/AvatarEditorPreviewModelView";
 import IScenePresenter from "../../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
 import SCENE_TYPES from "../../../../../Core/DependencyInjection/Scenes/SCENE_TYPES";
+import ILoggerPort from "../../../../../Core/Application/Ports/Interfaces/ILoggerPort";
+import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
+import { LogLevelTypes } from "../../../../../Core/Domain/Types/LogLevelTypes";
 
 const avatarPortMock = mock<AvatarPort>();
 const scenePresenterMock = mockDeep<IScenePresenter>();
@@ -63,5 +66,22 @@ describe("AvatarEditorPreviewModelBuilder", () => {
     systemUnderTest.buildView();
 
     expect(asyncSetupMock).toHaveBeenCalledTimes(1);
+  });
+
+  test("buildView logs error if asyncSetup fails", async () => {
+    const error = new Error("Test error");
+    const loggerMock = mock<ILoggerPort>();
+    CoreDIContainer.rebind(CORE_TYPES.ILogger).toConstantValue(loggerMock);
+
+    const asyncSetupMock = jest
+      .spyOn(AvatarEditorPreviewModelView.prototype, "asyncSetup")
+      .mockRejectedValue(error);
+
+    systemUnderTest.buildViewModel();
+    systemUnderTest.buildView();
+
+    await Promise.resolve();
+
+    expect(loggerMock.log).toHaveBeenCalledWith(LogLevelTypes.ERROR, error);
   });
 });

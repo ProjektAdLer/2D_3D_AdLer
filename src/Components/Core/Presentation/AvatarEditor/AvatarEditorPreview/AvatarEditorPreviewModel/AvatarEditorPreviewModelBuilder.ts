@@ -8,6 +8,9 @@ import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import IAvatarPort from "src/Components/Core/Application/Ports/Interfaces/IAvatarPort";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import { HistoryWrapper } from "~ReactComponents/ReactRelated/ReactEntryPoint/HistoryWrapper";
+import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILoggerPort";
+import CORE_TYPES from "~DependencyInjection/CoreTypes";
+import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 
 @injectable()
 export default class AvatarEditorPreviewModelBuilder extends AsyncPresentationBuilder<
@@ -28,9 +31,11 @@ export default class AvatarEditorPreviewModelBuilder extends AsyncPresentationBu
   buildView(): void {
     super.buildView();
 
+    const logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
+
     this.view!.asyncSetup().then(
       () => this.resolveIsCompleted(),
-      (e) => console.log(e),
+      (error) => logger.log(LogLevelTypes.ERROR, error),
     );
   }
 
