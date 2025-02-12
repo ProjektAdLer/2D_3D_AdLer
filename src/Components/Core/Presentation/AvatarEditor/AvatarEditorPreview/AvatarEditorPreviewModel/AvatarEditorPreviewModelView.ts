@@ -51,6 +51,9 @@ export default class AvatarEditorPreviewModelView {
       this.onAvatarConfigChanged();
     });
   }
+  private async onAvatarConfigChanged(): Promise<void> {
+    this.updateAllModels("diff");
+  }
 
   async asyncSetup(): Promise<void> {
     // load base model and position it
@@ -94,117 +97,100 @@ export default class AvatarEditorPreviewModelView {
     await CoreDIContainer.get<ILoadAvatarConfigUseCase>(
       USECASE_TYPES.ILoadAvatarConfigUseCase,
     ).executeAsync();
-
-    // hair
-    await this.updateModelHair(this.viewModel.currentAvatarConfig.Value.hair);
-    this.updateHairColor(this.viewModel.currentAvatarConfig.Value.hairColor);
-    await this.updateModelBeard(this.viewModel.currentAvatarConfig.Value.beard);
-    this.updateBeardColor(this.viewModel.currentAvatarConfig.Value.hairColor);
-    // face
-    this.updateEyeBrows(this.viewModel.currentAvatarConfig.Value.eyebrows);
-    this.updateEyes(this.viewModel.currentAvatarConfig.Value.eyes);
-    this.updateNose(this.viewModel.currentAvatarConfig.Value.nose);
-    this.updateMouth(this.viewModel.currentAvatarConfig.Value.mouth);
-
-    this.updateHeadGear(this.viewModel.currentAvatarConfig.Value.headgear);
-    this.updateGlasses(this.viewModel.currentAvatarConfig.Value.glasses);
-    this.updateBackPack(this.viewModel.currentAvatarConfig.Value.backpack);
-    this.updateOther(this.viewModel.currentAvatarConfig.Value.other);
-    // clothing
-    await this.updateModelShirt(this.viewModel.currentAvatarConfig.Value.shirt);
-    this.updateShirtColor(this.viewModel.currentAvatarConfig.Value.shirtColor);
-    await this.updateModelPants(this.viewModel.currentAvatarConfig.Value.pants);
-    this.updatePantsColor(this.viewModel.currentAvatarConfig.Value.pantsColor);
-    await this.updateModelShoes(this.viewModel.currentAvatarConfig.Value.shoes);
-    this.updateShoesColor(this.viewModel.currentAvatarConfig.Value.shoesColor);
-    this.updateSkinColor(
-      this.viewModel.currentAvatarConfig.Value.skinColor,
-      this.viewModel.baseModelMeshes,
-    );
-    this.updateSkinColor(
-      this.viewModel.currentAvatarConfig.Value.skinColor,
-      this.viewModel.shirtAnchorNode.getChildMeshes(),
-    );
-    this.updateSkinColor(
-      this.viewModel.currentAvatarConfig.Value.skinColor,
-      this.viewModel.pantsAnchorNode.getChildMeshes(),
-    );
-    this.updateSkinColor(
-      this.viewModel.currentAvatarConfig.Value.skinColor,
-      this.viewModel.shoesAnchorNode.getChildMeshes(),
-    );
+    this.updateAllModels("initial");
   }
 
-  private async onAvatarConfigChanged(): Promise<void> {
-    if (this.viewModel.avatarConfigDiff.Value.beard) {
-      await this.updateModelBeard(this.viewModel.avatarConfigDiff.Value.beard);
+  private async updateAllModels(mode: "initial" | "diff") {
+    await this.updateHairModels(mode);
+    await this.updateFaceModels(mode);
+    await this.updateClothingModels(mode);
+    await this.updateAccessoireModels(mode);
+    await this.updateBodyModels(mode);
+  }
+
+  private async updateHairModels(mode: "initial" | "diff") {
+    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.hair) {
+      await this.updateModelHair(this.viewModel.currentAvatarConfig.Value.hair);
+    }
+    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.beard) {
+      await this.updateModelBeard(
+        this.viewModel.currentAvatarConfig.Value.beard,
+      );
+    }
+    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.hairColor) {
+      this.updateHairColor(this.viewModel.currentAvatarConfig.Value.hairColor);
       this.updateBeardColor(this.viewModel.currentAvatarConfig.Value.hairColor);
     }
+  }
 
-    if (this.viewModel.avatarConfigDiff.Value.hair) {
-      await this.updateModelHair(this.viewModel.avatarConfigDiff.Value.hair);
-      this.updateHairColor(this.viewModel.currentAvatarConfig.Value.hairColor);
-    }
+  private updateFaceModels(mode: "initial" | "diff") {
+    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.eyebrows)
+      this.updateEyeBrows(this.viewModel.currentAvatarConfig.Value.eyebrows);
+    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.eyes)
+      this.updateEyes(this.viewModel.currentAvatarConfig.Value.eyes);
+    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.nose)
+      this.updateNose(this.viewModel.currentAvatarConfig.Value.nose);
+    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.mouth)
+      this.updateMouth(this.viewModel.currentAvatarConfig.Value.mouth);
+  }
 
-    if (this.viewModel.avatarConfigDiff.Value.hairColor) {
-      this.updateHairColor(this.viewModel.avatarConfigDiff.Value.hairColor);
-      this.updateBeardColor(this.viewModel.avatarConfigDiff.Value.hairColor);
-    }
-
-    if (this.viewModel.avatarConfigDiff.Value.eyebrows !== undefined)
-      this.updateEyeBrows(this.viewModel.avatarConfigDiff.Value.eyebrows);
-    if (this.viewModel.avatarConfigDiff.Value.eyes !== undefined)
-      this.updateEyes(this.viewModel.avatarConfigDiff.Value.eyes);
-    if (this.viewModel.avatarConfigDiff.Value.nose !== undefined)
-      this.updateNose(this.viewModel.avatarConfigDiff.Value.nose);
-    if (this.viewModel.avatarConfigDiff.Value.mouth !== undefined)
-      this.updateMouth(this.viewModel.avatarConfigDiff.Value.mouth);
-
-    if (this.viewModel.avatarConfigDiff.Value.shirt !== undefined)
-      await this.updateModelShirt(this.viewModel.avatarConfigDiff.Value.shirt);
-    this.updateShirtColor(this.viewModel.currentAvatarConfig.Value.shirtColor);
-    this.updateSkinColor(
-      this.viewModel.currentAvatarConfig.Value.skinColor,
-      this.viewModel.shirtMeshes.get(
+  private async updateClothingModels(mode: "initial" | "diff") {
+    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.shirt)
+      await this.updateModelShirt(
         this.viewModel.currentAvatarConfig.Value.shirt,
-      ),
-    );
-    if (this.viewModel.avatarConfigDiff.Value.shirtColor !== undefined)
-      this.updateShirtColor(this.viewModel.avatarConfigDiff.Value.shirtColor);
-
-    if (this.viewModel.avatarConfigDiff.Value.pants !== undefined)
-      await this.updateModelPants(this.viewModel.avatarConfigDiff.Value.pants);
-    this.updatePantsColor(this.viewModel.currentAvatarConfig.Value.pantsColor);
-    this.updateSkinColor(
-      this.viewModel.currentAvatarConfig.Value.skinColor,
-      this.viewModel.pantsMeshes.get(
+      );
+    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.shirtColor)
+      this.updateShirtColor(
+        this.viewModel.currentAvatarConfig.Value.shirtColor,
+      );
+    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.pants)
+      await this.updateModelPants(
         this.viewModel.currentAvatarConfig.Value.pants,
-      ),
-    );
-    if (this.viewModel.avatarConfigDiff.Value.pantsColor !== undefined)
-      this.updatePantsColor(this.viewModel.avatarConfigDiff.Value.pantsColor);
-    if (this.viewModel.avatarConfigDiff.Value.shoes !== undefined)
-      await this.updateModelShoes(this.viewModel.avatarConfigDiff.Value.shoes);
-    this.updateSkinColor(
-      this.viewModel.currentAvatarConfig.Value.skinColor,
-      this.viewModel.shoesAnchorNode.getChildMeshes(),
-    );
-    this.updateShoesColor(this.viewModel.currentAvatarConfig.Value.shoesColor);
-    if (this.viewModel.avatarConfigDiff.Value.shoesColor !== undefined)
-      this.updateShoesColor(this.viewModel.avatarConfigDiff.Value.shoesColor);
-    if (this.viewModel.avatarConfigDiff.Value.headgear !== undefined)
-      this.updateHeadGear(this.viewModel.avatarConfigDiff.Value.headgear);
-    if (this.viewModel.avatarConfigDiff.Value.glasses !== undefined)
-      this.updateGlasses(this.viewModel.avatarConfigDiff.Value.glasses);
-    if (this.viewModel.avatarConfigDiff.Value.backpack !== undefined)
-      this.updateBackPack(this.viewModel.avatarConfigDiff.Value.backpack);
-    if (this.viewModel.avatarConfigDiff.Value.other !== undefined)
-      this.updateOther(this.viewModel.avatarConfigDiff.Value.other);
-    if (this.viewModel.avatarConfigDiff.Value.skinColor !== undefined)
+      );
+    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.pantsColor)
+      this.updatePantsColor(
+        this.viewModel.currentAvatarConfig.Value.pantsColor,
+      );
+    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.shoes)
+      await this.updateModelShoes(
+        this.viewModel.currentAvatarConfig.Value.shoes,
+      );
+    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.shoesColor)
+      this.updateShoesColor(
+        this.viewModel.currentAvatarConfig.Value.shoesColor,
+      );
+  }
+
+  private updateAccessoireModels(mode: "initial" | "diff") {
+    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.headgear)
+      this.updateHeadGear(this.viewModel.currentAvatarConfig.Value.headgear);
+    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.glasses)
+      this.updateGlasses(this.viewModel.currentAvatarConfig.Value.glasses);
+    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.backpack)
+      this.updateBackPack(this.viewModel.currentAvatarConfig.Value.backpack);
+    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.other)
+      this.updateOther(this.viewModel.currentAvatarConfig.Value.other);
+  }
+
+  private updateBodyModels(mode: "initial" | "diff") {
+    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.skinColor) {
       this.updateSkinColor(
-        this.viewModel.avatarConfigDiff.Value.skinColor,
+        this.viewModel.currentAvatarConfig.Value.skinColor,
         this.viewModel.baseModelMeshes,
       );
+      this.updateSkinColor(
+        this.viewModel.currentAvatarConfig.Value.skinColor,
+        this.viewModel.shirtAnchorNode.getChildMeshes(),
+      );
+      this.updateSkinColor(
+        this.viewModel.currentAvatarConfig.Value.skinColor,
+        this.viewModel.pantsAnchorNode.getChildMeshes(),
+      );
+      this.updateSkinColor(
+        this.viewModel.currentAvatarConfig.Value.skinColor,
+        this.viewModel.shoesAnchorNode.getChildMeshes(),
+      );
+    }
   }
 
   private async updateModelHair(hair?: AvatarHairModels | undefined) {
