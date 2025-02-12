@@ -47,9 +47,7 @@ export default class AvatarEditorPreviewModelView {
     this.scenePresenter = CoreDIContainer.get<ScenePresenterFactory>(
       SCENE_TYPES.ScenePresenterFactory,
     )(AvatarEditorPreviewSceneDefinition);
-    viewModel.avatarConfigDiff.subscribe(() => {
-      this.onAvatarConfigChanged();
-    });
+    viewModel.avatarConfigDiff.subscribe(this.onAvatarConfigChanged);
   }
   private async onAvatarConfigChanged(): Promise<void> {
     this.updateAllModels("diff");
