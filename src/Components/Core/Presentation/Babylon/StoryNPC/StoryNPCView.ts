@@ -48,7 +48,11 @@ export default class StoryNPCView {
     this.navigation = CoreDIContainer.get<INavigation>(CORE_TYPES.INavigation);
 
     this.viewModel.state.subscribe(this.onStateChanged);
-    this.viewModel.isInteractable.subscribe(this.updateHighlight);
+    this.viewModel.isInteractable.subscribe((newValue) => {
+      this.updateHighlight();
+      this.toggleIconFloatAnimation(newValue);
+      console.log("isInteractable", newValue);
+    });
   }
 
   // -- Setup --
@@ -94,14 +98,25 @@ export default class StoryNPCView {
     this.viewModel.modelMeshes[0].setParent(this.viewModel.modelRootNode);
   }
 
-  private async loadIconModel(): Promise<void> {
-    this.viewModel.iconMeshes = (await this.scenePresenter.loadModel(
-      iconLink,
-    )) as Mesh[];
+  @bind private async loadIconModel(): Promise<void> {
+    const loadingResults = await this.scenePresenter.loadGLTFModel(iconLink);
+    this.viewModel.iconMeshes = loadingResults.meshes as Mesh[];
     this.viewModel.iconMeshes[0].position.addInPlace(
       new Vector3(0, this.viewModel.iconYOffset, 0),
     );
     this.viewModel.iconMeshes[0].rotation = new Vector3(0, -Math.PI / 4, 0);
+
+    // get floating animation, pause if not interactable from the start
+
+    this.viewModel.iconFloatingAnimation = loadingResults.animationGroups[0];
+    if (!this.viewModel.isInteractable.Value)
+      this.viewModel.iconFloatingAnimation.pause();
+  }
+
+  @bind private toggleIconFloatAnimation(isInteractable: boolean): void {
+    if (!this.viewModel.iconFloatingAnimation) return;
+    if (isInteractable) this.viewModel.iconFloatingAnimation.restart();
+    else this.viewModel.iconFloatingAnimation.pause();
   }
 
   private createParentNode(): void {

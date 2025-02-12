@@ -1,4 +1,4 @@
-import { Mesh, TransformNode, Vector3 } from "@babylonjs/core";
+import { AnimationGroup, Mesh, TransformNode, Vector3 } from "@babylonjs/core";
 import { LearningElementModel } from "../../../Domain/LearningElementModels/LearningElementModelTypes";
 import ICharacterNavigator from "../CharacterNavigator/ICharacterNavigator";
 import ICharacterAnimator from "../CharacterAnimator/ICharacterAnimator";
@@ -32,6 +32,7 @@ export default class StoryNPCViewModel {
   modelType: LearningElementModel;
   modelMeshes: Mesh[];
   iconMeshes: Mesh[];
+  iconFloatingAnimation: AnimationGroup;
   parentNode: TransformNode;
   modelRootNode: TransformNode;
   storyType: StoryElementType;

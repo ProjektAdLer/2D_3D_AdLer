@@ -63,7 +63,10 @@ export default class DoorView extends Readyable {
       });
     } else viewModel.isOpen.subscribe(this.onIsOpenChanged);
 
-    viewModel.isInteractable.subscribe(this.updateHighlight);
+    viewModel.isInteractable.subscribe((newValue) => {
+      this.updateHighlight();
+      this.toggleIconFloatAnimation(newValue);
+    });
   }
 
   public async asyncSetup(): Promise<void> {
@@ -79,9 +82,16 @@ export default class DoorView extends Readyable {
 
   private async loadMeshAsync(): Promise<void> {
     const modelLink = this.getModelLinkByThemeAndType();
-    const loadedMeshes = await this.scenePresenter.loadModel(modelLink);
+    const loadingResults = await this.scenePresenter.loadGLTFModel(modelLink);
+
+    // dispose old icon meshes on score change
+    if (this.viewModel.iconMeshes && this.viewModel.iconMeshes.length > 0) {
+      this.viewModel.iconMeshes.forEach((mesh) => mesh.dispose());
+      this.viewModel.iconFloatingAnimation?.dispose();
+    }
 
     // reset quaternion rotation because it can prevent mesh.rotate to have any effect
+    const loadedMeshes = loadingResults.meshes as Mesh[];
     loadedMeshes.forEach((mesh) => (mesh.rotationQuaternion = null));
 
     this.viewModel.meshes = loadedMeshes as Mesh[];
@@ -212,9 +222,12 @@ export default class DoorView extends Readyable {
   @bind private async loadIconModel(): Promise<void> {
     const doorRotationInRadians = (this.viewModel.rotation * Math.PI) / 180;
 
-    this.viewModel.iconMeshes = (await this.scenePresenter.loadModel(
+    const loadingResults = await this.scenePresenter.loadGLTFModel(
       this.viewModel.isExit ? iconLinkExitDoor : iconLinkEntryDoor,
-    )) as Mesh[];
+    );
+
+    // get meshes
+    this.viewModel.iconMeshes = loadingResults.meshes as Mesh[];
     // position and rotate icon
     // Door is off centered, so we need to adjust the icon position based on rotation
     let doorPosition = { ...this.viewModel.position };
@@ -232,5 +245,27 @@ export default class DoorView extends Readyable {
       (7 * Math.PI) / 4,
       0,
     );
+
+    // get floating animation, pause if not interactable from the start
+    if (
+      loadingResults.animationGroups.length > 1 ||
+      loadingResults.animationGroups.length === 0
+    ) {
+      this.logger.log(
+        LogLevelTypes.WARN,
+        "Expected exactly one animation group for icon model, but got " +
+          loadingResults.animationGroups.length +
+          " instead. Using first animation group.",
+      );
+    }
+    this.viewModel.iconFloatingAnimation = loadingResults.animationGroups[0];
+    if (!this.viewModel.isInteractable.Value)
+      this.viewModel.iconFloatingAnimation.pause();
+  }
+
+  @bind private toggleIconFloatAnimation(isInteractable: boolean): void {
+    if (!this.viewModel.iconFloatingAnimation) return;
+    if (isInteractable) this.viewModel.iconFloatingAnimation.restart();
+    else this.viewModel.iconFloatingAnimation.pause();
   }
 }
