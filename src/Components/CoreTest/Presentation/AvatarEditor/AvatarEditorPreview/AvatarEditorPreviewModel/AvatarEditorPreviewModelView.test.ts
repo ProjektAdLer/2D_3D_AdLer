@@ -1,4 +1,4 @@
-import { mock, mockDeep } from "jest-mock-extended";
+import { mockDeep } from "jest-mock-extended";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import SCENE_TYPES from "../../../../../Core/DependencyInjection/Scenes/SCENE_TYPES";
 import AvatarEditorPreviewModelView from "../../../../../Core/Presentation/AvatarEditor/AvatarEditorPreview/AvatarEditorPreviewModel/AvatarEditorPreviewModelView";
@@ -13,8 +13,6 @@ import {
 } from "@babylonjs/core";
 import AvatarEditorUtils from "../../../../../Core/Presentation/AvatarEditor/AvatarEditorUtils";
 import AvatarConfigTO from "../../../../../Core/Application/DataTransferObjects/AvatarConfigTO";
-import { time } from "console";
-import { TIMEOUT } from "dns";
 
 const scenePresenterMock = mockDeep<IScenePresenter>();
 const scenePresenterFactoryMock = () => scenePresenterMock;
