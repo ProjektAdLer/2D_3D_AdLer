@@ -36,6 +36,7 @@ import { AvatarColor } from "src/Components/Core/Domain/AvatarModels/AvatarColor
 import AvatarEditorUtils from "../../AvatarEditorUtils";
 import AvatarModelAssetPaths from "src/Components/Core/Domain/AvatarModels/AvatarModelPaths";
 import AvatarModelTransforms from "src/Components/Core/Domain/AvatarModels/AvatarModelTransforms";
+import bind from "bind-decorator";
 const baseModelLink = require("../../../../../../Assets/3dModels/sharedModels/avatar/a-avatar-skeleton.glb");
 
 export default class AvatarEditorPreviewModelView {
@@ -49,6 +50,8 @@ export default class AvatarEditorPreviewModelView {
     )(AvatarEditorPreviewSceneDefinition);
     viewModel.avatarConfigDiff.subscribe(this.onAvatarConfigChanged);
   }
+
+  @bind
   private async onAvatarConfigChanged(): Promise<void> {
     this.updateAllModels("diff");
   }
