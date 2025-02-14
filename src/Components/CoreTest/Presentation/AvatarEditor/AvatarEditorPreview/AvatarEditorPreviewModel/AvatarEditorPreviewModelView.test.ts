@@ -111,6 +111,81 @@ describe("AvatarEditorPreviewModelView", () => {
     expect(systemUnderTest["updateBodyModels"]).toHaveBeenCalled();
   });
 
+  test("updateHairModels calls updateModel if a new hairstyle is provided", async () => {
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    setupScenePresenterMockLoadingResults();
+    viewModel.currentAvatarConfig.Value.hair = "hair-backhead";
+    viewModel.avatarConfigDiff.Value.hair = "hair-backhead";
+
+    systemUnderTest["updateModel"] = jest.fn();
+
+    await systemUnderTest["updateHairModels"]("diff");
+
+    expect(systemUnderTest["updateModel"]).toHaveBeenCalledWith(
+      "hair-backhead",
+      "hair/hairstyle",
+      viewModel.hairMeshes,
+      viewModel.hairAnchorNode,
+    );
+  });
+  test("updateHairModels calls updateModel if a new beardtyle is provided", async () => {
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    setupScenePresenterMockLoadingResults();
+    viewModel.currentAvatarConfig.Value.beard =
+      "beard-full-friendly-muttonchops";
+    viewModel.avatarConfigDiff.Value.beard = "beard-full-friendly-muttonchops";
+
+    systemUnderTest["updateModel"] = jest.fn();
+
+    await systemUnderTest["updateHairModels"]("diff");
+
+    expect(systemUnderTest["updateModel"]).toHaveBeenCalledWith(
+      "beard-full-friendly-muttonchops",
+      "hair/beards",
+      viewModel.beardMeshes,
+      viewModel.beardAnchorNode,
+    );
+  });
+
+  test("updateHairModels calls updateHairColor and updateBeardColor if a new haircolor is provided", async () => {
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    setupScenePresenterMockLoadingResults();
+    viewModel.currentAvatarConfig.Value.hairColor = {
+      id: 0,
+      nameKey: "Black 1",
+      hexColor: "#000000",
+      uOffset: 0,
+      vOffset: 0,
+    };
+    viewModel.avatarConfigDiff.Value.hairColor = {
+      id: 0,
+      nameKey: "Black 1",
+      hexColor: "#000000",
+      uOffset: 0,
+      vOffset: 0,
+    };
+
+    systemUnderTest["updateHairColor"] = jest.fn();
+    systemUnderTest["updateBeardColor"] = jest.fn();
+
+    await systemUnderTest["updateHairModels"]("diff");
+
+    expect(systemUnderTest["updateHairColor"]).toHaveBeenCalledWith({
+      id: 0,
+      nameKey: "Black 1",
+      hexColor: "#000000",
+      uOffset: 0,
+      vOffset: 0,
+    });
+    expect(systemUnderTest["updateBeardColor"]).toHaveBeenCalledWith({
+      id: 0,
+      nameKey: "Black 1",
+      hexColor: "#000000",
+      uOffset: 0,
+      vOffset: 0,
+    });
+  });
+
   test("updateHairModels updates hair models if a new hairstyle is provided", async () => {
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
     setupScenePresenterMockLoadingResults();

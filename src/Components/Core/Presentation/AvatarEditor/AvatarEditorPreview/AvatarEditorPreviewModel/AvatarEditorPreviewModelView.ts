@@ -114,12 +114,22 @@ export default class AvatarEditorPreviewModelView {
   private async updateHairModels(mode: "initial" | "diff"): Promise<void> {
     if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.hair) {
       await Promise.resolve(
-        this.updateModelHair(this.viewModel.currentAvatarConfig.Value.hair),
+        this.updateModel(
+          this.viewModel.currentAvatarConfig.Value.hair,
+          AvatarModelAssetPaths.hairPath,
+          this.viewModel.hairMeshes,
+          this.viewModel.hairAnchorNode,
+        ),
       );
     }
     if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.beard) {
       await Promise.resolve(
-        this.updateModelBeard(this.viewModel.currentAvatarConfig.Value.beard),
+        this.updateModel(
+          this.viewModel.currentAvatarConfig.Value.beard,
+          AvatarModelAssetPaths.beardPath,
+          this.viewModel.beardMeshes,
+          this.viewModel.beardAnchorNode,
+        ),
       );
     }
     if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.hairColor) {
@@ -198,19 +208,6 @@ export default class AvatarEditorPreviewModelView {
     }
   }
 
-  private async updateModelHair(
-    hair?: AvatarHairModels | undefined,
-  ): Promise<void> {
-    await Promise.resolve(
-      this.updateModel(
-        hair,
-        AvatarModelAssetPaths.hairPath,
-        this.viewModel.hairMeshes,
-        this.viewModel.hairAnchorNode,
-      ),
-    );
-  }
-
   private updateHairColor(hairColor?: AvatarColor) {
     let hairMesh = this.viewModel.hairMeshes.get(
       this.viewModel.currentAvatarConfig.Value.hair,
@@ -228,15 +225,6 @@ export default class AvatarEditorPreviewModelView {
     if (hairTexture === undefined) return;
     hairTexture.uOffset = hairColorUOffeset - uDisplacement;
     hairTexture.vOffset = hairColorVOffset - vDisplacement;
-  }
-
-  private async updateModelBeard(beard?: AvatarBeardModels | undefined) {
-    await this.updateModel(
-      beard,
-      AvatarModelAssetPaths.beardPath,
-      this.viewModel.beardMeshes,
-      this.viewModel.beardAnchorNode,
-    );
   }
 
   private updateBeardColor(beardColor?: AvatarColor) {
