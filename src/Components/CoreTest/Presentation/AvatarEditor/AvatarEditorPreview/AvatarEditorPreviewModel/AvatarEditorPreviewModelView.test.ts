@@ -102,26 +102,16 @@ describe("AvatarEditorPreviewModelView", () => {
 
     viewModel.hairMeshes = new Map([["hair-backhead", [mesh]]]);
 
-    const avatarEditorUtilsSpy = jest.spyOn(
-      AvatarEditorUtils,
-      "setupAvatarAssetModel",
-    );
+    // set visibility of all meshes in the map to false
+    viewModel.hairMeshes.forEach((meshes, type) => {
+      meshes.forEach((mesh) => {
+        mesh.isVisible = false;
+      });
+    });
 
-    // avatarEditorUtilsMock.setupAvatarAssetModel.mockResolvedValue([mesh]);
-
-    // const mockAEU = jest.fn();
-    // AvatarEditorUtils.setupAvatarAssetModel = mockAEU;
-    // mockAEU.mockResolvedValue([mesh]);
-
+    // check visibility of first mesh
+    expect(viewModel.hairMeshes.get("hair-backhead")![0].isVisible).toBe(false);
     await systemUnderTest["updateHairModels"]("diff");
-    // await systemUnderTest["updateHairModels"]("diff").then(() => {
-    //   expect(avatarEditorUtilsSpy).toHaveBeenCalled();
-    // });
-
-    setTimeout(() => {
-      expect(avatarEditorUtilsSpy).toHaveBeenCalled();
-    }, 1000);
-
-    // expect(avatarEditorUtilsSpy).toHaveBeenCalled();
+    expect(viewModel.hairMeshes.get("hair-backhead")![0].isVisible).toBe(true);
   });
 });

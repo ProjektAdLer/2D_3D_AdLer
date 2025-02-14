@@ -98,7 +98,7 @@ export default class AvatarEditorPreviewModelView {
     await CoreDIContainer.get<ILoadAvatarConfigUseCase>(
       USECASE_TYPES.ILoadAvatarConfigUseCase,
     ).executeAsync();
-    this.updateAllModels("initial");
+    await this.updateAllModels("initial");
   }
 
   private async updateAllModels(mode: "initial" | "diff"): Promise<void> {
@@ -445,7 +445,6 @@ export default class AvatarEditorPreviewModelView {
       });
       return Promise.resolve();
     }
-
     // load model if not already loaded
     if (!modelMap.has(newModel)) {
       const result = await Promise.resolve(
