@@ -15,8 +15,9 @@ import { useTranslation } from "react-i18next";
 type WelcomePageButtonProps = {
   backgroundVideo: string;
   backgroundPicture: string;
+  label?: string;
   historyPath: string;
-  label: string;
+  imageSrc: string;
   isPlaceholder?: boolean;
 } & AdLerUIComponent;
 
@@ -55,7 +56,7 @@ export default function WelcomePageButton(props: WelcomePageButtonProps) {
       )}
     >
       {!props.isPlaceholder && userLoggedIn ? (
-        <div className="flex justify-center w-full h-full bg-gray-100 align-center opacity-90 hover:opacity-100">
+        <div className="flex justify-center w-full h-full bg-gray-100 align-center opacity-90 hover:opacity-100 relative">
           <video
             ref={videoRef}
             src={props.backgroundVideo}
@@ -68,18 +69,18 @@ export default function WelcomePageButton(props: WelcomePageButtonProps) {
             <track kind="captions"></track>
           </video>
           <img
-            className="landscape:hidden w-full h-full object-cover"
+            className="landscape:lg:hidden w-full h-full object-cover"
             ref={pictureRef}
             src={props.backgroundPicture}
             alt="Avatar Editor"
           />
-          <p
-            className="absolute p-4 mx-auto font-bold rounded-lg !text-xs lg:text-2xl text-center bg-buttonbgblue lg:bottom-[42%] portrait:bottom-[20%] bottom-32 text-adlerdarkblue "
+          <img
+            src={props.imageSrc}
+            className="absolute p-4 mx-auto rounded-lg lg:bottom-[42%] portrait:bottom-[20%] mobile-landscape:bottom-6 bottom-32"
+            alt={props.label}
             onMouseEnter={() => videoRef.current?.play()}
             onMouseLeave={() => videoRef.current?.pause()}
-          >
-            {props.label}
-          </p>
+          />
         </div>
       ) : (
         <div className="flex justify-center w-full h-full bg-gray-100 align-center opacity-90">
