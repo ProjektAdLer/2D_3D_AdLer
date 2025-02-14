@@ -53,7 +53,7 @@ export default class AvatarEditorPreviewModelView {
 
   @bind
   private async onAvatarConfigChanged(): Promise<void> {
-    await this.updateAllModels("diff");
+    await Promise.resolve(this.updateAllModels("diff"));
   }
 
   async asyncSetup(): Promise<void> {
@@ -101,21 +101,25 @@ export default class AvatarEditorPreviewModelView {
     this.updateAllModels("initial");
   }
 
-  private async updateAllModels(mode: "initial" | "diff") {
-    await this.updateHairModels(mode);
-    await this.updateFaceModels(mode);
-    await this.updateClothingModels(mode);
-    await this.updateAccessoireModels(mode);
-    await this.updateBodyModels(mode);
+  private async updateAllModels(mode: "initial" | "diff"): Promise<void> {
+    await Promise.all([
+      this.updateHairModels(mode),
+      this.updateFaceModels(mode),
+      this.updateClothingModels(mode),
+      this.updateAccessoireModels(mode),
+      this.updateBodyModels(mode),
+    ]);
   }
 
-  private async updateHairModels(mode: "initial" | "diff") {
+  private async updateHairModels(mode: "initial" | "diff"): Promise<void> {
     if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.hair) {
-      await this.updateModelHair(this.viewModel.currentAvatarConfig.Value.hair);
+      await Promise.resolve(
+        this.updateModelHair(this.viewModel.currentAvatarConfig.Value.hair),
+      );
     }
     if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.beard) {
-      await this.updateModelBeard(
-        this.viewModel.currentAvatarConfig.Value.beard,
+      await Promise.resolve(
+        this.updateModelBeard(this.viewModel.currentAvatarConfig.Value.beard),
       );
     }
     if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.hairColor) {
@@ -124,7 +128,7 @@ export default class AvatarEditorPreviewModelView {
     }
   }
 
-  private updateFaceModels(mode: "initial" | "diff") {
+  private async updateFaceModels(mode: "initial" | "diff"): Promise<void> {
     if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.eyebrows)
       this.updateEyeBrows(this.viewModel.currentAvatarConfig.Value.eyebrows);
     if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.eyes)
@@ -135,7 +139,7 @@ export default class AvatarEditorPreviewModelView {
       this.updateMouth(this.viewModel.currentAvatarConfig.Value.mouth);
   }
 
-  private async updateClothingModels(mode: "initial" | "diff") {
+  private async updateClothingModels(mode: "initial" | "diff"): Promise<void> {
     if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.shirt)
       await this.updateModelShirt(
         this.viewModel.currentAvatarConfig.Value.shirt,
@@ -194,12 +198,16 @@ export default class AvatarEditorPreviewModelView {
     }
   }
 
-  private async updateModelHair(hair?: AvatarHairModels | undefined) {
-    await this.updateModel(
-      hair,
-      AvatarModelAssetPaths.hairPath,
-      this.viewModel.hairMeshes,
-      this.viewModel.hairAnchorNode,
+  private async updateModelHair(
+    hair?: AvatarHairModels | undefined,
+  ): Promise<void> {
+    await Promise.resolve(
+      this.updateModel(
+        hair,
+        AvatarModelAssetPaths.hairPath,
+        this.viewModel.hairMeshes,
+        this.viewModel.hairAnchorNode,
+      ),
     );
   }
 
@@ -435,18 +443,20 @@ export default class AvatarEditorPreviewModelView {
       modelMap.forEach((meshes) => {
         meshes.forEach((mesh) => (mesh.isVisible = false));
       });
-      return;
+      return Promise.resolve();
     }
 
     // load model if not already loaded
     if (!modelMap.has(newModel)) {
-      const result = await AvatarEditorUtils.setupAvatarAssetModel(
-        this.scenePresenter,
-        this.baseModelSkeleton,
-        newModel,
-        modelFolder,
-        anchorNode,
-        onMeshLoad,
+      const result = await Promise.resolve(
+        AvatarEditorUtils.setupAvatarAssetModel(
+          this.scenePresenter,
+          this.baseModelSkeleton,
+          newModel,
+          modelFolder,
+          anchorNode,
+          onMeshLoad,
+        ),
       );
       modelMap.set(newModel, result!.meshes as Mesh[]);
     }
@@ -458,5 +468,6 @@ export default class AvatarEditorPreviewModelView {
         mesh.isVisible = newIsVisible;
       });
     });
+    return Promise.resolve();
   }
 }

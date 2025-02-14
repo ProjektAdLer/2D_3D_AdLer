@@ -114,6 +114,9 @@ describe("AvatarEditorPreviewModelView", () => {
     // mockAEU.mockResolvedValue([mesh]);
 
     await systemUnderTest["updateHairModels"]("diff");
+    // await systemUnderTest["updateHairModels"]("diff").then(() => {
+    //   expect(avatarEditorUtilsSpy).toHaveBeenCalled();
+    // });
 
     setTimeout(() => {
       expect(avatarEditorUtilsSpy).toHaveBeenCalled();
