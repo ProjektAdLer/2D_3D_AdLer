@@ -92,6 +92,25 @@ describe("AvatarEditorPreviewModelView", () => {
     ]);
   });
 
+  test("updateAllModels calls all the update functions", async () => {
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    setupScenePresenterMockLoadingResults();
+
+    systemUnderTest["updateHairModels"] = jest.fn();
+    systemUnderTest["updateFaceModels"] = jest.fn();
+    systemUnderTest["updateClothingModels"] = jest.fn();
+    systemUnderTest["updateAccessoireModels"] = jest.fn();
+    systemUnderTest["updateBodyModels"] = jest.fn();
+
+    await systemUnderTest["updateAllModels"]("diff");
+
+    expect(systemUnderTest["updateHairModels"]).toHaveBeenCalled();
+    expect(systemUnderTest["updateFaceModels"]).toHaveBeenCalled();
+    expect(systemUnderTest["updateClothingModels"]).toHaveBeenCalled();
+    expect(systemUnderTest["updateAccessoireModels"]).toHaveBeenCalled();
+    expect(systemUnderTest["updateBodyModels"]).toHaveBeenCalled();
+  });
+
   test("updateHairModels updates hair models if a new hairstyle is provided", async () => {
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
     setupScenePresenterMockLoadingResults();
@@ -113,5 +132,61 @@ describe("AvatarEditorPreviewModelView", () => {
     expect(viewModel.hairMeshes.get("hair-backhead")![0].isVisible).toBe(false);
     await systemUnderTest["updateHairModels"]("diff");
     expect(viewModel.hairMeshes.get("hair-backhead")![0].isVisible).toBe(true);
+  });
+
+  test("updateHairModels updates beard models if a new beardstyle is provided", async () => {
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    setupScenePresenterMockLoadingResults();
+    viewModel.currentAvatarConfig.Value.beard =
+      "beard-full-friendly-muttonchops";
+    viewModel.avatarConfigDiff.Value.beard = "beard-full-friendly-muttonchops";
+
+    const mesh = new AbstractMesh("TestMesh", new Scene(new NullEngine()));
+
+    viewModel.beardMeshes = new Map([
+      ["beard-full-friendly-muttonchops", [mesh]],
+    ]);
+
+    // set visibility of all meshes in the map to false
+    viewModel.beardMeshes.forEach((meshes, type) => {
+      meshes.forEach((mesh) => {
+        mesh.isVisible = false;
+      });
+    });
+
+    // check visibility of first mesh
+    expect(
+      viewModel.beardMeshes.get("beard-full-friendly-muttonchops")![0]
+        .isVisible,
+    ).toBe(false);
+    await systemUnderTest["updateHairModels"]("diff");
+    expect(
+      viewModel.beardMeshes.get("beard-full-friendly-muttonchops")![0]
+        .isVisible,
+    ).toBe(true);
+  });
+
+  test("updateHairModels updates hair color if a new haircolor is provided", async () => {
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    setupScenePresenterMockLoadingResults();
+    viewModel.currentAvatarConfig.Value.hairColor = {
+      id: 0,
+      nameKey: "Black 1",
+      hexColor: "#000000",
+      uOffset: 0,
+      vOffset: 0,
+    };
+    viewModel.avatarConfigDiff.Value.hairColor = {
+      id: 0,
+      nameKey: "Black 1",
+      hexColor: "#000000",
+      uOffset: 0,
+      vOffset: 0,
+    };
+    systemUnderTest["updateHairColor"] = jest.fn();
+
+    await systemUnderTest["updateHairModels"]("diff");
+
+    expect(systemUnderTest["updateHairColor"]).toHaveBeenCalled();
   });
 });
