@@ -12,18 +12,7 @@ import SCENE_TYPES, {
   ScenePresenterFactory,
 } from "~DependencyInjection/Scenes/SCENE_TYPES";
 import AvatarEditorPreviewSceneDefinition from "../AvatarEditorPreviewSceneDefinition";
-import {
-  AvatarBackpackModels,
-  AvatarBeardModels,
-  AvatarGlassesModels,
-  AvatarHairModels,
-  AvatarHeadgearModels,
-  AvatarPantsModels,
-  AvatarShoesModels,
-  AvatarNoneModel,
-  AvatarShirtModels,
-  AvatarOtherModels,
-} from "src/Components/Core/Domain/AvatarModels/AvatarModelTypes";
+import { AvatarNoneModel } from "src/Components/Core/Domain/AvatarModels/AvatarModelTypes";
 import ILoadAvatarConfigUseCase from "src/Components/Core/Application/UseCases/LoadAvatarConfig/ILoadAvatarConfigUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import {
@@ -37,6 +26,8 @@ import AvatarEditorUtils from "../../AvatarEditorUtils";
 import AvatarModelAssetPaths from "src/Components/Core/Domain/AvatarModels/AvatarModelPaths";
 import AvatarModelTransforms from "src/Components/Core/Domain/AvatarModels/AvatarModelTransforms";
 import bind from "bind-decorator";
+import AvatarConfigTO from "src/Components/Core/Application/DataTransferObjects/AvatarConfigTO";
+import AvatarModelMaterialNames from "src/Components/Core/Domain/AvatarModels/AvatarModelMaterialNames";
 const baseModelLink = require("../../../../../../Assets/3dModels/sharedModels/avatar/a-avatar-skeleton.glb");
 
 export default class AvatarEditorPreviewModelView {
@@ -53,7 +44,9 @@ export default class AvatarEditorPreviewModelView {
 
   @bind
   private async onAvatarConfigChanged(): Promise<void> {
-    await Promise.resolve(this.updateAllModels());
+    await Promise.resolve(
+      this.updateAllModels(this.viewModel.avatarConfigDiff.Value),
+    );
   }
 
   async asyncSetup(): Promise<void> {
@@ -98,21 +91,25 @@ export default class AvatarEditorPreviewModelView {
     await CoreDIContainer.get<ILoadAvatarConfigUseCase>(
       USECASE_TYPES.ILoadAvatarConfigUseCase,
     ).executeAsync();
-    await this.updateAllModels();
+    await this.updateAllModels(this.viewModel.currentAvatarConfig.Value);
   }
 
-  private async updateAllModels(): Promise<void> {
+  private async updateAllModels(
+    config: Partial<AvatarConfigTO>,
+  ): Promise<void> {
     await Promise.all([
-      this.updateHairModels(),
-      this.updateFaceModels(),
-      this.updateClothingModels(),
-      this.updateAccessoireModels(),
-      this.updateBodyModels(),
+      this.updateHairModels(config),
+      this.updateFaceModels(config),
+      this.updateClothingModels(config),
+      this.updateAccessoireModels(config),
     ]);
+    await this.updateBodyModels(config);
   }
 
-  private async updateHairModels(): Promise<void> {
-    if (this.viewModel.avatarConfigDiff.Value.hair) {
+  private async updateHairModels(
+    config: Partial<AvatarConfigTO>,
+  ): Promise<void> {
+    if (config.hair) {
       await Promise.resolve(
         this.updateModel(
           this.viewModel.currentAvatarConfig.Value.hair,
@@ -121,8 +118,18 @@ export default class AvatarEditorPreviewModelView {
           this.viewModel.hairAnchorNode,
         ),
       );
+      if (this.viewModel.currentAvatarConfig.Value.hair !== "none") {
+        AvatarEditorUtils.setupAvatarColor(
+          this.viewModel.hairMeshes.get(
+            this.viewModel.currentAvatarConfig.Value.hair,
+          )![1],
+          this.viewModel.currentAvatarConfig.Value.hairColor,
+          0.125,
+          0.5,
+        );
+      }
     }
-    if (this.viewModel.avatarConfigDiff.Value.beard) {
+    if (config.beard) {
       await Promise.resolve(
         this.updateModel(
           this.viewModel.currentAvatarConfig.Value.beard,
@@ -131,268 +138,230 @@ export default class AvatarEditorPreviewModelView {
           this.viewModel.beardAnchorNode,
         ),
       );
+      if (this.viewModel.currentAvatarConfig.Value.beard !== "none") {
+        AvatarEditorUtils.setupAvatarColor(
+          this.viewModel.beardMeshes.get(
+            this.viewModel.currentAvatarConfig.Value.beard,
+          )![1],
+          this.viewModel.currentAvatarConfig.Value.hairColor,
+          0.125,
+          0.5,
+        );
+      }
     }
-    if (this.viewModel.avatarConfigDiff.Value.hairColor) {
-      this.updateHairColor(this.viewModel.currentAvatarConfig.Value.hairColor);
-      this.updateBeardColor(this.viewModel.currentAvatarConfig.Value.hairColor);
+    if (config.hairColor) {
+      if (this.viewModel.currentAvatarConfig.Value.hair !== "none") {
+        AvatarEditorUtils.setupAvatarColor(
+          this.viewModel.hairMeshes.get(
+            this.viewModel.currentAvatarConfig.Value.hair,
+          )![1],
+          this.viewModel.currentAvatarConfig.Value.hairColor,
+          0.125,
+          0.5,
+        );
+      }
+      if (this.viewModel.currentAvatarConfig.Value.beard !== "none") {
+        AvatarEditorUtils.setupAvatarColor(
+          this.viewModel.beardMeshes.get(
+            this.viewModel.currentAvatarConfig.Value.beard,
+          )![1],
+          this.viewModel.currentAvatarConfig.Value.hairColor,
+          0.125,
+          0.5,
+        );
+      }
     }
   }
 
-  private async updateFaceModels(): Promise<void> {
-    if (this.viewModel.avatarConfigDiff.Value.eyebrows)
-      this.updateEyeBrows(this.viewModel.currentAvatarConfig.Value.eyebrows);
-    if (this.viewModel.avatarConfigDiff.Value.eyes)
-      this.updateEyes(this.viewModel.currentAvatarConfig.Value.eyes);
-    if (this.viewModel.avatarConfigDiff.Value.nose)
-      this.updateNose(this.viewModel.currentAvatarConfig.Value.nose);
-    if (this.viewModel.avatarConfigDiff.Value.mouth)
-      this.updateMouth(this.viewModel.currentAvatarConfig.Value.mouth);
-  }
-
-  private async updateClothingModels(): Promise<void> {
-    if (this.viewModel.avatarConfigDiff.Value.shirt)
-      await this.updateModelShirt(
-        this.viewModel.currentAvatarConfig.Value.shirt,
+  private async updateFaceModels(
+    config: Partial<AvatarConfigTO>,
+  ): Promise<void> {
+    if (config.eyebrows) {
+      AvatarEditorUtils.setupAvatarTextures(
+        config.eyebrows,
+        this.viewModel.baseModelMeshes,
+        AvatarModelMaterialNames.eyebrows,
+        AvatarEyeBrowTexture,
       );
-    if (this.viewModel.avatarConfigDiff.Value.shirtColor)
-      this.updateShirtColor(
+    }
+    if (config.eyes) {
+      AvatarEditorUtils.setupAvatarTextures(
+        config.eyes,
+        this.viewModel.baseModelMeshes,
+        AvatarModelMaterialNames.eyes,
+        AvatarEyeTexture,
+      );
+    }
+    if (config.nose) {
+      AvatarEditorUtils.setupAvatarTextures(
+        config.nose,
+        this.viewModel.baseModelMeshes,
+        AvatarModelMaterialNames.nose,
+        AvatarNoseTexture,
+      );
+    }
+    if (config.mouth)
+      AvatarEditorUtils.setupAvatarTextures(
+        config.mouth,
+        this.viewModel.baseModelMeshes,
+        AvatarModelMaterialNames.mouth,
+        AvatarMouthTexture,
+      );
+  }
+
+  private async updateClothingModels(
+    config: Partial<AvatarConfigTO>,
+  ): Promise<void> {
+    if (config.shirt) {
+      await this.updateModel(
+        config.shirt,
+        AvatarModelAssetPaths.shirtPath,
+        this.viewModel.shirtMeshes,
+        this.viewModel.shirtAnchorNode,
+      );
+      AvatarEditorUtils.setupAvatarColor(
+        this.viewModel.shirtMeshes.get(
+          this.viewModel.currentAvatarConfig.Value.shirt,
+        )![1],
         this.viewModel.currentAvatarConfig.Value.shirtColor,
       );
-    if (this.viewModel.avatarConfigDiff.Value.pants)
-      await this.updateModelPants(
-        this.viewModel.currentAvatarConfig.Value.pants,
+      this.updateSkinColor(
+        this.viewModel.currentAvatarConfig.Value.skinColor,
+        this.viewModel.shirtMeshes.get(
+          this.viewModel.currentAvatarConfig.Value.shirt,
+        ),
       );
-    if (this.viewModel.avatarConfigDiff.Value.pantsColor)
-      this.updatePantsColor(
+    }
+    if (config.shirtColor) {
+      AvatarEditorUtils.setupAvatarColor(
+        this.viewModel.shirtMeshes.get(
+          this.viewModel.currentAvatarConfig.Value.shirt,
+        )![1],
+        this.viewModel.currentAvatarConfig.Value.shirtColor,
+      );
+    }
+    if (config.pants) {
+      await this.updateModel(
+        config.pants,
+        AvatarModelAssetPaths.pantsPath,
+        this.viewModel.pantsMeshes,
+        this.viewModel.pantsAnchorNode,
+      );
+      AvatarEditorUtils.setupAvatarColor(
+        this.viewModel.pantsMeshes.get(
+          this.viewModel.currentAvatarConfig.Value.pants,
+        )![1],
         this.viewModel.currentAvatarConfig.Value.pantsColor,
       );
-    if (this.viewModel.avatarConfigDiff.Value.shoes)
-      await this.updateModelShoes(
-        this.viewModel.currentAvatarConfig.Value.shoes,
+      this.updateSkinColor(
+        this.viewModel.currentAvatarConfig.Value.skinColor,
+        this.viewModel.pantsMeshes.get(
+          this.viewModel.currentAvatarConfig.Value.pants,
+        ),
       );
-    if (this.viewModel.avatarConfigDiff.Value.shoesColor)
-      this.updateShoesColor(
+    }
+    if (config.pantsColor) {
+      AvatarEditorUtils.setupAvatarColor(
+        this.viewModel.pantsMeshes.get(
+          this.viewModel.currentAvatarConfig.Value.pants,
+        )![1],
+        this.viewModel.currentAvatarConfig.Value.pantsColor,
+      );
+    }
+    if (config.shoes) {
+      await this.updateModel(
+        config.shoes,
+        AvatarModelAssetPaths.shoesPath,
+        this.viewModel.shoesMeshes,
+        this.viewModel.shoesAnchorNode,
+      );
+      AvatarEditorUtils.setupAvatarColor(
+        this.viewModel.shoesMeshes.get(
+          this.viewModel.currentAvatarConfig.Value.shoes,
+        )![1],
         this.viewModel.currentAvatarConfig.Value.shoesColor,
       );
+      this.updateSkinColor(
+        this.viewModel.currentAvatarConfig.Value.skinColor,
+        this.viewModel.shoesMeshes.get(
+          this.viewModel.currentAvatarConfig.Value.shoes,
+        ),
+      );
+    }
+    if (config.shoesColor) {
+      AvatarEditorUtils.setupAvatarColor(
+        this.viewModel.shoesMeshes.get(
+          this.viewModel.currentAvatarConfig.Value.shoes,
+        )![1],
+        this.viewModel.currentAvatarConfig.Value.shoesColor,
+      );
+    }
   }
 
-  private updateAccessoireModels() {
-    if (this.viewModel.avatarConfigDiff.Value.headgear)
-      this.updateHeadGear(this.viewModel.currentAvatarConfig.Value.headgear);
-    if (this.viewModel.avatarConfigDiff.Value.glasses)
-      this.updateGlasses(this.viewModel.currentAvatarConfig.Value.glasses);
-    if (this.viewModel.avatarConfigDiff.Value.backpack)
-      this.updateBackPack(this.viewModel.currentAvatarConfig.Value.backpack);
-    if (this.viewModel.avatarConfigDiff.Value.other)
-      this.updateOther(this.viewModel.currentAvatarConfig.Value.other);
+  private updateAccessoireModels(config: Partial<AvatarConfigTO>) {
+    if (config.headgear) {
+      this.updateModel(
+        config.headgear,
+        AvatarModelAssetPaths.headGearPath,
+        this.viewModel.headGearMeshes,
+        this.viewModel.headGearAnchorNode,
+      );
+    }
+    if (config.glasses) {
+      this.updateModel(
+        config.glasses,
+        AvatarModelAssetPaths.glassesPath,
+        this.viewModel.glassesMeshes,
+        this.viewModel.glassesAnchorNode,
+      );
+    }
+    if (config.backpack) {
+      this.updateModel(
+        config.backpack,
+        AvatarModelAssetPaths.backpackPath,
+        this.viewModel.backpackMeshes,
+        this.viewModel.backpackAnchorNode,
+        AvatarModelTransforms.backpack,
+      );
+    }
+    if (config.other) {
+      this.updateModel(
+        config.other,
+        AvatarModelAssetPaths.otherPath,
+        this.viewModel.otherMeshes,
+        this.viewModel.otherAnchorNode,
+        AvatarModelTransforms.sheriffStar,
+      );
+    }
   }
 
-  private updateBodyModels() {
-    if (this.viewModel.avatarConfigDiff.Value.skinColor) {
+  private async updateBodyModels(
+    config: Partial<AvatarConfigTO>,
+  ): Promise<void> {
+    if (config.skinColor) {
       this.updateSkinColor(
         this.viewModel.currentAvatarConfig.Value.skinColor,
         this.viewModel.baseModelMeshes,
       );
       this.updateSkinColor(
         this.viewModel.currentAvatarConfig.Value.skinColor,
-        this.viewModel.shirtAnchorNode.getChildMeshes(),
+        this.viewModel.shirtMeshes.get(
+          this.viewModel.currentAvatarConfig.Value.shirt,
+        ),
       );
       this.updateSkinColor(
         this.viewModel.currentAvatarConfig.Value.skinColor,
-        this.viewModel.pantsAnchorNode.getChildMeshes(),
+        this.viewModel.pantsMeshes.get(
+          this.viewModel.currentAvatarConfig.Value.pants,
+        ),
       );
       this.updateSkinColor(
         this.viewModel.currentAvatarConfig.Value.skinColor,
-        this.viewModel.shoesAnchorNode.getChildMeshes(),
+        this.viewModel.shoesMeshes.get(
+          this.viewModel.currentAvatarConfig.Value.shoes,
+        ),
       );
     }
-  }
-  // kann man die Funktionen updateHairColor und updateBeardColor zusammenfassen?
-  private updateHairColor(hairColor?: AvatarColor) {
-    let hairMesh = this.viewModel.hairMeshes.get(
-      this.viewModel.currentAvatarConfig.Value.hair,
-    );
-    let hairMaterial = hairMesh?.[1].material as Material;
-    let hairTexture = hairMaterial?.getActiveTextures()[0] as Texture;
-
-    // Set Displacement of current mesh UV Map
-    const uDisplacement = 0.125;
-    const vDisplacement = 0.5;
-
-    let hairColorUOffeset = hairColor?.uOffset ?? 0;
-    let hairColorVOffset = hairColor?.vOffset ?? 0;
-
-    if (hairTexture === undefined) return;
-    hairTexture.uOffset = hairColorUOffeset - uDisplacement;
-    hairTexture.vOffset = hairColorVOffset - vDisplacement;
-  }
-
-  private updateBeardColor(beardColor?: AvatarColor) {
-    let beardMesh = this.viewModel.beardMeshes.get(
-      this.viewModel.currentAvatarConfig.Value.beard,
-    );
-    let beardMaterial = beardMesh?.[1].material as Material;
-    let beardTexture = beardMaterial?.getActiveTextures()[0] as Texture;
-
-    // Set Displacement of current mesh UV Map
-    const uDisplacement = 0.125;
-    const vDisplacement = 0.5;
-
-    let beardColorUOffeset = beardColor?.uOffset ?? 0;
-    let beardColorVOffset = beardColor?.vOffset ?? 0;
-
-    if (beardTexture === undefined) return;
-    beardTexture.uOffset = beardColorUOffeset - uDisplacement;
-    beardTexture.vOffset = beardColorVOffset - vDisplacement;
-  }
-
-  private updateHeadGear(headgear?: AvatarHeadgearModels | undefined) {
-    this.updateModel(
-      headgear,
-      AvatarModelAssetPaths.headGearPath,
-      this.viewModel.headGearMeshes,
-      this.viewModel.headGearAnchorNode,
-    );
-  }
-
-  private updateGlasses(glasses?: AvatarGlassesModels | undefined) {
-    this.updateModel(
-      glasses,
-      AvatarModelAssetPaths.glassesPath,
-      this.viewModel.glassesMeshes,
-      this.viewModel.glassesAnchorNode,
-    );
-  }
-
-  private updateBackPack(backpack?: AvatarBackpackModels | undefined) {
-    this.updateModel(
-      backpack,
-      AvatarModelAssetPaths.backpackPath,
-      this.viewModel.backpackMeshes,
-      this.viewModel.backpackAnchorNode,
-      AvatarModelTransforms.backpack,
-    );
-  }
-
-  private updateOther(other?: AvatarOtherModels) {
-    this.updateModel(
-      other,
-      AvatarModelAssetPaths.otherPath,
-      this.viewModel.otherMeshes,
-      this.viewModel.otherAnchorNode,
-      AvatarModelTransforms.sheriffStar,
-    );
-  }
-
-  private async updateModelShirt(shirt?: AvatarShirtModels | undefined) {
-    await this.updateModel(
-      shirt,
-      AvatarModelAssetPaths.shirtPath,
-      this.viewModel.shirtMeshes,
-      this.viewModel.shirtAnchorNode,
-    );
-  }
-
-  private async updateShirtColor(shirtColor?: AvatarColor) {
-    let shirtMesh = this.viewModel.shirtMeshes.get(
-      this.viewModel.currentAvatarConfig.Value.shirt,
-    );
-    let shirtMaterial = shirtMesh?.[1].material as Material;
-    let shirtTexture = shirtMaterial?.getActiveTextures()[0] as Texture;
-
-    if (shirtTexture === undefined) return;
-    shirtTexture.uOffset = shirtColor?.uOffset ?? 0;
-    shirtTexture.vOffset = shirtColor?.vOffset ?? 0;
-  }
-
-  private async updateModelPants(pants?: AvatarPantsModels | undefined) {
-    await this.updateModel(
-      pants,
-      AvatarModelAssetPaths.pantsPath,
-      this.viewModel.pantsMeshes,
-      this.viewModel.pantsAnchorNode,
-    );
-  }
-
-  private async updatePantsColor(pantsColor?: AvatarColor) {
-    let pantsMesh = this.viewModel.pantsMeshes.get(
-      this.viewModel.currentAvatarConfig.Value.pants,
-    );
-    let pantsMaterial = pantsMesh?.[1].material as Material;
-    let pantsTexture = pantsMaterial?.getActiveTextures()[0] as Texture;
-
-    if (pantsTexture === undefined) return;
-    pantsTexture.uOffset = pantsColor?.uOffset ?? 0;
-    pantsTexture.vOffset = pantsColor?.vOffset ?? 0;
-  }
-
-  private async updateModelShoes(shoes?: AvatarShoesModels | undefined) {
-    await this.updateModel(
-      shoes,
-      AvatarModelAssetPaths.shoesPath,
-      this.viewModel.shoesMeshes,
-      this.viewModel.shoesAnchorNode,
-    );
-  }
-
-  private async updateShoesColor(shoesColor?: AvatarColor) {
-    let shoesMesh = this.viewModel.shoesMeshes.get(
-      this.viewModel.currentAvatarConfig.Value.shoes,
-    );
-    let shoesMaterial = shoesMesh?.[1].material as Material;
-    let shoesTexture = shoesMaterial?.getActiveTextures()[0] as Texture;
-
-    if (shoesTexture === undefined) return;
-    shoesTexture.uOffset = shoesColor?.uOffset ?? 0;
-    shoesTexture.vOffset = shoesColor?.vOffset ?? 0;
-  }
-
-  private updateEyeBrows(eyebrow?: number) {
-    if (eyebrow === undefined || eyebrow === null) return;
-    let eyebrowMat = this.viewModel.baseModelMeshes.find((mesh) =>
-      mesh.material?.name.includes("mat_Eyebrows"),
-    )?.material!;
-
-    let texture = eyebrowMat.getActiveTextures()[0] as Texture;
-    const tmp = AvatarEyeBrowTexture[eyebrow];
-    texture.uOffset = tmp.uOffset;
-    texture.vOffset = tmp.vOffset;
-  }
-
-  private updateEyes(eyes?: number) {
-    if (eyes === undefined || eyes === null) return;
-    let eyeMat = this.viewModel.baseModelMeshes.find((mesh) =>
-      mesh.material?.name.includes("mat_Eyes"),
-    )?.material!;
-
-    let texture = eyeMat.getActiveTextures()[0] as Texture;
-    const tmp = AvatarEyeTexture[eyes];
-    texture.uOffset = tmp.uOffset;
-    texture.vOffset = tmp.vOffset;
-  }
-
-  private updateNose(nose?: number) {
-    if (nose === undefined || nose === null) return;
-    let noseMat = this.viewModel.baseModelMeshes.find((mesh) =>
-      mesh.material?.name.includes("mat_Nose"),
-    )?.material!;
-
-    let texture = noseMat.getActiveTextures()[0] as Texture;
-    const tmp = AvatarNoseTexture[nose];
-    texture.uOffset = tmp.uOffset;
-    texture.vOffset = tmp.vOffset;
-  }
-
-  private updateMouth(mouth?: number) {
-    if (mouth === undefined || mouth === null) return;
-    let mouthMat = this.viewModel.baseModelMeshes.find((mesh) =>
-      mesh.material?.name.includes("mat_Mouth"),
-    )?.material!;
-
-    let texture = mouthMat.getActiveTextures()[0] as Texture;
-    const tmp = AvatarMouthTexture[mouth];
-    texture.uOffset = tmp.uOffset;
-    texture.vOffset = tmp.vOffset;
   }
 
   private async updateSkinColor(skinColor?: AvatarColor, skinMeshes?: Mesh[]) {
