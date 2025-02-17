@@ -53,7 +53,7 @@ export default class AvatarEditorPreviewModelView {
 
   @bind
   private async onAvatarConfigChanged(): Promise<void> {
-    await Promise.resolve(this.updateAllModels("diff"));
+    await Promise.resolve(this.updateAllModels());
   }
 
   async asyncSetup(): Promise<void> {
