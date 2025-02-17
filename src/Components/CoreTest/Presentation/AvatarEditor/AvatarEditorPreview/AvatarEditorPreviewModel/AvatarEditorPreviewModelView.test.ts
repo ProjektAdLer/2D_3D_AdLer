@@ -13,6 +13,7 @@ import {
 } from "@babylonjs/core";
 import AvatarEditorUtils from "../../../../../Core/Presentation/AvatarEditor/AvatarEditorUtils";
 import AvatarConfigTO from "../../../../../Core/Application/DataTransferObjects/AvatarConfigTO";
+import { AvatarColor } from "../../../../../Core/Domain/AvatarModels/AvatarColorPalette";
 
 const scenePresenterMock = mockDeep<IScenePresenter>();
 const scenePresenterFactoryMock = () => scenePresenterMock;
@@ -56,6 +57,17 @@ function setupScenePresenterMockLoadingResults(): {
   };
 }
 
+jest
+  .spyOn(AvatarEditorUtils, "setupAvatarColor")
+  .mockImplementation(
+    async (
+      mesh: AbstractMesh,
+      meshColor: AvatarColor,
+      displacementU: number = 0,
+      displacementV: number = 0,
+    ) => {},
+  );
+
 describe("AvatarEditorPreviewModelView", () => {
   let systemUnderTest: AvatarEditorPreviewModelView;
 
@@ -68,7 +80,7 @@ describe("AvatarEditorPreviewModelView", () => {
   beforeEach(() => {
     buildSystemUnderTest();
     scenePresenterMock.loadModel.mockResolvedValue([
-      new AbstractMesh("TestMesh", new Scene(new NullEngine())),
+      new Mesh("TestMesh", new Scene(new NullEngine())),
     ]);
   });
   afterEach(() => {
@@ -77,6 +89,7 @@ describe("AvatarEditorPreviewModelView", () => {
 
   afterAll(() => {
     CoreDIContainer.restore();
+    jest.restoreAllMocks();
   });
 
   test("constructor injects scenePresenter", async () => {
@@ -116,10 +129,14 @@ describe("AvatarEditorPreviewModelView", () => {
     setupScenePresenterMockLoadingResults();
     viewModel.currentAvatarConfig.Value.hair = "hair-backhead";
     viewModel.avatarConfigDiff.Value.hair = "hair-backhead";
-
+    viewModel.hairMeshes = new Map([
+      ["hair-backhead", [new Mesh("mockMesh"), new Mesh("mockMesh")]],
+    ]);
     systemUnderTest["updateModel"] = jest.fn();
 
-    await systemUnderTest["updateHairModels"]("diff");
+    await systemUnderTest["updateHairModels"]({
+      hair: "hair-backhead",
+    } as Partial<AvatarConfigTO>);
 
     expect(systemUnderTest["updateModel"]).toHaveBeenCalledWith(
       "hair-backhead",
@@ -134,10 +151,17 @@ describe("AvatarEditorPreviewModelView", () => {
     viewModel.currentAvatarConfig.Value.beard =
       "beard-full-friendly-muttonchops";
     viewModel.avatarConfigDiff.Value.beard = "beard-full-friendly-muttonchops";
-
+    viewModel.beardMeshes = new Map([
+      [
+        "beard-full-friendly-muttonchops",
+        [new Mesh("mockMesh"), new Mesh("mockMesh")],
+      ],
+    ]);
     systemUnderTest["updateModel"] = jest.fn();
 
-    await systemUnderTest["updateHairModels"]("diff");
+    await systemUnderTest["updateHairModels"]({
+      beard: "beard-full-friendly-muttonchops",
+    } as Partial<AvatarConfigTO>);
 
     expect(systemUnderTest["updateModel"]).toHaveBeenCalledWith(
       "beard-full-friendly-muttonchops",
@@ -150,40 +174,45 @@ describe("AvatarEditorPreviewModelView", () => {
   test("updateHairModels calls updateHairColor and updateBeardColor if a new haircolor is provided", async () => {
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
     setupScenePresenterMockLoadingResults();
-    viewModel.currentAvatarConfig.Value.hairColor = {
+    const color = {
       id: 0,
       nameKey: "Black 1",
       hexColor: "#000000",
       uOffset: 0,
       vOffset: 0,
-    };
-    viewModel.avatarConfigDiff.Value.hairColor = {
-      id: 0,
-      nameKey: "Black 1",
-      hexColor: "#000000",
-      uOffset: 0,
-      vOffset: 0,
-    };
+    } as AvatarColor;
+    viewModel.currentAvatarConfig.Value.hairColor = color;
+    viewModel.currentAvatarConfig.Value.hair = "hair-backhead";
+    viewModel.currentAvatarConfig.Value.beard =
+      "beard-full-friendly-muttonchops";
+    viewModel.avatarConfigDiff.Value.hairColor = color;
+    const meshMock = new Mesh("mockMesh");
+    viewModel.hairMeshes = new Map([
+      ["hair-backhead", [new Mesh("mockMesh"), meshMock]],
+    ]);
+    viewModel.beardMeshes = new Map([
+      ["beard-full-friendly-muttonchops", [new Mesh("mockMesh"), meshMock]],
+    ]);
 
     systemUnderTest["updateHairColor"] = jest.fn();
     systemUnderTest["updateBeardColor"] = jest.fn();
 
-    await systemUnderTest["updateHairModels"]("diff");
+    await systemUnderTest["updateHairModels"]({
+      hairColor: color,
+    } as Partial<AvatarConfigTO>);
 
-    expect(systemUnderTest["updateHairColor"]).toHaveBeenCalledWith({
-      id: 0,
-      nameKey: "Black 1",
-      hexColor: "#000000",
-      uOffset: 0,
-      vOffset: 0,
-    });
-    expect(systemUnderTest["updateBeardColor"]).toHaveBeenCalledWith({
-      id: 0,
-      nameKey: "Black 1",
-      hexColor: "#000000",
-      uOffset: 0,
-      vOffset: 0,
-    });
+    expect(AvatarEditorUtils.setupAvatarColor).toHaveBeenCalledWith(
+      meshMock,
+      color,
+      0.125,
+      0.5,
+    );
+    expect(AvatarEditorUtils.setupAvatarColor).toHaveBeenCalledWith(
+      meshMock,
+      color,
+      0.125,
+      0.5,
+    );
   });
 
   test("updateHairModels updates hair models if a new hairstyle is provided", async () => {
@@ -191,8 +220,7 @@ describe("AvatarEditorPreviewModelView", () => {
     setupScenePresenterMockLoadingResults();
     viewModel.currentAvatarConfig.Value.hair = "hair-backhead";
     viewModel.avatarConfigDiff.Value.hair = "hair-backhead";
-
-    const mesh = new AbstractMesh("TestMesh", new Scene(new NullEngine()));
+    const mesh = new Mesh("TestMesh", new Scene(new NullEngine()));
 
     viewModel.hairMeshes = new Map([["hair-backhead", [mesh]]]);
 
@@ -205,7 +233,9 @@ describe("AvatarEditorPreviewModelView", () => {
 
     // check visibility of first mesh
     expect(viewModel.hairMeshes.get("hair-backhead")![0].isVisible).toBe(false);
-    await systemUnderTest["updateHairModels"]("diff");
+    await systemUnderTest["updateHairModels"]({
+      hair: "hair-backhead",
+    } as Partial<AvatarConfigTO>);
     expect(viewModel.hairMeshes.get("hair-backhead")![0].isVisible).toBe(true);
   });
 
@@ -216,7 +246,7 @@ describe("AvatarEditorPreviewModelView", () => {
       "beard-full-friendly-muttonchops";
     viewModel.avatarConfigDiff.Value.beard = "beard-full-friendly-muttonchops";
 
-    const mesh = new AbstractMesh("TestMesh", new Scene(new NullEngine()));
+    const mesh = new Mesh("TestMesh", new Scene(new NullEngine()));
 
     viewModel.beardMeshes = new Map([
       ["beard-full-friendly-muttonchops", [mesh]],
@@ -234,7 +264,9 @@ describe("AvatarEditorPreviewModelView", () => {
       viewModel.beardMeshes.get("beard-full-friendly-muttonchops")![0]
         .isVisible,
     ).toBe(false);
-    await systemUnderTest["updateHairModels"]("diff");
+    await systemUnderTest["updateHairModels"]({
+      beard: "beard-full-friendly-muttonchops",
+    } as Partial<AvatarConfigTO>);
     expect(
       viewModel.beardMeshes.get("beard-full-friendly-muttonchops")![0]
         .isVisible,
@@ -258,10 +290,27 @@ describe("AvatarEditorPreviewModelView", () => {
       uOffset: 0,
       vOffset: 0,
     };
-    systemUnderTest["updateHairColor"] = jest.fn();
+    viewModel.currentAvatarConfig.Value.hair = "hair-backhead";
 
-    await systemUnderTest["updateHairModels"]("diff");
+    const mesh = new Mesh("TestMesh", new Scene(new NullEngine()));
 
-    expect(systemUnderTest["updateHairColor"]).toHaveBeenCalled();
+    viewModel.beardMeshes = new Map([
+      ["beard-full-friendly-muttonchops", [mesh, mesh]],
+    ]);
+    viewModel.hairMeshes = new Map([["hair-backhead", [mesh, mesh]]]);
+    viewModel.currentAvatarConfig.Value.beard =
+      "beard-full-friendly-muttonchops";
+
+    await systemUnderTest["updateHairModels"]({
+      hairColor: {
+        id: 0,
+        nameKey: "Black 1",
+        hexColor: "#000000",
+        uOffset: 0,
+        vOffset: 0,
+      },
+    } as Partial<AvatarConfigTO>);
+
+    expect(AvatarEditorUtils.setupAvatarColor).toHaveBeenCalled();
   });
 });
