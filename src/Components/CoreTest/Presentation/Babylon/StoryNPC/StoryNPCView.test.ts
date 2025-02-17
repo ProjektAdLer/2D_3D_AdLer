@@ -158,11 +158,17 @@ describe("StoryNPCView", () => {
 
     test("loadIconModel calls the scenePresenter to load npc icon models", async () => {
       const mockMesh = new Mesh("mockMesh", new Scene(new NullEngine()));
-      scenePresenterMock.loadModel.mockResolvedValue([mockMesh]);
+      scenePresenterMock.loadGLTFModel.mockResolvedValue({
+        meshes: [mockMesh],
+        animationGroups: [
+          new AnimationGroup("TestAnimation"),
+          new Scene(new NullEngine()),
+        ],
+      } as ISceneLoaderAsyncResult);
 
       await systemUnderTest["loadIconModel"]();
 
-      expect(scenePresenterMock.loadModel).toHaveBeenCalledTimes(1);
+      expect(scenePresenterMock.loadGLTFModel).toHaveBeenCalledTimes(1);
     });
 
     test("createParentNode creates a new transform node and sets it in the viewmodel", () => {
