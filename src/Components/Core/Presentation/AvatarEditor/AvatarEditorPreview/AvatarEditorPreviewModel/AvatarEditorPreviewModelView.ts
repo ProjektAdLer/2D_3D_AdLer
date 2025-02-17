@@ -1,11 +1,5 @@
 import AvatarEditorPreviewModelViewModel from "./AvatarEditorPreviewModelViewModel";
-import {
-  Material,
-  Mesh,
-  Skeleton,
-  Texture,
-  TransformNode,
-} from "@babylonjs/core";
+import { Mesh, Skeleton, Texture, TransformNode } from "@babylonjs/core";
 import IScenePresenter from "../../../Babylon/SceneManagement/IScenePresenter";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import SCENE_TYPES, {
