@@ -25,6 +25,18 @@ const validClasses = [
   "grid-cols-10",
   "grid-cols-11",
   "grid-cols-12",
+  "portrait:grid-cols-1",
+  "portrait:grid-cols-2",
+  "portrait:grid-cols-3",
+  "portrait:grid-cols-4",
+  "portrait:grid-cols-5",
+  "portrait:grid-cols-6",
+  "portrait:grid-cols-7",
+  "portrait:grid-cols-8",
+  "portrait:grid-cols-9",
+  "portrait:grid-cols-10",
+  "portrait:grid-cols-11",
+  "portrait:grid-cols-12",
 ];
 
 export default function TileGridLayout(props: TileLayoutProps) {
