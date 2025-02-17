@@ -11,11 +11,11 @@ export default class AvatarEditorPreviewModelPresenter
     newAvatarConfig: AvatarConfigTO,
     avatarConfigDiff: Partial<AvatarConfigTO>,
   ): void {
-    this.viewModel.currentAvatarConfig.Value = newAvatarConfig;
+    // this.viewModel.currentAvatarConfig.Value = newAvatarConfig;
     this.viewModel.avatarConfigDiff.Value = avatarConfigDiff;
   }
 
   onAvatarConfigLoaded(avatarConfig: AvatarConfigTO): void {
-    this.viewModel.currentAvatarConfig.Value = avatarConfig;
+    this.viewModel.avatarConfigDiff.Value = avatarConfig;
   }
 }

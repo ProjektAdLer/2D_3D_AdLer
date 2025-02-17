@@ -98,21 +98,21 @@ export default class AvatarEditorPreviewModelView {
     await CoreDIContainer.get<ILoadAvatarConfigUseCase>(
       USECASE_TYPES.ILoadAvatarConfigUseCase,
     ).executeAsync();
-    await this.updateAllModels("initial");
+    await this.updateAllModels();
   }
 
-  private async updateAllModels(mode: "initial" | "diff"): Promise<void> {
+  private async updateAllModels(): Promise<void> {
     await Promise.all([
-      this.updateHairModels(mode),
-      this.updateFaceModels(mode),
-      this.updateClothingModels(mode),
-      this.updateAccessoireModels(mode),
-      this.updateBodyModels(mode),
+      this.updateHairModels(),
+      this.updateFaceModels(),
+      this.updateClothingModels(),
+      this.updateAccessoireModels(),
+      this.updateBodyModels(),
     ]);
   }
 
-  private async updateHairModels(mode: "initial" | "diff"): Promise<void> {
-    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.hair) {
+  private async updateHairModels(): Promise<void> {
+    if (this.viewModel.avatarConfigDiff.Value.hair) {
       await Promise.resolve(
         this.updateModel(
           this.viewModel.currentAvatarConfig.Value.hair,
@@ -122,7 +122,7 @@ export default class AvatarEditorPreviewModelView {
         ),
       );
     }
-    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.beard) {
+    if (this.viewModel.avatarConfigDiff.Value.beard) {
       await Promise.resolve(
         this.updateModel(
           this.viewModel.currentAvatarConfig.Value.beard,
@@ -132,63 +132,63 @@ export default class AvatarEditorPreviewModelView {
         ),
       );
     }
-    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.hairColor) {
+    if (this.viewModel.avatarConfigDiff.Value.hairColor) {
       this.updateHairColor(this.viewModel.currentAvatarConfig.Value.hairColor);
       this.updateBeardColor(this.viewModel.currentAvatarConfig.Value.hairColor);
     }
   }
 
-  private async updateFaceModels(mode: "initial" | "diff"): Promise<void> {
-    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.eyebrows)
+  private async updateFaceModels(): Promise<void> {
+    if (this.viewModel.avatarConfigDiff.Value.eyebrows)
       this.updateEyeBrows(this.viewModel.currentAvatarConfig.Value.eyebrows);
-    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.eyes)
+    if (this.viewModel.avatarConfigDiff.Value.eyes)
       this.updateEyes(this.viewModel.currentAvatarConfig.Value.eyes);
-    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.nose)
+    if (this.viewModel.avatarConfigDiff.Value.nose)
       this.updateNose(this.viewModel.currentAvatarConfig.Value.nose);
-    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.mouth)
+    if (this.viewModel.avatarConfigDiff.Value.mouth)
       this.updateMouth(this.viewModel.currentAvatarConfig.Value.mouth);
   }
 
-  private async updateClothingModels(mode: "initial" | "diff"): Promise<void> {
-    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.shirt)
+  private async updateClothingModels(): Promise<void> {
+    if (this.viewModel.avatarConfigDiff.Value.shirt)
       await this.updateModelShirt(
         this.viewModel.currentAvatarConfig.Value.shirt,
       );
-    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.shirtColor)
+    if (this.viewModel.avatarConfigDiff.Value.shirtColor)
       this.updateShirtColor(
         this.viewModel.currentAvatarConfig.Value.shirtColor,
       );
-    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.pants)
+    if (this.viewModel.avatarConfigDiff.Value.pants)
       await this.updateModelPants(
         this.viewModel.currentAvatarConfig.Value.pants,
       );
-    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.pantsColor)
+    if (this.viewModel.avatarConfigDiff.Value.pantsColor)
       this.updatePantsColor(
         this.viewModel.currentAvatarConfig.Value.pantsColor,
       );
-    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.shoes)
+    if (this.viewModel.avatarConfigDiff.Value.shoes)
       await this.updateModelShoes(
         this.viewModel.currentAvatarConfig.Value.shoes,
       );
-    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.shoesColor)
+    if (this.viewModel.avatarConfigDiff.Value.shoesColor)
       this.updateShoesColor(
         this.viewModel.currentAvatarConfig.Value.shoesColor,
       );
   }
 
-  private updateAccessoireModels(mode: "initial" | "diff") {
-    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.headgear)
+  private updateAccessoireModels() {
+    if (this.viewModel.avatarConfigDiff.Value.headgear)
       this.updateHeadGear(this.viewModel.currentAvatarConfig.Value.headgear);
-    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.glasses)
+    if (this.viewModel.avatarConfigDiff.Value.glasses)
       this.updateGlasses(this.viewModel.currentAvatarConfig.Value.glasses);
-    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.backpack)
+    if (this.viewModel.avatarConfigDiff.Value.backpack)
       this.updateBackPack(this.viewModel.currentAvatarConfig.Value.backpack);
-    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.other)
+    if (this.viewModel.avatarConfigDiff.Value.other)
       this.updateOther(this.viewModel.currentAvatarConfig.Value.other);
   }
 
-  private updateBodyModels(mode: "initial" | "diff") {
-    if (mode === "initial" || this.viewModel.avatarConfigDiff.Value.skinColor) {
+  private updateBodyModels() {
+    if (this.viewModel.avatarConfigDiff.Value.skinColor) {
       this.updateSkinColor(
         this.viewModel.currentAvatarConfig.Value.skinColor,
         this.viewModel.baseModelMeshes,
@@ -207,7 +207,7 @@ export default class AvatarEditorPreviewModelView {
       );
     }
   }
-
+  // kann man die Funktionen updateHairColor und updateBeardColor zusammenfassen?
   private updateHairColor(hairColor?: AvatarColor) {
     let hairMesh = this.viewModel.hairMeshes.get(
       this.viewModel.currentAvatarConfig.Value.hair,

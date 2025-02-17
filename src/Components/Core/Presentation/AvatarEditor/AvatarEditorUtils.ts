@@ -126,12 +126,7 @@ export default class AvatarEditorUtils {
     meshTexture.vOffset = meshColorVOffset - displacementV;
   }
 
-  public static setupSkinColor(
-    skinMeshes: Mesh[],
-    skinColor: AvatarColor,
-    displacementU: number = 0,
-    displacementV: number = 0,
-  ) {
+  public static setupSkinColor(skinMeshes: Mesh[], skinColor: AvatarColor) {
     if (skinColor === undefined || skinColor === null) return;
     if (skinMeshes === undefined || skinMeshes === null) return;
     let skinMat = skinMeshes.find((mesh) =>
