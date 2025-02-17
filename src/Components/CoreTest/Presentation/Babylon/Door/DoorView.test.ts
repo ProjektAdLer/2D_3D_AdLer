@@ -103,15 +103,19 @@ describe("DoorView", () => {
 
   // ANF-ID: [ELG0019]
   test("asyncSetup/loadMeshAsync calls scenePresenter.loadModel", async () => {
-    scenePresenterMock.loadModel.mockResolvedValue([
-      new AbstractMesh("TestMesh", new Scene(new NullEngine())),
-    ]);
-
+    scenePresenterMock.loadGLTFModel.mockResolvedValue({
+      meshes: [new AbstractMesh("TestMesh", new Scene(new NullEngine()))],
+      animationGroups: [
+        new AnimationGroup("TestAnimation"),
+        new Scene(new NullEngine()),
+      ],
+    } as ISceneLoaderAsyncResult);
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
     viewModel.theme = LearningSpaceThemeType.Campus;
 
     await systemUnderTest.asyncSetup();
-    expect(scenePresenterMock.loadModel).toHaveBeenCalledTimes(2);
+
+    expect(scenePresenterMock.loadGLTFModel).toHaveBeenCalledTimes(2);
   });
 
   test("asyncSetup/loadMeshAsync sets rotationQuaternion of each loaded mesh to null", async () => {
@@ -119,7 +123,13 @@ describe("DoorView", () => {
     mesh1.rotationQuaternion = new Quaternion();
     const mesh2 = new AbstractMesh("TestMesh2", new Scene(new NullEngine()));
     mesh2.rotationQuaternion = new Quaternion();
-    scenePresenterMock.loadModel.mockResolvedValue([mesh1, mesh2]);
+    scenePresenterMock.loadGLTFModel.mockResolvedValue({
+      meshes: [mesh1, mesh2],
+      animationGroups: [
+        new AnimationGroup("TestAnimation"),
+        new Scene(new NullEngine()),
+      ],
+    } as ISceneLoaderAsyncResult);
 
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
     viewModel.theme = LearningSpaceThemeType.Campus;
@@ -147,7 +157,13 @@ describe("DoorView", () => {
   // ANF-ID: [ELG0033]
   test("asyncSetup/setupAnimation creates a new animation and applies it to the first mesh", async () => {
     const mockMesh = new AbstractMesh("Door", new Scene(new NullEngine()));
-    scenePresenterMock.loadModel.mockResolvedValue([mockMesh]);
+    scenePresenterMock.loadGLTFModel.mockResolvedValue({
+      meshes: [mockMesh],
+      animationGroups: [
+        new AnimationGroup("TestAnimation"),
+        new Scene(new NullEngine()),
+      ],
+    } as ISceneLoaderAsyncResult);
 
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
     viewModel.isExit = true;
@@ -160,9 +176,13 @@ describe("DoorView", () => {
 
   // ANF-ID: [ELG0019]
   test("positionMesh sets position of the first mesh to viewModel.position", async () => {
-    scenePresenterMock.loadModel.mockResolvedValue([
-      new AbstractMesh("TestMesh", new Scene(new NullEngine())),
-    ]);
+    scenePresenterMock.loadGLTFModel.mockResolvedValue({
+      meshes: [new AbstractMesh("TestMesh", new Scene(new NullEngine()))],
+      animationGroups: [
+        new AnimationGroup("TestAnimation"),
+        new Scene(new NullEngine()),
+      ],
+    } as ISceneLoaderAsyncResult);
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
 
     viewModel.theme = LearningSpaceThemeType.Campus;
@@ -176,10 +196,16 @@ describe("DoorView", () => {
 
   // ANF-ID: [ELG0019]
   test("positionMesh sets rotation of the first mesh to viewModel.rotation", async () => {
-    scenePresenterMock.loadModel.mockResolvedValue([
-      new AbstractMesh("TestMesh", new Scene(new NullEngine())),
-      new AbstractMesh("TestMesh2", new Scene(new NullEngine())),
-    ]);
+    scenePresenterMock.loadGLTFModel.mockResolvedValue({
+      meshes: [
+        new AbstractMesh("TestMesh", new Scene(new NullEngine())),
+        new AbstractMesh("TestMesh2", new Scene(new NullEngine())),
+      ],
+      animationGroups: [
+        new AnimationGroup("TestAnimation"),
+        new Scene(new NullEngine()),
+      ],
+    } as ISceneLoaderAsyncResult);
 
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
     const newRotation = 42;
@@ -197,7 +223,13 @@ describe("DoorView", () => {
   // ANF-ID: [ELG0033]
   test("onIsOpenChanged calls beginAnimation on the scene if viewModel.isOpen is true", async () => {
     const mockMesh = new AbstractMesh("Door", new Scene(new NullEngine()));
-    scenePresenterMock.loadModel.mockResolvedValue([mockMesh]);
+    scenePresenterMock.loadGLTFModel.mockResolvedValue({
+      meshes: [mockMesh],
+      animationGroups: [
+        new AnimationGroup("TestAnimation"),
+        new Scene(new NullEngine()),
+      ],
+    } as ISceneLoaderAsyncResult);
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
     viewModel.theme = LearningSpaceThemeType.Campus;
 
