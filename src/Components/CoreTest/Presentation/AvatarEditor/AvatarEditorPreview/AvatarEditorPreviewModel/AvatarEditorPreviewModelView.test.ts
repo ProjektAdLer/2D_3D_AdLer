@@ -263,106 +263,7 @@ describe("AvatarEditorPreviewModelView", () => {
     );
   });
 
-  test("updateHairModels updates hair models if a new hairstyle is provided", async () => {
-    const [viewModel, systemUnderTest] = buildSystemUnderTest();
-    setupScenePresenterMockLoadingResults();
-    viewModel.currentAvatarConfig.Value.hair = "hair-backhead";
-    viewModel.avatarConfigDiff.Value.hair = "hair-backhead";
-    const mesh = new Mesh("TestMesh", new Scene(new NullEngine()));
-
-    viewModel.hairMeshes = new Map([["hair-backhead", [mesh]]]);
-
-    // set visibility of all meshes in the map to false
-    viewModel.hairMeshes.forEach((meshes, type) => {
-      meshes.forEach((mesh) => {
-        mesh.isVisible = false;
-      });
-    });
-
-    // check visibility of first mesh
-    expect(viewModel.hairMeshes.get("hair-backhead")![0].isVisible).toBe(false);
-    await systemUnderTest["updateHairModels"]({
-      hair: "hair-backhead",
-    } as Partial<AvatarConfigTO>);
-    expect(viewModel.hairMeshes.get("hair-backhead")![0].isVisible).toBe(true);
-  });
-
-  test("updateHairModels updates beard models if a new beardstyle is provided", async () => {
-    const [viewModel, systemUnderTest] = buildSystemUnderTest();
-    setupScenePresenterMockLoadingResults();
-    viewModel.currentAvatarConfig.Value.beard =
-      "beard-full-friendly-muttonchops";
-    viewModel.avatarConfigDiff.Value.beard = "beard-full-friendly-muttonchops";
-
-    const mesh = new Mesh("TestMesh", new Scene(new NullEngine()));
-
-    viewModel.beardMeshes = new Map([
-      ["beard-full-friendly-muttonchops", [mesh]],
-    ]);
-
-    // set visibility of all meshes in the map to false
-    viewModel.beardMeshes.forEach((meshes, type) => {
-      meshes.forEach((mesh) => {
-        mesh.isVisible = false;
-      });
-    });
-
-    // check visibility of first mesh
-    expect(
-      viewModel.beardMeshes.get("beard-full-friendly-muttonchops")![0]
-        .isVisible,
-    ).toBe(false);
-    await systemUnderTest["updateHairModels"]({
-      beard: "beard-full-friendly-muttonchops",
-    } as Partial<AvatarConfigTO>);
-    expect(
-      viewModel.beardMeshes.get("beard-full-friendly-muttonchops")![0]
-        .isVisible,
-    ).toBe(true);
-  });
-
-  test("updateHairModels updates hair color if a new haircolor is provided", async () => {
-    const [viewModel, systemUnderTest] = buildSystemUnderTest();
-    setupScenePresenterMockLoadingResults();
-    viewModel.currentAvatarConfig.Value.hairColor = {
-      id: 0,
-      nameKey: "Black 1",
-      hexColor: "#000000",
-      uOffset: 0,
-      vOffset: 0,
-    };
-    viewModel.avatarConfigDiff.Value.hairColor = {
-      id: 0,
-      nameKey: "Black 1",
-      hexColor: "#000000",
-      uOffset: 0,
-      vOffset: 0,
-    };
-    viewModel.currentAvatarConfig.Value.hair = "hair-backhead";
-
-    const mesh = new Mesh("TestMesh", new Scene(new NullEngine()));
-
-    viewModel.beardMeshes = new Map([
-      ["beard-full-friendly-muttonchops", [mesh, mesh]],
-    ]);
-    viewModel.hairMeshes = new Map([["hair-backhead", [mesh, mesh]]]);
-    viewModel.currentAvatarConfig.Value.beard =
-      "beard-full-friendly-muttonchops";
-
-    await systemUnderTest["updateHairModels"]({
-      hairColor: {
-        id: 0,
-        nameKey: "Black 1",
-        hexColor: "#000000",
-        uOffset: 0,
-        vOffset: 0,
-      },
-    } as Partial<AvatarConfigTO>);
-
-    expect(AvatarEditorUtils.setupAvatarColor).toHaveBeenCalled();
-  });
-
-  test("updateFaceModels calls setupAvatartextures if a new eyebrows are provided", async () => {
+  test("updateFaceModels calls setupAvatartextures if new eyebrows are provided", async () => {
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
     setupScenePresenterMockLoadingResults();
     viewModel.currentAvatarConfig.Value.eyebrows = 0;
@@ -382,7 +283,7 @@ describe("AvatarEditorPreviewModelView", () => {
     );
   });
 
-  test("updateFaceModels calls setupAvatartextures if a new eyes are provided", async () => {
+  test("updateFaceModels calls setupAvatartextures if new eyes are provided", async () => {
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
     setupScenePresenterMockLoadingResults();
     viewModel.currentAvatarConfig.Value.eyes = 0;
@@ -420,7 +321,7 @@ describe("AvatarEditorPreviewModelView", () => {
       AvatarNoseTexture,
     );
   });
-  test("updateFaceModels calls setupAvatartextures if a new mouth are provided", async () => {
+  test("updateFaceModels calls setupAvatartextures if a new mouth is provided", async () => {
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
     setupScenePresenterMockLoadingResults();
     viewModel.currentAvatarConfig.Value.mouth = 0;
@@ -633,7 +534,7 @@ describe("AvatarEditorPreviewModelView", () => {
       AvatarModelTransforms.backpack,
     );
   });
-  test("updateAccessoireModels calls updateModel if a new 'other'' is provided", async () => {
+  test("updateAccessoireModels calls updateModel if a new 'other' is provided", async () => {
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
     setupScenePresenterMockLoadingResults();
     viewModel.otherMeshes = new Map([
@@ -673,5 +574,30 @@ describe("AvatarEditorPreviewModelView", () => {
     } as Partial<AvatarConfigTO>);
 
     expect(systemUnderTest["updateSkinColor"]).toHaveBeenCalledTimes(4);
+  });
+
+  test("updateModel updates the visibility of updated meshes", async () => {
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    setupScenePresenterMockLoadingResults();
+    const mesh = new Mesh("TestMesh", new Scene(new NullEngine()));
+
+    viewModel.hairMeshes = new Map([["hair-backhead", [mesh]]]);
+
+    // set visibility of all meshes in the map to false
+    viewModel.hairMeshes.forEach((meshes, type) => {
+      meshes.forEach((mesh) => {
+        mesh.isVisible = false;
+      });
+    });
+
+    // check visibility of first mesh
+    expect(viewModel.hairMeshes.get("hair-backhead")![0].isVisible).toBe(false);
+    await systemUnderTest["updateModel"](
+      "hair-backhead",
+      "hair/hairstyle",
+      viewModel.hairMeshes,
+      viewModel.hairAnchorNode,
+    );
+    expect(viewModel.hairMeshes.get("hair-backhead")![0].isVisible).toBe(true);
   });
 });
