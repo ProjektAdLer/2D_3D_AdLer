@@ -240,7 +240,6 @@ export default class BackendAdapter implements IBackendPort {
     userToken: string,
     avatarConfig: BackendAvatarConfigTO,
   ): Promise<boolean> {
-    console.log("UPDATE CONFIG", avatarConfig);
     const response = await axios.post<boolean>("/Player/Avatar", avatarConfig, {
       headers: {
         token: userToken,
