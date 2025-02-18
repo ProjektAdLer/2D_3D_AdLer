@@ -17,7 +17,7 @@ import AvatarConfigTO from "../../../../../Core/Application/DataTransferObjects/
 import { AvatarColor } from "../../../../../Core/Domain/AvatarModels/AvatarColorPalette";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import ILoadAvatarConfigUseCase from "../../../../../Core/Application/UseCases/LoadAvatarConfig/ILoadAvatarConfigUseCase";
-import { Transform } from "stream";
+import { AvatarEyeBrowTexture } from "../../../../../Core/Domain/AvatarModels/AvatarFaceUVTexture";
 
 const loadAvatarConfigMock = mock<ILoadAvatarConfigUseCase>();
 const scenePresenterMock = mockDeep<IScenePresenter>();
@@ -128,7 +128,6 @@ describe("AvatarEditorPreviewModelView", () => {
   test("asyncSetup calls updateAllModels", async () => {
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
     setupScenePresenterMockLoadingResults();
-    // AvatarEditorUtils.getAvatarAnchorNodes = jest.fn();
     const avatarEditorUtilsMock = jest.fn().mockReturnValue({
       hairNode: new TransformNode("hairNode"),
       beardNode: new TransformNode("beardNode"),
@@ -355,5 +354,25 @@ describe("AvatarEditorPreviewModelView", () => {
     } as Partial<AvatarConfigTO>);
 
     expect(AvatarEditorUtils.setupAvatarColor).toHaveBeenCalled();
+  });
+
+  test("updateFaceModels calls setupAvatartextures if a new eyebrows are provided", async () => {
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    setupScenePresenterMockLoadingResults();
+    viewModel.currentAvatarConfig.Value.eyebrows = 0;
+    viewModel.avatarConfigDiff.Value.eyebrows = 0;
+
+    AvatarEditorUtils.setupAvatarTextures = jest.fn();
+
+    await systemUnderTest["updateFaceModels"]({
+      eyebrows: 1,
+    } as Partial<AvatarConfigTO>);
+
+    expect(AvatarEditorUtils.setupAvatarTextures).toHaveBeenCalledWith(
+      1,
+      undefined,
+      "mat_Eyebrows",
+      AvatarEyeBrowTexture,
+    );
   });
 });
