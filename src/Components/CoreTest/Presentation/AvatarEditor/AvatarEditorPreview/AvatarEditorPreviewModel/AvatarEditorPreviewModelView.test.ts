@@ -438,4 +438,140 @@ describe("AvatarEditorPreviewModelView", () => {
       AvatarMouthTexture,
     );
   });
+
+  test("updateClothingModels calls updateModel if a new shirt is provided", async () => {
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    setupScenePresenterMockLoadingResults();
+    viewModel.currentAvatarConfig.Value.shirt = "shirts-dress";
+    viewModel.shirtMeshes = new Map([
+      ["shirts-dress", [new Mesh("mockMesh"), new Mesh("mockMesh")]],
+    ]);
+    systemUnderTest["updateModel"] = jest.fn();
+
+    await systemUnderTest["updateClothingModels"]({
+      shirt: "shirts-hoodie",
+    } as Partial<AvatarConfigTO>);
+
+    expect(systemUnderTest["updateModel"]).toHaveBeenCalledWith(
+      "shirts-hoodie",
+      "clothing/shirts",
+      viewModel.shirtMeshes,
+      viewModel.shirtAnchorNode,
+    );
+  });
+  test("updateClothingModels calls updateModel if new pants are provided", async () => {
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    setupScenePresenterMockLoadingResults();
+    viewModel.currentAvatarConfig.Value.pants = "pants-cargo";
+    viewModel.pantsMeshes = new Map([
+      ["pants-cargo", [new Mesh("mockMesh"), new Mesh("mockMesh")]],
+    ]);
+    systemUnderTest["updateModel"] = jest.fn();
+
+    await systemUnderTest["updateClothingModels"]({
+      pants: "pants-cargo",
+    } as Partial<AvatarConfigTO>);
+
+    expect(systemUnderTest["updateModel"]).toHaveBeenCalledWith(
+      "pants-cargo",
+      "clothing/pants",
+      viewModel.pantsMeshes,
+      viewModel.pantsAnchorNode,
+    );
+  });
+  test("updateClothingModels calls updateModel if new shoes are provided", async () => {
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    setupScenePresenterMockLoadingResults();
+    viewModel.currentAvatarConfig.Value.shoes = "shoes-boots";
+    viewModel.shoesMeshes = new Map([
+      ["shoes-boots", [new Mesh("mockMesh"), new Mesh("mockMesh")]],
+    ]);
+    systemUnderTest["updateModel"] = jest.fn();
+
+    await systemUnderTest["updateClothingModels"]({
+      shoes: "shoes-boots",
+    } as Partial<AvatarConfigTO>);
+
+    expect(systemUnderTest["updateModel"]).toHaveBeenCalledWith(
+      "shoes-boots",
+      "clothing/shoes",
+      viewModel.shoesMeshes,
+      viewModel.shoesAnchorNode,
+    );
+  });
+  test("updateClothingModels calls setupAvatarColor if a new shirtColor is provided", async () => {
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    setupScenePresenterMockLoadingResults();
+    viewModel.currentAvatarConfig.Value.shirt = "shirts-dress";
+    viewModel.shirtMeshes = new Map([
+      ["shirts-dress", [new Mesh("mockMesh"), new Mesh("mockMesh")]],
+    ]);
+    const color = {
+      id: 0,
+      nameKey: "Black 1",
+      hexColor: "#000000",
+      uOffset: 0,
+      vOffset: 0,
+    } as AvatarColor;
+    viewModel.currentAvatarConfig.Value.shirtColor = color;
+
+    await systemUnderTest["updateClothingModels"]({
+      shirtColor: color,
+    } as Partial<AvatarConfigTO>);
+
+    expect(AvatarEditorUtils.setupAvatarColor).toHaveBeenCalledWith(
+      viewModel.shirtMeshes.get("shirts-dress")![1],
+      color,
+    );
+  });
+  test("updateClothingModels calls setupAvatarColor if a new pantsColor is provided", async () => {
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    setupScenePresenterMockLoadingResults();
+    viewModel.currentAvatarConfig.Value.pants = "pants-cargo";
+    viewModel.pantsMeshes = new Map([
+      ["pants-cargo", [new Mesh("mockMesh"), new Mesh("mockMesh")]],
+    ]);
+    const color = {
+      id: 0,
+      nameKey: "Black 1",
+      hexColor: "#000000",
+      uOffset: 0,
+      vOffset: 0,
+    } as AvatarColor;
+    viewModel.currentAvatarConfig.Value.pantsColor = color;
+
+    await systemUnderTest["updateClothingModels"]({
+      pantsColor: color,
+    } as Partial<AvatarConfigTO>);
+
+    expect(AvatarEditorUtils.setupAvatarColor).toHaveBeenCalledWith(
+      viewModel.pantsMeshes.get("pants-cargo")![1],
+      color,
+    );
+  });
+  test("updateClothingModels calls setupAvatarColor if a new shoesColor is provided", async () => {
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    setupScenePresenterMockLoadingResults();
+    viewModel.currentAvatarConfig.Value.shoes = "shoes-boots";
+    viewModel.shoesMeshes = new Map([
+      ["shoes-boots", [new Mesh("mockMesh"), new Mesh("mockMesh")]],
+    ]);
+    const color = {
+      id: 0,
+      nameKey: "Black 1",
+      hexColor: "#000000",
+      uOffset: 0,
+      vOffset: 0,
+    } as AvatarColor;
+    viewModel.currentAvatarConfig.Value.shoesColor = color;
+
+    await systemUnderTest["updateClothingModels"]({
+      shoesColor: color,
+    } as Partial<AvatarConfigTO>);
+
+    expect(AvatarEditorUtils.setupAvatarColor).toHaveBeenCalledWith(
+      viewModel.shoesMeshes.get("shoes-boots")![1],
+      color,
+    );
+  });
 });
