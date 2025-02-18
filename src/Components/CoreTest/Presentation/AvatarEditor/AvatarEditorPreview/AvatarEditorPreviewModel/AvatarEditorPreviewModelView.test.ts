@@ -1,4 +1,4 @@
-import { mockDeep } from "jest-mock-extended";
+import { mockDeep, mock } from "jest-mock-extended";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import SCENE_TYPES from "../../../../../Core/DependencyInjection/Scenes/SCENE_TYPES";
 import AvatarEditorPreviewModelView from "../../../../../Core/Presentation/AvatarEditor/AvatarEditorPreview/AvatarEditorPreviewModel/AvatarEditorPreviewModelView";
@@ -10,14 +10,20 @@ import {
   Mesh,
   NullEngine,
   Scene,
+  TransformNode,
 } from "@babylonjs/core";
 import AvatarEditorUtils from "../../../../../Core/Presentation/AvatarEditor/AvatarEditorUtils";
 import AvatarConfigTO from "../../../../../Core/Application/DataTransferObjects/AvatarConfigTO";
 import { AvatarColor } from "../../../../../Core/Domain/AvatarModels/AvatarColorPalette";
+import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
+import ILoadAvatarConfigUseCase from "../../../../../Core/Application/UseCases/LoadAvatarConfig/ILoadAvatarConfigUseCase";
+import { Transform } from "stream";
 
+const loadAvatarConfigMock = mock<ILoadAvatarConfigUseCase>();
 const scenePresenterMock = mockDeep<IScenePresenter>();
 const scenePresenterFactoryMock = () => scenePresenterMock;
-// const avatarEditorUtilsMock = mock<AvatarEditorUtils>();
+// const avatarEditorUtilsMock = mockDeep<AvatarEditorUtils>();
+
 function buildSystemUnderTest(): [
   AvatarEditorPreviewModelViewModel,
   AvatarEditorPreviewModelView,
@@ -76,6 +82,9 @@ describe("AvatarEditorPreviewModelView", () => {
     CoreDIContainer.rebind(SCENE_TYPES.ScenePresenterFactory).toConstantValue(
       scenePresenterFactoryMock,
     );
+    CoreDIContainer.rebind(
+      USECASE_TYPES.ILoadAvatarConfigUseCase,
+    ).toConstantValue(loadAvatarConfigMock);
   });
   beforeEach(() => {
     buildSystemUnderTest();
@@ -103,6 +112,40 @@ describe("AvatarEditorPreviewModelView", () => {
     expect(viewModel.avatarConfigDiff["subscribers"]).toStrictEqual([
       systemUnderTest["onAvatarConfigChanged"],
     ]);
+  });
+
+  test("onAvatarConfigChanged calls updateAllModels", async () => {
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    systemUnderTest["updateAllModels"] = jest.fn();
+
+    viewModel.avatarConfigDiff.Value = { hair: "hair-backhead" };
+
+    await systemUnderTest["onAvatarConfigChanged"]();
+
+    expect(systemUnderTest["updateAllModels"]).toHaveBeenCalled();
+  });
+
+  test("asyncSetup calls updateAllModels", async () => {
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    setupScenePresenterMockLoadingResults();
+    // AvatarEditorUtils.getAvatarAnchorNodes = jest.fn();
+    const avatarEditorUtilsMock = jest.fn().mockReturnValue({
+      hairNode: new TransformNode("hairNode"),
+      beardNode: new TransformNode("beardNode"),
+      shirtNode: new TransformNode("shirtNode"),
+      pantsNode: new TransformNode("pantsNode"),
+      shoesNode: new TransformNode("shoesNode"),
+      headGearNode: new TransformNode("headGearNode"),
+      glassesNode: new TransformNode("glassesNode"),
+      backpackNode: new TransformNode("backpackNode"),
+      otherNode: new TransformNode("otherNode"),
+    });
+    AvatarEditorUtils.getAvatarAnchorNodes = avatarEditorUtilsMock;
+    systemUnderTest["updateAllModels"] = jest.fn();
+
+    await systemUnderTest["asyncSetup"]();
+
+    expect(systemUnderTest["updateAllModels"]).toHaveBeenCalled();
   });
 
   test("updateAllModels calls all the update functions", async () => {
