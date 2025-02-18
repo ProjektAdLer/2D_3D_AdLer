@@ -17,7 +17,12 @@ import AvatarConfigTO from "../../../../../Core/Application/DataTransferObjects/
 import { AvatarColor } from "../../../../../Core/Domain/AvatarModels/AvatarColorPalette";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import ILoadAvatarConfigUseCase from "../../../../../Core/Application/UseCases/LoadAvatarConfig/ILoadAvatarConfigUseCase";
-import { AvatarEyeBrowTexture } from "../../../../../Core/Domain/AvatarModels/AvatarFaceUVTexture";
+import {
+  AvatarEyeBrowTexture,
+  AvatarEyeTexture,
+  AvatarMouthTexture,
+  AvatarNoseTexture,
+} from "../../../../../Core/Domain/AvatarModels/AvatarFaceUVTexture";
 
 const loadAvatarConfigMock = mock<ILoadAvatarConfigUseCase>();
 const scenePresenterMock = mockDeep<IScenePresenter>();
@@ -373,6 +378,64 @@ describe("AvatarEditorPreviewModelView", () => {
       undefined,
       "mat_Eyebrows",
       AvatarEyeBrowTexture,
+    );
+  });
+
+  test("updateFaceModels calls setupAvatartextures if a new eyes are provided", async () => {
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    setupScenePresenterMockLoadingResults();
+    viewModel.currentAvatarConfig.Value.eyes = 0;
+    viewModel.avatarConfigDiff.Value.eyes = 0;
+
+    AvatarEditorUtils.setupAvatarTextures = jest.fn();
+
+    await systemUnderTest["updateFaceModels"]({
+      eyes: 1,
+    } as Partial<AvatarConfigTO>);
+
+    expect(AvatarEditorUtils.setupAvatarTextures).toHaveBeenCalledWith(
+      1,
+      undefined,
+      "mat_Eyes",
+      AvatarEyeTexture,
+    );
+  });
+  test("updateFaceModels calls setupAvatartextures if a new nose is provided", async () => {
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    setupScenePresenterMockLoadingResults();
+    viewModel.currentAvatarConfig.Value.nose = 0;
+    viewModel.avatarConfigDiff.Value.nose = 0;
+
+    AvatarEditorUtils.setupAvatarTextures = jest.fn();
+
+    await systemUnderTest["updateFaceModels"]({
+      nose: 1,
+    } as Partial<AvatarConfigTO>);
+
+    expect(AvatarEditorUtils.setupAvatarTextures).toHaveBeenCalledWith(
+      1,
+      undefined,
+      "mat_Nose",
+      AvatarNoseTexture,
+    );
+  });
+  test("updateFaceModels calls setupAvatartextures if a new mouth are provided", async () => {
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    setupScenePresenterMockLoadingResults();
+    viewModel.currentAvatarConfig.Value.mouth = 0;
+    viewModel.avatarConfigDiff.Value.mouth = 0;
+
+    AvatarEditorUtils.setupAvatarTextures = jest.fn();
+
+    await systemUnderTest["updateFaceModels"]({
+      mouth: 1,
+    } as Partial<AvatarConfigTO>);
+
+    expect(AvatarEditorUtils.setupAvatarTextures).toHaveBeenCalledWith(
+      1,
+      undefined,
+      "mat_Mouth",
+      AvatarMouthTexture,
     );
   });
 });
