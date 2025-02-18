@@ -23,6 +23,7 @@ import {
   AvatarMouthTexture,
   AvatarNoseTexture,
 } from "../../../../../Core/Domain/AvatarModels/AvatarFaceUVTexture";
+import AvatarModelTransforms from "../../../../../Core/Domain/AvatarModels/AvatarModelTransforms";
 
 const loadAvatarConfigMock = mock<ILoadAvatarConfigUseCase>();
 const scenePresenterMock = mockDeep<IScenePresenter>();
@@ -573,5 +574,104 @@ describe("AvatarEditorPreviewModelView", () => {
       viewModel.shoesMeshes.get("shoes-boots")![1],
       color,
     );
+  });
+  test("updateAccessoireModels calls updateModel if a new headGear is provided", async () => {
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    setupScenePresenterMockLoadingResults();
+    viewModel.headGearMeshes = new Map([
+      ["hats-cowboy", [new Mesh("mockMesh"), new Mesh("mockMesh")]],
+    ]);
+    systemUnderTest["updateModel"] = jest.fn();
+
+    await systemUnderTest["updateAccessoireModels"]({
+      headgear: "hats-cowboy",
+    } as Partial<AvatarConfigTO>);
+
+    expect(systemUnderTest["updateModel"]).toHaveBeenCalledWith(
+      "hats-cowboy",
+      "accessoires/headgear",
+      viewModel.headGearMeshes,
+      viewModel.headGearAnchorNode,
+    );
+  });
+  test("updateAccessoireModels calls updateModel if new glasses are provided", async () => {
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    setupScenePresenterMockLoadingResults();
+    viewModel.glassesMeshes = new Map([
+      ["glasses-browline", [new Mesh("mockMesh"), new Mesh("mockMesh")]],
+    ]);
+    systemUnderTest["updateModel"] = jest.fn();
+
+    await systemUnderTest["updateAccessoireModels"]({
+      glasses: "glasses-browline",
+    } as Partial<AvatarConfigTO>);
+
+    expect(systemUnderTest["updateModel"]).toHaveBeenCalledWith(
+      "glasses-browline",
+      "accessoires/glasses",
+      viewModel.glassesMeshes,
+      viewModel.glassesAnchorNode,
+    );
+  });
+  test("updateAccessoireModels calls updateModel if a new backpack is provided", async () => {
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    setupScenePresenterMockLoadingResults();
+    viewModel.backpackMeshes = new Map([
+      ["backpack-santapack", [new Mesh("mockMesh"), new Mesh("mockMesh")]],
+    ]);
+    systemUnderTest["updateModel"] = jest.fn();
+
+    await systemUnderTest["updateAccessoireModels"]({
+      backpack: "backpack-santapack",
+    } as Partial<AvatarConfigTO>);
+
+    expect(systemUnderTest["updateModel"]).toHaveBeenCalledWith(
+      "backpack-santapack",
+      "accessoires/backpack",
+      viewModel.backpackMeshes,
+      viewModel.backpackAnchorNode,
+      AvatarModelTransforms.backpack,
+    );
+  });
+  test("updateAccessoireModels calls updateModel if a new 'other'' is provided", async () => {
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    setupScenePresenterMockLoadingResults();
+    viewModel.otherMeshes = new Map([
+      ["other-sheriff-star", [new Mesh("mockMesh"), new Mesh("mockMesh")]],
+    ]);
+    systemUnderTest["updateModel"] = jest.fn();
+
+    await systemUnderTest["updateAccessoireModels"]({
+      other: "other-sheriff-star",
+    } as Partial<AvatarConfigTO>);
+
+    expect(systemUnderTest["updateModel"]).toHaveBeenCalledWith(
+      "other-sheriff-star",
+      "accessoires/other",
+      viewModel.otherMeshes,
+      viewModel.otherAnchorNode,
+      AvatarModelTransforms.sheriffStar,
+    );
+  });
+  test("updateBodyModels calls updateSkinColor if a new skinColor is provided", async () => {
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    setupScenePresenterMockLoadingResults();
+    const color = {
+      id: 0,
+      nameKey: "Dark 1",
+      hexColor: "#4f2a1a",
+      uOffset: 0,
+      vOffset: 0,
+    } as AvatarColor;
+    viewModel.currentAvatarConfig.Value.skinColor = color;
+    viewModel.baseModelMeshes = [new Mesh("mockMesh")];
+
+    systemUnderTest["updateSkinColor"] = jest.fn();
+
+    await systemUnderTest["updateBodyModels"]({
+      skinColor: color,
+    } as Partial<AvatarConfigTO>);
+
+    expect(systemUnderTest["updateSkinColor"]).toHaveBeenCalledTimes(4);
   });
 });
