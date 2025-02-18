@@ -364,18 +364,16 @@ export default class AvatarEditorPreviewModelView {
     let skinMat = skinMeshes.find((mesh) =>
       mesh.material?.name.includes("mat_Skin"),
     )?.material;
-
     // Set Displacement of current mesh UV Map
     const uDisplacement = 0.625;
     const vDisplacement = 0;
 
-    let skinUOffset = skinColor?.uOffset ?? 0;
-    let skinVOffset = skinColor?.vOffset ?? 0;
+    let skinUOffset = skinColor.uOffset ?? 0;
+    let skinVOffset = skinColor.vOffset ?? 0;
 
     if (skinMat === undefined || skinMat === null) return;
     let textures = skinMat.getActiveTextures() as Texture[];
     textures.forEach((texture) => {
-      if (texture === undefined) return;
       texture.uOffset = skinUOffset - uDisplacement;
       texture.vOffset = skinVOffset - vDisplacement;
     });
