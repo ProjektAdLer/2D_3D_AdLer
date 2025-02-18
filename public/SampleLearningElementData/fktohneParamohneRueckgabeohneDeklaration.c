@@ -1,5 +1,8 @@
 #include <stdio.h>
 
+/* Deklaration der Funktion ausgabe */
+void ausgabe();
+
 /* Definition der Funktion main*/
 int main()
 {
@@ -14,3 +17,6 @@ void ausgabe()
 {
 	printf("Funktion ausgabe() wird aufgerufen\n");
 }
+
+/* Definiton der Funktion eineEwigLangerNameFuerEineFunktionDieNichtAufgerufenWirdWeilSieNichtRelevantIst */
+void eineEwigLangerNameFuerEineFunktionDieNichtAufgerufenWirdWeilSieNichtRelevantIst() {};

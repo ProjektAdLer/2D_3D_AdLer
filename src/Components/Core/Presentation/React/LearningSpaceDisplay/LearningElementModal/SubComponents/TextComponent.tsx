@@ -13,7 +13,7 @@ export default function TextComponent({
   useEffect(() => {
     if (filepath !== undefined) {
       fetch(filepath).then((response) =>
-        response.text().then((text) => setText(text))
+        response.text().then((text) => setText(text)),
       );
     }
   }, [filepath]);
@@ -21,7 +21,7 @@ export default function TextComponent({
   return (
     <div className="flex justify-center max-h-[75vh] lg:max-h-[85vh] xl:max-h-[85vh] w-fit h-fit max-w-[99vw] font-medium text-black">
       <pre>
-        <p className="w-[80vw] md:w-[60vw] lg:w-[50vw] xl:w-[40vw] 2xl:[30vw] p-8 bg-white rounded-lg overflow-auto">
+        <p className="w-[80vw] md:w-[60vw] lg:w-[50vw] xl:w-[40vw] 2xl:[30vw] p-8 bg-white rounded-lg overflow-auto text-wrap break-words">
           {text}
         </p>
       </pre>
