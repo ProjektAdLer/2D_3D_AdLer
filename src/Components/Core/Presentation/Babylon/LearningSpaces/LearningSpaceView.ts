@@ -62,6 +62,8 @@ export default class LearningSpaceView implements ILearningSpaceView {
       this.scenePresenter.Scene,
     );
 
+    this.viewModel.floorMaterial.alpha = 0;
+
     this.viewModel.floorMaterial.diffuseTexture = new Texture(
       LearningSpaceThemeLookup.getLearningSpaceTheme(
         this.viewModel.theme,
@@ -88,6 +90,8 @@ export default class LearningSpaceView implements ILearningSpaceView {
     (this.viewModel.wallMaterial.diffuseTexture as Texture).vScale = 1.5;
     (this.viewModel.wallMaterial.diffuseTexture as Texture).uScale = 6;
     this.viewModel.wallMaterial.specularColor = new Color3(0, 0, 0);
+
+    this.viewModel.wallMaterial.alpha = 0;
   }
 
   private async createFloor(): Promise<void> {

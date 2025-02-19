@@ -46,7 +46,7 @@ export const LearningSpaceTheme_CampusAB: ILearningSpaceTheme = {
   entryDoorModel: require("../../../../Assets/3dModels/campusTheme/d-door-campus-entry.glb"),
   exitDoorModel: require("../../../../Assets/3dModels/campusTheme/d-door-campus-exit.glb"),
   windowModel: require("../../../../Assets/3dModels/campusTheme/d-door-campus-window.glb"),
-  ambienceModel: require("../../../../Assets/3dModels/campusTheme/env-campus-ab.glb"),
+  ambienceModel: require("../../../../Assets/3dModels/campusTheme/Sub_Env_Library.glb"),
   storyElementModel:
     LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC,
   insideDecorationModels: {
@@ -75,7 +75,7 @@ export const LearningSpaceTheme_CampusKE: ILearningSpaceTheme = {
   entryDoorModel: LearningSpaceTheme_CampusAB.entryDoorModel,
   exitDoorModel: LearningSpaceTheme_CampusAB.exitDoorModel,
   windowModel: LearningSpaceTheme_CampusAB.windowModel,
-  ambienceModel: require("../../../../Assets/3dModels/campusTheme/env-campus-ke.glb"),
+  ambienceModel: require("../../../../Assets/3dModels/campusTheme/Sub_Env_Mensa.glb"),
   storyElementModel: LearningSpaceTheme_CampusAB.storyElementModel,
   insideDecorationModels: LearningSpaceTheme_CampusAB.insideDecorationModels,
   outsideDecorationModels: LearningSpaceTheme_CampusAB.outsideDecorationModels,
