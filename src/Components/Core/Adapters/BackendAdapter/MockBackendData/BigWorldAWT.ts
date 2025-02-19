@@ -31,7 +31,7 @@ const BigWorldAWT: AWT = {
     spaces: [
       {
         spaceId: 1,
-        spaceName: "Intro Story",
+        spaceName: "Mensa Subtheme",
         spaceDescription: "Ja, der Name dieses Raumes ist extrea so lang",
         spaceGoals: [
           "Ziel des abgeschlossenen Raumes 1/3",
@@ -42,7 +42,7 @@ const BigWorldAWT: AWT = {
         requiredPointsToComplete: 1,
         requiredSpacesToEnter: "",
         spaceTemplate: "R_20X20_6L",
-        spaceTemplateStyle: "CampusKE",
+        spaceTemplateStyle: "CAMPUSKEMPTEN",
         spaceStory: {
           introStory: {
             storyTexts: [
@@ -57,7 +57,7 @@ const BigWorldAWT: AWT = {
       },
       {
         spaceId: 2,
-        spaceName: "Outro Story",
+        spaceName: "Bib Subtheme",
         spaceDescription: "rdescription2",
         spaceGoals: ["rgoals2"],
         spaceSlotContents: [2],
