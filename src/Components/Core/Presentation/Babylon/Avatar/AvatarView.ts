@@ -132,8 +132,8 @@ export default class AvatarView {
 
   @bind
   private setupBlinkAnimation(): void {
-    const eyeMaterial = this.viewModel.meshes.find(
-      (mesh) => mesh.material?.name === AvatarModelMaterialNames.eyes,
+    const eyeMaterial = this.viewModel.meshes.find((mesh) =>
+      mesh.material?.name.includes(AvatarModelMaterialNames.eyes),
     )?.material!;
     this.viewModel.eyeTextures = eyeMaterial.getActiveTextures() as Texture[];
     this.setBlinkTimeout();
