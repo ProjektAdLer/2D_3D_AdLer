@@ -120,7 +120,7 @@ export default class AvatarView {
         case "ac_anim_idle2":
           this.idleAnimation = animationGroup;
           break;
-        case "ac_anim_walkcycle":
+        case "BHWalkCycle2":
           this.walkAnimation = animationGroup;
           break;
         case "ac_anim_interact":
