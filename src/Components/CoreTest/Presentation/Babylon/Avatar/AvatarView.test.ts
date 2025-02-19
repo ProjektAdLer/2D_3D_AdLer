@@ -338,7 +338,7 @@ describe("AvatarView", () => {
         new TransformNode("AvatarParentNode", new Scene(new NullEngine())),
       );
       const mockAnimationGroup = mockDeep<AnimationGroup>();
-      mockAnimationGroup.name = "ac_anim_walkcycle";
+      mockAnimationGroup.name = "BHWalkCycle2";
       const mockLoadingResult = mockDeep<ISceneLoaderAsyncResult>();
       // @ts-ignore
       mockLoadingResult.animationGroups = [mockAnimationGroup];
