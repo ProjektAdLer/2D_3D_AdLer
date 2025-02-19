@@ -5,9 +5,18 @@ export interface AvatarUVOffset {
   vOffset: number;
 }
 
+/**
+  To add new Texture:
+  1. increment variable numberOf[...]
+  2. change uv-offsets of corresponding texture, if it has changed
+  3. If new texture is a pair of eyes: add name of texture to bottom of name list of eyes 
+*/
+
+const numberOfEyebrows = 12;
 const AvatarEyeBrowTexture: AvatarUVOffset[] = [];
-for (let y = 0; y < 3; y++) {
+for (let y = 0; y < Math.ceil(numberOfEyebrows / 4); y++) {
   for (let x = 0; x < 4; x++) {
+    if (AvatarEyeBrowTexture.length === numberOfEyebrows) break;
     AvatarEyeBrowTexture.push({
       id: x + y * 4,
       name: "Brows_" + (1 + x + y * 4).toString(),
@@ -18,9 +27,11 @@ for (let y = 0; y < 3; y++) {
 }
 export { AvatarEyeBrowTexture };
 
+const numberOfEyes = 36;
 const AvatarEyeTexture: AvatarUVOffset[] = [];
-for (let y = 0; y < 9; y++) {
+for (let y = 0; y < Math.ceil(numberOfEyes / 4); y++) {
   for (let x = 0; x < 4; x++) {
+    if (AvatarEyeTexture.length === numberOfEyes) break;
     AvatarEyeTexture.push({
       id: x + y * 4,
       name:
@@ -42,9 +53,11 @@ for (let y = 0; y < 9; y++) {
 }
 export { AvatarEyeTexture };
 
+const numberOfNoses = 18;
 const AvatarNoseTexture: AvatarUVOffset[] = [];
-for (let y = 0; y < 3; y++) {
+for (let y = 0; y < Math.ceil(numberOfNoses / 6); y++) {
   for (let x = 0; x < 6; x++) {
+    if (AvatarNoseTexture.length === numberOfNoses) break;
     AvatarNoseTexture.push({
       id: x + y * 6,
       name: "Nose_" + (1 + x + y * 6).toString(),
@@ -55,9 +68,11 @@ for (let y = 0; y < 3; y++) {
 }
 export { AvatarNoseTexture };
 
+const numberOfMouths = 30;
 const AvatarMouthTexture: AvatarUVOffset[] = [];
-for (let y = 0; y < 5; y++) {
+for (let y = 0; y < Math.ceil(numberOfMouths / 6); y++) {
   for (let x = 0; x < 6; x++) {
+    if (AvatarMouthTexture.length === numberOfMouths) break;
     AvatarMouthTexture.push({
       id: x + y * 6,
       name: "Mouth_" + (1 + x + y * 6).toString(),
