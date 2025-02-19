@@ -7,7 +7,6 @@ import IScenePresenter from "../../../../../Core/Presentation/Babylon/SceneManag
 import {
   AbstractMesh,
   AnimationGroup,
-  Material,
   Mesh,
   NullEngine,
   Scene,
@@ -31,7 +30,6 @@ import AvatarModelTransforms from "../../../../../Core/Domain/AvatarModels/Avata
 const loadAvatarConfigMock = mock<ILoadAvatarConfigUseCase>();
 const scenePresenterMock = mockDeep<IScenePresenter>();
 const scenePresenterFactoryMock = () => scenePresenterMock;
-// const avatarEditorUtilsMock = mockDeep<AvatarEditorUtils>();
 
 function buildSystemUnderTest(): [
   AvatarEditorPreviewModelViewModel,
