@@ -555,7 +555,7 @@ describe("AvatarEditorPreviewModelView", () => {
       AvatarModelTransforms.sheriffStar,
     );
   });
-  test("updateBodyModels calls updateSkinColor if a new skinColor is provided", async () => {
+  test("updateBodyModels calls setUpSkinColor if a new skinColor is provided", async () => {
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
     setupScenePresenterMockLoadingResults();
     const color = {
@@ -574,95 +574,7 @@ describe("AvatarEditorPreviewModelView", () => {
       skinColor: color,
     } as Partial<AvatarConfigTO>);
 
-    expect(systemUnderTest["updateSkinColor"]).toHaveBeenCalledTimes(4);
-  });
-
-  test("updateSkinColor returns if skinMeshes are not defined", async () => {
-    const [viewModel, systemUnderTest] = buildSystemUnderTest();
-    setupScenePresenterMockLoadingResults();
-    const color = {
-      id: 0,
-      nameKey: "Dark 1",
-      hexColor: "#4f2a1a",
-      uOffset: 0,
-      vOffset: 0,
-    } as AvatarColor;
-    viewModel.baseModelMeshes = [new Mesh("mockMesh")];
-
-    const functionSpy = jest.spyOn(
-      systemUnderTest as unknown as any,
-      "updateSkinColor",
-    );
-    await systemUnderTest["updateSkinColor"](color);
-
-    expect(functionSpy).toHaveReturned();
-  });
-  test("updateSkinColor returns if skinMeshes are null", async () => {
-    const [viewModel, systemUnderTest] = buildSystemUnderTest();
-    setupScenePresenterMockLoadingResults();
-    const color = {
-      id: 0,
-      nameKey: "Dark 1",
-      hexColor: "#4f2a1a",
-      uOffset: 0,
-      vOffset: 0,
-    } as AvatarColor;
-    viewModel.baseModelMeshes = [new Mesh("mockMesh")];
-
-    const functionSpy = jest.spyOn(
-      systemUnderTest as unknown as any,
-      "updateSkinColor",
-    );
-    await systemUnderTest["updateSkinColor"](color, null!);
-
-    expect(functionSpy).toHaveReturned();
-  });
-  test("updateSkinColor returns if material on skinMeshes are undefined", async () => {
-    const [viewModel, systemUnderTest] = buildSystemUnderTest();
-    setupScenePresenterMockLoadingResults();
-    const color = {
-      id: 0,
-      nameKey: "Dark 1",
-      hexColor: "#4f2a1a",
-      uOffset: 1,
-      vOffset: 2,
-    } as AvatarColor;
-    viewModel.baseModelMeshes = [new Mesh("mockMesh")];
-    viewModel.baseModelMeshes[0].material = undefined!;
-
-    const functionSpy = jest.spyOn(
-      systemUnderTest as unknown as any,
-      "updateSkinColor",
-    );
-
-    await systemUnderTest["updateSkinColor"](color, viewModel.baseModelMeshes);
-    expect(functionSpy).toHaveReturned();
-  });
-
-  test("updateSkinColor displaces textures correctly", async () => {
-    const [viewModel, systemUnderTest] = buildSystemUnderTest();
-    setupScenePresenterMockLoadingResults();
-    const color = {
-      id: 0,
-      nameKey: "Dark 1",
-      hexColor: "#4f2a1a",
-      uOffset: 1,
-      vOffset: 2,
-    } as AvatarColor;
-    viewModel.baseModelMeshes = [new Mesh("mockMesh")];
-    const mockMaterial = new StandardMaterial(
-      "mat_Skin",
-      new Scene(new NullEngine()),
-    );
-    const mockTexture = new Texture("testTexture", new Scene(new NullEngine()));
-    viewModel.baseModelMeshes[0].material = mockMaterial;
-    mockMaterial.diffuseTexture = mockTexture;
-
-    await systemUnderTest["updateSkinColor"](color, viewModel.baseModelMeshes);
-    const testedTexture =
-      viewModel.baseModelMeshes[0].material.getActiveTextures()[0] as Texture;
-    expect(testedTexture.uOffset).toBe(0.375);
-    expect(testedTexture.vOffset).toBe(2);
+    expect(AvatarEditorUtils.setupSkinColor).toHaveBeenCalledTimes(4);
   });
 
   test("updateModel updates the visibility of updated meshes", async () => {

@@ -22,6 +22,7 @@ import AvatarModelTransforms from "src/Components/Core/Domain/AvatarModels/Avata
 import bind from "bind-decorator";
 import AvatarConfigTO from "src/Components/Core/Application/DataTransferObjects/AvatarConfigTO";
 import AvatarModelMaterialNames from "src/Components/Core/Domain/AvatarModels/AvatarModelMaterialNames";
+import AvatarEditor from "../../AvatarEditor";
 const baseModelLink = require("../../../../../../Assets/3dModels/sharedModels/avatar/a-avatar-skeleton.glb");
 
 export default class AvatarEditorPreviewModelView {
@@ -219,11 +220,11 @@ export default class AvatarEditorPreviewModelView {
         )![1],
         this.viewModel.currentAvatarConfig.Value.shirtColor,
       );
-      this.updateSkinColor(
-        this.viewModel.currentAvatarConfig.Value.skinColor,
+      AvatarEditorUtils.setupSkinColor(
         this.viewModel.shirtMeshes.get(
           this.viewModel.currentAvatarConfig.Value.shirt,
-        ),
+        )!,
+        this.viewModel.currentAvatarConfig.Value.skinColor,
       );
     }
     if (config.shirtColor) {
@@ -247,11 +248,11 @@ export default class AvatarEditorPreviewModelView {
         )![1],
         this.viewModel.currentAvatarConfig.Value.pantsColor,
       );
-      this.updateSkinColor(
-        this.viewModel.currentAvatarConfig.Value.skinColor,
+      AvatarEditorUtils.setupSkinColor(
         this.viewModel.pantsMeshes.get(
           this.viewModel.currentAvatarConfig.Value.pants,
-        ),
+        )!,
+        this.viewModel.currentAvatarConfig.Value.skinColor,
       );
     }
     if (config.pantsColor) {
@@ -275,11 +276,11 @@ export default class AvatarEditorPreviewModelView {
         )![1],
         this.viewModel.currentAvatarConfig.Value.shoesColor,
       );
-      this.updateSkinColor(
-        this.viewModel.currentAvatarConfig.Value.skinColor,
+      AvatarEditorUtils.setupSkinColor(
         this.viewModel.shoesMeshes.get(
           this.viewModel.currentAvatarConfig.Value.shoes,
-        ),
+        )!,
+        this.viewModel.currentAvatarConfig.Value.skinColor,
       );
     }
     if (config.shoesColor) {
@@ -333,50 +334,29 @@ export default class AvatarEditorPreviewModelView {
     config: Partial<AvatarConfigTO>,
   ): Promise<void> {
     if (config.skinColor) {
-      this.updateSkinColor(
-        this.viewModel.currentAvatarConfig.Value.skinColor,
+      AvatarEditorUtils.setupSkinColor(
         this.viewModel.baseModelMeshes,
-      );
-      this.updateSkinColor(
         this.viewModel.currentAvatarConfig.Value.skinColor,
+      );
+      AvatarEditorUtils.setupSkinColor(
         this.viewModel.shirtMeshes.get(
           this.viewModel.currentAvatarConfig.Value.shirt,
-        ),
-      );
-      this.updateSkinColor(
+        )!,
         this.viewModel.currentAvatarConfig.Value.skinColor,
+      );
+      AvatarEditorUtils.setupSkinColor(
         this.viewModel.pantsMeshes.get(
           this.viewModel.currentAvatarConfig.Value.pants,
-        ),
-      );
-      this.updateSkinColor(
+        )!,
         this.viewModel.currentAvatarConfig.Value.skinColor,
+      );
+      AvatarEditorUtils.setupSkinColor(
         this.viewModel.shoesMeshes.get(
           this.viewModel.currentAvatarConfig.Value.shoes,
-        ),
+        )!,
+        this.viewModel.currentAvatarConfig.Value.skinColor,
       );
     }
-  }
-
-  private async updateSkinColor(skinColor?: AvatarColor, skinMeshes?: Mesh[]) {
-    if (skinColor === undefined || skinColor === null) return;
-    if (skinMeshes === undefined || skinMeshes === null) return;
-    let skinMat = skinMeshes.find((mesh) =>
-      mesh.material?.name.includes("mat_Skin"),
-    )?.material;
-    // Set Displacement of current mesh UV Map
-    const uDisplacement = 0.625;
-    const vDisplacement = 0;
-
-    let skinUOffset = skinColor.uOffset ?? 0;
-    let skinVOffset = skinColor.vOffset ?? 0;
-
-    if (skinMat === undefined || skinMat === null) return;
-    let textures = skinMat.getActiveTextures() as Texture[];
-    textures.forEach((texture) => {
-      texture.uOffset = skinUOffset - uDisplacement;
-      texture.vOffset = skinVOffset - vDisplacement;
-    });
   }
 
   private async updateModel<T>(
