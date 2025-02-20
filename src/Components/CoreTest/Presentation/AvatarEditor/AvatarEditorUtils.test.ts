@@ -8,9 +8,12 @@ import {
   NullEngine,
   Scene,
   Skeleton,
+  StandardMaterial,
+  Texture,
   TransformNode,
 } from "@babylonjs/core";
 import { waitFor } from "@testing-library/react";
+import { AvatarColor } from "../../../Core/Domain/AvatarModels/AvatarColorPalette";
 
 const scenePresenterMock = mock<ScenePresenter>();
 const skeletonMock = mock<Skeleton>();
@@ -70,5 +73,81 @@ describe("AvatarEditorUtils", () => {
         spriteManagers: [],
       });
     });
+  });
+
+  test("setupSkinColor returns if skinMeshes are not defined", () => {
+    const color = {
+      id: 0,
+      nameKey: "Dark 1",
+      hexColor: "#4f2a1a",
+      uOffset: 0,
+      vOffset: 0,
+    } as AvatarColor;
+    systemUnderTest = AvatarEditorUtils;
+
+    const functionSpy = jest.spyOn(systemUnderTest as any, "setupSkinColor");
+    systemUnderTest["setupSkinColor"](undefined, color);
+
+    expect(functionSpy).toHaveReturned();
+  });
+
+  test("setupSkinColor returns if skinMeshes are null", () => {
+    const color = {
+      id: 0,
+      nameKey: "Dark 1",
+      hexColor: "#4f2a1a",
+      uOffset: 0,
+      vOffset: 0,
+    } as AvatarColor;
+    systemUnderTest = AvatarEditorUtils;
+
+    const functionSpy = jest.spyOn(systemUnderTest as any, "setupSkinColor");
+    systemUnderTest["setupSkinColor"](null!, color);
+
+    expect(functionSpy).toHaveReturned();
+  });
+  test("setupSkinColor returns if material on skinMeshes are undefined", () => {
+    const color = {
+      id: 0,
+      nameKey: "Dark 1",
+      hexColor: "#4f2a1a",
+      uOffset: 1,
+      vOffset: 2,
+    } as AvatarColor;
+    systemUnderTest = AvatarEditorUtils;
+
+    const mockMeshArray = [new Mesh("mockMesh")];
+    mockMeshArray[0].material = undefined!;
+
+    const functionSpy = jest.spyOn(systemUnderTest as any, "setupSkinColor");
+
+    systemUnderTest["setupSkinColor"](mockMeshArray, color);
+    expect(functionSpy).toHaveReturned();
+  });
+
+  test("setupSkinColor displaces textures correctly", async () => {
+    const color = {
+      id: 0,
+      nameKey: "Dark 1",
+      hexColor: "#4f2a1a",
+      uOffset: 1,
+      vOffset: 2,
+    } as AvatarColor;
+    systemUnderTest = AvatarEditorUtils;
+
+    const mockMeshArray = [new Mesh("mockMesh")];
+    const mockMaterial = new StandardMaterial(
+      "mat_Skin",
+      new Scene(new NullEngine()),
+    );
+    const mockTexture = new Texture("testTexture", new Scene(new NullEngine()));
+    mockMeshArray[0].material = mockMaterial;
+    mockMaterial.diffuseTexture = mockTexture;
+
+    await systemUnderTest["setupSkinColor"](mockMeshArray, color);
+    const testedTexture =
+      mockMeshArray[0].material.getActiveTextures()[0] as Texture;
+    expect(testedTexture.uOffset).toBe(0.375);
+    expect(testedTexture.vOffset).toBe(2);
   });
 });

@@ -568,7 +568,7 @@ describe("AvatarEditorPreviewModelView", () => {
     viewModel.currentAvatarConfig.Value.skinColor = color;
     viewModel.baseModelMeshes = [new Mesh("mockMesh")];
 
-    systemUnderTest["updateSkinColor"] = jest.fn();
+    AvatarEditorUtils.setupSkinColor = jest.fn();
 
     await systemUnderTest["updateBodyModels"]({
       skinColor: color,
