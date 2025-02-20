@@ -14,7 +14,6 @@ export default function AvatarEditorBodyCategory(
   const [showModal, setShowModal] = useState(false);
   const [skinColor] = useObservable(props.viewModel.skinColor);
 
-  if (!props.controller || !props.viewModel) return null;
   return (
     <div className="flex flex-col">
       <div className="pb-2 border-b border-gray-500">
