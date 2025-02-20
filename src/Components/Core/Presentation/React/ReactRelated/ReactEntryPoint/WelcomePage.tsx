@@ -47,7 +47,7 @@ export default function WelcomePage() {
           src={welcomePicture}
           alt="3D Welcome Text"
         />
-        <LoginComponent className="flex flex-col items-center justify-around col-span-6 col-start-2 tablet-portrait:col-start-1 tablet-portrait:col-span-8 xl:pt-8 lg:pt-4 mobile-portrait:row-start-2 mobile-portrait:justify-start mobile-landscape:pt-0" />
+        <LoginComponent className="flex flex-col items-center justify-around col-span-6 col-start-2 tablet-portrait:col-start-1 tablet-portrait:col-span-8 xl:pt-2 lg:pt-4 mobile-portrait:row-start-2 mobile-portrait:justify-start mobile-landscape:pt-0" />
       </section>
 
       <section className="flex items-center justify-center col-span-6 col-start-2 row-span-3 row-start-3 gap-4 mb-4 portrait:h-3/4 mobile-landscape:h-[60%] mobile-landscape:self-end mobile-landscape:mb-2 portrait:row-start-3 portrait:row-span-3 portrait:col-start-2 portrait:self-center portrait-col-span-6 portrait:gap-6">
