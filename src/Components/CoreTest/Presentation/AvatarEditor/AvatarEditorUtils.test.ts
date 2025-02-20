@@ -75,6 +75,49 @@ describe("AvatarEditorUtils", () => {
     });
   });
 
+  test("setupAvatarColor returns if meshColor is not defined", () => {
+    systemUnderTest = AvatarEditorUtils;
+
+    const functionSpy = jest.spyOn(systemUnderTest as any, "setupAvatarColor");
+    systemUnderTest["setupAvatarColor"](undefined, undefined);
+
+    expect(functionSpy).toHaveReturned();
+  });
+  test("setupAvatarColor returns if meshColor is null", () => {
+    systemUnderTest = AvatarEditorUtils;
+
+    const functionSpy = jest.spyOn(systemUnderTest as any, "setupAvatarColor");
+    systemUnderTest["setupAvatarColor"](undefined, null);
+
+    expect(functionSpy).toHaveReturned();
+  });
+
+  test("setupAvatarColor displays textures correctly", async () => {
+    const color = {
+      id: 0,
+      nameKey: "Dark 1",
+      hexColor: "#4f2a1a",
+      uOffset: 1,
+      vOffset: 2,
+    } as AvatarColor;
+    systemUnderTest = AvatarEditorUtils;
+
+    const mockMeshArray = [new Mesh("mockMesh")];
+    const mockMaterial = new StandardMaterial(
+      "mat_Skin",
+      new Scene(new NullEngine()),
+    );
+    const mockTexture = new Texture("testTexture", new Scene(new NullEngine()));
+    mockMeshArray[0].material = mockMaterial;
+    mockMaterial.diffuseTexture = mockTexture;
+
+    await systemUnderTest["setupAvatarColor"](mockMeshArray[0], color, 2, 4);
+    const testedTexture =
+      mockMeshArray[0].material.getActiveTextures()[0] as Texture;
+    expect(testedTexture.uOffset).toBe(-1);
+    expect(testedTexture.vOffset).toBe(-2);
+  });
+
   test("setupSkinColor returns if skinMeshes are not defined", () => {
     const color = {
       id: 0,
