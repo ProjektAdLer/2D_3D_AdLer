@@ -1,12 +1,12 @@
 import { mock } from "jest-mock-extended";
-import AvatarEditorBodyCategory from "../../../../Core/Presentation/AvatarEditor/AvatarEditorCategories/AvatarEditorCategoryContents/AvatarEditorBodyCategory";
-import AvatarEditorViewModel from "../../../../Core/Presentation/AvatarEditor/AvatarEditorViewModel";
-import IAvatarEditorController from "../../../../Core/Presentation/AvatarEditor/IAvatarEditorController";
-import Observable from "../../../../../Lib/Observable";
+import AvatarEditorBodyCategory from "../../../../../Core/Presentation/AvatarEditor/AvatarEditorCategories/AvatarEditorCategoryContents/AvatarEditorBodyCategory";
+import AvatarEditorViewModel from "../../../../../Core/Presentation/AvatarEditor/AvatarEditorViewModel";
+import IAvatarEditorController from "../../../../../Core/Presentation/AvatarEditor/IAvatarEditorController";
+import Observable from "../../../../../../Lib/Observable";
 import { fireEvent, render } from "@testing-library/react";
-import { AvatarColor } from "../../../../Core/Domain/AvatarModels/AvatarColorPalette";
+import { AvatarColor } from "../../../../../Core/Domain/AvatarModels/AvatarColorPalette";
 import React from "react";
-import AvatarSkinColorPalette from "../../../../Core/Domain/AvatarModels/AvatarSkinColorPalette";
+import AvatarSkinColorPalette from "../../../../../Core/Domain/AvatarModels/AvatarSkinColorPalette";
 
 const avatarEditorMock = mock<AvatarEditorViewModel>();
 const avatarEditorControllerMock = mock<IAvatarEditorController>();
