@@ -75,6 +75,36 @@ describe("AvatarEditorUtils", () => {
     });
   });
 
+  test("getAvatarAnchorNodes returns the nodes correctly", () => {
+    const initialNodes = [
+      new TransformNode("anchor_hair"),
+      new TransformNode("anchor_beard"),
+      new TransformNode("anchor_top"),
+      new TransformNode("anchor_pants"),
+      new TransformNode("anchor_shoes"),
+      new TransformNode("anchor_hat"),
+      new TransformNode("anchor_glasses"),
+      new TransformNode("Spine"),
+    ];
+    systemUnderTest = AvatarEditorUtils;
+    const functionSpy = jest.spyOn(
+      systemUnderTest as any,
+      "getAvatarAnchorNodes",
+    );
+
+    const result = systemUnderTest["getAvatarAnchorNodes"](initialNodes);
+
+    expect(result.hairNode.name).toBe("anchor_hair");
+    expect(result.beardNode.name).toBe("anchor_beard");
+    expect(result.shirtNode.name).toBe("anchor_top");
+    expect(result.pantsNode.name).toBe("anchor_pants");
+    expect(result.shoesNode.name).toBe("anchor_shoes");
+    expect(result.headGearNode.name).toBe("anchor_hat");
+    expect(result.glassesNode.name).toBe("anchor_glasses");
+    expect(result.backpackNode.name).toBe("Spine");
+    expect(result.otherNode.name).toBe("Spine");
+  });
+
   test("setupAvatarTextures returns if textureIndex is not defined", () => {
     systemUnderTest = AvatarEditorUtils;
 
