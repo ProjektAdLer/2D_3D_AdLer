@@ -1,5 +1,5 @@
 import AvatarEditorPreviewModelViewModel from "./AvatarEditorPreviewModelViewModel";
-import { Mesh, Skeleton, Texture, TransformNode } from "@babylonjs/core";
+import { Mesh, Skeleton, TransformNode } from "@babylonjs/core";
 import IScenePresenter from "../../../Babylon/SceneManagement/IScenePresenter";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import SCENE_TYPES, {
@@ -15,14 +15,12 @@ import {
   AvatarMouthTexture,
   AvatarNoseTexture,
 } from "src/Components/Core/Domain/AvatarModels/AvatarFaceUVTexture";
-import { AvatarColor } from "src/Components/Core/Domain/AvatarModels/AvatarColorPalette";
 import AvatarEditorUtils from "../../AvatarEditorUtils";
 import AvatarModelAssetPaths from "src/Components/Core/Domain/AvatarModels/AvatarModelPaths";
 import AvatarModelTransforms from "src/Components/Core/Domain/AvatarModels/AvatarModelTransforms";
 import bind from "bind-decorator";
 import AvatarConfigTO from "src/Components/Core/Application/DataTransferObjects/AvatarConfigTO";
 import AvatarModelMaterialNames from "src/Components/Core/Domain/AvatarModels/AvatarModelMaterialNames";
-import AvatarEditor from "../../AvatarEditor";
 const baseModelLink = require("../../../../../../Assets/3dModels/sharedModels/avatar/a-avatar-skeleton.glb");
 
 export default class AvatarEditorPreviewModelView {
