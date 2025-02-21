@@ -158,7 +158,7 @@ export default function AvatarEditorAccessoireCategory(
     <div className="flex flex-col">
       <AccordionElement
         header={translate("headgearTitle").toString()}
-        isOpen={props.viewModel.uiVisiblity.accessoireMenu.headGear}
+        isOpen={props.viewModel.uiVisiblity.accessoireMenu.headgear}
         content={TileGridHeadGear()}
       />
       <AccordionElement

@@ -91,7 +91,7 @@ export default class AvatarEditorViewModel {
       mouths: new Observable<boolean>(false),
     },
     accessoireMenu: {
-      headGear: new Observable<boolean>(true),
+      headgear: new Observable<boolean>(true),
       glasses: new Observable<boolean>(false),
       backpack: new Observable<boolean>(false),
       other: new Observable<boolean>(false),
@@ -117,7 +117,7 @@ export interface AvatarConfigFaceIconVisibility {
 }
 
 export interface AvatarConfigAccessoireIconVisibility {
-  headGear: Observable<boolean>;
+  headgear: Observable<boolean>;
   glasses: Observable<boolean>;
   backpack: Observable<boolean>;
   other: Observable<boolean>;
