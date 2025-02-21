@@ -276,8 +276,8 @@ export default class AvatarView {
       this.scenePresenter,
       baseSkeleton,
       avatarEntity.headgear,
-      AvatarModelAssetPaths.headGearPath,
-      anchorNodes.headGearNode,
+      AvatarModelAssetPaths.headgearPath,
+      anchorNodes.headgearNode,
     );
     // glasses
     AvatarEditorUtils.setupAvatarAssetModel(

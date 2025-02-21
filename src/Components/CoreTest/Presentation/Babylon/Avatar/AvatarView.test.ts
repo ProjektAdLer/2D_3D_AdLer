@@ -88,7 +88,7 @@ function setupAvatarEditorDataConfiguration() {
     shirtNode: transformNodeMock,
     pantsNode: transformNodeMock,
     shoesNode: transformNodeMock,
-    headGearNode: transformNodeMock,
+    headgearNode: transformNodeMock,
     glassesNode: transformNodeMock,
     backpackNode: transformNodeMock,
     otherNode: transformNodeMock,

@@ -54,7 +54,7 @@ export default class AvatarEditorUtils {
     shirtNode: TransformNode;
     pantsNode: TransformNode;
     shoesNode: TransformNode;
-    headGearNode: TransformNode;
+    headgearNode: TransformNode;
     glassesNode: TransformNode;
     backpackNode: TransformNode;
     otherNode: TransformNode;
@@ -64,7 +64,7 @@ export default class AvatarEditorUtils {
     const shirtAnchorNode = nodes.find((node) => node.name === "anchor_top")!;
     const pantsAnchorNode = nodes.find((node) => node.name === "anchor_pants")!;
     const shoesAnchorNode = nodes.find((node) => node.name === "anchor_shoes")!;
-    const headGearAnchorNode = nodes.find(
+    const headgearAnchorNode = nodes.find(
       (node) => node.name === "anchor_hat",
     )!;
     const glassesAnchorNode = nodes.find(
@@ -83,7 +83,7 @@ export default class AvatarEditorUtils {
       shirtNode: shirtAnchorNode,
       pantsNode: pantsAnchorNode,
       shoesNode: shoesAnchorNode,
-      headGearNode: headGearAnchorNode,
+      headgearNode: headgearAnchorNode,
       glassesNode: glassesAnchorNode,
       backpackNode: backpackAnchorNode,
       otherNode: otherAnchorNode,

@@ -76,7 +76,7 @@ export default class AvatarEditorPreviewModelView {
     this.viewModel.shirtAnchorNode = anchorNodes.shirtNode;
     this.viewModel.pantsAnchorNode = anchorNodes.pantsNode;
     this.viewModel.shoesAnchorNode = anchorNodes.shoesNode;
-    this.viewModel.headGearAnchorNode = anchorNodes.headGearNode;
+    this.viewModel.headgearAnchorNode = anchorNodes.headgearNode;
     this.viewModel.glassesAnchorNode = anchorNodes.glassesNode;
     this.viewModel.backpackAnchorNode = anchorNodes.backpackNode;
     this.viewModel.otherAnchorNode = anchorNodes.otherNode;
@@ -295,9 +295,9 @@ export default class AvatarEditorPreviewModelView {
     if (config.headgear) {
       this.updateModel(
         config.headgear,
-        AvatarModelAssetPaths.headGearPath,
-        this.viewModel.headGearMeshes,
-        this.viewModel.headGearAnchorNode,
+        AvatarModelAssetPaths.headgearPath,
+        this.viewModel.headgearMeshes,
+        this.viewModel.headgearAnchorNode,
       );
     }
     if (config.glasses) {

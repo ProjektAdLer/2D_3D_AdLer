@@ -1,7 +1,7 @@
 const AvatarModelAssetPaths = {
   hairPath: "hair/hairstyle",
   beardPath: "hair/beards",
-  headGearPath: "accessoires/headgear",
+  headgearPath: "accessoires/headgear",
   glassesPath: "accessoires/glasses",
   backpackPath: "accessoires/backpack",
   otherPath: "accessoires/other",

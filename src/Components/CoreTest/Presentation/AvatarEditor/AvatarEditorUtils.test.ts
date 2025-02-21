@@ -99,7 +99,7 @@ describe("AvatarEditorUtils", () => {
     expect(result.shirtNode.name).toBe("anchor_top");
     expect(result.pantsNode.name).toBe("anchor_pants");
     expect(result.shoesNode.name).toBe("anchor_shoes");
-    expect(result.headGearNode.name).toBe("anchor_hat");
+    expect(result.headgearNode.name).toBe("anchor_hat");
     expect(result.glassesNode.name).toBe("anchor_glasses");
     expect(result.backpackNode.name).toBe("Spine");
     expect(result.otherNode.name).toBe("Spine");

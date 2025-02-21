@@ -19,7 +19,7 @@ export default class AvatarEditorPreviewModelViewModel {
   // anchor nodes
   hairAnchorNode: TransformNode;
   beardAnchorNode: TransformNode;
-  headGearAnchorNode: TransformNode;
+  headgearAnchorNode: TransformNode;
   glassesAnchorNode: TransformNode;
   backpackAnchorNode: TransformNode;
   otherAnchorNode: TransformNode;
@@ -30,7 +30,7 @@ export default class AvatarEditorPreviewModelViewModel {
   // mesh maps
   hairMeshes: Map<AvatarHairModels, Mesh[]> = new Map();
   beardMeshes: Map<AvatarBeardModels, Mesh[]> = new Map();
-  headGearMeshes: Map<AvatarHeadgearModels, Mesh[]> = new Map();
+  headgearMeshes: Map<AvatarHeadgearModels, Mesh[]> = new Map();
   glassesMeshes: Map<AvatarGlassesModels, Mesh[]> = new Map();
   backpackMeshes: Map<AvatarBackpackModels, Mesh[]> = new Map();
   otherMeshes: Map<AvatarOtherModels, Mesh[]> = new Map();

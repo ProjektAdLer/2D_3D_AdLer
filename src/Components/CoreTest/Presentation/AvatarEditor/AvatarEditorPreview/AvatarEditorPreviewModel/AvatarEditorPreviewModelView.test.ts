@@ -141,7 +141,7 @@ describe("AvatarEditorPreviewModelView", () => {
       shirtNode: new TransformNode("shirtNode"),
       pantsNode: new TransformNode("pantsNode"),
       shoesNode: new TransformNode("shoesNode"),
-      headGearNode: new TransformNode("headGearNode"),
+      headgearNode: new TransformNode("headgearNode"),
       glassesNode: new TransformNode("glassesNode"),
       backpackNode: new TransformNode("backpackNode"),
       otherNode: new TransformNode("otherNode"),
@@ -477,10 +477,10 @@ describe("AvatarEditorPreviewModelView", () => {
       color,
     );
   });
-  test("updateAccessoireModels calls updateModel if a new headGear is provided", async () => {
+  test("updateAccessoireModels calls updateModel if a new headgear is provided", async () => {
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
     setupScenePresenterMockLoadingResults();
-    viewModel.headGearMeshes = new Map([
+    viewModel.headgearMeshes = new Map([
       ["hats-cowboy", [new Mesh("mockMesh"), new Mesh("mockMesh")]],
     ]);
     systemUnderTest["updateModel"] = jest.fn();
@@ -492,8 +492,8 @@ describe("AvatarEditorPreviewModelView", () => {
     expect(systemUnderTest["updateModel"]).toHaveBeenCalledWith(
       "hats-cowboy",
       "accessoires/headgear",
-      viewModel.headGearMeshes,
-      viewModel.headGearAnchorNode,
+      viewModel.headgearMeshes,
+      viewModel.headgearAnchorNode,
     );
   });
   test("updateAccessoireModels calls updateModel if new glasses are provided", async () => {
