@@ -1,7 +1,12 @@
 import { ActionEvent } from "@babylonjs/core";
 
-export default interface ILearningElementController {
-  picked( overrideIsInteractable?: boolean): void;
+interface IAccessibilityControls {
+  accessibilityPicked(): void;
+}
+
+export default interface ILearningElementController
+  extends IAccessibilityControls {
+  picked(event?: ActionEvent): void;
   pointerOver(event?: ActionEvent): void;
   pointerOut(event?: ActionEvent): void;
 }

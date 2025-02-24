@@ -42,16 +42,25 @@ export default class LearningElementController
     }
   }
 
+  @bind
+  picked(): void {
+    if (this.viewModel.isInteractable.Value) {
+      this.onPicked();
+    }
+  }
 
   @bind
-  picked(overrideIsInteractable?: boolean): void {
-    if (this.viewModel.isInteractable.Value || overrideIsInteractable) {
-      this.bottomTooltipPresenter.hideAll();
-      if (this.viewModel.type === LearningElementTypes.adaptivity) {
-        this.startLoadAdaptivityElementUseCase();
-      } else {
-        this.startLoadElementUseCase();
-      }
+  accessibilityPicked(): void {
+    this.onPicked();
+  }
+
+  @bind
+  private onPicked() {
+    this.bottomTooltipPresenter.hideAll();
+    if (this.viewModel.type === LearningElementTypes.adaptivity) {
+      this.startLoadAdaptivityElementUseCase();
+    } else {
+      this.startLoadElementUseCase();
     }
   }
 

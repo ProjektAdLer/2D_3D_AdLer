@@ -89,32 +89,34 @@ export default class LearningElementView {
       true,
     )) as Mesh[];
 
-    
     this.viewModel.modelMeshes[0].accessibilityTag = {
       description: this.viewModel.name + " " + this.viewModel.id,
       // @ts-ignore
-      eventHandler:{
+      eventHandler: {
         click: () => {
           // this.viewModel.isInteractable.Value = true;
-           this.controller.picked(true);
-          
+          this.controller.accessibilityPicked();
+
           // get position on screen
-          const canvas = this.scenePresenter.Scene.getEngine().getRenderingCanvas();
-          const position = this.viewModel.modelMeshes[0].getPositionInCameraSpace(this.scenePresenter.Scene.activeCamera!);
-          
+          const canvas =
+            this.scenePresenter.Scene.getEngine().getRenderingCanvas();
+          const position =
+            this.viewModel.modelMeshes[0].getPositionInCameraSpace(
+              this.scenePresenter.Scene.activeCamera!,
+            );
+
           // simulate click on that position
-          const event = new MouseEvent('click', {
+          const event = new MouseEvent("click", {
             view: window,
             bubbles: true,
             cancelable: true,
             clientX: position.x,
-            clientY: position.y
+            clientY: position.y,
           });
           canvas!.dispatchEvent(event);
-
-        }
-      }
-    }
+        },
+      },
+    };
 
     // position and rotate model
     this.viewModel.modelMeshes[0].position = this.viewModel.position;
@@ -177,9 +179,8 @@ export default class LearningElementView {
 
     // register interaction callbacks
     actionManager.registerAction(
-      new ExecuteCodeAction(
-        ActionManager.OnPickTrigger,
-        (e) => this.controller.picked(false),
+      new ExecuteCodeAction(ActionManager.OnPickTrigger, (e) =>
+        this.controller.picked(),
       ),
     );
     actionManager.registerAction(
