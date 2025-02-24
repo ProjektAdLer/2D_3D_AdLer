@@ -321,7 +321,7 @@ describe("AvatarView", () => {
         new TransformNode("AvatarParentNode", new Scene(new NullEngine())),
       );
       const mockAnimationGroup = mockDeep<AnimationGroup>();
-      mockAnimationGroup.name = "ac_anim_idle2";
+      mockAnimationGroup.name = "ac_anim_idle2_avatarSkeleton";
       const mockLoadingResult = mockDeep<ISceneLoaderAsyncResult>();
       // @ts-ignore
       mockLoadingResult.animationGroups = [mockAnimationGroup];
@@ -338,7 +338,7 @@ describe("AvatarView", () => {
         new TransformNode("AvatarParentNode", new Scene(new NullEngine())),
       );
       const mockAnimationGroup = mockDeep<AnimationGroup>();
-      mockAnimationGroup.name = "BHWalkCycle2";
+      mockAnimationGroup.name = "ac_anim_walkcycle_avatarSkeleton";
       const mockLoadingResult = mockDeep<ISceneLoaderAsyncResult>();
       // @ts-ignore
       mockLoadingResult.animationGroups = [mockAnimationGroup];
@@ -355,7 +355,7 @@ describe("AvatarView", () => {
         new TransformNode("AvatarParentNode", new Scene(new NullEngine())),
       );
       const mockAnimationGroup = mockDeep<AnimationGroup>();
-      mockAnimationGroup.name = "ac_anim_interact";
+      mockAnimationGroup.name = "ac_anim_interact_avatarSkeleton";
       const mockLoadingResult = mockDeep<ISceneLoaderAsyncResult>();
       // @ts-ignore
       mockLoadingResult.animationGroups = [mockAnimationGroup];

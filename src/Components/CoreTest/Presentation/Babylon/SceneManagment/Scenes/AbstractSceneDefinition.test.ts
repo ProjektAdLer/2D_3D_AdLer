@@ -3,9 +3,11 @@ import { HighlightLayer, NullEngine, Scene } from "@babylonjs/core";
 import { config } from "../../../../../../config";
 import AbstractSceneDefinition from "../../../../../Core/Presentation/Babylon/SceneManagement/Scenes/AbstractSceneDefinition";
 import { Inspector } from "@babylonjs/inspector";
+import { HTMLTwinRenderer } from "@babylonjs/accessibility";
 
 const mockAsyncPreTask = jest.fn(async () => Promise.resolve());
 const mockPreTask = jest.fn(() => {});
+jest.spyOn(HTMLTwinRenderer, "Render").mockImplementation((scene: Scene) => {});
 
 class ConcreteSceneDefinition extends AbstractSceneDefinition {
   protected preTasks = [mockPreTask, mockAsyncPreTask];
@@ -30,6 +32,7 @@ describe("AbstractSceneDefinition", () => {
 
   afterAll(() => {
     config.isDebug = oldIsDebugConfig;
+    jest.restoreAllMocks();
   });
 
   test("Scene getter returns private scene member", () => {
@@ -42,7 +45,7 @@ describe("AbstractSceneDefinition", () => {
   test("HighlightLayer getter returns private highlightLayer member", () => {
     const mockedHighlightLayer = new HighlightLayer(
       "test",
-      new Scene(new NullEngine())
+      new Scene(new NullEngine()),
     );
     systemUnderTest["highlightLayer"] = mockedHighlightLayer;
 

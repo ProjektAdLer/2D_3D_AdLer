@@ -178,8 +178,9 @@ export default class LearningElementView {
 
     // register interaction callbacks
     actionManager.registerAction(
-      new ExecuteCodeAction(ActionManager.OnPickTrigger, (e) =>
-        this.controller.picked(),
+      new ExecuteCodeAction(
+        ActionManager.OnPickTrigger,
+        this.controller.picked,
       ),
     );
     actionManager.registerAction(
