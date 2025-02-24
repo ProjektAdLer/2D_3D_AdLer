@@ -29,6 +29,7 @@ import bind from "bind-decorator";
 import HighlightColors from "../HighlightColors";
 
 import iconLink from "../../../../../Assets/3dModels/sharedModels/3dIcons/l-3dicons-story-speech-bubble-dots.glb";
+import AvatarAnimationNames from "src/Components/Core/Domain/AvatarModels/AvatarAnimationNames";
 
 export default class StoryNPCView {
   private scenePresenter: IScenePresenter;
@@ -76,10 +77,10 @@ export default class StoryNPCView {
 
     result.animationGroups.forEach((animationGroup) => {
       switch (animationGroup.name) {
-        case "ac_anim_idle2":
+        case AvatarAnimationNames.npc_idle:
           this.idleAnimation = animationGroup;
           break;
-        case "ac_anim_walkcycle":
+        case AvatarAnimationNames.npc_walk:
           this.walkAnimation = animationGroup;
           break;
       }

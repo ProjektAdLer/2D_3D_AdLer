@@ -40,6 +40,7 @@ import {
   AvatarNoseTexture,
 } from "src/Components/Core/Domain/AvatarModels/AvatarFaceUVTexture";
 import AvatarModelMaterialNames from "src/Components/Core/Domain/AvatarModels/AvatarModelMaterialNames";
+import AvatarAnimationNames from "src/Components/Core/Domain/AvatarModels/AvatarAnimationNames";
 
 const modelLink = require("../../../../../Assets/3dModels/sharedModels/avatar/a-avatar-skeleton.glb");
 
@@ -117,13 +118,13 @@ export default class AvatarView {
     // animation setup
     result.animationGroups.forEach((animationGroup) => {
       switch (animationGroup.name) {
-        case "ac_anim_idle2_avatarSkeleton":
+        case AvatarAnimationNames.idle:
           this.idleAnimation = animationGroup;
           break;
-        case "ac_anim_walkcycle_avatarSkeleton":
+        case AvatarAnimationNames.walk:
           this.walkAnimation = animationGroup;
           break;
-        case "ac_anim_interact_avatarSkeleton":
+        case AvatarAnimationNames.interact:
           this.interactionAnimation = animationGroup;
           break;
       }

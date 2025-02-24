@@ -28,6 +28,7 @@ import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import ICharacterNavigator from "../../../../Core/Presentation/Babylon/CharacterNavigator/ICharacterNavigator";
 import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
 import HighlightColors from "../../../../Core/Presentation/Babylon/HighlightColors";
+import AvatarAnimationNames from "../../../../Core/Domain/AvatarModels/AvatarAnimationNames";
 
 // setup scene presenter mock
 const scenePresenterMock = mockDeep<IScenePresenter>();
@@ -80,11 +81,11 @@ describe("StoryNPCView", () => {
     test("asyncSetupStoryNPC does not throw", async () => {
       const mockMesh = new Mesh("mockMesh", new Scene(new NullEngine()));
       const mockIdleAnimationGroup = new AnimationGroup(
-        "ac_anim_idle2",
+        AvatarAnimationNames.npc_idle,
         new Scene(new NullEngine()),
       );
       const mockWalkAnimationGroup = new AnimationGroup(
-        "ac_anim_walkcycle",
+        AvatarAnimationNames.npc_walk,
         new Scene(new NullEngine()),
       );
       const mockLoadingResult = mockDeep<ISceneLoaderAsyncResult>();
@@ -122,7 +123,7 @@ describe("StoryNPCView", () => {
     test("loadElementModel gets idleAnimation from loading results", async () => {
       const mockMesh = new Mesh("mockMesh", new Scene(new NullEngine()));
       const mockIdleAnimationGroup = new AnimationGroup(
-        "ac_anim_idle2",
+        AvatarAnimationNames.npc_idle,
         new Scene(new NullEngine()),
       );
       const mockLoadingResult = mockDeep<ISceneLoaderAsyncResult>();
@@ -141,7 +142,7 @@ describe("StoryNPCView", () => {
     test("loadElementModel gets walkAnimation from loading results", async () => {
       const mockMesh = new Mesh("mockMesh", new Scene(new NullEngine()));
       const mockWalkAnimationGroup = new AnimationGroup(
-        "ac_anim_walkcycle",
+        AvatarAnimationNames.npc_walk,
         new Scene(new NullEngine()),
       );
       const mockLoadingResult = mockDeep<ISceneLoaderAsyncResult>();

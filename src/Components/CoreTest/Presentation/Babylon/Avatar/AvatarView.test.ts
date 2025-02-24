@@ -1,3 +1,4 @@
+import AvatarAnimationNames from "../../../../Core/Domain/AvatarModels/AvatarAnimationNames";
 import AvatarModelMaterialNames from "../../../../Core/Domain/AvatarModels/AvatarModelMaterialNames";
 import {
   AnimationGroup,
@@ -321,7 +322,7 @@ describe("AvatarView", () => {
         new TransformNode("AvatarParentNode", new Scene(new NullEngine())),
       );
       const mockAnimationGroup = mockDeep<AnimationGroup>();
-      mockAnimationGroup.name = "ac_anim_idle2_avatarSkeleton";
+      mockAnimationGroup.name = AvatarAnimationNames.idle;
       const mockLoadingResult = mockDeep<ISceneLoaderAsyncResult>();
       // @ts-ignore
       mockLoadingResult.animationGroups = [mockAnimationGroup];
@@ -338,7 +339,7 @@ describe("AvatarView", () => {
         new TransformNode("AvatarParentNode", new Scene(new NullEngine())),
       );
       const mockAnimationGroup = mockDeep<AnimationGroup>();
-      mockAnimationGroup.name = "ac_anim_walkcycle_avatarSkeleton";
+      mockAnimationGroup.name = AvatarAnimationNames.walk;
       const mockLoadingResult = mockDeep<ISceneLoaderAsyncResult>();
       // @ts-ignore
       mockLoadingResult.animationGroups = [mockAnimationGroup];
@@ -355,7 +356,7 @@ describe("AvatarView", () => {
         new TransformNode("AvatarParentNode", new Scene(new NullEngine())),
       );
       const mockAnimationGroup = mockDeep<AnimationGroup>();
-      mockAnimationGroup.name = "ac_anim_interact_avatarSkeleton";
+      mockAnimationGroup.name = AvatarAnimationNames.interact;
       const mockLoadingResult = mockDeep<ISceneLoaderAsyncResult>();
       // @ts-ignore
       mockLoadingResult.animationGroups = [mockAnimationGroup];
