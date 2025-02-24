@@ -22,35 +22,35 @@ export interface AvatarColor {
 }
 
 const AvatarColorPalette: AvatarColor[] = [
-  // Black
-  { id: 0, nameKey: "Black 1", hexColor: "#000000", uOffset: 0, vOffset: 0 },
+  // Grey
+  { id: 0, nameKey: "Grey 1", hexColor: "#000000", uOffset: 0, vOffset: 0 },
   {
     id: 1,
-    nameKey: "Black 2",
+    nameKey: "Grey 2",
     hexColor: "#1b1b1b",
     uOffset: 0.125,
     vOffset: 0,
   },
-  { id: 2, nameKey: "Black 3", hexColor: "#313131", uOffset: 0.25, vOffset: 0 },
+  { id: 2, nameKey: "Grey 3", hexColor: "#313131", uOffset: 0.25, vOffset: 0 },
   {
     id: 3,
-    nameKey: "Black 4",
+    nameKey: "Grey 4",
     hexColor: "#555555",
     uOffset: 0.375,
     vOffset: 0,
   },
-  { id: 4, nameKey: "Black 5", hexColor: "#767676", uOffset: 0.5, vOffset: 0 },
+  { id: 4, nameKey: "Grey 5", hexColor: "#767676", uOffset: 0.5, vOffset: 0 },
   {
     id: 5,
-    nameKey: "Black 6",
+    nameKey: "Grey 6",
     hexColor: "#949494",
     uOffset: 0.625,
     vOffset: 0,
   },
-  { id: 6, nameKey: "Black 7", hexColor: "#b3b3b3", uOffset: 0.75, vOffset: 0 },
+  { id: 6, nameKey: "Grey 7", hexColor: "#b3b3b3", uOffset: 0.75, vOffset: 0 },
   {
     id: 7,
-    nameKey: "Black 8",
+    nameKey: "Grey 8",
     hexColor: "#cecece",
     uOffset: 0.875,
     vOffset: 0,
