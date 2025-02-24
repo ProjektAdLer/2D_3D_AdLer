@@ -1,5 +1,4 @@
 import {
-  ActionEvent,
   ActionManager,
   Color3,
   ExecuteCodeAction,
