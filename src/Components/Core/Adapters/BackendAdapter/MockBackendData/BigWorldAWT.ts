@@ -8,7 +8,7 @@ const BigWorldAWT: AWT = {
   author: "Au Thor",
   language: "de",
   world: {
-    worldName: "Story World",
+    worldName: "Mensa World",
     worldDescription: "Beschreibung der großen Welt",
     worldGoals: ["Weltziel 1/3", "Weltziel 2/3", "Weltziel 3/3"],
     topics: [
@@ -31,7 +31,7 @@ const BigWorldAWT: AWT = {
     spaces: [
       {
         spaceId: 1,
-        spaceName: "Mensa Subtheme",
+        spaceName: "Mensa 6 LE",
         spaceDescription: "Ja, der Name dieses Raumes ist extrea so lang",
         spaceGoals: [
           "Ziel des abgeschlossenen Raumes 1/3",
@@ -39,10 +39,10 @@ const BigWorldAWT: AWT = {
           "Ziel des abgeschlossenen Raumes 3/3",
         ],
         spaceSlotContents: [1],
-        requiredPointsToComplete: 1,
+        requiredPointsToComplete: 0,
         requiredSpacesToEnter: "",
         spaceTemplate: "R_20X20_6L",
-        spaceTemplateStyle: "CAMPUSKEMPTEN",
+        spaceTemplateStyle: "",
         spaceStory: {
           introStory: {
             storyTexts: [
@@ -57,14 +57,14 @@ const BigWorldAWT: AWT = {
       },
       {
         spaceId: 2,
-        spaceName: "Bib Subtheme",
+        spaceName: "Mensa 8 LE",
         spaceDescription: "rdescription2",
         spaceGoals: ["rgoals2"],
         spaceSlotContents: [2],
-        requiredPointsToComplete: 1,
+        requiredPointsToComplete: 0,
         requiredSpacesToEnter: "",
         spaceTemplate: "R_20X30_8L",
-        spaceTemplateStyle: "CampusKE",
+        spaceTemplateStyle: "",
         spaceStory: {
           introStory: null,
           outroStory: {
@@ -79,13 +79,13 @@ const BigWorldAWT: AWT = {
       },
       {
         spaceId: 3,
-        spaceName: "Intro + Outro 1 NPC",
+        spaceName: "Mensa 10 LE",
         spaceDescription: "rdescription3",
         spaceGoals: ["rgoals3"],
         spaceSlotContents: [3],
-        requiredPointsToComplete: 1,
+        requiredPointsToComplete: 0,
         requiredSpacesToEnter: "",
-        spaceTemplate: "D_40X37_15L",
+        spaceTemplate: "L_32X31_10L",
         spaceTemplateStyle: "",
         spaceStory: {
           introStory: {
@@ -104,11 +104,11 @@ const BigWorldAWT: AWT = {
       },
       {
         spaceId: 4,
-        spaceName: "Intro + Outro 2 NPC",
+        spaceName: "Mensa 13 LE",
         spaceDescription: "rdescription4",
         spaceGoals: ["rgoals4"],
         spaceSlotContents: [4],
-        requiredPointsToComplete: 1,
+        requiredPointsToComplete: 0,
         requiredSpacesToEnter: "(3)v((2)^(1))",
         spaceTemplate: "T_40X32_13L",
         spaceTemplateStyle: "",
@@ -133,11 +133,11 @@ const BigWorldAWT: AWT = {
       },
       {
         spaceId: 5,
-        spaceName: "Intro + Outro 2 NPC",
+        spaceName: "Mensa 15 LE",
         spaceDescription: "rdescription5",
         spaceGoals: ["rgoals5"],
         spaceSlotContents: [5],
-        requiredPointsToComplete: 1,
+        requiredPointsToComplete: 0,
         requiredSpacesToEnter: "4",
         spaceTemplate: "D_40X37_15L",
         spaceTemplateStyle: "",

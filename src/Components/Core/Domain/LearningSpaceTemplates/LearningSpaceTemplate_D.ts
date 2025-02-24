@@ -101,16 +101,7 @@ export const LearningSpaceTemplate_D: ILearningSpaceTemplate = {
     position: { x: 6.4, y: -0.8 },
     orientation: { rotation: 0 },
   },
-  windows: [
-    {
-      position: { x: -8.6, y: -3.4 },
-      orientation: { rotation: 180 },
-    },
-    {
-      position: { x: -8.6, y: 2.6 },
-      orientation: { rotation: 180 },
-    },
-  ],
+  windows: [],
   playerSpawnPoint: {
     position: { x: -5.2, y: -8 },
     orientation: { rotation: 0 },
