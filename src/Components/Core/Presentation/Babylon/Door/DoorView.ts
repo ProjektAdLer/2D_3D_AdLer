@@ -228,7 +228,6 @@ export default class DoorView extends Readyable {
 
     // get meshes
     this.viewModel.iconMeshes = loadingResults.meshes as Mesh[];
-    console.log(loadingResults);
     // position and rotate icon
     // Door is off centered, so we need to adjust the icon position based on rotation
     let doorPosition = { ...this.viewModel.position };

@@ -22,6 +22,7 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   shape?: StyledButtonShape;
   color?: StyledButtonColor;
   disabled?: boolean;
+  animatedTransition?: boolean;
   icon?: string;
   containerClassName?: string;
   feedback?: StyledButtonFeedback;
@@ -31,6 +32,7 @@ export default function StyledButton({
   shape = "square",
   color = "default",
   disabled = false,
+  animatedTransition = false,
   feedback = "defaultFeedback",
   icon,
   children,
@@ -60,6 +62,21 @@ export default function StyledButton({
     defaultFeedback: "landscape:hover:bg-adleryellow active:bg-adleryellow",
   };
 
+  const [animate, setAnimate] = React.useState(false);
+  const prevDisabledRef = React.useRef(disabled);
+
+  React.useEffect(() => {
+    if (!disabled && prevDisabledRef.current === true) {
+      setAnimate(true);
+      const timer = setTimeout(() => {
+        setAnimate(false);
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+    prevDisabledRef.current = disabled;
+    return undefined;
+  }, [disabled]);
+
   return (
     <div className={containerClassName}>
       <button
@@ -70,10 +87,13 @@ export default function StyledButton({
           disabled
             ? "box-border text-adlerdeactivatedtext bg-adlerbuttonlocked flex items-center text-sm rounded-lg lg:text-xl font-regular overflow-hidden grayscale"
             : tailwindMerge(
-                "flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular  border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer",
+                "flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular  border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer ",
                 buttonConfig[color],
                 buttonConfig[feedback],
               ),
+          animate && animatedTransition
+            ? "animate-[pulse_1s_ease-in-out_1]"
+            : "",
         )}
         {...rest}
       >

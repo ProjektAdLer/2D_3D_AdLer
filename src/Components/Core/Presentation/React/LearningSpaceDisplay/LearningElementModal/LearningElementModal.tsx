@@ -61,6 +61,7 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
   const [elementType] = useObservable<string>(viewModel?.type);
   const { t: translate } = useTranslation("learningElement");
   const [isVisible] = useObservable<boolean>(viewModel?.isVisible);
+  const [hasScored] = useObservable<boolean>(viewModel?.hasScored);
 
   if (!viewModel || !controller) return null;
   if (!isOpen) return null;
@@ -78,9 +79,9 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
         <StyledButton
           shape="freeFloatCenter"
           disabled={
-            viewModel.type.Value === LearningElementTypes.h5p &&
-            !viewModel.hasScored.Value
+            viewModel.type.Value === LearningElementTypes.h5p && !hasScored
           }
+          animatedTransition={true}
           onClick={async () => {
             if (
               isPrimitive &&
@@ -107,8 +108,8 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
         controller.showBottomToolTip();
       }}
       smallCloseButton={isPrimitive}
-      hasFooter={isPrimitive}
-      footer={isPrimitive ? completionButton() : undefined}
+      hasFooter={true}
+      footer={completionButton()}
       showModal={isOpen}
       className={tailwindMerge(
         className,
