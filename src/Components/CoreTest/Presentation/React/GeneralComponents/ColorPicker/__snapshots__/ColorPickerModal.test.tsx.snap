@@ -25,9 +25,9 @@ Object {
               >
                 <button
                   class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                  data-testid="Black 1"
+                  data-testid="Grey 1"
                   style="background-color: rgb(0, 0, 0);"
-                  title="Black 1"
+                  title="Grey 1"
                 />
               </div>
               <div
@@ -35,9 +35,9 @@ Object {
               >
                 <button
                   class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                  data-testid="Black 2"
+                  data-testid="Grey 2"
                   style="background-color: rgb(27, 27, 27);"
-                  title="Black 2"
+                  title="Grey 2"
                 />
               </div>
               <div
@@ -45,9 +45,9 @@ Object {
               >
                 <button
                   class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                  data-testid="Black 3"
+                  data-testid="Grey 3"
                   style="background-color: rgb(49, 49, 49);"
-                  title="Black 3"
+                  title="Grey 3"
                 />
               </div>
               <div
@@ -55,9 +55,9 @@ Object {
               >
                 <button
                   class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                  data-testid="Black 4"
+                  data-testid="Grey 4"
                   style="background-color: rgb(85, 85, 85);"
-                  title="Black 4"
+                  title="Grey 4"
                 />
               </div>
               <div
@@ -65,9 +65,9 @@ Object {
               >
                 <button
                   class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                  data-testid="Black 5"
+                  data-testid="Grey 5"
                   style="background-color: rgb(118, 118, 118);"
-                  title="Black 5"
+                  title="Grey 5"
                 />
               </div>
               <div
@@ -75,9 +75,9 @@ Object {
               >
                 <button
                   class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                  data-testid="Black 6"
+                  data-testid="Grey 6"
                   style="background-color: rgb(148, 148, 148);"
-                  title="Black 6"
+                  title="Grey 6"
                 />
               </div>
               <div
@@ -85,9 +85,9 @@ Object {
               >
                 <button
                   class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                  data-testid="Black 7"
+                  data-testid="Grey 7"
                   style="background-color: rgb(179, 179, 179);"
-                  title="Black 7"
+                  title="Grey 7"
                 />
               </div>
               <div
@@ -95,9 +95,9 @@ Object {
               >
                 <button
                   class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                  data-testid="Black 8"
+                  data-testid="Grey 8"
                   style="background-color: rgb(206, 206, 206);"
-                  title="Black 8"
+                  title="Grey 8"
                 />
               </div>
               <div
@@ -699,9 +699,9 @@ Object {
             >
               <button
                 class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                data-testid="Black 1"
+                data-testid="Grey 1"
                 style="background-color: rgb(0, 0, 0);"
-                title="Black 1"
+                title="Grey 1"
               />
             </div>
             <div
@@ -709,9 +709,9 @@ Object {
             >
               <button
                 class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                data-testid="Black 2"
+                data-testid="Grey 2"
                 style="background-color: rgb(27, 27, 27);"
-                title="Black 2"
+                title="Grey 2"
               />
             </div>
             <div
@@ -719,9 +719,9 @@ Object {
             >
               <button
                 class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                data-testid="Black 3"
+                data-testid="Grey 3"
                 style="background-color: rgb(49, 49, 49);"
-                title="Black 3"
+                title="Grey 3"
               />
             </div>
             <div
@@ -729,9 +729,9 @@ Object {
             >
               <button
                 class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                data-testid="Black 4"
+                data-testid="Grey 4"
                 style="background-color: rgb(85, 85, 85);"
-                title="Black 4"
+                title="Grey 4"
               />
             </div>
             <div
@@ -739,9 +739,9 @@ Object {
             >
               <button
                 class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                data-testid="Black 5"
+                data-testid="Grey 5"
                 style="background-color: rgb(118, 118, 118);"
-                title="Black 5"
+                title="Grey 5"
               />
             </div>
             <div
@@ -749,9 +749,9 @@ Object {
             >
               <button
                 class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                data-testid="Black 6"
+                data-testid="Grey 6"
                 style="background-color: rgb(148, 148, 148);"
-                title="Black 6"
+                title="Grey 6"
               />
             </div>
             <div
@@ -759,9 +759,9 @@ Object {
             >
               <button
                 class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                data-testid="Black 7"
+                data-testid="Grey 7"
                 style="background-color: rgb(179, 179, 179);"
-                title="Black 7"
+                title="Grey 7"
               />
             </div>
             <div
@@ -769,9 +769,9 @@ Object {
             >
               <button
                 class="m-2 border colorpicker-colors justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer"
-                data-testid="Black 8"
+                data-testid="Grey 8"
                 style="background-color: rgb(206, 206, 206);"
-                title="Black 8"
+                title="Grey 8"
               />
             </div>
             <div
