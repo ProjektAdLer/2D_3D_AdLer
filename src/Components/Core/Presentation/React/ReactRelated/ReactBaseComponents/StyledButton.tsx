@@ -92,7 +92,7 @@ export default function StyledButton({
                 buttonConfig[feedback],
               ),
           animate && animatedTransition
-            ? "animate-[pulse_1s_ease-in-out_1]"
+            ? "animate-[wiggle_0.5s_ease-in-out_1]"
             : "",
         )}
         {...rest}
