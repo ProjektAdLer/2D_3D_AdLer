@@ -70,7 +70,7 @@ export default class AvatarView {
     await this.loadAvatarAsync();
     this.setupBlinkAnimation();
     this.createCharacterAnimator();
-    await this.createNPCNavigator();
+    await this.createCharacterNavigator();
     this.setupCleanup();
   }
 
@@ -175,7 +175,7 @@ export default class AvatarView {
     );
   }
 
-  private async createNPCNavigator(): Promise<void> {
+  private async createCharacterNavigator(): Promise<void> {
     this.viewModel.characterNavigator =
       CoreDIContainer.get<ICharacterNavigator>(
         PRESENTATION_TYPES.ICharacterNavigator,
