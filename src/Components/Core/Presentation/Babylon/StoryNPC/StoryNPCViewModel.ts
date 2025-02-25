@@ -38,7 +38,6 @@ export default class StoryNPCViewModel {
   storyType: StoryElementType;
   idleTimer: NodeJS.Timeout;
   cutSceneTimer: NodeJS.Timeout;
-  avatarSpawnPosition: Vector3 = new Vector3(0, 0, 0);
   introIdlePosition: Vector3 = new Vector3(0, 0, 0);
   introIdlePosRotation: number = 0;
   introCutsceneSpawnPosition: Vector3 = new Vector3(0, 0, 0);

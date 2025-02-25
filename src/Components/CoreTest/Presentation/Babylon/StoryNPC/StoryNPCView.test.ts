@@ -29,6 +29,7 @@ import ICharacterNavigator from "../../../../Core/Presentation/Babylon/Character
 import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
 import HighlightColors from "../../../../Core/Presentation/Babylon/HighlightColors";
 import AvatarAnimationNames from "../../../../Core/Domain/AvatarModels/AvatarAnimationNames";
+import IAvatarPresenter from "../../../../Core/Presentation/Babylon/Avatar/IAvatarPresenter";
 
 // setup scene presenter mock
 const scenePresenterMock = mockDeep<IScenePresenter>();
@@ -39,6 +40,7 @@ const storyElementPresenterMock = mock<IStoryElementPresenter>();
 const navigationMock = mockDeep<INavigation>();
 const characterAnimatorMock = mock<ICharacterAnimator>();
 const characterNavigatorMock = mock<ICharacterNavigator>();
+const avatarPresenterMock = mock<IAvatarPresenter>();
 // @ts-ignore
 characterNavigatorMock.IsReady = Promise.resolve();
 
@@ -64,15 +66,18 @@ describe("StoryNPCView", () => {
     CoreDIContainer.rebind(
       PRESENTATION_TYPES.ICharacterNavigator,
     ).toConstantValue(characterNavigatorMock);
+    CoreDIContainer.rebind(PRESENTATION_TYPES.IAvatarPresenter).toConstantValue(
+      avatarPresenterMock,
+    );
   });
 
   afterAll(() => {
     CoreDIContainer.restore();
+    jest.restoreAllMocks();
   });
 
   beforeEach(() => {
     viewModel = new StoryNPCViewModel();
-    viewModel.avatarSpawnPosition = new Vector3(0, 0, 0);
     controllerMock = mock<IStoryNPCController>();
     systemUnderTest = new StoryNPCView(viewModel, controllerMock);
   });
@@ -240,6 +245,18 @@ describe("StoryNPCView", () => {
         "mockParentNode",
         new Scene(new NullEngine()),
       );
+
+      const vector = new Vector3(0, 0, 0);
+      Object.defineProperty(avatarPresenterMock, "AvatarPosition", {
+        get() {
+          return vector;
+        },
+        configurable: true,
+      });
+      jest
+        .spyOn(avatarPresenterMock, "AvatarPosition", "get")
+        .mockReturnValue(new Vector3(0, 0, 0));
+
       viewModel.storyType = StoryElementType.Intro;
       viewModel.state.Value = StoryNPCState.CutScene;
       viewModel.parentNode.position = new Vector3(0, 0, 0);
@@ -412,12 +429,21 @@ describe("StoryNPCView", () => {
     test("startCutSceneMovement calls startMovement on the characterNavigator after timeout", () => {
       viewModel.characterNavigator = characterNavigatorMock;
       viewModel.storyType = StoryElementType.Intro;
-      viewModel.avatarSpawnPosition = new Vector3(10, 0, 0);
       viewModel.parentNode = new TransformNode(
         "mockParentNode",
         new Scene(new NullEngine()),
       );
       viewModel.parentNode.position = new Vector3(0, 0, 0);
+      const vector = new Vector3(0, 0, 0);
+      Object.defineProperty(avatarPresenterMock, "AvatarPosition", {
+        get() {
+          return vector;
+        },
+        configurable: true,
+      });
+      jest
+        .spyOn(avatarPresenterMock, "AvatarPosition", "get")
+        .mockReturnValue(new Vector3(0, 0, 0));
 
       jest.useFakeTimers();
       systemUnderTest["startCutSceneMovement"]();
@@ -431,12 +457,21 @@ describe("StoryNPCView", () => {
     // ANF-ID: [EZZ0026]
     test("startCutSceneMovement calls open on the storyElementPresenter after cutscene position reached", () => {
       viewModel.storyType = StoryElementType.Intro;
-      viewModel.avatarSpawnPosition = new Vector3(10, 0, 0);
       viewModel.parentNode = new TransformNode(
         "mockParentNode",
         new Scene(new NullEngine()),
       );
       viewModel.parentNode.position = new Vector3(0, 0, 0);
+      const vector = new Vector3(0, 0, 0);
+      Object.defineProperty(avatarPresenterMock, "AvatarPosition", {
+        get() {
+          return vector;
+        },
+        configurable: true,
+      });
+      jest
+        .spyOn(avatarPresenterMock, "AvatarPosition", "get")
+        .mockReturnValue(new Vector3(0, 0, 0));
 
       viewModel.characterNavigator = characterNavigatorMock;
       characterNavigatorMock.startMovement.mockImplementationOnce(

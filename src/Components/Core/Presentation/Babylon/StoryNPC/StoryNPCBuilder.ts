@@ -107,12 +107,6 @@ export default class StoryNPCBuilder
       );
       this.viewModel!.outroIdlePosRotation =
         template.outroStoryElementIdlePoint.orientation.rotation;
-
-      this.viewModel!.avatarSpawnPosition = new Vector3(
-        template.playerSpawnPoint.position.x,
-        0,
-        template.playerSpawnPoint.position.y,
-      );
     }
   }
 

@@ -23,16 +23,16 @@ describe("LearningElementModalController", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind<IScoreLearningElementUseCase>(
-      USECASE_TYPES.IScoreLearningElementUseCase
+      USECASE_TYPES.IScoreLearningElementUseCase,
     ).toConstantValue(scoreElementUseCaseMock);
     CoreDIContainer.rebind<IScoreH5PLearningElementUseCase>(
-      USECASE_TYPES.IScoreH5PLearningElementUseCase
+      USECASE_TYPES.IScoreH5PLearningElementUseCase,
     ).toConstantValue(scoreH5PUseCaseMock);
     CoreDIContainer.bind<IBottomTooltipPresenter>(
-      PRESENTATION_TYPES.IBottomTooltipPresenter
+      PRESENTATION_TYPES.IBottomTooltipPresenter,
     ).toConstantValue(bottomTooltipPresenterMock);
     CoreDIContainer.rebind<IBeginStoryElementOutroCutSceneUseCase>(
-      USECASE_TYPES.IBeginStoryElementOutroCutSceneUseCase
+      USECASE_TYPES.IBeginStoryElementOutroCutSceneUseCase,
     ).toConstantValue(beginStoryElementOutroCutSceneUseCaseMock);
   });
 
@@ -62,11 +62,11 @@ describe("LearningElementModalController", () => {
   });
 
   //ANF-ID: [EWE0042]
-  test("closeModal calls beginStoryElementOutroCutSceneUseCase", () => {
+  test("triggerCutscene calls beginStoryElementOutroCutSceneUseCase", () => {
     viewModel.id.Value = 42;
-    systemUnderTest.closeModal();
+    systemUnderTest.triggerOutroCutscene();
     expect(
-      beginStoryElementOutroCutSceneUseCaseMock.execute
+      beginStoryElementOutroCutSceneUseCaseMock.execute,
     ).toHaveBeenCalledWith({
       scoredLearningElementID: 42,
     });

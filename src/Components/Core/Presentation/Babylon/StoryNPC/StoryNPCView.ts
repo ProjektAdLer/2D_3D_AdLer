@@ -30,10 +30,12 @@ import HighlightColors from "../HighlightColors";
 
 import iconLink from "../../../../../Assets/3dModels/sharedModels/3dIcons/l-3dicons-story-speech-bubble-dots.glb";
 import AvatarAnimationNames from "src/Components/Core/Domain/AvatarModels/AvatarAnimationNames";
+import IAvatarPresenter from "../Avatar/IAvatarPresenter";
 
 export default class StoryNPCView {
   private scenePresenter: IScenePresenter;
   private navigation: INavigation;
+  private avatarPresenter: IAvatarPresenter;
 
   private walkAnimation: AnimationGroup;
   private idleAnimation: AnimationGroup;
@@ -261,12 +263,18 @@ export default class StoryNPCView {
   }
 
   private startCutSceneMovement(): void {
+    if (!this.avatarPresenter) {
+      this.avatarPresenter = CoreDIContainer.get<IAvatarPresenter>(
+        PRESENTATION_TYPES.IAvatarPresenter,
+      );
+    }
     // npc stops in specific distance from avatar
-    const targetOffset = this.viewModel.avatarSpawnPosition
-      .subtract(this.viewModel.parentNode.position)
+    const targetOffset = this.avatarPresenter.AvatarPosition.subtract(
+      this.viewModel.parentNode.position,
+    )
       .normalize()
       .scale(this.viewModel.cutSceneDistanceFromAvatar);
-    const target = this.viewModel.avatarSpawnPosition.subtract(targetOffset);
+    const target = this.avatarPresenter.AvatarPosition.subtract(targetOffset);
 
     // go to avatar
     this.viewModel.cutSceneTimer = setTimeout(() => {

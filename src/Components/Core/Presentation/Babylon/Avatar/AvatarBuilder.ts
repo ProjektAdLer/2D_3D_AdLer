@@ -41,6 +41,13 @@ export default class AvatarBuilder
   override buildPresenter(): void {
     super.buildPresenter();
 
+    if (CoreDIContainer.isBound(PRESENTATION_TYPES.IAvatarPresenter)) {
+      CoreDIContainer.unbind(PRESENTATION_TYPES.IAvatarPresenter);
+    }
+    CoreDIContainer.bind<IAvatarPresenter>(
+      PRESENTATION_TYPES.IAvatarPresenter,
+    ).toConstantValue(this.presenter!);
+
     CoreDIContainer.get<ILearningWorldPort>(
       PORT_TYPES.ILearningWorldPort,
     ).registerAdapter(this.presenter!, HistoryWrapper.currentLocationScope());

@@ -10,6 +10,8 @@ import IAvatarCameraPresenter from "../../Presentation/Babylon/AvatarCamera/IAva
 import AvatarCameraPresenter from "../../Presentation/Babylon/AvatarCamera/AvatarCameraPresenter";
 import IAvatarFocusSelection from "../../Presentation/Babylon/Avatar/AvatarFocusSelection/IAvatarFokusSelection";
 import AvatarFocusSelection from "../../Presentation/Babylon/Avatar/AvatarFocusSelection/AvatarFocusSelection";
+import IAvatarPresenter from "../../Presentation/Babylon/Avatar/IAvatarPresenter";
+import AvatarPresenter from "../../Presentation/Babylon/Avatar/AvatarPresenter";
 
 const PresentationDIContainer = new ContainerModule((bind) => {
   bind<IMovementIndicator>(PRESENTATION_TYPES.IMovementIndicator).to(
@@ -27,6 +29,9 @@ const PresentationDIContainer = new ContainerModule((bind) => {
   bind<IAvatarFocusSelection>(PRESENTATION_TYPES.IAvatarFocusSelection)
     .to(AvatarFocusSelection)
     .inSingletonScope();
+  bind<IAvatarPresenter>(PRESENTATION_TYPES.IAvatarPresenter).to(
+    AvatarPresenter,
+  );
 });
 
 export default PresentationDIContainer;

@@ -16,6 +16,7 @@ const PRESENTATION_TYPES = {
     "IControlsExplanationModalPresenter",
   ),
   IAvatarFocusSelection: Symbol("IAvatarFocusSelection"),
+  IAvatarPresenter: Symbol("IAvatarPresenter"),
   IBreakTimeNotificationOverviewPresenter: Symbol(
     "IBreakTimeNotificationOverviewPresenter",
   ),
