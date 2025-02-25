@@ -26,6 +26,7 @@ describe("AvatarEditorPreview", () => {
     CoreDIContainer.restore();
   });
 
+  // ANF-ID: [EZZ0055]
   test("should render", () => {
     useBuilderMock([undefined, controllerMock]);
 

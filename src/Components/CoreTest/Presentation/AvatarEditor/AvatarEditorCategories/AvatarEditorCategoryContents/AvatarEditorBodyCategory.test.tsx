@@ -12,6 +12,7 @@ const avatarEditorMock = mock<AvatarEditorViewModel>();
 const avatarEditorControllerMock = mock<IAvatarEditorController>();
 
 describe("AvatarEditorBodyCategory", () => {
+  // ANF-ID: [EZZ0050]
   test("should render", () => {
     avatarEditorMock.skinColor = new Observable<AvatarColor>({
       id: 33,
@@ -28,6 +29,7 @@ describe("AvatarEditorBodyCategory", () => {
     expect(container).toMatchSnapshot();
   });
 
+  // ANF-ID: [EZZ0050]
   test("click on colorpicker-button opens color picker", () => {
     const container = render(
       <AvatarEditorBodyCategory

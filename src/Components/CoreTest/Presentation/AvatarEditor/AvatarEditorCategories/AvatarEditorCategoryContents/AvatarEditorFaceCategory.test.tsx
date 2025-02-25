@@ -12,6 +12,7 @@ const avatarEditorMock = mock<AvatarEditorViewModel>();
 const avatarEditorControllerMock = mock<IAvatarEditorController>();
 
 describe("AvatarEditorFaceCategory", () => {
+  // ANF-ID: [EZZ0037, EZZ0038, EZZ0039, EZZ0040]
   test("should render", () => {
     avatarEditorMock.uiVisiblity = {
       faceMenu: {
@@ -36,6 +37,7 @@ describe("AvatarEditorFaceCategory", () => {
     expect(container).toMatchSnapshot();
   });
 
+  // ANF-ID: [EZZ0037, EZZ0038, EZZ0039, EZZ0040]
   test.each([
     ["eyebrows", true, false, false, false, "Brows_1"],
     ["eyes", false, true, false, false, "Neural_Eyes_1"],

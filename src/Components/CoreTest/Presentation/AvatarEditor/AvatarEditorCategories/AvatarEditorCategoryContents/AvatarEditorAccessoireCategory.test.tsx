@@ -18,6 +18,7 @@ const avatarEditorMock = mock<AvatarEditorViewModel>();
 const avatarEditorControllerMock = mock<IAvatarEditorController>();
 
 describe("AvatarEditorHairCategory", () => {
+  // ANF-ID: [EZZ0041, EZZ0049, ELG0035, ELG0036]
   test("should render", () => {
     avatarEditorMock.uiVisiblity = {
       accessoireMenu: {
@@ -42,6 +43,7 @@ describe("AvatarEditorHairCategory", () => {
     expect(container).toMatchSnapshot();
   });
 
+  // ANF-ID: [EZZ0041, EZZ0049, ELG0035, ELG0036]
   test.each([
     ["headgear", true, false, false, false],
     ["glasses", false, true, false, false],

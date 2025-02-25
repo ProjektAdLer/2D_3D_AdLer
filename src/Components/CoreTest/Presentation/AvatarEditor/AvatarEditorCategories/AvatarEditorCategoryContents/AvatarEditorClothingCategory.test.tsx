@@ -18,6 +18,7 @@ const avatarEditorMock = mock<AvatarEditorViewModel>();
 const avatarEditorControllerMock = mock<IAvatarEditorController>();
 
 describe("AvatarEditorClothingCategory", () => {
+  // ANF-ID: [EZZ0042, EZZ0043, EZZ0044, EZZ0045, EZZ0046, EZZ0047]
   test("should render", () => {
     avatarEditorMock.uiVisiblity = {
       clothingMenu: {
@@ -27,9 +28,9 @@ describe("AvatarEditorClothingCategory", () => {
       },
     } as AvatarEditorUI;
 
-    avatarEditorMock.shirt = new Observable<AvatarShirtModels>("none");
-    avatarEditorMock.pants = new Observable<AvatarPantsModels>("none");
-    avatarEditorMock.shoes = new Observable<AvatarShoesModels>("none");
+    avatarEditorMock.shirt = new Observable<AvatarShirtModels>("none" as any);
+    avatarEditorMock.pants = new Observable<AvatarPantsModels>("none" as any);
+    avatarEditorMock.shoes = new Observable<AvatarShoesModels>("none" as any);
     avatarEditorMock.shirtColor = new Observable<AvatarColor>({
       id: 33,
       nameKey: "Brown 2",
@@ -55,6 +56,7 @@ describe("AvatarEditorClothingCategory", () => {
     expect(container).toMatchSnapshot();
   });
 
+  // ANF-ID: [EZZ0042, EZZ0043, EZZ0044]
   test.skip.each([
     ["shirt", true, false, false],
     ["pants", false, true, false],
@@ -70,9 +72,9 @@ describe("AvatarEditorClothingCategory", () => {
         },
       } as AvatarEditorUI;
 
-      avatarEditorMock.shirt = new Observable<AvatarShirtModels>("none");
-      avatarEditorMock.pants = new Observable<AvatarPantsModels>("none");
-      avatarEditorMock.shoes = new Observable<AvatarShoesModels>("none");
+      avatarEditorMock.shirt = new Observable<AvatarShirtModels>("none" as any);
+      avatarEditorMock.pants = new Observable<AvatarPantsModels>("none" as any);
+      avatarEditorMock.shoes = new Observable<AvatarShoesModels>("none" as any);
       avatarEditorMock.shirtColor = new Observable<AvatarColor>({
         id: 33,
         nameKey: "Brown 2",
