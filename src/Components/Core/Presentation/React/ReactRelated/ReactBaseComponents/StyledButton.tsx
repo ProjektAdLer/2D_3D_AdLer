@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 
@@ -62,15 +62,15 @@ export default function StyledButton({
     defaultFeedback: "landscape:hover:bg-adleryellow active:bg-adleryellow",
   };
 
-  const [animate, setAnimate] = React.useState(false);
-  const prevDisabledRef = React.useRef(disabled);
+  const [animate, setAnimate] = useState(false);
+  const prevDisabledRef = useRef(disabled);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!disabled && prevDisabledRef.current === true) {
       setAnimate(true);
       const timer = setTimeout(() => {
         setAnimate(false);
-      }, 1000);
+      }, 5000);
       return () => clearTimeout(timer);
     }
     prevDisabledRef.current = disabled;
@@ -91,9 +91,7 @@ export default function StyledButton({
                 buttonConfig[color],
                 buttonConfig[feedback],
               ),
-          animate && animatedTransition
-            ? "animate-[wiggle_0.5s_ease-in-out_1]"
-            : "",
+          animate && animatedTransition ? "animate-buttonTransition" : "",
         )}
         {...rest}
       >
