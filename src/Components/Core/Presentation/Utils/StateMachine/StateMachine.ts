@@ -16,7 +16,7 @@ export default class StateMachine<STATE, ACTION>
 
   constructor(
     initialState: STATE,
-    private transitions: IStateTransition<STATE, ACTION>[]
+    private transitions: IStateTransition<STATE, ACTION>[],
   ) {
     this.currentState = initialState;
     this.logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
@@ -29,7 +29,7 @@ export default class StateMachine<STATE, ACTION>
   applyAction(action: ACTION): boolean {
     const transition = this.transitions.find(
       (transition) =>
-        transition.action === action && transition.from === this.currentState
+        transition.action === action && transition.from === this.currentState,
     );
 
     if (transition) {
@@ -37,16 +37,6 @@ export default class StateMachine<STATE, ACTION>
         transition.onTransitionCallback();
       }
       this.currentState = transition.to;
-
-      this.logger.log(
-        LogLevelTypes.INFO,
-        "[StateMachine]: Transitioned from " +
-          transition.from +
-          " to " +
-          transition.to +
-          " after action " +
-          action
-      );
       return true;
     }
 
@@ -55,7 +45,7 @@ export default class StateMachine<STATE, ACTION>
       "[StateMachine]: No transition found for action " +
         action +
         " in state " +
-        this.currentState
+        this.currentState,
     );
     return false;
   }
