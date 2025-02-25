@@ -91,6 +91,7 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
               await controller.scoreLearningElement();
             }
             controller.closeModal();
+            controller.triggerOutroCutscene();
             controller.showBottomToolTip();
           }}
         >
@@ -105,6 +106,7 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
       title={viewModel.name.Value}
       onClose={() => {
         controller.closeModal();
+        controller.triggerOutroCutscene();
         controller.showBottomToolTip();
       }}
       smallCloseButton={isPrimitive}

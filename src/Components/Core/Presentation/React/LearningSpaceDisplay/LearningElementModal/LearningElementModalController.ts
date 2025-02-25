@@ -18,18 +18,21 @@ export default class LearningElementModalController
 
   constructor(private viewModel: LearningElementModalViewModel) {
     this.BottomTooltipPresenter = CoreDIContainer.get<IBottomTooltipPresenter>(
-      PRESENTATION_TYPES.IBottomTooltipPresenter
+      PRESENTATION_TYPES.IBottomTooltipPresenter,
     );
     this.beginStoryElementOutroCutSceneUseCase =
       CoreDIContainer.get<IBeginStoryElementOutroCutSceneUseCase>(
-        USECASE_TYPES.IBeginStoryElementOutroCutSceneUseCase
+        USECASE_TYPES.IBeginStoryElementOutroCutSceneUseCase,
       );
   }
 
   @bind
   closeModal(): void {
     this.viewModel.isOpen.Value = false;
-    // trigger cutscene
+  }
+
+  @bind
+  triggerOutroCutscene(): void {
     this.beginStoryElementOutroCutSceneUseCase.execute({
       scoredLearningElementID: this.viewModel.id.Value,
     });
@@ -38,7 +41,7 @@ export default class LearningElementModalController
   async scoreLearningElement(): Promise<void> {
     if (this.viewModel.type.Value !== LearningElementTypes.h5p) {
       await CoreDIContainer.get<IScoreLearningElementUseCase>(
-        USECASE_TYPES.IScoreLearningElementUseCase
+        USECASE_TYPES.IScoreLearningElementUseCase,
       ).executeAsync(this.viewModel.id.Value);
     }
   }
@@ -80,7 +83,7 @@ export default class LearningElementModalController
         statement?.result?.score?.scaled === 1 || false;
 
       await CoreDIContainer.get<IScoreH5PElementUseCase>(
-        USECASE_TYPES.IScoreH5PLearningElementUseCase
+        USECASE_TYPES.IScoreH5PLearningElementUseCase,
       ).executeAsync({
         // @ts-ignore
         xapiData: xapiData,
