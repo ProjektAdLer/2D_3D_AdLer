@@ -73,7 +73,7 @@ const getNewTestEntities = () => {
 const setupEntityContainerMock = (
   userEntityMock: UserDataEntity[],
   elementEntityMock: LearningElementEntity[],
-  spaceEntityMock: LearningSpaceEntity[]
+  spaceEntityMock: LearningSpaceEntity[],
 ) => {
   entityContainerMock.getEntitiesOfType.mockImplementation((entityType) => {
     if (entityType === UserDataEntity) {
@@ -98,7 +98,7 @@ const setupEntityContainerMock = (
         return spaceEntityMock;
       }
       return [];
-    }
+    },
   );
 };
 
@@ -109,28 +109,28 @@ describe("ScoreLearningElementUseCase", () => {
     CoreDIContainer.snapshot();
 
     CoreDIContainer.rebind<IEntityContainer>(
-      CORE_TYPES.IEntityContainer
+      CORE_TYPES.IEntityContainer,
     ).toConstantValue(entityContainerMock);
     CoreDIContainer.rebind<IBackendPort>(
-      CORE_TYPES.IBackendAdapter
+      CORE_TYPES.IBackendAdapter,
     ).toConstantValue(backendAdapterMock);
     CoreDIContainer.rebind<IInternalCalculateLearningWorldScoreUseCase>(
-      USECASE_TYPES.ICalculateLearningWorldScoreUseCase
+      USECASE_TYPES.ICalculateLearningWorldScoreUseCase,
     ).toConstantValue(InternalCalculateWorldScoreMock);
     CoreDIContainer.rebind<ILearningWorldPort>(
-      PORT_TYPES.ILearningWorldPort
+      PORT_TYPES.ILearningWorldPort,
     ).toConstantValue(worldPortMock);
     CoreDIContainer.rebind<IGetUserLocationUseCase>(
-      USECASE_TYPES.IGetUserLocationUseCase
+      USECASE_TYPES.IGetUserLocationUseCase,
     ).toConstantValue(getUserLocationUseCaseMock);
     CoreDIContainer.rebind<IBeginStoryElementOutroCutSceneUseCase>(
-      USECASE_TYPES.IBeginStoryElementOutroCutSceneUseCase
+      USECASE_TYPES.IBeginStoryElementOutroCutSceneUseCase,
     ).toConstantValue(beginStoryElementOutroCutSceneUseCaseMock);
   });
 
   beforeEach(() => {
     systemUnderTest = CoreDIContainer.get(
-      USECASE_TYPES.IScoreLearningElementUseCase
+      USECASE_TYPES.IScoreLearningElementUseCase,
     );
   });
 
@@ -146,6 +146,7 @@ describe("ScoreLearningElementUseCase", () => {
     } as UserLocationTO);
     const { userEntity, elementEntity, spaceEntity } = getNewTestEntities();
     setupEntityContainerMock([userEntity], [elementEntity], [spaceEntity]);
+    backendAdapterMock.scoreElement.mockResolvedValue(true);
 
     await expect(systemUnderTest.executeAsync(1)).resolves.toBeUndefined();
   });
@@ -169,7 +170,7 @@ describe("ScoreLearningElementUseCase", () => {
     expect(backendAdapterMock.scoreElement).toHaveBeenCalledWith(
       userEntity.userToken,
       1,
-      1
+      1,
     );
   });
 
@@ -181,6 +182,7 @@ describe("ScoreLearningElementUseCase", () => {
     const { userEntity, elementEntity, spaceEntity } = getNewTestEntities();
     setupEntityContainerMock([userEntity], [elementEntity], [spaceEntity]);
     backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
+    backendAdapterMock.scoreElement.mockResolvedValue(true);
 
     try {
       await systemUnderTest.executeAsync(1);
@@ -189,7 +191,7 @@ describe("ScoreLearningElementUseCase", () => {
     }
 
     expect(
-      InternalCalculateWorldScoreMock.internalExecute
+      InternalCalculateWorldScoreMock.internalExecute,
     ).toHaveBeenCalledTimes(1);
   });
 
@@ -201,6 +203,7 @@ describe("ScoreLearningElementUseCase", () => {
     const { userEntity, elementEntity, spaceEntity } = getNewTestEntities();
     setupEntityContainerMock([userEntity], [elementEntity], [spaceEntity]);
     backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
+    backendAdapterMock.scoreElement.mockResolvedValue(true);
 
     try {
       await systemUnderTest.executeAsync(1);
@@ -223,7 +226,7 @@ describe("ScoreLearningElementUseCase", () => {
     backendAdapterMock.scoreElement.mockRejectedValue("error");
 
     await expect(systemUnderTest.executeAsync(1)).rejects.toContain(
-      "Backend call failed"
+      "Backend call failed",
     );
   });
 
@@ -237,7 +240,7 @@ describe("ScoreLearningElementUseCase", () => {
     backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
 
     await expect(systemUnderTest.executeAsync(1)).rejects.toContain(
-      "No matching element found"
+      "No matching element found",
     );
   });
 
@@ -250,12 +253,12 @@ describe("ScoreLearningElementUseCase", () => {
     setupEntityContainerMock(
       [userEntity],
       [elementEntity, elementEntity],
-      [spaceEntity]
+      [spaceEntity],
     );
     backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
 
     await expect(systemUnderTest.executeAsync(1)).rejects.toContain(
-      "More than one matching element found"
+      "More than one matching element found",
     );
   });
 
@@ -269,7 +272,7 @@ describe("ScoreLearningElementUseCase", () => {
     backendAdapterMock.scoreH5PElement.mockResolvedValue(true);
 
     await expect(systemUnderTest.executeAsync(1)).rejects.toContain(
-      "User is not in a space!"
+      "User is not in a space!",
     );
   });
 
@@ -285,14 +288,14 @@ describe("ScoreLearningElementUseCase", () => {
 
     expect(loggerMock).toHaveBeenCalledWith(
       LogLevelTypes.WARN,
-      expect.stringContaining(warningMessage)
+      expect.stringContaining(warningMessage),
     );
   });
 
   test("rejectWithWarning rejects with given message", async () => {
     const warningMessage = "warning message";
     await expect(
-      systemUnderTest["rejectWithWarning"](warningMessage)
+      systemUnderTest["rejectWithWarning"](warningMessage),
     ).rejects.toContain(warningMessage);
   });
 });

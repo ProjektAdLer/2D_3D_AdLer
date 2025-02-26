@@ -3,7 +3,6 @@ import INotificationAdapter, {
   NotificationType,
 } from "../NotificationPort/INotificationAdapter";
 import IBreakTimeNotification from "../../../Domain/BreakTimeNotifications/IBreakTimeNotification";
-import { NotificationMessages } from "src/Components/Core/Domain/Types/NotificationMessages";
 
 export default interface INotificationPort
   extends IAbstractPort<INotificationAdapter> {

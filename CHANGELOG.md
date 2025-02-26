@@ -18,6 +18,10 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
+- fixed story npc not going to avatar when outro cutscene is triggered
+- fixed avatar editor not updating skin color if clothing has changed
+- fixed not checking backend answer of learning element scoring
+
 ### Deprecated
 
 ### Security

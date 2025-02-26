@@ -19,27 +19,27 @@ const mockController = mock<LearningElementModalController>();
 
 jest.mock(
   "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/ImageComponent.tsx",
-  () => () => <div>Hello World</div>
+  () => () => <div>Hello World</div>,
 );
 jest.mock(
   "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/H5PContent",
-  () => () => <div>Hello World</div>
+  () => () => <div>Hello World</div>,
 );
 jest.mock(
   "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/VideoComponent.tsx",
-  () => () => <div>Hello World</div>
+  () => () => <div>Hello World</div>,
 );
 jest.mock(
   "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/TextComponent.tsx",
-  () => () => <div>Hello World</div>
+  () => () => <div>Hello World</div>,
 );
 jest.mock(
   "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/PDFComponent.tsx",
-  () => () => <div>Hello World</div>
+  () => () => <div>Hello World</div>,
 );
 jest.mock(
   "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/PrimitiveH5PContent.tsx",
-  () => () => <div>Hello World</div>
+  () => () => <div>Hello World</div>,
 );
 
 describe("LearningElementModal", () => {
@@ -109,7 +109,7 @@ describe("LearningElementModal", () => {
     const componentUnderTest = render(<LearningElementModal />);
     expect(componentUnderTest.container.childElementCount).toBe(1);
     expect(
-      componentUnderTest.getByText("No Element selected")
+      componentUnderTest.getByText("No Element selected"),
     ).toBeInTheDocument();
   });
 
@@ -131,6 +131,7 @@ describe("LearningElementModal", () => {
     mockController.closeModal.mockImplementation(() => {
       mockViewModel.isOpen.Value = false;
     });
+    mockController.scoreLearningElement.mockResolvedValue(true);
     useBuilderMock([mockViewModel, mockController]);
     mockViewModel.isOpen.Value = true;
     mockViewModel.type.Value = "text";
@@ -184,7 +185,7 @@ describe("LearningElementModal", () => {
     expect(mockController.closeModal).toHaveBeenCalled();
     expect(mockViewModel.isOpen.Value).toBe(false);
     await waitFor(() =>
-      expect(componentUnderTest.container).toBeEmptyDOMElement()
+      expect(componentUnderTest.container).toBeEmptyDOMElement(),
     );
   });
 });

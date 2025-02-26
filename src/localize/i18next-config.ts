@@ -13,6 +13,7 @@ import de_spaceGoal from "./de/spaceGoal.json";
 import de_controls from "./de/controls.json";
 import de_avatarEditor from "./de/avatarEditor.json";
 import de_loadingScreen from "./de/loadingScreen.json";
+import de_errorMessages from "./de/errorMessages.json";
 
 const resources = {
   de: {
@@ -28,6 +29,7 @@ const resources = {
     controls: de_controls,
     avatarEditor: de_avatarEditor,
     loadingScreen: de_loadingScreen,
+    errorMessages: de_errorMessages,
   },
 };
 const defaultNS = "start";
@@ -47,6 +49,7 @@ i18next.use(initReactI18next).init({
     "spaceGoal",
     "controls",
     "avatarEditor",
+    "errorMessages",
   ],
   resources: resources,
   defaultNS: defaultNS,

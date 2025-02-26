@@ -83,16 +83,19 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
           }
           animatedTransition={true}
           onClick={async () => {
+            let result: boolean = true;
             if (
               isPrimitive &&
               viewModel.type?.Value !== "h5p" &&
               viewModel.isScoreable?.Value === true
             ) {
-              await controller.scoreLearningElement();
+              result = await controller.scoreLearningElement();
             }
-            controller.closeModal();
-            controller.triggerOutroCutscene();
-            controller.showBottomToolTip();
+            if (result) {
+              controller.closeModal();
+              controller.triggerOutroCutscene();
+              controller.showBottomToolTip();
+            }
           }}
         >
           {translate("submitElement")}

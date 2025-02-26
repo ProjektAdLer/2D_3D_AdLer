@@ -14,6 +14,8 @@ import type { IInternalCalculateLearningWorldScoreUseCase } from "../CalculateLe
 import type { IInternalCalculateLearningSpaceScoreUseCase } from "../CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
 import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
+import type INotificationPort from "../../Ports/Interfaces/INotificationPort";
+import i18next from "i18next";
 
 @injectable()
 export default class ScoreLearningElementUseCase
@@ -34,6 +36,8 @@ export default class ScoreLearningElementUseCase
     private worldPort: ILearningWorldPort,
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
     private getUserLocationUseCase: IGetUserLocationUseCase,
+    @inject(PORT_TYPES.INotificationPort)
+    private notificationPort: INotificationPort,
   ) {}
 
   async executeAsync(elementID: ComponentID): Promise<void> {
@@ -49,9 +53,10 @@ export default class ScoreLearningElementUseCase
       );
     }
 
+    let backendSuccessful: boolean;
     // call backend
     try {
-      await this.backendAdapter.scoreElement(
+      backendSuccessful = await this.backendAdapter.scoreElement(
         userEntity.userToken,
         elementID,
         userLocation.worldID,
@@ -78,6 +83,15 @@ export default class ScoreLearningElementUseCase
         "More than one matching element found!",
         elementID,
       );
+
+    if (!backendSuccessful && !elements[0].hasScored) {
+      this.notificationPort.onNotificationTriggered(
+        LogLevelTypes.ERROR,
+        `ScoreElementUseCase: scoreElement from backend returned: ${backendSuccessful} for learningelement ${elementID} in space ${userLocation.spaceID} of world ${userLocation.worldID}`,
+        i18next.t("learningElementScoringFalse", { ns: "errorMessages" }),
+      );
+      return Promise.reject("error");
+    }
 
     if (!elements[0].hasScored) {
       elements[0].hasScored = true;

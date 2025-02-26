@@ -38,12 +38,18 @@ export default class LearningElementModalController
     });
   }
 
-  async scoreLearningElement(): Promise<void> {
+  async scoreLearningElement(): Promise<boolean> {
+    let result = true;
     if (this.viewModel.type.Value !== LearningElementTypes.h5p) {
-      await CoreDIContainer.get<IScoreLearningElementUseCase>(
-        USECASE_TYPES.IScoreLearningElementUseCase,
-      ).executeAsync(this.viewModel.id.Value);
+      try {
+        await CoreDIContainer.get<IScoreLearningElementUseCase>(
+          USECASE_TYPES.IScoreLearningElementUseCase,
+        ).executeAsync(this.viewModel.id.Value);
+      } catch (e) {
+        result = false;
+      }
     }
+    return result;
   }
 
   @bind
