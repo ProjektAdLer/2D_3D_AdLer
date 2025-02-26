@@ -196,7 +196,7 @@ module.exports = {
         loadtilenine: "bluetogoldnine 8s ease-in-out 0s infinite",
         loadtileten: "bluetogoldten 8s ease-in-out 0s infinite",
         wiggle: "wiggle 2s ease-in-out infinite",
-        buttonTransition: "buttonTransition 0.5s linear 8",
+        buttonTransition: "buttonTransition 0.5s linear 4",
       },
       colors: {
         babylonbg: "#33334d", //Babylon Default Hintergrundfarbe
