@@ -54,7 +54,6 @@ export default class StoryNPCView {
     this.viewModel.isInteractable.subscribe((newValue) => {
       this.updateHighlight();
       this.toggleIconFloatAnimation(newValue);
-      console.log("isInteractable", newValue);
     });
   }
 

@@ -47,7 +47,6 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
   }, [canClose, controller, autoClose]);
 
   useEffect(() => {
-    //console.log("external: ", externalLoadText);
     if (externalLoadText) {
       setLoadingText(externalLoadText);
     }

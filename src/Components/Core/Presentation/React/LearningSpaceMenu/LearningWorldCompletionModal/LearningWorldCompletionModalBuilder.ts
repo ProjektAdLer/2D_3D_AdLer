@@ -11,6 +11,8 @@ import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import ILearningWorldAdapter from "src/Components/Core/Application/Ports/LearningWorldPort/ILearningWorldAdapter";
 import { HistoryWrapper } from "~ReactComponents/ReactRelated/ReactEntryPoint/HistoryWrapper";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
+import IGetLearningWorldUseCase from "src/Components/Core/Application/UseCases/GetLearningWorld/IGetLearningWorldUseCase";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 
 @injectable()
 export default class LearningWorldCompletionModalBuilder extends PresentationBuilder<
@@ -47,5 +49,9 @@ export default class LearningWorldCompletionModalBuilder extends PresentationBui
     CoreDIContainer.get<AbstractPort<ILearningWorldAdapter>>(
       PORT_TYPES.ILearningWorldPort,
     ).registerAdapter(this.presenter!, HistoryWrapper.currentLocationScope());
+
+    CoreDIContainer.get<IGetLearningWorldUseCase>(
+      USECASE_TYPES.IGetLearningWorldUseCase,
+    ).execute();
   }
 }

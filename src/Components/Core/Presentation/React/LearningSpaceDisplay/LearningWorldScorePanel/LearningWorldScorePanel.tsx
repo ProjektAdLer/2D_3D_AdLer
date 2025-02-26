@@ -36,21 +36,21 @@ export default function LearningWorldScorePanel({
       setPercentage((scoreInfo.currentScore / scoreInfo.requiredScore) * 100);
   }, [scoreInfo?.currentScore, scoreInfo?.requiredScore, scoreInfo]);
 
-  useEffect(() => {
-    const calculateWorldScore =
-      CoreDIContainer.get<ICalculateLearningWorldScoreUseCase>(
-        USECASE_TYPES.ICalculateLearningWorldScoreUseCase,
-      );
+  // useEffect(() => {
+  //   const calculateWorldScore =
+  //     CoreDIContainer.get<ICalculateLearningWorldScoreUseCase>(
+  //       USECASE_TYPES.ICalculateLearningWorldScoreUseCase,
+  //     );
 
-    try {
-      calculateWorldScore.execute();
-    } catch (e) {
-      CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger).log(
-        LogLevelTypes.ERROR,
-        `LearningWorldScorePanel: Error while calculating world score. Error: ${e}`,
-      );
-    }
-  }, []);
+  //   try {
+  //     calculateWorldScore.execute();
+  //   } catch (e) {
+  //     CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger).log(
+  //       LogLevelTypes.ERROR,
+  //       `LearningWorldScorePanel: Error while calculating world score. Error: ${e}`,
+  //     );
+  //   }
+  // }, []);
 
   if (!viewModel) return null;
 
