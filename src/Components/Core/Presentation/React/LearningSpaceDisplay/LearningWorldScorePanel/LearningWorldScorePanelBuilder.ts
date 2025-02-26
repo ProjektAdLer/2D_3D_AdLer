@@ -6,6 +6,8 @@ import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilde
 import LearningWorldScorePanelPresenter from "./LearningWorldScorePanelPresenter";
 import LearningWorldScorePanelViewModel from "./LearningWorldScorePanelViewModel";
 import { HistoryWrapper } from "~ReactComponents/ReactRelated/ReactEntryPoint/HistoryWrapper";
+import IGetLearningWorldUseCase from "src/Components/Core/Application/UseCases/GetLearningWorld/IGetLearningWorldUseCase";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 
 @injectable()
 export default class LearningWorldScorePanelBuilder extends PresentationBuilder<
@@ -19,14 +21,18 @@ export default class LearningWorldScorePanelBuilder extends PresentationBuilder<
       LearningWorldScorePanelViewModel,
       undefined,
       undefined,
-      LearningWorldScorePanelPresenter
+      LearningWorldScorePanelPresenter,
     );
   }
 
   override buildPresenter(): void {
     super.buildPresenter();
     CoreDIContainer.get<ILearningWorldPort>(
-      PORT_TYPES.ILearningWorldPort
+      PORT_TYPES.ILearningWorldPort,
     ).registerAdapter(this.presenter!, HistoryWrapper.currentLocationScope());
+
+    CoreDIContainer.get<IGetLearningWorldUseCase>(
+      USECASE_TYPES.IGetLearningWorldUseCase,
+    ).execute();
   }
 }

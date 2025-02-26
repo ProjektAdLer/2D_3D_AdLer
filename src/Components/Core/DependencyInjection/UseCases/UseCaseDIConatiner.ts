@@ -70,6 +70,8 @@ import IUpdateAvatarConfigUseCase from "../../Application/UseCases/UpdateAvatarC
 import UpdateAvatarConfigUseCase from "../../Application/UseCases/UpdateAvatarConfig/UpdateAvatarConfigUseCase";
 import ISaveAvatarConfigUseCase from "../../Application/UseCases/SaveAvatarConfig/ISaveAvatarConfigUseCase";
 import SaveAvatarConfigUseCase from "../../Application/UseCases/SaveAvatarConfig/SaveAvatarConfigUseCase";
+import IGetLearningWorldUseCase from "../../Application/UseCases/GetLearningWorld/IGetLearningWorldUseCase";
+import GetLearningWorldUseCase from "../../Application/UseCases/GetLearningWorld/GetLearningWorldUseCase";
 
 const UseCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases
@@ -251,6 +253,10 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
 
   bind<ISaveAvatarConfigUseCase>(USECASE_TYPES.ISaveAvatarConfigUseCase)
     .to(SaveAvatarConfigUseCase)
+    .inSingletonScope();
+
+  bind<IGetLearningWorldUseCase>(USECASE_TYPES.IGetLearningWorldUseCase)
+    .to(GetLearningWorldUseCase)
     .inSingletonScope();
 });
 

@@ -20,43 +20,44 @@ import AdaptivityElementQuestionPresentationUpdateTO from "../../DataTransferObj
 export default interface ILearningWorldAdapter {
   // userWorlds
   onUserInitialLearningWorldsInfoLoaded?(
-    userInitialLearningWorldsInfoTO: UserInitialLearningWorldsInfoTO
+    userInitialLearningWorldsInfoTO: UserInitialLearningWorldsInfoTO,
   ): void;
   onUserLearningWorldsInfoLoaded?(
-    userLearningWorldsInfoTO: UserLearningWorldsInfoTO
+    userLearningWorldsInfoTO: UserLearningWorldsInfoTO,
   ): void;
 
   // world
   onLearningWorldLoaded?(learningWorldTO: LearningWorldTO): void;
   onLearningWorldScored?(learningWorldScoreTO: LearningWorldScoreTO): void;
+  onLearningWorldEntityLoaded?(learningWorldTO: LearningWorldTO): void;
 
   // space
   onLearningSpaceLoaded?(learningSpaceTO: LearningSpaceTO): void;
   onLearningSpaceScored?(learningSpaceScoreTO: LearningSpaceScoreTO): void;
   onLearningSpacePrecursorAndSuccessorLoaded?(
-    LearningSpacePrecursorAndSuccessorTO: LearningSpacePrecursorAndSuccessorTO
+    LearningSpacePrecursorAndSuccessorTO: LearningSpacePrecursorAndSuccessorTO,
   ): void;
 
   // element
   onLearningElementLoaded?(learningElementTO: LearningElementTO): void;
   onLearningElementScored?(
     hasScored: boolean,
-    learningElementID: ComponentID
+    learningElementID: ComponentID,
   ): void;
   onLearningElementHighlighted?(learningElementID: ComponentID): void;
 
   // adaptivity
   onAdaptivityElementLoaded?(
-    adaptivityElementProgressTO: AdaptivityElementProgressTO
+    adaptivityElementProgressTO: AdaptivityElementProgressTO,
   ): void;
   onAdaptivityElementAnswerEvaluated?(
-    adaptivityElementProgressUpdateTO: AdaptivityElementProgressUpdateTO
+    adaptivityElementProgressUpdateTO: AdaptivityElementProgressUpdateTO,
   ): void;
   onAdaptivityElementUserHintInformed?(
-    adaptivityElementHintTO: AdaptivityElementHintTO
+    adaptivityElementHintTO: AdaptivityElementHintTO,
   ): void;
   onAdaptivityElementQuestionAnsweredCorrectly?(
-    adaptivityElementQuestionPresentationUpdateTO: AdaptivityElementQuestionPresentationUpdateTO
+    adaptivityElementQuestionPresentationUpdateTO: AdaptivityElementQuestionPresentationUpdateTO,
   ): void;
 
   // story
