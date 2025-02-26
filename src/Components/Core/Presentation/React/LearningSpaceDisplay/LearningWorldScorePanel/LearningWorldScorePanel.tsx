@@ -10,12 +10,6 @@ import {
 } from "react-circular-progressbar";
 import { useEffect, useState } from "react";
 import worldIcon from "../../../../../../Assets/icons/world.svg";
-import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
-import ICalculateLearningWorldScoreUseCase from "src/Components/Core/Application/UseCases/CalculateLearningWorldScore/ICalculateLearningWorldScoreUseCase";
-import CoreDIContainer from "src/Components/Core/DependencyInjection/CoreDIContainer";
-import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
-import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILoggerPort";
-import CORE_TYPES from "~DependencyInjection/CoreTypes";
 
 interface PanelProps extends React.HTMLAttributes<HTMLDivElement> {}
 
