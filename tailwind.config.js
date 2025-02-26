@@ -45,8 +45,9 @@ module.exports = {
           "50%": { transform: "rotate(1deg)" },
         },
         buttonTransition: {
-          "0%, 100%": { transform: "rotate(-5deg)" },
-          "50%": { transform: "rotate(5deg)" },
+          "0%, 50%, 100%": {},
+          "25%": { transform: "rotate(-3deg)" },
+          "75%": { transform: "rotate(3deg)" },
         },
         bluetogold: {
           "0%, 100%": { border: "1.25rem solid #172d4d" },
@@ -195,7 +196,7 @@ module.exports = {
         loadtilenine: "bluetogoldnine 8s ease-in-out 0s infinite",
         loadtileten: "bluetogoldten 8s ease-in-out 0s infinite",
         wiggle: "wiggle 2s ease-in-out infinite",
-        buttonTransition: "buttonTransition 2s ease-in-out infinite",
+        buttonTransition: "buttonTransition 0.5s linear 8",
       },
       colors: {
         babylonbg: "#33334d", //Babylon Default Hintergrundfarbe
