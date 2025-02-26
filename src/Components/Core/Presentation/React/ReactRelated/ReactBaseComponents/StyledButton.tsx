@@ -62,19 +62,15 @@ export default function StyledButton({
     defaultFeedback: "landscape:hover:bg-adleryellow active:bg-adleryellow",
   };
 
+  // Animation for button transition from disabled to enabled
   const [animate, setAnimate] = useState(false);
   const prevDisabledRef = useRef(disabled);
 
   useEffect(() => {
     if (!disabled && prevDisabledRef.current === true) {
       setAnimate(true);
-      const timer = setTimeout(() => {
-        setAnimate(false);
-      }, 5000);
-      return () => clearTimeout(timer);
     }
     prevDisabledRef.current = disabled;
-    return undefined;
   }, [disabled]);
 
   return (
