@@ -38,45 +38,6 @@ export default function AvatarEditorBodyCategory(
           }}
         />
       </div>
-      {/* <div className="pb-2 border-b border-gray-500">
-        <h1 className="text-2xl font-bold">
-          {translate("bodyProportionsTitle")}
-        </h1>
-      </div>
-
-      <div className="bodyProportionContainer">
-        <div className="flex items-center">
-          <h3 className="text-xl font-bold">{translate("upperBodyTitle")}</h3>
-        </div>
-        <div>
-          <RangeSlider
-            min={0}
-            max={1}
-            step={0.01}
-            callback={(value) => {
-              props.controller.onAvatarConfigChanged({ roundness: value });
-            }}
-            displayFactor={100}
-            buttons={{ imageLeft: bodySmallIcon, imageRight: bodyBigIcon }}
-          />
-        </div>
-
-        <div className="flex items-center">
-          <h3 className="text-xl font-bold">{translate("lowerBodyTitle")}</h3>
-        </div>
-        <div>
-          <RangeSlider
-            min={0}
-            max={1}
-            step={0.01}
-            callback={(value) => {
-              props.controller.onAvatarConfigChanged({ roundness: value });
-            }}
-            displayFactor={100}
-            buttons={{ imageLeft: bodySmallIcon, imageRight: bodyBigIcon }}
-          />
-        </div>
-      </div> */}
     </div>
   );
 }
