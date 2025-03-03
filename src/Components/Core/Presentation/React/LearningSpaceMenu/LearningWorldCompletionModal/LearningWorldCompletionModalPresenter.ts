@@ -33,6 +33,8 @@ export default class LearningWorldCompletionModalPresenter
       this.viewModel.showModal.Value = world.spaces.every(
         (space) => space.currentScore >= space.requiredScore,
       );
+    } else {
+      this.viewModel.wasClosedOnce = true;
     }
     this.viewModel.evaluationLink.Value = world.evaluationLink;
     this.viewModel.currentWorldId.Value = world.id;
