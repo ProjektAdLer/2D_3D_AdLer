@@ -5,50 +5,60 @@ import { Provider } from "inversify-react";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import PRESENTATION_TYPES from "../../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 import { mock } from "jest-mock-extended";
+import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
+import IGetLearningWorldUseCase from "../../../../../Core/Application/UseCases/GetLearningWorld/IGetLearningWorldUseCase";
 
 jest.mock(
   "../../../../../Core/Presentation/React/LearningSpaceDisplay/BottomTooltip/BottomTooltip",
-  () => "mocked"
+  () => "mocked",
 );
 jest.mock(
   "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/LearningElementModal",
-  () => "mocked"
+  () => "mocked",
 );
 jest.mock(
   "../../../../../Core/Presentation/React/GeneralComponents/NotificationManager/NotificationManager",
-  () => "mocked"
+  () => "mocked",
 );
 jest.mock(
   "../../../../../Core/Presentation/React/LearningSpaceDisplay/SideBar/SideBar",
-  () => "mocked"
+  () => "mocked",
 );
 jest.mock(
   "../../../../../Core/Presentation/Babylon/SceneManagement/BabylonCanvas",
-  () => "mocked"
+  () => "mocked",
 );
 jest.mock(
   "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningWorldScorePanel/LearningWorldScorePanel",
-  () => "mocked"
+  () => "mocked",
 );
 jest.mock(
   "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningSpaceScorePanel/LearningSpaceScorePanel",
-  () => "mocked"
+  () => "mocked",
 );
 jest.mock(
   "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningSpaceGoalPanel/LearningSpaceGoalPanel",
-  () => "mocked"
+  () => "mocked",
 );
 jest.mock(
   "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningSpaceNamePanel/LearningSpaceNamePanel",
-  () => "mocked"
+  () => "mocked",
 );
+jest.mock(
+  "../../../../../Core/Presentation/React/LearningSpaceMenu/LearningWorldCompletionModal/LearningWorldCompletionModal",
+  () => "mocked",
+);
+const getWorldUseCaseMock = mock<IGetLearningWorldUseCase>();
 
 describe("LearningSpace.tsx", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.bind(
-      PRESENTATION_TYPES.IBottomTooltipPresenter
+      PRESENTATION_TYPES.IBottomTooltipPresenter,
     ).toConstantValue(mock());
+    // CoreDIContainer.bind(
+    //   USECASE_TYPES.IGetLearningWorldUseCase,
+    // ).toConstantValue(getWorldUseCaseMock);
   });
 
   afterAll(() => {
@@ -59,7 +69,7 @@ describe("LearningSpace.tsx", () => {
     render(
       <Provider container={CoreDIContainer}>
         <LearningSpace />
-      </Provider>
+      </Provider>,
     );
   });
 });
