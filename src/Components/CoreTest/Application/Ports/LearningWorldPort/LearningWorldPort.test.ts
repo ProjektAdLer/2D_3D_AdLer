@@ -79,6 +79,18 @@ describe("LearningWorldPort", () => {
     );
   });
 
+  test("onLearningWorldEntityLoaded calls a registered adapter", () => {
+    const worldAdapterMock = mock<ILearningWorldAdapter>();
+    systemUnderTest.registerAdapter(worldAdapterMock);
+    const mockedWorldTO = mock<WorldTO>();
+
+    systemUnderTest.onLearningWorldEntityLoaded(mockedWorldTO);
+
+    expect(worldAdapterMock.onLearningWorldEntityLoaded).toBeCalledWith(
+      mockedWorldTO,
+    );
+  });
+
   test("onLearningSpaceLoaded calls a registered adapter", () => {
     const worldAdapterMock = mock<ILearningWorldAdapter>();
     systemUnderTest.registerAdapter(worldAdapterMock);
