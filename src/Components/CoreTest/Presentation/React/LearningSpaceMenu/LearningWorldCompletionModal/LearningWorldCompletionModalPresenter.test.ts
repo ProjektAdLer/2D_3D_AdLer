@@ -97,45 +97,104 @@ describe("LearningWorldCompletionModalPresenter", () => {
     expect(vm.showModal.Value).toEqual(false);
   });
 
-  test("onLearningWorldScored should set canShowModal true, if currentScore is equal/greater to requiredScore", () => {
+  test("onLearningWorldScored should set showModal true, if currentScore is equal/greater to requiredScore and wasClosedOnce is false", () => {
     const worldScoreTO = {
       worldID: 1,
       currentScore: 1,
       requiredScore: 1,
     };
+    vm.wasClosedOnce = false;
+    vm.showModal.Value = false;
 
     systemUnderTest.onLearningWorldScored(worldScoreTO);
 
-    expect(vm.canShowModal).toEqual(true);
+    expect(vm.showModal.Value).toEqual(true);
   });
 
-  test("onLearningWorldScored should not set canShowModal true, if currentScore is less than requiredScore", () => {
+  test("onLearningWorldScored should not set canShowModal true, if currentScore is less than requiredScore, even if wasClosed is false", () => {
     const worldScoreTO = {
       worldID: 1,
       currentScore: 1,
       requiredScore: 2,
     };
+    vm.wasClosedOnce = false;
+    vm.showModal.Value = false;
 
     systemUnderTest.onLearningWorldScored(worldScoreTO);
 
-    expect(vm.canShowModal).toEqual(false);
+    expect(vm.showModal.Value).toEqual(false);
   });
 
-  test("openModal should set showModal true, if canShowModal is true", () => {
-    vm.canShowModal = true;
+  test("onLearningWorldEntityLoaded should set showModal true, if each spaces currentScore is equal/greater to its requiredScore and WorldCompletionModalShown from world is falso", () => {
+    const worldTO = {
+      completionModalShown: false,
+      spaces: [
+        {
+          id: 1,
+          currentScore: 1,
+          requiredScore: 1,
+        } as LearningSpaceTO,
+        {
+          id: 2,
+          currentScore: 2,
+          requiredScore: 1,
+        } as LearningSpaceTO,
+      ],
+    } as LearningWorldTO;
+    vm.showModal.Value = false;
+
+    systemUnderTest.onLearningWorldEntityLoaded(worldTO);
+
+    expect(vm.showModal.Value).toEqual(true);
+  });
+
+  test("onLearningWorldEntityLoaded should not set showModal to true, if one of the spaces currentScore is less than its requiredScore", () => {
+    const worldTO = {
+      completionModalShown: false,
+      spaces: [
+        {
+          id: 1,
+          currentScore: 1,
+          requiredScore: 1,
+        } as LearningSpaceTO,
+        {
+          id: 2,
+          currentScore: 1,
+          requiredScore: 2,
+        } as LearningSpaceTO,
+      ],
+    } as LearningWorldTO;
+    vm.showModal.Value = false;
+
+    systemUnderTest.onLearningWorldEntityLoaded(worldTO);
+
+    expect(vm.showModal.Value).toEqual(false);
+  });
+
+  test("onLearningWorldEntityLoaded should set wasClosedOnce to true, if WorldCompletionModalShown from world is true", () => {
+    const worldTO = {
+      completionModalShown: true,
+      spaces: [
+        {
+          id: 1,
+          currentScore: 1,
+          requiredScore: 1,
+        } as LearningSpaceTO,
+      ],
+    } as LearningWorldTO;
+    vm.showModal.Value = false;
+    vm.wasClosedOnce = false;
+
+    systemUnderTest.onLearningWorldEntityLoaded(worldTO);
+
+    expect(vm.wasClosedOnce).toEqual(true);
+  });
+
+  test("openModal should set showModal true", () => {
     vm.showModal.Value = false;
 
     systemUnderTest.openModal();
 
     expect(vm.showModal.Value).toEqual(true);
-  });
-
-  test("openModal should not set showModal true, if canShowModal is false", () => {
-    vm.canShowModal = false;
-    vm.showModal.Value = false;
-
-    systemUnderTest.openModal();
-
-    expect(vm.showModal.Value).toEqual(false);
   });
 });
