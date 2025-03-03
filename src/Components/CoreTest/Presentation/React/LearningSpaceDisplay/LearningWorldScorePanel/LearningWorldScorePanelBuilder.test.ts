@@ -7,6 +7,11 @@ import {
   HistoryWrapper,
   LocationScope,
 } from "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/HistoryWrapper";
+import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
+import UserDataEntity from "../../../../../Core/Domain/Entities/UserDataEntity";
+import IEntityContainer from "../../../../../Core/Domain/EntityContainer/IEntityContainer";
+import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
+import IGetLearningWorldUseCase from "../../../../../Core/Application/UseCases/GetLearningWorld/IGetLearningWorldUseCase";
 
 const worldPortMock = mock<ILearningWorldPort>();
 
@@ -16,12 +21,31 @@ describe("LearningWorldScorePanelBuilder", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind(PORT_TYPES.ILearningWorldPort).toConstantValue(
-      worldPortMock
+      worldPortMock,
     );
   });
 
   beforeEach(() => {
     systemUnderTest = new LearningWorldScorePanelBuilder();
+
+    // Vorherige Bindings für IGetLearningWorldUseCase unbinden
+    if (CoreDIContainer.isBound(USECASE_TYPES.IGetLearningWorldUseCase)) {
+      CoreDIContainer.unbind(USECASE_TYPES.IGetLearningWorldUseCase);
+    }
+
+    // UserDataEntity hinzufügen
+    const mockUserDataEntity = new UserDataEntity();
+    mockUserDataEntity.isLoggedIn = true;
+    const entityContainer = CoreDIContainer.get<IEntityContainer>(
+      CORE_TYPES.IEntityContainer,
+    );
+    entityContainer.createEntity(mockUserDataEntity, UserDataEntity);
+
+    // IGetLearningWorldUseCase mocken
+    CoreDIContainer.bind<IGetLearningWorldUseCase>(
+      USECASE_TYPES.IGetLearningWorldUseCase,
+    ).toConstantValue({ execute: jest.fn() });
+
     jest
       .spyOn(HistoryWrapper, "currentLocationScope")
       .mockReturnValue(LocationScope.spaceDisplay);
@@ -39,7 +63,7 @@ describe("LearningWorldScorePanelBuilder", () => {
     expect(systemUnderTest["presenter"]).toBeDefined();
     expect(worldPortMock.registerAdapter).toHaveBeenCalledWith(
       systemUnderTest["presenter"],
-      LocationScope.spaceDisplay
+      LocationScope.spaceDisplay,
     );
   });
 });
