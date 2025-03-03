@@ -14,7 +14,7 @@ exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for mod
   alt="LearningImage!"
   class="visible h-16 -scale-x-100 lg:invisible lg:h-0"
   data-testid="npcImage"
-  src="a_npc_dozentlukas.png"
+  src="a-npc-dozentlukas.png"
 />
 `;
 
@@ -23,7 +23,7 @@ exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for mod
   alt="LearningImage!"
   class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
   data-testid="npcImage"
-  src="a_npc_sheriffjustice_close.png"
+  src="a-npc-sheriffjustice-close.png"
 />
 `;
 
@@ -32,7 +32,7 @@ exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for mod
   alt="LearningImage!"
   class="visible h-16 -scale-x-100 lg:invisible lg:h-0"
   data-testid="npcImage"
-  src="a_npc_sheriffjustice.png"
+  src="a-npc-sheriffjustice.png"
 />
 `;
 

@@ -14,7 +14,7 @@ exports[`StoryElement displays correct npc thumbnail for model "a-npc-sheriffjus
   alt="LearningImage!"
   class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
   data-testid="npcImage"
-  src="a_npc_sheriffjustice_close.png"
+  src="a-npc-sheriffjustice-close.png"
 />
 `;
 

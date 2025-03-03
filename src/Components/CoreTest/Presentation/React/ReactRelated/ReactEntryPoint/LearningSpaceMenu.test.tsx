@@ -10,15 +10,19 @@ import React from "react";
 
 jest.mock(
   "~ReactComponents/GeneralComponents/MenuHeaderBar/MenuHeaderBar",
-  () => "mocked"
+  () => "mocked",
 );
 jest.mock(
   "~ReactComponents/LearningSpaceMenu/LearningSpaceSelection/LearningSpaceSelection",
-  () => "mocked"
+  () => "mocked",
 );
 jest.mock(
   "~ReactComponents/LearningSpaceMenu/LearningSpaceDetail/LearningSpaceDetail",
-  () => "mocked"
+  () => "mocked",
+);
+jest.mock(
+  "~ReactComponents/LearningSpaceMenu/LearningWorldCompletionModal/LearningWorldCompletionModal",
+  () => "mocked",
 );
 
 const loadWorldUseCaseMock = mock<ILoadLearningWorldUseCase>();
@@ -27,7 +31,7 @@ describe("LearningSpaceMenu", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind(
-      USECASE_TYPES.ILoadLearningWorldUseCase
+      USECASE_TYPES.ILoadLearningWorldUseCase,
     ).toConstantValue(loadWorldUseCaseMock);
   });
 
@@ -39,7 +43,7 @@ describe("LearningSpaceMenu", () => {
     render(
       <Provider container={CoreDIContainer}>
         <LearningSpaceMenu />
-      </Provider>
+      </Provider>,
     );
   });
 });
