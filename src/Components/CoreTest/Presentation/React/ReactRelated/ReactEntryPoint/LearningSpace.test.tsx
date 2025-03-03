@@ -5,8 +5,6 @@ import { Provider } from "inversify-react";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import PRESENTATION_TYPES from "../../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 import { mock } from "jest-mock-extended";
-import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
-import IGetLearningWorldUseCase from "../../../../../Core/Application/UseCases/GetLearningWorld/IGetLearningWorldUseCase";
 
 jest.mock(
   "../../../../../Core/Presentation/React/LearningSpaceDisplay/BottomTooltip/BottomTooltip",
@@ -48,7 +46,6 @@ jest.mock(
   "../../../../../Core/Presentation/React/LearningSpaceMenu/LearningWorldCompletionModal/LearningWorldCompletionModal",
   () => "mocked",
 );
-const getWorldUseCaseMock = mock<IGetLearningWorldUseCase>();
 
 describe("LearningSpace.tsx", () => {
   beforeAll(() => {
@@ -56,9 +53,6 @@ describe("LearningSpace.tsx", () => {
     CoreDIContainer.bind(
       PRESENTATION_TYPES.IBottomTooltipPresenter,
     ).toConstantValue(mock());
-    // CoreDIContainer.bind(
-    //   USECASE_TYPES.IGetLearningWorldUseCase,
-    // ).toConstantValue(getWorldUseCaseMock);
   });
 
   afterAll(() => {
