@@ -1135,7 +1135,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
                           class="border-2 border-black rounded m-2 h-5 w-5"
                           style="background-color: rgb(0, 0, 0);"
                         />
-                        Schwarz 1
+                        Black 1
                       </button>
                     </div>
                   </div>
