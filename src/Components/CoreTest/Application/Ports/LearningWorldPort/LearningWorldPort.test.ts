@@ -15,6 +15,7 @@ import AdaptivityElementHintTO from "../../../../Core/Application/DataTransferOb
 import UserLearningWorldsInfoTO from "../../../../Core/Application/DataTransferObjects/UserLearningWorldsInfoTO";
 import StoryElementTO from "../../../../Core/Application/DataTransferObjects/StoryElementTO";
 import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
+import AdaptivityElementQuestionPresentationUpdateTO from "../../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionPresentationUpdateTO";
 
 describe("LearningWorldPort", () => {
   let systemUnderTest: LearningWorldPort;
@@ -197,6 +198,21 @@ describe("LearningWorldPort", () => {
     expect(worldAdapterMock.onAdaptivityElementUserHintInformed).toBeCalledWith(
       mockAdaptivityElementHintTO,
     );
+  });
+
+  test("onAdaptivityElementQuestionAnsweredCorrectly calls a registered adapter", () => {
+    const worldAdapterMock = mock<ILearningWorldAdapter>();
+    systemUnderTest.registerAdapter(worldAdapterMock);
+    const mockAdaptivityElementQuestionPresentationUpdateTO =
+      mock<AdaptivityElementQuestionPresentationUpdateTO>();
+
+    systemUnderTest.onAdaptivityElementQuestionAnsweredCorrectly(
+      mockAdaptivityElementQuestionPresentationUpdateTO,
+    );
+
+    expect(
+      worldAdapterMock.onAdaptivityElementQuestionAnsweredCorrectly,
+    ).toBeCalledWith(mockAdaptivityElementQuestionPresentationUpdateTO);
   });
 
   test("onStoryElementLoaded calls a registered adapter", () => {
