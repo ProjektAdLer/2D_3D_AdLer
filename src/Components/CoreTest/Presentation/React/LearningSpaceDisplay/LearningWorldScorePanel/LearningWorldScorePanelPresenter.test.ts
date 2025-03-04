@@ -24,4 +24,33 @@ describe("LearningWorldScorePanelPresenter", () => {
       maxScore: 6,
     });
   });
+
+  test("onLearningWorldEntityLoaded sets the score in the ViewModel", () => {
+    systemUnderTest.onLearningWorldEntityLoaded({
+      spaces: [
+        {
+          requiredScore: 5,
+          elements: [
+            { value: 1, hasScored: 1 },
+            { value: 2, hasScored: 1 },
+            { value: 3, hasScored: 1 },
+          ],
+        },
+        {
+          requiredScore: 10,
+          elements: [
+            { value: 1, hasScored: 1 },
+            { value: 2, hasScored: 1 },
+            { value: 3, hasScored: 1 },
+          ],
+        },
+      ],
+    });
+
+    expect(systemUnderTest["viewModel"].scoreInfo.Value).toStrictEqual({
+      currentScore: 12,
+      requiredScore: 15,
+      maxScore: 12,
+    });
+  });
 });
