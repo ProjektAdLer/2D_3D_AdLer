@@ -1,8 +1,5 @@
 import { ActionEvent } from "@babylonjs/core";
-
-interface IAccessibilityControls {
-  accessibilityPicked(): void;
-}
+import IAccessibilityControls from "../IAccessibilityControls";
 
 export default interface ILearningElementController
   extends IAccessibilityControls {

@@ -89,11 +89,11 @@ export default class LearningElementView {
     )) as Mesh[];
 
     this.viewModel.modelMeshes[0].accessibilityTag = {
-      description: this.viewModel.name + " " + this.viewModel.id,
+      description:
+        "learningelement " + this.viewModel.name + " " + this.viewModel.id,
       // @ts-ignore
       eventHandler: {
         click: () => {
-          // this.viewModel.isInteractable.Value = true;
           this.controller.accessibilityPicked();
 
           // get position on screen

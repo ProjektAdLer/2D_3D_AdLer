@@ -95,6 +95,35 @@ export default class DoorView extends Readyable {
     loadedMeshes.forEach((mesh) => (mesh.rotationQuaternion = null));
 
     this.viewModel.meshes = loadedMeshes as Mesh[];
+
+    this.viewModel.meshes[0].accessibilityTag = {
+      description:
+        (this.viewModel.isExit ? "exit door " : "entrance door ") +
+        this.viewModel.spaceID,
+      //@ts-ignore
+      eventHandler: {
+        click: () => {
+          this.controller.accessibilityPicked();
+
+          // get position on screen
+          const canvas =
+            this.scenePresenter.Scene.getEngine().getRenderingCanvas();
+          const position = this.viewModel.meshes[0].getPositionInCameraSpace(
+            this.scenePresenter.Scene.activeCamera!,
+          );
+
+          // simulate click on that position
+          const event = new MouseEvent("click", {
+            view: window,
+            bubbles: true,
+            cancelable: true,
+            clientX: position.x,
+            clientY: position.y,
+          });
+          canvas!.dispatchEvent(event);
+        },
+      },
+    };
   }
 
   private getModelLinkByThemeAndType(): string {

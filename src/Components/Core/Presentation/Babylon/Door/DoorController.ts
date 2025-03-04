@@ -50,11 +50,21 @@ export default class DoorController implements IDoorController {
       this.viewModel.isInteractable.Value &&
       this.viewModel.isInputEnabled.Value
     ) {
-      CoreDIContainer.get<IGetLearningSpacePrecursorAndSuccessorUseCase>(
-        USECASE_TYPES.IGetLearningSpacePrecursorAndSuccessorUseCase,
-      ).execute();
-      this.exitModalPresenter.open(this.viewModel.isExit);
+      this.onPicked();
     }
+  }
+
+  @bind
+  accessibilityPicked(): void {
+    this.onPicked();
+  }
+
+  @bind
+  private onPicked(): void {
+    CoreDIContainer.get<IGetLearningSpacePrecursorAndSuccessorUseCase>(
+      USECASE_TYPES.IGetLearningSpacePrecursorAndSuccessorUseCase,
+    ).execute();
+    this.exitModalPresenter.open(this.viewModel.isExit);
   }
 
   @bind

@@ -76,6 +76,34 @@ export default class StoryNPCView {
     this.viewModel.modelMeshes = result.meshes as Mesh[];
     this.setupModel();
 
+    this.viewModel.modelMeshes[0].accessibilityTag = {
+      description: "storyNPC " + this.viewModel.storyType,
+      // @ts-ignore
+      eventHandler: {
+        click: () => {
+          this.controller.accessibilityPicked();
+
+          // get position on screen
+          const canvas =
+            this.scenePresenter.Scene.getEngine().getRenderingCanvas();
+          const position =
+            this.viewModel.modelMeshes[0].getPositionInCameraSpace(
+              this.scenePresenter.Scene.activeCamera!,
+            );
+
+          // simulate click on that position
+          const event = new MouseEvent("click", {
+            view: window,
+            bubbles: true,
+            cancelable: true,
+            clientX: position.x,
+            clientY: position.y,
+          });
+          canvas!.dispatchEvent(event);
+        },
+      },
+    };
+
     result.animationGroups.forEach((animationGroup) => {
       switch (animationGroup.name) {
         case AvatarAnimationNames.npc_idle:

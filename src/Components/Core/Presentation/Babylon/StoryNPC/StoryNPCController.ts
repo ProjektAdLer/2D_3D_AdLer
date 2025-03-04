@@ -49,11 +49,7 @@ export default class StoryNPCController implements IStoryNPCController {
       this.viewModel.isInteractable.Value &&
       this.viewModel.state.Value !== StoryNPCState.CutScene
     ) {
-      if (this.viewModel.state.Value !== StoryNPCState.Idle) {
-        this.viewModel.state.Value = StoryNPCState.Stop;
-      }
-      this.bottomTooltipPresenter.hideAll();
-      this.viewModel.storyElementPresenter.open(this.viewModel.storyType);
+      this.onPicked();
     } else
       this.logger.log(
         LogLevelTypes.TRACE,
@@ -63,6 +59,20 @@ export default class StoryNPCController implements IStoryNPCController {
           this.viewModel.isInteractable.Value +
           ")",
       );
+  }
+
+  @bind
+  accessibilityPicked(): void {
+    this.onPicked();
+  }
+
+  @bind
+  private onPicked(): void {
+    if (this.viewModel.state.Value !== StoryNPCState.Idle) {
+      this.viewModel.state.Value = StoryNPCState.Stop;
+    }
+    this.bottomTooltipPresenter.hideAll();
+    this.viewModel.storyElementPresenter.open(this.viewModel.storyType);
   }
 
   @bind
