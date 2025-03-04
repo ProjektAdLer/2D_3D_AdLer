@@ -9,29 +9,40 @@ import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
 import IGetLearningWorldUseCase from "../../../../../Core/Application/UseCases/GetLearningWorld/IGetLearningWorldUseCase";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 
+const entityContainerMock = mock<IEntityContainer>();
+
 describe("LearningWorldCompletionModalBuilder", () => {
   let systemUnderTest: LearningWorldCompletionModalBuilder;
+
+  beforeAll(() => {
+    CoreDIContainer.snapshot();
+
+    CoreDIContainer.rebind(CORE_TYPES.IEntityContainer).toConstantValue(
+      entityContainerMock,
+    );
+  });
 
   beforeEach(() => {
     systemUnderTest = new LearningWorldCompletionModalBuilder();
 
-    // Vorherige Bindings für IGetLearningWorldUseCase unbinden
     if (CoreDIContainer.isBound(USECASE_TYPES.IGetLearningWorldUseCase)) {
       CoreDIContainer.unbind(USECASE_TYPES.IGetLearningWorldUseCase);
     }
-
-    // UserDataEntity hinzufügen
-    const mockUserDataEntity = new UserDataEntity();
-    mockUserDataEntity.isLoggedIn = true;
-    const entityContainer = CoreDIContainer.get<IEntityContainer>(
-      CORE_TYPES.IEntityContainer,
-    );
-    entityContainer.createEntity(mockUserDataEntity, UserDataEntity);
-
-    // IGetLearningWorldUseCase mocken
     CoreDIContainer.bind<IGetLearningWorldUseCase>(
       USECASE_TYPES.IGetLearningWorldUseCase,
     ).toConstantValue({ execute: jest.fn() });
+
+    const mockUserDataEntity = new UserDataEntity();
+    mockUserDataEntity.isLoggedIn = true;
+
+    entityContainerMock.filterEntitiesOfType.mockReturnValue([
+      mockUserDataEntity,
+    ]);
+  });
+
+  afterAll(() => {
+    CoreDIContainer.restore();
+    jest.restoreAllMocks();
   });
 
   test("buildPresenter registers presenter with the CoreDIContainer", () => {

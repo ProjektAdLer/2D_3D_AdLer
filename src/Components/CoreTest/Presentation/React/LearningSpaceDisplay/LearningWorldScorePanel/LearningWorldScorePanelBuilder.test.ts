@@ -14,6 +14,7 @@ import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
 import IGetLearningWorldUseCase from "../../../../../Core/Application/UseCases/GetLearningWorld/IGetLearningWorldUseCase";
 
 const worldPortMock = mock<ILearningWorldPort>();
+const entityContainerMock = mock<IEntityContainer>();
 
 describe("LearningWorldScorePanelBuilder", () => {
   let systemUnderTest: LearningWorldScorePanelBuilder;
@@ -23,25 +24,17 @@ describe("LearningWorldScorePanelBuilder", () => {
     CoreDIContainer.rebind(PORT_TYPES.ILearningWorldPort).toConstantValue(
       worldPortMock,
     );
+    CoreDIContainer.rebind(CORE_TYPES.IEntityContainer).toConstantValue(
+      entityContainerMock,
+    );
   });
 
   beforeEach(() => {
     systemUnderTest = new LearningWorldScorePanelBuilder();
 
-    // Vorherige Bindings für IGetLearningWorldUseCase unbinden
     if (CoreDIContainer.isBound(USECASE_TYPES.IGetLearningWorldUseCase)) {
       CoreDIContainer.unbind(USECASE_TYPES.IGetLearningWorldUseCase);
     }
-
-    // UserDataEntity hinzufügen
-    const mockUserDataEntity = new UserDataEntity();
-    mockUserDataEntity.isLoggedIn = true;
-    const entityContainer = CoreDIContainer.get<IEntityContainer>(
-      CORE_TYPES.IEntityContainer,
-    );
-    entityContainer.createEntity(mockUserDataEntity, UserDataEntity);
-
-    // IGetLearningWorldUseCase mocken
     CoreDIContainer.bind<IGetLearningWorldUseCase>(
       USECASE_TYPES.IGetLearningWorldUseCase,
     ).toConstantValue({ execute: jest.fn() });
@@ -57,6 +50,13 @@ describe("LearningWorldScorePanelBuilder", () => {
   });
 
   test("buildPresenter builds the presenter, and registers it with the LearningWorldPort", () => {
+    const mockUserDataEntity = new UserDataEntity();
+    mockUserDataEntity.isLoggedIn = true;
+
+    entityContainerMock.filterEntitiesOfType.mockReturnValue([
+      mockUserDataEntity,
+    ]);
+
     systemUnderTest.buildViewModel();
     systemUnderTest.buildPresenter();
 
