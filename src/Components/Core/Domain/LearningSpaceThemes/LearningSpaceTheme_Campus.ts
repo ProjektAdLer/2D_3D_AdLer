@@ -83,6 +83,7 @@ export const LearningSpaceTheme_CampusKE: ILearningSpaceTheme = {
 
 export const LearningSpaceTheme_CampusLibrary: ILearningSpaceTheme = {
   learningElementModels: LearningSpaceTheme_CampusAB.learningElementModels,
+  standinDecorationModels: LearningSpaceTheme_CampusAB.standinDecorationModels,
   entryDoorModel: LearningSpaceTheme_CampusAB.entryDoorModel,
   exitDoorModel: LearningSpaceTheme_CampusAB.exitDoorModel,
   ambienceModel: require("../../../../Assets/3dModels/campusTheme/env-campus-library.glb"),
@@ -91,6 +92,7 @@ export const LearningSpaceTheme_CampusLibrary: ILearningSpaceTheme = {
 
 export const LearningSpaceTheme_CampusMensa: ILearningSpaceTheme = {
   learningElementModels: LearningSpaceTheme_CampusAB.learningElementModels,
+  standinDecorationModels: LearningSpaceTheme_CampusAB.standinDecorationModels,
   entryDoorModel: LearningSpaceTheme_CampusAB.entryDoorModel,
   exitDoorModel: LearningSpaceTheme_CampusAB.exitDoorModel,
   ambienceModel: require("../../../../Assets/3dModels/campusTheme/env-campus-mensa.glb"),
