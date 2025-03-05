@@ -85,7 +85,7 @@ const SmallWorldAWT: AWT = {
           "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor ",
         ],
 
-        spaceTemplate: "T_40X32_13L",
+        spaceTemplate: "D_40X37_15L",
         spaceTemplateStyle: "CampusLibrary",
         spaceStory: {
           introStory: {
