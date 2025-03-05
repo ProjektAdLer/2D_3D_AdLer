@@ -17,7 +17,7 @@ export default class WindowView extends Readyable {
 
     // inject scenePresenter via factory
     let scenePresenterFactory = CoreDIContainer.get<ScenePresenterFactory>(
-      SCENE_TYPES.ScenePresenterFactory
+      SCENE_TYPES.ScenePresenterFactory,
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
   }
@@ -31,14 +31,17 @@ export default class WindowView extends Readyable {
 
   private async loadMeshAsync(): Promise<void> {
     const modelLinksByTheme = LearningSpaceThemeLookup.getLearningSpaceTheme(
-      this.viewModel.theme
+      this.viewModel.theme,
     ).windowModel;
-    const results = await this.scenePresenter.loadModel(modelLinksByTheme);
 
-    // reset quaternion rotation because it can prevent mesh.rotate to have any effect
-    results.forEach((mesh) => (mesh.rotationQuaternion = null));
+    if (modelLinksByTheme) {
+      const results = await this.scenePresenter.loadModel(modelLinksByTheme);
 
-    this.viewModel.meshes = results as Mesh[];
+      // reset quaternion rotation because it can prevent mesh.rotate to have any effect
+      results.forEach((mesh) => (mesh.rotationQuaternion = null));
+
+      this.viewModel.meshes = results as Mesh[];
+    }
   }
 
   @bind
@@ -47,7 +50,7 @@ export default class WindowView extends Readyable {
     this.viewModel.meshes[0].rotation = new Vector3(
       0.0,
       Tools.ToRadians(this.viewModel.rotation) + Math.PI / 2,
-      0.0
+      0.0,
     );
   }
 }

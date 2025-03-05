@@ -16,10 +16,10 @@ export default interface ILearningSpaceTheme {
   readonly entryDoorModel: string;
   readonly exitDoorModel: string;
   readonly storyElementModel: LearningElementModel;
+  readonly standinDecorationModels: string[];
   readonly wallTexture?: string;
   readonly floorTexture?: string;
   readonly windowModel?: string;
-  readonly standinDecorationModels?: string[];
   readonly insideDecorationModels?: LearningSpaceDecorationMap;
   readonly outsideDecorationModels?: LearningSpaceDecorationMap;
 }

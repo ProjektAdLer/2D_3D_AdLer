@@ -62,12 +62,16 @@ export default class LearningSpaceView implements ILearningSpaceView {
       this.scenePresenter.Scene,
     );
 
-    this.viewModel.floorMaterial.diffuseTexture = new Texture(
-      LearningSpaceThemeLookup.getLearningSpaceTheme(
-        this.viewModel.theme,
-      ).floorTexture,
-      this.scenePresenter.Scene,
-    );
+    const floorTexture = LearningSpaceThemeLookup.getLearningSpaceTheme(
+      this.viewModel.theme,
+    ).floorTexture;
+
+    if (floorTexture) {
+      this.viewModel.floorMaterial.diffuseTexture = new Texture(
+        floorTexture,
+        this.scenePresenter.Scene,
+      );
+    }
 
     (this.viewModel.floorMaterial.diffuseTexture as Texture).uScale = 3;
     (this.viewModel.floorMaterial.diffuseTexture as Texture).vScale = 3;
@@ -79,12 +83,17 @@ export default class LearningSpaceView implements ILearningSpaceView {
       "wallMaterial",
       this.scenePresenter.Scene,
     );
-    this.viewModel.wallMaterial.diffuseTexture = new Texture(
-      LearningSpaceThemeLookup.getLearningSpaceTheme(
-        this.viewModel.theme,
-      ).wallTexture,
-      this.scenePresenter.Scene,
-    );
+
+    const wallTexture = LearningSpaceThemeLookup.getLearningSpaceTheme(
+      this.viewModel.theme,
+    ).wallTexture;
+
+    if (wallTexture) {
+      this.viewModel.wallMaterial.diffuseTexture = new Texture(
+        wallTexture,
+        this.scenePresenter.Scene,
+      );
+    }
     (this.viewModel.wallMaterial.diffuseTexture as Texture).vScale = 1.5;
     (this.viewModel.wallMaterial.diffuseTexture as Texture).uScale = 6;
     this.viewModel.wallMaterial.specularColor = new Color3(0, 0, 0);
