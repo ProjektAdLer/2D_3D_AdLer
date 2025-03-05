@@ -48,12 +48,20 @@ export default class LearningSpaceView implements ILearningSpaceView {
         "Not enough corners found to generate space. Please review the Spacedata.",
       );
 
-    // create materials
-    this.createFloorMaterial();
-    this.createWallMaterial();
-
-    // create walls and floor meshes
-    await Promise.all([this.createWalls(), this.createFloor()]);
+    // If a theme has a wall texture, create walls
+    if (
+      LearningSpaceThemeLookup.getLearningSpaceTheme(this.viewModel.theme)
+        .floorTexture
+    ) {
+      this.createFloorMaterial();
+      this.createWallMaterial();
+      await Promise.all([this.createWalls(), this.createFloor()]);
+    }
+    // If a theme has no wall texture, only create floor
+    else {
+      this.createFloorMaterial();
+      await this.createFloor();
+    }
   }
 
   public createFloorMaterial(): void {
