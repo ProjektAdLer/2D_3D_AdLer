@@ -85,7 +85,7 @@ export const LearningSpaceTheme_CampusLibrary: ILearningSpaceTheme = {
   learningElementModels: LearningSpaceTheme_CampusAB.learningElementModels,
   entryDoorModel: LearningSpaceTheme_CampusAB.entryDoorModel,
   exitDoorModel: LearningSpaceTheme_CampusAB.exitDoorModel,
-  ambienceModel: require("../../../../Assets/3dModels/campusTheme/Sub_Env_LibraryBig.glb"),
+  ambienceModel: require("../../../../Assets/3dModels/campusTheme/env-campus-library.glb"),
   storyElementModel: LearningSpaceTheme_CampusAB.storyElementModel,
 };
 
@@ -93,6 +93,6 @@ export const LearningSpaceTheme_CampusMensa: ILearningSpaceTheme = {
   learningElementModels: LearningSpaceTheme_CampusAB.learningElementModels,
   entryDoorModel: LearningSpaceTheme_CampusAB.entryDoorModel,
   exitDoorModel: LearningSpaceTheme_CampusAB.exitDoorModel,
-  ambienceModel: require("../../../../Assets/3dModels/campusTheme/Sub_Env_MensaBig.glb"),
+  ambienceModel: require("../../../../Assets/3dModels/campusTheme/env-campus-mensa.glb"),
   storyElementModel: LearningSpaceTheme_CampusAB.storyElementModel,
 };
