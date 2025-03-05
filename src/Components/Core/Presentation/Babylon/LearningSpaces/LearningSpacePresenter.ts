@@ -181,26 +181,28 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     let firstSegmentData: LearningSpaceWallSegmentLocationData | null = null;
     let cornerPoleData: LearningSpaceCornerPoleLocationData | null = null;
 
-    this.viewModel.wallSegments.forEach((wallSegment) => {
-      segmentData = this.computeWallSegmentData(wallSegment);
-      if (examinedCornerPoints.has(wallSegment.start)) {
-        cornerPoleData = this.computeCornerPoleData(
-          segmentData,
-          previousSegmentData!,
-        );
-      } else examinedCornerPoints.add(wallSegment.start);
-      if (examinedCornerPoints.has(wallSegment.end)) {
-        cornerPoleData = this.computeCornerPoleData(
-          firstSegmentData!,
-          segmentData!,
-        );
-      } else examinedCornerPoints.add(wallSegment.end);
-      previousSegmentData = segmentData;
-      if (firstSegmentData === null) firstSegmentData = segmentData;
-      this.viewModel.wallSegmentLocations.push(segmentData);
-      if (cornerPoleData)
-        this.viewModel.cornerPoleLocations.push(cornerPoleData);
-    });
+    if (this.viewModel.wallSegments) {
+      this.viewModel.wallSegments.forEach((wallSegment) => {
+        segmentData = this.computeWallSegmentData(wallSegment);
+        if (examinedCornerPoints.has(wallSegment.start)) {
+          cornerPoleData = this.computeCornerPoleData(
+            segmentData,
+            previousSegmentData!,
+          );
+        } else examinedCornerPoints.add(wallSegment.start);
+        if (examinedCornerPoints.has(wallSegment.end)) {
+          cornerPoleData = this.computeCornerPoleData(
+            firstSegmentData!,
+            segmentData!,
+          );
+        } else examinedCornerPoints.add(wallSegment.end);
+        previousSegmentData = segmentData;
+        if (firstSegmentData === null) firstSegmentData = segmentData;
+        this.viewModel.wallSegmentLocations.push(segmentData);
+        if (cornerPoleData)
+          this.viewModel.cornerPoleLocations.push(cornerPoleData);
+      });
+    }
   }
 
   private computeWallSegmentData(wallSegment: {

@@ -25,7 +25,7 @@ export default class LearningSpaceBuilder extends AsyncPresentationBuilder<
 
   private isPresenterCompleted: Promise<void>;
   private resolveIsPresenterCompleted: (
-    value: void | PromiseLike<void>
+    value: void | PromiseLike<void>,
   ) => void;
   private isViewCompleted: Promise<void>;
   private resolveIsViewCompleted: (value: void | PromiseLike<void>) => void;
@@ -35,7 +35,7 @@ export default class LearningSpaceBuilder extends AsyncPresentationBuilder<
       LearningSpaceViewModel,
       LearningSpaceController,
       LearningSpaceView,
-      LearningSpacePresenter
+      LearningSpacePresenter,
     );
 
     this.setupPromises();
@@ -49,7 +49,7 @@ export default class LearningSpaceBuilder extends AsyncPresentationBuilder<
   override buildViewModel(): void {
     if (!this.spaceData)
       throw new Error(
-        "Space data is not defined. Set before using the builder."
+        "Space data is not defined. Set before using the builder.",
       );
 
     super.buildViewModel();
@@ -59,17 +59,17 @@ export default class LearningSpaceBuilder extends AsyncPresentationBuilder<
 
     this.setDimensionsStrategy(this.spaceData.template);
     this.viewModel!.spaceCornerPoints = this.dimensionStrategy.getCornerPoints(
-      this.spaceData
+      this.spaceData,
     );
     this.viewModel!.exitDoorPosition =
       this.dimensionStrategy.getExitDoorPosition(this.spaceData);
     this.viewModel!.entryDoorPosition =
       this.dimensionStrategy.getEntryDoorPosition(this.spaceData);
     this.viewModel!.windowPositions = this.dimensionStrategy.getWindowPositions(
-      this.spaceData
+      this.spaceData,
     );
     this.viewModel!.wallSegments = this.dimensionStrategy.getWallSegmentIndices(
-      this.spaceData
+      this.spaceData,
     );
     this.viewModel!.elementPositions =
       this.dimensionStrategy.getLearningElementPositions(this.spaceData);
@@ -84,7 +84,7 @@ export default class LearningSpaceBuilder extends AsyncPresentationBuilder<
       },
       (error) => {
         console.log(error);
-      }
+      },
     );
   }
 
@@ -97,7 +97,7 @@ export default class LearningSpaceBuilder extends AsyncPresentationBuilder<
       },
       (error) => {
         console.log(error);
-      }
+      },
     );
   }
 
@@ -120,14 +120,14 @@ export default class LearningSpaceBuilder extends AsyncPresentationBuilder<
         this.viewModel!.wallThickness,
         this.viewModel!.baseHeight,
         this.viewModel!.doorWidth,
-        this.viewModel!.windowWidth
+        this.viewModel!.windowWidth,
       );
     else
       this.dimensionStrategy = new TemplateLearningSpaceDimensionStrategy(
         this.viewModel!.wallThickness,
         this.viewModel!.baseHeight,
         this.viewModel!.doorWidth,
-        this.viewModel!.windowWidth
+        this.viewModel!.windowWidth,
       );
   }
 }
