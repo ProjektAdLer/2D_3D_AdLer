@@ -22,7 +22,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 </details>
 
-## Version 2.8.0
+## Version 2.8.0 - 05.03.2025
 
 ### Added
 
