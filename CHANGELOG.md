@@ -11,6 +11,9 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 ### Added
 
 - custom icons for save button in avatar editor and avatar preview controls
+- new NPC 'Old Man'
+- new NPC 'Male School Bully'
+- new NPC 'Female School Bully'
 
 ### Changed
 
@@ -21,6 +24,9 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - fixed story npc not going to avatar when outro cutscene is triggered
 - fixed avatar editor not updating skin color if clothing has changed
 - fixed not checking backend answer of learning element scoring
+- fixed world score sometimes not updating when entering a new LearningSpace
+- fixed world completion modal still sometimes showing erroneously
+- fixed several avatar animations
 
 ### Deprecated
 
