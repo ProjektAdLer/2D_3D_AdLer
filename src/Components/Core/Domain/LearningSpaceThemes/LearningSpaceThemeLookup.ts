@@ -2,6 +2,8 @@ import { LearningSpaceThemeType } from "../Types/LearningSpaceThemeTypes";
 import {
   LearningSpaceTheme_CampusAB,
   LearningSpaceTheme_CampusKE,
+  LearningSpaceTheme_CampusMensa,
+  LearningSpaceTheme_CampusLibrary,
 } from "./LearningSpaceTheme_Campus";
 import LearningSpaceTheme_Arcade from "./LearningSpaceTheme_Arcade";
 import LearningSpaceTheme_Suburb from "./LearningSpaceTheme_Suburb";
@@ -15,6 +17,12 @@ export default class LearningSpaceThemeLookup {
 
       case LearningSpaceThemeType.CampusKE:
         return LearningSpaceTheme_CampusKE;
+
+      case LearningSpaceThemeType.CampusMensa:
+        return LearningSpaceTheme_CampusMensa;
+
+      case LearningSpaceThemeType.CampusLibrary:
+        return LearningSpaceTheme_CampusLibrary;
 
       case LearningSpaceThemeType.Arcade:
         return LearningSpaceTheme_Arcade;
