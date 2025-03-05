@@ -45,6 +45,7 @@ export default class DecorationView {
 
     let insideDeco: AbstractMesh[] = [];
     if (
+      themeConfig.insideDecorationModels &&
       themeConfig.insideDecorationModels[
         this.viewModel.learningSpaceTemplateType
       ] !== ""
@@ -58,6 +59,7 @@ export default class DecorationView {
 
     let outsideDeco: AbstractMesh[] = [];
     if (
+      themeConfig.outsideDecorationModels &&
       themeConfig.outsideDecorationModels[
         this.viewModel.learningSpaceTemplateType
       ] !== ""
