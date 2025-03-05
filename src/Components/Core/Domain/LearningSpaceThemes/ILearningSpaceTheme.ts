@@ -11,15 +11,15 @@ type LearningSpaceDecorationMap = Readonly<
 >;
 
 export default interface ILearningSpaceTheme {
-  readonly wallTexture: string;
-  readonly floorTexture: string;
   readonly learningElementModels: LearningElementModelsMap;
-  readonly standinDecorationModels: string[];
+  readonly ambienceModel: string;
   readonly entryDoorModel: string;
   readonly exitDoorModel: string;
-  readonly windowModel: string;
-  readonly ambienceModel: string;
   readonly storyElementModel: LearningElementModel;
-  readonly insideDecorationModels: LearningSpaceDecorationMap;
-  readonly outsideDecorationModels: LearningSpaceDecorationMap;
+  readonly wallTexture?: string;
+  readonly floorTexture?: string;
+  readonly windowModel?: string;
+  readonly standinDecorationModels?: string[];
+  readonly insideDecorationModels?: LearningSpaceDecorationMap;
+  readonly outsideDecorationModels?: LearningSpaceDecorationMap;
 }
