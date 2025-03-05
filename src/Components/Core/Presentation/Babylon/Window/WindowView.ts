@@ -46,11 +46,13 @@ export default class WindowView extends Readyable {
 
   @bind
   private positionWindowMesh(): void {
-    this.viewModel.meshes[0].position = this.viewModel.position;
-    this.viewModel.meshes[0].rotation = new Vector3(
-      0.0,
-      Tools.ToRadians(this.viewModel.rotation) + Math.PI / 2,
-      0.0,
-    );
+    if (this.viewModel.meshes) {
+      this.viewModel.meshes[0].position = this.viewModel.position;
+      this.viewModel.meshes[0].rotation = new Vector3(
+        0.0,
+        Tools.ToRadians(this.viewModel.rotation) + Math.PI / 2,
+        0.0,
+      );
+    }
   }
 }

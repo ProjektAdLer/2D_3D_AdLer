@@ -71,11 +71,13 @@ export default class LearningSpaceView implements ILearningSpaceView {
         floorTexture,
         this.scenePresenter.Scene,
       );
-    }
 
-    (this.viewModel.floorMaterial.diffuseTexture as Texture).uScale = 3;
-    (this.viewModel.floorMaterial.diffuseTexture as Texture).vScale = 3;
-    this.viewModel.floorMaterial.specularColor = new Color3(0, 0, 0);
+      (this.viewModel.floorMaterial.diffuseTexture as Texture).uScale = 3;
+      (this.viewModel.floorMaterial.diffuseTexture as Texture).vScale = 3;
+      this.viewModel.floorMaterial.specularColor = new Color3(0, 0, 0);
+    } else {
+      this.viewModel.floorMaterial.alpha = 0;
+    }
   }
 
   public createWallMaterial(): void {
@@ -93,10 +95,13 @@ export default class LearningSpaceView implements ILearningSpaceView {
         wallTexture,
         this.scenePresenter.Scene,
       );
+
+      (this.viewModel.wallMaterial.diffuseTexture as Texture).vScale = 1.5;
+      (this.viewModel.wallMaterial.diffuseTexture as Texture).uScale = 6;
+      this.viewModel.wallMaterial.specularColor = new Color3(0, 0, 0);
+    } else {
+      this.viewModel.wallMaterial.alpha = 0;
     }
-    (this.viewModel.wallMaterial.diffuseTexture as Texture).vScale = 1.5;
-    (this.viewModel.wallMaterial.diffuseTexture as Texture).uScale = 6;
-    this.viewModel.wallMaterial.specularColor = new Color3(0, 0, 0);
   }
 
   private async createFloor(): Promise<void> {
