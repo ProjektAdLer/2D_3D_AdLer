@@ -25,7 +25,7 @@ const SmallWorldAWT: AWT = {
         spaceId: 1,
         spaceName: "Mensa Theme",
         spaceDescription: "Raumbeschreibung der kleinen Welt",
-        requiredPointsToComplete: 2,
+        requiredPointsToComplete: 0,
         spaceSlotContents: [
           1,
           2,
@@ -64,7 +64,7 @@ const SmallWorldAWT: AWT = {
         spaceId: 2,
         spaceName: "Library Theme",
         spaceDescription: "Raumbeschreibung der kleinen Welt",
-        requiredPointsToComplete: 2,
+        requiredPointsToComplete: 0,
         spaceSlotContents: [
           1,
           2,
@@ -104,7 +104,7 @@ const SmallWorldAWT: AWT = {
         spaceId: 3,
         spaceName: "Campus Kempten Theme",
         spaceDescription: "Raumbeschreibung der kleinen Welt",
-        requiredPointsToComplete: 2,
+        requiredPointsToComplete: 0,
         spaceSlotContents: [
           1,
           2,
@@ -143,7 +143,7 @@ const SmallWorldAWT: AWT = {
         spaceId: 4,
         spaceName: "Campus Aschaffenburg Theme",
         spaceDescription: "Raumbeschreibung der kleinen Welt",
-        requiredPointsToComplete: 2,
+        requiredPointsToComplete: 0,
         spaceSlotContents: [
           1,
           2,
@@ -182,7 +182,7 @@ const SmallWorldAWT: AWT = {
         spaceId: 5,
         spaceName: "Suburb Theme",
         spaceDescription: "Raumbeschreibung der kleinen Welt",
-        requiredPointsToComplete: 2,
+        requiredPointsToComplete: 0,
         spaceSlotContents: [
           1,
           2,
@@ -221,7 +221,7 @@ const SmallWorldAWT: AWT = {
         spaceId: 6,
         spaceName: "Arcade Theme",
         spaceDescription: "Raumbeschreibung der kleinen Welt",
-        requiredPointsToComplete: 2,
+        requiredPointsToComplete: 0,
         spaceSlotContents: [
           1,
           2,
