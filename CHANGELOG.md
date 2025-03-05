@@ -10,14 +10,27 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+### Changed
+
+### Removed
+
+### Fixed
+
+### Deprecated
+
+### Security
+
+</details>
+
+## Version 2.8.0
+
+### Added
+
 - custom icons for save button in avatar editor and avatar preview controls
 - new NPC 'Old Man'
 - new NPC 'Male School Bully'
 - new NPC 'Female School Bully'
-
-### Changed
-
-### Removed
+- added basic integration test capability
 
 ### Fixed
 
@@ -27,12 +40,6 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - fixed world score sometimes not updating when entering a new LearningSpace
 - fixed world completion modal still sometimes showing erroneously
 - fixed several avatar animations
-
-### Deprecated
-
-### Security
-
-</details>
 
 ## Version 2.7.1 - 11.02.25
 
