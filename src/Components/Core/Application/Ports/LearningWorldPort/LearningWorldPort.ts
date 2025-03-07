@@ -18,6 +18,7 @@ import StoryElementTO from "../../DataTransferObjects/StoryElementTO";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 import bind from "bind-decorator";
 import AdaptivityElementQuestionPresentationUpdateTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionPresentationUpdateTO";
+import NarrativeFrameworkTO from "../../DataTransferObjects/NarrativeFrameworkTO";
 
 @injectable()
 export default class LearningWorldPort
@@ -221,6 +222,19 @@ export default class LearningWorldPort
       adapter.forEach((value) => {
         if (value.onStoryElementCutSceneFinished)
           value.onStoryElementCutSceneFinished();
+      });
+    });
+  }
+
+  // Narrative Framework
+
+  public onNarrativeFrameworkInfoLoaded(
+    narrativeFrameworkTO: NarrativeFrameworkTO,
+  ): void {
+    this.mappedAdapters.forEach((adapter) => {
+      adapter.forEach((value) => {
+        if (value.onNarrativeFrameworkInfoLoaded)
+          value.onNarrativeFrameworkInfoLoaded(narrativeFrameworkTO);
       });
     });
   }

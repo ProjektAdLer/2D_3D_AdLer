@@ -1,27 +1,26 @@
 import { inject, injectable } from "inversify";
+import IGetNarrativeFrameworkInfoUseCase from "./IGetNarrativeFrameworkInfoUseCase";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
-import IGetLearningWorldUseCase from "./IGetLearningWorldUseCase";
 import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
-import LearningWorldEntity from "src/Components/Core/Domain/Entities/LearningWorldEntity";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
-import type INotificationPort from "../../Ports/Interfaces/INotificationPort";
-import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUseCase";
-import LearningWorldTO from "../../DataTransferObjects/LearningWorldTO";
 import type ILearningWorldPort from "../../Ports/Interfaces/ILearningWorldPort";
+import LearningWorldEntity from "src/Components/Core/Domain/Entities/LearningWorldEntity";
+import NarrativeFrameworkTO from "../../DataTransferObjects/NarrativeFrameworkTO";
+import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 
 @injectable()
-export default class GetLearningWorldUseCase
-  implements IGetLearningWorldUseCase
+export default class GetNarrativeFrameworkInfoUseCase
+  implements IGetNarrativeFrameworkInfoUseCase
 {
   constructor(
     @inject(CORE_TYPES.ILogger)
     private logger: ILoggerPort,
     @inject(CORE_TYPES.IEntityContainer)
     private container: IEntityContainer,
-    @inject(PORT_TYPES.INotificationPort)
+    @inject(USECASE_TYPES.IGetUserLocationUseCase)
     private getUserLocationUseCase: IGetUserLocationUseCase,
     @inject(PORT_TYPES.ILearningWorldPort)
     private worldPort: ILearningWorldPort,
@@ -34,13 +33,14 @@ export default class GetLearningWorldUseCase
       LearningWorldEntity,
       (WorldEntity) => WorldEntity.id === data.worldID,
     )[0];
-    let worldTO = new LearningWorldTO();
-    worldTO = Object.assign(worldTO, structuredClone(worldEntity));
+    let narrativeFrameworkTO = new NarrativeFrameworkTO();
+    narrativeFrameworkTO.id = worldEntity.id;
+    narrativeFrameworkTO.text = "placeholder";
 
     this.logger.log(
       LogLevelTypes.TRACE,
-      "GetLearningWorldUseCase: Loaded world from entity.",
+      `GetNarrativeFrameworkInfoUseCase: Got Framework Info of world ${worldEntity.id} from entity.`,
     );
-    this.worldPort.onLearningWorldEntityLoaded(worldTO);
+    this.worldPort.onNarrativeFrameworkInfoLoaded(narrativeFrameworkTO);
   }
 }

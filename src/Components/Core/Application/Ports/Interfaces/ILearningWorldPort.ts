@@ -15,6 +15,7 @@ import UserLearningWorldsInfoTO from "../../DataTransferObjects/UserLearningWorl
 import StoryElementTO from "../../DataTransferObjects/StoryElementTO";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 import adaptivityElementQuestionPresentationUpdateTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionPresentationUpdateTO";
+import NarrativeFrameworkTO from "../../DataTransferObjects/NarrativeFrameworkTO";
 
 export default interface ILearningWorldPort
   extends IAbstractPort<ILearningWorldAdapter> {
@@ -64,4 +65,10 @@ export default interface ILearningWorldPort
   onStoryElementLoaded(storyElementTextTO: StoryElementTO): void;
   onStoryElementCutSceneTriggered(storyType: StoryElementType): void;
   onStoryElementCutSceneFinished(): void;
+
+  // narrative framework
+
+  onNarrativeFrameworkInfoLoaded(
+    narrativeFrameworkTO: NarrativeFrameworkTO,
+  ): void;
 }
