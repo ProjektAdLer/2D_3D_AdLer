@@ -13,5 +13,5 @@ export default function NarrativeFramework() {
 
   if (!viewModel || !controller || !isOpen) return null;
 
-  return <div className="fixed ">Blah.</div>;
+  return <div className="fixed ">{viewModel.text}</div>;
 }
