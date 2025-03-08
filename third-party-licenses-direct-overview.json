@@ -1,0 +1,174 @@
+{
+  "@babylonjs/accessibility@7.45.0": {
+    "licenses": "Apache-2.0",
+    "repository": "https://github.com/BabylonJS/Babylon.js",
+    "licenseUrl": "https://github.com/BabylonJS/Babylon.js/raw/master/license.md",
+    "parents": "adler-engine"
+  },
+  "@babylonjs/core@7.24.0": {
+    "licenses": "Apache-2.0",
+    "repository": "https://github.com/BabylonJS/Babylon.js",
+    "licenseUrl": "https://github.com/BabylonJS/Babylon.js/raw/master/license.md",
+    "parents": "adler-engine"
+  },
+  "@babylonjs/gui@7.24.0": {
+    "licenses": "Apache-2.0",
+    "repository": "https://github.com/BabylonJS/Babylon.js",
+    "licenseUrl": "https://github.com/BabylonJS/Babylon.js/raw/master/license.md",
+    "parents": "adler-engine"
+  },
+  "@babylonjs/loaders@7.24.0": {
+    "licenses": "Apache-2.0",
+    "repository": "https://github.com/BabylonJS/Babylon.js",
+    "licenseUrl": "https://github.com/BabylonJS/Babylon.js/raw/master/license.md",
+    "parents": "adler-engine"
+  },
+  "@dagrejs/dagre@1.1.4": {
+    "licenses": "MIT",
+    "repository": "https://github.com/dagrejs/dagre",
+    "licenseUrl": "https://github.com/dagrejs/dagre/raw/master/LICENSE",
+    "parents": "adler-engine"
+  },
+  "@types/node@22.5.4": {
+    "licenses": "MIT",
+    "repository": "https://github.com/DefinitelyTyped/DefinitelyTyped",
+    "licenseUrl": "https://github.com/DefinitelyTyped/DefinitelyTyped/raw/master/LICENSE",
+    "parents": "adler-engine"
+  },
+  "@xapi/xapi@2.2.8": {
+    "licenses": "MIT",
+    "repository": "https://github.com/xapijs/xapi",
+    "licenseUrl": "https://github.com/xapijs/xapi/raw/master/LICENSE.md",
+    "parents": "adler-engine"
+  },
+  "axios@1.7.7": {
+    "licenses": "MIT",
+    "repository": "https://github.com/axios/axios",
+    "licenseUrl": "https://github.com/axios/axios/raw/master/LICENSE",
+    "parents": "adler-engine"
+  },
+  "babylonjs@7.45.0": {
+    "licenses": "Apache-2.0",
+    "repository": "https://github.com/BabylonJS/Babylon.js",
+    "licenseUrl": "https://github.com/BabylonJS/Babylon.js/raw/master/license.md",
+    "parents": "adler-engine"
+  },
+  "bind-decorator@1.0.11": {
+    "licenses": "MIT",
+    "repository": "https://github.com/NoHomey/bind-decorator",
+    "licenseUrl": "https://github.com/NoHomey/bind-decorator/raw/master/LICENSE",
+    "parents": "adler-engine"
+  },
+  "clsx@2.1.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/lukeed/clsx",
+    "licenseUrl": "https://github.com/lukeed/clsx/raw/master/license",
+    "parents": "adler-engine"
+  },
+  "earcut@3.0.0": {
+    "licenses": "ISC",
+    "repository": "https://github.com/mapbox/earcut",
+    "licenseUrl": "https://github.com/mapbox/earcut/raw/master/LICENSE",
+    "parents": "adler-engine"
+  },
+  "h5p-standalone@3.7.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/tunapanda/h5p-standalone",
+    "licenseUrl": "https://github.com/tunapanda/h5p-standalone/raw/master/LICENSE",
+    "parents": "adler-engine"
+  },
+  "history@5.3.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/remix-run/history",
+    "licenseUrl": "https://github.com/remix-run/history/raw/master/LICENSE",
+    "parents": "adler-engine"
+  },
+  "i18next@22.5.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/i18next/i18next",
+    "licenseUrl": "https://github.com/i18next/i18next/raw/master/LICENSE",
+    "parents": "adler-engine"
+  },
+  "inversify-react@1.1.1": {
+    "licenses": "Apache-2.0",
+    "repository": "https://github.com/Kukkimonsuta/inversify-react",
+    "licenseUrl": "https://github.com/Kukkimonsuta/inversify-react/raw/master/LICENSE",
+    "parents": "adler-engine"
+  },
+  "inversify@6.0.2": {
+    "licenses": "MIT",
+    "repository": "https://github.com/inversify/InversifyJS",
+    "licenseUrl": "https://github.com/inversify/InversifyJS/raw/master/LICENSE",
+    "parents": "adler-engine"
+  },
+  "path-browserify@1.0.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/browserify/path-browserify",
+    "licenseUrl": "https://github.com/browserify/path-browserify/raw/master/LICENSE",
+    "parents": "adler-engine"
+  },
+  "pdfobject@2.2.8": {
+    "licenses": "MIT",
+    "repository": "git+https://pipwerks@github.com/pipwerks/PDFObject",
+    "licenseUrl": "git+https://pipwerks@github.com/pipwerks/PDFObject/raw/master/LICENSE.md",
+    "parents": "adler-engine"
+  },
+  "react-circular-progressbar@2.1.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/kevinsqi/react-circular-progressbar",
+    "licenseUrl": "https://github.com/kevinsqi/react-circular-progressbar/raw/master/LICENSE",
+    "parents": "adler-engine"
+  },
+  "react-dom@18.2.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/facebook/react",
+    "licenseUrl": "https://github.com/facebook/react/raw/master/LICENSE",
+    "parents": "adler-engine"
+  },
+  "react-i18next@12.3.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/i18next/react-i18next",
+    "licenseUrl": "https://github.com/i18next/react-i18next/raw/master/LICENSE",
+    "parents": "adler-engine"
+  },
+  "react-pdf@8.0.2": {
+    "licenses": "MIT",
+    "repository": "https://github.com/wojtekmaj/react-pdf",
+    "licenseUrl": "https://github.com/wojtekmaj/react-pdf/raw/master/LICENSE",
+    "parents": "adler-engine"
+  },
+  "react-router-dom@6.26.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/remix-run/react-router",
+    "licenseUrl": "https://github.com/remix-run/react-router/raw/master/LICENSE.md",
+    "parents": "adler-engine"
+  },
+  "react@18.2.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/facebook/react",
+    "licenseUrl": "https://github.com/facebook/react/raw/master/LICENSE",
+    "parents": "adler-engine"
+  },
+  "reactflow@11.11.4": {
+    "licenses": "MIT",
+    "repository": "https://github.com/xyflow/xyflow",
+    "licenseUrl": "https://github.com/xyflow/xyflow/raw/master/LICENSE",
+    "parents": "adler-engine"
+  },
+  "recast-detour@1.6.3": {
+    "licenses": "Zlib",
+    "parents": "adler-engine"
+  },
+  "reflect-metadata@0.2.2": {
+    "licenses": "Apache-2.0",
+    "repository": "https://github.com/rbuckton/reflect-metadata",
+    "licenseUrl": "https://github.com/rbuckton/reflect-metadata/raw/master/LICENSE",
+    "parents": "adler-engine"
+  },
+  "tailwind-merge@2.5.2": {
+    "licenses": "MIT",
+    "repository": "https://github.com/dcastil/tailwind-merge",
+    "licenseUrl": "https://github.com/dcastil/tailwind-merge/raw/master/LICENSE.md",
+    "parents": "adler-engine"
+  }
+}
