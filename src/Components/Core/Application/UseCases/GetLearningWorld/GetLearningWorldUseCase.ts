@@ -5,7 +5,6 @@ import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
 import LearningWorldEntity from "src/Components/Core/Domain/Entities/LearningWorldEntity";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
-import type INotificationPort from "../../Ports/Interfaces/INotificationPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUseCase";
