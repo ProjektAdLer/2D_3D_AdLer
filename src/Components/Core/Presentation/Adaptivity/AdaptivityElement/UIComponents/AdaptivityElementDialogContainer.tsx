@@ -92,12 +92,14 @@ export default function AdaptivityElementDialogContainer({
     viewmodel?.showFooterTooltip,
   );
   const [model] = useObservable<LearningElementModel>(viewmodel?.model);
+  const [resetting] = useObservable<boolean>(viewmodel?.hasResetted);
 
   const { t: translate } = useTranslation("learningElement");
 
   // -- State --
   const [headerText, setHeaderText] = useState<string>("");
   const [progressPercentage, setProgressPercentage] = useState<number>(0);
+  const [allTasksCompleted, setAllTasksCompleted] = useState<boolean>(false);
 
   useEffect(() => {
     if (!contentData) return;
@@ -110,10 +112,18 @@ export default function AdaptivityElementDialogContainer({
       0,
     );
     setProgressPercentage((completedTasks / requiredTasks) * 100);
-  }, [contentData, currentTask]);
+
+    if (completedTasks === contentData.tasks.length) {
+      setAllTasksCompleted(true);
+    } else {
+      setAllTasksCompleted(false);
+    }
+  }, [contentData, currentTask, resetting]);
 
   if (!viewmodel || !controller) return null;
   if (!isOpen || !contentData) return null;
+
+  console.log("View Rerender");
 
   return (
     <StyledContainer className={tailwindMerge(className, "")}>
@@ -182,6 +192,16 @@ export default function AdaptivityElementDialogContainer({
 
               <div className="w-full text-xs lg:text-lg">{headerText}</div>
 
+              {allTasksCompleted && (
+                <button
+                  onClick={() => {
+                    controller.reset();
+                    console.log("RESETTING");
+                  }}
+                >
+                  {"\u21BA"}
+                </button>
+              )}
               <CloseButton
                 onClick={controller.closeModal}
                 className="w-8 h-8 p-1 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
@@ -200,6 +220,7 @@ export default function AdaptivityElementDialogContainer({
                 <div className=" flex items-center justify-center px-1 mb-4 h-fit rounded-lg font-regular !text-sm lg:mx-4">
                   <AdaptivityElementTaskSelection
                     tasks={contentData.tasks}
+                    reset={viewmodel.hasResetted}
                     setHeaderText={setHeaderText}
                     onSelectTask={controller.selectTask}
                   />

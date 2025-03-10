@@ -11,7 +11,7 @@ export default interface IAdaptivityElementController {
   selectQuestion(selectedQuestion: AdaptivityQuestion): void;
   selectHint(
     selectedHint: AdaptivityHint,
-    associatedQuestion: AdaptivityQuestion
+    associatedQuestion: AdaptivityQuestion,
   ): void;
   submitSelection(): void;
   closeFeedback(): void;
@@ -22,6 +22,7 @@ export default interface IAdaptivityElementController {
   hideFooterTooltip(): void;
   loadExternalContentReference(
     elementID: ComponentID,
-    associatedQuestion: AdaptivityQuestion
+    associatedQuestion: AdaptivityQuestion,
   ): void;
+  reset(): void;
 }

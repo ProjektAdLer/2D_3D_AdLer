@@ -12,11 +12,10 @@ import AdaptivityElementViewModel, {
   AdaptivityElementContent,
 } from "../../../../Core/Presentation/Adaptivity/AdaptivityElement/AdaptivityElementViewModel";
 import { AdaptivityElementStatusTypes } from "../../../../Core/Domain/Types/Adaptivity/AdaptivityElementStatusTypes";
-import { Observable } from "@babylonjs/core";
 import AdaptivityElementHintTO from "../../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementHintTO";
 import { AdaptivityElementActionTypes } from "../../../../Core/Domain/Types/Adaptivity/AdaptivityElementActionTypes";
 import AdaptivityElementTriggerTO from "../../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementTriggerTO";
-import AdaptivityElementActionTO from "../../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementActionTO";
+import AdaptivityElementProgressUpdateTO from "../../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementProgressUpdateTO";
 
 describe("AdaptivityElementPresenter", () => {
   let systemUnderTest: AdaptivityElementPresenter;
@@ -104,7 +103,7 @@ describe("AdaptivityElementPresenter", () => {
       systemUnderTest["setFooterBreadcrumbs"]();
 
       expect(viewModel.footerText.Value).toMatchSnapshot();
-    }
+    },
   );
 
   test.each([
@@ -115,21 +114,19 @@ describe("AdaptivityElementPresenter", () => {
     "onAdaptivityElementAnswerEvaluated sets isCompleted of task to %s if the task status is %s",
     (testIsCompleted, testTaskStatus) => {
       const adaptivityElementProgressUpdateTO = {
-        isCompleted: undefined,
-        hasbeenCompleted: undefined,
-        taskInfo: {
-          taskId: 0,
-          taskStatus: testTaskStatus,
-        },
         elementInfo: {
           elementId: 0,
           success: false,
         },
+        taskInfo: {
+          taskId: 0,
+          taskStatus: testTaskStatus,
+        },
         questionInfo: {
           questionId: 1,
-          questionStatus: undefined,
+          questionStatus: AdaptivityElementStatusTypes.Correct,
         },
-      };
+      } as AdaptivityElementProgressUpdateTO;
       const question = {
         questionID: 1,
         questionText: "",
@@ -157,12 +154,12 @@ describe("AdaptivityElementPresenter", () => {
       viewModel.contentData.Value = contentData;
 
       systemUnderTest.onAdaptivityElementAnswerEvaluated(
-        adaptivityElementProgressUpdateTO
+        adaptivityElementProgressUpdateTO,
       );
       expect(
-        systemUnderTest["viewModel"].contentData.Value.tasks[0].isCompleted
+        systemUnderTest["viewModel"].contentData.Value.tasks[0].isCompleted,
       ).toBe(testIsCompleted);
-    }
+    },
   );
 
   test.each([
@@ -215,13 +212,13 @@ describe("AdaptivityElementPresenter", () => {
       viewModel.contentData.Value = contentData;
 
       systemUnderTest.onAdaptivityElementAnswerEvaluated(
-        adaptivityElementProgressUpdateTO
+        adaptivityElementProgressUpdateTO,
       );
       expect(
         systemUnderTest["viewModel"].contentData.Value.tasks[0].questions[0]
-          .isCompleted
+          .isCompleted,
       ).toBe(testIsCompleted);
-    }
+    },
   );
 
   test("onAdaptivityElementAnswerEvaluated resets isSelected for all answers of the current question", () => {
@@ -341,7 +338,7 @@ describe("AdaptivityElementPresenter", () => {
       },
     };
     systemUnderTest.onAdaptivityElementUserHintInformed!(
-      adaptivityElementHintTO
+      adaptivityElementHintTO,
     );
     expect(viewModel.selectedHint.Value).toEqual(adaptivityElementHintTO);
   });
@@ -396,7 +393,7 @@ describe("AdaptivityElementPresenter", () => {
     });
     expect(
       viewModel.contentData.Value.tasks[0].questions[0].questionAnswers[0]
-        .isCorrect
+        .isCorrect,
     ).toBe(true);
   });
 
