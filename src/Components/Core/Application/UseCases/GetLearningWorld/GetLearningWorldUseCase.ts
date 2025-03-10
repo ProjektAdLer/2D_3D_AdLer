@@ -21,7 +21,7 @@ export default class GetLearningWorldUseCase
     private logger: ILoggerPort,
     @inject(CORE_TYPES.IEntityContainer)
     private container: IEntityContainer,
-    @inject(PORT_TYPES.INotificationPort)
+    @inject(USECASE_TYPES.IGetUserLocationUseCase)
     private getUserLocationUseCase: IGetUserLocationUseCase,
     @inject(PORT_TYPES.ILearningWorldPort)
     private worldPort: ILearningWorldPort,
