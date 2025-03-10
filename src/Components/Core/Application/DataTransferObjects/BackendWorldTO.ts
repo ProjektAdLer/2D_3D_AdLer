@@ -1,4 +1,5 @@
 import { BackendBaseElementTO } from "./BackendElementTO";
+import BackendNarrativeFrameworkTO from "./BackendNarrativeFrameworkTO";
 import BackendSpaceTO from "./BackendSpaceTO";
 
 export default class BackendWorldTO {
@@ -8,4 +9,5 @@ export default class BackendWorldTO {
   description: string;
   evaluationLink: string;
   externalElements: BackendBaseElementTO[];
+  narrativeFramework: BackendNarrativeFrameworkTO | null;
 }
