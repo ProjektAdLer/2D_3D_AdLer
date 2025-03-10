@@ -12,6 +12,11 @@ export default function NarrativeFramework() {
   const [isOpen] = useObservable<boolean>(viewModel?.isOpen);
 
   if (!viewModel || !controller || !isOpen) return null;
+  if (!viewModel.introText && !viewModel.outroText) return null;
 
-  return <div className="fixed ">{viewModel.text}</div>;
+  return (
+    <div className="fixed ">
+      {viewModel.introText} {viewModel.outroText}
+    </div>
+  );
 }

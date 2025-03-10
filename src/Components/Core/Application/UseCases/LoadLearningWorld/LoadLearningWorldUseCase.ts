@@ -41,6 +41,7 @@ import BackendStoryTO from "../../DataTransferObjects/BackendStoryTO";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 import type { IInternalGetLoginStatusUseCase } from "../GetLoginStatus/IGetLoginStatusUseCase";
 import { NotificationMessages } from "src/Components/Core/Domain/Types/NotificationMessages";
+import NarrativeFrameworkEntity from "src/Components/Core/Domain/Entities/NarrativeFrameworkEntity";
 
 @injectable()
 export default class LoadLearningWorldUseCase
@@ -413,6 +414,18 @@ export default class LoadLearningWorldUseCase
     spaceEntities: LearningSpaceEntity[],
     apiWorldDataResponse: Partial<BackendWorldTO>,
   ): LearningWorldEntity {
+    let narrativeFrameworkEntity: NarrativeFrameworkEntity | undefined;
+    if (apiWorldDataResponse.narrativeFramework) {
+      narrativeFrameworkEntity =
+        this.container.createEntity<NarrativeFrameworkEntity>(
+          {
+            introText: apiWorldDataResponse.narrativeFramework.frameStoryIntro,
+            outroText: apiWorldDataResponse.narrativeFramework.frameStoryOutro,
+          },
+          NarrativeFrameworkEntity,
+        );
+    }
+
     const worldEntity = this.container.createEntity<LearningWorldEntity>(
       {
         name: apiWorldDataResponse.worldName,
@@ -421,6 +434,7 @@ export default class LoadLearningWorldUseCase
         id: worldID,
         description: apiWorldDataResponse.description,
         evaluationLink: apiWorldDataResponse.evaluationLink,
+        narrativeFramework: narrativeFrameworkEntity,
       },
       LearningWorldEntity,
     );

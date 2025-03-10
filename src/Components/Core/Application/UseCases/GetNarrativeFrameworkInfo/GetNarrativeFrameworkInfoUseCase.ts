@@ -34,8 +34,8 @@ export default class GetNarrativeFrameworkInfoUseCase
       (WorldEntity) => WorldEntity.id === data.worldID,
     )[0];
     let narrativeFrameworkTO = new NarrativeFrameworkTO();
-    narrativeFrameworkTO.id = worldEntity.id;
-    narrativeFrameworkTO.text = "placeholder";
+    narrativeFrameworkTO.introText = worldEntity.narrativeFramework!.introText;
+    narrativeFrameworkTO.outroText = worldEntity.narrativeFramework!.outroText;
 
     this.logger.log(
       LogLevelTypes.TRACE,
