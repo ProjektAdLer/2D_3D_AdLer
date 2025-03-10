@@ -84,8 +84,8 @@ export const LearningSpaceTheme_CampusKE: ILearningSpaceTheme = {
 export const LearningSpaceTheme_CampusLibrary: ILearningSpaceTheme = {
   learningElementModels: LearningSpaceTheme_CampusAB.learningElementModels,
   standinDecorationModels: LearningSpaceTheme_CampusAB.standinDecorationModels,
-  entryDoorModel: require("../../../../Assets/3dModels/sharedModels/elevator_entry.glb"),
-  exitDoorModel: require("../../../../Assets/3dModels/sharedModels/elevator_exit.glb"),
+  entryDoorModel: require("../../../../Assets/3dModels/sharedModels/id-elevator-entry.glb"),
+  exitDoorModel: require("../../../../Assets/3dModels/sharedModels/id-elevator-exit.glb"),
   ambienceModel: require("../../../../Assets/3dModels/campusTheme/env-campus-library.glb"),
   storyElementModel: LearningSpaceTheme_CampusAB.storyElementModel,
 };
@@ -93,8 +93,8 @@ export const LearningSpaceTheme_CampusLibrary: ILearningSpaceTheme = {
 export const LearningSpaceTheme_CampusMensa: ILearningSpaceTheme = {
   learningElementModels: LearningSpaceTheme_CampusAB.learningElementModels,
   standinDecorationModels: LearningSpaceTheme_CampusAB.standinDecorationModels,
-  entryDoorModel: require("../../../../Assets/3dModels/sharedModels/elevator_entry.glb"),
-  exitDoorModel: require("../../../../Assets/3dModels/sharedModels/elevator_exit.glb"),
+  entryDoorModel: require("../../../../Assets/3dModels/sharedModels/id-elevator-entry.glb"),
+  exitDoorModel: require("../../../../Assets/3dModels/sharedModels/id-elevator-exit.glb"),
   ambienceModel: require("../../../../Assets/3dModels/campusTheme/env-campus-mensa.glb"),
   storyElementModel: LearningSpaceTheme_CampusAB.storyElementModel,
 };
