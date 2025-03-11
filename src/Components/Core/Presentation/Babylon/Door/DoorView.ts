@@ -1,6 +1,7 @@
 import {
   ActionManager,
   Animation,
+  AnimationGroup,
   Color3,
   ExecuteCodeAction,
   Mesh,
@@ -33,6 +34,11 @@ export default class DoorView extends Readyable {
 
   private openTheDoorSound: Sound;
   private doorAnimation: Animation;
+  private doorAnimationGroup: AnimationGroup;
+  private doorAnimationGoUp: AnimationGroup;
+  private doorAnimationGoOpen: AnimationGroup;
+  private doorAnimationGoClose: AnimationGroup;
+  private doorAnimationStayUp: AnimationGroup;
   private logger: ILoggerPort;
 
   constructor(
@@ -66,7 +72,16 @@ export default class DoorView extends Readyable {
     viewModel.isInteractable.subscribe((newValue) => {
       this.updateHighlight();
       this.toggleIconFloatAnimation(newValue);
+      this.elevatorDoorAnimation(newValue);
     });
+  }
+
+  private async elevatorDoorAnimation(avatarIsClose: boolean): Promise<void> {
+    if (avatarIsClose) {
+      this.doorAnimationGoOpen?.play(false);
+    } else {
+      this.doorAnimationGoClose?.play(false);
+    }
   }
 
   public async asyncSetup(): Promise<void> {
@@ -95,6 +110,29 @@ export default class DoorView extends Readyable {
     loadedMeshes.forEach((mesh) => (mesh.rotationQuaternion = null));
 
     this.viewModel.meshes = loadedMeshes as Mesh[];
+
+    // animation setup
+    loadingResults.animationGroups.forEach((animationGroup) => {
+      animationGroup.stop();
+      switch (animationGroup.name) {
+        case "elevator_drive_up_open":
+          this.doorAnimationGoUp = animationGroup;
+          break;
+        case "elevator_up_idle":
+          this.doorAnimationStayUp = animationGroup;
+          break;
+        case "elevator_open":
+          this.doorAnimationGoOpen = animationGroup;
+          break;
+        case "elevator_close":
+          this.doorAnimationGoClose = animationGroup;
+          break;
+      }
+    });
+
+    if (!this.viewModel.isExit) {
+      this.doorAnimationGoOpen?.play(false);
+    }
 
     this.viewModel.meshes[0].accessibilityTag = {
       description:
@@ -166,6 +204,12 @@ export default class DoorView extends Readyable {
     ]);
 
     meshToRotate.animations.push(this.doorAnimation);
+
+    this.doorAnimationGroup = new AnimationGroup("doorAnimationGroup");
+    this.doorAnimationGroup.addTargetedAnimation(
+      this.doorAnimation,
+      this.viewModel.meshes[0],
+    );
   }
 
   @bind
@@ -184,12 +228,11 @@ export default class DoorView extends Readyable {
   private onIsOpenChanged(newIsOpen: boolean): void {
     if (newIsOpen) {
       this.IsReady.then(() => {
-        this.scenePresenter.Scene.beginAnimation(
-          this.viewModel.meshes.find((mesh) => mesh.id === "Door"),
-          0,
-          45,
-        );
+        console.log("DoorView: Opening door");
+        console.log(this.doorAnimationGroup);
         this.openTheDoorSound.play();
+        this.doorAnimationGroup?.play(false);
+        this.doorAnimationGoUp?.play(false);
       });
     }
   }

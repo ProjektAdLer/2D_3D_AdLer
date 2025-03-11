@@ -42,7 +42,7 @@ const BigWorldAWT: AWT = {
         requiredPointsToComplete: 1,
         requiredSpacesToEnter: "",
         spaceTemplate: "R_20X20_6L",
-        spaceTemplateStyle: "",
+        spaceTemplateStyle: "CAMPUSLIBRARY",
         spaceStory: {
           introStory: {
             storyTexts: [
@@ -64,7 +64,7 @@ const BigWorldAWT: AWT = {
         requiredPointsToComplete: 1,
         requiredSpacesToEnter: "",
         spaceTemplate: "R_20X30_8L",
-        spaceTemplateStyle: "",
+        spaceTemplateStyle: "CAMPUSMENSA",
         spaceStory: {
           introStory: null,
           outroStory: {
