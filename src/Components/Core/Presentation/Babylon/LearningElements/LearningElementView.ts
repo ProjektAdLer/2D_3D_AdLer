@@ -90,7 +90,10 @@ export default class LearningElementView {
 
     this.viewModel.modelMeshes[0].accessibilityTag = {
       description:
-        "learningelement " + this.viewModel.name + " " + this.viewModel.id,
+        "learningelement id: " +
+        this.viewModel.id +
+        " with name: " +
+        this.viewModel.name,
       // @ts-ignore
       eventHandler: {
         click: () => {

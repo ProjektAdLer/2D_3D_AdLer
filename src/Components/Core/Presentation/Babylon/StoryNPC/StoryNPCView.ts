@@ -77,7 +77,7 @@ export default class StoryNPCView {
     this.setupModel();
 
     this.viewModel.modelMeshes[0].accessibilityTag = {
-      description: "storyNPC " + this.viewModel.storyType,
+      description: "storyNPC of type: " + this.viewModel.storyType,
       // @ts-ignore
       eventHandler: {
         click: () => {

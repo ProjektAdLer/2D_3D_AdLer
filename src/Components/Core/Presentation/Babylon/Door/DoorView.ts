@@ -98,8 +98,10 @@ export default class DoorView extends Readyable {
 
     this.viewModel.meshes[0].accessibilityTag = {
       description:
-        (this.viewModel.isExit ? "exit door " : "entrance door ") +
-        this.viewModel.spaceID,
+        "door of space id: " +
+        this.viewModel.spaceID +
+        " of type: " +
+        (this.viewModel.isExit ? "exit" : "entrance"),
       //@ts-ignore
       eventHandler: {
         click: () => {
