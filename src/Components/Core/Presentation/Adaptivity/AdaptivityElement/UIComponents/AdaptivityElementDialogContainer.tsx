@@ -198,6 +198,10 @@ export default function AdaptivityElementDialogContainer({
                     controller.reset();
                     console.log("RESETTING");
                   }}
+                  className={tailwindMerge(
+                    "justify-center p-1 xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10 w-8 h-8 mobile-portrait:rounded-md aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue",
+                    className ?? "",
+                  )}
                 >
                   {"\u21BA"}
                 </button>
@@ -486,6 +490,17 @@ export default function AdaptivityElementDialogContainer({
                                   />
                                 </td>
                                 <td>{translate("legendNoStar")}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <h3 className="pt-2 text-sm font-bold text-left ">
+                            {translate("headerlegendInteraction")}
+                          </h3>
+                          <table>
+                            <tbody>
+                              <tr>
+                                <td className="pr-2 text-xl">{"\u21BA"}</td>
+                                <td>{translate("legendReset")}</td>
                               </tr>
                             </tbody>
                           </table>
