@@ -31,13 +31,14 @@ const iconLinkExitDoor = require("../../../../../Assets/3dModels/sharedModels/3d
 
 export default class DoorView extends Readyable {
   private scenePresenter: IScenePresenter;
-
+  private isElevator: boolean = false;
+  private enableProximityBehaviour = false;
   private openTheDoorSound: Sound;
   private doorAnimation: Animation;
   private doorAnimationGroup: AnimationGroup;
-  private elevatorAnimationGoUp: AnimationGroup;
   private elevatorAnimationOpen: AnimationGroup;
-  private elevatorAnimationClose: AnimationGroup;
+  private elevatorAnimationLiftUp: AnimationGroup;
+  private elevatorAnimationLiftDown: AnimationGroup;
   private logger: ILoggerPort;
 
   constructor(
@@ -82,7 +83,6 @@ export default class DoorView extends Readyable {
     if (this.viewModel.isExit) this.setupAnimation();
     this.registerActions();
     this.updateHighlight();
-
     this.resolveIsReady();
   }
 
@@ -101,27 +101,38 @@ export default class DoorView extends Readyable {
     loadedMeshes.forEach((mesh) => (mesh.rotationQuaternion = null));
 
     this.viewModel.meshes = loadedMeshes as Mesh[];
+    this.viewModel.doorAnimations =
+      loadingResults.animationGroups as AnimationGroup[];
 
     // animation setup for elevator
-    loadingResults?.animationGroups?.forEach((animationGroup) => {
+    this.viewModel.doorAnimations?.forEach((animationGroup) => {
       if (animationGroup.children) {
         animationGroup.stop();
         switch (animationGroup.name) {
-          case "elevator_drive_up_open":
-            this.elevatorAnimationGoUp = animationGroup;
-            break;
           case "elevator_open":
+            this.isElevator = true;
             this.elevatorAnimationOpen = animationGroup;
             break;
-          case "elevator_close":
-            this.elevatorAnimationClose = animationGroup;
+          case "elevator_drive_up_open":
+            this.elevatorAnimationLiftUp = animationGroup;
+            break;
+          case "elevator_drive_down_close":
+            this.elevatorAnimationLiftDown = animationGroup;
             break;
         }
       }
     });
 
-    if (!this.viewModel.isExit) {
-      this.elevatorAnimationOpen?.play(false);
+    // Elevator Intial Setup
+    if (this.isElevator) {
+      //Play initial entry elevator animation on scene start
+      if (!this.viewModel.isExit) {
+        this.elevatorAnimationOpen?.play(false);
+      }
+      //Enable ProximityBehaviour if door is set open
+      if (this.viewModel.isOpen.Value) {
+        this.enableProximityBehaviour = true;
+      }
     }
 
     this.viewModel.meshes[0].accessibilityTag = {
@@ -220,9 +231,13 @@ export default class DoorView extends Readyable {
   private onIsOpenChanged(newIsOpen: boolean): void {
     if (newIsOpen) {
       this.IsReady.then(() => {
-        this.openTheDoorSound.play();
-        this.doorAnimationGroup?.play(false);
-        this.elevatorAnimationGoUp?.start(false, 1, 0, 300, false);
+        if (this.isElevator) {
+          this.elevatorAnimationLiftUp?.play(false);
+          this.enableProximityBehaviour = true;
+        } else {
+          this.openTheDoorSound.play();
+          this.doorAnimationGroup?.play(false);
+        }
       });
     }
   }
@@ -282,11 +297,25 @@ export default class DoorView extends Readyable {
   }
 
   private async elevatorDoorAnimation(avatarIsClose: boolean): Promise<void> {
-    if (this.viewModel.isOpen.Value || !this.viewModel.isExit) {
+    if (!this.isElevator) return;
+    console.log("Door is open: " + this.viewModel.isOpen.Value);
+    console.log("enableProximityBehaviour: " + this.enableProximityBehaviour);
+    // Behaviour for first entry animation
+    if (!this.enableProximityBehaviour && !this.viewModel.isExit) {
+      this.elevatorAnimationLiftDown?.play(false);
+      this.elevatorAnimationLiftDown.onAnimationEndObservable.add(() => {
+        this.enableProximityBehaviour = true;
+        this.elevatorAnimationLiftDown.onAnimationEndObservable.clear();
+      });
+    }
+    // Elevator behaviour for exit and entry after first animation
+    if (this.enableProximityBehaviour) {
       if (avatarIsClose) {
-        this.elevatorAnimationOpen?.play(false);
+        this.elevatorAnimationLiftUp.speedRatio = 1;
+        this.elevatorAnimationLiftUp?.play(false);
       } else {
-        this.elevatorAnimationClose?.play(false);
+        this.elevatorAnimationLiftUp.speedRatio = -1;
+        this.elevatorAnimationLiftUp?.play(false);
       }
     }
   }

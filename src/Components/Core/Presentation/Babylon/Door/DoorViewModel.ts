@@ -13,6 +13,7 @@ export default class DoorViewModel {
   public iconMeshes: Mesh[];
 
   // animations
+  public doorAnimations: AnimationGroup[];
   public iconFloatingAnimation: AnimationGroup;
 
   //door properties
