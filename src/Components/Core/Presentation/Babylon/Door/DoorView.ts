@@ -103,18 +103,20 @@ export default class DoorView extends Readyable {
     this.viewModel.meshes = loadedMeshes as Mesh[];
 
     // animation setup for elevator
-    loadingResults.animationGroups.forEach((animationGroup) => {
-      animationGroup.stop();
-      switch (animationGroup.name) {
-        case "elevator_drive_up_open":
-          this.elevatorAnimationGoUp = animationGroup;
-          break;
-        case "elevator_open":
-          this.elevatorAnimationOpen = animationGroup;
-          break;
-        case "elevator_close":
-          this.elevatorAnimationClose = animationGroup;
-          break;
+    loadingResults?.animationGroups?.forEach((animationGroup) => {
+      if (animationGroup.children) {
+        animationGroup.stop();
+        switch (animationGroup.name) {
+          case "elevator_drive_up_open":
+            this.elevatorAnimationGoUp = animationGroup;
+            break;
+          case "elevator_open":
+            this.elevatorAnimationOpen = animationGroup;
+            break;
+          case "elevator_close":
+            this.elevatorAnimationClose = animationGroup;
+            break;
+        }
       }
     });
 
