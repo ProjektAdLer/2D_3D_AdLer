@@ -216,8 +216,6 @@ export default class DoorView extends Readyable {
   private onIsOpenChanged(newIsOpen: boolean): void {
     if (newIsOpen) {
       this.IsReady.then(() => {
-        console.log("DoorView: Opening door");
-        console.log(this.doorAnimationGroup);
         this.openTheDoorSound.play();
         this.doorAnimationGroup?.play(false);
         this.elevatorAnimationGoUp?.start(false, 1, 0, 300, false);
@@ -280,7 +278,7 @@ export default class DoorView extends Readyable {
   }
 
   private async elevatorDoorAnimation(avatarIsClose: boolean): Promise<void> {
-    if (this.viewModel.isOpen.Value) {
+    if (this.viewModel.isOpen.Value || !this.viewModel.isExit) {
       if (avatarIsClose) {
         this.elevatorAnimationOpen?.play(false);
       } else {
