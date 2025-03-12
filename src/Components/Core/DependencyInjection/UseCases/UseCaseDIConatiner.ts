@@ -72,6 +72,8 @@ import ISaveAvatarConfigUseCase from "../../Application/UseCases/SaveAvatarConfi
 import SaveAvatarConfigUseCase from "../../Application/UseCases/SaveAvatarConfig/SaveAvatarConfigUseCase";
 import IGetLearningWorldUseCase from "../../Application/UseCases/GetLearningWorld/IGetLearningWorldUseCase";
 import GetLearningWorldUseCase from "../../Application/UseCases/GetLearningWorld/GetLearningWorldUseCase";
+import IGetNarrativeFrameworkInfoUseCase from "../../Application/UseCases/GetNarrativeFrameworkInfo/IGetNarrativeFrameworkInfoUseCase";
+import GetNarrativeFrameworkInfoUseCase from "../../Application/UseCases/GetNarrativeFrameworkInfo/GetNarrativeFrameworkInfoUseCase";
 
 const UseCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases
@@ -257,6 +259,11 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
 
   bind<IGetLearningWorldUseCase>(USECASE_TYPES.IGetLearningWorldUseCase)
     .to(GetLearningWorldUseCase)
+    .inSingletonScope();
+  bind<IGetNarrativeFrameworkInfoUseCase>(
+    USECASE_TYPES.IGetNarrativeFrameworkInfoUseCase,
+  )
+    .to(GetNarrativeFrameworkInfoUseCase)
     .inSingletonScope();
 });
 
