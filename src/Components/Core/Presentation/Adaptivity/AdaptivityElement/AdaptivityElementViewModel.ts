@@ -8,7 +8,7 @@ export interface AdaptivityAnswer {
   answerIndex: number;
   answerText: string;
   isSelected: boolean;
-  isCorrect: boolean;
+  isCorrect: boolean | undefined;
 }
 
 export interface AdaptivityHintAction {
@@ -65,4 +65,5 @@ export default class AdaptivityElementViewModel {
   footerText: Observable<string> = new Observable<string>("");
   elementID: Observable<ComponentID> = new Observable<ComponentID>();
   model: Observable<LearningElementModel> = new Observable();
+  hasResetted: Observable<boolean> = new Observable(false);
 }

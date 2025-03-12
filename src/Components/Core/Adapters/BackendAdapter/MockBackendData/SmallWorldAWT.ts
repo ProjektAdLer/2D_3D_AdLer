@@ -13,6 +13,10 @@ const SmallWorldAWT: AWT = {
       "Small World with only one topic and one space but with all elements",
     worldGoals: ["Weltziel 1/3", "Weltziel 2/3", "Weltziel 3/3"],
     evaluationLink: "https://www.th-ab.de",
+    frameStory: {
+      frameStoryIntro: "blablaINTROblabla",
+      frameStoryOutro: "blablaOUTROblabla",
+    },
     topics: [
       {
         topicId: 7,

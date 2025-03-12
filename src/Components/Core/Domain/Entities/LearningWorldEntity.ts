@@ -1,5 +1,6 @@
 import { ComponentID } from "../Types/EntityTypes";
 import LearningSpaceEntity from "./LearningSpaceEntity";
+import NarrativeFrameworkEntity from "./NarrativeFrameworkEntity";
 
 export default class LearningWorldEntity {
   id: ComponentID;
@@ -10,4 +11,5 @@ export default class LearningWorldEntity {
   evaluationLink: string;
   completionModalShown: boolean | undefined;
   lastVisitedSpaceID: ComponentID | undefined;
+  narrativeFramework: NarrativeFrameworkEntity | null;
 }

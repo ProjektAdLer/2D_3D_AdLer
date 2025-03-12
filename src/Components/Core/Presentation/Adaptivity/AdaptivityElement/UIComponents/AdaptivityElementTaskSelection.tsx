@@ -12,6 +12,8 @@ import { useTranslation } from "react-i18next";
 
 import requiredTaskIcon from "../../../../../../Assets/icons/required.svg";
 import solvedTaskIcon from "../../../../../../Assets/icons/check-solution.svg";
+import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
+import Observable from "src/Lib/Observable";
 
 export function getAdaptivityQuestionStarState(
   question: AdaptivityQuestion | undefined,
@@ -34,14 +36,18 @@ export function getAdaptivityQuestionStarState(
 
 export default function AdaptivityElementTaskSelection({
   tasks,
+  reset,
   setHeaderText,
   onSelectTask,
 }: Readonly<{
   tasks: AdaptivityTask[];
+  reset: Observable<boolean>;
   setHeaderText: (headerText: string) => void;
   onSelectTask: (selectedTask: AdaptivityTask) => void;
 }>) {
   const [taskButtons, setTaskButtons] = useState<JSX.Element[]>([]);
+  const [resetting] = useObservable<boolean>(reset);
+
   const { t: translate } = useTranslation("learningElement");
   useEffect(() => {
     setHeaderText(translate("adaptivityIntro"));
@@ -117,7 +123,7 @@ export default function AdaptivityElementTaskSelection({
         );
       }),
     );
-  }, [tasks, onSelectTask]);
+  }, [tasks, onSelectTask, resetting]);
 
   return (
     <div className="grid justify-center gap-4 lg:grid-cols-2 gap-x-8">

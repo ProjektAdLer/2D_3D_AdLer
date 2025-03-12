@@ -12,6 +12,7 @@ export default class NarrativeFrameworkPresenter
     narrativeFrameWorkTO: NarrativeFrameworkTO,
   ): void {
     this.viewModel.isOpen.Value = true;
-    this.viewModel.text = narrativeFrameWorkTO.text;
+    this.viewModel.introText = narrativeFrameWorkTO.introText;
+    this.viewModel.outroText = narrativeFrameWorkTO.outroText;
   }
 }

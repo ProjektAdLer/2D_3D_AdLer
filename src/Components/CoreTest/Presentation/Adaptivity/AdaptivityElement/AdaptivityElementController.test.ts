@@ -1,3 +1,4 @@
+import { AdaptivityElementContent } from "./../../../../Core/Presentation/Adaptivity/AdaptivityElement/AdaptivityElementViewModel";
 import { mock } from "jest-mock-extended";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
@@ -43,11 +44,13 @@ const mockQuestion: AdaptivityQuestion = {
       answerIndex: 1,
       answerText: "TestAnswerText",
       isSelected: false,
+      isCorrect: true,
     },
     {
       answerIndex: 3,
       answerText: "TestAnswerText",
       isSelected: true,
+      isCorrect: false,
     },
   ],
   isRequired: false,
@@ -285,5 +288,24 @@ describe("AdaptivityElementController", () => {
           "Der hier hinterlegte Hinweis ist nicht eindeutig zuordbar. Bitte füllen Sie einen Bugreport aus.",
       },
     } as AdaptivityHint);
+  });
+
+  test("reset sets every task and question to not completed", () => {
+    viewModel.contentData = new Observable<AdaptivityElementContent>();
+    viewModel.contentData.Value = {
+      elementName: "",
+      introText: "",
+      tasks: [mockTask],
+    } as AdaptivityElementContent;
+    //viewModel.contentData.Value.tasks = [mockTask] as AdaptivityTask[];
+    viewModel.contentData.Value.tasks[0].isCompleted = true;
+    viewModel.contentData.Value.tasks[0].questions[0].isCompleted = true;
+
+    systemUnderTest.reset();
+
+    expect(viewModel.contentData.Value.tasks[0].isCompleted).toEqual(null);
+    expect(
+      viewModel.contentData.Value.tasks[0].questions[0].isCompleted,
+    ).toEqual(null);
   });
 });

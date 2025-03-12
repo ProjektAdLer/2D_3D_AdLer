@@ -32,7 +32,7 @@ export default class AdaptivityElementPresenter
   }
 
   onAdaptivityElementLoaded(
-    adaptivityElementProgressTO: AdaptivityElementProgressTO
+    adaptivityElementProgressTO: AdaptivityElementProgressTO,
   ): void {
     this.setContentData(adaptivityElementProgressTO);
     this.setFooterBreadcrumbs();
@@ -46,29 +46,23 @@ export default class AdaptivityElementPresenter
   }
 
   onAdaptivityElementAnswerEvaluated(
-    adaptivityElementProgressUpdateTO: AdaptivityElementProgressUpdateTO
+    adaptivityElementProgressUpdateTO: AdaptivityElementProgressUpdateTO,
   ): void {
     const updatedTask = this.viewModel.contentData.Value.tasks.find(
       (task) =>
-        task.taskID === adaptivityElementProgressUpdateTO.taskInfo.taskId
+        task.taskID === adaptivityElementProgressUpdateTO.taskInfo.taskId,
     )!;
 
-    const taskStatus = adaptivityElementProgressUpdateTO.taskInfo.taskStatus;
-    if (taskStatus === AdaptivityElementStatusTypes.Correct) {
-      updatedTask.isCompleted = true;
-      updatedTask.hasBeenCompleted = true;
-    } else if (taskStatus === AdaptivityElementStatusTypes.Incorrect)
-      updatedTask.isCompleted = false;
-    else updatedTask.isCompleted = null;
+    // update question status
+    const questionStatus =
+      adaptivityElementProgressUpdateTO.questionInfo.questionStatus;
 
     const updatedQuestion = updatedTask.questions.find(
       (question) =>
         question.questionID ===
-        adaptivityElementProgressUpdateTO.questionInfo.questionId
+        adaptivityElementProgressUpdateTO.questionInfo.questionId,
     )!;
 
-    const questionStatus =
-      adaptivityElementProgressUpdateTO.questionInfo.questionStatus;
     if (questionStatus === AdaptivityElementStatusTypes.Correct)
       updatedQuestion.isCompleted = true;
     else if (questionStatus === AdaptivityElementStatusTypes.Incorrect)
@@ -79,11 +73,23 @@ export default class AdaptivityElementPresenter
       answer.isSelected = false;
     });
 
+    // update task status
+    const taskStatus = adaptivityElementProgressUpdateTO.taskInfo.taskStatus;
+    if (
+      taskStatus === AdaptivityElementStatusTypes.Correct &&
+      questionStatus === AdaptivityElementStatusTypes.Correct
+    ) {
+      updatedTask.isCompleted = true;
+      updatedTask.hasBeenCompleted = true;
+    } else if (taskStatus === AdaptivityElementStatusTypes.Incorrect)
+      updatedTask.isCompleted = false;
+    else updatedTask.isCompleted = null;
+
     this.viewModel.showFeedback.Value = true;
   }
 
   onAdaptivityElementUserHintInformed?(
-    adaptivityElementHintTO: AdaptivityElementHintTO
+    adaptivityElementHintTO: AdaptivityElementHintTO,
   ): void {
     const hint = {
       hintID: adaptivityElementHintTO.hintID,
@@ -98,16 +104,16 @@ export default class AdaptivityElementPresenter
   }
 
   onAdaptivityElementQuestionAnsweredCorrectly?(
-    questionPresentationUpdateTO: AdaptivityElementQuestionPresentationUpdateTO
+    questionPresentationUpdateTO: AdaptivityElementQuestionPresentationUpdateTO,
   ): void {
     const questionToBeUpdated = this.viewModel.contentData.Value.tasks
       .find(
-        (task) => task.taskID === questionPresentationUpdateTO.taskInfo.taskId
+        (task) => task.taskID === questionPresentationUpdateTO.taskInfo.taskId,
       )!
       .questions.find(
         (question) =>
           question.questionID ===
-          questionPresentationUpdateTO.questionInfo.questionId
+          questionPresentationUpdateTO.questionInfo.questionId,
       )!;
 
     questionToBeUpdated.questionAnswers.map((answer, index) => {
@@ -147,10 +153,10 @@ export default class AdaptivityElementPresenter
   }
 
   private setContentData(
-    adaptivityElementProgressTO: AdaptivityElementProgressTO
+    adaptivityElementProgressTO: AdaptivityElementProgressTO,
   ): void {
     const newTasks: AdaptivityTask[] = this.mapTasks(
-      adaptivityElementProgressTO.tasks
+      adaptivityElementProgressTO.tasks,
     );
 
     this.viewModel.contentData.Value = {
@@ -168,7 +174,7 @@ export default class AdaptivityElementPresenter
         questions: this.mapQuestions(
           task.questions,
           task.requiredDifficulty,
-          task.taskOptional
+          task.taskOptional,
         ),
         isCompleted: task.isCompleted,
         hasBeenCompleted: task.isCompleted !== null ? task.isCompleted : false,
@@ -179,22 +185,22 @@ export default class AdaptivityElementPresenter
   }
 
   private sortQuestionsByDifficulty(
-    questions: AdaptivityElementQuestionProgressTO[]
+    questions: AdaptivityElementQuestionProgressTO[],
   ) {
     questions.sort(
       (
         a: AdaptivityElementQuestionProgressTO,
-        b: AdaptivityElementQuestionProgressTO
+        b: AdaptivityElementQuestionProgressTO,
       ) => {
         return a.questionDifficulty - b.questionDifficulty;
-      }
+      },
     );
   }
 
   private mapQuestions(
     questions: AdaptivityElementQuestionProgressTO[],
     requiredDifficulty: AdaptivityElementQuestionDifficultyTypes,
-    isTaskOptional: boolean
+    isTaskOptional: boolean,
   ): AdaptivityQuestion[] {
     this.sortQuestionsByDifficulty(questions);
     return questions.map((question) => {
@@ -232,7 +238,7 @@ export default class AdaptivityElementPresenter
   }
 
   private mapAdaptivityTriggers(
-    triggers: AdaptivityElementTriggerTO[]
+    triggers: AdaptivityElementTriggerTO[],
   ): AdaptivityHint[] {
     if (!triggers.length) return [];
 

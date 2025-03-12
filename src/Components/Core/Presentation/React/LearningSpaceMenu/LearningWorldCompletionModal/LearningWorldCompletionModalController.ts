@@ -15,12 +15,10 @@ export default class LearningWorldCompletionModalController
   }
 
   CloseButtonClicked(): void {
-    if ((this.viewModel.wasClosedOnce = true)) {
-      this.viewModel.showModal.Value = false;
-      this.viewModel.wasClosedOnce = true;
-      this.setWorldCompletionModalToShown.execute({
-        worldID: this.viewModel.currentWorldId.Value,
-      });
-    }
+    this.viewModel.showModal.Value = false;
+    this.viewModel.wasClosedOnce = true;
+    this.setWorldCompletionModalToShown.execute({
+      worldID: this.viewModel.currentWorldId.Value,
+    });
   }
 }

@@ -154,6 +154,23 @@ export default class AdaptivityElementController
   }
 
   @bind
+  reset(): void {
+    this.viewModel.currentTask.Value = null;
+    this.viewModel.currentQuestion.Value = null;
+    this.viewModel.contentData.Value.tasks.forEach((task) => {
+      task.isCompleted = null;
+      task.hasBeenCompleted = false;
+      task.questions.forEach((question) => {
+        question.isCompleted = null;
+        question.questionAnswers.forEach((answer) => {
+          answer.isCorrect = undefined;
+        });
+      });
+    });
+    this.viewModel.hasResetted.Value = !this.viewModel.hasResetted.Value;
+  }
+
+  @bind
   async loadExternalContentReference(
     elementID: ComponentID,
     associatedQuestion: AdaptivityQuestion,

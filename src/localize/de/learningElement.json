@@ -42,5 +42,7 @@
   "legendStarNotRequiredUnsolved": "optionale Schwierigkeit vorhanden",
   "legendStarNotRequiredTried": "optionale Schwierigkeit falsch beantwortet",
   "legendStarNotRequiredSolved": "optionale Schwierigkeit erfolgreich abgeschlossen",
-  "legendNoStar": "Schwierigkeitsgrad nicht vorhanden"
+  "legendNoStar": "Schwierigkeitsgrad nicht vorhanden",
+  "headerlegendInteraction": "Symbole für Interaktionen",
+  "legendReset": "Fragen werden kurzfristig zurückgesetzt zum erneut beantworten"
 }

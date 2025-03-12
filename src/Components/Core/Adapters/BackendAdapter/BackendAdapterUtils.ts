@@ -76,6 +76,7 @@ export default class BackendAdapterUtils {
       description: awt.world.worldDescription ?? "",
       evaluationLink: awt.world.evaluationLink ?? "",
       externalElements: externalLearningElements,
+      narrativeFramework: awt.world.frameStory ?? null,
     };
 
     return response;

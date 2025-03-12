@@ -16,6 +16,7 @@ export interface APIWorld {
   spaces: APISpace[];
   elements: APIElement[];
   evaluationLink?: string;
+  frameStory?: APIFrameStory;
 }
 
 export interface APITopic {
@@ -98,6 +99,11 @@ export interface APIAdaptivityAction {
   commentText?: string;
   elementId?: number;
   hintText?: string | null;
+}
+
+export interface APIFrameStory {
+  frameStoryIntro: string;
+  frameStoryOutro: string;
 }
 
 export default AWT;
