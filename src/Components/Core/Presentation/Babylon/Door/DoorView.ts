@@ -35,10 +35,9 @@ export default class DoorView extends Readyable {
   private openTheDoorSound: Sound;
   private doorAnimation: Animation;
   private doorAnimationGroup: AnimationGroup;
-  private doorAnimationGoUp: AnimationGroup;
-  private doorAnimationGoOpen: AnimationGroup;
-  private doorAnimationGoClose: AnimationGroup;
-  private doorAnimationStayUp: AnimationGroup;
+  private elevatorAnimationGoUp: AnimationGroup;
+  private elevatorAnimationOpen: AnimationGroup;
+  private elevatorAnimationClose: AnimationGroup;
   private logger: ILoggerPort;
 
   constructor(
@@ -76,14 +75,6 @@ export default class DoorView extends Readyable {
     });
   }
 
-  private async elevatorDoorAnimation(avatarIsClose: boolean): Promise<void> {
-    if (avatarIsClose) {
-      this.doorAnimationGoOpen?.play(false);
-    } else {
-      this.doorAnimationGoClose?.play(false);
-    }
-  }
-
   public async asyncSetup(): Promise<void> {
     await this.loadMeshAsync();
     this.positionMesh();
@@ -111,27 +102,24 @@ export default class DoorView extends Readyable {
 
     this.viewModel.meshes = loadedMeshes as Mesh[];
 
-    // animation setup
+    // animation setup for elevator
     loadingResults.animationGroups.forEach((animationGroup) => {
       animationGroup.stop();
       switch (animationGroup.name) {
         case "elevator_drive_up_open":
-          this.doorAnimationGoUp = animationGroup;
-          break;
-        case "elevator_up_idle":
-          this.doorAnimationStayUp = animationGroup;
+          this.elevatorAnimationGoUp = animationGroup;
           break;
         case "elevator_open":
-          this.doorAnimationGoOpen = animationGroup;
+          this.elevatorAnimationOpen = animationGroup;
           break;
         case "elevator_close":
-          this.doorAnimationGoClose = animationGroup;
+          this.elevatorAnimationClose = animationGroup;
           break;
       }
     });
 
     if (!this.viewModel.isExit) {
-      this.doorAnimationGoOpen?.play(false);
+      this.elevatorAnimationOpen?.play(false);
     }
 
     this.viewModel.meshes[0].accessibilityTag = {
@@ -232,7 +220,7 @@ export default class DoorView extends Readyable {
         console.log(this.doorAnimationGroup);
         this.openTheDoorSound.play();
         this.doorAnimationGroup?.play(false);
-        this.doorAnimationGoUp?.play(false);
+        this.elevatorAnimationGoUp?.start(false, 1, 0, 300, false);
       });
     }
   }
@@ -289,6 +277,16 @@ export default class DoorView extends Readyable {
           HighlightColors.NonLearningElementBase,
         ),
       );
+  }
+
+  private async elevatorDoorAnimation(avatarIsClose: boolean): Promise<void> {
+    if (this.viewModel.isOpen.Value) {
+      if (avatarIsClose) {
+        this.elevatorAnimationOpen?.play(false);
+      } else {
+        this.elevatorAnimationClose?.play(false);
+      }
+    }
   }
 
   @bind private async loadIconModel(): Promise<void> {
