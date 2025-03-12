@@ -16,6 +16,7 @@ import UserLearningWorldsInfoTO from "../../../../Core/Application/DataTransferO
 import StoryElementTO from "../../../../Core/Application/DataTransferObjects/StoryElementTO";
 import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
 import AdaptivityElementQuestionPresentationUpdateTO from "../../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionPresentationUpdateTO";
+import NarrativeFrameworkTO from "../../../../Core/Application/DataTransferObjects/NarrativeFrameworkTO";
 
 describe("LearningWorldPort", () => {
   let systemUnderTest: LearningWorldPort;
@@ -246,6 +247,16 @@ describe("LearningWorldPort", () => {
     systemUnderTest.onStoryElementCutSceneFinished();
 
     expect(worldAdapterMock.onStoryElementCutSceneFinished).toBeCalled();
+  });
+
+  test("onNarrativeFrameworkInfoLoaded calls a registered adapter", () => {
+    const worldAdapterMock = mock<ILearningWorldAdapter>();
+    systemUnderTest.registerAdapter(worldAdapterMock);
+
+    let testTO = new NarrativeFrameworkTO();
+    systemUnderTest.onNarrativeFrameworkInfoLoaded(testTO);
+
+    expect(worldAdapterMock.onNarrativeFrameworkInfoLoaded).toBeCalled();
   });
 
   test("name returns LEARNING-WORLD-PORT", () => {
