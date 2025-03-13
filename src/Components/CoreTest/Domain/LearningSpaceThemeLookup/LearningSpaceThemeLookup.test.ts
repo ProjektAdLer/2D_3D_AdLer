@@ -3,6 +3,8 @@ import LearningSpaceTheme_Arcade from "../../../Core/Domain/LearningSpaceThemes/
 import {
   LearningSpaceTheme_CampusAB,
   LearningSpaceTheme_CampusKE,
+  LearningSpaceTheme_CampusLibrary,
+  LearningSpaceTheme_CampusMensa,
 } from "../../../Core/Domain/LearningSpaceThemes/LearningSpaceTheme_Campus";
 import LearningSpaceTheme_Suburb from "../../../Core/Domain/LearningSpaceThemes/LearningSpaceTheme_Suburb";
 import { LearningSpaceThemeType } from "../../../Core/Domain/Types/LearningSpaceThemeTypes";
@@ -10,36 +12,50 @@ import { LearningSpaceThemeType } from "../../../Core/Domain/Types/LearningSpace
 describe("LearningSpaceThemeLookup", () => {
   test("getLearningSpaceTheme return correct theme for Campus", () => {
     const result = LearningSpaceThemeLookup.getLearningSpaceTheme(
-      LearningSpaceThemeType.Campus
+      LearningSpaceThemeType.Campus,
     );
     expect(result).toMatchObject(LearningSpaceTheme_CampusAB);
   });
 
   test("getLearningSpaceTheme return correct theme for CampusAB", () => {
     const result = LearningSpaceThemeLookup.getLearningSpaceTheme(
-      LearningSpaceThemeType.CampusAB
+      LearningSpaceThemeType.CampusAB,
     );
     expect(result).toMatchObject(LearningSpaceTheme_CampusAB);
   });
 
   test("getLearningSpaceTheme return correct theme for CampusKE", () => {
     const result = LearningSpaceThemeLookup.getLearningSpaceTheme(
-      LearningSpaceThemeType.CampusKE
+      LearningSpaceThemeType.CampusKE,
     );
     expect(result).toMatchObject(LearningSpaceTheme_CampusKE);
   });
 
   test("getLearningSpaceTheme return correct theme for Arcade", () => {
     const result = LearningSpaceThemeLookup.getLearningSpaceTheme(
-      LearningSpaceThemeType.Arcade
+      LearningSpaceThemeType.Arcade,
     );
     expect(result).toMatchObject(LearningSpaceTheme_Arcade);
   });
 
   test("getLearningSpaceTheme return correct theme for Suburb", () => {
     const result = LearningSpaceThemeLookup.getLearningSpaceTheme(
-      LearningSpaceThemeType.Suburb
+      LearningSpaceThemeType.Suburb,
     );
     expect(result).toMatchObject(LearningSpaceTheme_Suburb);
+  });
+
+  test("getLearningSpaceTheme return correct theme for CampusMensa", () => {
+    const result = LearningSpaceThemeLookup.getLearningSpaceTheme(
+      LearningSpaceThemeType.CampusMensa,
+    );
+    expect(result).toMatchObject(LearningSpaceTheme_CampusMensa);
+  });
+
+  test("getLearningSpaceTheme return correct theme for CampusLibrary", () => {
+    const result = LearningSpaceThemeLookup.getLearningSpaceTheme(
+      LearningSpaceThemeType.CampusLibrary,
+    );
+    expect(result).toMatchObject(LearningSpaceTheme_CampusLibrary);
   });
 });
