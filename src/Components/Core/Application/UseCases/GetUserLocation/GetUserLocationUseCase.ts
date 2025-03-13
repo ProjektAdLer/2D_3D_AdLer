@@ -9,6 +9,8 @@ import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import type INotificationPort from "../../Ports/Interfaces/INotificationPort";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import { NotificationMessages } from "src/Components/Core/Domain/Types/NotificationMessages";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+import type { IInternalGetLoginStatusUseCase } from "../GetLoginStatus/IGetLoginStatusUseCase";
 
 @injectable()
 export default class GetUserLocationUseCase implements IGetUserLocationUseCase {
@@ -19,12 +21,15 @@ export default class GetUserLocationUseCase implements IGetUserLocationUseCase {
     private entityContainer: IEntityContainer,
     @inject(PORT_TYPES.INotificationPort)
     private notificationPort: INotificationPort,
+    @inject(USECASE_TYPES.IGetLoginStatusUseCase)
+    private getLoginStatusUseCase: IInternalGetLoginStatusUseCase,
   ) {}
 
   execute(): UserLocationTO {
-    let userDataEntity =
-      this.entityContainer.getEntitiesOfType<UserDataEntity>(UserDataEntity)[0];
-    if (!userDataEntity.isLoggedIn) {
+    let userLoggedIn = this.getLoginStatusUseCase.internalExecute().isLoggedIn;
+    // let userDataEntity =
+    //   this.entityContainer.getEntitiesOfType<UserDataEntity>(UserDataEntity)[0];
+    if (!userLoggedIn) {
       this.notificationPort.onNotificationTriggered(
         LogLevelTypes.ERROR,
         `GetUserLocationUseCase: User is not logged in!`,
@@ -35,6 +40,8 @@ export default class GetUserLocationUseCase implements IGetUserLocationUseCase {
         spaceID: undefined,
       };
     }
+    let userDataEntity =
+      this.entityContainer.getEntitiesOfType<UserDataEntity>(UserDataEntity)[0];
     if (userDataEntity.currentWorldID === undefined) {
       this.logger.log(
         LogLevelTypes.WARN,

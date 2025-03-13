@@ -16,7 +16,7 @@ const notificationPortMock = mock<INotificationPort>();
 const getLoginStatusUseCaseMock = mock<IInternalGetLoginStatusUseCase>();
 const loggerMock = mock<Logger>();
 
-describe("SetUserLocationUseCase", () => {
+describe("GetUserLocationUseCase", () => {
   let systemUnderTest: GetUserLocationUseCase;
 
   beforeAll(() => {
@@ -44,12 +44,10 @@ describe("SetUserLocationUseCase", () => {
   });
 
   test("calls notificationPort with Error if user is not logged in", () => {
-    let userDataEntity = {
+    getLoginStatusUseCaseMock.internalExecute.mockReturnValue({
+      userName: "test",
       isLoggedIn: false,
-      currentWorldID: undefined,
-      currentSpaceID: 1,
-    };
-    entityContainerMock.getEntitiesOfType.mockReturnValue([userDataEntity]);
+    });
     systemUnderTest.execute();
 
     expect(notificationPortMock.onNotificationTriggered).toHaveBeenCalledTimes(
@@ -64,6 +62,10 @@ describe("SetUserLocationUseCase", () => {
 
   // ANF-ID: [ELG0009]
   test("calls logger with a warning if world id is not set on the user entity", () => {
+    getLoginStatusUseCaseMock.internalExecute.mockReturnValue({
+      userName: "test",
+      isLoggedIn: true,
+    });
     let userDataEntity = {
       isLoggedIn: true,
       currentWorldID: undefined,
