@@ -1,3 +1,4 @@
+import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/LearningSpaceThemeTypes";
 import Observable from "src/Lib/Observable";
 
 export default class NarrativeFrameworkViewModel {
@@ -5,4 +6,5 @@ export default class NarrativeFrameworkViewModel {
 
   introText?: string = "Beispieltext";
   outroText?: string = "Beispieltext";
+  theme: LearningSpaceThemeType;
 }
