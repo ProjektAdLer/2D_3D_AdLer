@@ -69,6 +69,20 @@ export default class BackendAdapterUtils {
       },
     );
 
+    // assigns the world the right theme
+    let theme: LearningSpaceThemeType;
+    if (
+      !awt.world.theme ||
+      !Object.values<string>(LearningSpaceThemeType).includes(
+        awt.world.theme.toUpperCase(),
+      )
+    ) {
+      theme = LearningSpaceThemeType.Campus;
+    } else {
+      // cast to enum
+      theme = awt.world.theme!.toUpperCase() as LearningSpaceThemeType;
+    }
+
     const response: BackendWorldTO = {
       worldName: awt.world.worldName,
       goals: awt.world.worldGoals ?? [""],
@@ -77,6 +91,7 @@ export default class BackendAdapterUtils {
       evaluationLink: awt.world.evaluationLink ?? "",
       externalElements: externalLearningElements,
       narrativeFramework: awt.world.frameStory ?? null,
+      theme: theme,
     };
 
     return response;
