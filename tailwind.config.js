@@ -28,6 +28,8 @@ module.exports = {
           "url('/src/Assets/misc/WelcomeScreenButtonBackgrounds/LearningWorldButtonBackground.jpg')",
         avatarcreatorbg:
           "url('/src/Assets/misc/WelcomeScreenButtonBackgrounds/AvatarEditorButtonBackground.jpg')",
+        suburbthemebg:
+          "url('/src/Assets/misc/narrattiveFrameworkBackgrounds/a-background-narrativeframework-suburb.png')",
       },
       fontSize: {
         "2xs": "0.625rem", // 10px
