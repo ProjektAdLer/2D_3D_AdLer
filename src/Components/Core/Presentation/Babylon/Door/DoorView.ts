@@ -39,6 +39,7 @@ export default class DoorView extends Readyable {
   private elevatorAnimationOpen: AnimationGroup;
   private elevatorAnimationLiftUp: AnimationGroup;
   private elevatorAnimationLiftDown: AnimationGroup;
+  private elevatorIsLifted: boolean = false;
   private logger: ILoggerPort;
 
   constructor(
@@ -53,21 +54,7 @@ export default class DoorView extends Readyable {
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
     this.logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
 
-    this.openTheDoorSound = new Sound(
-      "openTheDoor",
-      soundLink,
-      this.scenePresenter.Scene,
-    );
-    this.openTheDoorSound.setVolume(0.5);
-    if (this.viewModel.isOpen.Value) {
-      this.IsReady.then(() => {
-        this.scenePresenter.Scene.beginAnimation(
-          this.viewModel.meshes[0],
-          0,
-          45,
-        );
-      });
-    } else viewModel.isOpen.subscribe(this.onIsOpenChanged);
+    viewModel.isOpen.subscribe(this.onIsOpenChanged);
 
     viewModel.isInteractable.subscribe((newValue) => {
       this.updateHighlight();
@@ -80,7 +67,6 @@ export default class DoorView extends Readyable {
     await this.loadMeshAsync();
     this.positionMesh();
     await this.loadIconModel();
-    if (this.viewModel.isExit) this.setupAnimation();
     this.registerActions();
     this.updateHighlight();
     this.resolveIsReady();
@@ -100,71 +86,25 @@ export default class DoorView extends Readyable {
     const loadedMeshes = loadingResults.meshes as Mesh[];
     loadedMeshes.forEach((mesh) => (mesh.rotationQuaternion = null));
 
+    // Store meshes and animations in viewModel
     this.viewModel.meshes = loadedMeshes as Mesh[];
     this.viewModel.doorAnimations =
       loadingResults.animationGroups as AnimationGroup[];
 
-    // animation setup for elevator
-    this.viewModel.doorAnimations?.forEach((animationGroup) => {
-      if (animationGroup.children) {
-        animationGroup.stop();
-        switch (animationGroup.name) {
-          case "elevator_open":
-            this.isElevator = true;
-            this.elevatorAnimationOpen = animationGroup;
-            break;
-          case "elevator_drive_up_open":
-            this.elevatorAnimationLiftUp = animationGroup;
-            break;
-          case "elevator_drive_down_close":
-            this.elevatorAnimationLiftDown = animationGroup;
-            break;
-        }
-      }
-    });
-
-    // Elevator Intial Setup
-    if (this.isElevator) {
-      //Play initial entry elevator animation on scene start
-      if (!this.viewModel.isExit) {
-        this.elevatorAnimationOpen?.play(false);
-      }
-      //Enable ProximityBehaviour if door is set open
-      if (this.viewModel.isOpen.Value) {
-        this.enableProximityBehaviour = true;
-      }
+    // Setup door or elevator logic
+    const elevatorMesh = this.viewModel.meshes.find((mesh) =>
+      mesh.id.includes("elevator"),
+    );
+    if (elevatorMesh) {
+      this.isElevator = true;
+      this.setupElevatorAnimation();
+    } else {
+      this.setupDoorAnimation();
+      this.setupDoorSound();
     }
 
-    this.viewModel.meshes[0].accessibilityTag = {
-      description:
-        "door of space id: " +
-        this.viewModel.spaceID +
-        " of type: " +
-        (this.viewModel.isExit ? "exit" : "entrance"),
-      //@ts-ignore
-      eventHandler: {
-        click: () => {
-          this.controller.accessibilityPicked();
-
-          // get position on screen
-          const canvas =
-            this.scenePresenter.Scene.getEngine().getRenderingCanvas();
-          const position = this.viewModel.meshes[0].getPositionInCameraSpace(
-            this.scenePresenter.Scene.activeCamera!,
-          );
-
-          // simulate click on that position
-          const event = new MouseEvent("click", {
-            view: window,
-            bubbles: true,
-            cancelable: true,
-            clientX: position.x,
-            clientY: position.y,
-          });
-          canvas!.dispatchEvent(event);
-        },
-      },
-    };
+    // Setup for screen reader and integration tests
+    this.accesibilitySetup();
   }
 
   private getModelLinkByThemeAndType(): string {
@@ -177,7 +117,7 @@ export default class DoorView extends Readyable {
       : themeConfig.entryDoorModel;
   }
 
-  private setupAnimation(): void {
+  private setupDoorAnimation(): void {
     const meshToRotate = this.viewModel.meshes.find(
       (mesh) => mesh.id === "Door",
     );
@@ -215,6 +155,76 @@ export default class DoorView extends Readyable {
     );
   }
 
+  private setupDoorSound(): void {
+    this.openTheDoorSound = new Sound(
+      "openTheDoor",
+      soundLink,
+      this.scenePresenter.Scene,
+    );
+    this.openTheDoorSound.setVolume(0.5);
+  }
+
+  private setupElevatorAnimation(): void {
+    this.viewModel.doorAnimations?.forEach((animationGroup) => {
+      if (animationGroup.children) {
+        animationGroup.stop();
+        switch (animationGroup.name) {
+          case "elevator_open":
+            this.isElevator = true;
+            this.elevatorAnimationOpen = animationGroup;
+            break;
+          case "elevator_drive_up_open":
+            this.elevatorAnimationLiftUp = animationGroup;
+            break;
+          case "elevator_drive_down_close":
+            this.elevatorAnimationLiftDown = animationGroup;
+            break;
+        }
+      }
+    });
+    //Play initial entry elevator animation on scene start
+    if (!this.viewModel.isExit) {
+      this.elevatorAnimationOpen?.play(false);
+    }
+    //Enable ProximityBehaviour if door is set open
+    if (this.viewModel.isOpen.Value) {
+      this.enableProximityBehaviour = true;
+    }
+  }
+
+  private accesibilitySetup(): void {
+    this.viewModel.meshes[0].accessibilityTag = {
+      description:
+        "door of space id: " +
+        this.viewModel.spaceID +
+        " of type: " +
+        (this.viewModel.isExit ? "exit" : "entrance"),
+      //@ts-ignore
+      eventHandler: {
+        click: () => {
+          this.controller.accessibilityPicked();
+
+          // get position on screen
+          const canvas =
+            this.scenePresenter.Scene.getEngine().getRenderingCanvas();
+          const position = this.viewModel.meshes[0].getPositionInCameraSpace(
+            this.scenePresenter.Scene.activeCamera!,
+          );
+
+          // simulate click on that position
+          const event = new MouseEvent("click", {
+            view: window,
+            bubbles: true,
+            cancelable: true,
+            clientX: position.x,
+            clientY: position.y,
+          });
+          canvas!.dispatchEvent(event);
+        },
+      },
+    };
+  }
+
   @bind
   private positionMesh(): void {
     if (this.viewModel.meshes && this.viewModel.meshes.length > 0) {
@@ -232,10 +242,14 @@ export default class DoorView extends Readyable {
     if (newIsOpen) {
       this.IsReady.then(() => {
         if (this.isElevator) {
-          this.elevatorAnimationLiftUp?.play(false);
+          this.elevatorAnimationLiftUp?.start(false);
+          this.elevatorAnimationLiftUp?.onAnimationEndObservable.add(() => {
+            this.elevatorIsLifted = true;
+            this.elevatorAnimationLiftUp?.onAnimationEndObservable.clear();
+          });
           this.enableProximityBehaviour = true;
         } else {
-          this.openTheDoorSound.play();
+          this.openTheDoorSound?.play();
           this.doorAnimationGroup?.play(false);
         }
       });
@@ -297,7 +311,6 @@ export default class DoorView extends Readyable {
   }
 
   private async elevatorDoorAnimation(avatarIsClose: boolean): Promise<void> {
-    if (!this.isElevator) return;
     // Behaviour for first entry animation
     if (!this.enableProximityBehaviour && !this.viewModel.isExit) {
       this.elevatorAnimationLiftDown?.play(false);
@@ -308,12 +321,14 @@ export default class DoorView extends Readyable {
     }
     // Elevator behaviour for exit and entry after first animation
     if (this.enableProximityBehaviour) {
-      if (avatarIsClose) {
+      if (avatarIsClose && !this.elevatorIsLifted) {
         this.elevatorAnimationLiftUp.speedRatio = 1;
         this.elevatorAnimationLiftUp?.play(false);
-      } else {
+      } else if (!avatarIsClose) {
         this.elevatorAnimationLiftUp.speedRatio = -1;
         this.elevatorAnimationLiftUp?.play(false);
+      } else {
+        this.elevatorIsLifted = false;
       }
     }
   }
