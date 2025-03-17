@@ -69,6 +69,9 @@ const USECASE_TYPES = {
   IUpdateAvatarConfigUseCase: Symbol("IUpdateAvatarConfigUseCase"),
   ISaveAvatarConfigUseCase: Symbol("ISaveAvatarConfigUseCase"),
   IGetLearningWorldUseCase: Symbol("IGetLearningWorldUseCase"),
+  IGetNarrativeFrameworkInfoUseCase: Symbol(
+    "IGetNarrativeFrameworkInfoUseCase",
+  ),
 };
 
 export default USECASE_TYPES;

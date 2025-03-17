@@ -29,6 +29,14 @@ export default class GetLearningWorldUseCase
   execute(): void {
     const data = this.getUserLocationUseCase.execute();
 
+    if (data.worldID === undefined) {
+      this.logger.log(
+        LogLevelTypes.WARN,
+        "GetLearningWorldUseCase: No world ID found.",
+      );
+      return;
+    }
+
     let worldEntity = this.container.filterEntitiesOfType(
       LearningWorldEntity,
       (WorldEntity) => WorldEntity.id === data.worldID,

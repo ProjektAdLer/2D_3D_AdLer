@@ -435,6 +435,7 @@ export default class LoadLearningWorldUseCase
         description: apiWorldDataResponse.description,
         evaluationLink: apiWorldDataResponse.evaluationLink,
         narrativeFramework: narrativeFrameworkEntity,
+        theme: apiWorldDataResponse.theme,
       },
       LearningWorldEntity,
     );

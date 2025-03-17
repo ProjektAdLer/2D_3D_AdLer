@@ -17,6 +17,7 @@ export interface APIWorld {
   elements: APIElement[];
   evaluationLink?: string;
   frameStory?: APIFrameStory;
+  theme?: string;
 }
 
 export interface APITopic {
