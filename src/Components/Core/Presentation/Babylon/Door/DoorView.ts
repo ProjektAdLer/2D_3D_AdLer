@@ -298,8 +298,6 @@ export default class DoorView extends Readyable {
 
   private async elevatorDoorAnimation(avatarIsClose: boolean): Promise<void> {
     if (!this.isElevator) return;
-    console.log("Door is open: " + this.viewModel.isOpen.Value);
-    console.log("enableProximityBehaviour: " + this.enableProximityBehaviour);
     // Behaviour for first entry animation
     if (!this.enableProximityBehaviour && !this.viewModel.isExit) {
       this.elevatorAnimationLiftDown?.play(false);
