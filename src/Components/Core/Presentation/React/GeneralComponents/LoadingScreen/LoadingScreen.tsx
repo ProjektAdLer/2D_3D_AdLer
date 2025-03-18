@@ -72,8 +72,8 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
         </section>
 
         {/* Loading screen content */}
-        {/*{props.content}*/}
-        <NarrativeFramework />
+        {props.content}
+        {/*<NarrativeFramework />*/}
 
         {/* Loading screen controls */}
 
