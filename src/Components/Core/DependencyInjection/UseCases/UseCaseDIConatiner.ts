@@ -74,6 +74,8 @@ import IGetLearningWorldUseCase from "../../Application/UseCases/GetLearningWorl
 import GetLearningWorldUseCase from "../../Application/UseCases/GetLearningWorld/GetLearningWorldUseCase";
 import IGetNarrativeFrameworkInfoUseCase from "../../Application/UseCases/GetNarrativeFrameworkInfo/IGetNarrativeFrameworkInfoUseCase";
 import GetNarrativeFrameworkInfoUseCase from "../../Application/UseCases/GetNarrativeFrameworkInfo/GetNarrativeFrameworkInfoUseCase";
+import ISetNarrativeFrameworkToShownUseCase from "../../Application/UseCases/SetNarrativeFrameworkToShown/ISetNarrativeFrameworkToShownUseCase";
+import SetNarrativeFrameworkToShownUseCase from "../../Application/UseCases/SetNarrativeFrameworkToShown/SetNarrativeFrameworkToShownUseCase";
 
 const UseCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases
@@ -264,6 +266,11 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
     USECASE_TYPES.IGetNarrativeFrameworkInfoUseCase,
   )
     .to(GetNarrativeFrameworkInfoUseCase)
+    .inSingletonScope();
+  bind<ISetNarrativeFrameworkToShownUseCase>(
+    USECASE_TYPES.ISetNarrativeFrameworkToShownUseCase,
+  )
+    .to(SetNarrativeFrameworkToShownUseCase)
     .inSingletonScope();
 });
 
