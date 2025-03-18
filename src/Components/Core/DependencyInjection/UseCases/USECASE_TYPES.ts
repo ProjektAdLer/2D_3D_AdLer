@@ -72,6 +72,9 @@ const USECASE_TYPES = {
   IGetNarrativeFrameworkInfoUseCase: Symbol(
     "IGetNarrativeFrameworkInfoUseCase",
   ),
+  ISetNarrativeFrameworkToShownUseCase: Symbol(
+    "ISetNarrativeFrameworkToShownUseCase",
+  ),
 };
 
 export default USECASE_TYPES;
