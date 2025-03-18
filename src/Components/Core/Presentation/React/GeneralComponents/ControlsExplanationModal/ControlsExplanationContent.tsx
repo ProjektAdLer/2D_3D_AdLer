@@ -22,7 +22,7 @@ export default function ControlsExplanationContent({
     <div
       className={tailwindMerge(
         className,
-        "grid grid-rows-6 grid-flow-col mobile-landscape:justify-center mobile-landscape:grid-cols-1 mobile-landscape:grid-rows-auto mobile-landscape:grid-flow-row-dense mobile-landscape:gap-y-1 mobile-landscape:pb-0 mobile-landscape:text-2xs mobile-landscape:gap-x-1 portrait:grid-flow-row portrait:grid-cols-1 portrait:grid-rows-auto gap-x-8 gap-y-3 pb-4 portrait:pb-1 portrait-gap-y-1 text-xs lg:text-sm max-w-[85vw]",
+        "grid grid-rows-6 grid-flow-col mobile-landscape:justify-center mobile-landscape:grid-cols-1 mobile-landscape:grid-rows-auto mobile-landscape:grid-flow-row-dense mobile-landscape:gap-y-1 mobile-landscape:pb-0 mobile-landscape:text-2xs mobile-landscape:gap-x-1 portrait:grid-flow-row portrait:grid-cols-1 portrait:grid-rows-auto gap-x-8 gap-y-3 pb-4 portrait:pb-1 portrait-gap-y-1 text-xs lg:text-sm max-w-[85vw] xl:gap-2",
       )}
     >
       {/* Avatar Controls */}
