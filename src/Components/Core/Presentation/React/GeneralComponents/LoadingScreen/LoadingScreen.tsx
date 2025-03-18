@@ -72,7 +72,9 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
         </section>
 
         {/* Loading screen content */}
-        <NarrativeFramework />
+        {props.content}
+
+        {/* Loading screen controls */}
 
         <div className="flex flex-col items-center justify-center h-16 pt-16 portrait:pt-8 mobile-landscape:pt-4">
           {!canClose && (
