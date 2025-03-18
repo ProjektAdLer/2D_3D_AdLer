@@ -44,6 +44,9 @@
       -1px 1px 0 rgb(233, 242, 250, 0.4),
       -1px 0 0 rgb(233, 242, 250, 0.4);
   }
+  .bubblecornerbottomleft {
+    clip-path: polygon(100% 0, 0 54%, 35% 0);
+  }
 }
 
 body {

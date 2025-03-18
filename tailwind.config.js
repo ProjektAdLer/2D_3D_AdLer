@@ -9,6 +9,9 @@ module.exports = {
       md: "768px",
       lg: "1024px",
       xl: "1280px",
+      onek: "1920px",
+      twok: "2560px",
+      fourk: "3840px",
       "2xl": "1536px",
       ultraWide: "3400px",
       "mobile-landscape": {
@@ -29,7 +32,7 @@ module.exports = {
         avatarcreatorbg:
           "url('/src/Assets/misc/WelcomeScreenButtonBackgrounds/AvatarEditorButtonBackground.jpg')",
         suburbthemebg:
-          "url('/src/Assets/misc/narrattiveFrameworkBackgrounds/a-background-narrativeframework-suburb.png')",
+          "url('/src/Assets/misc/narrativeFrameworkBackgrounds/a-background-narrativeframework-suburb.png')",
       },
       fontSize: {
         "2xs": "0.625rem", // 10px
@@ -208,6 +211,7 @@ module.exports = {
         adlerdarkblue: "rgb(23,45,77)" /*#172d4d*/,
         adlergreen: "#59b347",
         buttonbgblue: "#e9f2fa",
+        buttonbgblueopacity: "rgba(233,242,250,0.8)",
         buttonpressedblue: "#ace8fc",
         adlertextgrey: "#111111",
         adlerbuttonlocked: "#b9bfc6",
