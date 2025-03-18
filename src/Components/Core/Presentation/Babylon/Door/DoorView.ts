@@ -1,11 +1,9 @@
 import {
   ActionManager,
-  Animation,
   AnimationGroup,
   Color3,
   ExecuteCodeAction,
   Mesh,
-  Sound,
   Tools,
   Vector3,
 } from "@babylonjs/core";
@@ -24,22 +22,14 @@ import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILogge
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import HighlightColors from "../HighlightColors";
+import ElevatorLogic from "./DoorLogic/ElevatorLogic";
+import DoorLogic from "./DoorLogic/DoorLogic";
 
-const soundLink = require("../../../../../Assets/Sounds/door_opening.mp3");
 const iconLinkEntryDoor = require("../../../../../Assets/3dModels/sharedModels/3dIcons/d-3dicons-door-in.glb");
 const iconLinkExitDoor = require("../../../../../Assets/3dModels/sharedModels/3dIcons/d-3dicons-door-out.glb");
 
 export default class DoorView extends Readyable {
   private scenePresenter: IScenePresenter;
-  private isElevator: boolean = false;
-  private enableProximityBehaviour = false;
-  private openTheDoorSound: Sound;
-  private doorAnimation: Animation;
-  private doorAnimationGroup: AnimationGroup;
-  private elevatorAnimationOpen: AnimationGroup;
-  private elevatorAnimationLiftUp: AnimationGroup;
-  private elevatorAnimationLiftDown: AnimationGroup;
-  private elevatorIsLifted: boolean = false;
   private logger: ILoggerPort;
 
   constructor(
@@ -59,7 +49,7 @@ export default class DoorView extends Readyable {
     viewModel.isInteractable.subscribe((newValue) => {
       this.updateHighlight();
       this.toggleIconFloatAnimation(newValue);
-      this.elevatorDoorAnimation(newValue);
+      this.isInteractableAnimation(newValue);
     });
   }
 
@@ -91,16 +81,25 @@ export default class DoorView extends Readyable {
     this.viewModel.doorAnimations =
       loadingResults.animationGroups as AnimationGroup[];
 
-    // Setup door or elevator logic
+    // Check if this is an elevator or door
     const elevatorMesh = this.viewModel.meshes.find((mesh) =>
-      mesh.id.includes("elevator"),
+      mesh.id.toLowerCase().includes("elevator"),
+    );
+    const doorMesh = this.viewModel.meshes.find((mesh) =>
+      mesh.id.toLowerCase().includes("door"),
     );
     if (elevatorMesh) {
-      this.isElevator = true;
-      this.setupElevatorAnimation();
+      this.viewModel.doorLogic = new ElevatorLogic(this.viewModel);
+    } else if (doorMesh) {
+      this.viewModel.doorLogic = new DoorLogic(
+        this.viewModel,
+        this.scenePresenter,
+      );
     } else {
-      this.setupDoorAnimation();
-      this.setupDoorSound();
+      this.logger.log(
+        LogLevelTypes.WARN,
+        "No valid DoorMesh found in DoorView. DoorLogic will not work.",
+      );
     }
 
     // Setup for screen reader and integration tests
@@ -115,81 +114,6 @@ export default class DoorView extends Readyable {
     return this.viewModel.isExit
       ? themeConfig.exitDoorModel
       : themeConfig.entryDoorModel;
-  }
-
-  private setupDoorAnimation(): void {
-    const meshToRotate = this.viewModel.meshes.find(
-      (mesh) => mesh.id === "Door",
-    );
-
-    if (meshToRotate === undefined) {
-      this.logger.log(
-        LogLevelTypes.WARN,
-        "DoorView: No submesh with name Door found. Door animation will not work.",
-      );
-      return;
-    }
-
-    this.doorAnimation = new Animation(
-      "doorAnimation",
-      "rotation.y",
-      30,
-      Animation.ANIMATIONTYPE_FLOAT,
-    );
-
-    const initialRotation = Tools.ToRadians(meshToRotate.rotation.y);
-    this.doorAnimation.setKeys([
-      { frame: 0, value: initialRotation },
-      {
-        frame: 45,
-        value: initialRotation + Tools.ToRadians(80),
-      },
-    ]);
-
-    meshToRotate.animations.push(this.doorAnimation);
-
-    this.doorAnimationGroup = new AnimationGroup("doorAnimationGroup");
-    this.doorAnimationGroup.addTargetedAnimation(
-      this.doorAnimation,
-      this.viewModel.meshes[0],
-    );
-  }
-
-  private setupDoorSound(): void {
-    this.openTheDoorSound = new Sound(
-      "openTheDoor",
-      soundLink,
-      this.scenePresenter.Scene,
-    );
-    this.openTheDoorSound.setVolume(0.5);
-  }
-
-  private setupElevatorAnimation(): void {
-    this.viewModel.doorAnimations?.forEach((animationGroup) => {
-      if (animationGroup.children) {
-        animationGroup.stop();
-        switch (animationGroup.name) {
-          case "elevator_open":
-            this.isElevator = true;
-            this.elevatorAnimationOpen = animationGroup;
-            break;
-          case "elevator_drive_up_open":
-            this.elevatorAnimationLiftUp = animationGroup;
-            break;
-          case "elevator_drive_down_close":
-            this.elevatorAnimationLiftDown = animationGroup;
-            break;
-        }
-      }
-    });
-    //Play initial entry elevator animation on scene start
-    if (!this.viewModel.isExit) {
-      this.elevatorAnimationOpen?.play(false);
-    }
-    //Enable ProximityBehaviour if door is set open
-    if (this.viewModel.isOpen.Value) {
-      this.enableProximityBehaviour = true;
-    }
   }
 
   private accesibilitySetup(): void {
@@ -241,19 +165,18 @@ export default class DoorView extends Readyable {
   private onIsOpenChanged(newIsOpen: boolean): void {
     if (newIsOpen) {
       this.IsReady.then(() => {
-        if (this.isElevator) {
-          this.elevatorAnimationLiftUp?.start(false);
-          this.elevatorAnimationLiftUp?.onAnimationEndObservable.add(() => {
-            this.elevatorIsLifted = true;
-            this.elevatorAnimationLiftUp?.onAnimationEndObservable.clear();
-          });
-          this.enableProximityBehaviour = true;
-        } else {
-          this.openTheDoorSound?.play();
-          this.doorAnimationGroup?.play(false);
-        }
+        this.viewModel.doorLogic.open();
       });
     }
+  }
+
+  private async isInteractableAnimation(avatarIsClose: boolean): Promise<void> {
+    if (this.viewModel.doorLogic instanceof ElevatorLogic)
+      if (avatarIsClose) {
+        this.viewModel.doorLogic.avatarClose();
+      } else {
+        this.viewModel.doorLogic.avatarFar();
+      }
   }
 
   private registerActions(): void {
@@ -308,29 +231,6 @@ export default class DoorView extends Readyable {
           HighlightColors.NonLearningElementBase,
         ),
       );
-  }
-
-  private async elevatorDoorAnimation(avatarIsClose: boolean): Promise<void> {
-    // Behaviour for first entry animation
-    if (!this.enableProximityBehaviour && !this.viewModel.isExit) {
-      this.elevatorAnimationLiftDown?.play(false);
-      this.elevatorAnimationLiftDown.onAnimationEndObservable.add(() => {
-        this.enableProximityBehaviour = true;
-        this.elevatorAnimationLiftDown.onAnimationEndObservable.clear();
-      });
-    }
-    // Elevator behaviour for exit and entry after first animation
-    if (this.enableProximityBehaviour) {
-      if (avatarIsClose && !this.elevatorIsLifted) {
-        this.elevatorAnimationLiftUp.speedRatio = 1;
-        this.elevatorAnimationLiftUp?.play(false);
-      } else if (!avatarIsClose) {
-        this.elevatorAnimationLiftUp.speedRatio = -1;
-        this.elevatorAnimationLiftUp?.play(false);
-      } else {
-        this.elevatorIsLifted = false;
-      }
-    }
   }
 
   @bind private async loadIconModel(): Promise<void> {

@@ -2,6 +2,7 @@ import { AnimationGroup, Mesh, Vector3 } from "@babylonjs/core";
 import Observable from "../../../../../Lib/Observable";
 import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/LearningSpaceThemeTypes";
+import IDoorLogic from "./DoorLogic/IDoorLogic";
 
 export default class DoorViewModel {
   //constants
@@ -15,6 +16,9 @@ export default class DoorViewModel {
   // animations
   public doorAnimations: AnimationGroup[];
   public iconFloatingAnimation: AnimationGroup;
+
+  // logic
+  public doorLogic: IDoorLogic;
 
   //door properties
   public position: Vector3;
