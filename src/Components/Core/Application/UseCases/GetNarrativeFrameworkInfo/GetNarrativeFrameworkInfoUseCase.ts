@@ -36,6 +36,8 @@ export default class GetNarrativeFrameworkInfoUseCase
     let narrativeFrameworkTO = new NarrativeFrameworkTO();
     narrativeFrameworkTO.introText = worldEntity.narrativeFramework!.introText;
     narrativeFrameworkTO.outroText = worldEntity.narrativeFramework!.outroText;
+    narrativeFrameworkTO.shownBefore =
+      worldEntity.narrativeFramework!.shownBefore ?? false;
     narrativeFrameworkTO.theme = worldEntity.theme;
 
     this.logger.log(

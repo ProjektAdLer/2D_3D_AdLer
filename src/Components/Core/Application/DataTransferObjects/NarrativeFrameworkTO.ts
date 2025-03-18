@@ -4,4 +4,5 @@ export default class NarrativeFrameworkTO {
   introText?: string;
   outroText?: string;
   theme: LearningSpaceThemeType;
+  shownBefore: boolean;
 }
