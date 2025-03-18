@@ -58,9 +58,9 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
   return (
     <div className=" fixed top-0 left-0 w-screen h-screen z-[20000] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto flex justify-center items-center pb-24">
       <div className="grid max-h-[1000px]">
-        <section className="flex items-center justify-center w-full gap-8 portrait:flex mobile-landscape:pt-10">
+        <section className="flex items-center justify-center w-full gap-8 portrait:flex mobile-landscape:pt-10 xl:m-3 xl:mt-6">
           <img
-            className="w-full m-4 xs:w-16 md:w-24 lg:w-32 xl:w-28 onek:w-48 portrait:w-16 animate-wiggle place-self-end mobile-landscape:w-12 mobile-landscape:m-2"
+            className="w-full xs:w-16 md:w-24 lg:w-32 xl:w-20 onek:w-32 twok:w-40 portrait:w-16 animate-wiggle place-self-end mobile-landscape:w-12 mobile-landscape:m-2"
             src={logo}
             alt="AdlerEngine Logo"
           />
@@ -72,7 +72,8 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
         </section>
 
         {/* Loading screen content */}
-        {props.content}
+        {/*{props.content}*/}
+        <NarrativeFramework />
 
         {/* Loading screen controls */}
 

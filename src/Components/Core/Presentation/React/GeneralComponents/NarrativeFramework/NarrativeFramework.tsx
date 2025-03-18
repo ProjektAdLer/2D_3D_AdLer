@@ -17,13 +17,13 @@ export default function NarrativeFramework() {
 
   return (
     <main className="bg-suburbthemebg bg-no-repeat bg-cover w-[60svw] h-[60svh] relative rounded-lg p-4">
-      <div className="absolute top-[20%] -left-64 flex justify-start items-start lg:top-[30%] xl:-left-32">
+      <div className="absolute top-[40%] -left-64 flex justify-start items-start xl:-left-32">
         <img
           alt="AdLer with a thumb up"
           src={explainAdler}
           className="w-1/3 h-auto z-0"
         />
-        <div className="max-w-[45svw] z-50 relative mt-4 -left-32 translate-y-[-50%] xl:-left-20 xl:-top-10 onek:top-8 onek:mt-0 twok:top-20 twok:-left-44">
+        <div className="max-w-[50svw] z-50 relative mt-4 -left-32 translate-y-[-50%] xl:-left-16 xl:-top-10 onek:mt-0 onek:-top-10 onek:-left-20 twok:top-15 twok:-left-24">
           <span className="bg-buttonbgblueopacity absolute -left-3 -bottom-20 bubblecornerbottomleft w-20 h-20"></span>
           <div className="bg-buttonbgblueopacity rounded-lg p-4 text-adlerdarkblue">
             <p className="font-bold text-sm onek:text-lg">
