@@ -54,7 +54,7 @@ enum H5pElementModelTypes {
   DaylightProjector = "l_h5p_daylightprojector_1",
 }
 
-enum QuizElementModelTypes {
+export enum QuizElementModelTypes {
   RobotNPC = "a-quizbg-alerobot",
   DefaultNPC = "a-quizbg-defaultnpc",
   ArcadeNPC = "a-npc-sheriffjustice",
