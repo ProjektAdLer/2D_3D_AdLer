@@ -5,6 +5,7 @@ import StoryElementViewModel from "./StoryElementViewModel";
 import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 import Observable from "src/Lib/Observable";
+import { EmotionType } from "src/Components/Core/Domain/Types/EmotionTypes";
 
 export default class StoryElementPresenter implements IStoryElementPresenter {
   constructor(private viewModel: StoryElementViewModel) {}
@@ -60,13 +61,16 @@ export default class StoryElementPresenter implements IStoryElementPresenter {
         if (
           learningSpaceTO.storyElements[i].introStoryTexts &&
           learningSpaceTO.storyElements[i].introStoryTexts?.length !== 0
-        )
+        ) {
           this.viewModel.introTexts.Value =
             learningSpaceTO.storyElements[i].introStoryTexts!;
-        else this.viewModel.introTexts.Value = ["Kein Text vorhanden."];
-
+        } else {
+          this.viewModel.introTexts.Value = ["Kein Text vorhanden."];
+        }
         this.viewModel.introModelType.Value =
           learningSpaceTO.storyElements[i].modelType!;
+        this.viewModel.introEmotion.Value =
+          learningSpaceTO.storyElements[i].introEmotion ?? EmotionType.default;
       }
       if (
         (learningSpaceTO.storyElements[i].storyType &
@@ -76,13 +80,16 @@ export default class StoryElementPresenter implements IStoryElementPresenter {
         if (
           learningSpaceTO.storyElements[i].outroStoryTexts &&
           learningSpaceTO.storyElements[i].outroStoryTexts?.length !== 0
-        )
+        ) {
           this.viewModel.outroTexts.Value =
             learningSpaceTO.storyElements[i].outroStoryTexts!;
-        else this.viewModel.outroTexts.Value = ["Kein Text vorhanden."];
-
+        } else {
+          this.viewModel.outroTexts.Value = ["Kein Text vorhanden."];
+        }
         this.viewModel.outroModelType.Value =
           learningSpaceTO.storyElements[i].modelType!;
+        this.viewModel.outroEmotion.Value =
+          learningSpaceTO.storyElements[i].outroEmotion ?? EmotionType.default;
       }
     }
   }

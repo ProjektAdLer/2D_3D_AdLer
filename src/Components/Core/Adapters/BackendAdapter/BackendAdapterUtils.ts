@@ -44,6 +44,7 @@ import {
 } from "../../Domain/AvatarModels/AvatarFaceUVTexture";
 import AvatarColorPalette from "../../Domain/AvatarModels/AvatarColorPalette";
 import AvatarSkinColorPalette from "../../Domain/AvatarModels/AvatarSkinColorPalette";
+import { EmotionType } from "../../Domain/Types/EmotionTypes";
 
 type BackendTO =
   | BackendBaseElementTO
@@ -151,14 +152,26 @@ export default class BackendAdapterUtils {
     storyElement: APIStoryElement | null,
   ): BackendStoryTO | null {
     if (storyElement === null || storyElement === undefined) return null;
-    else {
-      let backendStoryTO = new BackendStoryTO();
-      backendStoryTO.storyTexts = storyElement.storyTexts;
-      backendStoryTO.elementModel = this.extractModelData(
-        storyElement.elementModel,
-      ) as LearningElementModel;
-      return backendStoryTO;
+
+    let backendStoryTO = new BackendStoryTO();
+    backendStoryTO.storyTexts = storyElement.storyTexts;
+    backendStoryTO.elementModel = this.extractModelData(
+      storyElement.elementModel,
+    ) as LearningElementModel;
+
+    if (
+      storyElement.modelFacialExpression &&
+      Object.values<string>(EmotionType).includes(
+        storyElement.modelFacialExpression,
+      )
+    ) {
+      backendStoryTO.facialExpression =
+        storyElement.modelFacialExpression as EmotionType;
+    } else {
+      backendStoryTO.facialExpression = EmotionType.default;
     }
+
+    return backendStoryTO;
   }
 
   // creates BackendElementTOs from the AWT if the element type is supported

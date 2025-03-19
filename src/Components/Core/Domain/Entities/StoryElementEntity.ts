@@ -1,4 +1,5 @@
 import { LearningElementModel } from "../LearningElementModels/LearningElementModelTypes";
+import { EmotionType } from "../Types/EmotionTypes";
 import { ComponentID } from "../Types/EntityTypes";
 import { StoryElementType } from "../Types/StoryElementType";
 
@@ -10,4 +11,6 @@ export default class StoryElementEntity {
   modelType: LearningElementModel | null;
   storyType: StoryElementType;
   hasOutroTriggered: boolean | null;
+  introEmotion: EmotionType | null;
+  outroEmotion: EmotionType | null;
 }

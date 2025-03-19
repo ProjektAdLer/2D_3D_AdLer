@@ -44,27 +44,12 @@ import {
 import AdaptivityElementQuestionSelection from "./AdaptivityElementQuestionSelection";
 import AdaptivityElementAnswerFeedback from "./AdaptivityElementAnswerFeedback";
 import AdaptivityElementHint from "./AdaptivityElementHint";
-import {
-  LearningElementModel,
-  LearningElementModelTypeEnums,
-} from "../../../../Domain/LearningElementModels/LearningElementModelTypes";
+import { LearningElementModel } from "../../../../Domain/LearningElementModels/LearningElementModelTypes";
 import { useTranslation } from "react-i18next";
 import CloseButton from "~ReactComponents/ReactRelated/ReactBaseComponents/CloseButton";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
-
-function getNPCImage(model: LearningElementModel, close: boolean): string {
-  switch (model) {
-    case LearningElementModelTypeEnums.QuizElementModelTypes.RobotNPC:
-      return close ? robotNPCClose : robotNPC;
-    case LearningElementModelTypeEnums.QuizElementModelTypes.ArcadeNPC:
-      return close ? arcadeNPCClose : arcadeNPC;
-    case LearningElementModelTypeEnums.QuizElementModelTypes.CampusNPC:
-      return close ? campusNPCClose : campusNPC;
-    case LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC:
-    default:
-      return close ? defaultNPCClose : defaultNPC;
-  }
-}
+import { EmotionType } from "src/Components/Core/Domain/Types/EmotionTypes";
+import { getNPCImage } from "../../../Utils/GetNPCImage";
 
 export default function AdaptivityElementDialogContainer({
   className,
@@ -100,6 +85,7 @@ export default function AdaptivityElementDialogContainer({
   const [headerText, setHeaderText] = useState<string>("");
   const [progressPercentage, setProgressPercentage] = useState<number>(0);
   const [allTasksCompleted, setAllTasksCompleted] = useState<boolean>(false);
+  const [emotion, setEmotion] = useState<EmotionType>(EmotionType.default);
 
   useEffect(() => {
     if (!contentData) return;
@@ -120,6 +106,21 @@ export default function AdaptivityElementDialogContainer({
     }
   }, [contentData, currentTask, resetting]);
 
+  useEffect(() => {
+    if (!showAnswerFeedback) {
+      setEmotion(EmotionType.default);
+      return;
+    }
+
+    if (currentQuestion && currentQuestion.isCompleted) {
+      setEmotion(EmotionType.approval);
+    } else if (currentQuestion && currentQuestion.isCompleted === false) {
+      setEmotion(EmotionType.sad);
+    } else {
+      setEmotion(EmotionType.default);
+    }
+  }, [currentQuestion, showAnswerFeedback]);
+
   if (!viewmodel || !controller) return null;
   if (!isOpen || !contentData) return null;
 
@@ -137,7 +138,7 @@ export default function AdaptivityElementDialogContainer({
             className="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
             alt="LearningImage!"
             data-testid="npcImage"
-            src={getNPCImage(model, true)}
+            src={getNPCImage(model, true, emotion)}
             onClick={(event) => {
               event.stopPropagation();
             }}
@@ -182,12 +183,12 @@ export default function AdaptivityElementDialogContainer({
                   </CircularProgressbarWithChildren>
                 </div>
               )}
-
+              {/* Background image for mobile view */}
               <img
                 className="visible h-16 -scale-x-100 lg:invisible lg:h-0"
                 alt="LearningImage!"
                 data-testid="npcImage"
-                src={getNPCImage(model, false)}
+                src={getNPCImage(model, false, emotion)}
               ></img>
 
               <div className="w-full text-xs lg:text-lg">{headerText}</div>

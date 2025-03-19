@@ -87,7 +87,7 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
           alt="LearningImage!"
           class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
           data-testid="npcImage"
-          src="a-quizbg-defaultnpc-close.png"
+          src="a-quizbg-defaultnpc.png"
         />
       </div>
       <div

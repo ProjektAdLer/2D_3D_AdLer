@@ -47,6 +47,8 @@ export interface APISpace {
 export interface APIStoryElement {
   storyTexts: string[];
   elementModel: string;
+  modelFacialExpression?: string;
+  storyNpcName?: string;
 }
 
 export interface APIElement {

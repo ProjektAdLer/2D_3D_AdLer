@@ -1,13 +1,4 @@
-import campusNPC from "../../../../../../Assets/misc/quizBackgrounds/a-npc-dozentlukas.png";
-import campusNPCClose from "../../../../../../Assets/misc/quizBackgrounds/a-quizbg-dozentlukas-close.png";
-import arcadeNPC from "../../../../../../Assets/misc/quizBackgrounds/a-npc-sheriffjustice.png";
-import arcadeNPCClose from "../../../../../../Assets/misc/quizBackgrounds/a-npc-sheriffjustice-close.png";
-import defaultNPC from "../../../../../../Assets/misc/quizBackgrounds/a-quizbg-defaultnpc.png";
-import defaultNPCClose from "../../../../../../Assets/misc/quizBackgrounds/a-quizbg-defaultnpc-close.png";
-import robotNPC from "../../../../../../Assets/misc/quizBackgrounds/a-quizbg-alerobot.png";
-import robotNPCClose from "../../../../../../Assets/misc/quizBackgrounds/a-quizbg-alerobot-close.png";
 import closeIcon from "../../../../../../Assets/icons/close.svg";
-
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import StoryElementViewModel from "./StoryElementViewModel";
@@ -18,31 +9,11 @@ import { useTranslation } from "react-i18next";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledContainer";
-import {
-  LearningElementModel,
-  LearningElementModelTypeEnums,
-} from "src/Components/Core/Domain/LearningElementModels/LearningElementModelTypes";
 import StorySelection from "./StorySelection";
 import SingleStoryLayout from "./SingleStoryLayout";
 import { useCallback } from "react";
 import CloseButton from "~ReactComponents/ReactRelated/ReactBaseComponents/CloseButton";
-
-function getNPCImage(
-  model: LearningElementModel | null,
-  close: boolean,
-): string {
-  switch (model) {
-    case LearningElementModelTypeEnums.QuizElementModelTypes.RobotNPC:
-      return close ? robotNPCClose : robotNPC;
-    case LearningElementModelTypeEnums.QuizElementModelTypes.ArcadeNPC:
-      return close ? arcadeNPCClose : arcadeNPC;
-    case LearningElementModelTypeEnums.QuizElementModelTypes.CampusNPC:
-      return close ? campusNPCClose : campusNPC;
-    case LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC:
-    default:
-      return close ? defaultNPCClose : defaultNPC;
-  }
-}
+import { getNPCImage } from "../../../Utils/GetNPCImage";
 
 export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   const [viewModel, controller] = useBuilder<
@@ -62,6 +33,9 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   );
   const [introModelType] = useObservable(viewModel?.introModelType);
   const [outroModelType] = useObservable(viewModel?.outroModelType);
+
+  const [introEmotion] = useObservable(viewModel?.introEmotion);
+  const [outroEmotion] = useObservable(viewModel?.outroEmotion);
 
   const { t: translate } = useTranslation("learningSpace");
 
@@ -94,6 +68,12 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   if (!viewModel || !controller) return null;
   if (!isOpen || storyTypeToDisplay === StoryElementType.None) return null;
 
+  console.log(
+    "StoryElement-Info: ",
+    viewModel.introEmotion.Value,
+    viewModel.outroEmotion.Value,
+  );
+
   return (
     <StyledContainer className={tailwindMerge(className, "")}>
       <div className="fixed top-0 bottom-0 left-0 right-0 z-50 flex flex-col items-center justify-center w-screen h-full bg-blacktrans lg:grid lg:grid-rows-3 lg:items-start">
@@ -109,6 +89,10 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
                 ? introModelType
                 : outroModelType,
               true,
+              (storyTypeToDisplay & StoryElementType.Intro) ===
+                StoryElementType.Intro
+                ? introEmotion
+                : outroEmotion,
             )}
           />
         </div>
@@ -129,6 +113,10 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
                     ? introModelType
                     : outroModelType,
                   false,
+                  (storyTypeToDisplay & StoryElementType.Intro) ===
+                    StoryElementType.Intro
+                    ? introEmotion
+                    : outroEmotion,
                 )}
               />
 
