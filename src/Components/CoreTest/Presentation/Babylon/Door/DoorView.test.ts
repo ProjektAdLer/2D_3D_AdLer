@@ -221,7 +221,7 @@ describe("DoorView", () => {
   });
 
   // ANF-ID: [ELG0033]
-  test("onIsOpenChanged calls beginAnimation on the scene if viewModel.isOpen is true", async () => {
+  test("onIsOpenChanged calls doorAnimationGroup.play() on the scene if viewModel.isOpen is true", async () => {
     const mockMesh = new AbstractMesh("Door", new Scene(new NullEngine()));
     scenePresenterMock.loadGLTFModel.mockResolvedValue({
       meshes: [mockMesh],
@@ -237,12 +237,14 @@ describe("DoorView", () => {
     viewModel.isOpen.Value = true;
     await setTimeout(100);
 
-    expect(scenePresenterMock.Scene.beginAnimation).toHaveBeenCalledTimes(1);
-    expect(scenePresenterMock.Scene.beginAnimation).toHaveBeenCalledWith(
-      mockMesh,
-      expect.any(Number),
-      expect.any(Number),
+    const doorAnimationGroup = viewModel.doorAnimations.find(
+      (group) => group.name === "doorAnimationGroup",
     );
+
+    expect(doorAnimationGroup).toBeDefined();
+    if (doorAnimationGroup) {
+      expect(doorAnimationGroup.isPlaying).toBe(true);
+    }
   });
 
   //ANF-ID: [ELG0018]

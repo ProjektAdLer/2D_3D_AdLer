@@ -1,10 +1,9 @@
 import {
   ActionManager,
-  Animation,
+  AnimationGroup,
   Color3,
   ExecuteCodeAction,
   Mesh,
-  Sound,
   Tools,
   Vector3,
 } from "@babylonjs/core";
@@ -23,16 +22,14 @@ import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILogge
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import HighlightColors from "../HighlightColors";
+import ElevatorLogic from "./DoorLogic/ElevatorLogic";
+import DoorLogic from "./DoorLogic/DoorLogic";
 
-const soundLink = require("../../../../../Assets/Sounds/door_opening.mp3");
 const iconLinkEntryDoor = require("../../../../../Assets/3dModels/sharedModels/3dIcons/d-3dicons-door-in.glb");
 const iconLinkExitDoor = require("../../../../../Assets/3dModels/sharedModels/3dIcons/d-3dicons-door-out.glb");
 
 export default class DoorView extends Readyable {
   private scenePresenter: IScenePresenter;
-
-  private openTheDoorSound: Sound;
-  private doorAnimation: Animation;
   private logger: ILoggerPort;
 
   constructor(
@@ -47,25 +44,12 @@ export default class DoorView extends Readyable {
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
     this.logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
 
-    this.openTheDoorSound = new Sound(
-      "openTheDoor",
-      soundLink,
-      this.scenePresenter.Scene,
-    );
-    this.openTheDoorSound.setVolume(0.5);
-    if (this.viewModel.isOpen.Value) {
-      this.IsReady.then(() => {
-        this.scenePresenter.Scene.beginAnimation(
-          this.viewModel.meshes[0],
-          0,
-          45,
-        );
-      });
-    } else viewModel.isOpen.subscribe(this.onIsOpenChanged);
+    viewModel.isOpen.subscribe(this.onIsOpenChanged);
 
     viewModel.isInteractable.subscribe((newValue) => {
       this.updateHighlight();
       this.toggleIconFloatAnimation(newValue);
+      this.isInteractableAnimation(newValue);
     });
   }
 
@@ -73,10 +57,8 @@ export default class DoorView extends Readyable {
     await this.loadMeshAsync();
     this.positionMesh();
     await this.loadIconModel();
-    if (this.viewModel.isExit) this.setupAnimation();
     this.registerActions();
     this.updateHighlight();
-
     this.resolveIsReady();
   }
 
@@ -94,8 +76,47 @@ export default class DoorView extends Readyable {
     const loadedMeshes = loadingResults.meshes as Mesh[];
     loadedMeshes.forEach((mesh) => (mesh.rotationQuaternion = null));
 
+    // Store meshes and animations in viewModel
     this.viewModel.meshes = loadedMeshes as Mesh[];
+    this.viewModel.doorAnimations =
+      loadingResults.animationGroups as AnimationGroup[];
 
+    // Check if this is an elevator or door
+    const elevatorMesh = this.viewModel.meshes.find((mesh) =>
+      mesh.id.toLowerCase().includes("elevator"),
+    );
+    const doorMesh = this.viewModel.meshes.find((mesh) =>
+      mesh.id.toLowerCase().includes("door"),
+    );
+    if (elevatorMesh) {
+      this.viewModel.doorLogic = new ElevatorLogic(this.viewModel);
+    } else if (doorMesh) {
+      this.viewModel.doorLogic = new DoorLogic(
+        this.viewModel,
+        this.scenePresenter,
+      );
+    } else {
+      this.logger.log(
+        LogLevelTypes.WARN,
+        "No valid DoorMesh found in DoorView. DoorLogic will not work.",
+      );
+    }
+
+    // Setup for screen reader and integration tests
+    this.accesibilitySetup();
+  }
+
+  private getModelLinkByThemeAndType(): string {
+    const themeConfig = LearningSpaceThemeLookup.getLearningSpaceTheme(
+      this.viewModel.theme,
+    );
+
+    return this.viewModel.isExit
+      ? themeConfig.exitDoorModel
+      : themeConfig.entryDoorModel;
+  }
+
+  private accesibilitySetup(): void {
     this.viewModel.meshes[0].accessibilityTag = {
       description:
         "door of space id: " +
@@ -128,48 +149,6 @@ export default class DoorView extends Readyable {
     };
   }
 
-  private getModelLinkByThemeAndType(): string {
-    const themeConfig = LearningSpaceThemeLookup.getLearningSpaceTheme(
-      this.viewModel.theme,
-    );
-
-    return this.viewModel.isExit
-      ? themeConfig.exitDoorModel
-      : themeConfig.entryDoorModel;
-  }
-
-  private setupAnimation(): void {
-    const meshToRotate = this.viewModel.meshes.find(
-      (mesh) => mesh.id === "Door",
-    );
-
-    if (meshToRotate === undefined) {
-      this.logger.log(
-        LogLevelTypes.WARN,
-        "DoorView: No submesh with name Door found. Door animation will not work.",
-      );
-      return;
-    }
-
-    this.doorAnimation = new Animation(
-      "doorAnimation",
-      "rotation.y",
-      30,
-      Animation.ANIMATIONTYPE_FLOAT,
-    );
-
-    const initialRotation = Tools.ToRadians(meshToRotate.rotation.y);
-    this.doorAnimation.setKeys([
-      { frame: 0, value: initialRotation },
-      {
-        frame: 45,
-        value: initialRotation + Tools.ToRadians(80),
-      },
-    ]);
-
-    meshToRotate.animations.push(this.doorAnimation);
-  }
-
   @bind
   private positionMesh(): void {
     if (this.viewModel.meshes && this.viewModel.meshes.length > 0) {
@@ -186,14 +165,18 @@ export default class DoorView extends Readyable {
   private onIsOpenChanged(newIsOpen: boolean): void {
     if (newIsOpen) {
       this.IsReady.then(() => {
-        this.scenePresenter.Scene.beginAnimation(
-          this.viewModel.meshes.find((mesh) => mesh.id === "Door"),
-          0,
-          45,
-        );
-        this.openTheDoorSound.play();
+        this.viewModel.doorLogic.open();
       });
     }
+  }
+
+  private async isInteractableAnimation(avatarIsClose: boolean): Promise<void> {
+    if (this.viewModel.doorLogic instanceof ElevatorLogic)
+      if (avatarIsClose) {
+        this.viewModel.doorLogic.avatarClose();
+      } else {
+        this.viewModel.doorLogic.avatarFar();
+      }
   }
 
   private registerActions(): void {

@@ -3,6 +3,7 @@ import DoorViewModel from "./DoorViewModel";
 import IDoorPresenter from "./IDoorPresenter";
 import LearningSpaceScoreTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceScoreTO";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
+import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
 
 export default class DoorPresenter implements IDoorPresenter {
   constructor(private viewModel: DoorViewModel) {
@@ -28,6 +29,16 @@ export default class DoorPresenter implements IDoorPresenter {
       spaceScoreTO.spaceID === this.viewModel.spaceID &&
       this.viewModel.isExit &&
       spaceScoreTO.currentScore >= spaceScoreTO.requiredScore
+    ) {
+      this.viewModel.isOpen.Value = true;
+    }
+  }
+
+  onLearningSpaceLoaded(learningSpaceTO: LearningSpaceTO): void {
+    if (
+      learningSpaceTO.id === this.viewModel.spaceID &&
+      this.viewModel.isExit &&
+      learningSpaceTO.currentScore >= learningSpaceTO.requiredScore
     ) {
       this.viewModel.isOpen.Value = true;
     }
