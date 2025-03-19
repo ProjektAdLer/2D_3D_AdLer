@@ -23,6 +23,97 @@ import robotNPC_Happy from "../../../../Assets/misc/quizBackgrounds/a-npc-alerob
 import robotNPC_Sad from "../../../../Assets/misc/quizBackgrounds/a-npc-alerobot/a-npc-alerobot-disappointed.png";
 import robotNPC_Approval from "../../../../Assets/misc/quizBackgrounds/a-npc-alerobot/a-npc-alerobot-thumbsup.png";
 
+// EmotionMap is used as index of ImageMaps value-Element
+enum EmotionMap {
+  default = 1, // neutral emotion
+  happy,
+  sad,
+  approval,
+}
+
+// first preview is substitute for not having a full-body image
+const keys = ["preview", "preview", "happy", "disappointed"];
+
+const ImageDB = {
+  // nerdFemaleDark: ["happy"].map((value) => {
+  //   return require(
+  //     `../../../../Assets/misc/quizBackgrounds/a-npc-averagenerdfemaledark/a-npc-averagenerdfemaledark-${value}.png`,
+  //   );
+  // }),
+  nerdFemaleLight: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-averagenerdfemalelight/a-npc-averagenerdfemalelight-${value}.png`,
+    );
+  }),
+  nerdMaleDark: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-averagenerdmaledark/a-npc-averagenerdmaledark-${value}.png`,
+    );
+  }),
+  nerdMaleLight: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-averagenerdmalelight/a-npc-averagenerdmalelight-${value}.png`,
+    );
+  }),
+  bullyFemale: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-bullyfemale/a-npc-bullyfemale-${value}.png`,
+    );
+  }),
+  bullyMale: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-bullymale/a-npc-bullymale-${value}.png`,
+    );
+  }),
+  defaultMale: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-defaultmale/a-npc-defaultmale-${value}.png`,
+    );
+  }),
+  dozentAntonia: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-dozentantonia/a-npc-dozentantonia-${value}.png`,
+    );
+  }),
+  dozentDaniel: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-dozentdaniel/a-npc-dozentdaniel-${value}.png`,
+    );
+  }),
+  dozentGeorg: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-dozentgeorg/a-npc-dozentgeorg-${value}.png`,
+    );
+  }),
+  dozentJoerg: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-dozentjoerg/a-npc-dozentjoerg-${value}.png`,
+    );
+  }),
+  hiphopFemale: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-hiphopfemale/a-npc-hiphopfemale-${value}.png`,
+    );
+  }),
+  hiphopMale: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-hiphopmale/a-npc-hiphopmale-${value}.png`,
+    );
+  }),
+  santaFemale: ["welcome", "welcome", "happy", "disappointed"].map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-santafemale/a-npc-santafemale-${value}.png`,
+    );
+  }),
+  santaMale: ["welcome", "welcome", "happy", "disappointed"].map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-santamale/a-npc-santamale-${value}.png`,
+    );
+  }),
+};
+
+console.log("ImageDB: ", ImageDB);
+
 interface ImageMap {
   get(key: LearningElementModel): string[] | undefined;
 }
@@ -44,15 +135,22 @@ const imageMap: ImageMap = new Map([
     QuizElementModelTypes.CampusNPC,
     [campusNPC, campusNPC_Close, campusNPC_Happy, campusNPC_Sad],
   ],
+  //[QuizElementModelTypes.NerdFemaleDarkNPC, ImageDB.nerdFemaleDark],
+  [QuizElementModelTypes.NerdFemaleLightNPC, ImageDB.nerdFemaleLight],
+  [QuizElementModelTypes.NerdMaleDarkNPC, ImageDB.nerdMaleDark],
+  [QuizElementModelTypes.NerdMaleLightNPC, ImageDB.nerdMaleLight],
+  [QuizElementModelTypes.BullyFemaleNPC, ImageDB.bullyFemale],
+  [QuizElementModelTypes.BullyMaleNPC, ImageDB.bullyMale],
+  [QuizElementModelTypes.DefaultMaleNPC, ImageDB.defaultMale],
+  [QuizElementModelTypes.DozentAntoniaNPC, ImageDB.dozentAntonia],
+  [QuizElementModelTypes.DozentDanielNPC, ImageDB.dozentDaniel],
+  [QuizElementModelTypes.DozentGeorgNPC, ImageDB.dozentGeorg],
+  [QuizElementModelTypes.DozentJoergNPC, ImageDB.dozentJoerg],
+  [QuizElementModelTypes.HiphopFemaleNPC, ImageDB.hiphopFemale],
+  [QuizElementModelTypes.HiphopMaleNPC, ImageDB.hiphopMale],
+  [QuizElementModelTypes.SantaFemaleNPC, ImageDB.santaFemale],
+  [QuizElementModelTypes.SantaMaleNPC, ImageDB.santaMale],
 ]);
-
-// EmotionMap is used as index of ImageMaps value-Element
-enum EmotionMap {
-  default = 1, // neutral emotion
-  happy,
-  sad,
-  approval,
-}
 
 export function getNPCImage(
   model: LearningElementModel,

@@ -59,6 +59,21 @@ export enum QuizElementModelTypes {
   DefaultNPC = "a-quizbg-defaultnpc",
   ArcadeNPC = "a-npc-sheriffjustice",
   CampusNPC = "a_npc_dozentlukas",
+  NerdFemaleDarkNPC = "a-npc-averagenerdfemaledark",
+  NerdFemaleLightNPC = "a-npc-averagenerdfemalelight",
+  NerdMaleDarkNPC = "a-npc-averagenerdmaledark",
+  NerdMaleLightNPC = "a-npc-averagenerdmalelight",
+  BullyFemaleNPC = "a-npc-bullyfemale",
+  BullyMaleNPC = "a-npc-bullymale",
+  DefaultMaleNPC = "a-npc-defaultmale",
+  DozentAntoniaNPC = "a-npc-dozentantonia",
+  DozentDanielNPC = "a-npc-dozentdaniel",
+  DozentGeorgNPC = "a-npc-dozentgeorg",
+  DozentJoergNPC = "a-npc-dozentjoerg",
+  HiphopFemaleNPC = "a-npc-hiphopfemale",
+  HiphopMaleNPC = "a-npc-hiphopmale",
+  SantaFemaleNPC = "a-npc-santafemale",
+  SantaMaleNPC = "a-npc-santamale",
 }
 
 enum TrophyElementModelTypes {
