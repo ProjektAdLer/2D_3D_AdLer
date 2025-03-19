@@ -53,6 +53,8 @@ describe("GetNarrativeFrameworkInfoUseCase", () => {
     expect(worldPortMock.onNarrativeFrameworkInfoLoaded).toHaveBeenCalledWith({
       introText: "intro",
       outroText: "outro",
+      shownBefore: false,
+      theme: undefined,
     });
   });
 

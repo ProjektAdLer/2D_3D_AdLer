@@ -204,10 +204,6 @@ body {
   transform: scale(1.4);
 }
 
-.rangeSlider {
-  width: 100%;
-}
-
 .bodyProportionContainer {
   display: grid;
   width: 100%;
