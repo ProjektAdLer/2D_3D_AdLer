@@ -671,7 +671,7 @@ describe("LoadLearningWorldUseCase", () => {
   });
 
   // ANF-ID: [EZZ0006]
-  test.skip("applies model to story element if none is assigned in ATF", async () => {
+  test("applies model to story element if none is assigned in ATF", async () => {
     // mock user data response
     entityContainerMock.getEntitiesOfType.mockReturnValue(
       mockedGetEntitiesOfTypeUserDataReturnValue,
@@ -692,7 +692,7 @@ describe("LoadLearningWorldUseCase", () => {
           id: 1,
           name: "TestSpace",
           requiredScore: 0,
-          elements: [backendAdaptivityElementTOMock],
+          elements: [],
           template: LearningSpaceTemplateType.L,
           templateStyle: LearningSpaceThemeType.Arcade,
           introStory: {
@@ -708,6 +708,7 @@ describe("LoadLearningWorldUseCase", () => {
           } as BackendStoryTO,
         },
       ],
+      narrativeFramework: null,
       externalElements: [],
     });
 
@@ -715,10 +716,6 @@ describe("LoadLearningWorldUseCase", () => {
       worldID: 42,
       elements: [{}],
     } as LearningWorldStatusTO);
-
-    entityContainerMock.createEntity.mockReturnValueOnce(
-      mock<LearningElementEntity>(),
-    );
 
     entityContainerMock.createEntity.mockReturnValueOnce(
       mock<StoryElementEntity>(),
@@ -730,10 +727,6 @@ describe("LoadLearningWorldUseCase", () => {
 
     entityContainerMock.createEntity.mockReturnValueOnce(
       mock<LearningSpaceEntity>(),
-    );
-
-    entityContainerMock.createEntity.mockReturnValueOnce(
-      mock<AdaptivityElementEntity>(),
     );
 
     // mock world response
@@ -757,7 +750,7 @@ describe("LoadLearningWorldUseCase", () => {
         storyType: StoryElementType.Intro,
         hasOutroTriggered: expect.toBeOneOf([expect.any(Boolean), null]),
         introEmotion: EmotionType.default,
-        outroEmotion: EmotionType.default,
+        outroEmotion: null,
       },
       StoryElementEntity,
     ]);
