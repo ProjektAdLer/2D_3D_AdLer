@@ -56,11 +56,11 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
   if (!viewModel || !controller || !isOpen) return null;
 
   return (
-    <div className=" fixed top-0 left-0 w-screen h-screen z-[20000] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto flex justify-center items-center pb-24">
-      <div className="grid max-h-[1000px]">
-        <section className="flex items-center justify-center w-full gap-8 portrait:flex mobile-landscape:pt-10 xl:m-3 xl:mt-6">
+    <div className=" fixed top-0 left-0 w-screen h-screen z-[20000] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto flex flex-col justify-center items-center">
+      <div className="flex flex-col">
+        <section className="flex items-center justify-center w-full gap-8 portrait:flex xl:m-3 xl:mt-6">
           <img
-            className="w-full xs:w-16 md:w-24 lg:w-32 xl:w-20 onek:w-32 twok:w-40 portrait:w-16 animate-wiggle place-self-end mobile-landscape:w-12 mobile-landscape:m-2"
+            className="w-8 xs:w-16 md:w-24 lg:w-32 xl:w-20 onek:w-32 twok:w-40 portrait:w-16 animate-wiggle place-self-end mobile-landscape:w-10 mobile-landscape:m-2"
             src={logo}
             alt="AdlerEngine Logo"
           />
@@ -94,11 +94,11 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
           )}
 
           {canClose && !autoClose && (
-            <section className="flex justify-center h-12 mobile-landscape:h-8">
+            <section className="flex justify-center h-6">
               <StyledButton
                 shape={"freeFloatCenter"}
                 onClick={() => controller.closeLoadingScreen()}
-                className="p-5 font-bold scale-60 lg:scale-90"
+                className="p-5 font-bold h-6 lg:scale-90"
               >
                 {translate(props.i18nKeys.button)}
               </StyledButton>
@@ -106,7 +106,21 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
           )}
         </div>
       </div>
-      <div className="fixed flex flex-col items-center justify-center w-full gap-2 mobile-landscape:gap-0 px-4 bottom-4 mobile-landscape:bottom-1">
+      <StyledButton
+        className="absolute bottom-1 right-1"
+        shape="square"
+        key={0}
+      >
+        <a
+          href="https://projekt-adler.eu"
+          target="_blank"
+          rel="noreferrer"
+          title="AdLer Website"
+        >
+          i
+        </a>
+      </StyledButton>
+      <div className="fixed flex flex-col items-center justify-center w-full gap-2 mobile-landscape:gap-0 px-4 bottom-4 mobile-landscape:invisible">
         <p className="text-sm portrait:text-[10px] font-medium mobile-landscape:text-2xs text-adlerdarkblue portrait:leading-normal">
           <Trans
             i18nKey="projectInformation"
