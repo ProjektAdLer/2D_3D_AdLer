@@ -36,9 +36,18 @@ export default class GetNarrativeFrameworkInfoUseCase
     let narrativeFrameworkTO = new NarrativeFrameworkTO();
     narrativeFrameworkTO.introText = worldEntity.narrativeFramework!.introText;
     narrativeFrameworkTO.outroText = worldEntity.narrativeFramework!.outroText;
-    narrativeFrameworkTO.shownBefore =
-      worldEntity.narrativeFramework!.shownBefore ?? false;
     narrativeFrameworkTO.theme = worldEntity.theme;
+
+    //check all spaces if they have at least one scored learningelement
+    //if so, set the narrative framework to shown
+    narrativeFrameworkTO.shownBefore = worldEntity.spaces.every((space) => {
+      if (!space.elements) {
+        return false;
+      }
+      return !space.elements.every((element) => {
+        return !element?.hasScored;
+      });
+    });
 
     this.logger.log(
       LogLevelTypes.TRACE,

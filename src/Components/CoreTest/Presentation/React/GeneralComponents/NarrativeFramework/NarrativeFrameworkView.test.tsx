@@ -7,10 +7,23 @@ import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilder
 import NarrativeFrameworkViewModel from "../../../../../Core/Presentation/React/GeneralComponents/NarrativeFramework/NarrativeFrameworkViewModel";
 import { mock } from "jest-mock-extended";
 import INarrativeFrameworkController from "../../../../../Core/Presentation/React/GeneralComponents/NarrativeFramework/INarrativeFrameworkController";
+import IGetNarrativeFrameworkInfoUseCase from "../../../../../Core/Application/UseCases/GetNarrativeFrameworkInfo/IGetNarrativeFrameworkInfoUseCase";
+import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 
 let mockViewModel = new NarrativeFrameworkViewModel();
 let mockController = mock<INarrativeFrameworkController>();
+let mockUseCase = mock<IGetNarrativeFrameworkInfoUseCase>();
+
 describe("NarrativeFrameworkView", () => {
+  beforeAll(() => {
+    CoreDIContainer.snapshot();
+    CoreDIContainer.rebind(
+      USECASE_TYPES.IGetNarrativeFrameworkInfoUseCase,
+    ).toConstantValue(mockUseCase);
+  });
+  afterAll(() => {
+    CoreDIContainer.restore();
+  });
   test("should render", () => {
     render(
       <Provider container={CoreDIContainer}>

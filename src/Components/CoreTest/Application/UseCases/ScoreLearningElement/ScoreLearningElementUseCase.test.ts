@@ -19,6 +19,7 @@ import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
 import { LearningElementModelTypeEnums } from "../../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
 import IBeginStoryElementOutroCutSceneUseCase from "../../../../Core/Application/UseCases/BeginStoryElementOutroCutScene/IBeginStoryElementOutroCutSceneUseCase";
 import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
+import ISetNarrativeFrameworkToShownUseCase from "../../../../Core/Application/UseCases/SetNarrativeFrameworkToShown/ISetNarrativeFrameworkToShownUseCase";
 
 const entityContainerMock = mock<IEntityContainer>();
 const backendAdapterMock = mock<IBackendPort>();
@@ -28,6 +29,8 @@ const worldPortMock = mock<ILearningWorldPort>();
 const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
 const beginStoryElementOutroCutSceneUseCaseMock =
   mock<IBeginStoryElementOutroCutSceneUseCase>();
+const setNarrativeFrameworkToShownUseCaseMock =
+  mock<ISetNarrativeFrameworkToShownUseCase>();
 
 const getNewTestEntities = () => {
   const userEntity: UserDataEntity = {
@@ -126,6 +129,9 @@ describe("ScoreLearningElementUseCase", () => {
     CoreDIContainer.rebind<IBeginStoryElementOutroCutSceneUseCase>(
       USECASE_TYPES.IBeginStoryElementOutroCutSceneUseCase,
     ).toConstantValue(beginStoryElementOutroCutSceneUseCaseMock);
+    CoreDIContainer.rebind<ISetNarrativeFrameworkToShownUseCase>(
+      USECASE_TYPES.ISetNarrativeFrameworkToShownUseCase,
+    ).toConstantValue(setNarrativeFrameworkToShownUseCaseMock);
   });
 
   beforeEach(() => {

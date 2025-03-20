@@ -1,3 +1,1 @@
-export default interface INarrativeFrameworkController {
-  closeNarrativeFramework(): void;
-}
+export default interface INarrativeFrameworkController {}

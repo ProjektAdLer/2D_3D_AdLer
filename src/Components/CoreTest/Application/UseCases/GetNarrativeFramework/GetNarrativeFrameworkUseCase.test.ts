@@ -34,9 +34,81 @@ describe("GetNarrativeFrameworkInfoUseCase", () => {
     CoreDIContainer.restore();
   });
 
-  test("should call port with loaded narrative framework info", () => {
+  test("should call port with correct loaded narrative framework info (shownBefore false)", () => {
     const worldEntity = {
       id: 1,
+      spaces: [
+        {
+          elements: [
+            {
+              hasScored: false,
+            },
+            {
+              hasScored: false,
+            },
+          ],
+        },
+      ],
+      narrativeFramework: {
+        introText: "intro",
+        outroText: "outro",
+      },
+    };
+    entityContainerMock.filterEntitiesOfType.mockReturnValue([worldEntity]);
+    getUserLocationUseCaseMock.execute.mockReturnValue({ worldID: 1 } as any);
+
+    systemUnderTest = CoreDIContainer.get(
+      USECASE_TYPES.IGetNarrativeFrameworkInfoUseCase,
+    );
+    systemUnderTest.execute();
+
+    expect(worldPortMock.onNarrativeFrameworkInfoLoaded).toHaveBeenCalledWith({
+      introText: "intro",
+      outroText: "outro",
+      shownBefore: false,
+      theme: undefined,
+    });
+  });
+  test("should call port with correct loaded narrative framework info (shownBefore true)", () => {
+    const worldEntity = {
+      id: 1,
+      spaces: [
+        {
+          elements: [
+            {
+              hasScored: true,
+            },
+            {
+              hasScored: false,
+            },
+          ],
+        },
+      ],
+      narrativeFramework: {
+        introText: "intro",
+        outroText: "outro",
+      },
+    };
+    entityContainerMock.filterEntitiesOfType.mockReturnValue([worldEntity]);
+    getUserLocationUseCaseMock.execute.mockReturnValue({ worldID: 1 } as any);
+
+    systemUnderTest = CoreDIContainer.get(
+      USECASE_TYPES.IGetNarrativeFrameworkInfoUseCase,
+    );
+    systemUnderTest.execute();
+
+    expect(worldPortMock.onNarrativeFrameworkInfoLoaded).toHaveBeenCalledWith({
+      introText: "intro",
+      outroText: "outro",
+      shownBefore: true,
+      theme: undefined,
+    });
+  });
+
+  test("should call port with correct loaded narrative framework info (no elements in space)", () => {
+    const worldEntity = {
+      id: 1,
+      spaces: [{ elements: [] }],
       narrativeFramework: {
         introText: "intro",
         outroText: "outro",
@@ -63,11 +135,12 @@ describe("GetNarrativeFrameworkInfoUseCase", () => {
 
     const learningWorldEntityMock = {
       id: 42,
+      spaces: [],
       narrativeFramework: {
         introText: "intro",
         outroText: "outro",
       },
-    } as LearningWorldEntity;
+    };
 
     let filterResult;
 

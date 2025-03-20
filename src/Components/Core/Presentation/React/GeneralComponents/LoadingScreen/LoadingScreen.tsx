@@ -7,6 +7,7 @@ import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservab
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import { Trans, useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
+import NarrativeFramework from "../NarrativeFramework/NarrativeFramework";
 
 type LoadinScreenProps = {
   content: JSX.Element;
@@ -71,8 +72,11 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
         </section>
 
         {/* Loading screen content */}
-        {props.content}
-        {/*<NarrativeFramework />*/}
+        {!viewModel.loadingLocation.Value.includes("spacedisplay") &&
+          props.content}
+        {viewModel.loadingLocation.Value.includes("spacedisplay") && (
+          <NarrativeFramework />
+        )}
 
         {/* Loading screen controls */}
 
