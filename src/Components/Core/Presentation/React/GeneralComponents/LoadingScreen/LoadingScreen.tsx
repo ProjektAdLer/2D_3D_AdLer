@@ -72,8 +72,8 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
         </section>
 
         {/* Loading screen content */}
-        {props.content}
-        {/*<NarrativeFramework />*/}
+        {/*{props.content}*/}
+        <NarrativeFramework />
 
         {/* Loading screen controls */}
 
@@ -94,7 +94,7 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
           )}
 
           {canClose && !autoClose && (
-            <section className="flex justify-center h-12">
+            <section className="flex justify-center h-12 mobile-landscape:h-8">
               <StyledButton
                 shape={"freeFloatCenter"}
                 onClick={() => controller.closeLoadingScreen()}
@@ -106,8 +106,8 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
           )}
         </div>
       </div>
-      <div className="fixed flex flex-col items-center justify-center w-full gap-2 px-4 bottom-4">
-        <p className="text-sm portrait:text-[10px] font-medium mobile-landscape:text-xs text-adlerdarkblue portrait:leading-normal">
+      <div className="fixed flex flex-col items-center justify-center w-full gap-2 mobile-landscape:gap-0 px-4 bottom-4 mobile-landscape:bottom-1">
+        <p className="text-sm portrait:text-[10px] font-medium mobile-landscape:text-2xs text-adlerdarkblue portrait:leading-normal">
           <Trans
             i18nKey="projectInformation"
             ns="learningSpace"
@@ -118,7 +118,7 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
                 href="https://projekt-adler.eu"
                 title={translate("linkInfo").toString()}
                 rel="noreferrer"
-                className="underline text-adleroceanblue hover:text-nodehandlecolor"
+                className="underline text-adleroceanblue hover:text-nodehandlecolor mobile-landscape:text-2xs"
               >
                 {}
               </a>,
@@ -127,7 +127,7 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
           />
         </p>
 
-        <p className="text-xs portrait:text-[8px] portrait:leading-normal mobile-landscape:text-2xs text-center">
+        <p className="text-3xs portrait:text-[8px] portrait:leading-normal mobile-landscape:text-3xs text-center">
           {translate("copyright", { ns: "start" })}
         </p>
       </div>

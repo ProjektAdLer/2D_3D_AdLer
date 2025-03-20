@@ -35,6 +35,8 @@ module.exports = {
           "url('/src/Assets/misc/narrativeFrameworkBackgrounds/a-background-narrativeframework-suburb.png')",
       },
       fontSize: {
+        "4xs": "0.25rem", // 4px
+        "3xs": "0.5rem", // 8px
         "2xs": "0.625rem", // 10px
         "2xl": "1.75rem", // 28px
         "3xl": "2rem", // 32px

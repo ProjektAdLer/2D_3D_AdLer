@@ -33,7 +33,7 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
     <main
       className={tailwindMerge(
         className,
-        "flex flex-col gap-2 w-full self-start h-[100svh] portrait:h-[62dvh]",
+        "flex flex-col gap-2 w-full self-start h-[80svh] portrait:h-[62dvh]",
       )}
     >
       <article className="flex flex-row portrait:flex-col portrait:items-between portrait:justify-center portrait:h-[25%] portrait:gap-2 items-center justify-between h-[10%] p-1 pb-4 border-b border-gray-500">
@@ -52,7 +52,7 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
           {translate("openLearningWorldButton")}
         </StyledButton>
       </article>
-      <article className="flex flex-col w-full gap-2 landscape:lg-[75%] h-[68%] overflow-y-auto">
+      <article className="flex flex-col w-full gap-2 landscape:lg-[75%] h-[68%] onek-h-[75%] overflow-y-auto">
         {description === undefined ||
           (description !== "" && (
             <div className="pb-2 border-b border-gray-500">
