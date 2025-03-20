@@ -17,6 +17,7 @@ const SmallWorldAWT: AWT = {
       frameStoryIntro: "blablaINTROblabla",
       frameStoryOutro: "blablaOUTROblabla",
     },
+    theme: "CampusMensa",
     topics: [
       {
         topicId: 7,
