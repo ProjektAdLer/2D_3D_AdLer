@@ -56,16 +56,16 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
   if (!viewModel || !controller || !isOpen) return null;
 
   return (
-    <div className=" fixed top-0 left-0 w-screen h-screen z-[20000] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto flex flex-col justify-center items-center">
-      <div className="flex flex-col">
-        <section className="flex items-center justify-center w-full gap-8 portrait:flex xl:m-3 xl:mt-6">
+    <div className=" fixed top-0 left-0 w-screen h-screen z-[20000] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto flex flex-col justify-center items-center lg:gap-6">
+      <div className="flex flex-col tablet-portrait:gap-8 lg:gap-4">
+        <section className="flex items-center justify-center w-full gap-8">
           <img
-            className="w-8 xs:w-16 md:w-24 lg:w-32 xl:w-20 onek:w-32 twok:w-40 portrait:w-16 animate-wiggle place-self-end mobile-landscape:w-10 mobile-landscape:m-2"
+            className="w-8 animate-wiggle place-self-end mobile-landscape:w-10 mobile-landscape:m-2 tablet-portrait:w-24 lg:w-20 twok:w-28"
             src={logo}
             alt="AdlerEngine Logo"
           />
           {loadingText && (
-            <p className="text-sm font-bold lg:text-lg xl:text-2xl text-outline mobile-landscape:text-lg text-adlerdarkblue">
+            <p className="text-lg font-bold text-outline text-adlerdarkblue tablet-portrait:text-2xl lg:text-2xl fourk:text-[4rem]">
               {loadingText}
             </p>
           )}
@@ -94,11 +94,11 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
           )}
 
           {canClose && !autoClose && (
-            <section className="flex justify-center h-6">
+            <section className="flex justify-center h-10 tablet-portrait:h-16">
               <StyledButton
                 shape={"freeFloatCenter"}
                 onClick={() => controller.closeLoadingScreen()}
-                className="p-5 font-bold h-6 lg:scale-90"
+                className="p-5 font-bold h-10 tablet-portrait:h-12 lg:scale-90"
               >
                 {translate(props.i18nKeys.button)}
               </StyledButton>
@@ -107,7 +107,7 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
         </div>
       </div>
       <StyledButton
-        className="absolute bottom-1 right-1"
+        className="absolute bottom-2 right-2 visible"
         shape="square"
         key={0}
       >
@@ -120,8 +120,8 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
           i
         </a>
       </StyledButton>
-      <div className="fixed flex flex-col items-center justify-center w-full gap-2 mobile-landscape:gap-0 px-4 bottom-4 mobile-landscape:invisible">
-        <p className="text-sm portrait:text-[10px] font-medium mobile-landscape:text-2xs text-adlerdarkblue portrait:leading-normal">
+      <div className="fixed flex flex-col items-center justify-center w-full gap-2 mobile-landscape:gap-0 px-4 bottom-4 invisible">
+        <p className="text-sm portrait:text-2xs text-center font-medium mobile-landscape:text-2xs text-adlerdarkblue">
           <Trans
             i18nKey="projectInformation"
             ns="learningSpace"
@@ -141,7 +141,7 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
           />
         </p>
 
-        <p className="text-3xs portrait:text-[8px] portrait:leading-normal mobile-landscape:text-3xs text-center">
+        <p className="text-3xs text-center">
           {translate("copyright", { ns: "start" })}
         </p>
       </div>

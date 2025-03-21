@@ -15,7 +15,7 @@ module.exports = {
       "2xl": "1536px",
       ultraWide: "3400px",
       "mobile-landscape": {
-        raw: `only screen and (max-height: 600px) and (orientation: landscape)`,
+        raw: `only screen and (max-height: 400px) and (orientation: landscape)`,
       },
       "mobile-portrait": {
         raw: `only screen and (max-width: 400px) and (orientation: portrait)`,
