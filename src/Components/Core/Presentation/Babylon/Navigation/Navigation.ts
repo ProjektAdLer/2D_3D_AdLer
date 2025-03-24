@@ -32,7 +32,7 @@ export default class Navigation extends Readyable implements INavigation {
     @inject(SCENE_TYPES.ScenePresenterFactory)
     private scenePresenterFactory: ScenePresenterFactory,
     @inject(NavigationConfiguration)
-    private navigationConfiguration: NavigationConfiguration
+    private navigationConfiguration: NavigationConfiguration,
   ) {
     super();
   }
@@ -50,13 +50,13 @@ export default class Navigation extends Readyable implements INavigation {
     if (this.plugin) {
       console.warn(
         "Repeated call to setupNavigation. " +
-          " This may break the agents indices if it happens while a scene is running."
+          " This may break the agents indices if it happens while a scene is running.",
       );
     }
 
     // create scenePresenter via factory (delayed creation to ensure that the scene is created)
     this.scenePresenter = this.scenePresenterFactory(
-      LearningSpaceSceneDefinition
+      LearningSpaceSceneDefinition,
     );
 
     // -- Navigation Plugin --
@@ -66,20 +66,21 @@ export default class Navigation extends Readyable implements INavigation {
     // -- NavMesh --
     this.plugin.createNavMesh(
       this.scenePresenter.NavigationMeshes,
-      this.navigationConfiguration.navmeshParameters
+      this.navigationConfiguration.navmeshParameters,
     );
+    this.plugin.setDefaultQueryExtent(new Vector3(2, 1, 2)); // supports querys on objects slightly outside navmesh
 
     // debug: colored navmesh representation
     if (config.isDebug === true) {
       this.navMeshDebug?.dispose();
       this.navMeshDebug = this.plugin.createDebugNavMesh(
-        this.scenePresenter.Scene
+        this.scenePresenter.Scene,
       );
       this.navMeshDebug.position = new Vector3(0, 0.01, 0);
       this.matDebug?.dispose();
       this.matDebug = new StandardMaterial(
         "matdebug",
-        this.scenePresenter.Scene
+        this.scenePresenter.Scene,
       );
       this.matDebug.diffuseColor = new Color3(0.1, 0.2, 1);
       this.matDebug.alpha = 0.2;
@@ -90,7 +91,7 @@ export default class Navigation extends Readyable implements INavigation {
     this.crowd = this.plugin.createCrowd(
       this.navigationConfiguration.maxAgentCount,
       this.navigationConfiguration.maxAgentRadius,
-      this.scenePresenter.Scene
+      this.scenePresenter.Scene,
     ) as RecastJSCrowd;
 
     this.resolveIsReady();
