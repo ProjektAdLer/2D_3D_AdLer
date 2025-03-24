@@ -56,7 +56,7 @@ const SmallWorldAWT: AWT = {
             storyTexts: [
               "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod ",
             ],
-            elementModel: "a-quizbg-defaultnpc",
+            elementModel: "a-npc-averagenerdfemaledark",
           },
           outroStory: {
             storyTexts: ["Tschüss", "Du bist mit diesem Raum fertig"],

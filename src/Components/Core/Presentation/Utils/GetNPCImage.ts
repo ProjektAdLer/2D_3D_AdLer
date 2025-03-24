@@ -35,11 +35,11 @@ enum EmotionMap {
 const keys = ["preview", "preview", "happy", "disappointed"];
 
 const ImageDB = {
-  // nerdFemaleDark: ["happy"].map((value) => {
-  //   return require(
-  //     `../../../../Assets/misc/quizBackgrounds/a-npc-averagenerdfemaledark/a-npc-averagenerdfemaledark-${value}.png`,
-  //   );
-  // }),
+  nerdFemaleDark: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-averagenerdfemaledark/a-npc-averagenerdfemaledark-${value}.png`,
+    );
+  }),
   nerdFemaleLight: keys.map((value) => {
     return require(
       `../../../../Assets/misc/quizBackgrounds/a-npc-averagenerdfemalelight/a-npc-averagenerdfemalelight-${value}.png`,
@@ -112,8 +112,6 @@ const ImageDB = {
   }),
 };
 
-console.log("ImageDB: ", ImageDB);
-
 interface ImageMap {
   get(key: LearningElementModel): string[] | undefined;
 }
@@ -135,7 +133,7 @@ const imageMap: ImageMap = new Map([
     QuizElementModelTypes.CampusNPC,
     [campusNPC, campusNPC_Close, campusNPC_Happy, campusNPC_Sad],
   ],
-  //[QuizElementModelTypes.NerdFemaleDarkNPC, ImageDB.nerdFemaleDark],
+  [QuizElementModelTypes.NerdFemaleDarkNPC, ImageDB.nerdFemaleDark],
   [QuizElementModelTypes.NerdFemaleLightNPC, ImageDB.nerdFemaleLight],
   [QuizElementModelTypes.NerdMaleDarkNPC, ImageDB.nerdMaleDark],
   [QuizElementModelTypes.NerdMaleLightNPC, ImageDB.nerdMaleLight],
@@ -164,7 +162,6 @@ export function getNPCImage(
   const index = Number(close) * EmotionMap[emotion];
 
   const result = imageMap.get(model)?.[index];
-  console.log("NPC Image: ", model, close, emotion, result);
 
   if (!result) {
     return defaultNPC;
