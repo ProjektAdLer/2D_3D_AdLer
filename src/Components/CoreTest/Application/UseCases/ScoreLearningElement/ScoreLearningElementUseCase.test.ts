@@ -37,7 +37,7 @@ const getNewTestEntities = () => {
     availableWorlds: [],
     currentWorldID: undefined,
     currentSpaceID: undefined,
-  };
+  } as Partial<UserDataEntity> as UserDataEntity;
   const elementEntity: LearningElementEntity = {
     id: 1,
     value: 0,
