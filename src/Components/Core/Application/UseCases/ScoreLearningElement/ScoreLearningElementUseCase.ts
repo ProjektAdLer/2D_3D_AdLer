@@ -16,7 +16,6 @@ import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import type INotificationPort from "../../Ports/Interfaces/INotificationPort";
 import i18next from "i18next";
-import type ISetNarrativeFrameworkToShownUseCase from "../SetNarrativeFrameworkToShown/ISetNarrativeFrameworkToShownUseCase";
 
 @injectable()
 export default class ScoreLearningElementUseCase
@@ -33,8 +32,6 @@ export default class ScoreLearningElementUseCase
     private calculateWorldScoreUseCase: IInternalCalculateLearningWorldScoreUseCase,
     @inject(USECASE_TYPES.ICalculateLearningSpaceScoreUseCase)
     private calculateSpaceScoreUseCase: IInternalCalculateLearningSpaceScoreUseCase,
-    @inject(USECASE_TYPES.ISetNarrativeFrameworkToShownUseCase)
-    private setNarrativeFrameworkToShownUseCase: ISetNarrativeFrameworkToShownUseCase,
     @inject(PORT_TYPES.ILearningWorldPort)
     private worldPort: ILearningWorldPort,
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
@@ -123,8 +120,6 @@ export default class ScoreLearningElementUseCase
           `ScoreLearningElementUseCase: Error calculating new space score: ${e}`,
         );
       }
-
-      // this.setNarrativeFrameworkToShownUseCase.execute();
 
       this.worldPort.onLearningElementScored(true, elementID);
     }
