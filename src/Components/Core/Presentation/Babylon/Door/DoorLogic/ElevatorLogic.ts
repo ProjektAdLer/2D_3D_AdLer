@@ -53,7 +53,6 @@ export default class ElevatorLogic implements IDoorLogic {
     if (this.enableProximityBehaviour && !this.elevatorIsLifted) {
       this.elevatorAnimationLiftUp.speedRatio = 1;
       this.elevatorAnimationLiftUp?.play(false);
-      console.log("Lift Up Elevator ");
     }
   }
 
@@ -70,7 +69,6 @@ export default class ElevatorLogic implements IDoorLogic {
       this.elevatorAnimationLiftUp.speedRatio = -1;
       this.elevatorAnimationLiftUp?.play(false);
       this.elevatorIsLifted = false;
-      console.log("Lift Down Elevator ");
     }
   }
 }

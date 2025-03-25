@@ -68,12 +68,6 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   if (!viewModel || !controller) return null;
   if (!isOpen || storyTypeToDisplay === StoryElementType.None) return null;
 
-  console.log(
-    "StoryElement-Info: ",
-    viewModel.introEmotion.Value,
-    viewModel.outroEmotion.Value,
-  );
-
   return (
     <StyledContainer className={tailwindMerge(className, "")}>
       <div className="fixed top-0 bottom-0 left-0 right-0 z-50 flex flex-col items-center justify-center w-screen h-full bg-blacktrans lg:grid lg:grid-rows-3 lg:items-start">
