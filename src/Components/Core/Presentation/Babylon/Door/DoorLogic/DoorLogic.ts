@@ -60,6 +60,7 @@ export default class DoorLogic implements IDoorLogic {
       this.doorAnimation,
       this.viewModel.meshes[0],
     );
+    this.viewModel.doorAnimations.push(this.doorAnimationGroup);
   }
 
   private setupDoorSound(): void {

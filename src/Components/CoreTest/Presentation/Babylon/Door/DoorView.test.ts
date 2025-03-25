@@ -139,18 +139,24 @@ describe("DoorView", () => {
     expect(mesh2.rotationQuaternion).toBeNull();
   });
 
-  test("setupAnimation calls logger with warning", async () => {
+  test("loadMeshAsync calls logger with warning", async () => {
+    scenePresenterMock.loadGLTFModel.mockResolvedValue({
+      meshes: [new AbstractMesh("TestMesh", new Scene(new NullEngine()))],
+      animationGroups: [
+        new AnimationGroup("TestAnimation"),
+        new Scene(new NullEngine()),
+      ],
+    } as ISceneLoaderAsyncResult);
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
-    viewModel.meshes = [
-      new AbstractMesh("TestMesh", new Scene(new NullEngine())) as Mesh,
-    ];
 
-    systemUnderTest["setupAnimation"]();
+    await systemUnderTest.asyncSetup();
 
-    expect(loggerMock.log).toHaveBeenCalledTimes(1);
+    expect(loggerMock.log).toHaveBeenCalledTimes(2);
     expect(loggerMock.log).toHaveBeenCalledWith(
       LogLevelTypes.WARN,
-      expect.stringContaining("No submesh with name Door found."),
+      expect.stringContaining(
+        "No valid DoorMesh found in DoorView. DoorLogic will not work.",
+      ),
     );
   });
 

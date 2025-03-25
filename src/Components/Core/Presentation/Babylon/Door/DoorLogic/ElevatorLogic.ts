@@ -5,7 +5,6 @@ import DoorViewModel from "../DoorViewModel";
 export default class ElevatorLogic implements IDoorLogic {
   private elevatorAnimationOpen: AnimationGroup;
   private elevatorAnimationLiftUp: AnimationGroup;
-  private elevatorAnimationLiftDown: AnimationGroup;
   private enableProximityBehaviour = false;
   private elevatorIsLifted: boolean = false;
 
@@ -24,15 +23,14 @@ export default class ElevatorLogic implements IDoorLogic {
           case "elevator_drive_up_open":
             this.elevatorAnimationLiftUp = animationGroup;
             break;
-          case "elevator_drive_down_close":
-            this.elevatorAnimationLiftDown = animationGroup;
-            break;
         }
       }
     });
     //Play initial entry elevator animation on scene start
     if (!this.viewModel.isExit) {
       this.elevatorAnimationOpen?.play(false);
+      this.elevatorIsLifted = true;
+      this.enableProximityBehaviour = true;
     }
     //Enable ProximityBehaviour if door is set open
     if (this.viewModel.isOpen.Value) {
@@ -58,15 +56,7 @@ export default class ElevatorLogic implements IDoorLogic {
   }
 
   avatarFar(): void {
-    //Play first lift down animation for entry elevator
-    if (!this.enableProximityBehaviour && !this.viewModel.isExit) {
-      this.elevatorAnimationLiftDown?.play(false);
-      this.elevatorAnimationLiftDown.onAnimationEndObservable.add(() => {
-        this.enableProximityBehaviour = true;
-        this.elevatorAnimationLiftDown.onAnimationEndObservable.clear();
-      });
-      //Regular proximity Behaviour for Elevator
-    } else if (this.enableProximityBehaviour) {
+    if (this.enableProximityBehaviour) {
       this.elevatorAnimationLiftUp.speedRatio = -1;
       this.elevatorAnimationLiftUp?.play(false);
       this.elevatorIsLifted = false;
