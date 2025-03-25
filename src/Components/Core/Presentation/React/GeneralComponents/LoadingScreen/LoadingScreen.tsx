@@ -7,7 +7,7 @@ import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservab
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import { Trans, useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
-import NarrativeFramework from "../NarrativeFramework/NarrativeFramework";
+import NarrativeFramework from "../NarrativeFrameworkIntro/NarrativeFrameworkIntro";
 
 type LoadinScreenProps = {
   content: JSX.Element;
