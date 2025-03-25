@@ -1,20 +1,20 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import NarrativeFramework from "../../../../../Core/Presentation/React/GeneralComponents/NarrativeFramework/NarrativeFramework";
+import NarrativeFrameworkIntro from "../../../../../Core/Presentation/React/GeneralComponents/NarrativeFrameworkIntro/NarrativeFrameworkIntro";
 import { Provider } from "inversify-react";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
-import NarrativeFrameworkViewModel from "../../../../../Core/Presentation/React/GeneralComponents/NarrativeFramework/NarrativeFrameworkViewModel";
+import NarrativeFrameworkIntroViewModel from "../../../../../Core/Presentation/React/GeneralComponents/NarrativeFrameworkIntro/NarrativeFrameworkIntroViewModel";
 import { mock } from "jest-mock-extended";
-import INarrativeFrameworkController from "../../../../../Core/Presentation/React/GeneralComponents/NarrativeFramework/INarrativeFrameworkController";
+import INarrativeFrameworkIntroController from "../../../../../Core/Presentation/React/GeneralComponents/NarrativeFrameworkIntro/INarrativeFrameworkIntroController";
 import IGetNarrativeFrameworkInfoUseCase from "../../../../../Core/Application/UseCases/GetNarrativeFrameworkInfo/IGetNarrativeFrameworkInfoUseCase";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 
-let mockViewModel = new NarrativeFrameworkViewModel();
-let mockController = mock<INarrativeFrameworkController>();
+let mockViewModel = new NarrativeFrameworkIntroViewModel();
+let mockController = mock<INarrativeFrameworkIntroController>();
 let mockUseCase = mock<IGetNarrativeFrameworkInfoUseCase>();
 
-describe("NarrativeFrameworkView", () => {
+describe("NarrativeFrameworkIntroView", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind(
@@ -27,7 +27,7 @@ describe("NarrativeFrameworkView", () => {
   test("should render", () => {
     render(
       <Provider container={CoreDIContainer}>
-        <NarrativeFramework />
+        <NarrativeFrameworkIntro />
       </Provider>,
     );
   });
@@ -40,7 +40,7 @@ describe("NarrativeFrameworkView", () => {
 
     const container = render(
       <Provider container={CoreDIContainer}>
-        <NarrativeFramework />
+        <NarrativeFrameworkIntro />
       </Provider>,
     );
 

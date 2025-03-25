@@ -249,14 +249,16 @@ describe("LearningWorldPort", () => {
     expect(worldAdapterMock.onStoryElementCutSceneFinished).toBeCalled();
   });
 
-  test("onNarrativeFrameworkInfoLoaded calls a registered adapter", () => {
+  test("onNarrativeFrameworkInfoLoadedOrUpdated calls a registered adapter", () => {
     const worldAdapterMock = mock<ILearningWorldAdapter>();
     systemUnderTest.registerAdapter(worldAdapterMock);
 
     let testTO = new NarrativeFrameworkTO();
-    systemUnderTest.onNarrativeFrameworkInfoLoaded(testTO);
+    systemUnderTest.onNarrativeFrameworkInfoLoadedOrUpdated(testTO);
 
-    expect(worldAdapterMock.onNarrativeFrameworkInfoLoaded).toBeCalled();
+    expect(
+      worldAdapterMock.onNarrativeFrameworkInfoLoadedOrUpdated,
+    ).toBeCalled();
   });
 
   test("name returns LEARNING-WORLD-PORT", () => {
