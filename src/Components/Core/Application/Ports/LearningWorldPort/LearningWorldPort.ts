@@ -228,13 +228,13 @@ export default class LearningWorldPort
 
   // Narrative Framework
 
-  public onNarrativeFrameworkInfoLoaded(
+  public onNarrativeFrameworkInfoLoadedOrUpdated(
     narrativeFrameworkTO: NarrativeFrameworkTO,
   ): void {
     this.mappedAdapters.forEach((adapter) => {
       adapter.forEach((value) => {
-        if (value.onNarrativeFrameworkInfoLoaded)
-          value.onNarrativeFrameworkInfoLoaded(narrativeFrameworkTO);
+        if (value.onNarrativeFrameworkInfoLoadedOrUpdated)
+          value.onNarrativeFrameworkInfoLoadedOrUpdated(narrativeFrameworkTO);
       });
     });
   }

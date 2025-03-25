@@ -47,7 +47,9 @@ describe("GetNarrativeFrameworkInfoUseCase", () => {
     );
     systemUnderTest.execute();
 
-    expect(worldPortMock.onNarrativeFrameworkInfoLoaded).not.toHaveBeenCalled();
+    expect(
+      worldPortMock.onNarrativeFrameworkInfoLoadedOrUpdated,
+    ).not.toHaveBeenCalled();
   });
 
   test("should call port with correct loaded narrative framework info (shownBefore false)", () => {
@@ -78,7 +80,9 @@ describe("GetNarrativeFrameworkInfoUseCase", () => {
     );
     systemUnderTest.execute();
 
-    expect(worldPortMock.onNarrativeFrameworkInfoLoaded).toHaveBeenCalledWith({
+    expect(
+      worldPortMock.onNarrativeFrameworkInfoLoadedOrUpdated,
+    ).toHaveBeenCalledWith({
       introText: "intro",
       outroText: "outro",
       shownBefore: false,
@@ -113,7 +117,57 @@ describe("GetNarrativeFrameworkInfoUseCase", () => {
     );
     systemUnderTest.execute();
 
-    expect(worldPortMock.onNarrativeFrameworkInfoLoaded).toHaveBeenCalledWith({
+    expect(
+      worldPortMock.onNarrativeFrameworkInfoLoadedOrUpdated,
+    ).toHaveBeenCalledWith({
+      introText: "intro",
+      outroText: "outro",
+      shownBefore: true,
+      theme: undefined,
+    });
+  });
+
+  test("should call port with correct loaded narrative framework info (shownBefore true, but split on different rooms)", () => {
+    const worldEntity = {
+      id: 1,
+      spaces: [
+        {
+          elements: [
+            {
+              hasScored: true,
+            },
+            {
+              hasScored: false,
+            },
+          ],
+        },
+        {
+          elements: [
+            {
+              hasScored: false,
+            },
+            {
+              hasScored: false,
+            },
+          ],
+        },
+      ],
+      narrativeFramework: {
+        introText: "intro",
+        outroText: "outro",
+      },
+    };
+    entityContainerMock.filterEntitiesOfType.mockReturnValue([worldEntity]);
+    getUserLocationUseCaseMock.execute.mockReturnValue({ worldID: 1 } as any);
+
+    systemUnderTest = CoreDIContainer.get(
+      USECASE_TYPES.IGetNarrativeFrameworkInfoUseCase,
+    );
+    systemUnderTest.execute();
+
+    expect(
+      worldPortMock.onNarrativeFrameworkInfoLoadedOrUpdated,
+    ).toHaveBeenCalledWith({
       introText: "intro",
       outroText: "outro",
       shownBefore: true,
@@ -138,7 +192,9 @@ describe("GetNarrativeFrameworkInfoUseCase", () => {
     );
     systemUnderTest.execute();
 
-    expect(worldPortMock.onNarrativeFrameworkInfoLoaded).toHaveBeenCalledWith({
+    expect(
+      worldPortMock.onNarrativeFrameworkInfoLoadedOrUpdated,
+    ).toHaveBeenCalledWith({
       introText: "intro",
       outroText: "outro",
       shownBefore: false,

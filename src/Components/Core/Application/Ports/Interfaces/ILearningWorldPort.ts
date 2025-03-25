@@ -68,7 +68,7 @@ export default interface ILearningWorldPort
 
   // narrative framework
 
-  onNarrativeFrameworkInfoLoaded(
+  onNarrativeFrameworkInfoLoadedOrUpdated(
     narrativeFrameworkTO: NarrativeFrameworkTO,
   ): void;
 }

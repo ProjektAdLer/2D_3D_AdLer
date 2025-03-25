@@ -47,12 +47,12 @@ export default class GetNarrativeFrameworkInfoUseCase
 
     //check all spaces if they have at least one scored learningelement
     //if so, set the narrative framework to shown
-    narrativeFrameworkTO.shownBefore = worldEntity.spaces.every((space) => {
+    narrativeFrameworkTO.shownBefore = worldEntity.spaces.some((space) => {
       if (!space.elements) {
         return false;
       }
-      return !space.elements.every((element) => {
-        return !element?.hasScored;
+      return space.elements.some((element) => {
+        return element?.hasScored;
       });
     });
 
@@ -60,6 +60,8 @@ export default class GetNarrativeFrameworkInfoUseCase
       LogLevelTypes.TRACE,
       `GetNarrativeFrameworkInfoUseCase: Got Framework Info of world ${worldEntity.id} from entity.`,
     );
-    this.worldPort.onNarrativeFrameworkInfoLoaded(narrativeFrameworkTO);
+    this.worldPort.onNarrativeFrameworkInfoLoadedOrUpdated(
+      narrativeFrameworkTO,
+    );
   }
 }
