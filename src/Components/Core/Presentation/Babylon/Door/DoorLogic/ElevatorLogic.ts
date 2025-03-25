@@ -32,8 +32,8 @@ export default class ElevatorLogic implements IDoorLogic {
       this.elevatorIsLifted = true;
       this.enableProximityBehaviour = true;
     }
-    //Enable ProximityBehaviour if door is set open
-    if (this.viewModel.isOpen.Value) {
+    //Enable ProximityBehaviour if exit elevator is set open
+    if (this.viewModel.isOpen.Value && this.viewModel.isExit) {
       this.enableProximityBehaviour = true;
     }
   }

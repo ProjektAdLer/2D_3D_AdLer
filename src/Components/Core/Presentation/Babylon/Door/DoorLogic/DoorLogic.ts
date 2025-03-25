@@ -22,6 +22,10 @@ export default class DoorLogic implements IDoorLogic {
     this.logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
     this.setupDoorAnimation();
     this.setupDoorSound();
+    if (this.viewModel.isOpen.Value) {
+      console.log("Door is open");
+      this.open();
+    }
   }
 
   private setupDoorAnimation(): void {
@@ -73,7 +77,11 @@ export default class DoorLogic implements IDoorLogic {
   }
 
   open(): void {
-    this.doorAnimationGroup.play(false);
-    this.openTheDoorSound.play();
+    if (this.doorAnimationGroup) {
+      this.doorAnimationGroup.play(false);
+    }
+    if (this.openTheDoorSound) {
+      this.openTheDoorSound.play();
+    }
   }
 }
