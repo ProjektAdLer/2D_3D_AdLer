@@ -8,7 +8,7 @@ export default class NarrativeFrameworkPresenter
   implements INarrativeFrameworkPresenter
 {
   constructor(private viewModel: NarrativeFrameworkViewModel) {}
-  onNarrativeFrameworkInfoLoaded(
+  onNarrativeFrameworkInfoLoadedOrUpdated(
     narrativeFrameWorkTO: NarrativeFrameworkTO,
   ): void {
     this.viewModel.introText = narrativeFrameWorkTO.introText;

@@ -26,10 +26,6 @@ export default class NarrativeFrameworkBuilder extends PresentationBuilder<
       undefined,
       NarrativeFrameworkPresenter,
     );
-
-    CoreDIContainer.get<IGetNarrativeFrameworkInfoUseCase>(
-      USECASE_TYPES.IGetNarrativeFrameworkInfoUseCase,
-    ).execute();
   }
 
   override buildPresenter(): void {
@@ -37,5 +33,9 @@ export default class NarrativeFrameworkBuilder extends PresentationBuilder<
     CoreDIContainer.get<ILearningWorldPort>(
       PORT_TYPES.ILearningWorldPort,
     ).registerAdapter(this.presenter!, HistoryWrapper.currentLocationScope());
+
+    CoreDIContainer.get<IGetNarrativeFrameworkInfoUseCase>(
+      USECASE_TYPES.IGetNarrativeFrameworkInfoUseCase,
+    ).execute();
   }
 }

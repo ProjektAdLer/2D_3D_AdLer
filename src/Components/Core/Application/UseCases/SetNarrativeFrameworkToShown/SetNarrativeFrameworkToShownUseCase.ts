@@ -7,6 +7,9 @@ import LearningWorldEntity from "../../../Domain/Entities/LearningWorldEntity";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUseCase";
+import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
+import type ILearningWorldPort from "../../Ports/Interfaces/ILearningWorldPort";
+import NarrativeFrameworkTO from "../../DataTransferObjects/NarrativeFrameworkTO";
 
 @injectable()
 export default class SetNarrativeFrameworkToShownUseCase
@@ -19,6 +22,8 @@ export default class SetNarrativeFrameworkToShownUseCase
     private getUserLocationUseCase: IGetUserLocationUseCase,
     @inject(CORE_TYPES.IEntityContainer)
     private entityContainer: IEntityContainer,
+    @inject(PORT_TYPES.ILearningWorldPort)
+    private worldPort: ILearningWorldPort,
   ) {}
 
   execute(): void {
@@ -34,10 +39,22 @@ export default class SetNarrativeFrameworkToShownUseCase
       );
       return;
     }
-    worldEntity.narrativeFramework!.shownBefore = true;
+    if (worldEntity.narrativeFramework.shownBefore) {
+      return;
+    }
+    worldEntity.narrativeFramework.shownBefore = true;
+
+    let narrativeFrameworkTO = new NarrativeFrameworkTO();
+    narrativeFrameworkTO.introText = worldEntity.narrativeFramework!.introText;
+    narrativeFrameworkTO.outroText = worldEntity.narrativeFramework!.outroText;
+    narrativeFrameworkTO.theme = worldEntity.theme;
+    narrativeFrameworkTO.shownBefore = true;
     this.logger.log(
       LogLevelTypes.TRACE,
       `SetNarrativeFrameworkToShownUseCase: Set Narrative Framework of World with ID ${worldEntity.id} to shown.`,
+    );
+    this.worldPort.onNarrativeFrameworkInfoLoadedOrUpdated(
+      narrativeFrameworkTO,
     );
   }
 }

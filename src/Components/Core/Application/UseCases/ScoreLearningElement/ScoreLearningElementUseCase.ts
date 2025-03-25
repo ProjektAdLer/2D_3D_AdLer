@@ -124,7 +124,7 @@ export default class ScoreLearningElementUseCase
         );
       }
 
-      this.setNarrativeFrameworkToShownUseCase.execute();
+      // this.setNarrativeFrameworkToShownUseCase.execute();
 
       this.worldPort.onLearningElementScored(true, elementID);
     }
