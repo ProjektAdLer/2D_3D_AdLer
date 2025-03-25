@@ -34,6 +34,22 @@ describe("GetNarrativeFrameworkInfoUseCase", () => {
     CoreDIContainer.restore();
   });
 
+  test("should return if world entity has no narrative framework", () => {
+    const worldEntity = {
+      id: 1,
+      spaces: [],
+    };
+    entityContainerMock.filterEntitiesOfType.mockReturnValue([worldEntity]);
+    getUserLocationUseCaseMock.execute.mockReturnValue({ worldID: 1 } as any);
+
+    systemUnderTest = CoreDIContainer.get(
+      USECASE_TYPES.IGetNarrativeFrameworkInfoUseCase,
+    );
+    systemUnderTest.execute();
+
+    expect(worldPortMock.onNarrativeFrameworkInfoLoaded).not.toHaveBeenCalled();
+  });
+
   test("should call port with correct loaded narrative framework info (shownBefore false)", () => {
     const worldEntity = {
       id: 1,

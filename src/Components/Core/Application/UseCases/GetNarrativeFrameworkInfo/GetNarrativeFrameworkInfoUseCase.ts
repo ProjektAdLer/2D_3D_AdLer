@@ -33,6 +33,13 @@ export default class GetNarrativeFrameworkInfoUseCase
       LearningWorldEntity,
       (WorldEntity) => WorldEntity.id === data.worldID,
     )[0];
+    if (!worldEntity.narrativeFramework) {
+      this.logger.log(
+        LogLevelTypes.WARN,
+        `GetNarrativeFrameworkInfoUseCase: World ${worldEntity.id} has no narrative framework.`,
+      );
+      return;
+    }
     let narrativeFrameworkTO = new NarrativeFrameworkTO();
     narrativeFrameworkTO.introText = worldEntity.narrativeFramework!.introText;
     narrativeFrameworkTO.outroText = worldEntity.narrativeFramework!.outroText;
