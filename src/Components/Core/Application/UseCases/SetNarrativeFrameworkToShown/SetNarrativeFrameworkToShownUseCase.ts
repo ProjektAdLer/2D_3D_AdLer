@@ -23,11 +23,17 @@ export default class SetNarrativeFrameworkToShownUseCase
 
   execute(): void {
     const data = this.getUserLocationUseCase.execute();
-
     let worldEntity = this.entityContainer.filterEntitiesOfType(
       LearningWorldEntity,
       (WorldEntity) => WorldEntity.id === data.worldID,
     )[0];
+    if (!worldEntity.narrativeFramework) {
+      this.logger.log(
+        LogLevelTypes.WARN,
+        `SetNarrativeFrameworkToShownUseCase: World ${worldEntity.id} has no narrative framework.`,
+      );
+      return;
+    }
     worldEntity.narrativeFramework!.shownBefore = true;
     this.logger.log(
       LogLevelTypes.TRACE,

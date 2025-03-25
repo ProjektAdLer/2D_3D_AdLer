@@ -116,8 +116,6 @@ export default function AdaptivityElementDialogContainer({
   if (!viewmodel || !controller) return null;
   if (!isOpen || !contentData) return null;
 
-  console.log("View Rerender");
-
   return (
     <StyledContainer className={tailwindMerge(className, "")}>
       <div
@@ -189,7 +187,6 @@ export default function AdaptivityElementDialogContainer({
                 <button
                   onClick={() => {
                     controller.reset();
-                    console.log("RESETTING");
                   }}
                   className={tailwindMerge(
                     "justify-center p-1 xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10 w-8 h-8 mobile-portrait:rounded-md aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue",
