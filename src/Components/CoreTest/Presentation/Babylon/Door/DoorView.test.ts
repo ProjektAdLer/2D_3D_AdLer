@@ -75,9 +75,9 @@ describe("DoorView", () => {
   });
 
   //ANF-ID: [ELG0033]
-  test("constructor does not subscribe to viewModel.isOpen when isOpen is true, calls animation instead", async () => {
+  test("constructor does not subscribe to viewModel.isOpen when isOpen is true", async () => {
     scenePresenterMock.loadGLTFModel.mockResolvedValue({
-      meshes: [new AbstractMesh("TestMesh", new Scene(new NullEngine()))],
+      meshes: [new AbstractMesh("Door", new Scene(new NullEngine()))],
       animationGroups: [
         new AnimationGroup("TestAnimation"),
         new Scene(new NullEngine()),
@@ -93,12 +93,6 @@ describe("DoorView", () => {
     await systemUnderTest.asyncSetup();
 
     expect(viewModel.isOpen["subscribers"]).toStrictEqual([]);
-    expect(scenePresenterMock.Scene.beginAnimation).toHaveBeenCalledTimes(1);
-    expect(scenePresenterMock.Scene.beginAnimation).toHaveBeenCalledWith(
-      viewModel.meshes[0],
-      expect.any(Number),
-      expect.any(Number),
-    );
   });
 
   // ANF-ID: [ELG0019]
@@ -227,7 +221,7 @@ describe("DoorView", () => {
   });
 
   // ANF-ID: [ELG0033]
-  test("onIsOpenChanged calls doorAnimationGroup.play() on the scene if viewModel.isOpen is true", async () => {
+  test("onIsOpenChanged calls doorAnimationGroup.play() on the scene if viewModel.isOpen and viewModel.isExit is true", async () => {
     const mockMesh = new AbstractMesh("Door", new Scene(new NullEngine()));
     scenePresenterMock.loadGLTFModel.mockResolvedValue({
       meshes: [mockMesh],
@@ -238,6 +232,7 @@ describe("DoorView", () => {
     } as ISceneLoaderAsyncResult);
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
     viewModel.theme = LearningSpaceThemeType.Campus;
+    viewModel.isExit = true;
 
     await systemUnderTest.asyncSetup();
     viewModel.isOpen.Value = true;

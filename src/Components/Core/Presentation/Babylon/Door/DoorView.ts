@@ -44,7 +44,9 @@ export default class DoorView extends Readyable {
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
     this.logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
 
-    viewModel.isOpen.subscribe(this.onIsOpenChanged);
+    if (!this.viewModel.isOpen.Value) {
+      viewModel.isOpen.subscribe(this.onIsOpenChanged);
+    }
 
     viewModel.isInteractable.subscribe((newValue) => {
       this.updateHighlight();
