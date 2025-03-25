@@ -1,4 +1,4 @@
 import ILearningWorldAdapter from "src/Components/Core/Application/Ports/LearningWorldPort/ILearningWorldAdapter";
 
-export default interface INarrativeFrameworkPresenter
+export default interface INarrativeFrameworkIntroPresenter
   extends ILearningWorldAdapter {}

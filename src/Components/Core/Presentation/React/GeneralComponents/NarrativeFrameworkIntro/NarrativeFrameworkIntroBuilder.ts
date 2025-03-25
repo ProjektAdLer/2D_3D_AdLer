@@ -1,10 +1,10 @@
 import { injectable } from "inversify";
 import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
-import NarrativeFrameworkViewModel from "./NarrativeFrameworkViewModel";
-import INarrativeFrameworkController from "./INarrativeFrameworkController";
-import INarrativeFrameworkPresenter from "./INarrativeFrameworkPresenter";
-import NarrativeFrameworkController from "./NarrativeFrameworkController";
-import NarrativeFrameworkPresenter from "./NarrativeFrameworkPresenter";
+import NarrativeFrameworkIntroViewModel from "./NarrativeFrameworkIntroViewModel";
+import INarrativeFrameworkIntroController from "./INarrativeFrameworkIntroController";
+import INarrativeFrameworkIntroPresenter from "./INarrativeFrameworkIntroPresenter";
+import NarrativeFrameworkIntroController from "./NarrativeFrameworkIntroController";
+import NarrativeFrameworkIntroPresenter from "./NarrativeFrameworkIntroPresenter";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces/ILearningWorldPort";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
@@ -13,18 +13,18 @@ import IGetNarrativeFrameworkInfoUseCase from "src/Components/Core/Application/U
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 
 @injectable()
-export default class NarrativeFrameworkBuilder extends PresentationBuilder<
-  NarrativeFrameworkViewModel,
-  INarrativeFrameworkController,
+export default class NarrativeFrameworkIntroBuilder extends PresentationBuilder<
+  NarrativeFrameworkIntroViewModel,
+  INarrativeFrameworkIntroController,
   undefined,
-  INarrativeFrameworkPresenter
+  INarrativeFrameworkIntroPresenter
 > {
   constructor() {
     super(
-      NarrativeFrameworkViewModel,
-      NarrativeFrameworkController,
+      NarrativeFrameworkIntroViewModel,
+      NarrativeFrameworkIntroController,
       undefined,
-      NarrativeFrameworkPresenter,
+      NarrativeFrameworkIntroPresenter,
     );
   }
 
