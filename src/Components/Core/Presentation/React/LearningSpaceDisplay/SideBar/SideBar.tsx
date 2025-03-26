@@ -92,15 +92,6 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
             </p>
           </div>
 
-          {/* <div className="flex flex-col justify-start items-center max-h-[25%]">
-            <StyledButton onClick={controller.onBreakTimeButtonClicked}>
-              <img src={pauseIcon} alt="" />
-            </StyledButton>
-            <p className="font-bold text-center text-2xs lg:text-md text-adlerdarkblue text-outline">
-              {translate("sidebar_breakTime")}
-            </p>
-          </div> */}
-
           <div className="flex flex-col justify-start items-center max-h-[25%]">
             <StyledButton
               onClick={controller.onControlsExplanationButtonClicked}
@@ -139,18 +130,18 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
             </p>
           </div>
 
-          {/* Empty placeholder containers for future functions/buttons */}
-          <div className="flex flex-col justify-start items-center max-h-[25%] invisible ">
+          <div className="flex flex-col justify-start items-center max-h-[25%]">
             <StyledButton
-              onClick={controller.onControlsExplanationButtonClicked}
+              onClick={controller.onNarrativeFrameworkIntroButtonClicked}
             >
               <img src={controlsIcon} alt="Steuerungserklärung" />
             </StyledButton>
             <p className="font-bold text-center text-2xs lg:text-md text-adlerdarkblue text-outline">
-              {translate("sidebar_controls")}
+              {translate("sidebar_narrativeFrameworkIntro")}
             </p>
           </div>
 
+          {/* Empty placeholder containers for future functions/buttons */}
           <div className="flex flex-col justify-start items-center max-h-[25%] invisible ">
             <StyledButton
               onClick={controller.onControlsExplanationButtonClicked}

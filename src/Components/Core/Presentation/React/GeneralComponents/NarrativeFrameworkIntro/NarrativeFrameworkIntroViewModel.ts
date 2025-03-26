@@ -2,9 +2,10 @@ import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/Learnin
 import Observable from "src/Lib/Observable";
 
 export default class NarrativeFrameworkIntroViewModel {
-  isOpen: Observable<boolean> = new Observable<boolean>(true);
+  isOpenInLoadingscreen: Observable<boolean> = new Observable<boolean>();
+  isOpenInModal: Observable<boolean> = new Observable<boolean>();
+  isModal: Observable<boolean> = new Observable<boolean>();
 
   introText?: string;
-  outroText?: string;
   theme: LearningSpaceThemeType;
 }
