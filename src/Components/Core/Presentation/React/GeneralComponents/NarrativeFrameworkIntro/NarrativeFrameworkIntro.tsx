@@ -5,18 +5,48 @@ import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import explainAdler from "src/Assets/narrativeFramework/g-narrativeframe-explainadler-angled.png";
 
-export default function NarrativeFrameworkIntro() {
+type NarrativeFrameworkIntroProps = {
+  location: "space" | "loadingScreen";
+};
+
+export default function NarrativeFrameworkIntro(
+  props: NarrativeFrameworkIntroProps,
+) {
   const [viewModel, controller] = useBuilder<
     NarrativeFrameworkIntroViewModel,
     INarrativeFrameworkIntroController
   >(BUILDER_TYPES.INarrativeFrameworkIntroBuilder);
-  const [isOpen] = useObservable<boolean>(viewModel?.isOpen);
+  const [isOpenInLoadingScreen] = useObservable<boolean>(
+    viewModel?.isOpenInLoadingscreen,
+  );
+  const [isOpenInModal] = useObservable<boolean>(viewModel?.isOpenInModal);
+  const [isModal] = useObservable<boolean>(viewModel?.isModal);
 
-  if (!viewModel || !controller || !isOpen) return null;
-  if (!viewModel.introText && !viewModel.outroText) return null;
+  console.log(
+    "NarrativeFrameworkIntro",
+    isModal,
+    isOpenInLoadingScreen,
+    isOpenInModal,
+  );
+  if (!viewModel || !controller) return null;
+  if (props.location === "space" && isOpenInModal !== true) return null;
+  if (isOpenInModal !== true && isOpenInLoadingScreen !== true) return null;
+  // if (!viewModel.introText) return null;
 
+  if (isModal) {
+    return (
+      <div>
+        Neues Modal styling
+        {mainBody(viewModel)}
+      </div>
+    );
+  } else {
+    return mainBody(viewModel);
+  }
+}
+function mainBody(viewModel: NarrativeFrameworkIntroViewModel) {
   return (
-    <main className="bg-suburbthemebg bg-no-repeat bg-cover w-[60svw] h-[60svh] relative rounded-lg p-4">
+    <div className="bg-suburbthemebg bg-no-repeat bg-cover w-[60svw] h-[60svh] relative rounded-lg p-4">
       <div className="absolute top-[40%] -left-64 flex justify-start items-start xl:-left-32">
         <img
           alt="AdLer with a thumb up"
@@ -31,8 +61,7 @@ export default function NarrativeFrameworkIntro() {
             </p>
           </div>
         </div>
-        {/*}{viewModel.outroText}{*/}
       </div>
-    </main>
+    </div>
   );
 }

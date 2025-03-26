@@ -23,6 +23,9 @@ const PRESENTATION_TYPES = {
   ILearningWorldCompletionModalPresenter: Symbol(
     "ILearningWorldCompletionModalPresenter",
   ),
+  INarrativeFrameworkIntroPresenter: Symbol(
+    "INarrativeFrameworkIntroPresenter",
+  ),
 };
 
 export default PRESENTATION_TYPES;

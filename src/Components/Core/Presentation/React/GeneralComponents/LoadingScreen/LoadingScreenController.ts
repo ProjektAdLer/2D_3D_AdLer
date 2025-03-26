@@ -3,6 +3,8 @@ import LoadingScreenViewModel from "./LoadingScreenViewModel";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import IBeginStoryElementIntroCutSceneUseCase from "src/Components/Core/Application/UseCases/BeginStoryElementIntroCutScene/IBeginStoryElementIntroCutSceneUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
+import INarrativeFrameworkIntroPresenter from "../NarrativeFrameworkIntro/INarrativeFrameworkIntroPresenter";
 
 export default class LoadingScreenController
   implements ILoadingScreenController
@@ -13,8 +15,11 @@ export default class LoadingScreenController
 
     if (this.viewModel.loadingLocation.Value.includes("spacedisplay")) {
       CoreDIContainer.get<IBeginStoryElementIntroCutSceneUseCase>(
-        USECASE_TYPES.IBeginStoryElementIntroCutSceneUseCase
+        USECASE_TYPES.IBeginStoryElementIntroCutSceneUseCase,
       ).execute();
+      CoreDIContainer.get<INarrativeFrameworkIntroPresenter>(
+        PRESENTATION_TYPES.INarrativeFrameworkIntroPresenter,
+      ).closeNarrativeFrameworkIntro();
     }
   }
 }

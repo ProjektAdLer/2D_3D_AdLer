@@ -15,11 +15,12 @@ import StoryElement from "~ReactComponents/LearningSpaceDisplay/StoryElement/Sto
 import ControlsExplanationModal from "~ReactComponents/GeneralComponents/ControlsExplanationModal/ControlsExplanationModal";
 import BreakTimeNotificationOverview from "~ReactComponents/GeneralComponents/BreakTimeNotificationOverview/BreakTimeNotificationOverview";
 import LearningWorldCompletionModal from "~ReactComponents/LearningSpaceMenu/LearningWorldCompletionModal/LearningWorldCompletionModal";
+import NarrativeFrameworkIntro from "~ReactComponents/GeneralComponents/NarrativeFrameworkIntro/NarrativeFrameworkIntro";
 
 export default function LearningSpace() {
   return (
     <div className="grid h-0 min-h-[90vh] lg:min-h-[90vh] grid-cols-9 grid-rows-6 root">
-      <section className="fixed z-20 flex flex-col-reverse items-center justify-center portrait:flex-col col-span-2 col-start-8 row-start-1 gap-1 lg:space-x-2 space-x-reverse lg:flex-row-reverse right-2 top-2">
+      <section className="fixed z-20 flex flex-col-reverse items-center justify-center col-span-2 col-start-8 row-start-1 gap-1 space-x-reverse portrait:flex-col lg:space-x-2 lg:flex-row-reverse right-2 top-2">
         <LearningWorldScorePanel />
         <LearningSpaceScorePanel />
         <LearningSpaceGoalPanel />
@@ -44,6 +45,7 @@ export default function LearningSpace() {
       {/* Generell sollten Modals immer direkt unter dem Error Manager sein */}
       <NotificationManager className="z-50" />
       <LearningWorldCompletionModal />
+      <NarrativeFrameworkIntro location="space" />
     </div>
   );
 }

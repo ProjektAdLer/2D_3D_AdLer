@@ -2,6 +2,7 @@ import LearningWorldTO from "src/Components/Core/Application/DataTransferObjects
 import ISideBarPresenter from "./ISideBarPresenter";
 import SideBarViewModel from "./SideBarViewModel";
 import LearningWorldScoreTO from "src/Components/Core/Application/DataTransferObjects/LearningWorldScoreTO";
+import NarrativeFrameworkTO from "src/Components/Core/Application/DataTransferObjects/NarrativeFrameworkTO";
 
 export default class SideBarPresenter implements ISideBarPresenter {
   constructor(private viewModel: SideBarViewModel) {}
@@ -15,5 +16,11 @@ export default class SideBarPresenter implements ISideBarPresenter {
   onLearningWorldScored(learningWorldScoreTO: LearningWorldScoreTO): void {
     this.viewModel.allowWorldCompletionModalButtonClick =
       learningWorldScoreTO.currentScore >= learningWorldScoreTO.requiredScore;
+  }
+
+  onNarrativeFrameworkInfoLoadedOrUpdated(
+    narrativeFrameworkTO: NarrativeFrameworkTO,
+  ): void {
+    this.viewModel.allowNarrativeFrameworkIntroButtonClick = true;
   }
 }
