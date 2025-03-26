@@ -131,7 +131,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
     entryDoorBuilder.theme = this.viewModel.theme;
     entryDoorBuilder.spaceID = this.viewModel.id;
     entryDoorBuilder.isExit = false;
-    entryDoorBuilder.isOpen = false;
+    entryDoorBuilder.isOpen = true;
 
     await this.director.buildAsync(entryDoorBuilder);
 

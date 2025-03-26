@@ -34,16 +34,6 @@ export default class DoorPresenter implements IDoorPresenter {
     }
   }
 
-  onLearningSpaceLoaded(learningSpaceTO: LearningSpaceTO): void {
-    if (
-      learningSpaceTO.id === this.viewModel.spaceID &&
-      this.viewModel.isExit &&
-      learningSpaceTO.currentScore >= learningSpaceTO.requiredScore
-    ) {
-      this.viewModel.isOpen.Value = true;
-    }
-  }
-
   onStoryElementCutSceneTriggered(storyType: StoryElementType): void {
     this.viewModel.isInputEnabled.Value = false;
   }

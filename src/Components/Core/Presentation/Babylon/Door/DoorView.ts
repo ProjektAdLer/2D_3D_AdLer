@@ -104,16 +104,6 @@ export default class DoorView extends Readyable {
       );
     }
 
-    if (!this.viewModel.isExit) {
-      this.viewModel.isOpen.Value = true;
-    }
-    console.log(
-      "Ist Ausgang? " +
-        this.viewModel.isExit +
-        " ist offen? " +
-        this.viewModel.isOpen.Value,
-    );
-
     // Setup for screen reader and integration tests
     this.accesibilitySetup();
   }
