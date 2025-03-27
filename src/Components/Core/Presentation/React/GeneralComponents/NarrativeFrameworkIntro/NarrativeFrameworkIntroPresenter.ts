@@ -2,8 +2,6 @@ import { injectable } from "inversify";
 import INarrativeFrameworkIntroPresenter from "./INarrativeFrameworkIntroPresenter";
 import NarrativeFrameworkIntroViewModel from "./NarrativeFrameworkIntroViewModel";
 import NarrativeFrameworkTO from "src/Components/Core/Application/DataTransferObjects/NarrativeFrameworkTO";
-import bind from "bind-decorator";
-import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
 
 @injectable()
 export default class NarrativeFrameworkIntroPresenter

@@ -15,7 +15,6 @@ import StoryElement from "~ReactComponents/LearningSpaceDisplay/StoryElement/Sto
 import ControlsExplanationModal from "~ReactComponents/GeneralComponents/ControlsExplanationModal/ControlsExplanationModal";
 import BreakTimeNotificationOverview from "~ReactComponents/GeneralComponents/BreakTimeNotificationOverview/BreakTimeNotificationOverview";
 import LearningWorldCompletionModal from "~ReactComponents/LearningSpaceMenu/LearningWorldCompletionModal/LearningWorldCompletionModal";
-import NarrativeFrameworkIntro from "~ReactComponents/GeneralComponents/NarrativeFrameworkIntro/NarrativeFrameworkIntro";
 import NarrativeFrameworkLearningSpaceContainer from "~ReactComponents/GeneralComponents/NarrativeFrameworkLearningSpaceContainer/NarrativeFrameworkLearningSpaceContainer";
 
 export default function LearningSpace() {

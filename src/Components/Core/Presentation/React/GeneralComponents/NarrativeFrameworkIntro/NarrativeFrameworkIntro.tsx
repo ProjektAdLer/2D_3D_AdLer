@@ -2,7 +2,6 @@ import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import NarrativeFrameworkIntroViewModel from "./NarrativeFrameworkIntroViewModel";
 import INarrativeFrameworkIntroController from "./INarrativeFrameworkIntroController";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
-import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import explainAdler from "src/Assets/narrativeFramework/g-narrativeframe-explainadler-angled.png";
 
 type NarrativeFrameworkIntroProps = {
@@ -17,7 +16,6 @@ export default function NarrativeFrameworkIntro(
     INarrativeFrameworkIntroController
   >(BUILDER_TYPES.INarrativeFrameworkIntroBuilder);
 
-  console.log("NarrativeFrameworkIntro");
   if (!viewModel || !controller) return null;
   return (
     <div className="bg-suburbthemebg bg-no-repeat bg-cover w-[60svw] h-[60svh] relative rounded-lg p-4">

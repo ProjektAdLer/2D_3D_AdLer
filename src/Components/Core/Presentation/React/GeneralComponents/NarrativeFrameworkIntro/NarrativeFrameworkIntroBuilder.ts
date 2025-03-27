@@ -27,8 +27,6 @@ export default class NarrativeFrameworkIntroBuilder extends PresentationBuilder<
       undefined,
       NarrativeFrameworkIntroPresenter,
     );
-
-    console.log("builder");
   }
 
   override buildPresenter(): void {

@@ -1,5 +1,4 @@
 import { injectable } from "inversify";
-import NarrativeFrameworkTO from "src/Components/Core/Application/DataTransferObjects/NarrativeFrameworkTO";
 import bind from "bind-decorator";
 import INarrativeFrameworkLearningSpaceContainerPresenter from "./INarrativeFrameworkLearningSpaceContainerPresenter";
 import NarrativeFrameworkLearningSpaceContainerViewModel from "./NarrativeFrameworkLearningSpaceContainerViewModel";
@@ -14,7 +13,6 @@ export default class NarrativeFrameworkLearningSpaceContainerPresenter
 
   @bind
   openModal(): void {
-    console.log("openModal");
     this.viewModel.isOpen.Value = true;
   }
 }

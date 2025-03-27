@@ -13,11 +13,8 @@ export default function NarrativeFrameworkLearningSpaceContainer() {
   >(BUILDER_TYPES.INarrativeFrameworkLearningSpaceContainerBuilder);
   const [isOpen] = useObservable<boolean>(viewModel?.isOpen);
 
-  console.log("NarrativeFrameworkLearningSpaceContainer");
   if (!viewModel || !controller) return null;
   if (isOpen !== true) return null;
-
-  console.log(viewModel);
 
   return (
     <div>
