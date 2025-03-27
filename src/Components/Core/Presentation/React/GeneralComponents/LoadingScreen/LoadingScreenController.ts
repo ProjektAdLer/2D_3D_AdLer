@@ -17,9 +17,6 @@ export default class LoadingScreenController
       CoreDIContainer.get<IBeginStoryElementIntroCutSceneUseCase>(
         USECASE_TYPES.IBeginStoryElementIntroCutSceneUseCase,
       ).execute();
-      CoreDIContainer.get<INarrativeFrameworkIntroPresenter>(
-        PRESENTATION_TYPES.INarrativeFrameworkIntroPresenter,
-      ).closeNarrativeFrameworkIntro();
     }
   }
 }

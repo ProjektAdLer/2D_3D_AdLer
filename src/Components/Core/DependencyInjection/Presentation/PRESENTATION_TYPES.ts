@@ -26,6 +26,12 @@ const PRESENTATION_TYPES = {
   INarrativeFrameworkIntroPresenter: Symbol(
     "INarrativeFrameworkIntroPresenter",
   ),
+  INarrativeFrameworkLoadingScreenContainerPresenter: Symbol(
+    "INarrativeFrameworkLoadingScreenContainerPresenter",
+  ),
+  INarrativeFrameworkLearningSpaceContainerPresenter: Symbol(
+    "INarrativeFrameworkLearningSpaceContainerPresenter",
+  ),
 };
 
 export default PRESENTATION_TYPES;

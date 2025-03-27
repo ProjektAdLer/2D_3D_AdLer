@@ -6,7 +6,7 @@ import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservab
 import explainAdler from "src/Assets/narrativeFramework/g-narrativeframe-explainadler-angled.png";
 
 type NarrativeFrameworkIntroProps = {
-  location: "space" | "loadingScreen";
+  type: "intro" | "outro";
 };
 
 export default function NarrativeFrameworkIntro(
@@ -16,35 +16,9 @@ export default function NarrativeFrameworkIntro(
     NarrativeFrameworkIntroViewModel,
     INarrativeFrameworkIntroController
   >(BUILDER_TYPES.INarrativeFrameworkIntroBuilder);
-  const [isOpenInLoadingScreen] = useObservable<boolean>(
-    viewModel?.isOpenInLoadingscreen,
-  );
-  const [isOpenInModal] = useObservable<boolean>(viewModel?.isOpenInModal);
-  const [isModal] = useObservable<boolean>(viewModel?.isModal);
 
-  console.log(
-    "NarrativeFrameworkIntro",
-    isModal,
-    isOpenInLoadingScreen,
-    isOpenInModal,
-  );
+  console.log("NarrativeFrameworkIntro");
   if (!viewModel || !controller) return null;
-  if (props.location === "space" && isOpenInModal !== true) return null;
-  if (isOpenInModal !== true && isOpenInLoadingScreen !== true) return null;
-  // if (!viewModel.introText) return null;
-
-  if (isModal) {
-    return (
-      <div>
-        Neues Modal styling
-        {mainBody(viewModel)}
-      </div>
-    );
-  } else {
-    return mainBody(viewModel);
-  }
-}
-function mainBody(viewModel: NarrativeFrameworkIntroViewModel) {
   return (
     <div className="bg-suburbthemebg bg-no-repeat bg-cover w-[60svw] h-[60svh] relative rounded-lg p-4">
       <div className="absolute top-[40%] -left-64 flex justify-start items-start xl:-left-32">
@@ -57,7 +31,8 @@ function mainBody(viewModel: NarrativeFrameworkIntroViewModel) {
           <span className="absolute w-20 h-20 bg-buttonbgblueopacity -left-3 -bottom-20 bubblecornerbottomleft"></span>
           <div className="p-4 rounded-lg bg-buttonbgblueopacity text-adlerdarkblue">
             <p className="text-sm font-bold onek:text-lg">
-              {viewModel.introText}
+              {props.type === "intro" && viewModel.introText}
+              {props.type === "outro" && viewModel.outroText}
             </p>
           </div>
         </div>
