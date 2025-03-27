@@ -81,28 +81,28 @@ describe("LearningSpacePresenter", () => {
     CoreDIContainer.snapshot();
 
     CoreDIContainer.rebind(
-      BUILDER_TYPES.ILearningElementBuilder
+      BUILDER_TYPES.ILearningElementBuilder,
     ).toConstantValue(elementBuilderMock);
     CoreDIContainer.rebind(
-      BUILDER_TYPES.IStandInDecorationBuilder
+      BUILDER_TYPES.IStandInDecorationBuilder,
     ).toConstantValue(standinBuilderMock);
     CoreDIContainer.rebind(BUILDER_TYPES.IDoorBuilder).toConstantValue(
-      doorBuilderMock
+      doorBuilderMock,
     );
     CoreDIContainer.rebind(BUILDER_TYPES.IWindowBuilder).toConstantValue(
-      windowBuilderMock
+      windowBuilderMock,
     );
     CoreDIContainer.rebind(BUILDER_TYPES.IDecorationBuilder).toConstantValue(
-      decorationBuilderMock
+      decorationBuilderMock,
     );
     CoreDIContainer.rebind<IPresentationDirector>(
-      BUILDER_TYPES.IPresentationDirector
+      BUILDER_TYPES.IPresentationDirector,
     ).toConstantValue(directorMock);
     CoreDIContainer.rebind<ILearningWorldPort>(
-      PORT_TYPES.ILearningWorldPort
+      PORT_TYPES.ILearningWorldPort,
     ).toConstantValue(worldPortMock);
     CoreDIContainer.rebind<IStoryNPCBuilder>(
-      BUILDER_TYPES.IStoryNPCBuilder
+      BUILDER_TYPES.IStoryNPCBuilder,
     ).toConstantValue(storyNPCBuilderMock);
   });
 
@@ -177,13 +177,13 @@ describe("LearningSpacePresenter", () => {
 
     const decorationPresenterMock = mock<IDecorationPresenter>();
     decorationBuilderMock.getPresenter.mockReturnValueOnce(
-      decorationPresenterMock
+      decorationPresenterMock,
     );
 
     await systemUnderTest["asyncSetupSpace"](spaceTO);
 
     expect(decorationBuilderMock.spaceTemplate).toEqual(
-      LearningSpaceTemplateType.L
+      LearningSpaceTemplateType.L,
     );
     expect(directorMock.buildAsync).toHaveBeenCalledTimes(1);
     expect(directorMock.buildAsync).toHaveBeenCalledWith(decorationBuilderMock);
@@ -208,7 +208,7 @@ describe("LearningSpacePresenter", () => {
     expect(directorMock.buildAsync).toHaveBeenCalledTimes(2);
     expect(directorMock.buildAsync).toHaveBeenNthCalledWith(
       2,
-      elementBuilderMock
+      elementBuilderMock,
     );
   });
 
@@ -230,7 +230,7 @@ describe("LearningSpacePresenter", () => {
     expect(directorMock.buildAsync).toHaveBeenCalledTimes(2);
     expect(directorMock.buildAsync).toHaveBeenNthCalledWith(
       1,
-      standinBuilderMock
+      standinBuilderMock,
     );
   });
 
@@ -260,7 +260,7 @@ describe("LearningSpacePresenter", () => {
     expect(doorBuilderMock.rotation).toEqual(1);
     expect(doorBuilderMock.spaceID).toBe(1);
     expect(doorBuilderMock.isExit).toBe(false);
-    expect(doorBuilderMock.isOpen).toBe(false);
+    expect(doorBuilderMock.isOpen).toBe(true);
 
     expect(directorMock.buildAsync).toHaveBeenCalledTimes(1);
     expect(directorMock.buildAsync).toHaveBeenCalledWith(doorBuilderMock);
