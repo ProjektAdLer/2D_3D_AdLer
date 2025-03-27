@@ -47,6 +47,8 @@ import AvatarEditorPreviewCameraBuilder from "../../Presentation/AvatarEditor/Av
 import AvatarEditorPreviewBuilder from "../../Presentation/AvatarEditor/AvatarEditorPreview/AvatarEditorPreviewBuilder";
 import AvatarEditorPreviewModelBuilder from "../../Presentation/AvatarEditor/AvatarEditorPreview/AvatarEditorPreviewModel/AvatarEditorPreviewModelBuilder";
 import NarrativeFrameworkIntroBuilder from "~ReactComponents/GeneralComponents/NarrativeFrameworkIntro/NarrativeFrameworkIntroBuilder";
+import NarrativeFrameworkLoadingScreenContainerBuilder from "~ReactComponents/GeneralComponents/NarrativeFrameworkLoadingScreenContainer/NarrativeFrameworkLoadingScreenContainerBuilder";
+import NarrativeFrameworkLearningSpaceContainerBuilder from "~ReactComponents/GeneralComponents/NarrativeFrameworkLearningSpaceContainer/NarrativeFrameworkLearningSpaceContainerBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -177,6 +179,12 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationBuilder>(BUILDER_TYPES.INarrativeFrameworkIntroBuilder).to(
     NarrativeFrameworkIntroBuilder,
   );
+  bind<IPresentationBuilder>(
+    BUILDER_TYPES.INarrativeFrameworkLoadingScreenContainerBuilder,
+  ).to(NarrativeFrameworkLoadingScreenContainerBuilder);
+  bind<IPresentationBuilder>(
+    BUILDER_TYPES.INarrativeFrameworkLearningSpaceContainerBuilder,
+  ).to(NarrativeFrameworkLearningSpaceContainerBuilder);
 });
 
 export default BuilderDIContainer;

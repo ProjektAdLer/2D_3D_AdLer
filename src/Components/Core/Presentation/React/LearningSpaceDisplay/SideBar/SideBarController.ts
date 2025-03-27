@@ -5,7 +5,7 @@ import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_T
 import IControlsExplanationModalPresenter from "~ReactComponents/GeneralComponents/ControlsExplanationModal/IControlsExplanationModalPresenter";
 import IBreakTimeNotificationOverviewPresenter from "~ReactComponents/GeneralComponents/BreakTimeNotificationOverview/IBreakTimeNotificationOverviewPresenter";
 import ILearningWorldCompletionModalPresenter from "~ReactComponents/LearningSpaceMenu/LearningWorldCompletionModal/ILearningWorldCompletionModalPresenter";
-import INarrativeFrameworkIntroPresenter from "~ReactComponents/GeneralComponents/NarrativeFrameworkIntro/INarrativeFrameworkIntroPresenter";
+import INarrativeFrameworkLearningSpaceContainerPresenter from "~ReactComponents/GeneralComponents/NarrativeFrameworkLearningSpaceContainer/INarrativeFrameworkLearningSpaceContainerPresenter";
 
 export default class SideBarController implements ISideBarController {
   onMainMenuButtonClicked(): void {
@@ -37,8 +37,8 @@ export default class SideBarController implements ISideBarController {
     ).openModal();
   }
   onNarrativeFrameworkIntroButtonClicked(): void {
-    CoreDIContainer.get<INarrativeFrameworkIntroPresenter>(
-      PRESENTATION_TYPES.INarrativeFrameworkIntroPresenter,
+    CoreDIContainer.get<INarrativeFrameworkLearningSpaceContainerPresenter>(
+      PRESENTATION_TYPES.INarrativeFrameworkLearningSpaceContainerPresenter,
     ).openModal();
   }
 }

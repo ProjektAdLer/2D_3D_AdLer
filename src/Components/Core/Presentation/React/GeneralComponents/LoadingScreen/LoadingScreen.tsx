@@ -8,6 +8,7 @@ import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/Styl
 import { Trans, useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import NarrativeFrameworkIntro from "../NarrativeFrameworkIntro/NarrativeFrameworkIntro";
+import NarrativeFrameworkLoadingScreenContainer from "../NarrativeFrameworkLoadingScreenContainer/NarrativeFrameworkLoadingScreenContainer";
 
 type LoadinScreenProps = {
   content: JSX.Element;
@@ -72,13 +73,11 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
         </section>
 
         {/* Loading screen content */}
-        {
-          // !viewModel.loadingLocation.Value.includes("spacedisplay") &&
-          props.content
-        }
-        {/* {viewModel.loadingLocation.Value.includes("spacedisplay") && (
-          <NarrativeFrameworkIntro location="loadingScreen" />
-        )} */}
+        {!viewModel.loadingLocation.Value.includes("spacedisplay") &&
+          props.content}
+        {viewModel.loadingLocation.Value.includes("spacedisplay") && (
+          <NarrativeFrameworkLoadingScreenContainer />
+        )}
 
         {/* Loading screen controls */}
 

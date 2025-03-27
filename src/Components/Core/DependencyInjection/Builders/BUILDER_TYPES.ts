@@ -52,6 +52,12 @@ const BUILDER_TYPES = {
   IAvatarEditorPreviewBuilder: Symbol("IAvatarEditorPreviewBuilder"),
   IAvatarEditorPreviewModelBuilder: Symbol("IAvatarEditorPreviewModelBuilder"),
   INarrativeFrameworkIntroBuilder: Symbol("INarrativeFrameworkIntroBuilder"),
+  INarrativeFrameworkLoadingScreenContainerBuilder: Symbol(
+    "INarrativeFrameworkLoadingScreenContainerBuilder",
+  ),
+  INarrativeFrameworkLearningSpaceContainerBuilder: Symbol(
+    "INarrativeFrameworkLearningSpaceContainerBuilder",
+  ),
 };
 
 export default BUILDER_TYPES;

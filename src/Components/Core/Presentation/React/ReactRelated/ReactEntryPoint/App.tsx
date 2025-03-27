@@ -46,7 +46,7 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
     return (
       <>
         <LoadingScreen
-          content={<NarrativeFrameworkIntro location="loadingScreen" />}
+          content={<LoadingScreenControlsExplanation />}
           i18nKeys={{
             namespace: "learningSpace",
             button: "enterLearningSpace",

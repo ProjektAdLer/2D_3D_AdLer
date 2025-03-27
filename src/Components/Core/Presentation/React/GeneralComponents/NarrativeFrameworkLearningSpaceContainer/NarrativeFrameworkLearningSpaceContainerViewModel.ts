@@ -1,8 +1,6 @@
 import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/LearningSpaceThemeTypes";
 import Observable from "src/Lib/Observable";
 
-export default class NarrativeFrameworkIntroViewModel {
-  introText?: string;
-  outroText?: string;
-  theme: LearningSpaceThemeType;
+export default class NarrativeFrameworkLearningSpaceContainerViewModel {
+  isOpen: Observable<boolean> = new Observable<boolean>();
 }

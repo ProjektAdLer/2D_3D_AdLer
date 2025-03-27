@@ -16,6 +16,7 @@ import ControlsExplanationModal from "~ReactComponents/GeneralComponents/Control
 import BreakTimeNotificationOverview from "~ReactComponents/GeneralComponents/BreakTimeNotificationOverview/BreakTimeNotificationOverview";
 import LearningWorldCompletionModal from "~ReactComponents/LearningSpaceMenu/LearningWorldCompletionModal/LearningWorldCompletionModal";
 import NarrativeFrameworkIntro from "~ReactComponents/GeneralComponents/NarrativeFrameworkIntro/NarrativeFrameworkIntro";
+import NarrativeFrameworkLearningSpaceContainer from "~ReactComponents/GeneralComponents/NarrativeFrameworkLearningSpaceContainer/NarrativeFrameworkLearningSpaceContainer";
 
 export default function LearningSpace() {
   return (
@@ -45,7 +46,8 @@ export default function LearningSpace() {
       {/* Generell sollten Modals immer direkt unter dem Error Manager sein */}
       <NotificationManager className="z-50" />
       <LearningWorldCompletionModal />
-      <NarrativeFrameworkIntro location="space" />
+      {/* <NarrativeFrameworkIntro location="space" /> */}
+      <NarrativeFrameworkLearningSpaceContainer />
     </div>
   );
 }
