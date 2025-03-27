@@ -90,6 +90,7 @@ export default class DoorView extends Readyable {
     const doorMesh = this.viewModel.meshes.find((mesh) =>
       mesh.id.toLowerCase().includes("door"),
     );
+    console.log(doorMesh);
     if (elevatorMesh) {
       this.viewModel.doorLogic = new ElevatorLogic(this.viewModel);
     } else if (doorMesh) {

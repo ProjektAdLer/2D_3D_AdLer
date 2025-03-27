@@ -10,8 +10,6 @@ import CORE_TYPES from "~DependencyInjection/CoreTypes";
 const soundLink = require("../../../../../../Assets/Sounds/door_opening.mp3");
 
 export default class DoorLogic implements IDoorLogic {
-  private logger: ILoggerPort;
-  private doorAnimation: Animation;
   private doorAnimationGroup: AnimationGroup;
   private openTheDoorSound: Sound;
 
@@ -19,7 +17,6 @@ export default class DoorLogic implements IDoorLogic {
     private viewModel: DoorViewModel,
     private scenePresenter: IScenePresenter,
   ) {
-    this.logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
     this.setupDoorAnimation();
     this.setupDoorSound();
     if (this.viewModel.isOpen.Value) {
@@ -28,42 +25,16 @@ export default class DoorLogic implements IDoorLogic {
   }
 
   private setupDoorAnimation(): void {
-    const meshToRotate = this.viewModel.meshes.find(
-      (mesh) => mesh.id === "Door",
-    );
-
-    if (meshToRotate === undefined) {
-      this.logger.log(
-        LogLevelTypes.WARN,
-        "DoorView: No submesh with name Door found. Door animation will not work.",
-      );
-      return;
-    }
-
-    this.doorAnimation = new Animation(
-      "doorAnimation",
-      "rotation.y",
-      30,
-      Animation.ANIMATIONTYPE_FLOAT,
-    );
-
-    const initialRotation = Tools.ToRadians(meshToRotate.rotation.y);
-    this.doorAnimation.setKeys([
-      { frame: 0, value: initialRotation },
-      {
-        frame: 45,
-        value: initialRotation + Tools.ToRadians(80),
-      },
-    ]);
-
-    meshToRotate.animations.push(this.doorAnimation);
-
-    this.doorAnimationGroup = new AnimationGroup("doorAnimationGroup");
-    this.doorAnimationGroup.addTargetedAnimation(
-      this.doorAnimation,
-      this.viewModel.meshes[0],
-    );
-    this.viewModel.doorAnimations.push(this.doorAnimationGroup);
+    this.viewModel.doorAnimations?.forEach((animationGroup) => {
+      if (animationGroup.children) {
+        animationGroup.stop();
+        switch (animationGroup.name) {
+          case "door_open":
+            this.doorAnimationGroup = animationGroup;
+            break;
+        }
+      }
+    });
   }
 
   private setupDoorSound(): void {
