@@ -10,7 +10,8 @@ import CORE_TYPES from "~DependencyInjection/CoreTypes";
 const soundLink = require("../../../../../../Assets/Sounds/door_opening.mp3");
 
 export default class DoorLogic implements IDoorLogic {
-  private doorAnimationGroup: AnimationGroup;
+  private openDoorAnimationGroup: AnimationGroup;
+  private setDoorOpenAnimationGroup: AnimationGroup;
   private openTheDoorSound: Sound;
 
   constructor(
@@ -20,7 +21,7 @@ export default class DoorLogic implements IDoorLogic {
     this.setupDoorAnimation();
     this.setupDoorSound();
     if (this.viewModel.isOpen.Value) {
-      setTimeout(() => this.open(), 500);
+      setTimeout(() => this.setDoorOpen(), 500);
     }
   }
 
@@ -30,7 +31,10 @@ export default class DoorLogic implements IDoorLogic {
         animationGroup.stop();
         switch (animationGroup.name) {
           case "door_open":
-            this.doorAnimationGroup = animationGroup;
+            this.openDoorAnimationGroup = animationGroup;
+            break;
+          case "door_open_idle":
+            this.setDoorOpenAnimationGroup = animationGroup;
             break;
         }
       }
@@ -46,9 +50,13 @@ export default class DoorLogic implements IDoorLogic {
     this.openTheDoorSound.setVolume(0.5);
   }
 
+  setDoorOpen(): void {
+    this.setDoorOpenAnimationGroup?.play(false);
+  }
+
   open(): void {
-    if (this.doorAnimationGroup) {
-      this.doorAnimationGroup.play(false);
+    if (this.openDoorAnimationGroup) {
+      this.openDoorAnimationGroup.play(false);
     }
     if (this.openTheDoorSound) {
       this.openTheDoorSound.play();
