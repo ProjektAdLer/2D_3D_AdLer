@@ -1,6 +1,5 @@
 import { injectable } from "inversify";
 import NarrativeFrameworkTO from "src/Components/Core/Application/DataTransferObjects/NarrativeFrameworkTO";
-import bind from "bind-decorator";
 import INarrativeFrameworkLoadingScreenContainerPresenter from "./INarrativeFrameworkLoadingScreenContainerPresenter";
 import NarrativeFrameworkLoadingScreenContainerViewModel from "./NarrativeFrameworkLoadingScreenContainerViewModel";
 

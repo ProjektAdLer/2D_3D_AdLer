@@ -27,8 +27,6 @@ export default class NarrativeFrameworkLoadingScreenContainerBuilder extends Pre
       undefined,
       NarrativeFrameworkLoadingScreenContainerPresenter,
     );
-
-    console.log("builder");
   }
 
   override buildPresenter(): void {

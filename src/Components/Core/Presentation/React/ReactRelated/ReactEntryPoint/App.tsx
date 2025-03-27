@@ -15,7 +15,6 @@ import "src/localize/i18next-config";
 import AvatarEditor from "src/Components/Core/Presentation/AvatarEditor/AvatarEditor";
 import LoadingScreenControlsExplanation from "~ReactComponents/GeneralComponents/LoadingScreen/LoadingScreenContent/LoadingScreenControlsExplanation";
 import LoadingScreenHomePageInformation from "~ReactComponents/GeneralComponents/LoadingScreen/LoadingScreenContent/LoadingScreenHomePageInformation";
-import NarrativeFrameworkIntro from "~ReactComponents/GeneralComponents/NarrativeFrameworkIntro/NarrativeFrameworkIntro";
 
 export interface IAppProps {}
 
