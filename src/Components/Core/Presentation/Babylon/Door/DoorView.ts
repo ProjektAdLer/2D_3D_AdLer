@@ -4,6 +4,7 @@ import {
   Color3,
   ExecuteCodeAction,
   Mesh,
+  Quaternion,
   Tools,
   Vector3,
 } from "@babylonjs/core";
@@ -24,6 +25,7 @@ import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import HighlightColors from "../HighlightColors";
 import ElevatorLogic from "./DoorLogic/ElevatorLogic";
 import DoorLogic from "./DoorLogic/DoorLogic";
+import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/LearningSpaceThemeTypes";
 
 const iconLinkEntryDoor = require("../../../../../Assets/3dModels/sharedModels/3dIcons/d-3dicons-door-in.glb");
 const iconLinkExitDoor = require("../../../../../Assets/3dModels/sharedModels/3dIcons/d-3dicons-door-out.glb");
@@ -74,9 +76,18 @@ export default class DoorView extends Readyable {
       this.viewModel.iconFloatingAnimation?.dispose();
     }
 
-    // reset quaternion rotation because it can prevent mesh.rotate to have any effect
     const loadedMeshes = loadingResults.meshes as Mesh[];
-    loadedMeshes.forEach((mesh) => (mesh.rotationQuaternion = null));
+    // reset quaternion rotation because it can prevent mesh.rotate to have any effect and added rotation for Arcade entry
+    loadedMeshes.forEach((mesh) => {
+      if (
+        !this.viewModel.isExit &&
+        this.viewModel.theme === LearningSpaceThemeType.Arcade
+      ) {
+        mesh.rotate(Vector3.Up(), Math.PI / 2);
+      } else {
+        mesh.rotationQuaternion = null;
+      }
+    });
 
     // Store meshes and animations in viewModel
     this.viewModel.meshes = loadedMeshes as Mesh[];
@@ -90,7 +101,6 @@ export default class DoorView extends Readyable {
     const doorMesh = this.viewModel.meshes.find((mesh) =>
       mesh.id.toLowerCase().includes("door"),
     );
-    console.log(doorMesh);
     if (elevatorMesh) {
       this.viewModel.doorLogic = new ElevatorLogic(this.viewModel);
     } else if (doorMesh) {

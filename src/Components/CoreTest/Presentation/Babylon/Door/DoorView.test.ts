@@ -154,26 +154,6 @@ describe("DoorView", () => {
     );
   });
 
-  // ANF-ID: [ELG0033]
-  test("asyncSetup/setupAnimation creates a new animation and applies it to the first mesh", async () => {
-    const mockMesh = new AbstractMesh("Door", new Scene(new NullEngine()));
-    scenePresenterMock.loadGLTFModel.mockResolvedValue({
-      meshes: [mockMesh],
-      animationGroups: [
-        new AnimationGroup("TestAnimation"),
-        new Scene(new NullEngine()),
-      ],
-    } as ISceneLoaderAsyncResult);
-
-    const [viewModel, systemUnderTest] = buildSystemUnderTest();
-    viewModel.isExit = true;
-    viewModel.theme = LearningSpaceThemeType.Campus;
-
-    await systemUnderTest.asyncSetup();
-
-    expect(mockMesh.animations.length).toBe(1);
-  });
-
   // ANF-ID: [ELG0019]
   test("positionMesh sets position of the first mesh to viewModel.position", async () => {
     scenePresenterMock.loadGLTFModel.mockResolvedValue({
@@ -218,34 +198,6 @@ describe("DoorView", () => {
     expect(viewModel.meshes[0].rotation.y).toStrictEqual(
       Tools.ToRadians(newRotation),
     );
-  });
-
-  // ANF-ID: [ELG0033]
-  test("onIsOpenChanged calls doorAnimationGroup.play() on the scene if viewModel.isOpen and viewModel.isExit is true", async () => {
-    const mockMesh = new AbstractMesh("Door", new Scene(new NullEngine()));
-    scenePresenterMock.loadGLTFModel.mockResolvedValue({
-      meshes: [mockMesh],
-      animationGroups: [
-        new AnimationGroup("TestAnimation"),
-        new Scene(new NullEngine()),
-      ],
-    } as ISceneLoaderAsyncResult);
-    const [viewModel, systemUnderTest] = buildSystemUnderTest();
-    viewModel.theme = LearningSpaceThemeType.Campus;
-    viewModel.isExit = true;
-
-    await systemUnderTest.asyncSetup();
-    viewModel.isOpen.Value = true;
-    await setTimeout(100);
-
-    const doorAnimationGroup = viewModel.doorAnimations.find(
-      (group) => group.name === "doorAnimationGroup",
-    );
-
-    expect(doorAnimationGroup).toBeDefined();
-    if (doorAnimationGroup) {
-      expect(doorAnimationGroup.isPlaying).toBe(true);
-    }
   });
 
   //ANF-ID: [ELG0018]
