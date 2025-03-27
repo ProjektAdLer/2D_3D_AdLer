@@ -21,7 +21,7 @@ export default class DoorLogic implements IDoorLogic {
     this.setupDoorAnimation();
     this.setupDoorSound();
     if (this.viewModel.isOpen.Value) {
-      setTimeout(() => this.setDoorOpen(), 500);
+      this.setDoorOpen();
     }
   }
 
