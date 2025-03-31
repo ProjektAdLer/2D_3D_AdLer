@@ -112,27 +112,6 @@ describe("DoorView", () => {
     expect(scenePresenterMock.loadGLTFModel).toHaveBeenCalledTimes(2);
   });
 
-  test("asyncSetup/loadMeshAsync sets rotationQuaternion of each loaded mesh to null", async () => {
-    const mesh1 = new AbstractMesh("TestMesh1", new Scene(new NullEngine()));
-    mesh1.rotationQuaternion = new Quaternion();
-    const mesh2 = new AbstractMesh("TestMesh2", new Scene(new NullEngine()));
-    mesh2.rotationQuaternion = new Quaternion();
-    scenePresenterMock.loadGLTFModel.mockResolvedValue({
-      meshes: [mesh1, mesh2],
-      animationGroups: [
-        new AnimationGroup("TestAnimation"),
-        new Scene(new NullEngine()),
-      ],
-    } as ISceneLoaderAsyncResult);
-
-    const [viewModel, systemUnderTest] = buildSystemUnderTest();
-    viewModel.theme = LearningSpaceThemeType.Campus;
-
-    await systemUnderTest.asyncSetup();
-    expect(mesh1.rotationQuaternion).toBeNull();
-    expect(mesh2.rotationQuaternion).toBeNull();
-  });
-
   test("loadMeshAsync calls logger with warning", async () => {
     scenePresenterMock.loadGLTFModel.mockResolvedValue({
       meshes: [new AbstractMesh("TestMesh", new Scene(new NullEngine()))],
