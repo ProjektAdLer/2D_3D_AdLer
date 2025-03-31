@@ -12,12 +12,12 @@ import {
   Vector3,
 } from "@babylonjs/core";
 import { mock, mockDeep } from "jest-mock-extended";
-import { setTimeout } from "timers/promises";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import SCENE_TYPES from "../../../../Core/DependencyInjection/Scenes/SCENE_TYPES";
 import DoorView from "../../../../Core/Presentation/Babylon/Door/DoorView";
 import DoorViewModel from "../../../../Core/Presentation/Babylon/Door/DoorViewModel";
 import IDoorController from "../../../../Core/Presentation/Babylon/Door/IDoorController";
+import ElevatorLogic from "../../../../Core/Presentation/Babylon/Door/DoorLogic/ElevatorLogic";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
 import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
 import ILoggerPort from "../../../../Core/Application/Ports/Interfaces/ILoggerPort";
@@ -247,4 +247,57 @@ describe("DoorView", () => {
       expect(link).toBeDefined();
     },
   );
+
+  test("instatiate ElevatorLogic for elevator Mesh", async () => {
+    scenePresenterMock.loadGLTFModel.mockResolvedValue({
+      meshes: [new AbstractMesh("elevator", new Scene(new NullEngine()))],
+      animationGroups: [
+        new AnimationGroup("TestAnimation"),
+        new Scene(new NullEngine()),
+      ],
+    } as ISceneLoaderAsyncResult);
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    viewModel.theme = LearningSpaceThemeType.Campus;
+
+    await systemUnderTest.asyncSetup();
+
+    expect(viewModel.doorLogic).toBeInstanceOf(ElevatorLogic);
+  });
+
+  test("dispose old icon meshes on score change", async () => {
+    const scene = new Scene(new NullEngine());
+    const oldIcon = new Mesh("oldIcon", scene);
+    const disposeSpy = jest.spyOn(oldIcon, "dispose");
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    viewModel.iconMeshes = [oldIcon];
+    const newMesh = new Mesh("newMesh", scene);
+    scenePresenterMock.loadGLTFModel.mockResolvedValue({
+      meshes: [newMesh],
+      animationGroups: [new AnimationGroup("TestAnimation", scene)],
+    } as unknown as ISceneLoaderAsyncResult);
+
+    await systemUnderTest.asyncSetup();
+
+    expect(disposeSpy).toHaveBeenCalled();
+  });
+
+  test("doorLogic.open() is called if viewModel.isOpen turns true and Door is exit", async () => {
+    scenePresenterMock.loadGLTFModel.mockResolvedValue({
+      meshes: [new AbstractMesh("elevator", new Scene(new NullEngine()))],
+      animationGroups: [
+        new AnimationGroup("TestAnimation"),
+        new Scene(new NullEngine()),
+      ],
+    } as ISceneLoaderAsyncResult);
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    viewModel.isOpen.Value = false;
+    viewModel.isExit = true;
+
+    await systemUnderTest.asyncSetup();
+    const openSpy = jest.spyOn(viewModel.doorLogic, "open");
+    systemUnderTest["onIsOpenChanged"](true);
+    await new Promise((resolve) => setTimeout(resolve, 100));
+
+    expect(openSpy).toHaveBeenCalled();
+  });
 });
