@@ -77,18 +77,6 @@ export default class DoorView extends Readyable {
     }
 
     const loadedMeshes = loadingResults.meshes as Mesh[];
-    // reset quaternion rotation because it can prevent mesh.rotate to have any effect and added rotation for Arcade entry
-    loadedMeshes.forEach((mesh) => {
-      if (
-        !this.viewModel.isExit &&
-        this.viewModel.theme === LearningSpaceThemeType.Arcade
-      ) {
-        mesh.rotate(Vector3.Up(), Math.PI / 2);
-      } else {
-        mesh.rotationQuaternion = null;
-      }
-    });
-
     // Store meshes and animations in viewModel
     this.viewModel.meshes = loadedMeshes as Mesh[];
     this.viewModel.doorAnimations =
