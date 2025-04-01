@@ -1,11 +1,7 @@
 import IDoorLogic from "./IDoorLogic";
 import DoorViewModel from "../DoorViewModel";
-import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILoggerPort";
-import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
-import { Animation, AnimationGroup, Sound, Tools } from "@babylonjs/core";
-import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
+import { AnimationGroup, Sound } from "@babylonjs/core";
 import IScenePresenter from "../../SceneManagement/IScenePresenter";
-import CORE_TYPES from "~DependencyInjection/CoreTypes";
 
 const soundLink = require("../../../../../../Assets/Sounds/door_opening.mp3");
 

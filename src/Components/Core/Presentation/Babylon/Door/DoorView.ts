@@ -4,7 +4,6 @@ import {
   Color3,
   ExecuteCodeAction,
   Mesh,
-  Quaternion,
   Tools,
   Vector3,
 } from "@babylonjs/core";
@@ -25,7 +24,6 @@ import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import HighlightColors from "../HighlightColors";
 import ElevatorLogic from "./DoorLogic/ElevatorLogic";
 import DoorLogic from "./DoorLogic/DoorLogic";
-import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/LearningSpaceThemeTypes";
 
 const iconLinkEntryDoor = require("../../../../../Assets/3dModels/sharedModels/3dIcons/d-3dicons-door-in.glb");
 const iconLinkExitDoor = require("../../../../../Assets/3dModels/sharedModels/3dIcons/d-3dicons-door-out.glb");

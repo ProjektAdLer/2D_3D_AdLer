@@ -2,11 +2,9 @@ import {
   AbstractMesh,
   ActionManager,
   AnimationGroup,
-  Color3,
   ISceneLoaderAsyncResult,
   Mesh,
   NullEngine,
-  Quaternion,
   Scene,
   Tools,
   Vector3,
@@ -24,6 +22,7 @@ import ILoggerPort from "../../../../Core/Application/Ports/Interfaces/ILoggerPo
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
 import HighlightColors from "../../../../Core/Presentation/Babylon/HighlightColors";
+import exp from "constants";
 
 // setup scene presenter mock
 const scenePresenterMock = mockDeep<IScenePresenter>();
@@ -299,5 +298,42 @@ describe("DoorView", () => {
     await new Promise((resolve) => setTimeout(resolve, 100));
 
     expect(openSpy).toHaveBeenCalled();
+  });
+
+  test("elevator proximity animation behaviour is working correctly", async () => {
+    scenePresenterMock.loadGLTFModel.mockResolvedValue({
+      meshes: [new AbstractMesh("elevator", new Scene(new NullEngine()))],
+      animationGroups: [
+        new AnimationGroup("elevator_open"),
+        new AnimationGroup("elevator_drive_up_open"),
+        new Scene(new NullEngine()),
+      ],
+    } as ISceneLoaderAsyncResult);
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    viewModel.isOpen.Value = false;
+
+    await systemUnderTest.asyncSetup();
+    const spyOnClose = jest.spyOn(viewModel.doorLogic, "avatarClose");
+    const spyOnFar = jest.spyOn(viewModel.doorLogic, "avatarFar");
+
+    await systemUnderTest["isInteractableAnimation"](true);
+    expect(spyOnClose).toHaveBeenCalledTimes(1);
+
+    await systemUnderTest["isInteractableAnimation"](false);
+    expect(spyOnFar).toHaveBeenCalledTimes(1);
+  });
+
+  test("toogle of icon float animation works correctly", async () => {
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    const mockAnimation = new AnimationGroup("TestAnimation");
+    mockAnimation.restart = jest.fn();
+    mockAnimation.pause = jest.fn();
+    viewModel.iconFloatingAnimation = mockAnimation;
+
+    systemUnderTest["toggleIconFloatAnimation"](true);
+    expect(viewModel.iconFloatingAnimation.restart).toHaveBeenCalled();
+
+    systemUnderTest["toggleIconFloatAnimation"](false);
+    expect(viewModel.iconFloatingAnimation.pause).toHaveBeenCalled();
   });
 });
