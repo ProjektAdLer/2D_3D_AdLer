@@ -53,4 +53,11 @@ export default class NarrativeFrameworkLoadingScreenContainerBuilder extends Pre
       USECASE_TYPES.IGetNarrativeFrameworkInfoUseCase,
     ).execute();
   }
+
+  override buildViewModel(): void {
+    super.buildViewModel();
+  }
+  override buildController(): void {
+    super.buildController();
+  }
 }
