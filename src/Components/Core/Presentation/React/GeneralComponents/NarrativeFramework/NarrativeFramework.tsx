@@ -15,6 +15,8 @@ export default function NarrativeFramework(props: NarrativeFrameworkProps) {
   >(BUILDER_TYPES.INarrativeFrameworkBuilder);
 
   if (!viewModel || !controller) return null;
+  if (props.type === "intro" && !viewModel.introText) return null;
+  if (props.type === "outro" && !viewModel.outroText) return null;
   return (
     <div className="bg-suburbthemebg bg-no-repeat bg-cover w-[60svw] h-[60svh] relative rounded-lg p-4">
       <div className="absolute top-[40%] -left-64 flex justify-start items-start xl:-left-32">
