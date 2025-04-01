@@ -25,11 +25,37 @@ describe("NarrativeFrameworkView", () => {
     CoreDIContainer.restore();
   });
   test("should render", () => {
+    mockViewModel.introText = "blah";
+    useBuilderMock([mockViewModel, mockController]);
     render(
       <Provider container={CoreDIContainer}>
         <NarrativeFramework type="intro" />
       </Provider>,
     );
+  });
+
+  test("should not render if viewmodel is undefined", () => {
+    useBuilderMock([undefined, mockController]);
+
+    const container = render(
+      <Provider container={CoreDIContainer}>
+        <NarrativeFramework type="intro" />
+      </Provider>,
+    );
+
+    expect(container.container).toBeEmptyDOMElement();
+  });
+
+  test("should not render if controller is undefined", () => {
+    useBuilderMock([mockViewModel, undefined]);
+
+    const container = render(
+      <Provider container={CoreDIContainer}>
+        <NarrativeFramework type="intro" />
+      </Provider>,
+    );
+
+    expect(container.container).toBeEmptyDOMElement();
   });
 
   test("should not render if type = intro, yet introText is undefined", () => {

@@ -49,4 +49,11 @@ export default class NarrativeFrameworkBuilder extends PresentationBuilder<
       USECASE_TYPES.IGetNarrativeFrameworkInfoUseCase,
     ).execute();
   }
+
+  override buildViewModel(): void {
+    super.buildViewModel();
+  }
+  override buildController(): void {
+    super.buildController();
+  }
 }

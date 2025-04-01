@@ -1,14 +1,14 @@
 import { mock } from "jest-mock-extended";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import PRESENTATION_TYPES from "../../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
-import NarrativeFrameworkLearningSpaceContainerBuilder from "../../../../../Core/Presentation/React/GeneralComponents/NarrativeFrameworkLearningSpaceContainer/NarrativeFrameworkLearningSpaceContainerBuilder";
-import INarrativeFrameworkLearningSpaceContainerPresenter from "../../../../../Core/Presentation/React/GeneralComponents/NarrativeFrameworkLearningSpaceContainer/INarrativeFrameworkLearningSpaceContainerPresenter";
+import NarrativeFrameworkLoadingScreenContainerBuilder from "../../../../../Core/Presentation/React/GeneralComponents/NarrativeFrameworkLoadingScreenContainer/NarrativeFrameworkLoadingScreenContainerBuilder";
+import INarrativeFrameworkLoadingScreenContainerPresenter from "../../../../../Core/Presentation/React/GeneralComponents/NarrativeFrameworkLoadingScreenContainer/INarrativeFrameworkLoadingScreenContainerPresenter";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import IGetNarrativeFrameworkInfoUseCase from "../../../../../Core/Application/UseCases/GetNarrativeFrameworkInfo/IGetNarrativeFrameworkInfoUseCase";
 
 let mockUseCase = mock<IGetNarrativeFrameworkInfoUseCase>();
-describe("NarrativeFrameworkLearningSpaceContainerBuilder", () => {
-  let systemUnderTest: NarrativeFrameworkLearningSpaceContainerBuilder;
+describe("NarrativeFrameworkLoadingScreenContainerBuilder", () => {
+  let systemUnderTest: NarrativeFrameworkLoadingScreenContainerBuilder;
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind(
@@ -16,7 +16,7 @@ describe("NarrativeFrameworkLearningSpaceContainerBuilder", () => {
     ).toConstantValue(mockUseCase);
   });
   beforeEach(() => {
-    systemUnderTest = new NarrativeFrameworkLearningSpaceContainerBuilder();
+    systemUnderTest = new NarrativeFrameworkLoadingScreenContainerBuilder();
   });
   afterAll(() => {
     CoreDIContainer.restore();
@@ -34,19 +34,19 @@ describe("NarrativeFrameworkLearningSpaceContainerBuilder", () => {
 
     expect(
       CoreDIContainer.isBound(
-        PRESENTATION_TYPES.INarrativeFrameworkLearningSpaceContainerPresenter,
+        PRESENTATION_TYPES.INarrativeFrameworkLoadingScreenContainerPresenter,
       ),
     ).toBe(true);
     expect(
       CoreDIContainer.get(
-        PRESENTATION_TYPES.INarrativeFrameworkLearningSpaceContainerPresenter,
+        PRESENTATION_TYPES.INarrativeFrameworkLoadingScreenContainerPresenter,
       ),
     ).toBe(systemUnderTest.getPresenter()!);
   });
   test("buildPresenter unbinds the presenter if it is already bound", () => {
     CoreDIContainer.bind(
-      PRESENTATION_TYPES.INarrativeFrameworkLearningSpaceContainerPresenter,
-    ).toConstantValue(mock<INarrativeFrameworkLearningSpaceContainerPresenter>);
+      PRESENTATION_TYPES.INarrativeFrameworkLoadingScreenContainerPresenter,
+    ).toConstantValue(mock<INarrativeFrameworkLoadingScreenContainerPresenter>);
 
     const unbindSpy = jest.spyOn(CoreDIContainer, "unbind");
 

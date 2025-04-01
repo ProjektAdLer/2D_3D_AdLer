@@ -39,4 +39,9 @@ describe("SideBarPresenter", () => {
     systemUnderTest.onLearningWorldScored(worldScoreTo);
     expect(vm.allowWorldCompletionModalButtonClick).toBe(true);
   });
+
+  test("onNarrativeFrameworkInfoLoadedOrUpdated sets allowNarrativeFrameworkIntroButtonClick", () => {
+    systemUnderTest.onNarrativeFrameworkInfoLoadedOrUpdated({});
+    expect(vm.allowNarrativeFrameworkIntroButtonClick).toBe(true);
+  });
 });

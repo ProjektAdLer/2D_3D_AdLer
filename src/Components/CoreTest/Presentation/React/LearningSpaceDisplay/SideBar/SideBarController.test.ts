@@ -6,6 +6,7 @@ import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIConta
 import PRESENTATION_TYPES from "../../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 import IBreakTimeNotificationOverviewPresenter from "../../../../../Core/Presentation/React/GeneralComponents/BreakTimeNotificationOverview/IBreakTimeNotificationOverviewPresenter";
 import ILearningWorldCompletionModalPresenter from "../../../../../Core/Presentation/React/LearningSpaceMenu/LearningWorldCompletionModal/ILearningWorldCompletionModalPresenter";
+import INarrativeFrameworkLearningSpaceContainerPresenter from "../../../../../Core/Presentation/React/GeneralComponents/NarrativeFrameworkLearningSpaceContainer/INarrativeFrameworkLearningSpaceContainerPresenter";
 const historyPushMock = jest.spyOn(history, "push");
 
 describe("SideBarController", () => {
@@ -59,6 +60,18 @@ describe("SideBarController", () => {
     ).toConstantValue(presenterMock);
 
     systemUnderTest.onWorldCompletionModalButtonClicked();
+
+    expect(presenterMock.openModal).toHaveBeenCalledTimes(1);
+  });
+
+  test("onNarrativeFrameworkIntroButtonClicked calls openModal on DI-bound INarrativeFrameworkLearningSpaceContainerPresenter", () => {
+    const presenterMock =
+      mock<INarrativeFrameworkLearningSpaceContainerPresenter>();
+    CoreDIContainer.bind<INarrativeFrameworkLearningSpaceContainerPresenter>(
+      PRESENTATION_TYPES.INarrativeFrameworkLearningSpaceContainerPresenter,
+    ).toConstantValue(presenterMock);
+
+    systemUnderTest.onNarrativeFrameworkIntroButtonClicked();
 
     expect(presenterMock.openModal).toHaveBeenCalledTimes(1);
   });
