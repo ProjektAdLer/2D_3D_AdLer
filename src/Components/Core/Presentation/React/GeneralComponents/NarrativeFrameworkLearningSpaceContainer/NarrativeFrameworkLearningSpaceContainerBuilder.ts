@@ -47,4 +47,11 @@ export default class NarrativeFrameworkLearningSpaceContainerBuilder extends Pre
       PORT_TYPES.ILearningWorldPort,
     ).registerAdapter(this.presenter!, HistoryWrapper.currentLocationScope());
   }
+
+  override buildViewModel(): void {
+    super.buildViewModel();
+  }
+  override buildController(): void {
+    super.buildController();
+  }
 }
