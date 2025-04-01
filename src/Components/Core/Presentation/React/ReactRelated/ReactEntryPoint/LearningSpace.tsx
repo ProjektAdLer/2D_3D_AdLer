@@ -45,7 +45,6 @@ export default function LearningSpace() {
       {/* Generell sollten Modals immer direkt unter dem Error Manager sein */}
       <NotificationManager className="z-50" />
       <LearningWorldCompletionModal />
-      {/* <NarrativeFrameworkIntro location="space" /> */}
       <NarrativeFrameworkLearningSpaceContainer />
     </div>
   );

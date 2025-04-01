@@ -1,13 +1,13 @@
 import { injectable } from "inversify";
-import INarrativeFrameworkIntroPresenter from "./INarrativeFrameworkIntroPresenter";
-import NarrativeFrameworkIntroViewModel from "./NarrativeFrameworkIntroViewModel";
+import INarrativeFrameworkPresenter from "./INarrativeFrameworkPresenter";
+import NarrativeFrameworkViewModel from "./NarrativeFrameworkViewModel";
 import NarrativeFrameworkTO from "src/Components/Core/Application/DataTransferObjects/NarrativeFrameworkTO";
 
 @injectable()
-export default class NarrativeFrameworkIntroPresenter
-  implements INarrativeFrameworkIntroPresenter
+export default class NarrativeFrameworkPresenter
+  implements INarrativeFrameworkPresenter
 {
-  constructor(private viewModel: NarrativeFrameworkIntroViewModel) {}
+  constructor(private viewModel: NarrativeFrameworkViewModel) {}
   onNarrativeFrameworkInfoLoadedOrUpdated(
     narrativeFrameWorkTO: NarrativeFrameworkTO,
   ): void {

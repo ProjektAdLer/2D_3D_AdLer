@@ -3,7 +3,7 @@ import NarrativeFrameworkLearningSpaceContainerViewModel from "./NarrativeFramew
 import INarrativeFrameworkLearningSpaceContainerController from "./INarrativeFrameworkLearningSpaceContainerController";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
-import NarrativeFrameworkIntro from "~ReactComponents/GeneralComponents/NarrativeFrameworkIntro/NarrativeFrameworkIntro";
+import NarrativeFramework from "~ReactComponents/GeneralComponents/NarrativeFramework/NarrativeFramework";
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
 
 export default function NarrativeFrameworkLearningSpaceContainer() {
@@ -23,7 +23,7 @@ export default function NarrativeFrameworkLearningSpaceContainer() {
         onClose={() => controller.closeModal()}
         showModal={isOpen}
       >
-        <NarrativeFrameworkIntro type="intro" />
+        <NarrativeFramework type="intro" />
       </StyledModal>
     </div>
   );

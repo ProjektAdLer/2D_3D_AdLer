@@ -3,7 +3,7 @@ import NarrativeFrameworkLoadingScreenContainerViewModel from "./NarrativeFramew
 import INarrativeFrameworkLoadingScreenContainerController from "./INarrativeFrameworkLoadingScreenContainerController";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
-import NarrativeFrameworkIntro from "~ReactComponents/GeneralComponents/NarrativeFrameworkIntro/NarrativeFrameworkIntro";
+import NarrativeFramework from "~ReactComponents/GeneralComponents/NarrativeFramework/NarrativeFramework";
 
 export default function NarrativeFrameworkLoadingScreenContainer() {
   const [viewModel, controller] = useBuilder<
@@ -19,7 +19,7 @@ export default function NarrativeFrameworkLoadingScreenContainer() {
 
   return (
     <div>
-      <NarrativeFrameworkIntro type="intro" />
+      <NarrativeFramework type="intro" />
     </div>
   );
 }

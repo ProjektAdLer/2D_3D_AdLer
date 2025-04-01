@@ -1,6 +1,6 @@
 import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/LearningSpaceThemeTypes";
 
-export default class NarrativeFrameworkIntroViewModel {
+export default class NarrativeFrameworkViewModel {
   introText?: string;
   outroText?: string;
   theme: LearningSpaceThemeType;

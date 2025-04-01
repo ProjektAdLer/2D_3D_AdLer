@@ -1,10 +1,10 @@
 import { injectable } from "inversify";
 import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
-import NarrativeFrameworkIntroViewModel from "./NarrativeFrameworkIntroViewModel";
-import INarrativeFrameworkIntroController from "./INarrativeFrameworkIntroController";
-import INarrativeFrameworkIntroPresenter from "./INarrativeFrameworkIntroPresenter";
-import NarrativeFrameworkIntroController from "./NarrativeFrameworkIntroController";
-import NarrativeFrameworkIntroPresenter from "./NarrativeFrameworkIntroPresenter";
+import NarrativeFrameworkViewModel from "./NarrativeFrameworkViewModel";
+import INarrativeFrameworkController from "./INarrativeFrameworkController";
+import INarrativeFrameworkPresenter from "./INarrativeFrameworkPresenter";
+import NarrativeFrameworkController from "./NarrativeFrameworkController";
+import NarrativeFrameworkPresenter from "./NarrativeFrameworkPresenter";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces/ILearningWorldPort";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
@@ -14,18 +14,18 @@ import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
 
 @injectable()
-export default class NarrativeFrameworkIntroBuilder extends PresentationBuilder<
-  NarrativeFrameworkIntroViewModel,
-  INarrativeFrameworkIntroController,
+export default class NarrativeFrameworkBuilder extends PresentationBuilder<
+  NarrativeFrameworkViewModel,
+  INarrativeFrameworkController,
   undefined,
-  INarrativeFrameworkIntroPresenter
+  INarrativeFrameworkPresenter
 > {
   constructor() {
     super(
-      NarrativeFrameworkIntroViewModel,
-      NarrativeFrameworkIntroController,
+      NarrativeFrameworkViewModel,
+      NarrativeFrameworkController,
       undefined,
-      NarrativeFrameworkIntroPresenter,
+      NarrativeFrameworkPresenter,
     );
   }
 
@@ -33,16 +33,12 @@ export default class NarrativeFrameworkIntroBuilder extends PresentationBuilder<
     super.buildPresenter();
 
     if (
-      CoreDIContainer.isBound(
-        PRESENTATION_TYPES.INarrativeFrameworkIntroPresenter,
-      )
+      CoreDIContainer.isBound(PRESENTATION_TYPES.INarrativeFrameworkPresenter)
     )
-      CoreDIContainer.unbind(
-        PRESENTATION_TYPES.INarrativeFrameworkIntroPresenter,
-      );
+      CoreDIContainer.unbind(PRESENTATION_TYPES.INarrativeFrameworkPresenter);
 
-    CoreDIContainer.bind<INarrativeFrameworkIntroPresenter>(
-      PRESENTATION_TYPES.INarrativeFrameworkIntroPresenter,
+    CoreDIContainer.bind<INarrativeFrameworkPresenter>(
+      PRESENTATION_TYPES.INarrativeFrameworkPresenter,
     ).toConstantValue(this.presenter!);
 
     CoreDIContainer.get<ILearningWorldPort>(

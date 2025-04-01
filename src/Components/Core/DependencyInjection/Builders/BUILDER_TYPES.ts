@@ -51,7 +51,7 @@ const BUILDER_TYPES = {
   ),
   IAvatarEditorPreviewBuilder: Symbol("IAvatarEditorPreviewBuilder"),
   IAvatarEditorPreviewModelBuilder: Symbol("IAvatarEditorPreviewModelBuilder"),
-  INarrativeFrameworkIntroBuilder: Symbol("INarrativeFrameworkIntroBuilder"),
+  INarrativeFrameworkBuilder: Symbol("INarrativeFrameworkBuilder"),
   INarrativeFrameworkLoadingScreenContainerBuilder: Symbol(
     "INarrativeFrameworkLoadingScreenContainerBuilder",
   ),

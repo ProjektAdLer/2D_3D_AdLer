@@ -7,7 +7,6 @@ import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservab
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import { Trans, useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
-import NarrativeFrameworkIntro from "../NarrativeFrameworkIntro/NarrativeFrameworkIntro";
 import NarrativeFrameworkLoadingScreenContainer from "../NarrativeFrameworkLoadingScreenContainer/NarrativeFrameworkLoadingScreenContainer";
 
 type LoadinScreenProps = {

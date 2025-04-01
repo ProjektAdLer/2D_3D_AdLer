@@ -1,20 +1,18 @@
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
-import NarrativeFrameworkIntroViewModel from "./NarrativeFrameworkIntroViewModel";
-import INarrativeFrameworkIntroController from "./INarrativeFrameworkIntroController";
+import NarrativeFrameworkViewModel from "./NarrativeFrameworkViewModel";
+import INarrativeFrameworkController from "./INarrativeFrameworkController";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import explainAdler from "src/Assets/narrativeFramework/g-narrativeframe-explainadler-angled.png";
 
-type NarrativeFrameworkIntroProps = {
+type NarrativeFrameworkProps = {
   type: "intro" | "outro";
 };
 
-export default function NarrativeFrameworkIntro(
-  props: NarrativeFrameworkIntroProps,
-) {
+export default function NarrativeFramework(props: NarrativeFrameworkProps) {
   const [viewModel, controller] = useBuilder<
-    NarrativeFrameworkIntroViewModel,
-    INarrativeFrameworkIntroController
-  >(BUILDER_TYPES.INarrativeFrameworkIntroBuilder);
+    NarrativeFrameworkViewModel,
+    INarrativeFrameworkController
+  >(BUILDER_TYPES.INarrativeFrameworkBuilder);
 
   if (!viewModel || !controller) return null;
   return (

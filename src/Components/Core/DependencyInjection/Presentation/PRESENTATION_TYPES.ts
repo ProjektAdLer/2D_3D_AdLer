@@ -23,9 +23,7 @@ const PRESENTATION_TYPES = {
   ILearningWorldCompletionModalPresenter: Symbol(
     "ILearningWorldCompletionModalPresenter",
   ),
-  INarrativeFrameworkIntroPresenter: Symbol(
-    "INarrativeFrameworkIntroPresenter",
-  ),
+  INarrativeFrameworkPresenter: Symbol("INarrativeFrameworkPresenter"),
   INarrativeFrameworkLoadingScreenContainerPresenter: Symbol(
     "INarrativeFrameworkLoadingScreenContainerPresenter",
   ),
