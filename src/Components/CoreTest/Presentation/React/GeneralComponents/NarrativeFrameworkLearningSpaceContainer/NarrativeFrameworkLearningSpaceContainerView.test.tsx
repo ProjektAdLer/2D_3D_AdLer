@@ -4,7 +4,7 @@ import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USEC
 import IGetNarrativeFrameworkInfoUseCase from "../../../../../Core/Application/UseCases/GetNarrativeFrameworkInfo/IGetNarrativeFrameworkInfoUseCase";
 import INarrativeFrameworkLearningSpaceContainerController from "../../../../../Core/Presentation/React/GeneralComponents/NarrativeFrameworkLearningSpaceContainer/INarrativeFrameworkLearningSpaceContainerController";
 import NarrativeFrameworkLearningSpaceContainerViewModel from "../../../../../Core/Presentation/React/GeneralComponents/NarrativeFrameworkLearningSpaceContainer/NarrativeFrameworkLearningSpaceContainerViewModel";
-import { render } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 import { Provider } from "inversify-react";
 import React from "react";
 import NarrativeFrameworkLearningSpaceContainer from "../../../../../Core/Presentation/React/GeneralComponents/NarrativeFrameworkLearningSpaceContainer/NarrativeFrameworkLearningSpaceContainer";
@@ -31,6 +31,20 @@ describe("NarrativeFrameworkLearningSpaceContainerView", () => {
         <NarrativeFrameworkLearningSpaceContainer />
       </Provider>,
     );
+  });
+
+  test("should call controller when clicked", () => {
+    useBuilderMock([mockViewModel, mockController]);
+    mockViewModel.isOpen.Value = true;
+
+    const component = render(
+      <Provider container={CoreDIContainer}>
+        <NarrativeFrameworkLearningSpaceContainer />
+      </Provider>,
+    );
+    fireEvent.click(component.getByRole("button"));
+
+    expect(mockController.closeModal).toHaveBeenCalled();
   });
 
   test("should not render if viewmodel is undefined", () => {
