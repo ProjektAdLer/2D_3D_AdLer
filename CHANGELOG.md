@@ -10,11 +10,18 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+- added subthemes functionality
+- added elevator models for subthemes
+- added subtheme Campus - Mensa
+- added subtheme Campus - Library
+
 ### Changed
 
 ### Removed
 
 ### Fixed
+
+- fixed animation behaviour for door models
 
 ### Deprecated
 
