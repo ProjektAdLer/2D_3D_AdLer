@@ -5,6 +5,7 @@ import {
   Color4,
   HighlightLayer,
   TransformNode,
+  Color3,
 } from "@babylonjs/core";
 import "@babylonjs/inspector";
 import { inject, injectable } from "inversify";
@@ -63,7 +64,13 @@ export default class LearningSpaceSceneDefinition
 
   protected override async initializeScene(): Promise<void> {
     this.scene.clearColor = new Color4(0.66, 0.83, 0.98, 1);
-    new HemisphericLight("light", new Vector3(0, 1, 0), this.scene);
+    const light = new HemisphericLight(
+      "light",
+      new Vector3(0, 1, 0),
+      this.scene,
+    );
+    light.intensity = 1;
+    light.diffuse = new Color3(1, 1, 1);
 
     // setup highlight layer
     this.highlightLayer = new HighlightLayer("highlightLayer", this.scene);

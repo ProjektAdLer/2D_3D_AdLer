@@ -14,31 +14,35 @@ export default class StandInDecorationView {
 
   constructor(private viewModel: StandInDecorationViewModel) {
     let scenePresenterFactory = CoreDIContainer.get<ScenePresenterFactory>(
-      SCENE_TYPES.ScenePresenterFactory
+      SCENE_TYPES.ScenePresenterFactory,
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
   }
 
   public async asyncSetup(): Promise<void> {
-    const modelRandomizer = new ArrayItemRandomizer(
+    const standInDecorationsModels =
       LearningSpaceThemeLookup.getLearningSpaceTheme(
-        this.viewModel.theme
-      ).standinDecorationModels
-    );
-    const modelLink = modelRandomizer.getItem(
-      `${this.viewModel.slotNumber} ${this.viewModel.spaceName}`
-    );
+        this.viewModel.theme,
+      ).standinDecorationModels;
 
-    this.viewModel.modelMeshes = (await this.scenePresenter.loadModel(
-      modelLink,
-      true
-    )) as Mesh[];
+    if (standInDecorationsModels) {
+      const modelRandomizer = new ArrayItemRandomizer(standInDecorationsModels);
 
-    this.viewModel.modelMeshes[0].position = this.viewModel.position;
+      const modelLink = modelRandomizer.getItem(
+        `${this.viewModel.slotNumber} ${this.viewModel.spaceName}`,
+      );
 
-    this.viewModel.modelMeshes[0].rotate(
-      Vector3.Up(),
-      Tools.ToRadians(this.viewModel.rotation)
-    );
+      this.viewModel.modelMeshes = (await this.scenePresenter.loadModel(
+        modelLink,
+        true,
+      )) as Mesh[];
+
+      this.viewModel.modelMeshes[0].position = this.viewModel.position;
+
+      this.viewModel.modelMeshes[0].rotate(
+        Vector3.Up(),
+        Tools.ToRadians(this.viewModel.rotation),
+      );
+    }
   }
 }
