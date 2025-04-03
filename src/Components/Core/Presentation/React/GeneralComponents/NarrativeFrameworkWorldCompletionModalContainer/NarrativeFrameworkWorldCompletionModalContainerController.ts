@@ -1,0 +1,4 @@
+import INarrativeFrameworkWorldCompletionModalContainerController from "./INarrativeFrameworkWorldCompletionModalContainerController";
+
+export default class NarrativeFrameworkWorldCompletionModalContainerController
+  implements INarrativeFrameworkWorldCompletionModalContainerController {}

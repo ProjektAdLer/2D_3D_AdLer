@@ -30,6 +30,9 @@ const PRESENTATION_TYPES = {
   INarrativeFrameworkLearningSpaceContainerPresenter: Symbol(
     "INarrativeFrameworkLearningSpaceContainerPresenter",
   ),
+  INarrativeFrameworkWorldCompletionModalContainerPresenter: Symbol(
+    "INarrativeFrameworkWorldCompletionModalContainerPresenter",
+  ),
 };
 
 export default PRESENTATION_TYPES;

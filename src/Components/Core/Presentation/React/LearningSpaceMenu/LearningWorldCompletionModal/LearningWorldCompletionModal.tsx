@@ -8,6 +8,7 @@ import SolutionIcon from "../../../../../../Assets/icons/world-completed.svg";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import { useTranslation } from "react-i18next";
+import NarrativeFrameworkWorldCompletionModalContainer from "~ReactComponents/GeneralComponents/NarrativeFrameworkWorldCompletionModalContainer/NarrativeFrameworkWorldCompletionModalContainer";
 
 export default function LearningWorldCompletionModal({
   className,
@@ -46,6 +47,7 @@ export default function LearningWorldCompletionModal({
         }
         <div className="w-full max-w-96">
           <p className="mb-4">{translate("congratulation")}</p>
+          <NarrativeFrameworkWorldCompletionModalContainer />
           {evaluationLink && (
             <div>
               <div className="flex justify-center">

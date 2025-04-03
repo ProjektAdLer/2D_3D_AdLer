@@ -49,6 +49,7 @@ import AvatarEditorPreviewModelBuilder from "../../Presentation/AvatarEditor/Ava
 import NarrativeFrameworkBuilder from "~ReactComponents/GeneralComponents/NarrativeFramework/NarrativeFrameworkBuilder";
 import NarrativeFrameworkLoadingScreenContainerBuilder from "~ReactComponents/GeneralComponents/NarrativeFrameworkLoadingScreenContainer/NarrativeFrameworkLoadingScreenContainerBuilder";
 import NarrativeFrameworkLearningSpaceContainerBuilder from "~ReactComponents/GeneralComponents/NarrativeFrameworkLearningSpaceContainer/NarrativeFrameworkLearningSpaceContainerBuilder";
+import NarrativeFrameworkWorldCompletionModalContainerBuilder from "~ReactComponents/GeneralComponents/NarrativeFrameworkWorldCompletionModalContainer/NarrativeFrameworkWorldCompletionModalContainerBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -185,6 +186,9 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationBuilder>(
     BUILDER_TYPES.INarrativeFrameworkLearningSpaceContainerBuilder,
   ).to(NarrativeFrameworkLearningSpaceContainerBuilder);
+  bind<IPresentationBuilder>(
+    BUILDER_TYPES.INarrativeFrameworkWorldCompletionModalContainerBuilder,
+  ).to(NarrativeFrameworkWorldCompletionModalContainerBuilder);
 });
 
 export default BuilderDIContainer;

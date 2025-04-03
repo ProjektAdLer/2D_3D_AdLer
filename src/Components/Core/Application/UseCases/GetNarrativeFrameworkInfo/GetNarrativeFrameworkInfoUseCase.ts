@@ -33,6 +33,7 @@ export default class GetNarrativeFrameworkInfoUseCase
       LearningWorldEntity,
       (WorldEntity) => WorldEntity.id === data.worldID,
     )[0];
+
     if (!worldEntity.narrativeFramework) {
       this.logger.log(
         LogLevelTypes.WARN,

@@ -58,6 +58,9 @@ const BUILDER_TYPES = {
   INarrativeFrameworkLearningSpaceContainerBuilder: Symbol(
     "INarrativeFrameworkLearningSpaceContainerBuilder",
   ),
+  INarrativeFrameworkWorldCompletionModalContainerBuilder: Symbol(
+    "INarrativeFrameworkWorldCompletionModalContainerBuilder",
+  ),
 };
 
 export default BUILDER_TYPES;
