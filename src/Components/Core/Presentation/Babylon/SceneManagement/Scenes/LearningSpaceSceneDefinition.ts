@@ -6,7 +6,6 @@ import {
   HighlightLayer,
   TransformNode,
   Color3,
-  LensRenderingPipeline,
 } from "@babylonjs/core";
 import "@babylonjs/inspector";
 import { inject, injectable } from "inversify";
