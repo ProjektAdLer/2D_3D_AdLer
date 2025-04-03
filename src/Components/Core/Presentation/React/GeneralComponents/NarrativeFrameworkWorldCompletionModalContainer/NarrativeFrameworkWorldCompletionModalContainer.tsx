@@ -15,6 +15,7 @@ export default function NarrativeFrameworkWorldCompletionModalContainer() {
   );
 
   if (!viewModel || !controller) return null;
+  if (isShowingContent !== true) return null;
 
   return (
     <div>
