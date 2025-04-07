@@ -66,7 +66,10 @@ export default class DoorView extends Readyable {
 
   private async loadMeshAsync(): Promise<void> {
     const modelLink = this.getModelLinkByThemeAndType();
-    const loadingResults = await this.scenePresenter.loadGLTFModel(modelLink);
+    const loadingResults = await this.scenePresenter.loadGLTFModel(
+      modelLink,
+      true,
+    );
 
     // dispose old icon meshes on score change
     if (this.viewModel.iconMeshes && this.viewModel.iconMeshes.length > 0) {

@@ -34,6 +34,7 @@ export default class LearningSpaceViewModel {
   // materials
   public floorMaterial: StandardMaterial;
   public wallMaterial: StandardMaterial;
+  public navMeshMaterial: StandardMaterial;
 
   // meshes
   public floorMesh: Mesh;

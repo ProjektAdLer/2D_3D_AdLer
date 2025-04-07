@@ -60,6 +60,8 @@ export default class LearningSpaceView implements ILearningSpaceView {
     // If a theme has no wall texture, only create floor
     else {
       this.createFloorMaterial();
+      this.createNavMeshMaterial();
+      this.createBigNavigationMesh();
       await this.createFloor();
     }
   }
@@ -106,6 +108,14 @@ export default class LearningSpaceView implements ILearningSpaceView {
     (this.viewModel.wallMaterial.diffuseTexture as Texture).vScale = 1.5;
     (this.viewModel.wallMaterial.diffuseTexture as Texture).uScale = 6;
     this.viewModel.wallMaterial.specularColor = new Color3(0, 0, 0);
+  }
+
+  public createNavMeshMaterial(): void {
+    this.viewModel.navMeshMaterial = new StandardMaterial(
+      "navMeshMaterial",
+      this.scenePresenter.Scene,
+    );
+    this.viewModel.navMeshMaterial.alpha = 0;
   }
 
   private async createFloor(): Promise<void> {
@@ -323,5 +333,18 @@ export default class LearningSpaceView implements ILearningSpaceView {
     pole.position.z = posZ;
 
     return pole;
+  }
+
+  private async createBigNavigationMesh(): Promise<void> {
+    const bigNavmesh = MeshBuilder.CreateGround(
+      "BigNavMesh",
+      {
+        width: 18,
+        height: 18,
+      },
+      this.scenePresenter.Scene,
+    );
+    bigNavmesh.material = this.viewModel.navMeshMaterial;
+    this.scenePresenter.registerNavigationMesh(bigNavmesh);
   }
 }
