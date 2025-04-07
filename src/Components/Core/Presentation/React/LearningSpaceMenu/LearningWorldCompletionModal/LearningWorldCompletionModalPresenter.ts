@@ -14,7 +14,7 @@ export default class LearningWorldCompletionModalPresenter
         (space) => space.currentScore >= space.requiredScore,
       );
     }
-
+    this.viewModel.worldCompletionText = world.worldCompletionText;
     this.viewModel.evaluationLink.Value = world.evaluationLink;
     this.viewModel.currentWorldId.Value = world.id;
   }

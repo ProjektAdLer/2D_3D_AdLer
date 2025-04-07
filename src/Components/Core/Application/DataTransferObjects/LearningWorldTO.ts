@@ -7,6 +7,7 @@ export default class LearningWorldTO {
   spaces: LearningSpaceTO[];
   goals: string[];
   description: string;
+  worldCompletionText: string;
   evaluationLink: string;
   completionModalShown: boolean | undefined;
   lastVisitedSpaceID: ComponentID | undefined;

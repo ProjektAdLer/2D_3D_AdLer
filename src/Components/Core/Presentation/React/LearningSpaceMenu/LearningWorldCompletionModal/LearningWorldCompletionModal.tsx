@@ -47,6 +47,11 @@ export default function LearningWorldCompletionModal({
         }
         <div className="w-full max-w-96">
           <p className="mb-4">{translate("congratulation")}</p>
+          {viewModel.worldCompletionText && (
+            <div className="flex justify-center">
+              {viewModel.worldCompletionText}
+            </div>
+          )}
           <NarrativeFrameworkWorldCompletionModalContainer />
           {evaluationLink && (
             <div>
@@ -65,6 +70,7 @@ export default function LearningWorldCompletionModal({
               </div>
             </div>
           )}
+
           <p>
             {translate("link_Homepage")}
             <a
