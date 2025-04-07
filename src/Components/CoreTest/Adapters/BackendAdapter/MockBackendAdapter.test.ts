@@ -123,6 +123,10 @@ describe("MockBackendAdapter", () => {
         },
         {
           courseID: 3,
+          courseName: "Subtheme World",
+        },
+        {
+          courseID: 4,
           courseName: "New World",
         },
       ],
