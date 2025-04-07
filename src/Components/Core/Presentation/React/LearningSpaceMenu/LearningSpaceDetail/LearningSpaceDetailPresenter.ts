@@ -23,7 +23,7 @@ export default class LearningSpaceDetailPresenter
       });
     });
 
-    // this.viewModel.completionDisplay = world.displayStrategy;
+    this.viewModel.completionDisplay = world.displayStrategy;
 
     // set all values at once to avoid multiple re-renders
     this.viewModel.spaces.Value = newSpaces;

@@ -9,6 +9,7 @@ import LearningSpaceDetailViewModel, {
 } from "../../../../../Core/Presentation/React/LearningSpaceMenu/LearningSpaceDetail/LearningSpaceDetailViewModel";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 import React from "react";
+import PointBasedDisplay from "../../../../../Core/Presentation/Utils/ElementCompletionDisplay/PointBasedDisplay";
 
 let mockViewModel = new LearningSpaceDetailViewModel();
 //world data
@@ -42,6 +43,7 @@ describe("LearningSpaceDetail in Space Menu", () => {
     mockViewModel.elements = mockElements;
     mockViewModel.requiredPoints = mockRequiredPoints;
     mockViewModel.spaces = mockSpaces;
+    mockViewModel.completionDisplay = new PointBasedDisplay();
   });
 
   test("should render", () => {
@@ -94,7 +96,7 @@ describe("LearningSpaceDetail in Space Menu", () => {
     let componentUnderTest = render(<LearningSpaceDetail />);
     waitFor(() => {
       expect(
-        componentUnderTest.getByTestId("checkMark")
+        componentUnderTest.getByTestId("checkMark"),
       ).not.toBeInTheDocument();
     });
 

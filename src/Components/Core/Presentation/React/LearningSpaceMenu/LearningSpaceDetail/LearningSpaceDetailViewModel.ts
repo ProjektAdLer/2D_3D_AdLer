@@ -11,7 +11,6 @@ export interface LearningSpaceDetailLearningSpaceData {
 
 export default class LearningSpaceDetailViewModel {
   // world data
-  // spaces (id, name, isCompleted)
   spaces: Observable<LearningSpaceDetailLearningSpaceData[]> = new Observable<
     LearningSpaceDetailLearningSpaceData[]
   >([]);
@@ -24,14 +23,8 @@ export default class LearningSpaceDetailViewModel {
   requiredPoints: Observable<number> = new Observable<number>(0);
   isAvailable: Observable<boolean> = new Observable<boolean>(false);
 
-  // completionDisplay: IElementCompletionDisplay;
+  completionDisplay: IElementCompletionDisplay;
 
-  // element data (type, name, hasScored, points)
-  // elements: Observable<
-  //   [LearningElementTypeStrings, string, boolean, number][]
-  // > = new Observable<[LearningElementTypeStrings, string, boolean, number][]>(
-  //   [],
-  // );
   elements: Observable<LearningElementInfo[]> = new Observable<
     LearningElementInfo[]
   >([]);

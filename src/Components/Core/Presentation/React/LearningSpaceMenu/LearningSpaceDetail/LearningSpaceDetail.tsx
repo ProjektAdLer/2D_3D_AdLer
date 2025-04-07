@@ -5,7 +5,6 @@ import LearningSpaceDetailViewModel, {
 } from "./LearningSpaceDetailViewModel";
 import spaceIcon from "../../../../../../Assets/icons/space.svg";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
-import { LearningElementTypeStrings } from "../../../../Domain/Types/LearningElementTypes";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import LearningSpaceDetailController from "./LearningSpaceDetailController";
 import { getLearningElementIcon } from "../../../Utils/GetLearningElementIcon";
@@ -130,14 +129,9 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
                         </div>
                       </div>
                       <div className="flex flex-row items-center ml-1 place-items-end">
-                        {element.hasScored
-                          ? element.points + "/" + element.points
-                          : "0/" + element.points}
-                        <img
-                          src={coinIcon}
-                          className="self-center w-6 ml-1 portrait:w-4 lg:w-8"
-                          alt="Coin-Icon"
-                        ></img>
+                        {viewModel.completionDisplay.learningSpaceDetail(
+                          element,
+                        )}
                       </div>
                     </div>
                   </div>
