@@ -17,4 +17,5 @@ export default class LearningElementTO {
   model: LearningElementModel;
   theme: LearningSpaceThemeType;
   isScoreable: boolean;
+  isRequired: boolean | null;
 }

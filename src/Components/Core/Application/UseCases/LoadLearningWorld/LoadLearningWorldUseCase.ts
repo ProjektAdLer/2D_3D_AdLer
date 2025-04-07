@@ -384,6 +384,7 @@ export default class LoadLearningWorldUseCase
           worldStatus.elements.find((e) => e.elementID === element.id)
             ?.hasScored || false,
         parentWorldID: worldID,
+        isRequired: null,
       };
 
       newElementEntity = this.container.createEntity(
@@ -442,6 +443,7 @@ export default class LoadLearningWorldUseCase
         evaluationLink: apiWorldDataResponse.evaluationLink,
         narrativeFramework: narrativeFrameworkEntity,
         theme: apiWorldDataResponse.theme,
+        // displayStrategy: new PointBasedDisplay(),
       },
       LearningWorldEntity,
     );
@@ -475,6 +477,8 @@ export default class LoadLearningWorldUseCase
     // this will need to be changed when entity and TO are not matching in structure anymore
     let worldTO = new LearningWorldTO();
     worldTO = Object.assign(worldTO, structuredClone(entityToConvert));
+    // structured clone wont deep copy instantiation of an interface
+    // worldTO.displayStrategy = entityToConvert.displayStrategy;
 
     return worldTO;
   }

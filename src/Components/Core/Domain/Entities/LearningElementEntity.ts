@@ -12,4 +12,5 @@ export default class LearningElementEntity {
   public type: LearningElementTypeStrings;
   public model: LearningElementModel;
   public parentWorldID: ComponentID;
+  public isRequired: boolean | null;
 }
