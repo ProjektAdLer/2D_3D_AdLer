@@ -241,6 +241,7 @@ export default class LoadLearningWorldUseCase
               space.id,
               space.templateStyle,
             ),
+            displayStrategy: new PointBasedDisplay(),
           },
           LearningSpaceEntity,
         ),

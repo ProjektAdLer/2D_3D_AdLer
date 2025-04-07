@@ -112,6 +112,7 @@ export default class LoadLearningSpaceUseCase
   private toTO(spaceEntity: LearningSpaceEntity): LearningSpaceTO {
     let spaceTO = new LearningSpaceTO();
     spaceTO = Object.assign(spaceTO, structuredClone(spaceEntity));
+    spaceTO.displayStrategy = spaceEntity.displayStrategy;
 
     return spaceTO;
   }

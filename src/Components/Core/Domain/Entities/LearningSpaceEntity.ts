@@ -1,3 +1,4 @@
+import IElementCompletionDisplay from "../../Presentation/Utils/ElementCompletionDisplay/IElementCompletionDisplay";
 import { ComponentID } from "../Types/EntityTypes";
 import { LearningSpaceTemplateType } from "../Types/LearningSpaceTemplateType";
 import { LearningSpaceThemeType } from "../Types/LearningSpaceThemeTypes";
@@ -16,4 +17,5 @@ export default class LearningSpaceEntity {
   public theme: LearningSpaceThemeType;
   public parentWorldID: ComponentID;
   public storyElements: StoryElementEntity[];
+  public displayStrategy: IElementCompletionDisplay;
 }
