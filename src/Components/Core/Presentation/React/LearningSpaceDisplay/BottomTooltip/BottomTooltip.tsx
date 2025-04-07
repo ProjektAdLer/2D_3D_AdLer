@@ -11,7 +11,6 @@ import {
 import useObservable from "../../ReactRelated/CustomHooks/useObservable";
 import StyledContainer from "../../ReactRelated/ReactBaseComponents/StyledContainer";
 import BottomTooltipViewModel from "./BottomTooltipViewModel";
-import coinIcon from "../../../../../../Assets/icons/coin.svg";
 import { AdLerUIComponent } from "../../../../Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import {
@@ -58,12 +57,7 @@ export default function BottomTooltip({
             iconType === DoorTypes.exitDoor) &&
             getDoorIcon(iconType)}
           {text}
-          {showPoints && (
-            <div className="flex items-center ml-2">
-              {points}
-              <img src={coinIcon} alt="" className="w-8"></img>
-            </div>
-          )}
+          {showPoints && viewModel.displayStrategy.bottomTooltip(points)}
         </div>
       </StyledContainer>
     </div>

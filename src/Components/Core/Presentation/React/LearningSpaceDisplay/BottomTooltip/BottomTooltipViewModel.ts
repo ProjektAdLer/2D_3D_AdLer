@@ -1,6 +1,7 @@
 import { DoorTypeStrings } from "src/Components/Core/Domain/Types/DoorTypes";
 import Observable from "../../../../../../Lib/Observable";
 import { LearningElementTypeStrings } from "../../../../Domain/Types/LearningElementTypes";
+import IElementCompletionDisplay from "../../../Utils/ElementCompletionDisplay/IElementCompletionDisplay";
 
 export default class BottomTooltipViewModel {
   show = new Observable<boolean>(false, true);
@@ -13,4 +14,5 @@ export default class BottomTooltipViewModel {
   showPoints = new Observable<boolean>(true, true);
   onClickCallback = new Observable<() => void>(undefined, true);
   hasScored = new Observable<boolean>(false);
+  displayStrategy: IElementCompletionDisplay;
 }

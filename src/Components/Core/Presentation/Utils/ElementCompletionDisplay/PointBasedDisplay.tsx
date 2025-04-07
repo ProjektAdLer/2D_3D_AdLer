@@ -3,14 +3,13 @@ import IElementCompletionDisplay from "./IElementCompletionDisplay";
 import coinIcon from "../../../../../Assets/icons/coin.svg";
 
 export default class PointBasedDisplay implements IElementCompletionDisplay {
-  bottomTooltip(): JSX.Element {
-    // (
-    //   <div className="flex items-center ml-2">
-    //     {points}
-    //     <img src={coinIcon} alt="" className="w-8"></img>
-    //   </div>
-    // )
-    return <></>;
+  bottomTooltip(value: number | boolean): JSX.Element {
+    return (
+      <div className="flex items-center ml-2">
+        {value}
+        <img src={coinIcon} alt="" className="w-8"></img>
+      </div>
+    );
   }
 
   learningSpaceDetail(element: LearningElementInfo): JSX.Element {

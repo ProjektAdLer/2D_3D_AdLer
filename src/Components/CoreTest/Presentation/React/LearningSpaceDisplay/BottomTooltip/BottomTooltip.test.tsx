@@ -4,6 +4,7 @@ import BottomTooltip from "../../../../../Core/Presentation/React/LearningSpaceD
 import BottomTooltipViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/BottomTooltip/BottomTooltipViewModel";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 import React from "react";
+import PointBasedDisplay from "../../../../../Core/Presentation/Utils/ElementCompletionDisplay/PointBasedDisplay";
 
 let fakeModel = new BottomTooltipViewModel();
 
@@ -12,6 +13,7 @@ describe("BottomTooltip", () => {
     fakeModel.show.Value = true;
     fakeModel.iconType.Value = "text";
     fakeModel.text.Value = "testText";
+    fakeModel.displayStrategy = new PointBasedDisplay();
 
     useBuilderMock([fakeModel, undefined]);
 
@@ -24,6 +26,7 @@ describe("BottomTooltip", () => {
     fakeModel.show.Value = false;
     fakeModel.iconType.Value = "text";
     fakeModel.text.Value = "testText";
+    fakeModel.displayStrategy = new PointBasedDisplay();
 
     useBuilderMock([fakeModel, undefined]);
 
