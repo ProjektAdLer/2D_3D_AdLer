@@ -42,6 +42,7 @@ import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementT
 import type { IInternalGetLoginStatusUseCase } from "../GetLoginStatus/IGetLoginStatusUseCase";
 import { NotificationMessages } from "src/Components/Core/Domain/Types/NotificationMessages";
 import NarrativeFrameworkEntity from "src/Components/Core/Domain/Entities/NarrativeFrameworkEntity";
+import PointBasedDisplay from "src/Components/Core/Presentation/Utils/ElementCompletionDisplay/PointBasedDisplay";
 
 @injectable()
 export default class LoadLearningWorldUseCase
@@ -443,7 +444,7 @@ export default class LoadLearningWorldUseCase
         evaluationLink: apiWorldDataResponse.evaluationLink,
         narrativeFramework: narrativeFrameworkEntity,
         theme: apiWorldDataResponse.theme,
-        // displayStrategy: new PointBasedDisplay(),
+        displayStrategy: new PointBasedDisplay(),
       },
       LearningWorldEntity,
     );
@@ -478,7 +479,7 @@ export default class LoadLearningWorldUseCase
     let worldTO = new LearningWorldTO();
     worldTO = Object.assign(worldTO, structuredClone(entityToConvert));
     // structured clone wont deep copy instantiation of an interface
-    // worldTO.displayStrategy = entityToConvert.displayStrategy;
+    worldTO.displayStrategy = entityToConvert.displayStrategy;
 
     return worldTO;
   }
