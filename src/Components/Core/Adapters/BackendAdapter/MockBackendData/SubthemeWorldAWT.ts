@@ -30,7 +30,7 @@ const SubthemeWorldAWT: AWT = {
         spaceName: "Mensa R6",
         spaceDescription: "Raumbeschreibung der kleinen Welt",
         requiredPointsToComplete: 0,
-        spaceSlotContents: [1, null, null, null, null, null],
+        spaceSlotContents: [1, null, 2, 5, 4, null],
         requiredSpacesToEnter: "",
         spaceGoals: [
           "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor ",
@@ -55,7 +55,7 @@ const SubthemeWorldAWT: AWT = {
         spaceName: "Mensa R8",
         spaceDescription: "Raumbeschreibung der kleinen Welt",
         requiredPointsToComplete: 0,
-        spaceSlotContents: [null, 2, null, null, null, null, null, null],
+        spaceSlotContents: [null, 2, 1, 3, null, 5, 6, null],
         requiredSpacesToEnter: "1",
         spaceGoals: [
           "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor ",
@@ -81,18 +81,7 @@ const SubthemeWorldAWT: AWT = {
         spaceName: "Mensa L10",
         spaceDescription: "Raumbeschreibung der kleinen Welt",
         requiredPointsToComplete: 0,
-        spaceSlotContents: [
-          null,
-          null,
-          3,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-        ],
+        spaceSlotContents: [null, null, 3, 2, null, 1, 6, null, 5, null],
         requiredSpacesToEnter: "2",
         spaceGoals: [
           "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor ",
@@ -119,18 +108,18 @@ const SubthemeWorldAWT: AWT = {
         requiredPointsToComplete: 0,
         spaceSlotContents: [
           null,
-          null,
+          6,
           null,
           4,
           null,
           null,
           null,
           null,
+          2,
+          1,
           null,
-          null,
-          null,
-          null,
-          null,
+          3,
+          5,
         ],
         requiredSpacesToEnter: "3",
         spaceGoals: [
@@ -158,8 +147,8 @@ const SubthemeWorldAWT: AWT = {
         requiredPointsToComplete: 0,
         spaceSlotContents: [
           null,
-          null,
-          null,
+          2,
+          1,
           null,
           null,
           5,
@@ -168,8 +157,8 @@ const SubthemeWorldAWT: AWT = {
           null,
           null,
           null,
-          null,
-          null,
+          4,
+          6,
           null,
           null,
         ],
@@ -179,6 +168,162 @@ const SubthemeWorldAWT: AWT = {
         ],
         spaceTemplate: "D_40X37_15L",
         spaceTemplateStyle: "CAMPUSMENSA",
+        spaceStory: {
+          introStory: {
+            storyTexts: [
+              "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod ",
+            ],
+            elementModel: "a-quizbg-defaultnpc",
+          },
+          outroStory: {
+            storyTexts: ["Tschüss", "Du bist mit diesem Raum fertig"],
+            elementModel: "a_npc_defaultnpc",
+          },
+        },
+      },
+      {
+        spaceId: 6,
+        spaceName: "Library R6",
+        spaceDescription: "Raumbeschreibung der kleinen Welt",
+        requiredPointsToComplete: 0,
+        spaceSlotContents: [1, null, 2, 5, 4, null],
+        requiredSpacesToEnter: "",
+        spaceGoals: [
+          "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor ",
+        ],
+        spaceTemplate: "R_20X20_6L",
+        spaceTemplateStyle: "CAMPUSLIBRARY",
+        spaceStory: {
+          introStory: {
+            storyTexts: [
+              "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod ",
+            ],
+            elementModel: "a-npc-averagenerdfemaledark",
+          },
+          outroStory: {
+            storyTexts: ["Tschüss", "Du bist mit diesem Raum fertig"],
+            elementModel: "a_npc_defaultnpc",
+          },
+        },
+      },
+      {
+        spaceId: 7,
+        spaceName: "Library R8",
+        spaceDescription: "Raumbeschreibung der kleinen Welt",
+        requiredPointsToComplete: 0,
+        spaceSlotContents: [null, 2, 1, 3, null, 5, 6, null],
+        requiredSpacesToEnter: "1",
+        spaceGoals: [
+          "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor ",
+        ],
+
+        spaceTemplate: "R_20X30_8L",
+        spaceTemplateStyle: "CAMPUSLIBRARY",
+        spaceStory: {
+          introStory: {
+            storyTexts: [
+              "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod ",
+            ],
+            elementModel: "a-quizbg-defaultnpc",
+          },
+          outroStory: {
+            storyTexts: ["Tschüss", "Du bist mit diesem Raum fertig"],
+            elementModel: "a_npc_defaultnpc",
+          },
+        },
+      },
+      {
+        spaceId: 8,
+        spaceName: "Library L10",
+        spaceDescription: "Raumbeschreibung der kleinen Welt",
+        requiredPointsToComplete: 0,
+        spaceSlotContents: [null, null, 3, 2, null, 1, 6, null, 5, null],
+        requiredSpacesToEnter: "2",
+        spaceGoals: [
+          "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor ",
+        ],
+        spaceTemplate: "L_32X31_10L",
+        spaceTemplateStyle: "CAMPUSLIBRARY",
+        spaceStory: {
+          introStory: {
+            storyTexts: [
+              "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod ",
+            ],
+            elementModel: "a-quizbg-defaultnpc",
+          },
+          outroStory: {
+            storyTexts: ["Tschüss", "Du bist mit diesem Raum fertig"],
+            elementModel: "a_npc_defaultnpc",
+          },
+        },
+      },
+      {
+        spaceId: 9,
+        spaceName: "Library T 13",
+        spaceDescription: "Raumbeschreibung der kleinen Welt",
+        requiredPointsToComplete: 0,
+        spaceSlotContents: [
+          null,
+          6,
+          null,
+          4,
+          null,
+          null,
+          null,
+          null,
+          2,
+          1,
+          null,
+          3,
+          5,
+        ],
+        requiredSpacesToEnter: "3",
+        spaceGoals: [
+          "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor ",
+        ],
+        spaceTemplate: "T_40X32_13L",
+        spaceTemplateStyle: "CAMPUSLIBRARY",
+        spaceStory: {
+          introStory: {
+            storyTexts: [
+              "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod ",
+            ],
+            elementModel: "a-quizbg-defaultnpc",
+          },
+          outroStory: {
+            storyTexts: ["Tschüss", "Du bist mit diesem Raum fertig"],
+            elementModel: "a_npc_defaultnpc",
+          },
+        },
+      },
+      {
+        spaceId: 10,
+        spaceName: "Library D15",
+        spaceDescription: "Raumbeschreibung der kleinen Welt",
+        requiredPointsToComplete: 0,
+        spaceSlotContents: [
+          null,
+          2,
+          1,
+          null,
+          null,
+          5,
+          null,
+          null,
+          null,
+          null,
+          null,
+          4,
+          6,
+          null,
+          null,
+        ],
+        requiredSpacesToEnter: "4",
+        spaceGoals: [
+          "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor",
+        ],
+        spaceTemplate: "D_40X37_15L",
+        spaceTemplateStyle: "CAMPUSLIBRARY",
         spaceStory: {
           introStory: {
             storyTexts: [
