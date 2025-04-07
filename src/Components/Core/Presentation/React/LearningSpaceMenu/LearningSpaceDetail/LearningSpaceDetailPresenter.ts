@@ -5,6 +5,7 @@ import LearningSpaceDetailViewModel, {
 } from "./LearningSpaceDetailViewModel";
 import LearningWorldTO from "src/Components/Core/Application/DataTransferObjects/LearningWorldTO";
 import { LearningElementTypeStrings } from "src/Components/Core/Domain/Types/LearningElementTypes";
+import { LearningElementInfo } from "src/Components/Core/Domain/Types/LearningElementInfo";
 
 export default class LearningSpaceDetailPresenter
   implements ILearningSpaceDetailPresenter
@@ -22,6 +23,8 @@ export default class LearningSpaceDetailPresenter
       });
     });
 
+    // this.viewModel.completionDisplay = world.displayStrategy;
+
     // set all values at once to avoid multiple re-renders
     this.viewModel.spaces.Value = newSpaces;
   }
@@ -37,15 +40,16 @@ export default class LearningSpaceDetailPresenter
       (result, elementTO) => {
         if (!elementTO) return result;
 
-        result.push([
-          elementTO.type,
-          elementTO.name,
-          elementTO.hasScored,
-          elementTO.value,
-        ]);
+        result.push({
+          type: elementTO.type,
+          name: elementTO.name,
+          hasScored: elementTO.hasScored,
+          points: elementTO.value,
+          isRequired: elementTO.isRequired,
+        });
         return result;
       },
-      [] as [LearningElementTypeStrings, string, boolean, number][]
+      [] as LearningElementInfo[],
     );
 
     this.viewModel.requiredPoints.Value = spaceTO.requiredScore;

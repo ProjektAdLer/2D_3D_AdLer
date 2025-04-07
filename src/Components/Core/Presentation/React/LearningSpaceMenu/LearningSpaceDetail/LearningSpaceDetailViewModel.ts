@@ -1,6 +1,7 @@
 import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import Observable from "src/Lib/Observable";
-import { LearningElementTypeStrings } from "../../../../Domain/Types/LearningElementTypes";
+import IElementCompletionDisplay from "../../../Utils/ElementCompletionDisplay/IElementCompletionDisplay";
+import { LearningElementInfo } from "src/Components/Core/Domain/Types/LearningElementInfo";
 
 export interface LearningSpaceDetailLearningSpaceData {
   id: ComponentID;
@@ -23,10 +24,15 @@ export default class LearningSpaceDetailViewModel {
   requiredPoints: Observable<number> = new Observable<number>(0);
   isAvailable: Observable<boolean> = new Observable<boolean>(false);
 
+  // completionDisplay: IElementCompletionDisplay;
+
   // element data (type, name, hasScored, points)
-  elements: Observable<
-    [LearningElementTypeStrings, string, boolean, number][]
-  > = new Observable<[LearningElementTypeStrings, string, boolean, number][]>(
-    []
-  );
+  // elements: Observable<
+  //   [LearningElementTypeStrings, string, boolean, number][]
+  // > = new Observable<[LearningElementTypeStrings, string, boolean, number][]>(
+  //   [],
+  // );
+  elements: Observable<LearningElementInfo[]> = new Observable<
+    LearningElementInfo[]
+  >([]);
 }

@@ -15,6 +15,7 @@ import greenSwosh from "../../../../../../Assets/icons/check-solution.svg";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import { useTranslation } from "react-i18next";
+import { LearningElementInfo } from "src/Components/Core/Domain/Types/LearningElementInfo";
 
 export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
   const [viewModel, controller] = useBuilder<
@@ -25,9 +26,7 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
   const [name] = useObservable<string>(viewModel.name);
   const [description] = useObservable<string>(viewModel.description);
   const [goals] = useObservable<string[]>(viewModel.goals);
-  const [elements] = useObservable<
-    [LearningElementTypeStrings, string, boolean, number][]
-  >(viewModel.elements);
+  const [elements] = useObservable<LearningElementInfo[]>(viewModel.elements);
   const [requiredPoints] = useObservable<number>(viewModel.requiredPoints);
   const [spaces] = useObservable<LearningSpaceDetailLearningSpaceData[]>(
     viewModel.spaces,
@@ -66,7 +65,7 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
           <StyledButton
             color="highlight"
             shape="freeFloatLeft"
-            className="self-center block m-2 portrait:p-2 justify-self-center animate-bounce-once font-bold bg-nodehandlecolor"
+            className="self-center block m-2 font-bold portrait:p-2 justify-self-center animate-bounce-once bg-nodehandlecolor"
             onClick={controller.onLearningSpaceButtonClicked}
           >
             {translate("learningSpaceButton")}
@@ -110,12 +109,13 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
             <div className="flex flex-col items-start ml-6 font-medium portrait:ml-3 portrait:text-xs lg:text-lg mobile-landscape:text-xs">
               {elements.map((element) => {
                 return (
-                  <div key={element[1]} className="w-full">
+                  <div key={element.name} className="w-full">
                     <div className="flex flex-row justify-between w-full xl:w-3/4">
                       <div className="flex flex-row items-center portrait:gap-x-0.5 gap-x-2 max-w-[72%]">
+                        {/* icon of element */}
                         <div className="relative w-6 portrait:w-4 mx-2 portrait:mx-0.5 lg:w-8">
-                          {getLearningElementIcon(element[0])}
-                          {element[2] && (
+                          {getLearningElementIcon(element.type)}
+                          {element.hasScored && (
                             <img
                               src={greenSwosh}
                               alt=""
@@ -124,16 +124,15 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
                             />
                           )}
                         </div>
-
+                        {/* name of element */}
                         <div className="flex flex-row items-center ml-1">
-                          {" " + element[1]}
+                          {" " + element.name}
                         </div>
                       </div>
                       <div className="flex flex-row items-center ml-1 place-items-end">
-                        {/* //TODO: Add real current points  */}
-                        {element[2]
-                          ? element[3] + "/" + element[3]
-                          : "0/" + element[3]}
+                        {element.hasScored
+                          ? element.points + "/" + element.points
+                          : "0/" + element.points}
                         <img
                           src={coinIcon}
                           className="self-center w-6 ml-1 portrait:w-4 lg:w-8"
@@ -167,7 +166,7 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
                 {translate("maximumPoints")}
               </h3>
               <div className="flex flex-row items-start ml-6 text-lg font-medium portrait:text-xs mobile-landscape:text-sm portrait:ml-2">
-                {elements.reduce((acc, element) => acc + element[3], 0)}
+                {elements.reduce((acc, element) => acc + element.points, 0)}
                 <img
                   src={coinIcon}
                   className="self-center w-6 ml-1 portrait:w-4 lg:w-8"

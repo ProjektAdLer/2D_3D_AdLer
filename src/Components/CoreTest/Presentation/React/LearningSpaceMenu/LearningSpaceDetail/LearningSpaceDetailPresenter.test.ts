@@ -7,7 +7,7 @@ describe("LearningSpaceDetailPresenter", () => {
 
   beforeEach(() => {
     systemUnderTest = new LearningSpaceDetailPresenter(
-      new LearningSpaceDetailViewModel()
+      new LearningSpaceDetailViewModel(),
     );
   });
 
@@ -17,7 +17,9 @@ describe("LearningSpaceDetailPresenter", () => {
     });
 
     expect(systemUnderTest["viewModel"].spaces.Value).toEqual(
-      expect.arrayContaining([expect.objectContaining({ id: 1, name: "test" })])
+      expect.arrayContaining([
+        expect.objectContaining({ id: 1, name: "test" }),
+      ]),
     );
   });
 
@@ -29,7 +31,7 @@ describe("LearningSpaceDetailPresenter", () => {
     expect(systemUnderTest["viewModel"].spaces.Value).toEqual(
       expect.arrayContaining([
         expect.objectContaining({ id: 1, name: "test", isCompleted: false }),
-      ])
+      ]),
     );
   });
 
@@ -41,7 +43,7 @@ describe("LearningSpaceDetailPresenter", () => {
     expect(systemUnderTest["viewModel"].spaces.Value).toEqual(
       expect.arrayContaining([
         expect.objectContaining({ id: 1, name: "test", isCompleted: true }),
-      ])
+      ]),
     );
   });
 
@@ -87,15 +89,29 @@ describe("LearningSpaceDetailPresenter", () => {
 
     expect(systemUnderTest["viewModel"].name.Value).toEqual(spaceTO.name);
     expect(systemUnderTest["viewModel"].description.Value).toEqual(
-      spaceTO.description
+      spaceTO.description,
     );
     expect(systemUnderTest["viewModel"].goals.Value).toEqual(spaceTO.goals);
     expect(systemUnderTest["viewModel"].requiredPoints.Value).toEqual(
-      spaceTO.requiredScore
+      spaceTO.requiredScore,
     );
     expect(systemUnderTest["viewModel"].elements.Value).toEqual([
-      ["h5p", "Test Element 1", false, 1],
-      ["text", "Test Element 2", false, 1],
+      {
+        type: "h5p",
+        name: "Test Element 1",
+        hasScored: false,
+        points: 1,
+        isRequired: undefined,
+      },
+      {
+        type: "text",
+        name: "Test Element 2",
+        hasScored: false,
+        points: 1,
+        isRequired: undefined,
+      },
+      // ["h5p", "Test Element 1", false, 1, undefined],
+      // ["text", "Test Element 2", false, 1, undefined],
     ]);
   });
 });
