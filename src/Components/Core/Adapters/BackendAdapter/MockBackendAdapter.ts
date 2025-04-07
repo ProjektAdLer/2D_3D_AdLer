@@ -24,6 +24,7 @@ import StoryWorldAWT from "./MockBackendData/StoryWorldAWT";
 import AWT from "./Types/AWT";
 import { BackendAvatarConfigTO } from "../../Application/DataTransferObjects/BackendAvatarConfigTO";
 import SimpleWorldAWT from "./MockBackendData/SimpleWorldAWT";
+import SubthemeWorldAWT from "./MockBackendData/SubthemeWorldAWT";
 
 @injectable()
 export default class MockBackendAdapter implements IBackendPort {
@@ -81,6 +82,7 @@ export default class MockBackendAdapter implements IBackendPort {
     let worldToUse: AWT;
     if (worldID === 1) worldToUse = SmallWorldAWT;
     else if (worldID === 2) worldToUse = StoryWorldAWT;
+    else if (worldID === 3) worldToUse = SubthemeWorldAWT;
     else worldToUse = SimpleWorldAWT;
 
     const elementType = worldToUse.world.elements.find(
@@ -140,6 +142,10 @@ export default class MockBackendAdapter implements IBackendPort {
         },
         {
           courseID: 3,
+          courseName: "Subtheme World",
+        },
+        {
+          courseID: 4,
           courseName: "New World",
         },
       ],
@@ -165,6 +171,7 @@ export default class MockBackendAdapter implements IBackendPort {
     let worldToUse: AWT;
     if (worldID === 1) worldToUse = SmallWorldAWT;
     else if (worldID === 2) worldToUse = StoryWorldAWT;
+    else if (worldID === 3) worldToUse = SubthemeWorldAWT;
     else worldToUse = SimpleWorldAWT;
 
     return Promise.resolve(BackendAdapterUtils.parseAWT(worldToUse));
