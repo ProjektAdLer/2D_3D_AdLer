@@ -1,7 +1,7 @@
-import useObservable from "../../ReactRelated/CustomHooks/useObservable";
-import LearningSpaceScorePanelViewModel, {
+import useObservable from "../../../ReactRelated/CustomHooks/useObservable";
+import LearningWorldScorePanelViewModel, {
   ScoreInfo,
-} from "./LearningSpaceScorePanelViewModel";
+} from "./LearningWorldScorePanelViewModel";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import {
@@ -9,32 +9,29 @@ import {
   CircularProgressbarWithChildren,
 } from "react-circular-progressbar";
 import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-
-import coinIcon from "../../../../../../Assets/icons/coin.svg";
-import LearningSpaceScorePanelController from "./LearningSpaceScorePanelController";
+import worldIcon from "../../../../../../../Assets/icons/world.svg";
 
 interface PanelProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-export default function LearningSpaceScorePanel({
+export default function LearningWorldScorePanel({
   ...rest
 }: React.DetailedHTMLProps<PanelProps, HTMLDivElement>) {
-  const [viewModel] = useBuilder<
-    LearningSpaceScorePanelViewModel,
-    LearningSpaceScorePanelController
-  >(BUILDER_TYPES.ILearningSpaceScorePanelBuilder);
+  const [viewModel] = useBuilder<LearningWorldScorePanelViewModel, undefined>(
+    BUILDER_TYPES.ILearningWorldScorePanelBuilder,
+  );
 
   const [scoreInfo] = useObservable<ScoreInfo>(viewModel?.scoreInfo);
   const [percentage, setPercentage] = useState(0);
 
-  const { t: translate } = useTranslation("learningSpace");
-
   useEffect(() => {
     if (!scoreInfo) return;
-    setPercentage((scoreInfo.currentScore / scoreInfo.requiredScore) * 100);
+    if (scoreInfo.requiredScore === 0) return setPercentage(100);
+    else
+      setPercentage((scoreInfo.currentScore / scoreInfo.requiredScore) * 100);
   }, [scoreInfo?.currentScore, scoreInfo?.requiredScore, scoreInfo]);
 
   if (!viewModel) return null;
+
   return (
     <div className="w-[49px] lg:w-[70px] bg-buttonbgblue rounded-full">
       <CircularProgressbarWithChildren
@@ -51,19 +48,12 @@ export default function LearningSpaceScorePanel({
       >
         <img
           className="w-[35px] lg:w-[50px] opacity-40"
-          src={coinIcon}
+          src={worldIcon}
           alt="icon"
         />
 
         <div className="absolute text-adlerdarkblue text-[8px] lg:text-[10px] xl:[12px] font-bold leading-5 text-center">
-          {scoreInfo && (
-            <div>
-              {translate("spaceScore", {
-                current: scoreInfo.currentScore,
-                required: scoreInfo.requiredScore,
-              })}
-            </div>
-          )}
+          {Math.round(percentage) + "%"}
         </div>
       </CircularProgressbarWithChildren>
     </div>

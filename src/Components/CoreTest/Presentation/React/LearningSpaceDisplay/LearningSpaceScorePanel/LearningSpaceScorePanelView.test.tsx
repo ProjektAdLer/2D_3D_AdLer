@@ -1,6 +1,6 @@
-import { cleanup, render, waitFor } from "@testing-library/react";
-import LearningSpaceScorePanel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningSpaceScorePanel/LearningSpaceScorePanel";
-import LearningSpaceScorePanelViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningSpaceScorePanel/LearningSpaceScorePanelViewModel";
+import { render, waitFor } from "@testing-library/react";
+import LearningSpaceScorePanel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/ProgressScorePanel/LearningSpaceScorePanel/LearningSpaceScorePanel";
+import LearningSpaceScorePanelViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/ProgressScorePanel/LearningSpaceScorePanel/LearningSpaceScorePanelViewModel";
 import "@testing-library/jest-dom";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 import React from "react";
@@ -8,7 +8,7 @@ import ICalculateLearningWorldScoreUseCase from "../../../../../Core/Application
 import { mock } from "jest-mock-extended";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
-import ILearningSpaceScorePanelController from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningSpaceScorePanel/ILearningSpaceScorePanelController";
+import ILearningSpaceScorePanelController from "../../../../../Core/Presentation/React/LearningSpaceDisplay/ProgressScorePanel/LearningSpaceScorePanel/ILearningSpaceScorePanelController";
 
 let mockedViewModel = new LearningSpaceScorePanelViewModel();
 mockedViewModel.scoreInfo.Value = {
@@ -23,7 +23,7 @@ describe("Learning Space Score Panel View", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind(
-      USECASE_TYPES.ICalculateLearningWorldScoreUseCase
+      USECASE_TYPES.ICalculateLearningWorldScoreUseCase,
     ).toConstantValue(calculateWorldScoreMock);
   });
 

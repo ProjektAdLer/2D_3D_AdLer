@@ -1,27 +1,25 @@
-import { injectable } from "inversify";
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
+import ProgressScorePanelViewModel from "./ProgessScorePanelViewModel";
+import ProgressScorePanelPresenter from "./ProgressScorePanelPresenter";
 import ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces/ILearningWorldPort";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
-import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
-import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
-import LearningWorldScorePanelPresenter from "./LearningWorldScorePanelPresenter";
-import LearningWorldScorePanelViewModel from "./LearningWorldScorePanelViewModel";
 import { HistoryWrapper } from "~ReactComponents/ReactRelated/ReactEntryPoint/HistoryWrapper";
 import IGetLearningWorldUseCase from "src/Components/Core/Application/UseCases/GetLearningWorld/IGetLearningWorldUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 
-@injectable()
-export default class LearningWorldScorePanelBuilder extends PresentationBuilder<
-  LearningWorldScorePanelViewModel,
+export default class ProgressScorePanelBuilder extends PresentationBuilder<
+  ProgressScorePanelViewModel,
   undefined,
   undefined,
-  LearningWorldScorePanelPresenter
+  ProgressScorePanelPresenter
 > {
   constructor() {
     super(
-      LearningWorldScorePanelViewModel,
+      ProgressScorePanelViewModel,
       undefined,
       undefined,
-      LearningWorldScorePanelPresenter,
+      ProgressScorePanelPresenter,
     );
   }
 

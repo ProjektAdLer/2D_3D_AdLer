@@ -1,6 +1,6 @@
 import LearningSpaceTO from "../../../../../Core/Application/DataTransferObjects/LearningSpaceTO";
-import LearningSpaceScorePanelPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningSpaceScorePanel/LearningSpaceScorePanelPresenter";
-import LearningSpaceScorePanelViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningSpaceScorePanel/LearningSpaceScorePanelViewModel";
+import LearningSpaceScorePanelPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/ProgressScorePanel/LearningSpaceScorePanel/LearningSpaceScorePanelPresenter";
+import LearningSpaceScorePanelViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/ProgressScorePanel/LearningSpaceScorePanel/LearningSpaceScorePanelViewModel";
 
 describe("LearningSpaceScorePanelPresenter", () => {
   let viewModel: LearningSpaceScorePanelViewModel;

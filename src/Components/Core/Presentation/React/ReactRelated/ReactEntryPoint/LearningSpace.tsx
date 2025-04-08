@@ -6,8 +6,6 @@ import SideBar from "~ReactComponents/LearningSpaceDisplay/SideBar/SideBar";
 import BabylonCanvas from "../../../Babylon/SceneManagement/BabylonCanvas";
 import LearningSpaceSceneDefinition from "../../../Babylon/SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import ExitModal from "~ReactComponents/LearningSpaceDisplay/ExitModal/ExitModal";
-import LearningSpaceScorePanel from "~ReactComponents/LearningSpaceDisplay/LearningSpaceScorePanel/LearningSpaceScorePanel";
-import LearningWorldScorePanel from "~ReactComponents/LearningSpaceDisplay/LearningWorldScorePanel/LearningWorldScorePanel";
 import BreakTimeNotification from "../../../Adaptivity/BreakTimeNotification/BreakTimeNotification";
 import AdaptivityElementDialogContainer from "../../../Adaptivity/AdaptivityElement/UIComponents/AdaptivityElementDialogContainer";
 import LearningSpaceGoalPanel from "~ReactComponents/LearningSpaceDisplay/LearningSpaceGoalPanel/LearningSpaceGoalPanel";
@@ -16,13 +14,13 @@ import ControlsExplanationModal from "~ReactComponents/GeneralComponents/Control
 import BreakTimeNotificationOverview from "~ReactComponents/GeneralComponents/BreakTimeNotificationOverview/BreakTimeNotificationOverview";
 import LearningWorldCompletionModal from "~ReactComponents/LearningSpaceMenu/LearningWorldCompletionModal/LearningWorldCompletionModal";
 import NarrativeFrameworkLearningSpaceContainer from "~ReactComponents/GeneralComponents/NarrativeFrameworkLearningSpaceContainer/NarrativeFrameworkLearningSpaceContainer";
+import ProgressScorePanel from "~ReactComponents/LearningSpaceDisplay/ProgressScorePanel/ProgessScorePanel";
 
 export default function LearningSpace() {
   return (
     <div className="grid h-0 min-h-[90vh] lg:min-h-[90vh] grid-cols-9 grid-rows-6 root">
       <section className="fixed z-20 flex flex-col-reverse items-center justify-center col-span-2 col-start-8 row-start-1 gap-1 space-x-reverse portrait:flex-col lg:space-x-2 lg:flex-row-reverse right-2 top-2">
-        <LearningWorldScorePanel />
-        <LearningSpaceScorePanel />
+        <ProgressScorePanel />
         <LearningSpaceGoalPanel />
       </section>
       <LearningSpaceNamePanel className="z-10 col-span-5 col-start-3 row-start-1 pointer-events-none justify-self-center" />

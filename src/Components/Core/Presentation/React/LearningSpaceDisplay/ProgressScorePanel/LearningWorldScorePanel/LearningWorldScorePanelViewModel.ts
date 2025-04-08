@@ -1,4 +1,4 @@
-import Observable from "../../../../../../Lib/Observable";
+import Observable from "../../../../../../../Lib/Observable";
 
 export interface ScoreInfo {
   currentScore: number;

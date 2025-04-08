@@ -2,7 +2,7 @@ import mock from "jest-mock-extended/lib/Mock";
 import ILearningWorldPort from "../../../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import LearningWorldScorePanelBuilder from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningWorldScorePanel/LearningWorldScorePanelBuilder";
+import LearningWorldScorePanelBuilder from "../../../../../Core/Presentation/React/LearningSpaceDisplay/ProgressScorePanel/LearningWorldScorePanel/LearningWorldScorePanelBuilder";
 import {
   HistoryWrapper,
   LocationScope,

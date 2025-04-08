@@ -2,7 +2,7 @@ import mock from "jest-mock-extended/lib/Mock";
 import ILearningWorldPort from "../../../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import LearningSpaceScorePanelBuilder from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningSpaceScorePanel/LearningSpaceScorePanelBuilder";
+import LearningSpaceScorePanelBuilder from "../../../../../Core/Presentation/React/LearningSpaceDisplay/ProgressScorePanel/LearningSpaceScorePanel/LearningSpaceScorePanelBuilder";
 import {
   HistoryWrapper,
   LocationScope,
@@ -16,7 +16,7 @@ describe("LearningSpaceScorePanelBuilder", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind(PORT_TYPES.ILearningWorldPort).toConstantValue(
-      worldPortMock
+      worldPortMock,
     );
   });
 
@@ -39,7 +39,7 @@ describe("LearningSpaceScorePanelBuilder", () => {
     expect(systemUnderTest["presenter"]).toBeDefined();
     expect(worldPortMock.registerAdapter).toHaveBeenCalledWith(
       systemUnderTest["presenter"],
-      LocationScope.spaceDisplay
+      LocationScope.spaceDisplay,
     );
   });
 });

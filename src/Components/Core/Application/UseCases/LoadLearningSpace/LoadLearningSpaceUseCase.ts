@@ -96,6 +96,7 @@ export default class LoadLearningSpaceUseCase
     spaceTO.requirementsString = availabilityData.requirementsString;
     spaceTO.requirementsSyntaxTree = availabilityData.requirementsSyntaxTree;
     spaceTO.isAvailable = availabilityData.isAvailable;
+    spaceTO.displayStrategy = spaceEntity.displayStrategy;
 
     // set current location in user entity
     this.setUserLocationUseCase.execute({

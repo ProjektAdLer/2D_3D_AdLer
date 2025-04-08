@@ -43,6 +43,7 @@ export default class GetLearningWorldUseCase
     )[0];
     let worldTO = new LearningWorldTO();
     worldTO = Object.assign(worldTO, structuredClone(worldEntity));
+    worldTO.displayStrategy = worldEntity.displayStrategy;
 
     this.logger.log(
       LogLevelTypes.TRACE,

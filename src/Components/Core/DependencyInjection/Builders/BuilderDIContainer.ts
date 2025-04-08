@@ -7,7 +7,7 @@ import IPresentationBuilder from "../../Presentation/PresentationBuilder/IPresen
 import IPresentationDirector from "../../Presentation/PresentationBuilder/IPresentationDirector";
 import PresentationDirector from "../../Presentation/PresentationBuilder/PresentationDirector";
 import ElementModalBuilder from "../../Presentation/React/LearningSpaceDisplay/LearningElementModal/LearningElementModalBuilder";
-import LearningWorldScorePanelBuilder from "../../Presentation/React/LearningSpaceDisplay/LearningWorldScorePanel/LearningWorldScorePanelBuilder";
+import LearningWorldScorePanelBuilder from "../../Presentation/React/LearningSpaceDisplay/ProgressScorePanel/LearningWorldScorePanel/LearningWorldScorePanelBuilder";
 import NotificationManagerBuilder from "../../Presentation/React/GeneralComponents/NotificationManager/NotificationManagerBuilder";
 import BUILDER_TYPES from "./BUILDER_TYPES";
 import SignInAndOutComponentBuilder from "../../Presentation/React/WelcomePage/SignInAndOutComponent/SignInAndOutComponentBuilder";
@@ -27,7 +27,7 @@ import LearningWorldSelectionBuilder from "~ReactComponents/LearningWorldMenu/Le
 import LearningWorldDetailBuilder from "~ReactComponents/LearningWorldMenu/LearningWorldDetail/LearningWorldDetailBuilder";
 import AmbienceBuilder from "../../Presentation/Babylon/Ambience/AmbienceBuilder";
 import WindowBuilder from "../../Presentation/Babylon/Window/WindowBuilder";
-import LearningSpaceScorePanelBuilder from "~ReactComponents/LearningSpaceDisplay/LearningSpaceScorePanel/LearningSpaceScorePanelBuilder";
+import LearningSpaceScorePanelBuilder from "~ReactComponents/LearningSpaceDisplay/ProgressScorePanel/LearningSpaceScorePanel/LearningSpaceScorePanelBuilder";
 import DecorationBuilder from "../../Presentation/Babylon/Decoration/DecorationBuilder";
 import StandInDecorationBuilder from "../../Presentation/Babylon/StandInDecoration/StandInDecorationBuilder";
 import HelpDeskModalBuilder from "~ReactComponents/GeneralComponents/HelpDeskModal/HelpDeskModalBuilder";
@@ -50,6 +50,7 @@ import NarrativeFrameworkBuilder from "~ReactComponents/GeneralComponents/Narrat
 import NarrativeFrameworkLoadingScreenContainerBuilder from "~ReactComponents/GeneralComponents/NarrativeFrameworkLoadingScreenContainer/NarrativeFrameworkLoadingScreenContainerBuilder";
 import NarrativeFrameworkLearningSpaceContainerBuilder from "~ReactComponents/GeneralComponents/NarrativeFrameworkLearningSpaceContainer/NarrativeFrameworkLearningSpaceContainerBuilder";
 import NarrativeFrameworkWorldCompletionModalContainerBuilder from "~ReactComponents/GeneralComponents/NarrativeFrameworkWorldCompletionModalContainer/NarrativeFrameworkWorldCompletionModalContainerBuilder";
+import ProgressScorePanelBuilder from "~ReactComponents/LearningSpaceDisplay/ProgressScorePanel/ProgressScorePanelBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -189,6 +190,9 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationBuilder>(
     BUILDER_TYPES.INarrativeFrameworkWorldCompletionModalContainerBuilder,
   ).to(NarrativeFrameworkWorldCompletionModalContainerBuilder);
+  bind<IPresentationBuilder>(BUILDER_TYPES.IProgressScorePanelBuilder).to(
+    ProgressScorePanelBuilder,
+  );
 });
 
 export default BuilderDIContainer;

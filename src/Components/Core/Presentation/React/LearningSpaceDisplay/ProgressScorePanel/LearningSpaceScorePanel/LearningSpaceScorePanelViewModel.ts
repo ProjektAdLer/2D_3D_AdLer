@@ -1,5 +1,5 @@
 import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
-import Observable from "../../../../../../Lib/Observable";
+import Observable from "../../../../../../../Lib/Observable";
 
 export interface ScoreInfo {
   currentScore: number;

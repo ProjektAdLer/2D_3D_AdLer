@@ -1,5 +1,5 @@
-import LearningWorldScorePanelPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningWorldScorePanel/LearningWorldScorePanelPresenter";
-import LearningWorldScorePanelViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningWorldScorePanel/LearningWorldScorePanelViewModel";
+import LearningWorldScorePanelPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/ProgressScorePanel/LearningWorldScorePanel/LearningWorldScorePanelPresenter";
+import LearningWorldScorePanelViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/ProgressScorePanel/LearningWorldScorePanel/LearningWorldScorePanelViewModel";
 
 describe("LearningWorldScorePanelPresenter", () => {
   let viewModel: LearningWorldScorePanelViewModel;
