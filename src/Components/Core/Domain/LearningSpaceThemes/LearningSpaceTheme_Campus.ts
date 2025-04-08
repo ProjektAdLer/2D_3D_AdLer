@@ -100,11 +100,11 @@ export const LearningSpaceTheme_CampusMensa: ILearningSpaceTheme = {
     require("../../../../Assets/3dModels/campusTheme/d-dcomp-watertower-1.glb"),
   ],
   insideDecorationModels: {
-    [LearningSpaceTemplateType.L]: "",
-    [LearningSpaceTemplateType.R6]: "",
-    [LearningSpaceTemplateType.R8]: "",
-    [LearningSpaceTemplateType.D]: require("../../../../Assets/3dModels/campusTheme/d-roomcomp-d-mensa-in.glb"),
-    [LearningSpaceTemplateType.T]: "",
+    [LearningSpaceTemplateType.L]: require("../../../../Assets/3dModels/campusTheme/mensa/d-roomcomp-l-mensa-in.glb"),
+    [LearningSpaceTemplateType.R6]: require("../../../../Assets/3dModels/campusTheme/mensa/d-roomcomp-r6-mensa-in.glb"),
+    [LearningSpaceTemplateType.R8]: require("../../../../Assets/3dModels/campusTheme/mensa/d-roomcomp-r8-mensa-in.glb"),
+    [LearningSpaceTemplateType.D]: require("../../../../Assets/3dModels/campusTheme/mensa/d-roomcomp-d-mensa-in.glb"),
+    [LearningSpaceTemplateType.T]: require("../../../../Assets/3dModels/campusTheme/mensa/d-roomcomp-t-mensa-in.glb"),
     [LearningSpaceTemplateType.None]: "",
   },
 };
