@@ -14,6 +14,8 @@ export default class AvatarCameraPresenter implements IAvatarCameraPresenter {
   }
 
   onStoryElementCutSceneFinished(): void {
+    // resets camera to default settings
+    this.viewModel.camera.Value.radius = this.viewModel.defaultRadius;
     this.viewModel.camera.Value.attachControl();
   }
 }
