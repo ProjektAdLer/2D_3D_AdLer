@@ -85,7 +85,7 @@ export const LearningSpaceTheme_CampusLibrary: ILearningSpaceTheme = {
   learningElementModels: LearningSpaceTheme_CampusAB.learningElementModels,
   entryDoorModel: require("../../../../Assets/3dModels/sharedModels/id-elevator-entry.glb"),
   exitDoorModel: require("../../../../Assets/3dModels/sharedModels/id-elevator-exit.glb"),
-  ambienceModel: require("../../../../Assets/3dModels/campusTheme/env-campus-library.glb"),
+  ambienceModel: require("../../../../Assets/3dModels/campusTheme/library/env-campus-library.glb"),
   storyElementModel: LearningSpaceTheme_CampusAB.storyElementModel,
   insideDecorationModels: {
     [LearningSpaceTemplateType.L]: require("../../../../Assets/3dModels/campusTheme/library/d-roomcomp-l-library-in.glb"),
@@ -101,7 +101,7 @@ export const LearningSpaceTheme_CampusMensa: ILearningSpaceTheme = {
   learningElementModels: LearningSpaceTheme_CampusAB.learningElementModels,
   entryDoorModel: require("../../../../Assets/3dModels/sharedModels/id-elevator-entry.glb"),
   exitDoorModel: require("../../../../Assets/3dModels/sharedModels/id-elevator-exit.glb"),
-  ambienceModel: require("../../../../Assets/3dModels/campusTheme/env-campus-mensa.glb"),
+  ambienceModel: require("../../../../Assets/3dModels/campusTheme/mensa/env-campus-mensa.glb"),
   storyElementModel: LearningSpaceTheme_CampusAB.storyElementModel,
   standinDecorationModels: [
     require("../../../../Assets/3dModels/campusTheme/d-dcomp-schooldesk-1.glb"),
