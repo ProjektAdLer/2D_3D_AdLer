@@ -112,7 +112,7 @@ export const LearningSpaceTemplate_D: ILearningSpaceTemplate = {
     },
   ],
   playerSpawnPoint: {
-    position: { x: -5.2, y: -8 },
+    position: { x: -4.4, y: -8 },
     orientation: { rotation: 0 },
   },
   introStoryElementIdlePoint: {
