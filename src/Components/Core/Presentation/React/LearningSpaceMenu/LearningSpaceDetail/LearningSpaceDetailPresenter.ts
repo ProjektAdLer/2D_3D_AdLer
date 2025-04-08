@@ -4,7 +4,6 @@ import LearningSpaceDetailViewModel, {
   LearningSpaceDetailLearningSpaceData,
 } from "./LearningSpaceDetailViewModel";
 import LearningWorldTO from "src/Components/Core/Application/DataTransferObjects/LearningWorldTO";
-import { LearningElementTypeStrings } from "src/Components/Core/Domain/Types/LearningElementTypes";
 import { LearningElementInfo } from "src/Components/Core/Domain/Types/LearningElementInfo";
 
 export default class LearningSpaceDetailPresenter
