@@ -5,7 +5,7 @@ import { injectable } from "inversify";
 export default class NavigationConfiguration {
   public navmeshParameters: INavMeshParameters = {
     cs: 0.1,
-    ch: 0.05,
+    ch: 0.2,
     walkableSlopeAngle: 10,
     walkableHeight: 5.0,
     walkableClimb: 0.05,

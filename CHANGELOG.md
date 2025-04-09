@@ -14,8 +14,11 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - added elevator models for subthemes
 - added subtheme Campus - Mensa
 - added subtheme Campus - Library
+- added decoration for new subthemes
 
 ### Changed
+
+- set Avatar to ground without offset
 
 ### Removed
 
