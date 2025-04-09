@@ -1,11 +1,14 @@
 import { Vector3 } from "@babylonjs/core/Maths/math";
 import ILearningElementPresenter from "./ILearningElementPresenter";
 import LearningElementViewModel from "./LearningElementViewModel";
+import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
+import bind from "bind-decorator";
 
 export default class LearningElementPresenter
   implements ILearningElementPresenter
 {
   private centerPosition: Vector3;
+  private isInteractableBeforeCutscene: boolean;
 
   constructor(private viewModel: LearningElementViewModel) {}
 
@@ -38,10 +41,25 @@ export default class LearningElementPresenter
     }
   }
 
+  onStoryElementCutSceneTriggered(storyType: StoryElementType): void {
+    this.isInteractableBeforeCutscene = this.viewModel.isInteractable.Value;
+    if (this.isInteractableBeforeCutscene) {
+      this.onUnfocused();
+    }
+  }
+
+  onStoryElementCutSceneFinished(): void {
+    if (this.isInteractableBeforeCutscene) {
+      this.onFocused();
+    }
+  }
+
+  @bind
   onFocused(): void {
     this.viewModel.isInteractable.Value = true;
   }
 
+  @bind
   onUnfocused(): void {
     this.viewModel.isInteractable.Value = false;
   }

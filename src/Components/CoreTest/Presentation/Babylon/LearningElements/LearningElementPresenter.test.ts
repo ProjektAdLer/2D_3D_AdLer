@@ -2,6 +2,7 @@ import mock from "jest-mock-extended/lib/Mock";
 import LearningElementPresenter from "../../../../Core/Presentation/Babylon/LearningElements/LearningElementPresenter";
 import LearningElementViewModel from "../../../../Core/Presentation/Babylon/LearningElements/LearningElementViewModel";
 import { Mesh, Vector3 } from "@babylonjs/core";
+import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
 
 describe("LearningElementPresenter", () => {
   let systemUnderTest: LearningElementPresenter;
@@ -98,5 +99,20 @@ describe("LearningElementPresenter", () => {
     systemUnderTest.onUnfocused();
 
     expect(viewModel.isInteractable.Value).toBe(false);
+  });
+
+  test("onStoryElementCutSceneTriggered sets interactable to false", () => {
+    viewModel.isInteractable.Value = true;
+    systemUnderTest.onStoryElementCutSceneTriggered(StoryElementType.Intro);
+
+    expect(viewModel.isInteractable.Value).toEqual(false);
+  });
+
+  test("onStoryElementCutSceneFinished sets interactable to true if it was interactable before", () => {
+    viewModel.isInteractable.Value = true;
+    systemUnderTest.onStoryElementCutSceneTriggered(StoryElementType.Intro);
+    systemUnderTest.onStoryElementCutSceneFinished();
+
+    expect(viewModel.isInteractable.Value).toEqual(true);
   });
 });
