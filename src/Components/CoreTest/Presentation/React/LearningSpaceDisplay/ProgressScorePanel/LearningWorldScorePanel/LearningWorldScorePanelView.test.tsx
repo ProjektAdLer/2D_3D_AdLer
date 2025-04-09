@@ -1,14 +1,14 @@
 import { render, waitFor } from "@testing-library/react";
-import LearningWorldScorePanel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/ProgressScorePanel/LearningWorldScorePanel/LearningWorldScorePanel";
-import LearningWorldScorePanelViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/ProgressScorePanel/LearningWorldScorePanel/LearningWorldScorePanelViewModel";
+import LearningWorldScorePanel from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/ProgressScorePanel/LearningWorldScorePanel/LearningWorldScorePanel";
+import LearningWorldScorePanelViewModel from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/ProgressScorePanel/LearningWorldScorePanel/LearningWorldScorePanelViewModel";
 import "@testing-library/jest-dom";
-import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
+import useBuilderMock from "../../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 import React from "react";
-import ICalculateLearningWorldScoreUseCase from "../../../../../Core/Application/UseCases/CalculateLearningWorldScore/ICalculateLearningWorldScoreUseCase";
+import ICalculateLearningWorldScoreUseCase from "../../../../../../Core/Application/UseCases/CalculateLearningWorldScore/ICalculateLearningWorldScoreUseCase";
 import { mock } from "jest-mock-extended";
-import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
-import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
-import ILearningWorldScorePanelPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/ProgressScorePanel/LearningWorldScorePanel/ILearningWorldScorePanelPresenter";
+import USECASE_TYPES from "../../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
+import CoreDIContainer from "../../../../../../Core/DependencyInjection/CoreDIContainer";
+import ILearningWorldScorePanelPresenter from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/ProgressScorePanel/LearningWorldScorePanel/ILearningWorldScorePanelPresenter";
 
 let mockedViewModel = new LearningWorldScorePanelViewModel();
 mockedViewModel.scoreInfo.Value = {

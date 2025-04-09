@@ -1,12 +1,12 @@
 import mock from "jest-mock-extended/lib/Mock";
-import ILearningWorldPort from "../../../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
-import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
-import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import LearningSpaceScorePanelBuilder from "../../../../../Core/Presentation/React/LearningSpaceDisplay/ProgressScorePanel/LearningSpaceScorePanel/LearningSpaceScorePanelBuilder";
+import ILearningWorldPort from "../../../../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
+import CoreDIContainer from "../../../../../../Core/DependencyInjection/CoreDIContainer";
+import PORT_TYPES from "../../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
+import LearningSpaceScorePanelBuilder from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/ProgressScorePanel/LearningSpaceScorePanel/LearningSpaceScorePanelBuilder";
 import {
   HistoryWrapper,
   LocationScope,
-} from "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/HistoryWrapper";
+} from "../../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/HistoryWrapper";
 
 const worldPortMock = mock<ILearningWorldPort>();
 

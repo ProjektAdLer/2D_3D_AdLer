@@ -1,17 +1,17 @@
 import mock from "jest-mock-extended/lib/Mock";
-import ILearningWorldPort from "../../../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
-import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
-import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import LearningWorldScorePanelBuilder from "../../../../../Core/Presentation/React/LearningSpaceDisplay/ProgressScorePanel/LearningWorldScorePanel/LearningWorldScorePanelBuilder";
+import ILearningWorldPort from "../../../../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
+import CoreDIContainer from "../../../../../../Core/DependencyInjection/CoreDIContainer";
+import PORT_TYPES from "../../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
+import LearningWorldScorePanelBuilder from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/ProgressScorePanel/LearningWorldScorePanel/LearningWorldScorePanelBuilder";
 import {
   HistoryWrapper,
   LocationScope,
-} from "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/HistoryWrapper";
-import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
-import UserDataEntity from "../../../../../Core/Domain/Entities/UserDataEntity";
-import IEntityContainer from "../../../../../Core/Domain/EntityContainer/IEntityContainer";
-import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
-import IGetLearningWorldUseCase from "../../../../../Core/Application/UseCases/GetLearningWorld/IGetLearningWorldUseCase";
+} from "../../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/HistoryWrapper";
+import USECASE_TYPES from "../../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
+import UserDataEntity from "../../../../../../Core/Domain/Entities/UserDataEntity";
+import IEntityContainer from "../../../../../../Core/Domain/EntityContainer/IEntityContainer";
+import CORE_TYPES from "../../../../../../Core/DependencyInjection/CoreTypes";
+import IGetLearningWorldUseCase from "../../../../../../Core/Application/UseCases/GetLearningWorld/IGetLearningWorldUseCase";
 
 const worldPortMock = mock<ILearningWorldPort>();
 const entityContainerMock = mock<IEntityContainer>();
