@@ -45,7 +45,7 @@ export default function LearningWorldCompletionModal({
             alt=""
           ></img>
         }
-        <div className="w-full max-w-96">
+        <div className="w-full flex flex-col items-center justify-center">
           <p className="mb-4">{translate("congratulation")}</p>
           {viewModel.worldCompletionText && (
             <div className="flex justify-center">
@@ -57,7 +57,7 @@ export default function LearningWorldCompletionModal({
             <div>
               <div className="flex justify-center">
                 <a
-                  className="m-8 mt-2 text-2xl font-bold underline text-adlergreen"
+                  className="m-3 text-2xl font-bold underline text-adlergreen"
                   href={evaluationLink}
                   target="_blank"
                   rel="noreferrer"
@@ -81,6 +81,7 @@ export default function LearningWorldCompletionModal({
             >
               Homepage
             </a>
+            .
           </p>
         </div>
       </div>
