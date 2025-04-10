@@ -24,7 +24,6 @@ export default class AvatarCameraPresenter implements IAvatarCameraPresenter {
 
   private triggerZoomTimer(mode: string): void {
     let zoomRate = 2;
-    console.log("zoom:", this.viewModel.zoomPercentage);
     setTimeout(() => {
       this.viewModel.zoomPercentage += zoomRate;
       if (mode === "zoomIn") {
