@@ -23,35 +23,33 @@ export default class AvatarCameraPresenter implements IAvatarCameraPresenter {
   }
 
   private triggerZoomTimer(mode: string): void {
+    let zoomRate = 2;
+    console.log("zoom:", this.viewModel.zoomPercentage);
     setTimeout(() => {
-      this.viewModel.zoomPercentage += 2;
+      this.viewModel.zoomPercentage += zoomRate;
       if (mode === "zoomIn") {
-        this.zoomIn();
+        this.zoomIn(zoomRate);
       }
       if (mode === "zoomOut") {
-        this.zoomOut();
+        this.zoomOut(zoomRate);
       }
       if (this.viewModel.zoomPercentage < 100) {
         this.triggerZoomTimer(mode);
       }
     }, 25);
   }
-  private zoomIn(): void {
-    let a = this.viewModel.preZoomRadius;
-    let b = this.viewModel.lowerRadiusLimit;
-    let c = this.viewModel.zoomPercentage;
-    let d = a - b;
-    let e = d * (c / 100);
-    let f = a - e;
-    this.viewModel.camera.Value.radius = f;
+  private zoomIn(zoomRate: number): void {
+    let currentRadius = this.viewModel.camera.Value.radius;
+    let adjustment = 0.00015 * zoomRate * this.viewModel.zoomPercentage;
+    let limit = this.viewModel.lowerRadiusLimit;
+    this.viewModel.camera.Value.radius =
+      currentRadius - adjustment * currentRadius * (currentRadius - limit);
   }
-  private zoomOut(): void {
-    let a = this.viewModel.lowerRadiusLimit;
-    let b = this.viewModel.preZoomRadius;
-    let c = this.viewModel.zoomPercentage;
-    let d = b - a;
-    let e = d * (c / 100);
-    let f = a + e;
-    this.viewModel.camera.Value.radius = f;
+  private zoomOut(zoomRate: number): void {
+    let currentRadius = this.viewModel.camera.Value.radius;
+    let adjustment = 0.00015 * zoomRate * this.viewModel.zoomPercentage;
+    let limit = this.viewModel.preZoomRadius;
+    this.viewModel.camera.Value.radius =
+      currentRadius + adjustment * currentRadius * (limit - currentRadius);
   }
 }
