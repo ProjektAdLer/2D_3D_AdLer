@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CinemaStripes renders if isOpen is set to true 1`] = `
+<div>
+  <div>
+    <div
+      class="absolute top-0 left-0 w-full h-24 bg-black z-[100]"
+    />
+    <div
+      class="absolute bottom-0 left-0 w-full h-24 bg-black z-[100]"
+    />
+  </div>
+</div>
+`;
