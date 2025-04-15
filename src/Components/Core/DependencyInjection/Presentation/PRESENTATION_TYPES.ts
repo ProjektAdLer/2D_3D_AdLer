@@ -33,6 +33,7 @@ const PRESENTATION_TYPES = {
   INarrativeFrameworkWorldCompletionModalContainerPresenter: Symbol(
     "INarrativeFrameworkWorldCompletionModalContainerPresenter",
   ),
+  ICinemaStripesPresenter: Symbol("ICinemaStripesPresenter"),
 };
 
 export default PRESENTATION_TYPES;

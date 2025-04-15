@@ -51,6 +51,7 @@ import NarrativeFrameworkLoadingScreenContainerBuilder from "~ReactComponents/Ge
 import NarrativeFrameworkLearningSpaceContainerBuilder from "~ReactComponents/GeneralComponents/NarrativeFrameworkLearningSpaceContainer/NarrativeFrameworkLearningSpaceContainerBuilder";
 import NarrativeFrameworkWorldCompletionModalContainerBuilder from "~ReactComponents/GeneralComponents/NarrativeFrameworkWorldCompletionModalContainer/NarrativeFrameworkWorldCompletionModalContainerBuilder";
 import ProgressScorePanelBuilder from "~ReactComponents/LearningSpaceDisplay/ProgressScorePanel/ProgressScorePanelBuilder";
+import CinemaStripesBuilder from "~ReactComponents/LearningSpaceDisplay/CinemaStripes/CinemaStripesBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -192,6 +193,9 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   ).to(NarrativeFrameworkWorldCompletionModalContainerBuilder);
   bind<IPresentationBuilder>(BUILDER_TYPES.IProgressScorePanelBuilder).to(
     ProgressScorePanelBuilder,
+  );
+  bind<IPresentationBuilder>(BUILDER_TYPES.ICinemaStripesBuilder).to(
+    CinemaStripesBuilder,
   );
 });
 

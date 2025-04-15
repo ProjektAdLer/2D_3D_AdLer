@@ -15,6 +15,7 @@ import BreakTimeNotificationOverview from "~ReactComponents/GeneralComponents/Br
 import LearningWorldCompletionModal from "~ReactComponents/LearningSpaceMenu/LearningWorldCompletionModal/LearningWorldCompletionModal";
 import NarrativeFrameworkLearningSpaceContainer from "~ReactComponents/GeneralComponents/NarrativeFrameworkLearningSpaceContainer/NarrativeFrameworkLearningSpaceContainer";
 import ProgressScorePanel from "~ReactComponents/LearningSpaceDisplay/ProgressScorePanel/ProgessScorePanel";
+import CinemaStripes from "~ReactComponents/LearningSpaceDisplay/CinemaStripes/CinemaStripes";
 
 export default function LearningSpace() {
   return (
@@ -44,6 +45,7 @@ export default function LearningSpace() {
       <NotificationManager className="z-50" />
       <LearningWorldCompletionModal />
       <NarrativeFrameworkLearningSpaceContainer />
+      <CinemaStripes />
     </div>
   );
 }

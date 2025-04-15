@@ -62,6 +62,7 @@ const BUILDER_TYPES = {
     "INarrativeFrameworkWorldCompletionModalContainerBuilder",
   ),
   IProgressScorePanelBuilder: Symbol("ILearningWorldScorePanelBuilder"),
+  ICinemaStripesBuilder: Symbol("ICinemaStripesBuilder"),
 };
 
 export default BUILDER_TYPES;
