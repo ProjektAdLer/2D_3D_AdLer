@@ -50,7 +50,7 @@ export default function WelcomePage() {
         <LoginComponent className="flex flex-col items-center justify-around col-span-6 col-start-2 tablet-portrait:col-start-1 tablet-portrait:col-span-8 xl:pt-2 lg:pt-4 mobile-portrait:row-start-2 mobile-portrait:justify-start mobile-landscape:pt-0" />
       </section>
 
-      <section className="flex items-center justify-center col-span-6 col-start-2 row-span-3 row-start-3 gap-4 mb-4 portrait:h-3/4 mobile-landscape:h-[60%] mobile-landscape:self-end mobile-landscape:mb-2 portrait:row-start-3 portrait:row-span-3 portrait:col-start-2 portrait:self-center portrait-col-span-6 portrait:gap-6">
+      <section className="flex items-center justify-center col-span-6 col-start-2 row-span-3 row-start-3 gap-4 mb-4 portrait:h-1/2 mobile-landscape:h-[60%] mobile-landscape:self-end mobile-landscape:mb-2 portrait:row-start-3 portrait:row-span-3 portrait:col-start-2 portrait:self-center portrait-col-span-6 portrait:gap-6">
         <WelcomePageButton
           backgroundVideo={learningWorldButtonBackgroundVideo}
           backgroundPicture={learningWorldMenuButtonBackground}
@@ -71,7 +71,7 @@ export default function WelcomePage() {
       <LMSButton className="w-32 mobile-portrait:w-28 col-start-1 row-start-1 col-span-1 row-span-1" />
 
       <p
-        className="self-end p-2 text-xs text-center rounded-lg portrait:row-start-6 portrait:col-start-1
+        className="self-end p-2 text-2xs md:text-xs text-center rounded-lg portrait:row-start-6 portrait:col-start-1
        portrait:col-span-6 portrait:text-2xs mobile-landscape:text-2xs mobile-landscape:col-start-2 mobile-landscape:col-span-5 landscape:col-span-4 landscape:col-start-3 landscape:row-start-6 text-adlerdarkblue lg:text-md lg:font-semibold font-regular justify-self-center lg:landscape:row-start-6"
       >
         {translate("copyright")}

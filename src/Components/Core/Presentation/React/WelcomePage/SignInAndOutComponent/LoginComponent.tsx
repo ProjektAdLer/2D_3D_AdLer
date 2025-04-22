@@ -66,7 +66,7 @@ export default function LoginComponent({
 
   return (
     <div className={tailwindMerge(className)}>
-      <h2 className="col-span-6 col-start-2 row-start-2 mt-8 pt-2 text-xl mobile-landscape:text-sm mobile-landscape:pt-0 mobile-landscape:mt-2 font-extrabold text-center justify-self-center portrait:text-sm lg:text-2xl text-outline text-adlerdarkblue portrait:row-start-1 portrait:col-start-1 portrait:col-span-8">
+      <h2 className="col-span-6 col-start-2 row-start-2 mt-1 pt-1 text-xl mobile-landscape:text-sm mobile-landscape:pt-0 mobile-landscape:mt-2 font-extrabold text-center justify-self-center portrait:text-sm lg:text-2xl text-outline text-adlerdarkblue portrait:row-start-1 portrait:col-start-1 portrait:col-span-8">
         {userLoggedIn
           ? translate("loginSuccessfullSubheading")
           : translate("moodleLoginSubheading")}
@@ -75,7 +75,7 @@ export default function LoginComponent({
       {!userLoggedIn && (
         <div className="flex flex-col items-start justify-center">
           <form
-            className="flex items-center justify-center col-span-6 col-start-2 row-start-2 gap-2 m-4 text-xl font-bold text-center rounded-lg portrait:self-end portrait:row-start-1 mobile-landscape:scale-75 portrait:scale-50 portrait:col-start-1 portrait:col-span-8"
+            className="flex flex-col md:flex-row items-center justify-center col-span-6 col-start-2 row-start-2 gap-2 m-4 text-xl font-bold text-center rounded-lg portrait:self-end portrait:row-start-1 mobile-landscape:scale-75 portrait:col-start-1 portrait:col-span-8"
             onSubmit={(e) => {
               e.preventDefault();
               handleSubmit();

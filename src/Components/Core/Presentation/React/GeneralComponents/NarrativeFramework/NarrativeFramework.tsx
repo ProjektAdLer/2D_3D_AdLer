@@ -18,8 +18,8 @@ export default function NarrativeFramework(props: NarrativeFrameworkProps) {
   if (props.type === "intro" && !viewModel.introText) return null;
   if (props.type === "outro" && !viewModel.outroText) return null;
   return (
-    <div className="bg-suburbthemebg bg-no-repeat bg-cover w-[60svw] h-[60svh] relative rounded-lg p-4">
-      <div className="absolute top-[40%] -left-64 flex justify-start items-start xl:-left-32">
+    <div className="bg-suburbthemebg bg-no-repeat bg-cover relative rounded-lg p-4 w-full h-full">
+      <div className="absolute top-[40%] left-32 flex justify-start items-start xl:-left-32">
         <img
           alt="AdLer with a thumb up"
           src={explainAdler}
