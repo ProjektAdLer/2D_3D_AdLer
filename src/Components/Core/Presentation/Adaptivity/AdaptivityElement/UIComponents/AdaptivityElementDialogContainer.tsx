@@ -105,9 +105,9 @@ export default function AdaptivityElementDialogContainer({
     }
 
     if (currentQuestion && currentQuestion.isCompleted) {
-      setEmotion(EmotionType.approval);
+      setEmotion(EmotionType.thumbsup);
     } else if (currentQuestion && currentQuestion.isCompleted === false) {
-      setEmotion(EmotionType.sad);
+      setEmotion(EmotionType.disappointed);
     } else {
       setEmotion(EmotionType.default);
     }

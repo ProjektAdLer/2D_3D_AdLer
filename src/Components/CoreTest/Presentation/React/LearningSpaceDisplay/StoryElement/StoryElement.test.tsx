@@ -44,10 +44,10 @@ describe("StoryElement", () => {
 
   // ANF-ID: [ELG0032]
   test.each([
-    [LearningElementModelTypeEnums.QuizElementModelTypes.ArcadeNPC],
-    [LearningElementModelTypeEnums.QuizElementModelTypes.CampusNPC],
-    [LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC],
-    [LearningElementModelTypeEnums.QuizElementModelTypes.RobotNPC],
+    [LearningElementModelTypeEnums.QuizElementModelTypes.DefaultArcadeNPC],
+    [LearningElementModelTypeEnums.QuizElementModelTypes.DefaultCampusNPC],
+    [LearningElementModelTypeEnums.QuizElementModelTypes.DefaultSuburbNPC],
+    [LearningElementModelTypeEnums.QuizElementModelTypes.AleRobotNPC],
   ])("displays correct npc thumbnail for model %p", (model) => {
     viewModel.introModelType.Value = model;
     viewModel.isOpen.Value = true;
@@ -154,9 +154,9 @@ describe("StoryElement", () => {
       viewModel.isOutroCutsceneRunning.Value = false;
       viewModel.isOutroUnlocked.Value = true;
       viewModel.introModelType.Value =
-        LearningElementModelTypeEnums.QuizElementModelTypes.ArcadeNPC;
+        LearningElementModelTypeEnums.QuizElementModelTypes.DefaultArcadeNPC;
       viewModel.outroModelType.Value =
-        LearningElementModelTypeEnums.QuizElementModelTypes.CampusNPC;
+        LearningElementModelTypeEnums.QuizElementModelTypes.DefaultCampusNPC;
 
       useBuilderMock([viewModel, fakeController]);
 
@@ -171,14 +171,14 @@ describe("StoryElement", () => {
     [
       StoryElementType.Intro,
       false,
-      LearningElementModelTypeEnums.QuizElementModelTypes.CampusNPC,
+      LearningElementModelTypeEnums.QuizElementModelTypes.DefaultCampusNPC,
       undefined,
     ],
     [
       StoryElementType.Outro,
       true,
       undefined,
-      LearningElementModelTypeEnums.QuizElementModelTypes.CampusNPC,
+      LearningElementModelTypeEnums.QuizElementModelTypes.DefaultCampusNPC,
     ],
   ])(
     "doesn't render back button when storyelement has only intro or outro cutscene and storyElementType is %p",

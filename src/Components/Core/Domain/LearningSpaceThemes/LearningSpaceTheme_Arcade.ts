@@ -36,7 +36,7 @@ const LearningSpaceTheme_Arcade: ILearningSpaceTheme = {
       LearningElementModelTypeEnums.TextElementModelTypes.ComicShelfsmall,
     ],
     [LearningElementTypes.adaptivity]: [
-      LearningElementModelTypeEnums.QuizElementModelTypes.RobotNPC,
+      LearningElementModelTypeEnums.QuizElementModelTypes.AleRobotNPC,
     ],
     [LearningElementTypes.notAnElement]: [],
   },
@@ -50,7 +50,7 @@ const LearningSpaceTheme_Arcade: ILearningSpaceTheme = {
   windowModel: require("../../../../Assets/3dModels/arcadeTheme/d-window-arcade-with-blind.glb"),
   ambienceModel: require("../../../../Assets/3dModels/arcadeTheme/env-arcade.glb"),
   storyElementModel:
-    LearningElementModelTypeEnums.QuizElementModelTypes.ArcadeNPC,
+    LearningElementModelTypeEnums.QuizElementModelTypes.DefaultArcadeNPC,
   insideDecorationModels: {
     [LearningSpaceTemplateType.L]: require("../../../../Assets/3dModels/arcadeTheme/d-roomcomp-l-arcade-in.glb"),
     [LearningSpaceTemplateType.R6]: require("../../../../Assets/3dModels/arcadeTheme/d-roomcomp-r6-arcade-in.glb"),

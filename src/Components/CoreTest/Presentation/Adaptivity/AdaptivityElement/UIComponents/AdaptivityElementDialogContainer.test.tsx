@@ -130,10 +130,10 @@ describe("AdaptivityElementDialogContainer", () => {
 
   // ANF-ID: [EWE0015]
   test.each([
-    [LearningElementModelTypeEnums.QuizElementModelTypes.ArcadeNPC],
-    [LearningElementModelTypeEnums.QuizElementModelTypes.CampusNPC],
-    [LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC],
-    [LearningElementModelTypeEnums.QuizElementModelTypes.RobotNPC],
+    [LearningElementModelTypeEnums.QuizElementModelTypes.DefaultArcadeNPC],
+    [LearningElementModelTypeEnums.QuizElementModelTypes.DefaultCampusNPC],
+    [LearningElementModelTypeEnums.QuizElementModelTypes.DefaultSuburbNPC],
+    [LearningElementModelTypeEnums.QuizElementModelTypes.AleRobotNPC],
   ])("displays correct npc thumbnail for model %p", (model) => {
     viewModel.isOpen.Value = true;
     viewModel.model.Value = model;
@@ -195,7 +195,7 @@ describe("AdaptivityElementDialogContainer", () => {
     waitFor(() => {
       expect(container.getByText("headerLegend")).toBeInTheDocument();
       expect(
-        container.getByTestId("requiredTaskIconImage")
+        container.getByTestId("requiredTaskIconImage"),
       ).toBeInTheDocument();
     });
   });

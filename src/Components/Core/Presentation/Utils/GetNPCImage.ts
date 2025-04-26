@@ -2,72 +2,72 @@ import { QuizElementModelTypes } from "./../../Domain/LearningElementModels/Lear
 import { LearningElementModel } from "../../Domain/LearningElementModels/LearningElementModelTypes";
 import { EmotionType } from "../../Domain/Types/EmotionTypes";
 
-import campusNPC from "../../../../Assets/misc/quizBackgrounds/a-npc-dozentlukas.png";
-import campusNPC_Close from "../../../../Assets/misc/quizBackgrounds/a-quizbg-dozentlukas-close.png";
-import campusNPC_Happy from "../../../../Assets/misc/quizBackgrounds/a-npc-dozentlukas/a-npc-dozentlukas-happy.png";
-import campusNPC_Sad from "../../../../Assets/misc/quizBackgrounds/a-npc-dozentlukas/a-npc-dozentlukas-disappointed.png";
-
-import arcadeNPC from "../../../../Assets/misc/quizBackgrounds/a-npc-sheriffjustice.png";
-import arcadeNPC_Close from "../../../../Assets/misc/quizBackgrounds/a-npc-sheriffjustice-close.png";
-import arcadeNPC_Happy from "../../../../Assets/misc/quizBackgrounds/a-npc-sheriffjustice/a-npc-sheriffjustice-happy.png";
-import arcadeNPC_Sad from "../../../../Assets/misc/quizBackgrounds/a-npc-sheriffjustice/a-npc-sheriffjustice-disappointed.png";
-
-import defaultNPC from "../../../../Assets/misc/quizBackgrounds/a-quizbg-defaultnpc.png";
-import defaultNPC_Close from "../../../../Assets/misc/quizBackgrounds/a-quizbg-defaultnpc-close.png";
-import defaultNPC_Happy from "../../../../Assets/misc/quizBackgrounds/a-npc-defaultfemale/a-npc-defaultfemale-happy.png";
-import defaultNPC_Sad from "../../../../Assets/misc/quizBackgrounds/a-npc-defaultfemale/a-npc-defaultfemale-disappointed.png";
-
-import robotNPC from "../../../../Assets/misc/quizBackgrounds/a-quizbg-alerobot.png";
-import robotNPC_Close from "../../../../Assets/misc/quizBackgrounds/a-quizbg-alerobot-close.png";
-import robotNPC_Happy from "../../../../Assets/misc/quizBackgrounds/a-npc-alerobot/a-npc-alerobot-happy.png";
-import robotNPC_Sad from "../../../../Assets/misc/quizBackgrounds/a-npc-alerobot/a-npc-alerobot-disappointed.png";
-import robotNPC_Approval from "../../../../Assets/misc/quizBackgrounds/a-npc-alerobot/a-npc-alerobot-thumbsup.png";
-
 // EmotionMap is used as index of ImageMaps value-Element
 enum EmotionMap {
   default = 1, // neutral emotion
   happy,
-  sad,
-  approval,
+  disappointed,
+  thumbsup,
+  angry,
+  tired,
+  shocked,
+  welcome,
 }
 
-// first preview is substitute for not having a full-body image
-const keys = ["preview", "preview", "happy", "disappointed"];
+// first default is substitute for not having a full-body image
+const keys = [
+  "default",
+  "default",
+  "happy",
+  "disappointed",
+  "thumbsup",
+  "angry",
+  "tired",
+  "shocked",
+  "welcome",
+];
 
 const ImageDB = {
-  nerdFemaleDark: keys.map((value) => {
+  // defaults
+  defaultSuburbNPC: keys.map((value) => {
     return require(
-      `../../../../Assets/misc/quizBackgrounds/a-npc-averagenerdfemaledark/a-npc-averagenerdfemaledark-${value}.png`,
+      `../../../../Assets/misc/quizBackgrounds/a-npc-dozentjoerg/a-npc-dozentjoerg-${value}.png`,
     );
   }),
-  nerdFemaleLight: keys.map((value) => {
+  defaultArcadeNPC: keys.map((value) => {
     return require(
-      `../../../../Assets/misc/quizBackgrounds/a-npc-averagenerdfemalelight/a-npc-averagenerdfemalelight-${value}.png`,
+      `../../../../Assets/misc/quizBackgrounds/a-npc-sheriffjustice/a-npc-sheriffjustice-${value}.png`,
     );
   }),
-  nerdMaleDark: keys.map((value) => {
+  defaultCampusNPC: keys.map((value) => {
     return require(
-      `../../../../Assets/misc/quizBackgrounds/a-npc-averagenerdmaledark/a-npc-averagenerdmaledark-${value}.png`,
+      `../../../../Assets/misc/quizBackgrounds/a-npc-dozentgeorg/a-npc-dozentgeorg-${value}.png`,
     );
   }),
-  nerdMaleLight: keys.map((value) => {
+  // non defaults
+  aleRobot: keys.map((value) => {
     return require(
-      `../../../../Assets/misc/quizBackgrounds/a-npc-averagenerdmalelight/a-npc-averagenerdmalelight-${value}.png`,
+      `../../../../Assets/misc/quizBackgrounds/a-npc-alerobot/a-npc-alerobot-${value}.png`,
     );
   }),
   bullyFemale: keys.map((value) => {
     return require(
-      `../../../../Assets/misc/quizBackgrounds/a-npc-bullyfemale/a-npc-bullyfemale-${value}.png`,
+      `../../../../Assets/misc/quizBackgrounds/a-npc-bully-female/a-npc-bully-female-${value}.png`,
     );
   }),
   bullyMale: keys.map((value) => {
     return require(
-      `../../../../Assets/misc/quizBackgrounds/a-npc-bullymale/a-npc-bullymale-${value}.png`,
+      `../../../../Assets/misc/quizBackgrounds/a-npc-bully-male/a-npc-bully-male-${value}.png`,
     );
   }),
-  defaultMale: keys.map((value) => {
+  defaultDarkFemale: keys.map((value) => {
     return require(
-      `../../../../Assets/misc/quizBackgrounds/a-npc-defaultmale/a-npc-defaultmale-${value}.png`,
+      `../../../../Assets/misc/quizBackgrounds/a-npc-defaultdark-female/a-npc-defaultdark-female-${value}.png`,
+    );
+  }),
+  defaultDarkMale: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-defaultdark-male/a-npc-defaultdark-male-${value}.png`,
     );
   }),
   dozentAntonia: keys.map((value) => {
@@ -90,24 +90,94 @@ const ImageDB = {
       `../../../../Assets/misc/quizBackgrounds/a-npc-dozentjoerg/a-npc-dozentjoerg-${value}.png`,
     );
   }),
+  dozentLukas: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-dozentlukas/a-npc-dozentlukas-${value}.png`,
+    );
+  }),
   hiphopFemale: keys.map((value) => {
     return require(
-      `../../../../Assets/misc/quizBackgrounds/a-npc-hiphopfemale/a-npc-hiphopfemale-${value}.png`,
+      `../../../../Assets/misc/quizBackgrounds/a-npc-hiphop-female/a-npc-hiphop-female-${value}.png`,
     );
   }),
   hiphopMale: keys.map((value) => {
     return require(
-      `../../../../Assets/misc/quizBackgrounds/a-npc-hiphopmale/a-npc-hiphopmale-${value}.png`,
+      `../../../../Assets/misc/quizBackgrounds/a-npc-hiphop-male/a-npc-hiphop-male-${value}.png`,
     );
   }),
-  santaFemale: ["welcome", "welcome", "happy", "disappointed"].map((value) => {
+  nerdDarkFemale: keys.map((value) => {
     return require(
-      `../../../../Assets/misc/quizBackgrounds/a-npc-santafemale/a-npc-santafemale-${value}.png`,
+      `../../../../Assets/misc/quizBackgrounds/a-npc-nerddark-female/a-npc-nerddark-female-${value}.png`,
     );
   }),
-  santaMale: ["welcome", "welcome", "happy", "disappointed"].map((value) => {
+  nerdDarkMale: keys.map((value) => {
     return require(
-      `../../../../Assets/misc/quizBackgrounds/a-npc-santamale/a-npc-santamale-${value}.png`,
+      `../../../../Assets/misc/quizBackgrounds/a-npc-nerddark-male/a-npc-nerddark-male-${value}.png`,
+    );
+  }),
+  nerdLightFemale: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-nerdlight-female/a-npc-nerdlight-female-${value}.png`,
+    );
+  }),
+  nerdLightMale: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-nerdlight-male/a-npc-nerdlight-male-${value}.png`,
+    );
+  }),
+  oldieDarkFemale: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-oldiedark-female/a-npc-oldiedark-female-${value}.png`,
+    );
+  }),
+  oldieDarkMale: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-oldiedark-male/a-npc-oldiedark-male-${value}.png`,
+    );
+  }),
+  oldieLightFemale: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-oldielight-female/a-npc-oldielight-female-${value}.png`,
+    );
+  }),
+  oldieLightMale: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-oldielight-male/a-npc-oldielight-male-${value}.png`,
+    );
+  }),
+  santaFemale: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-santa-female/a-npc-santa-female-${value}.png`,
+    );
+  }),
+  santaMale: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-santa-male/a-npc-santa-male-${value}.png`,
+    );
+  }),
+  sheriffJustice: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-sheriffjustice/a-npc-sheriffjustice-${value}.png`,
+    );
+  }),
+  studentDarkFemale: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-studentdark-female/a-npc-studentdark-female-${value}.png`,
+    );
+  }),
+  studentDarkMale: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-studentdark-male/a-npc-studentdark-male-${value}.png`,
+    );
+  }),
+  studentLightFemale: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-studentlight-female/a-npc-studentlight-female-${value}.png`,
+    );
+  }),
+  studentLightMale: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-studentlight-male/a-npc-studentlight-male-${value}.png`,
     );
   }),
 };
@@ -117,37 +187,37 @@ interface ImageMap {
 }
 
 const imageMap: ImageMap = new Map([
-  [
-    QuizElementModelTypes.RobotNPC,
-    [robotNPC, robotNPC_Close, robotNPC_Happy, robotNPC_Sad, robotNPC_Approval],
-  ],
-  [
-    QuizElementModelTypes.DefaultNPC,
-    [defaultNPC, defaultNPC_Close, defaultNPC_Happy, defaultNPC_Sad],
-  ],
-  [
-    QuizElementModelTypes.ArcadeNPC,
-    [arcadeNPC, arcadeNPC_Close, arcadeNPC_Happy, arcadeNPC_Sad],
-  ],
-  [
-    QuizElementModelTypes.CampusNPC,
-    [campusNPC, campusNPC_Close, campusNPC_Happy, campusNPC_Sad],
-  ],
-  [QuizElementModelTypes.NerdFemaleDarkNPC, ImageDB.nerdFemaleDark],
-  [QuizElementModelTypes.NerdFemaleLightNPC, ImageDB.nerdFemaleLight],
-  [QuizElementModelTypes.NerdMaleDarkNPC, ImageDB.nerdMaleDark],
-  [QuizElementModelTypes.NerdMaleLightNPC, ImageDB.nerdMaleLight],
+  [QuizElementModelTypes.DefaultSuburbNPC, ImageDB.defaultSuburbNPC],
+  [QuizElementModelTypes.DefaultArcadeNPC, ImageDB.defaultArcadeNPC],
+  [QuizElementModelTypes.DefaultCampusNPC, ImageDB.defaultCampusNPC],
+  [QuizElementModelTypes.AleRobotNPC, ImageDB.aleRobot],
   [QuizElementModelTypes.BullyFemaleNPC, ImageDB.bullyFemale],
   [QuizElementModelTypes.BullyMaleNPC, ImageDB.bullyMale],
-  [QuizElementModelTypes.DefaultMaleNPC, ImageDB.defaultMale],
+  [QuizElementModelTypes.DefaultDarkFemaleNPC, ImageDB.defaultDarkFemale],
+  [QuizElementModelTypes.DefaultDarkMaleNPC, ImageDB.defaultDarkMale],
+  // [QuizElementModelTypes.DefaultLightMaleNPC, ImageDB.defaultLightMale],
   [QuizElementModelTypes.DozentAntoniaNPC, ImageDB.dozentAntonia],
   [QuizElementModelTypes.DozentDanielNPC, ImageDB.dozentDaniel],
   [QuizElementModelTypes.DozentGeorgNPC, ImageDB.dozentGeorg],
   [QuizElementModelTypes.DozentJoergNPC, ImageDB.dozentJoerg],
+  [QuizElementModelTypes.DozentLukasNPC, ImageDB.dozentLukas],
   [QuizElementModelTypes.HiphopFemaleNPC, ImageDB.hiphopFemale],
   [QuizElementModelTypes.HiphopMaleNPC, ImageDB.hiphopMale],
+  [QuizElementModelTypes.NerdDarkFemaleNPC, ImageDB.nerdDarkFemale],
+  [QuizElementModelTypes.NerdDarkMaleNPC, ImageDB.nerdDarkMale],
+  [QuizElementModelTypes.NerdLightFemaleNPC, ImageDB.nerdLightFemale],
+  [QuizElementModelTypes.NerdLightMaleNPC, ImageDB.nerdLightMale],
+  [QuizElementModelTypes.OldieDarkFemaleNPC, ImageDB.oldieDarkFemale],
+  [QuizElementModelTypes.OldieDarkMaleNPC, ImageDB.oldieDarkMale],
+  [QuizElementModelTypes.OldieLightFemaleNPC, ImageDB.oldieLightFemale],
+  [QuizElementModelTypes.OldieLightMaleNPC, ImageDB.oldieLightMale],
   [QuizElementModelTypes.SantaFemaleNPC, ImageDB.santaFemale],
   [QuizElementModelTypes.SantaMaleNPC, ImageDB.santaMale],
+  [QuizElementModelTypes.SheriffJusticeNPC, ImageDB.sheriffJustice],
+  [QuizElementModelTypes.StudentDarkFemaleNPC, ImageDB.studentDarkFemale],
+  [QuizElementModelTypes.StudentDarkMaleNPC, ImageDB.studentDarkMale],
+  [QuizElementModelTypes.StudentLightFemaleNPC, ImageDB.studentLightFemale],
+  [QuizElementModelTypes.StudentLightMaleNPC, ImageDB.studentLightMale],
 ]);
 
 export function getNPCImage(
@@ -164,7 +234,7 @@ export function getNPCImage(
   const result = imageMap.get(model)?.[index];
 
   if (!result) {
-    return defaultNPC;
+    return ImageDB.aleRobot[0];
   }
   return result;
 }

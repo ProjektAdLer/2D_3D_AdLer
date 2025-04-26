@@ -71,7 +71,7 @@ backendAdaptivityElementTOMock.adaptivity = {
   id: 1,
   elementName: "",
   introText: "",
-  model: "a-quizbg-defaultnpc",
+  model: "a-npc-alerobot",
   tasks: [],
 } as AdaptivityElementDataTO;
 
@@ -117,12 +117,12 @@ const minimalCombinedStoryElementBackendWorldTO: BackendWorldTO = {
       introStory: {
         storyTexts: ["hello"],
         elementModel:
-          LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC,
+          LearningElementModelTypeEnums.QuizElementModelTypes.AleRobotNPC,
       } as BackendStoryTO,
       outroStory: {
         storyTexts: ["hello"],
         elementModel:
-          LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC,
+          LearningElementModelTypeEnums.QuizElementModelTypes.AleRobotNPC,
       } as BackendStoryTO,
     },
   ],
@@ -177,12 +177,12 @@ const minimalSeperateStoryElementBackendWorldTO: BackendWorldTO = {
       introStory: {
         storyTexts: ["hello"],
         elementModel:
-          LearningElementModelTypeEnums.QuizElementModelTypes.ArcadeNPC,
+          LearningElementModelTypeEnums.QuizElementModelTypes.DefaultArcadeNPC,
       } as BackendStoryTO,
       outroStory: {
         storyTexts: ["hello"],
         elementModel:
-          LearningElementModelTypeEnums.QuizElementModelTypes.RobotNPC,
+          LearningElementModelTypeEnums.QuizElementModelTypes.AleRobotNPC,
       } as BackendStoryTO,
     },
   ],
@@ -684,6 +684,7 @@ describe("LoadLearningWorldUseCase", () => {
       goals: ["TestGoal"],
       description: "TestDescription",
       evaluationLink: "TestLink",
+      theme: LearningSpaceThemeType.Arcade,
       spaces: [
         {
           description: "TestDescription",
@@ -703,7 +704,8 @@ describe("LoadLearningWorldUseCase", () => {
           outroStory: {
             storyTexts: ["hello"],
             elementModel:
-              LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC,
+              LearningElementModelTypeEnums.QuizElementModelTypes
+                .DefaultArcadeNPC,
             facialExpression: EmotionType.default,
           } as BackendStoryTO,
         },
@@ -746,7 +748,7 @@ describe("LoadLearningWorldUseCase", () => {
         spaceID: expect.any(Number),
         introStoryTexts: expect.any(Array),
         modelType:
-          LearningElementModelTypeEnums.QuizElementModelTypes.ArcadeNPC,
+          LearningElementModelTypeEnums.QuizElementModelTypes.DefaultArcadeNPC,
         storyType: StoryElementType.Intro,
         hasOutroTriggered: expect.toBeOneOf([expect.any(Boolean), null]),
         introEmotion: EmotionType.default,
@@ -824,7 +826,7 @@ describe("LoadLearningWorldUseCase", () => {
       type: "h5p",
       description: "",
       goals: [""],
-      model: LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC,
+      model: LearningElementModelTypeEnums.QuizElementModelTypes.AleRobotNPC,
     };
     const worldStatusTO: LearningWorldStatusTO = {
       worldID: 1,
@@ -846,7 +848,7 @@ describe("LoadLearningWorldUseCase", () => {
     expect(result[0]!.id).toBe(42);
     expect(result[0]!.name).toBe("testElement");
     expect(result[0]!.model).toBe(
-      LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC,
+      LearningElementModelTypeEnums.QuizElementModelTypes.AleRobotNPC,
     );
   });
 

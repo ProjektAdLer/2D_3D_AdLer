@@ -1,74 +1,74 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a_npc_dozentlukas" 1`] = `
+exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a-npc-alerobot" 1`] = `
 <img
   alt="LearningImage!"
   class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
   data-testid="npcImage"
-  src="a-quizbg-dozentlukas-close.png"
+  src="a-npc-alerobot-default.png"
 />
 `;
 
-exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a_npc_dozentlukas" 2`] = `
+exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a-npc-alerobot" 2`] = `
 <img
   alt="LearningImage!"
   class="visible h-16 -scale-x-100 lg:invisible lg:h-0"
   data-testid="npcImage"
-  src="a-npc-dozentlukas.png"
+  src="a-npc-alerobot-default.png"
 />
 `;
 
-exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a-npc-sheriffjustice" 1`] = `
+exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a-npc-defaultarcade" 1`] = `
 <img
   alt="LearningImage!"
   class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
   data-testid="npcImage"
-  src="a-npc-sheriffjustice-close.png"
+  src="a-npc-sheriffjustice-default.png"
 />
 `;
 
-exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a-npc-sheriffjustice" 2`] = `
+exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a-npc-defaultarcade" 2`] = `
 <img
   alt="LearningImage!"
   class="visible h-16 -scale-x-100 lg:invisible lg:h-0"
   data-testid="npcImage"
-  src="a-npc-sheriffjustice.png"
+  src="a-npc-sheriffjustice-default.png"
 />
 `;
 
-exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a-quizbg-alerobot" 1`] = `
+exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a-npc-defaultcampus" 1`] = `
 <img
   alt="LearningImage!"
   class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
   data-testid="npcImage"
-  src="a-quizbg-alerobot-close.png"
+  src="a-npc-dozentgeorg-default.png"
 />
 `;
 
-exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a-quizbg-alerobot" 2`] = `
+exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a-npc-defaultcampus" 2`] = `
 <img
   alt="LearningImage!"
   class="visible h-16 -scale-x-100 lg:invisible lg:h-0"
   data-testid="npcImage"
-  src="a-quizbg-alerobot.png"
+  src="a-npc-dozentgeorg-default.png"
 />
 `;
 
-exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a-quizbg-defaultnpc" 1`] = `
+exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a-npc-defaultsuburb" 1`] = `
 <img
   alt="LearningImage!"
   class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
   data-testid="npcImage"
-  src="a-quizbg-defaultnpc-close.png"
+  src="a-npc-dozentjoerg-default.png"
 />
 `;
 
-exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a-quizbg-defaultnpc" 2`] = `
+exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a-npc-defaultsuburb" 2`] = `
 <img
   alt="LearningImage!"
   class="visible h-16 -scale-x-100 lg:invisible lg:h-0"
   data-testid="npcImage"
-  src="a-quizbg-defaultnpc.png"
+  src="a-npc-dozentjoerg-default.png"
 />
 `;
 
@@ -87,7 +87,7 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
           alt="LearningImage!"
           class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
           data-testid="npcImage"
-          src="a-quizbg-defaultnpc.png"
+          src="a-npc-alerobot-default.png"
         />
       </div>
       <div
@@ -112,7 +112,7 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
               alt="LearningImage!"
               class="visible h-16 -scale-x-100 lg:invisible lg:h-0"
               data-testid="npcImage"
-              src="a-quizbg-defaultnpc.png"
+              src="a-npc-alerobot-default.png"
             />
             <div
               class="w-full text-xs lg:text-lg"

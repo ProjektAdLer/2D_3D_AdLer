@@ -34,7 +34,7 @@ const LearningSpaceTheme_Suburb: ILearningSpaceTheme = {
       LearningElementModelTypeEnums.TextElementModelTypes.Bookshelf2,
     ],
     [LearningElementTypes.adaptivity]: [
-      LearningElementModelTypeEnums.QuizElementModelTypes.RobotNPC,
+      LearningElementModelTypeEnums.QuizElementModelTypes.AleRobotNPC,
     ],
     [LearningElementTypes.notAnElement]: [],
   },
@@ -48,7 +48,7 @@ const LearningSpaceTheme_Suburb: ILearningSpaceTheme = {
   windowModel: require("../../../../Assets/3dModels/suburbTheme/d-door-suburb-window.glb"),
   ambienceModel: require("../../../../Assets/3dModels/suburbTheme/env-suburb.glb"),
   storyElementModel:
-    LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC,
+    LearningElementModelTypeEnums.QuizElementModelTypes.DefaultSuburbNPC,
   insideDecorationModels: {
     [LearningSpaceTemplateType.L]: require("../../../../Assets/3dModels/suburbTheme/d-roomcomp-l-suburb-in.glb"),
     [LearningSpaceTemplateType.R6]: require("../../../../Assets/3dModels/suburbTheme/d-roomcomp-r6-suburb-in.glb"),

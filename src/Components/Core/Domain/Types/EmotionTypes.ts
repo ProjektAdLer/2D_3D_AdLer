@@ -1,6 +1,10 @@
 export enum EmotionType {
   default = "default",
   happy = "happy",
-  sad = "sad",
-  approval = "approval",
+  disappointed = "disappointed",
+  thumbsup = "thumbsup",
+  angry = "angry",
+  tired = "tired",
+  shocked = "shocked",
+  welcome = "welcome",
 }

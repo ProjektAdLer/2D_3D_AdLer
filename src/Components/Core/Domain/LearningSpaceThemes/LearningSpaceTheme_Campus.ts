@@ -34,7 +34,7 @@ export const LearningSpaceTheme_CampusAB: ILearningSpaceTheme = {
       LearningElementModelTypeEnums.TextElementModelTypes.Bookshelf1,
     ],
     [LearningElementTypes.adaptivity]: [
-      LearningElementModelTypeEnums.QuizElementModelTypes.RobotNPC,
+      LearningElementModelTypeEnums.QuizElementModelTypes.AleRobotNPC,
     ],
     [LearningElementTypes.notAnElement]: [],
   },
@@ -48,7 +48,7 @@ export const LearningSpaceTheme_CampusAB: ILearningSpaceTheme = {
   windowModel: require("../../../../Assets/3dModels/campusTheme/d-door-campus-window.glb"),
   ambienceModel: require("../../../../Assets/3dModels/campusTheme/env-campus-ab.glb"),
   storyElementModel:
-    LearningElementModelTypeEnums.QuizElementModelTypes.DefaultNPC,
+    LearningElementModelTypeEnums.QuizElementModelTypes.DefaultCampusNPC,
   insideDecorationModels: {
     [LearningSpaceTemplateType.L]: require("../../../../Assets/3dModels/campusTheme/d-roomcomp-l-campus-in.glb"),
     [LearningSpaceTemplateType.R6]: require("../../../../Assets/3dModels/campusTheme/d-roomcomp-r6-campus-in.glb"),

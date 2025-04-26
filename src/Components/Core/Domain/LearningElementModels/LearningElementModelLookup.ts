@@ -31,7 +31,7 @@ const LearningElementModelLookup: {
   [LearningElementModelTypeEnums.VideoElementModelTypes
     .Television]: require("../../../../Assets/3dModels/suburbTheme/l-video-television-1.glb"),
   [LearningElementModelTypeEnums.QuizElementModelTypes
-    .DefaultNPC]: require("../../../../Assets/3dModels/suburbTheme/a-npc-defaultnpc.glb"),
+    .DefaultSuburbNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-dozentjoerg.glb"),
 
   //ArcadeTheme
   [LearningElementModelTypeEnums.H5pElementModelTypes
@@ -57,7 +57,7 @@ const LearningElementModelLookup: {
   [LearningElementModelTypeEnums.VideoElementModelTypes
     .VrDesk]: require("../../../../Assets/3dModels/arcadeTheme/l-video-vrdesk-1.glb"),
   [LearningElementModelTypeEnums.QuizElementModelTypes
-    .ArcadeNPC]: require("../../../../Assets/3dModels/arcadeTheme/a-npc-sheriffjustice.glb"),
+    .DefaultArcadeNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-sheriffjustice.glb"),
 
   //CampusTheme
   [LearningElementModelTypeEnums.H5pElementModelTypes
@@ -79,31 +79,28 @@ const LearningElementModelLookup: {
   [LearningElementModelTypeEnums.VideoElementModelTypes
     .MovieProjector]: require("../../../../Assets/3dModels/campusTheme/l-video-movieprojector-1.glb"),
   [LearningElementModelTypeEnums.QuizElementModelTypes
-    .CampusNPC]: require("../../../../Assets/3dModels/campusTheme/a-npc-dozentlukas.glb"),
+    .DefaultCampusNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-dozentgeorg.glb"),
 
-  //sharedModels
-  [LearningElementModelTypeEnums.QuizElementModelTypes
-    .RobotNPC]: require("../../../../Assets/3dModels/sharedModels/a_npc_alerobot.glb"),
+  //Shared Models - Trophies
   [LearningElementModelTypeEnums.TrophyElementModelTypes
     .BronzeTrophy]: require("../../../../Assets/prototype/l_trophy_bronze.glb"),
   [LearningElementModelTypeEnums.TrophyElementModelTypes
     .SilverTrophy]: require("../../../../Assets/prototype/l_trophy_silver.glb"),
   [LearningElementModelTypeEnums.TrophyElementModelTypes
     .GoldTrophy]: require("../../../../Assets/prototype/l_trophy_gold.glb"),
+  //Shared Models - NPCs
   [LearningElementModelTypeEnums.QuizElementModelTypes
-    .NerdFemaleDarkNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-averagenerdfemaledark.glb"),
+    .AleRobotNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-alerobot.glb"),
   [LearningElementModelTypeEnums.QuizElementModelTypes
-    .NerdFemaleLightNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-averagenerdfemalelight.glb"),
+    .BullyFemaleNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-bully-female.glb"),
   [LearningElementModelTypeEnums.QuizElementModelTypes
-    .NerdMaleDarkNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-averagenerdmaledark.glb"),
+    .BullyMaleNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-bully-male.glb"),
   [LearningElementModelTypeEnums.QuizElementModelTypes
-    .NerdMaleLightNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-averagenerdmalelight.glb"),
+    .DefaultDarkFemaleNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-defaultdark-female.glb"),
   [LearningElementModelTypeEnums.QuizElementModelTypes
-    .BullyFemaleNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-bullyfemale.glb"),
-  [LearningElementModelTypeEnums.QuizElementModelTypes
-    .BullyMaleNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-bullymale.glb"),
-  [LearningElementModelTypeEnums.QuizElementModelTypes
-    .DefaultMaleNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-defaultmale.glb"),
+    .DefaultDarkMaleNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-defaultdark-male.glb"),
+  // [LearningElementModelTypeEnums.QuizElementModelTypes
+  //   .DefaultLightMaleNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-defaultlightmale.glb"),
   [LearningElementModelTypeEnums.QuizElementModelTypes
     .DozentAntoniaNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-dozentantonia.glb"),
   [LearningElementModelTypeEnums.QuizElementModelTypes
@@ -113,13 +110,41 @@ const LearningElementModelLookup: {
   [LearningElementModelTypeEnums.QuizElementModelTypes
     .DozentJoergNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-dozentjoerg.glb"),
   [LearningElementModelTypeEnums.QuizElementModelTypes
-    .HiphopFemaleNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-hiphopfemale.glb"),
+    .DozentLukasNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-dozentlukas.glb"),
   [LearningElementModelTypeEnums.QuizElementModelTypes
-    .HiphopMaleNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-hiphopmale.glb"),
+    .HiphopFemaleNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-hiphop-female.glb"),
   [LearningElementModelTypeEnums.QuizElementModelTypes
-    .SantaFemaleNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-santafemale.glb"),
+    .HiphopMaleNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-hiphop-male.glb"),
   [LearningElementModelTypeEnums.QuizElementModelTypes
-    .SantaMaleNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-santamale.glb"),
+    .NerdDarkFemaleNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-nerddark-female.glb"),
+  [LearningElementModelTypeEnums.QuizElementModelTypes
+    .NerdDarkMaleNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-nerddark-male.glb"),
+  [LearningElementModelTypeEnums.QuizElementModelTypes
+    .NerdLightFemaleNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-nerdlight-female.glb"),
+  [LearningElementModelTypeEnums.QuizElementModelTypes
+    .NerdLightMaleNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-nerdlight-male.glb"),
+  [LearningElementModelTypeEnums.QuizElementModelTypes
+    .OldieDarkFemaleNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-oldiedark-female.glb"),
+  [LearningElementModelTypeEnums.QuizElementModelTypes
+    .OldieDarkMaleNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-oldiedark-male.glb"),
+  [LearningElementModelTypeEnums.QuizElementModelTypes
+    .OldieLightFemaleNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-oldielight-female.glb"),
+  [LearningElementModelTypeEnums.QuizElementModelTypes
+    .OldieLightMaleNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-oldielight-male.glb"),
+  [LearningElementModelTypeEnums.QuizElementModelTypes
+    .SantaFemaleNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-santa-female.glb"),
+  [LearningElementModelTypeEnums.QuizElementModelTypes
+    .SantaMaleNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-santa-male.glb"),
+  [LearningElementModelTypeEnums.QuizElementModelTypes
+    .SheriffJusticeNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-sheriffjustice.glb"),
+  [LearningElementModelTypeEnums.QuizElementModelTypes
+    .StudentDarkFemaleNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-studentdark-female.glb"),
+  [LearningElementModelTypeEnums.QuizElementModelTypes
+    .StudentDarkMaleNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-studentdark-male.glb"),
+  [LearningElementModelTypeEnums.QuizElementModelTypes
+    .StudentLightFemaleNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-studentlight-female.glb"),
+  [LearningElementModelTypeEnums.QuizElementModelTypes
+    .StudentLightMaleNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-studentlight-male.glb"),
 };
 
 export default LearningElementModelLookup;
