@@ -70,7 +70,7 @@ export default class StoryElementPresenter implements IStoryElementPresenter {
         this.viewModel.introModelType.Value =
           learningSpaceTO.storyElements[i].modelType!;
         this.viewModel.introEmotion.Value =
-          learningSpaceTO.storyElements[i].introEmotion ?? EmotionType.default;
+          learningSpaceTO.storyElements[i].introEmotion ?? EmotionType.welcome;
       }
       if (
         (learningSpaceTO.storyElements[i].storyType &
@@ -89,7 +89,7 @@ export default class StoryElementPresenter implements IStoryElementPresenter {
         this.viewModel.outroModelType.Value =
           learningSpaceTO.storyElements[i].modelType!;
         this.viewModel.outroEmotion.Value =
-          learningSpaceTO.storyElements[i].outroEmotion ?? EmotionType.default;
+          learningSpaceTO.storyElements[i].outroEmotion ?? EmotionType.welcome;
       }
     }
   }

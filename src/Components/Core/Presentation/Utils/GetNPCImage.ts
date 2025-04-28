@@ -226,7 +226,7 @@ export function getNPCImage(
   emotion: EmotionType | null,
 ) {
   if (emotion === null) {
-    emotion = EmotionType.default;
+    emotion = EmotionType.welcome;
   }
 
   const index = Number(close) * EmotionMap[emotion];

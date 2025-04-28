@@ -168,7 +168,7 @@ export default class BackendAdapterUtils {
         backendStoryTO.facialExpression =
           storyElement.modelFacialExpression as EmotionType;
       } else {
-        backendStoryTO.facialExpression = EmotionType.default;
+        backendStoryTO.facialExpression = EmotionType.welcome;
       }
       return backendStoryTO;
     }

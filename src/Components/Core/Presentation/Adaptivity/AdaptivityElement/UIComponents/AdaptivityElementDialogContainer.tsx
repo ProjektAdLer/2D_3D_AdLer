@@ -77,7 +77,7 @@ export default function AdaptivityElementDialogContainer({
   const [headerText, setHeaderText] = useState<string>("");
   const [progressPercentage, setProgressPercentage] = useState<number>(0);
   const [allTasksCompleted, setAllTasksCompleted] = useState<boolean>(false);
-  const [emotion, setEmotion] = useState<EmotionType>(EmotionType.default);
+  const [emotion, setEmotion] = useState<EmotionType>(EmotionType.welcome);
 
   useEffect(() => {
     if (!contentData) return;
@@ -100,7 +100,7 @@ export default function AdaptivityElementDialogContainer({
 
   useEffect(() => {
     if (!showAnswerFeedback) {
-      setEmotion(EmotionType.default);
+      setEmotion(EmotionType.welcome);
       return;
     }
 
@@ -109,7 +109,7 @@ export default function AdaptivityElementDialogContainer({
     } else if (currentQuestion && currentQuestion.isCompleted === false) {
       setEmotion(EmotionType.disappointed);
     } else {
-      setEmotion(EmotionType.default);
+      setEmotion(EmotionType.welcome);
     }
   }, [currentQuestion, showAnswerFeedback]);
 

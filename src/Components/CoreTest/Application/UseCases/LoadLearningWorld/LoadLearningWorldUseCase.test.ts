@@ -699,14 +699,14 @@ describe("LoadLearningWorldUseCase", () => {
           introStory: {
             storyTexts: ["hello"],
             elementModel: undefined,
-            facialExpression: EmotionType.default,
+            facialExpression: EmotionType.welcome,
           } as unknown as BackendStoryTO,
           outroStory: {
             storyTexts: ["hello"],
             elementModel:
               LearningElementModelTypeEnums.QuizElementModelTypes
                 .DefaultArcadeNPC,
-            facialExpression: EmotionType.default,
+            facialExpression: EmotionType.welcome,
           } as BackendStoryTO,
         },
       ],
@@ -751,7 +751,7 @@ describe("LoadLearningWorldUseCase", () => {
           LearningElementModelTypeEnums.QuizElementModelTypes.DefaultArcadeNPC,
         storyType: StoryElementType.Intro,
         hasOutroTriggered: expect.toBeOneOf([expect.any(Boolean), null]),
-        introEmotion: EmotionType.default,
+        introEmotion: EmotionType.welcome,
         outroEmotion: null,
       },
       StoryElementEntity,
