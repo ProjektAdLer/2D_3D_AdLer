@@ -5,7 +5,7 @@ exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for mod
   alt="LearningImage!"
   class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
   data-testid="npcImage"
-  src="a-npc-alerobot-default.png"
+  src="a-npc-alerobot-welcome.png"
 />
 `;
 
@@ -14,7 +14,7 @@ exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for mod
   alt="LearningImage!"
   class="visible h-16 -scale-x-100 lg:invisible lg:h-0"
   data-testid="npcImage"
-  src="a-npc-alerobot-default.png"
+  src="a-npc-alerobot-welcome.png"
 />
 `;
 
@@ -23,7 +23,7 @@ exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for mod
   alt="LearningImage!"
   class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
   data-testid="npcImage"
-  src="a-npc-sheriffjustice-default.png"
+  src="a-npc-sheriffjustice-welcome.png"
 />
 `;
 
@@ -32,7 +32,7 @@ exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for mod
   alt="LearningImage!"
   class="visible h-16 -scale-x-100 lg:invisible lg:h-0"
   data-testid="npcImage"
-  src="a-npc-sheriffjustice-default.png"
+  src="a-npc-sheriffjustice-welcome.png"
 />
 `;
 
@@ -41,7 +41,7 @@ exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for mod
   alt="LearningImage!"
   class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
   data-testid="npcImage"
-  src="a-npc-dozentgeorg-default.png"
+  src="a-npc-dozentgeorg-welcome.png"
 />
 `;
 
@@ -50,7 +50,7 @@ exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for mod
   alt="LearningImage!"
   class="visible h-16 -scale-x-100 lg:invisible lg:h-0"
   data-testid="npcImage"
-  src="a-npc-dozentgeorg-default.png"
+  src="a-npc-dozentgeorg-welcome.png"
 />
 `;
 
@@ -59,7 +59,7 @@ exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for mod
   alt="LearningImage!"
   class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
   data-testid="npcImage"
-  src="a-npc-dozentjoerg-default.png"
+  src="a-npc-dozentjoerg-welcome.png"
 />
 `;
 
@@ -68,7 +68,7 @@ exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for mod
   alt="LearningImage!"
   class="visible h-16 -scale-x-100 lg:invisible lg:h-0"
   data-testid="npcImage"
-  src="a-npc-dozentjoerg-default.png"
+  src="a-npc-dozentjoerg-welcome.png"
 />
 `;
 
@@ -87,7 +87,7 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
           alt="LearningImage!"
           class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
           data-testid="npcImage"
-          src="a-npc-alerobot-default.png"
+          src="a-npc-alerobot-welcome.png"
         />
       </div>
       <div
@@ -112,7 +112,7 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
               alt="LearningImage!"
               class="visible h-16 -scale-x-100 lg:invisible lg:h-0"
               data-testid="npcImage"
-              src="a-npc-alerobot-default.png"
+              src="a-npc-alerobot-welcome.png"
             />
             <div
               class="w-full text-xs lg:text-lg"

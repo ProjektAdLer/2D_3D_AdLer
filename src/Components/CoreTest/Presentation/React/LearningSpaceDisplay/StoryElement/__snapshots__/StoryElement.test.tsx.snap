@@ -5,7 +5,7 @@ exports[`StoryElement displays correct npc thumbnail for model "a-npc-alerobot" 
   alt="LearningImage!"
   class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
   data-testid="npcImage"
-  src="a-npc-alerobot-default.png"
+  src="a-npc-alerobot-welcome.png"
 />
 `;
 
@@ -14,7 +14,7 @@ exports[`StoryElement displays correct npc thumbnail for model "a-npc-defaultarc
   alt="LearningImage!"
   class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
   data-testid="npcImage"
-  src="a-npc-alerobot-default.png"
+  src="a-npc-alerobot-welcome.png"
 />
 `;
 
@@ -23,7 +23,7 @@ exports[`StoryElement displays correct npc thumbnail for model "a-npc-defaultcam
   alt="LearningImage!"
   class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
   data-testid="npcImage"
-  src="a-npc-alerobot-default.png"
+  src="a-npc-alerobot-welcome.png"
 />
 `;
 
@@ -32,6 +32,6 @@ exports[`StoryElement displays correct npc thumbnail for model "a-npc-defaultsub
   alt="LearningImage!"
   class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
   data-testid="npcImage"
-  src="a-npc-alerobot-default.png"
+  src="a-npc-alerobot-welcome.png"
 />
 `;
