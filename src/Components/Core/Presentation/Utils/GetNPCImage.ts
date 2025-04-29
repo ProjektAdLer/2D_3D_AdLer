@@ -4,27 +4,25 @@ import { EmotionType } from "../../Domain/Types/EmotionTypes";
 
 // EmotionMap is used as index of ImageMaps value-Element
 enum EmotionMap {
-  default = 1, // neutral emotion
+  welcome = 1, // neutral emotion
   happy,
   disappointed,
   thumbsup,
   angry,
   tired,
   shocked,
-  welcome,
 }
 
 // first default is substitute for not having a full-body image
 const keys = [
-  "default",
-  "default",
+  "welcome",
+  "welcome",
   "happy",
   "disappointed",
   "thumbsup",
   "angry",
   "tired",
   "shocked",
-  "welcome",
 ];
 
 const ImageDB = {
