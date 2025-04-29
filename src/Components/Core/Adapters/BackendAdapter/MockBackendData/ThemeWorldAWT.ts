@@ -272,6 +272,47 @@ const SmallWorldAWT: AWT = {
           },
         },
       },
+      {
+        spaceId: 7,
+        spaceName: "StudentClub Theme",
+        spaceDescription: "Raumbeschreibung der kleinen Welt",
+        requiredPointsToComplete: 0,
+        spaceSlotContents: [
+          null,
+          5,
+          null,
+          null,
+          2,
+          null,
+          null,
+          6,
+          3,
+          null,
+          1,
+          null,
+          null,
+        ],
+        requiredSpacesToEnter: "6",
+        spaceGoals: [
+          "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor ",
+        ],
+        spaceTemplate: "T_40X32_13L",
+        spaceTemplateStyle: "CampusStudentClub",
+        spaceStory: {
+          introStory: {
+            storyTexts: [
+              "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod sto ",
+            ],
+            elementModel: "a-npc-studendark-male",
+            modelFacialExpression: "disappointed",
+          },
+          outroStory: {
+            storyTexts: ["Tschüss", "Du bist mit diesem Raum fertig"],
+            elementModel: "a-npc-studenlight-female",
+            modelFacialExpression: "thumbsup",
+          },
+        },
+      },
     ],
     elements: [
       {

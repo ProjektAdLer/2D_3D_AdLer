@@ -337,6 +337,162 @@ const SubthemeWorldAWT: AWT = {
           },
         },
       },
+      {
+        spaceId: 11,
+        spaceName: "StudentClub R6",
+        spaceDescription: "Raumbeschreibung der kleinen Welt",
+        requiredPointsToComplete: 0,
+        spaceSlotContents: [1, null, 2, 5, 4, null],
+        requiredSpacesToEnter: "",
+        spaceGoals: [
+          "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor ",
+        ],
+        spaceTemplate: "R_20X20_6L",
+        spaceTemplateStyle: "CAMPUSSTUDENTCLUB",
+        spaceStory: {
+          introStory: {
+            storyTexts: [
+              "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod ",
+            ],
+            elementModel: "a-npc-averagenerdfemaledark",
+          },
+          outroStory: {
+            storyTexts: ["Tschüss", "Du bist mit diesem Raum fertig"],
+            elementModel: "a_npc_defaultnpc",
+          },
+        },
+      },
+      {
+        spaceId: 12,
+        spaceName: "StudentClub R8",
+        spaceDescription: "Raumbeschreibung der kleinen Welt",
+        requiredPointsToComplete: 0,
+        spaceSlotContents: [null, 2, 1, 3, null, 5, 6, null],
+        requiredSpacesToEnter: "1",
+        spaceGoals: [
+          "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor ",
+        ],
+
+        spaceTemplate: "R_20X30_8L",
+        spaceTemplateStyle: "CAMPUSSTUDENTCLUB",
+        spaceStory: {
+          introStory: {
+            storyTexts: [
+              "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod ",
+            ],
+            elementModel: "a-quizbg-defaultnpc",
+          },
+          outroStory: {
+            storyTexts: ["Tschüss", "Du bist mit diesem Raum fertig"],
+            elementModel: "a_npc_defaultnpc",
+          },
+        },
+      },
+      {
+        spaceId: 13,
+        spaceName: "StudentClub L10",
+        spaceDescription: "Raumbeschreibung der kleinen Welt",
+        requiredPointsToComplete: 0,
+        spaceSlotContents: [null, null, 3, 2, null, 1, 6, null, 5, null],
+        requiredSpacesToEnter: "2",
+        spaceGoals: [
+          "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor ",
+        ],
+        spaceTemplate: "L_32X31_10L",
+        spaceTemplateStyle: "CAMPUSSTUDENTCLUB",
+        spaceStory: {
+          introStory: {
+            storyTexts: [
+              "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod ",
+            ],
+            elementModel: "a-quizbg-defaultnpc",
+          },
+          outroStory: {
+            storyTexts: ["Tschüss", "Du bist mit diesem Raum fertig"],
+            elementModel: "a_npc_defaultnpc",
+          },
+        },
+      },
+      {
+        spaceId: 14,
+        spaceName: "StudentClub T 13",
+        spaceDescription: "Raumbeschreibung der kleinen Welt",
+        requiredPointsToComplete: 0,
+        spaceSlotContents: [
+          null,
+          6,
+          null,
+          4,
+          null,
+          null,
+          null,
+          null,
+          2,
+          1,
+          null,
+          3,
+          5,
+        ],
+        requiredSpacesToEnter: "3",
+        spaceGoals: [
+          "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor ",
+        ],
+        spaceTemplate: "T_40X32_13L",
+        spaceTemplateStyle: "CAMPUSSTUDENTCLUB",
+        spaceStory: {
+          introStory: {
+            storyTexts: [
+              "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod ",
+            ],
+            elementModel: "a-quizbg-defaultnpc",
+          },
+          outroStory: {
+            storyTexts: ["Tschüss", "Du bist mit diesem Raum fertig"],
+            elementModel: "a_npc_defaultnpc",
+          },
+        },
+      },
+      {
+        spaceId: 15,
+        spaceName: "StudentClub D15",
+        spaceDescription: "Raumbeschreibung der kleinen Welt",
+        requiredPointsToComplete: 0,
+        spaceSlotContents: [
+          null,
+          2,
+          1,
+          null,
+          null,
+          5,
+          null,
+          null,
+          null,
+          null,
+          null,
+          4,
+          6,
+          null,
+          null,
+        ],
+        requiredSpacesToEnter: "4",
+        spaceGoals: [
+          "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor",
+        ],
+        spaceTemplate: "D_40X37_15L",
+        spaceTemplateStyle: "CAMPUSSTUDENTCLUB",
+        spaceStory: {
+          introStory: {
+            storyTexts: [
+              "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod ",
+            ],
+            elementModel: "a-quizbg-defaultnpc",
+          },
+          outroStory: {
+            storyTexts: ["Tschüss", "Du bist mit diesem Raum fertig"],
+            elementModel: "a_npc_defaultnpc",
+          },
+        },
+      },
     ],
     elements: [
       {
