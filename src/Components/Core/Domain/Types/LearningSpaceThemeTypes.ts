@@ -5,6 +5,7 @@ export enum LearningSpaceThemeType {
   CampusKE = "CAMPUSKEMPTEN",
   CampusMensa = "CAMPUSMENSA",
   CampusLibrary = "CAMPUSLIBRARY",
+  CampusStudentClub = "CAMPUSSTUDENTCLUB",
   Arcade = "ARCADE",
   Suburb = "SUBURB",
 }

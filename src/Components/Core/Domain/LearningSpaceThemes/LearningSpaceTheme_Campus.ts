@@ -116,3 +116,23 @@ export const LearningSpaceTheme_CampusMensa: ILearningSpaceTheme = {
     [LearningSpaceTemplateType.None]: "",
   },
 };
+
+export const LearningSpaceTheme_CampusStudentClub: ILearningSpaceTheme = {
+  learningElementModels: LearningSpaceTheme_CampusAB.learningElementModels,
+  entryDoorModel: require("../../../../Assets/3dModels/sharedModels/id-elevator-entry.glb"),
+  exitDoorModel: require("../../../../Assets/3dModels/sharedModels/id-elevator-exit.glb"),
+  ambienceModel: require("../../../../Assets/3dModels/campusTheme/studentClub/env-campus-studentClub.glb"),
+  storyElementModel: LearningSpaceTheme_CampusAB.storyElementModel,
+  standinDecorationModels: [
+    require("../../../../Assets/3dModels/campusTheme/d-dcomp-schooldesk-1.glb"),
+    require("../../../../Assets/3dModels/campusTheme/d-dcomp-watertower-1.glb"),
+  ],
+  insideDecorationModels: {
+    [LearningSpaceTemplateType.L]: "",
+    [LearningSpaceTemplateType.R6]: "",
+    [LearningSpaceTemplateType.R8]: "",
+    [LearningSpaceTemplateType.D]: "",
+    [LearningSpaceTemplateType.T]: "",
+    [LearningSpaceTemplateType.None]: "",
+  },
+};
