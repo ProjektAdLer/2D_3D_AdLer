@@ -19,7 +19,7 @@ import {
   MockAdaptivityData,
   MockAdaptivityElementStatusResponse,
 } from "./MockBackendData/MockAdaptivityData";
-import SmallWorldAWT from "./MockBackendData/SmallWorldAWT";
+import ThemeWorldAWT from "./MockBackendData/ThemeWorldAWT";
 import StoryWorldAWT from "./MockBackendData/StoryWorldAWT";
 import AWT from "./Types/AWT";
 import { BackendAvatarConfigTO } from "../../Application/DataTransferObjects/BackendAvatarConfigTO";
@@ -80,7 +80,7 @@ export default class MockBackendAdapter implements IBackendPort {
     worldID,
   }: ElementDataParams): Promise<string> {
     let worldToUse: AWT;
-    if (worldID === 1) worldToUse = SmallWorldAWT;
+    if (worldID === 1) worldToUse = ThemeWorldAWT;
     else if (worldID === 2) worldToUse = StoryWorldAWT;
     else if (worldID === 3) worldToUse = SubthemeWorldAWT;
     else worldToUse = SimpleWorldAWT;
@@ -169,10 +169,10 @@ export default class MockBackendAdapter implements IBackendPort {
     worldID,
   }: GetWorldDataParams): Promise<BackendWorldTO> {
     let worldToUse: AWT;
-    if (worldID === 1) worldToUse = SmallWorldAWT;
+    if (worldID === 1) worldToUse = SimpleWorldAWT;
     else if (worldID === 2) worldToUse = StoryWorldAWT;
-    else if (worldID === 3) worldToUse = SubthemeWorldAWT;
-    else worldToUse = SimpleWorldAWT;
+    else if (worldID === 3) worldToUse = ThemeWorldAWT;
+    else worldToUse = SubthemeWorldAWT;
 
     return Promise.resolve(BackendAdapterUtils.parseAWT(worldToUse));
   }
