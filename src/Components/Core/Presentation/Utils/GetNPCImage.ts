@@ -13,7 +13,7 @@ enum EmotionMap {
   shocked,
 }
 
-// first default is substitute for not having a full-body image
+// first welcome is substitute for not having a full-body image
 const keys = [
   "welcome",
   "welcome",
