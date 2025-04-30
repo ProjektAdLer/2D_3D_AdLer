@@ -1,3 +1,4 @@
+import { BackendAvatarConfigTO } from "./../../../Core/Application/DataTransferObjects/BackendAvatarConfigTO";
 import { AdaptivityElementDataTO } from "./../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementDataTO";
 import { mock } from "jest-mock-extended";
 import {
@@ -27,6 +28,28 @@ const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 const oldConfigBackendValue = config.useFakeBackend;
 const oldConfigServerURL = config.serverURL;
+
+const mockedBackendAvatarConfigTO = {
+  eyebrows: "eyebrows",
+  eyes: "eyes",
+  nose: "nose",
+  mouth: "mouth",
+  hair: "hair-backhead",
+  beard: "beard-full-long",
+  hairColor: 0,
+  headgear: "none",
+  glasses: "glasses-oval",
+  backpack: "backpack-santapack",
+  other: "other-sheriff-star",
+  shirt: "shirts-dress",
+  shirtColor: 1,
+  pants: "pants-cargo",
+  pantsColor: 2,
+  shoes: "shoes-boots",
+  shoesColor: 3,
+  skinColor: 4,
+  roundness: 1,
+} as BackendAvatarConfigTO;
 
 describe("BackendAdapter", () => {
   let systemUnderTest: BackendAdapter;
@@ -407,5 +430,44 @@ describe("BackendAdapter", () => {
         },
       ],
     } as AdaptivityElementstatusResponse);
+  });
+
+  test("getAvatarConfig calls backend and returns avatarconfig", async () => {
+    mockedAxios.get.mockResolvedValue({
+      data: {
+        mockedBackendAvatarConfigTO,
+      },
+    });
+    const returnedVal = await systemUnderTest.getAvatarConfig("token");
+
+    expect(mockedAxios.get).toHaveBeenCalled();
+    expect(mockedAxios.get).toHaveBeenCalledWith("/Player/Avatar", {
+      headers: {
+        token: "token",
+      },
+    });
+    expect(returnedVal).toEqual({ mockedBackendAvatarConfigTO });
+  });
+
+  test("updateAvatarConfig calls backend and returns avatarconfig", async () => {
+    mockedAxios.post.mockResolvedValue({
+      data: true,
+    });
+    const returnedVal = await systemUnderTest.updateAvatarConfig(
+      "token",
+      mockedBackendAvatarConfigTO,
+    );
+
+    expect(mockedAxios.post).toHaveBeenCalled();
+    expect(mockedAxios.post).toHaveBeenCalledWith(
+      "/Player/Avatar",
+      mockedBackendAvatarConfigTO,
+      {
+        headers: {
+          token: "token",
+        },
+      },
+    );
+    expect(returnedVal).toEqual(true);
   });
 });
