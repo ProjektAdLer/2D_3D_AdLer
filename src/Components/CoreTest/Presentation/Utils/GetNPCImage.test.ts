@@ -4,7 +4,7 @@ import { getNPCImage } from "../../../Core/Presentation/Utils/GetNPCImage.ts";
 import welcomeRobotNPC from "../../../../Assets/misc/quizBackgrounds/a-npc-alerobot/a-npc-alerobot-welcome.png";
 import happyRobotNPC from "../../../../Assets/misc/quizBackgrounds/a-npc-alerobot/a-npc-alerobot-happy.png";
 import disappointedRobotNPC from "../../../../Assets/misc/quizBackgrounds/a-npc-alerobot/a-npc-alerobot-disappointed.png";
-import thumbsUpRobotNPC from "../../../../Assets/misc/quizBackgrounds/a-npc-alerobot/a-npc-alerobot-thumbsUp.png";
+import thumbsUpRobotNPC from "../../../../Assets/misc/quizBackgrounds/a-npc-alerobot/a-npc-alerobot-thumbsup.png";
 import angryRobotNPC from "../../../../Assets/misc/quizBackgrounds/a-npc-alerobot/a-npc-alerobot-angry.png";
 import tiredRobotNPC from "../../../../Assets/misc/quizBackgrounds/a-npc-alerobot/a-npc-alerobot-tired.png";
 import shockedRobotNPC from "../../../../Assets/misc/quizBackgrounds/a-npc-alerobot/a-npc-alerobot-shocked.png";
