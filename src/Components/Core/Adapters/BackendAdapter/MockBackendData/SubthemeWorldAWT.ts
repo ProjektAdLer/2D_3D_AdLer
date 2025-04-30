@@ -14,8 +14,10 @@ const SubthemeWorldAWT: AWT = {
     worldGoals: ["Weltziel 1/3", "Weltziel 2/3", "Weltziel 3/3"],
     evaluationLink: "https://www.th-ab.de",
     frameStory: {
-      frameStoryIntro: "blablaINTROblabla",
-      frameStoryOutro: "blablaOUTROblabla",
+      frameStoryIntro:
+        "Diese Into Story hat genau 600 Zeichen. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
+      frameStoryOutro:
+        "Diese Outro Story hat genau 600 Zeichen. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
     },
     topics: [
       {
