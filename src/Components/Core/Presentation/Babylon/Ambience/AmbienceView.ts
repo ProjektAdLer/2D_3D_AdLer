@@ -31,7 +31,8 @@ export default class AmbienceView {
         this.viewModel.theme === LearningSpaceThemeType.CampusAB ||
         this.viewModel.theme === LearningSpaceThemeType.CampusKE ||
         this.viewModel.theme === LearningSpaceThemeType.Arcade ||
-        this.viewModel.theme === LearningSpaceThemeType.Suburb
+        this.viewModel.theme === LearningSpaceThemeType.Suburb ||
+        this.viewModel.theme === LearningSpaceThemeType.CampusStudentClub
       ) {
         mesh.translate(new Vector3(0, -0.05, 0), 1);
       }

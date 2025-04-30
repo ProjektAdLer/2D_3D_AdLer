@@ -3,6 +3,8 @@ import IStoryElementController from "./IStoryElementController";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import { useEffect, useState } from "react";
 import React from "react";
+import CloseButton from "~ReactComponents/ReactRelated/ReactBaseComponents/CloseButton";
+import closeIcon from "../../../../../../Assets/icons/close.svg";
 
 export default function SingleStoryLayout({
   contentTexts,
@@ -23,38 +25,28 @@ export default function SingleStoryLayout({
   return (
     <React.Fragment>
       {/* Story Text */}
-      <div className="flex items-center p-2 bg-buttonbgblue rounded-xl whitespace-pre-line">
-        {contentTexts[pageId]}
+      <div className="flex items-center p-2 bg-buttonbgblue rounded-xl whitespace-pre-line italic font-bold w-full text-justifiy ">
+        {`"${contentTexts[pageId]}"`}{" "}
       </div>
 
       {/* Navigation Buttons */}
       <div className="flex flex-row-reverse justify-between w-full min-h-8 lg:max-w-5xl xl:max-w-6xl">
-        {withBackButton && (
+        {withBackButton ? (
           <>
             <StyledButton
               shape="freeFloatLeft"
               onClick={() => controller.onBackToSelectionButtonClicked()}
               data-testid="back"
             >
-              {translate("backButton")}
+              {"\u21A9"}
             </StyledButton>
           </>
+        ) : (
+          <div></div>
         )}
 
-        {/* Storyelement abschließen Button */}
-        <StyledButton
-          shape="freeFloatCenter"
-          onClick={() => controller.closePanel()}
-          data-testid="close"
-        >
-          {
-            "Zurück zum Lernraum"
-            //translate("closeButton")
-          }
-        </StyledButton>
-
         {contentTexts.length > 1 && (
-          <div className="grid w-16 grid-cols-2 gap-2 mx-1 lg:w-32 justify-items-end">
+          <div className="grid w-16 grid-cols-2 gap-2 mx-1 lg:w-24 justify-items-end">
             <div>
               <StyledButton
                 className="text-xl"
@@ -63,7 +55,7 @@ export default function SingleStoryLayout({
                 disabled={pageId <= 0}
                 data-testid="back"
               >
-                {"\u25C0"}
+                {"\u25B2"}
               </StyledButton>
             </div>
 
@@ -77,11 +69,12 @@ export default function SingleStoryLayout({
                 disabled={pageId >= contentTexts.length - 1}
                 data-testid="next"
               >
-                {"\u25B6"}
+                {"\u25BC"}
               </StyledButton>
             </div>
           </div>
         )}
+        <div></div>
       </div>
     </React.Fragment>
   );

@@ -47,6 +47,9 @@
   .bubblecornerbottomleft {
     clip-path: polygon(100% 0, 0 54%, 35% 0);
   }
+  .bubblecornertopleft {
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  }
 }
 
 body {
