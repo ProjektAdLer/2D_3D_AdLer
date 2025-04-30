@@ -1,3 +1,5 @@
+import { GradingStyle } from "src/Components/Core/Domain/Types/GradingStyle";
+
 export default class ProgressScorePanelViewModel {
-  displayStrategy: "point-based" | "requirement-based";
+  gradingStyle: GradingStyle;
 }

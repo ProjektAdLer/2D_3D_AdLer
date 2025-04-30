@@ -93,6 +93,7 @@ export default class BackendAdapterUtils {
       externalElements: externalLearningElements,
       narrativeFramework: awt.world.frameStory ?? null,
       theme: theme,
+      gradingStyle: awt.world.worldGradingStyle ?? null,
     };
 
     return response;

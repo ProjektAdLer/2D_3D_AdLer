@@ -2,6 +2,7 @@ import LearningWorldTO from "src/Components/Core/Application/DataTransferObjects
 import { IProgressScorePanelPresenter } from "./IProgressScorePanelPresenter";
 import ProgressScorePanelViewModel from "./ProgessScorePanelViewModel";
 import PointBasedDisplay from "../../../Utils/ElementCompletionDisplay/PointBasedDisplay";
+import { GradingStyle } from "src/Components/Core/Domain/Types/GradingStyle";
 
 export default class ProgressScorePanelPresenter
   implements IProgressScorePanelPresenter
@@ -9,10 +10,10 @@ export default class ProgressScorePanelPresenter
   constructor(private viewModel: ProgressScorePanelViewModel) {}
 
   onLearningWorldEntityLoaded(learningWorldTO: LearningWorldTO): void {
-    if (learningWorldTO.displayStrategy instanceof PointBasedDisplay) {
-      this.viewModel.displayStrategy = "point-based";
+    if (learningWorldTO.gradingStyle instanceof PointBasedDisplay) {
+      this.viewModel.gradingStyle = GradingStyle.point;
     } else {
-      this.viewModel.displayStrategy = "point-based";
+      this.viewModel.gradingStyle = GradingStyle.requirement;
     }
   }
 }

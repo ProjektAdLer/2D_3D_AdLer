@@ -43,6 +43,9 @@ import type { IInternalGetLoginStatusUseCase } from "../GetLoginStatus/IGetLogin
 import { NotificationMessages } from "src/Components/Core/Domain/Types/NotificationMessages";
 import NarrativeFrameworkEntity from "src/Components/Core/Domain/Entities/NarrativeFrameworkEntity";
 import PointBasedDisplay from "src/Components/Core/Presentation/Utils/ElementCompletionDisplay/PointBasedDisplay";
+import IElementCompletionDisplay from "src/Components/Core/Presentation/Utils/ElementCompletionDisplay/IElementCompletionDisplay";
+import { GradingStyle } from "src/Components/Core/Domain/Types/GradingStyle";
+import RequirementBasedDisplay from "src/Components/Core/Presentation/Utils/ElementCompletionDisplay/RequirementBasedDisplay";
 
 @injectable()
 export default class LoadLearningWorldUseCase
@@ -241,7 +244,9 @@ export default class LoadLearningWorldUseCase
               space.id,
               space.templateStyle,
             ),
-            displayStrategy: new PointBasedDisplay(),
+            gradingStyle: this.createDisplayStrategy(
+              apiWorldDataResponse.gradingStyle,
+            ),
           },
           LearningSpaceEntity,
         ),
@@ -445,7 +450,9 @@ export default class LoadLearningWorldUseCase
         evaluationLink: apiWorldDataResponse.evaluationLink,
         narrativeFramework: narrativeFrameworkEntity,
         theme: apiWorldDataResponse.theme,
-        displayStrategy: new PointBasedDisplay(),
+        gradingStyle: this.createDisplayStrategy(
+          apiWorldDataResponse.gradingStyle,
+        ),
       },
       LearningWorldEntity,
     );
@@ -480,8 +487,16 @@ export default class LoadLearningWorldUseCase
     let worldTO = new LearningWorldTO();
     worldTO = Object.assign(worldTO, structuredClone(entityToConvert));
     // structured clone wont deep copy instantiation of an interface
-    worldTO.displayStrategy = entityToConvert.displayStrategy;
+    worldTO.gradingStyle = entityToConvert.gradingStyle;
 
     return worldTO;
+  }
+
+  private createDisplayStrategy(
+    flag?: string | null,
+  ): IElementCompletionDisplay {
+    if (flag && flag === GradingStyle.requirement) {
+      return new RequirementBasedDisplay();
+    } else return new PointBasedDisplay();
   }
 }

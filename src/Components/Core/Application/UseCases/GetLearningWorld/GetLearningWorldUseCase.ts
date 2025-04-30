@@ -43,7 +43,7 @@ export default class GetLearningWorldUseCase
     )[0];
     let worldTO = new LearningWorldTO();
     worldTO = Object.assign(worldTO, structuredClone(worldEntity));
-    worldTO.displayStrategy = worldEntity.displayStrategy;
+    worldTO.gradingStyle = worldEntity.gradingStyle;
 
     this.logger.log(
       LogLevelTypes.TRACE,

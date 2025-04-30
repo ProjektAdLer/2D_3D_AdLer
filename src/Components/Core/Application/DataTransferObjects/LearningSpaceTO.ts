@@ -21,5 +21,5 @@ export default class LearningSpaceTO {
   template: LearningSpaceTemplateType;
   theme: LearningSpaceThemeType;
   storyElements: StoryElementTO[];
-  displayStrategy: IElementCompletionDisplay;
+  gradingStyle: IElementCompletionDisplay;
 }
