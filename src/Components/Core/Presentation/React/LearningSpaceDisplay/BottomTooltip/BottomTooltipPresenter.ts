@@ -72,7 +72,7 @@ export default class BottomTooltipPresenter implements IBottomTooltipPresenter {
 
   onLearningSpaceLoaded(learningSpaceTO: LearningSpaceTO): void {
     this.dataQueue = []; // prevents displaying tooltip of previous space
-    this.viewModel.displayStrategy = learningSpaceTO.displayStrategy;
+    this.viewModel.gradingStyle = learningSpaceTO.gradingStyle;
     this.updateViewModel();
   }
 

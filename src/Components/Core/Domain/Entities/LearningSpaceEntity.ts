@@ -17,5 +17,5 @@ export default class LearningSpaceEntity {
   public theme: LearningSpaceThemeType;
   public parentWorldID: ComponentID;
   public storyElements: StoryElementEntity[];
-  public displayStrategy: IElementCompletionDisplay;
+  public gradingStyle: IElementCompletionDisplay;
 }

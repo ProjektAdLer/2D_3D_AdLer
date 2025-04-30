@@ -96,7 +96,7 @@ export default class LoadLearningSpaceUseCase
     spaceTO.requirementsString = availabilityData.requirementsString;
     spaceTO.requirementsSyntaxTree = availabilityData.requirementsSyntaxTree;
     spaceTO.isAvailable = availabilityData.isAvailable;
-    spaceTO.displayStrategy = spaceEntity.displayStrategy;
+    spaceTO.gradingStyle = spaceEntity.gradingStyle;
 
     // set current location in user entity
     this.setUserLocationUseCase.execute({
@@ -113,7 +113,7 @@ export default class LoadLearningSpaceUseCase
   private toTO(spaceEntity: LearningSpaceEntity): LearningSpaceTO {
     let spaceTO = new LearningSpaceTO();
     spaceTO = Object.assign(spaceTO, structuredClone(spaceEntity));
-    spaceTO.displayStrategy = spaceEntity.displayStrategy;
+    spaceTO.gradingStyle = spaceEntity.gradingStyle;
 
     return spaceTO;
   }

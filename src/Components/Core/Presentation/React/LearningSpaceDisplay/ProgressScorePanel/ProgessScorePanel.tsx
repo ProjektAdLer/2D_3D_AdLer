@@ -3,6 +3,7 @@ import LearningSpaceScorePanel from "./LearningSpaceScorePanel/LearningSpaceScor
 import LearningWorldScorePanel from "./LearningWorldScorePanel/LearningWorldScorePanel";
 import ProgressScorePanelViewModel from "./ProgessScorePanelViewModel";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
+import { GradingStyle } from "src/Components/Core/Domain/Types/GradingStyle";
 
 export default function ProgressScorePanel() {
   const [viewModel] = useBuilder<ProgressScorePanelViewModel, undefined>(
@@ -10,11 +11,11 @@ export default function ProgressScorePanel() {
   );
 
   if (!viewModel) return null;
-  if (!viewModel.displayStrategy) return null;
+  if (!viewModel.gradingStyle) return null;
 
   return (
     <>
-      {viewModel.displayStrategy === "point-based" && (
+      {viewModel.gradingStyle === GradingStyle.point && (
         <>
           <LearningWorldScorePanel />
           <LearningSpaceScorePanel />

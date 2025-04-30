@@ -3,6 +3,7 @@ import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilder
 import ProgressScorePanel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/ProgressScorePanel/ProgessScorePanel";
 import { render } from "@testing-library/react";
 import React from "react";
+import { GradingStyle } from "../../../../../Core/Domain/Types/GradingStyle";
 
 describe("ProgressScorePanel", () => {
   let viewModel = new ProgressScorePanelViewModel();
@@ -22,7 +23,7 @@ describe("ProgressScorePanel", () => {
   });
 
   test("renders point-based progress score", () => {
-    viewModel.displayStrategy = "point-based";
+    viewModel.gradingStyle = GradingStyle.point;
     useBuilderMock([viewModel, undefined]);
 
     const systemUnderTest = render(<ProgressScorePanel />);

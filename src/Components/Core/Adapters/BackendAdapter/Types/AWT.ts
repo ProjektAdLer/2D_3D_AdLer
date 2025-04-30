@@ -12,6 +12,7 @@ export interface APIWorld {
   worldName: string;
   worldDescription?: string;
   worldGoals?: string[];
+  worldGradingStyle?: string;
   topics: APITopic[];
   spaces: APISpace[];
   elements: APIElement[];

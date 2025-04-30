@@ -12,4 +12,5 @@ export default class BackendWorldTO {
   externalElements: BackendBaseElementTO[];
   narrativeFramework: BackendNarrativeFrameworkTO | null;
   theme: LearningSpaceThemeType;
+  gradingStyle: string | null;
 }

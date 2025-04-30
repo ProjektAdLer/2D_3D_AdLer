@@ -15,5 +15,5 @@ export default class LearningWorldEntity {
   lastVisitedSpaceID: ComponentID | undefined;
   narrativeFramework: NarrativeFrameworkEntity | null;
   theme: LearningSpaceThemeType;
-  displayStrategy: IElementCompletionDisplay;
+  gradingStyle: IElementCompletionDisplay;
 }

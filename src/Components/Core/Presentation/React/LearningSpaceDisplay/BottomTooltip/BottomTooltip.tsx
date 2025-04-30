@@ -57,7 +57,7 @@ export default function BottomTooltip({
             iconType === DoorTypes.exitDoor) &&
             getDoorIcon(iconType)}
           {text}
-          {showPoints && viewModel.displayStrategy.bottomTooltip(points)}
+          {showPoints && viewModel.gradingStyle.bottomTooltip(points)}
         </div>
       </StyledContainer>
     </div>

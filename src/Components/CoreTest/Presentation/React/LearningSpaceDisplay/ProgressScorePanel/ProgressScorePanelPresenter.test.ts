@@ -1,7 +1,9 @@
+import { GradingStyle } from "./../../../../../Core/Domain/Types/GradingStyle";
 import LearningWorldTO from "../../../../../Core/Application/DataTransferObjects/LearningWorldTO";
 import ProgressScorePanlViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/ProgressScorePanel/ProgessScorePanelViewModel";
 import ProgressscorepanelPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/ProgressScorePanel/ProgressScorePanelPresenter";
 import PointBasedDisplay from "../../../../../Core/Presentation/Utils/ElementCompletionDisplay/PointBasedDisplay";
+import RequirementBasedDisplay from "../../../../../Core/Presentation/Utils/ElementCompletionDisplay/RequirementBasedDisplay";
 
 describe("ProgressScorePanelPresenter", () => {
   let viewModel: ProgressScorePanlViewModel;
@@ -23,14 +25,14 @@ describe("ProgressScorePanelPresenter", () => {
       evaluationLink: "",
       completionModalShown: false,
       lastVisitedSpaceID: 1,
-      displayStrategy: new PointBasedDisplay(),
+      gradingStyle: new PointBasedDisplay(),
     };
 
     systemUnderTest.onLearningWorldEntityLoaded(learningWorldTO);
-    expect(viewModel.displayStrategy).toEqual("point-based");
+    expect(viewModel.gradingStyle).toEqual(GradingStyle.point);
   });
 
-  test("onLearningWorldEntityLoaded sets default strategy", () => {
+  test("onLearningWorldEntityLoaded sets point-based strategy", () => {
     const learningWorldTO: LearningWorldTO = {
       id: 0,
       name: "",
@@ -41,9 +43,28 @@ describe("ProgressScorePanelPresenter", () => {
       evaluationLink: "",
       completionModalShown: false,
       lastVisitedSpaceID: 1,
+      gradingStyle: new PointBasedDisplay(),
     };
 
     systemUnderTest.onLearningWorldEntityLoaded(learningWorldTO);
-    expect(viewModel.displayStrategy).toEqual("point-based");
+    expect(viewModel.gradingStyle).toEqual(GradingStyle.point);
+  });
+
+  test("onLearningWorldEntityLoaded sets point-based strategy", () => {
+    const learningWorldTO: LearningWorldTO = {
+      id: 0,
+      name: "",
+      spaces: [],
+      goals: [],
+      description: "",
+      worldCompletionText: "",
+      evaluationLink: "",
+      completionModalShown: false,
+      lastVisitedSpaceID: 1,
+      gradingStyle: new RequirementBasedDisplay(),
+    };
+
+    systemUnderTest.onLearningWorldEntityLoaded(learningWorldTO);
+    expect(viewModel.gradingStyle).toEqual(GradingStyle.requirement);
   });
 });

@@ -12,5 +12,5 @@ export default class LearningWorldTO {
   evaluationLink: string;
   completionModalShown: boolean | undefined;
   lastVisitedSpaceID: ComponentID | undefined;
-  displayStrategy: IElementCompletionDisplay;
+  gradingStyle: IElementCompletionDisplay;
 }

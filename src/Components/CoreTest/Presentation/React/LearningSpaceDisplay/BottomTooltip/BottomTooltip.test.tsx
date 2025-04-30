@@ -13,7 +13,7 @@ describe("BottomTooltip", () => {
     fakeModel.show.Value = true;
     fakeModel.iconType.Value = "text";
     fakeModel.text.Value = "testText";
-    fakeModel.displayStrategy = new PointBasedDisplay();
+    fakeModel.gradingStyle = new PointBasedDisplay();
 
     useBuilderMock([fakeModel, undefined]);
 
@@ -26,7 +26,7 @@ describe("BottomTooltip", () => {
     fakeModel.show.Value = false;
     fakeModel.iconType.Value = "text";
     fakeModel.text.Value = "testText";
-    fakeModel.displayStrategy = new PointBasedDisplay();
+    fakeModel.gradingStyle = new PointBasedDisplay();
 
     useBuilderMock([fakeModel, undefined]);
 
