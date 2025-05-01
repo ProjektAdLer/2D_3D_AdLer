@@ -30,12 +30,7 @@ export default function ControlsExplanationModal({
         setIsOpen(false);
       }}
     >
-      <ControlsExplanationContent
-        className={tailwindMerge(
-          className,
-          "portrait:max-w-[90vw] max-h-[80vh] max-w-6xl",
-        )}
-      />
+      <ControlsExplanationContent className={tailwindMerge(className, "")} />
     </StyledModal>
   );
 }
