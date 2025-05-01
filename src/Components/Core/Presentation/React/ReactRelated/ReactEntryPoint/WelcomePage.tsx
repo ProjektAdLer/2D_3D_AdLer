@@ -18,7 +18,7 @@ import avatarEditorButtonBackgroundVideo from "../../../../../../Assets/misc/Wel
 export default function WelcomePage() {
   const { t: translate } = useTranslation("start");
   return (
-    <div className=" relative grid h-[100svh] mobile-landscape:w-[100dvw] mobile-landscape:h-[100dvh] grid-cols-8 grid-rows-6 mobile-landscape:pb-1 p-2 bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto">
+    <div className="relative grid h-[100svh] mobile-landscape:w-[100dvw] mobile-landscape:h-[100dvh] grid-cols-8 grid-rows-6 mobile-landscape:pb-1 p-2 bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto">
       <img
         className="absolute w-32 m-4 -bottom-3 -right-3 opacity-20"
         src={logo}
@@ -28,7 +28,7 @@ export default function WelcomePage() {
       <HelpDeskButton className="col-start-8 row-start-1 justify-self-end" />
       <HelpDeskModal />
 
-      <section className="flex flex-col items-center portrait:row-start-1 portrait:row-span-2 portrait:self-center portrait:col-start-2 portrait:col-span-6 tablet-portrait:col-start-1 tablet-portrait:col-span-8 landscape:col-span-6 landscape:col-start-2 landscape:row-start-1 text-adlerdarkblue lg:landscape:col-span-6 lg:landscape:col-start-2 xl:landscape:col-start-2 xl:landscape:col-span-6 lg:landscape:row-start-1 mobile-portrait:mt-10">
+      <section className="flex flex-col items-center portrait:row-start-1 portrait:row-span-2 portrait:self-center portrait:col-start-2 portrait:col-span-6 tablet-portrait:col-start-1 tablet-portrait:col-span-8 landscape:col-span-6 landscape:col-start-2 landscape:row-start-1 text-adlerdarkblue lg:landscape:col-span-6 lg:landscape:col-start-2 xl:landscape:col-start-2 xl:landscape:col-span-6 lg:landscape:row-start-1 mobile-portrait:mt-32 tablet-portrait:mt-32">
         <video
           className="scale-75 lg:-mb-16 portrait:hidden mobile-landscape:hidden"
           src={welcomeVideo}
@@ -47,10 +47,10 @@ export default function WelcomePage() {
           src={welcomePicture}
           alt="3D Welcome Text"
         />
-        <LoginComponent className="flex flex-col items-center justify-around col-span-6 col-start-2 tablet-portrait:col-start-1 tablet-portrait:col-span-8 xl:pt-2 lg:pt-4 mobile-portrait:row-start-2 mobile-portrait:justify-start mobile-landscape:pt-0" />
+        <LoginComponent className="flex flex-col items-center justify-around col-span-6 col-start-2 tablet-portrait:col-start-1 tablet-portrait:col-span-8 xl:pt-2 lg:pt-8 mobile-portrait:row-start-2 mobile-portrait:justify-start mobile-landscape:pt-0" />
       </section>
 
-      <section className="flex items-center justify-center col-span-6 col-start-2 row-span-3 row-start-3 gap-4 mb-4 portrait:h-1/2 mobile-landscape:h-[60%] mobile-landscape:self-end mobile-landscape:mb-2 portrait:row-start-3 portrait:row-span-3 portrait:col-start-2 portrait:self-center portrait-col-span-6 portrait:gap-6">
+      <section className="flex items-center justify-center col-span-6 col-start-2 row-span-3 row-start-3 gap-4 mb-4 portrait:h-1/2 mobile-landscape:h-[60%] mobile-landscape:self-end mobile-landscape:mb-2 portrait:row-start-3 portrait:row-span-3 portrait:col-start-2 portrait:self-center portrait-col-span-6 portrait:gap-6 md:mb-8 md:pt-4">
         <WelcomePageButton
           backgroundVideo={learningWorldButtonBackgroundVideo}
           backgroundPicture={learningWorldMenuButtonBackground}
