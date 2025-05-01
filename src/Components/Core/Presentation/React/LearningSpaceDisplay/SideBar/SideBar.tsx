@@ -53,7 +53,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
       useAsTriggerOnly={true}
     >
       {/*<StyledContainer className="flex flex-col p-2 border-8 border-black rounded-lg w-44 lg:w-64 bg-whitetrans ">*/}
-      <StyledContainer className="relative w-[11rem] md:w-[13rem] lg:w-60 border-8 rounded-2xl mobile-landscape:w-[60vw] border-adlerdarkblue bg-white flex flex-col z-0">
+      <StyledContainer className="relative w-[11rem] md:w-[13rem] lg:w-60 border-8 rounded-2xl mobile-portrait:w-48 mobile-landscape:w-[65vw] mobile-landscape:max-h-64 mobile-landscape:ml-8 border-adlerdarkblue bg-white flex flex-col z-0">
         <header className="relative z-20 flex items-center justify-between w-full mt-1">
           <span className="ml-1 font-bold text-2xs lg:text-md text-adlerdarkblue">
             {time.toLocaleDateString()}
@@ -63,8 +63,8 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
             {time.toLocaleTimeString()} Uhr
           </span>
         </header>
-        <span className="bg-adlerdarkblue h-2 w-2 rounded-full absolute left-[calc(50%-0.25rem)] mobile-landscape:left-2 mobile-landscape:top-[calc(50%-0.25rem)]"></span>
-        <div className="z-20 grid grid-flow-row grid-cols-3 gap-1 p-1 rounded-lg mobile-landscape:ml-4 mobile-landscape:grid-flow-col mobile-landscape:auto-cols-max mobile-landscape:grid-rows-2 mobile-landscape:grid-cols-auto auto-rows-max">
+        <span className="bg-adlerdarkblue h-2 w-2 rounded-full absolute left-[calc(50%-0.25rem)] mobile-landscape:left-2 mobile-landscape:top-[calc(50%-0.25rem)] hidden mobile-landscape:block"></span>
+        <div className="z-20 grid grid-flow-row grid-cols-3 gap-1 p-1 rounded-lg mobile-landscape:ml-8 mobile-landscape:grid-flow-row mobile-landscape:auto-cols-max mobile-landscape:grid-rows-2 mobile-landscape:grid-cols-auto auto-rows-max">
           <div className="flex flex-col justify-start items-center max-h-[25%]">
             <StyledButton onClick={controller.onMainMenuButtonClicked}>
               <img src={engineLogo} alt="" />
@@ -136,7 +136,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
             >
               <img src={controlsIcon} alt="Steuerungserklärung" />
             </StyledButton>
-            <p className="font-bold text-center text-2xs lg:text-md text-adlerdarkblue text-outline">
+            <p className="font-bold break-all text-center text-2xs lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_narrativeFrameworkIntro")}
             </p>
           </div>
