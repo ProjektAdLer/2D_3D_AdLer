@@ -16,8 +16,8 @@ export default function CinemaStripes() {
   if (!isOpen) return null;
   return (
     <div>
-      <div className="absolute top-0 left-0 w-full h-24 bg-black z-[100]"></div>
-      <div className="absolute bottom-0 left-0 w-full h-24 bg-black z-[100]"></div>
+      <div className="absolute top-0 left-0 w-full h-24 bg-black z-[30]"></div>
+      <div className="absolute bottom-0 left-0 w-full h-24 bg-black z-[30]"></div>
     </div>
   );
 }
