@@ -4,10 +4,10 @@ exports[`CinemaStripes renders if isOpen is set to true 1`] = `
 <div>
   <div>
     <div
-      class="absolute top-0 left-0 w-full h-24 bg-black z-[100]"
+      class="absolute top-0 left-0 w-full h-24 bg-black z-[30]"
     />
     <div
-      class="absolute bottom-0 left-0 w-full h-24 bg-black z-[100]"
+      class="absolute bottom-0 left-0 w-full h-24 bg-black z-[30]"
     />
   </div>
 </div>
