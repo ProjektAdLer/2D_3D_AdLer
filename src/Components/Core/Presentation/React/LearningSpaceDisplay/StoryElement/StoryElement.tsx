@@ -93,7 +93,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
         </div>
 
         {/* Modal */}
-        <div className="flex items-start justify-center pb-2 w-full lg:w-[95vw] max-w-7xl lg:max-h-[30vh] xl:max-h-[32vh] pt-2 lg:pt-0 row-start-3 overflow-auto">
+        <div className="z-50 flex items-start justify-center pb-2 w-full lg:w-[95vw] max-w-7xl lg:max-h-[30vh] xl:max-h-[32vh] pt-2 lg:pt-0 row-start-3 overflow-auto">
           <div className="flex flex-col p-2 xl:px-8 gap-2 justify-center rounded-lg bg-buttonbgblue h-full w-full max-w-[95%]">
             {/* Header */}
             <div className="z-20 flex items-start justify-center pt-2 gap-2 overflow-hidden text-xl font-bold lg:max-w-5xl xl:max-w-6xl text-adlerdarkblue lg:roboto-black lg:text-2xl ">
@@ -118,7 +118,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
               {/* Title */}
               <div className="w-full lg:text-lg">{getTitleText()}</div>
 
-              {/* Close Button (only in selection) */}
+              {/* Close Button */}
               <CloseButton
                 onClick={() => controller.closePanel()}
                 className="w-8 h-8 p-1 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10 lg:text-lg"

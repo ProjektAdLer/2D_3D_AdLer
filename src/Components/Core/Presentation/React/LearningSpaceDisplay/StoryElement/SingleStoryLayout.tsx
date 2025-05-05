@@ -25,8 +25,8 @@ export default function SingleStoryLayout({
   return (
     <React.Fragment>
       {/* Story Text */}
-      <div className="flex items-center p-2 bg-buttonbgblue rounded-xl whitespace-pre-line italic font-bold w-full text-justifiy ">
-        {`"${contentTexts[pageId]}"`}{" "}
+      <div className="flex items-center p-2 bg-buttonbgblue rounded-xl whitespace-pre-line italic font-bold w-full text-justifiy text-adlerdarkblue">
+        {`"${contentTexts[pageId]}"`}
       </div>
 
       {/* Navigation Buttons */}
@@ -53,7 +53,7 @@ export default function SingleStoryLayout({
                 shape="smallSquare"
                 onClick={() => setPageId(Math.max(0, pageId - 1))}
                 disabled={pageId <= 0}
-                data-testid="back"
+                data-testid="prev-page" // Umbenannt, um Konflikt zu vermeiden
               >
                 {"\u25B2"}
               </StyledButton>

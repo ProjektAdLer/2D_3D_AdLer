@@ -94,7 +94,8 @@ describe("StoryElement", () => {
 
     const componentUnderTest = render(<StoryElement />);
     const title = componentUnderTest.getByText("introStoryTitle");
-    const text = componentUnderTest.getByText("Blabla Intro 1");
+    // Suche nach Text mit Anführungszeichen
+    const text = componentUnderTest.getByText('"Blabla Intro 1"');
 
     expect(title).toBeInTheDocument();
     expect(text).toBeInTheDocument();
@@ -108,7 +109,8 @@ describe("StoryElement", () => {
 
     const componentUnderTest = render(<StoryElement />);
     const title = componentUnderTest.getByText("outroStoryTitle");
-    const text = componentUnderTest.getByText("Blabla Outro 1");
+    // Suche nach Text mit Anführungszeichen
+    const text = componentUnderTest.getByText('"Blabla Outro 1"');
 
     expect(title).toBeInTheDocument();
     expect(text).toBeInTheDocument();
@@ -123,7 +125,8 @@ describe("StoryElement", () => {
 
     const componentUnderTest = render(<StoryElement />);
     const title = componentUnderTest.getByText("outroStoryTitle");
-    const text = componentUnderTest.getByText("outroLockedText");
+    // Suche nach Text mit Anführungszeichen (kommt aus translate, wird dann umrahmt)
+    const text = componentUnderTest.getByText('"outroLockedText"');
 
     expect(title).toBeInTheDocument();
     expect(text).toBeInTheDocument();
@@ -161,7 +164,8 @@ describe("StoryElement", () => {
       useBuilderMock([viewModel, fakeController]);
 
       const componentUnderTest = render(<StoryElement />);
-      const backButton = componentUnderTest.getByText("backButton");
+      // Suche nach data-testid statt Text
+      const backButton = componentUnderTest.getByTestId("back");
 
       expect(backButton).toBeInTheDocument();
     },
