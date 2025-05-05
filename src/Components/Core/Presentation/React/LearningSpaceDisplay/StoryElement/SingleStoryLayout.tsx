@@ -1,4 +1,3 @@
-import { useTranslation } from "react-i18next";
 import IStoryElementController from "./IStoryElementController";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import { useEffect, useState } from "react";
