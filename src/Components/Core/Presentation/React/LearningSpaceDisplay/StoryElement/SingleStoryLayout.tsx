@@ -3,8 +3,6 @@ import IStoryElementController from "./IStoryElementController";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import { useEffect, useState } from "react";
 import React from "react";
-import CloseButton from "~ReactComponents/ReactRelated/ReactBaseComponents/CloseButton";
-import closeIcon from "../../../../../../Assets/icons/close.svg";
 
 export default function SingleStoryLayout({
   contentTexts,
@@ -16,7 +14,6 @@ export default function SingleStoryLayout({
   withBackButton: boolean;
 }) {
   const [pageId, setPageId] = useState(0);
-  const { t: translate } = useTranslation("learningSpace");
 
   useEffect(() => {
     setPageId(0);
@@ -25,7 +22,7 @@ export default function SingleStoryLayout({
   return (
     <React.Fragment>
       {/* Story Text */}
-      <div className="flex items-center p-2 bg-buttonbgblue rounded-xl whitespace-pre-line italic font-bold w-full text-justifiy text-adlerdarkblue">
+      <div className="flex items-center w-full p-2 italic font-bold whitespace-pre-line bg-buttonbgblue rounded-xl text-justifiy text-adlerdarkblue">
         {`"${contentTexts[pageId]}"`}
       </div>
 
