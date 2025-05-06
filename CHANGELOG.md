@@ -21,6 +21,9 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 ### Fixed
 
 - SideBar smartphone view on mobile-landscape
+- sketchy NarrativeFramework styling
+- WelcomeScreen responsive styling
+- WorldCompletionModal responsiv styling
 
 ### Deprecated
 
