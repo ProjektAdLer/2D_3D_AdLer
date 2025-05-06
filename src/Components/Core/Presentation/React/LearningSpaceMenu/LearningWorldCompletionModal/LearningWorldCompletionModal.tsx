@@ -40,7 +40,7 @@ export default function LearningWorldCompletionModal({
       <div className="flex flex-col items-center justify-center">
         {
           <img
-            className="w-32 mb-4 mobile-landscape:w-16 mobile-portrait:w-16"
+            className="w-20 mb-4 mobile-portrait:w-16 mobile-landscape:w-10"
             src={SolutionIcon}
             alt=""
           ></img>
