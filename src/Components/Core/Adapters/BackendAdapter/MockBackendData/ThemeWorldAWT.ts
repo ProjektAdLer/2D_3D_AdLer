@@ -313,6 +313,88 @@ const SmallWorldAWT: AWT = {
           },
         },
       },
+      {
+        spaceId: 8,
+        spaceName: "Rechenzentrum Theme",
+        spaceDescription: "Raumbeschreibung der kleinen Welt",
+        requiredPointsToComplete: 0,
+        spaceSlotContents: [
+          null,
+          5,
+          null,
+          null,
+          2,
+          null,
+          null,
+          6,
+          3,
+          null,
+          1,
+          null,
+          null,
+        ],
+        requiredSpacesToEnter: "7",
+        spaceGoals: [
+          "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor ",
+        ],
+        spaceTemplate: "T_40X32_13L",
+        spaceTemplateStyle: "CampusServerRoom",
+        spaceStory: {
+          introStory: {
+            storyTexts: [
+              "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod sto ",
+            ],
+            elementModel: "a-npc-studendark-male",
+            modelFacialExpression: "disappointed",
+          },
+          outroStory: {
+            storyTexts: ["Tschüss", "Du bist mit diesem Raum fertig"],
+            elementModel: "a-npc-studenlight-female",
+            modelFacialExpression: "thumbsup",
+          },
+        },
+      },
+      {
+        spaceId: 9,
+        spaceName: "Hörsaal Theme",
+        spaceDescription: "Raumbeschreibung der kleinen Welt",
+        requiredPointsToComplete: 0,
+        spaceSlotContents: [
+          null,
+          5,
+          null,
+          null,
+          2,
+          null,
+          null,
+          6,
+          3,
+          null,
+          1,
+          null,
+          null,
+        ],
+        requiredSpacesToEnter: "8",
+        spaceGoals: [
+          "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor ",
+        ],
+        spaceTemplate: "T_40X32_13L",
+        spaceTemplateStyle: "CampusAuditorium",
+        spaceStory: {
+          introStory: {
+            storyTexts: [
+              "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod sto ",
+            ],
+            elementModel: "a-npc-studendark-male",
+            modelFacialExpression: "disappointed",
+          },
+          outroStory: {
+            storyTexts: ["Tschüss", "Du bist mit diesem Raum fertig"],
+            elementModel: "a-npc-studenlight-female",
+            modelFacialExpression: "thumbsup",
+          },
+        },
+      },
     ],
     elements: [
       {

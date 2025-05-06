@@ -136,3 +136,43 @@ export const LearningSpaceTheme_CampusStudentClub: ILearningSpaceTheme = {
     [LearningSpaceTemplateType.None]: "",
   },
 };
+
+export const LearningSpaceTheme_CampusServerRoom: ILearningSpaceTheme = {
+  learningElementModels: LearningSpaceTheme_CampusAB.learningElementModels,
+  entryDoorModel: require("../../../../Assets/3dModels/sharedModels/id-elevator-entry.glb"),
+  exitDoorModel: require("../../../../Assets/3dModels/sharedModels/id-elevator-exit.glb"),
+  ambienceModel: require("../../../../Assets/3dModels/campusTheme/serverroom/env-campus-serverroom.glb"),
+  storyElementModel: LearningSpaceTheme_CampusAB.storyElementModel,
+  standinDecorationModels: [
+    require("../../../../Assets/3dModels/campusTheme/d-dcomp-schooldesk-1.glb"),
+    require("../../../../Assets/3dModels/campusTheme/d-dcomp-watertower-1.glb"),
+  ],
+  insideDecorationModels: {
+    [LearningSpaceTemplateType.L]: require("../../../../Assets/3dModels/campusTheme/serverroom/d-roomcomp-l-server-in.glb"),
+    [LearningSpaceTemplateType.R6]: require("../../../../Assets/3dModels/campusTheme/serverroom/d-roomcomp-r6-server-in.glb"),
+    [LearningSpaceTemplateType.R8]: require("../../../../Assets/3dModels/campusTheme/serverroom/d-roomcomp-r8-server-in.glb"),
+    [LearningSpaceTemplateType.D]: require("../../../../Assets/3dModels/campusTheme/serverroom/d-roomcomp-d-server-in.glb"),
+    [LearningSpaceTemplateType.T]: require("../../../../Assets/3dModels/campusTheme/serverroom/d-roomcomp-t-server-in.glb"),
+    [LearningSpaceTemplateType.None]: "",
+  },
+};
+
+export const LearningSpaceTheme_CampusAuditorium: ILearningSpaceTheme = {
+  learningElementModels: LearningSpaceTheme_CampusAB.learningElementModels,
+  entryDoorModel: require("../../../../Assets/3dModels/sharedModels/id-elevator-entry.glb"),
+  exitDoorModel: require("../../../../Assets/3dModels/sharedModels/id-elevator-exit.glb"),
+  ambienceModel: require("../../../../Assets/3dModels/campusTheme/auditorium/env-campus-auditorium.glb"),
+  storyElementModel: LearningSpaceTheme_CampusAB.storyElementModel,
+  standinDecorationModels: [
+    require("../../../../Assets/3dModels/campusTheme/d-dcomp-schooldesk-1.glb"),
+    require("../../../../Assets/3dModels/campusTheme/d-dcomp-watertower-1.glb"),
+  ],
+  insideDecorationModels: {
+    [LearningSpaceTemplateType.L]: "",
+    [LearningSpaceTemplateType.R6]: "",
+    [LearningSpaceTemplateType.R8]: "",
+    [LearningSpaceTemplateType.D]: "",
+    [LearningSpaceTemplateType.T]: "",
+    [LearningSpaceTemplateType.None]: "",
+  },
+};
