@@ -66,7 +66,7 @@ export default function LoginComponent({
 
   return (
     <div className={tailwindMerge(className)}>
-      <h2 className="col-span-6 col-start-2 row-start-2 mt-1 pt-1 text-xl mobile-landscape:text-sm mobile-landscape:pt-0 mobile-landscape:mt-2 font-extrabold text-center justify-self-center portrait:text-sm lg:text-2xl text-outline text-adlerdarkblue portrait:row-start-1 portrait:col-start-1 portrait:col-span-8">
+      <h2 className="col-span-6 col-start-2 row-start-2 mt-2 pt-1 text-xl text-adlerdarkblue font-extrabold text-center justify-self-center text-outline mobile-landscape:text-sm mobile-landscape:pt-0 mobile-landscape:mt-2 portrait:text-sm portrait:row-start-1 portrait:col-start-1 portrait:col-span-8 md:mt-4 lg:text-2xl">
         {userLoggedIn
           ? translate("loginSuccessfullSubheading")
           : translate("moodleLoginSubheading")}

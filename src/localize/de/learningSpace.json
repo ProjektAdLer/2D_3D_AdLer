@@ -31,8 +31,8 @@
   "sidebar_help": "Hilfe-Fenster",
   "sidebar_controls": "Steuerung",
   "sidebar_breakTime": "Pausenhinweise",
-  "sidebar_worldCompleted": "Lernwelt Abschlussmodal",
-  "sidebar_narrativeFrameworkIntro": "Narrativer Einstieg in the Welt",
+  "sidebar_worldCompleted": "Lernwelt-Abschluss-Modal",
+  "sidebar_narrativeFrameworkIntro": "Rahmenhandlung Intro",
 
   "hint_controlsExplanationModal": "Sie können die Steuerungs-Erklärung jederzeit über das Menü in der 3D-Ansicht erneut aufrufen."
 }
