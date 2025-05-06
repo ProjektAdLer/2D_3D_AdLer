@@ -56,8 +56,8 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
   if (!viewModel || !controller || !isOpen) return null;
 
   return (
-    <div className=" fixed top-0 left-0 w-screen h-screen z-[20000] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto flex justify-center items-center pb-24">
-      <div className="grid max-h-[1000px]">
+    <div className="fixed top-0 left-0 w-screen h-screen z-[20000] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto flex justify-center items-center pb-24">
+      <div className="grid w-full p-3 justify-center">
         <section className="flex items-center justify-center w-full gap-8 portrait:flex mobile-landscape:pt-10 xl:m-3 xl:mt-6">
           <img
             className="w-full xs:w-16 md:w-24 lg:w-32 xl:w-20 onek:w-32 twok:w-40 portrait:w-16 animate-wiggle place-self-end mobile-landscape:w-12 mobile-landscape:m-2"
@@ -65,7 +65,7 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
             alt="AdlerEngine Logo"
           />
           {loadingText && (
-            <p className="text-sm font-bold lg:text-lg xl:text-2xl text-outline mobile-landscape:text-lg text-adlerdarkblue">
+            <p className="text-sm font-bold lg:text-lg xl:text-2xl text-outline mobile-landscape:text-lg tablet-portrait:text-xl text-adlerdarkblue">
               {loadingText}
             </p>
           )}

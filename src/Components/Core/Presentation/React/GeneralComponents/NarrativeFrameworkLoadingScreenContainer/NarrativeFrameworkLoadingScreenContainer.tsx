@@ -18,7 +18,7 @@ export default function NarrativeFrameworkLoadingScreenContainer() {
   if (isShowingContent !== true) return null;
 
   return (
-    <div className="w-full h-[60svh]">
+    <div className="w-full h-80 mt-10 mobile-landscape:h-32 mobile-landscape:mt-1 mobile-landscape:w-full tablet-portrait:h-[60vh] lg:w-[70vw] tablet-portrait:w-[70vw]">
       <NarrativeFramework type="intro" />
     </div>
   );
