@@ -156,6 +156,7 @@ export default class BackendAdapterUtils {
     else {
       let backendStoryTO = new BackendStoryTO();
       backendStoryTO.storyTexts = storyElement.storyTexts;
+      backendStoryTO.storyNpcName = storyElement.storyNpcName ?? undefined;
       backendStoryTO.elementModel = this.extractModelData(
         storyElement.elementModel,
       ) as LearningElementModel;

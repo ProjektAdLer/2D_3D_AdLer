@@ -38,7 +38,7 @@ const BigWorldAWT: AWT = {
       {
         spaceId: 1,
         spaceName: "Intro Story",
-        spaceDescription: "Ja, der Name dieses Raumes ist extrea so lang",
+        spaceDescription: "Ja, der Name dieses Raumes ist extra so lange!",
         spaceGoals: [
           "Ziel des abgeschlossenen Raumes 1/3",
           "Ziel des abgeschlossenen Raumes 2/3",
@@ -52,12 +52,13 @@ const BigWorldAWT: AWT = {
         spaceStory: {
           introStory: {
             storyTexts: [
-              "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+              "Test1.",
               "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolorekasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
               "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
             ],
             elementModel: "a-quizbg-defaultnpc",
             modelFacialExpression: "happy",
+            storyNpcName: "Yoda",
           },
           outroStory: null,
         },
@@ -81,6 +82,7 @@ const BigWorldAWT: AWT = {
               "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
             ],
             elementModel: "a-quizbg-defaultnpc",
+            storyNpcName: "Yoda der Zweite",
           },
         },
       },

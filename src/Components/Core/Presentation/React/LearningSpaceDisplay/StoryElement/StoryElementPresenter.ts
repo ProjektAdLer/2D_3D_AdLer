@@ -46,7 +46,9 @@ export default class StoryElementPresenter implements IStoryElementPresenter {
     this.viewModel.isIntroCutsceneRunning.Value = false;
 
     this.viewModel.introModelType = new Observable<LearningElementModel>();
+    this.viewModel.introModelName = new Observable<string | null>();
     this.viewModel.outroModelType = new Observable<LearningElementModel>();
+    this.viewModel.outroModelName = new Observable<string | null>();
     this.viewModel.storyTypeToDisplay.Value = StoryElementType.None;
 
     this.viewModel.isOutroUnlocked.Value =
@@ -71,6 +73,8 @@ export default class StoryElementPresenter implements IStoryElementPresenter {
           learningSpaceTO.storyElements[i].modelType!;
         this.viewModel.introEmotion.Value =
           learningSpaceTO.storyElements[i].introEmotion ?? EmotionType.welcome;
+        this.viewModel.introModelName.Value =
+          learningSpaceTO.storyElements[i].storyNpcName ?? null;
       }
       if (
         (learningSpaceTO.storyElements[i].storyType &
@@ -90,6 +94,8 @@ export default class StoryElementPresenter implements IStoryElementPresenter {
           learningSpaceTO.storyElements[i].modelType!;
         this.viewModel.outroEmotion.Value =
           learningSpaceTO.storyElements[i].outroEmotion ?? EmotionType.welcome;
+        this.viewModel.outroModelName.Value =
+          learningSpaceTO.storyElements[i].storyNpcName ?? null;
       }
     }
   }

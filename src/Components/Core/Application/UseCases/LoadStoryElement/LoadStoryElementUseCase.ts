@@ -24,7 +24,7 @@ export default class LoadStoryElementUseCase
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
     private getUserLocationUseCase: IGetUserLocationUseCase,
     @inject(PORT_TYPES.ILearningWorldPort)
-    private worldPort: ILearningWorldPort
+    private worldPort: ILearningWorldPort,
   ) {}
 
   execute(storyElementType: StoryElementType): void {
@@ -38,7 +38,7 @@ export default class LoadStoryElementUseCase
 
     const learningSpaceEntity = this.getLearningSpaceEntity(
       userLocation.worldID,
-      userLocation.spaceID
+      userLocation.spaceID,
     );
     if (!learningSpaceEntity) return;
 
@@ -49,27 +49,27 @@ export default class LoadStoryElementUseCase
 
   private getLearningSpaceEntity(
     worldID: number,
-    spaceID: number
+    spaceID: number,
   ): LearningSpaceEntity | null {
     const learningSpaceEntities =
       this.entityContainter.filterEntitiesOfType<LearningSpaceEntity>(
         LearningSpaceEntity,
         (entity) => {
           return entity.parentWorldID === worldID && entity.id === spaceID;
-        }
+        },
       );
 
     // throw expeciton if no entities found
     if (learningSpaceEntities.length === 0) {
       this.logger.log(
         LogLevelTypes.WARN,
-        `Could not find a space with spaceID ${spaceID} in world ${worldID}`
+        `Could not find a space with spaceID ${spaceID} in world ${worldID}`,
       );
       return null;
     } else if (learningSpaceEntities.length > 1) {
       this.logger.log(
         LogLevelTypes.WARN,
-        `Found more than one space with spaceID ${spaceID} in world ${worldID}`
+        `Found more than one space with spaceID ${spaceID} in world ${worldID}`,
       );
       return null;
     }
@@ -79,17 +79,17 @@ export default class LoadStoryElementUseCase
 
   private createStoryTO(
     learningSpaceEntity: LearningSpaceEntity,
-    storyElementType: StoryElementType
+    storyElementType: StoryElementType,
   ): StoryElementTO | null {
     const storyElementEntity = learningSpaceEntity.storyElements?.find(
       (storyElement) =>
-        (storyElement.storyType & storyElementType) === storyElementType
+        (storyElement.storyType & storyElementType) === storyElementType,
     );
 
     if (!storyElementEntity) {
       this.logger.log(
         LogLevelTypes.WARN,
-        `Could not find story element of type ${storyElementType}`
+        `Could not find story element of type ${storyElementType}`,
       );
       return null;
     }
@@ -99,6 +99,7 @@ export default class LoadStoryElementUseCase
     storyTO.outroStoryTexts = storyElementEntity.outroStoryTexts;
     storyTO.storyType = storyElementEntity.storyType;
     storyTO.modelType = storyElementEntity.modelType;
+    storyTO.storyNpcName = storyElementEntity.storyNpcName;
     return storyTO;
   }
 }

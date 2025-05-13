@@ -10,6 +10,7 @@ export default class StoryElementEntity {
   outroStoryTexts: string[] | null;
   modelType: LearningElementModel | null;
   storyType: StoryElementType;
+  storyNpcName: string | null;
   hasOutroTriggered: boolean | null;
   introEmotion: EmotionType | null;
   outroEmotion: EmotionType | null;

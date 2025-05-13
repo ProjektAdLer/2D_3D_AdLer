@@ -7,6 +7,7 @@ export default class StoryElementTO {
   outroStoryTexts: string[] | null;
   modelType: LearningElementModel | null;
   storyType: StoryElementType;
+  storyNpcName: string | null;
   introEmotion: EmotionType | null;
   outroEmotion: EmotionType | null;
 }

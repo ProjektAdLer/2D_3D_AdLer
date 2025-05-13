@@ -11,8 +11,10 @@ export default class StoryElementViewModel {
   outroTexts: Observable<string[]> = new Observable<string[]>();
   introModelType: Observable<LearningElementModel> =
     new Observable<LearningElementModel>();
+  introModelName: Observable<string | null> = new Observable<string | null>();
   outroModelType: Observable<LearningElementModel> =
     new Observable<LearningElementModel>();
+  outroModelName: Observable<string | null> = new Observable<string | null>();
 
   introEmotion: Observable<EmotionType> = new Observable<EmotionType>();
   outroEmotion: Observable<EmotionType> = new Observable<EmotionType>();
