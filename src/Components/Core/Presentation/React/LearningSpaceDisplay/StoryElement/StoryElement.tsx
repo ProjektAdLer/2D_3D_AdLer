@@ -146,7 +146,8 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
                   outroUnlocked &&
                   !outroCutsceneRunning &&
                   introModelType !== undefined &&
-                  outroModelType !== undefined
+                  outroModelType !== undefined &&
+                  introModelType === outroModelType
                 }
               />
             )}

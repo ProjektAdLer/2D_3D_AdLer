@@ -159,7 +159,7 @@ describe("StoryElement", () => {
       viewModel.introModelType.Value =
         LearningElementModelTypeEnums.QuizElementModelTypes.DefaultArcadeNPC;
       viewModel.outroModelType.Value =
-        LearningElementModelTypeEnums.QuizElementModelTypes.DefaultCampusNPC;
+        LearningElementModelTypeEnums.QuizElementModelTypes.DefaultArcadeNPC;
 
       useBuilderMock([viewModel, fakeController]);
 
