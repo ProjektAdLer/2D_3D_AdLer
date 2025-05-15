@@ -166,6 +166,7 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
           spaceTO.elements.find((e) => e?.hasScored) === undefined;
         storyNPCBuilder.learningSpaceCompleted =
           spaceTO.currentScore >= spaceTO.requiredScore;
+        storyNPCBuilder.storyNpcName = spaceTO.storyElements[0].storyNpcName;
 
         await this.director.buildAsync(storyNPCBuilder);
 

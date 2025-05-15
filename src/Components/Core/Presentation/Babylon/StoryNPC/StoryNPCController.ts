@@ -103,7 +103,9 @@ export default class StoryNPCController implements IStoryNPCController {
     );
 
     return this.bottomTooltipPresenter.display(
-      tooltipText,
+      this.viewModel.storyNpcName
+        ? tooltipText + ": " + this.viewModel.storyNpcName
+        : tooltipText,
       undefined,
       undefined,
       undefined,

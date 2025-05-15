@@ -36,6 +36,7 @@ export default class StoryNPCBuilder
 {
   public modelType: LearningElementModel;
   public storyType: StoryElementType;
+  public storyNpcName: string | null;
   public noLearningElementHasScored: boolean = false;
   public learningSpaceCompleted: boolean = false;
   public learningSpaceTemplateType: LearningSpaceTemplateType;
@@ -61,6 +62,7 @@ export default class StoryNPCBuilder
 
     this.viewModel!.modelType = this.modelType;
     this.viewModel!.storyType = this.storyType;
+    this.viewModel!.storyNpcName = this.storyNpcName;
 
     // set inital state
     // cut scene state is only set by the presenter for timing reasons
