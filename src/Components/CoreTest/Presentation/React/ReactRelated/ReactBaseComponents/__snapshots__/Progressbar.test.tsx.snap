@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Progressbar should render 1`] = `
+<div>
+  <div
+    class="flex items-center text-center"
+  >
+    <div
+      class="relative font-bold text-center text-yellow-300 align-middle rounded-full bg-adlerblue/80 dark:bg-gray-700 -z-20"
+    >
+      <div
+        class="absolute h-full rounded-full bg-adlerdarkblue -z-10"
+        style="width: 10%;"
+      />
+      1
+    </div>
+  </div>
+</div>
+`;
