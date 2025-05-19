@@ -395,6 +395,47 @@ const SmallWorldAWT: AWT = {
           },
         },
       },
+      {
+        spaceId: 10,
+        spaceName: "Labor Theme",
+        spaceDescription: "Raumbeschreibung der kleinen Welt",
+        requiredPointsToComplete: 0,
+        spaceSlotContents: [
+          null,
+          5,
+          null,
+          null,
+          2,
+          null,
+          null,
+          6,
+          3,
+          null,
+          1,
+          null,
+          null,
+        ],
+        requiredSpacesToEnter: "9",
+        spaceGoals: [
+          "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor ",
+        ],
+        spaceTemplate: "T_40X32_13L",
+        spaceTemplateStyle: "CampusLabor",
+        spaceStory: {
+          introStory: {
+            storyTexts: [
+              "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod sto ",
+            ],
+            elementModel: "a-npc-studendark-male",
+            modelFacialExpression: "disappointed",
+          },
+          outroStory: {
+            storyTexts: ["Tschüss", "Du bist mit diesem Raum fertig"],
+            elementModel: "a-npc-studenlight-female",
+            modelFacialExpression: "thumbsup",
+          },
+        },
+      },
     ],
     elements: [
       {

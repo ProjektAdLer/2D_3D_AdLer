@@ -7,6 +7,7 @@ import {
   LearningSpaceTheme_CampusStudentClub,
   LearningSpaceTheme_CampusAuditorium,
   LearningSpaceTheme_CampusServerRoom,
+  LearningSpaceTheme_CampusLabor,
 } from "./LearningSpaceTheme_Campus";
 import LearningSpaceTheme_Arcade from "./LearningSpaceTheme_Arcade";
 import LearningSpaceTheme_Suburb from "./LearningSpaceTheme_Suburb";
@@ -32,6 +33,9 @@ export default class LearningSpaceThemeLookup {
 
       case LearningSpaceThemeType.CampusServerRoom:
         return LearningSpaceTheme_CampusServerRoom;
+
+      case LearningSpaceThemeType.CampusLabor:
+        return LearningSpaceTheme_CampusLabor;
 
       case LearningSpaceThemeType.CampusAuditorium:
         return LearningSpaceTheme_CampusAuditorium;
