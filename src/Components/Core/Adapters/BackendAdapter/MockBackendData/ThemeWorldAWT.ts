@@ -337,7 +337,7 @@ const SmallWorldAWT: AWT = {
         spaceGoals: [
           "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor ",
         ],
-        spaceTemplate: "T_40X32_13L",
+        spaceTemplate: "D_40X37_15L",
         spaceTemplateStyle: "CampusServerRoom",
         spaceStory: {
           introStory: {
@@ -378,7 +378,7 @@ const SmallWorldAWT: AWT = {
         spaceGoals: [
           "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor ",
         ],
-        spaceTemplate: "T_40X32_13L",
+        spaceTemplate: "D_40X37_15L",
         spaceTemplateStyle: "CampusAuditorium",
         spaceStory: {
           introStory: {
