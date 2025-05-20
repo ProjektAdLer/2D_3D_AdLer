@@ -12,13 +12,13 @@ export default class EntityContainer implements IEntityContainer {
 
   useSingletonEntity<T extends object>(
     entityData: Partial<T>,
-    entityType: ConstructorReference<T>
+    entityType: ConstructorReference<T>,
   ): T {
     const entities = this.getEntitiesOfType(entityType);
 
     if (entities.length > 1) {
       throw new Error(
-        "Multible Enitites of this type exist - Singleton expected"
+        "Multible Enitites of this type exist - Singleton expected",
       );
     }
 
@@ -32,7 +32,7 @@ export default class EntityContainer implements IEntityContainer {
 
   createEntity<T extends object>(
     entityData: Partial<T>,
-    entityType: ConstructorReference<T>
+    entityType: ConstructorReference<T>,
   ): T {
     const entity = new entityType();
     Object.assign(entity, entityData);
@@ -44,7 +44,7 @@ export default class EntityContainer implements IEntityContainer {
   }
 
   getEntitiesOfType<T extends object>(
-    entityType: ConstructorReference<T>
+    entityType: ConstructorReference<T>,
   ): T[] {
     const retVal = this.entityMap.get(entityType) as T[];
     return retVal || [];
@@ -52,7 +52,7 @@ export default class EntityContainer implements IEntityContainer {
 
   filterEntitiesOfType<T extends object>(
     entityType: ConstructorReference<T>,
-    filter: (entity: T) => boolean
+    filter: (entity: T) => boolean,
   ): T[] {
     const entities = this.getEntitiesOfType(entityType);
     return entities.filter(filter);
@@ -70,5 +70,9 @@ export default class EntityContainer implements IEntityContainer {
         entityList.splice(index, 1);
       }
     }
+  }
+
+  deleteAll(): void {
+    this.entityMap.clear();
   }
 }

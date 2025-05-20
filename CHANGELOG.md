@@ -25,6 +25,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - sketchy NarrativeFramework styling
 - WelcomeScreen responsive styling
 - WorldCompletionModal responsiv styling
+- logout not deleting player progress data
 
 ### Deprecated
 

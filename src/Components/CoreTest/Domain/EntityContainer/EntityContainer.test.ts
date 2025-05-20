@@ -9,7 +9,7 @@ describe("EntityManager", () => {
     CoreDIContainer.snapshot();
 
     systemUnderTest = CoreDIContainer.get<IEntityContainer>(
-      CORE_TYPES.IEntityContainer
+      CORE_TYPES.IEntityContainer,
     );
   });
 
@@ -22,13 +22,13 @@ describe("EntityManager", () => {
       {
         test1: "entity1",
       },
-      TestEntity
+      TestEntity,
     );
     const entity2 = systemUnderTest.createEntity<TestEntity>(
       {
         test1: "entity2",
       },
-      TestEntity
+      TestEntity,
     );
 
     expect(systemUnderTest.getEntitiesOfType(TestEntity)).toEqual([
@@ -42,13 +42,13 @@ describe("EntityManager", () => {
       {
         test1: "entity1",
       },
-      TestEntity
+      TestEntity,
     );
     systemUnderTest.createEntity<TestEntity>(
       {
         test1: "entity2",
       },
-      TestEntity
+      TestEntity,
     );
 
     expect(systemUnderTest.getEntitiesOfType(TestEntity2)).toEqual([]);
@@ -59,20 +59,20 @@ describe("EntityManager", () => {
       {
         test1: "entity1",
       },
-      TestEntity
+      TestEntity,
     );
     systemUnderTest.createEntity<TestEntity>(
       {
         test1: "entity2",
       },
-      TestEntity
+      TestEntity,
     );
 
     expect(
       systemUnderTest.filterEntitiesOfType(
         TestEntity,
-        (entity) => entity.test1 === "entity1"
-      )
+        (entity) => entity.test1 === "entity1",
+      ),
     ).toEqual([entity1]);
   });
 
@@ -81,20 +81,20 @@ describe("EntityManager", () => {
       {
         test1: "entity1",
       },
-      TestEntity
+      TestEntity,
     );
     systemUnderTest.createEntity<TestEntity>(
       {
         test1: "entity2",
       },
-      TestEntity
+      TestEntity,
     );
 
     expect(
       systemUnderTest.filterEntitiesOfType(
         TestEntity,
-        (entity) => entity.test1 === "foo"
-      )
+        (entity) => entity.test1 === "foo",
+      ),
     ).toEqual([]);
   });
 
@@ -118,13 +118,23 @@ describe("EntityManager", () => {
     expect(systemUnderTest.getEntitiesOfType(TestEntity)[0]).toBe(entity2);
   });
 
+  test("deleteAll delets all entities", () => {
+    systemUnderTest.createEntity<TestEntity>({}, TestEntity);
+    systemUnderTest.createEntity<TestEntity2>({}, TestEntity2);
+
+    systemUnderTest.deleteAll();
+
+    expect(systemUnderTest.getEntitiesOfType(TestEntity).length).toBe(0);
+    expect(systemUnderTest.getEntitiesOfType(TestEntity2).length).toBe(0);
+  });
+
   test("UseSingletonEntity returns a already exisiting entity", () => {
     const entity1 = systemUnderTest.createEntity<TestEntity>({}, TestEntity);
     systemUnderTest.createEntity<TestEntity2>({}, TestEntity2);
 
     const entity3 = systemUnderTest.useSingletonEntity<TestEntity>(
       {},
-      TestEntity
+      TestEntity,
     );
 
     expect(entity3).toBe(entity1);
@@ -136,7 +146,7 @@ describe("EntityManager", () => {
       {
         test1: "test",
       },
-      TestEntity
+      TestEntity,
     );
 
     expect(entity.test1).toBe("test");
@@ -148,14 +158,14 @@ describe("EntityManager", () => {
         test1: "test",
         test2: true,
       },
-      TestEntity
+      TestEntity,
     );
 
     systemUnderTest.useSingletonEntity<TestEntity>(
       {
         test2: false,
       },
-      TestEntity
+      TestEntity,
     );
 
     const entityToTest = systemUnderTest.getEntitiesOfType(TestEntity)[0];

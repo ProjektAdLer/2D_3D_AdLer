@@ -13,7 +13,7 @@ describe("LogoutUseCase", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind<IEntityContainer>(
-      CORE_TYPES.IEntityContainer
+      CORE_TYPES.IEntityContainer,
     ).toConstantValue(entityContainerMock);
   });
 
@@ -32,9 +32,7 @@ describe("LogoutUseCase", () => {
 
     systemUnderTest.execute();
 
-    expect(entityContainerMock.deleteEntity).toHaveBeenCalledWith(
-      userEntityMock
-    );
+    expect(entityContainerMock.deleteAll).toHaveBeenCalled();
   });
 
   test("returns without deleting user entity, if user is not logged in", () => {
@@ -42,6 +40,6 @@ describe("LogoutUseCase", () => {
 
     systemUnderTest.execute();
 
-    expect(entityContainerMock.deleteEntity).not.toHaveBeenCalled();
+    expect(entityContainerMock.deleteAll).not.toHaveBeenCalled();
   });
 });
