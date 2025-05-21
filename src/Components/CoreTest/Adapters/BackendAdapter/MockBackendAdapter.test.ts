@@ -129,6 +129,10 @@ describe("MockBackendAdapter", () => {
           courseID: 4,
           courseName: "New World",
         },
+        {
+          courseID: 5,
+          courseName: "Requirements-Grading",
+        },
       ],
     });
   });

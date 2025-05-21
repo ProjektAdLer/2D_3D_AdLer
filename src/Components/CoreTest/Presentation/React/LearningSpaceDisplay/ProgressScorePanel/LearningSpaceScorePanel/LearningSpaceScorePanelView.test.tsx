@@ -9,6 +9,7 @@ import { mock } from "jest-mock-extended";
 import USECASE_TYPES from "../../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import CoreDIContainer from "../../../../../../Core/DependencyInjection/CoreDIContainer";
 import ILearningSpaceScorePanelController from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/ProgressScorePanel/LearningSpaceScorePanel/ILearningSpaceScorePanelController";
+import { GradingStyle } from "../../../../../../Core/Domain/Types/GradingStyle";
 
 let mockedViewModel = new LearningSpaceScorePanelViewModel();
 mockedViewModel.scoreInfo.Value = {
@@ -34,7 +35,9 @@ describe("Learning Space Score Panel View", () => {
   // ANF-ID: [EWE0030]
   test("renders the current score and the required score", () => {
     useBuilderMock([mockedViewModel, mockedController]);
-    const comp = render(<LearningSpaceScorePanel />);
+    const comp = render(
+      <LearningSpaceScorePanel gradingStyle={GradingStyle.point} />,
+    );
 
     expect(comp.container).toHaveTextContent("0");
     expect(comp.container).toHaveTextContent("42");
@@ -42,7 +45,9 @@ describe("Learning Space Score Panel View", () => {
 
   test("returns null when viewModel is not registered", () => {
     useBuilderMock([undefined, undefined]);
-    const comp = render(<LearningSpaceScorePanel />);
+    const comp = render(
+      <LearningSpaceScorePanel gradingStyle={GradingStyle.point} />,
+    );
 
     expect(comp.container).toBeEmptyDOMElement();
   });
@@ -50,7 +55,9 @@ describe("Learning Space Score Panel View", () => {
   // ANF-ID: [EWE0030]
   test("updates the current score when the value in the viewmodel changes", async () => {
     useBuilderMock([mockedViewModel, mockedController]);
-    const comp = render(<LearningSpaceScorePanel />);
+    const comp = render(
+      <LearningSpaceScorePanel gradingStyle={GradingStyle.point} />,
+    );
 
     expect(comp.container).toHaveTextContent("0");
 

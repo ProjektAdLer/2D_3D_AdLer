@@ -9,6 +9,7 @@ import { mock } from "jest-mock-extended";
 import USECASE_TYPES from "../../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import CoreDIContainer from "../../../../../../Core/DependencyInjection/CoreDIContainer";
 import ILearningWorldScorePanelPresenter from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/ProgressScorePanel/LearningWorldScorePanel/ILearningWorldScorePanelPresenter";
+import { GradingStyle } from "../../../../../../Core/Domain/Types/GradingStyle";
 
 let mockedViewModel = new LearningWorldScorePanelViewModel();
 mockedViewModel.scoreInfo.Value = {
@@ -33,14 +34,18 @@ describe("Learning World Score Panel View", () => {
   // ANF-ID: [EWE0027]
   test("renders the correct score", () => {
     useBuilderMock([mockedViewModel, undefined]);
-    let comp = render(<LearningWorldScorePanel />);
+    let comp = render(
+      <LearningWorldScorePanel gradingStyle={GradingStyle.point} />,
+    );
 
     expect(comp.container).toHaveTextContent("80%");
   });
 
   test("returns null when viewModel is not registered", () => {
     useBuilderMock([undefined, undefined]);
-    const comp = render(<LearningWorldScorePanel />);
+    const comp = render(
+      <LearningWorldScorePanel gradingStyle={GradingStyle.point} />,
+    );
 
     expect(comp.container).toBeEmptyDOMElement();
   });
@@ -48,7 +53,9 @@ describe("Learning World Score Panel View", () => {
   // ANF-ID: [EWE0027]
   test("updates the displayed score when the current score in the viewmodel changes", async () => {
     useBuilderMock([mockedViewModel, mock<ILearningWorldScorePanelPresenter>]);
-    const comp = render(<LearningWorldScorePanel />);
+    const comp = render(
+      <LearningWorldScorePanel gradingStyle={GradingStyle.point} />,
+    );
 
     expect(comp.container).toHaveTextContent("80%");
 
