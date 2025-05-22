@@ -72,6 +72,9 @@ const USECASE_TYPES = {
   IGetNarrativeFrameworkInfoUseCase: Symbol(
     "IGetNarrativeFrameworkInfoUseCase",
   ),
+  ICalculateInitialExperiencePointsUseCase: Symbol(
+    "ICalculateInitialExperiencePointsUseCase",
+  ),
 };
 
 export default USECASE_TYPES;
