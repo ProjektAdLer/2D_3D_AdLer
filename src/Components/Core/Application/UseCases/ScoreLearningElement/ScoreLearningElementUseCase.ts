@@ -16,6 +16,7 @@ import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import type INotificationPort from "../../Ports/Interfaces/INotificationPort";
 import i18next from "i18next";
+import type IUpdateExperiencePointsUseCase from "../UpdateExperiencePoints/IUpdateExperiencePointsUseCase";
 
 @injectable()
 export default class ScoreLearningElementUseCase
@@ -38,6 +39,8 @@ export default class ScoreLearningElementUseCase
     private getUserLocationUseCase: IGetUserLocationUseCase,
     @inject(PORT_TYPES.INotificationPort)
     private notificationPort: INotificationPort,
+    @inject(USECASE_TYPES.IUpdateExperiencePointsUseCase)
+    private updateExperiencePointsUseCase: IUpdateExperiencePointsUseCase,
   ) {}
 
   async executeAsync(elementID: ComponentID): Promise<void> {
@@ -120,7 +123,7 @@ export default class ScoreLearningElementUseCase
           `ScoreLearningElementUseCase: Error calculating new space score: ${e}`,
         );
       }
-
+      this.updateExperiencePointsUseCase.internalExecute();
       this.worldPort.onLearningElementScored(true, elementID);
     }
   }

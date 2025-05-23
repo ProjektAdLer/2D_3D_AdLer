@@ -76,6 +76,8 @@ import IGetNarrativeFrameworkInfoUseCase from "../../Application/UseCases/GetNar
 import GetNarrativeFrameworkInfoUseCase from "../../Application/UseCases/GetNarrativeFrameworkInfo/GetNarrativeFrameworkInfoUseCase";
 import ICalculateInitialExperiencePointsUseCase from "../../Application/UseCases/CalculateInitialExperiencePoints/ICalculateInitialExperiencePointsUseCase";
 import CalculateInitialExperiencePointsUseCase from "../../Application/UseCases/CalculateInitialExperiencePoints/CalculateInitialExperiencePointsUseCase";
+import IUpdateExperiencePointsUseCase from "../../Application/UseCases/UpdateExperiencePoints/IUpdateExperiencePointsUseCase";
+import UpdateExperiencePointsUseCase from "../../Application/UseCases/UpdateExperiencePoints/UpdateExperiencePointsUseCase";
 
 const UseCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases
@@ -271,6 +273,11 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
     USECASE_TYPES.ICalculateInitialExperiencePointsUseCase,
   )
     .to(CalculateInitialExperiencePointsUseCase)
+    .inSingletonScope();
+  bind<IUpdateExperiencePointsUseCase>(
+    USECASE_TYPES.IUpdateExperiencePointsUseCase,
+  )
+    .to(UpdateExperiencePointsUseCase)
     .inSingletonScope();
 });
 
