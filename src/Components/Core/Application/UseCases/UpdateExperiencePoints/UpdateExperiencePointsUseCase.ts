@@ -9,6 +9,8 @@ import LearningWorldEntity from "src/Components/Core/Domain/Entities/LearningWor
 import IUpdateExperiencePointsUseCase from "./IUpdateExperiencePointsUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUseCase";
+import LearningSpaceEntity from "src/Components/Core/Domain/Entities/LearningSpaceEntity";
+import LearningElementEntity from "src/Components/Core/Domain/Entities/LearningElementEntity";
 
 @injectable()
 export default class UpdateExperiencePointsUseCase
@@ -22,7 +24,7 @@ export default class UpdateExperiencePointsUseCase
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
     private getUserLocationUseCase: IGetUserLocationUseCase,
   ) {}
-  internalExecute(): void {
+  internalExecute(elementID: ComponentID): void {
     // get the current user location
     const userLocation = this.getUserLocationUseCase.execute();
     // Check if the user is in a space (should never not be available since its checked in ScoreLearningElementUseCase)
@@ -48,6 +50,32 @@ export default class UpdateExperiencePointsUseCase
     }
 
     //Calculate Experience Points
+    let multiplicator = 1;
+    let spaceEntity: LearningSpaceEntity;
+    worldEntity.spaces.forEach((space) => {
+      if (space.id === userLocation.spaceID) {
+        spaceEntity = space;
+      }
+    });
+    let elementEntity: LearningElementEntity;
+
+    spaceEntity!.elements.forEach((element) => {
+      if (element!.id === elementID) elementEntity = element!;
+    });
+    if (elementEntity!.difficulty === 100) {
+      multiplicator = 1.5;
+    }
+    if (elementEntity!.difficulty === 200) {
+      multiplicator = 2;
+    }
+
+    const userData = this.entityContainer.getEntitiesOfType(UserDataEntity);
+    let experiencePointsEntity = userData[0].experiencePoints.find(
+      (xpEntity) => xpEntity.worldID === userLocation.worldID,
+    );
+
+    experiencePointsEntity!.currentExperiencePoints +=
+      experiencePointsEntity!.baseExperiencePoints * multiplicator;
 
     console.log("reached", userLocation.worldID);
     this.logger.log(

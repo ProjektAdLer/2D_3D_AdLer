@@ -123,7 +123,7 @@ export default class ScoreLearningElementUseCase
           `ScoreLearningElementUseCase: Error calculating new space score: ${e}`,
         );
       }
-      this.updateExperiencePointsUseCase.internalExecute();
+      this.updateExperiencePointsUseCase.internalExecute(elementID);
       this.worldPort.onLearningElementScored(true, elementID);
     }
   }
