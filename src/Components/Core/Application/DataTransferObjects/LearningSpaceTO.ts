@@ -22,4 +22,5 @@ export default class LearningSpaceTO {
   theme: LearningSpaceThemeType;
   storyElements: StoryElementTO[];
   gradingStyle: IElementCompletionDisplay;
+  difficulty: number;
 }

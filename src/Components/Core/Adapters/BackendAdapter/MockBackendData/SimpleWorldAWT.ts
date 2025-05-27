@@ -56,13 +56,14 @@ const SimpleWorldAWT: AWT = {
       {
         $type: "LearningElement",
         elementId: 1,
-        elementName: "Ein Text-Lernelement",
+        elementName: "Das Text-Lernelement",
         elementCategory: "text",
         elementDescription: "Beschreibung des Text-Lernelements",
         elementGoals: ["Elementziel 1/3", "Elementziel 2/3", "Elementziel 3/3"],
         elementFileType: "text",
         elementMaxScore: 1,
         elementModel: "l_trophy_bronze",
+        elementDifficulty: 200,
       },
       {
         $type: "LearningElement",

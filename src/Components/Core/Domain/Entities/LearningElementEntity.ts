@@ -13,4 +13,5 @@ export default class LearningElementEntity {
   public model: LearningElementModel;
   public parentWorldID: ComponentID;
   public isRequired: boolean | null;
+  public difficulty: number;
 }

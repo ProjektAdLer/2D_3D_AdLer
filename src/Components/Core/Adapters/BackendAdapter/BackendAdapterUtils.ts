@@ -220,6 +220,7 @@ export default class BackendAdapterUtils {
     elementTO.model = this.extractModelData(
       apiElement.elementModel,
     ) as LearningElementModel;
+    elementTO.difficulty = apiElement.elementDifficulty ?? 0;
   }
   private static extractModelData(modelData?: string): string | undefined {
     if (
