@@ -168,7 +168,6 @@ describe("CalculateInitialExperiencePointsUseCase", () => {
 
     const entityArg = entityContainerMock.createEntity.mock
       .calls[0][0] as ExperiencePointsEntity;
-    console.log("Entity Argument:", entityArg);
     expect(entityContainerMock.createEntity).toHaveBeenCalled();
     expect(entityArg.worldID).toBe(1);
     expect(entityArg.baseExperiencePoints).toBe(40);
