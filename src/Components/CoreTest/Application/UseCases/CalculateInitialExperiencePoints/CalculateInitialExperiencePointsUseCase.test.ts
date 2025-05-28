@@ -8,6 +8,7 @@ import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import Logger from "../../../../Core/Adapters/Logger/Logger";
 import LearningWorldEntity from "../../../../Core/Domain/Entities/LearningWorldEntity";
+import ExperiencePointsEntity from "../../../../Core/Domain/Entities/ExperiencePointsEntity";
 
 const entityContainerMock = mock<IEntityContainer>();
 const notificationPortMock = mock<INotificationPort>();
@@ -76,6 +77,7 @@ describe("CalculateInitialExperiencePointsUseCase", () => {
     let userDataEntity = {
       isLoggedIn: true,
       availableWorlds: [{ worldID: 42, worldName: "World 1" }],
+      experiencePoints: [],
     };
 
     entityContainerMock.getEntitiesOfType.mockReturnValueOnce([userDataEntity]);
@@ -83,6 +85,7 @@ describe("CalculateInitialExperiencePointsUseCase", () => {
     const worldEntityMock = {
       id: 42,
       name: "World 1",
+      spaces: [{ id: 1, elements: [{ id: 1, difficulty: 100 }] }],
     };
     let filterResult;
     entityContainerMock.filterEntitiesOfType.mockImplementationOnce(
