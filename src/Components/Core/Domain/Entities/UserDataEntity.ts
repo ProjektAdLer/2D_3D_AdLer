@@ -1,5 +1,6 @@
 import { ComponentID } from "../Types/EntityTypes";
 import AvatarEntity from "./AvatarEntity";
+import ExperiencePointsEntity from "./ExperiencePointsEntity";
 
 export default class UserDataEntity {
   userToken: string;
@@ -10,4 +11,5 @@ export default class UserDataEntity {
   currentSpaceID: ComponentID | undefined = undefined;
   lastVisitedWorldID: ComponentID | undefined = undefined;
   avatar: AvatarEntity;
+  experiencePoints: ExperiencePointsEntity[] = [];
 }

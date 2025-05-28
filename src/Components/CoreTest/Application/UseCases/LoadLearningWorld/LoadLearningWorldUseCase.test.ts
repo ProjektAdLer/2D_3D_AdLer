@@ -40,6 +40,8 @@ import BackendStoryTO from "../../../../Core/Application/DataTransferObjects/Bac
 import { LearningElementTypes } from "../../../../Core/Domain/Types/LearningElementTypes";
 import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
 import { EmotionType } from "../../../../Core/Domain/Types/EmotionTypes";
+import ICalculateInitialExperiencePointsUseCase from "../../../../Core/Application/UseCases/CalculateInitialExperiencePoints/ICalculateInitialExperiencePointsUseCase";
+import CalculateInitialExperiencePointsUseCase from "../../../../Core/Application/UseCases/CalculateInitialExperiencePoints/CalculateInitialExperiencePointsUseCase";
 
 const backendMock = mock<IBackendPort>();
 const worldPortMock = mock<ILearningWorldPort>();
@@ -220,6 +222,8 @@ describe("LoadLearningWorldUseCase", () => {
 
   beforeEach(() => {
     systemUnderTest = CoreDIContainer.resolve(LoadLearningWorldUseCase);
+    CalculateInitialExperiencePointsUseCase.prototype.internalExecute =
+      jest.fn();
   });
 
   afterAll(() => {

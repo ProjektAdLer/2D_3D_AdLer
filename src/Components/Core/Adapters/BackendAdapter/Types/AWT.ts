@@ -63,6 +63,7 @@ export interface APIElement {
   elementMaxScore?: number;
   elementModel?: string;
   adaptivityContent?: APIAdaptivity;
+  elementDifficulty?: number;
 }
 
 export interface APIAdaptivity {

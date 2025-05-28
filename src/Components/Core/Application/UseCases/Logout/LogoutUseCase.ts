@@ -14,7 +14,7 @@ export default class LogoutUseCase implements ILogoutUseCase {
     @inject(CORE_TYPES.IEntityContainer)
     private entityContainer: IEntityContainer,
     @inject(CORE_TYPES.ILogger) private logger: ILoggerPort,
-    @inject(PORT_TYPES.ILMSPort) private lmsPort: ILMSPort
+    @inject(PORT_TYPES.ILMSPort) private lmsPort: ILMSPort,
   ) {}
 
   execute(): void {
@@ -23,11 +23,11 @@ export default class LogoutUseCase implements ILogoutUseCase {
       return;
     }
 
-    this.entityContainer.deleteEntity(userEntity[0]);
+    this.entityContainer.deleteAll();
 
     this.logger.log(
       LogLevelTypes.INFO,
-      "LoginUseCase: User logged out successfully"
+      "LoginUseCase: User logged out successfully",
     );
     this.lmsPort.onLogoutSuccessful();
   }

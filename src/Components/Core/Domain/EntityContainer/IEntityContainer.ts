@@ -10,12 +10,12 @@ export default interface IEntityContainer {
    */
   createEntity<T extends object>(
     entityData: Partial<T>,
-    entityType: ConstructorReference<T>
+    entityType: ConstructorReference<T>,
   ): T;
 
   useSingletonEntity<T extends object>(
     entityData: Partial<T>,
-    entityType: ConstructorReference<T>
+    entityType: ConstructorReference<T>,
   ): T;
 
   /**
@@ -34,7 +34,7 @@ export default interface IEntityContainer {
    */
   filterEntitiesOfType<T extends object>(
     entityType: ConstructorReference<T>,
-    filter: (entity: T) => boolean
+    filter: (entity: T) => boolean,
   ): T[];
 
   /**
@@ -43,6 +43,12 @@ export default interface IEntityContainer {
    * @param entity The entity to delete
    */
   deleteEntity(entity: object): void;
+
+  /**
+   * Deletes all entities from the EntityManager
+   * Caution: This will (at least for now) delete all entitites regardless of references in other entities.
+   */
+  deleteAll(): void;
 
   /**
    * Gets all Entites in a Map

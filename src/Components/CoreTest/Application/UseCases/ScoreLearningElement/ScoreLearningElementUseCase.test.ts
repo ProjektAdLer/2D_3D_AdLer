@@ -19,6 +19,7 @@ import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
 import { LearningElementModelTypeEnums } from "../../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
 import IBeginStoryElementOutroCutSceneUseCase from "../../../../Core/Application/UseCases/BeginStoryElementOutroCutScene/IBeginStoryElementOutroCutSceneUseCase";
 import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
+import UpdateExperiencePointsUseCase from "../../../../Core/Application/UseCases/UpdateExperiencePoints/UpdateExperiencePointsUseCase";
 
 const entityContainerMock = mock<IEntityContainer>();
 const backendAdapterMock = mock<IBackendPort>();
@@ -132,6 +133,7 @@ describe("ScoreLearningElementUseCase", () => {
     systemUnderTest = CoreDIContainer.get(
       USECASE_TYPES.IScoreLearningElementUseCase,
     );
+    UpdateExperiencePointsUseCase.prototype.internalExecute = jest.fn();
   });
 
   afterAll(() => {

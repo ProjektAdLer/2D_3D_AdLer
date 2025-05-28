@@ -46,6 +46,7 @@ import PointBasedDisplay from "src/Components/Core/Presentation/Utils/ElementCom
 import IElementCompletionDisplay from "src/Components/Core/Presentation/Utils/ElementCompletionDisplay/IElementCompletionDisplay";
 import { GradingStyle } from "src/Components/Core/Domain/Types/GradingStyle";
 import RequirementBasedDisplay from "src/Components/Core/Presentation/Utils/ElementCompletionDisplay/RequirementBasedDisplay";
+import type ICalculateInitialExperiencePointsUseCase from "../CalculateInitialExperiencePoints/ICalculateInitialExperiencePointsUseCase";
 
 @injectable()
 export default class LoadLearningWorldUseCase
@@ -70,6 +71,8 @@ export default class LoadLearningWorldUseCase
     private calculateSpaceAvailabilityUseCase: ICalculateLearningSpaceAvailabilityUseCase,
     @inject(USECASE_TYPES.IGetLoginStatusUseCase)
     private getLoginStatusUseCase: IInternalGetLoginStatusUseCase,
+    @inject(USECASE_TYPES.ICalculateInitialExperiencePointsUseCase)
+    private calculateInitialExperiencePointsUseCase: ICalculateInitialExperiencePointsUseCase,
   ) {}
 
   private semaphore = new Semaphore("LoadWorld in Use", 1);
@@ -78,6 +81,10 @@ export default class LoadLearningWorldUseCase
     worldID: number;
   }): Promise<LearningWorldTO> {
     const loadedWorld = await this.loadWorld(data);
+
+    this.calculateInitialExperiencePointsUseCase.internalExecute(
+      loadedWorld.id,
+    );
 
     this.logger.log(
       LogLevelTypes.TRACE,
@@ -395,6 +402,7 @@ export default class LoadLearningWorldUseCase
             ?.hasScored || false,
         parentWorldID: worldID,
         isRequired: null,
+        difficulty: element.difficulty,
       };
 
       newElementEntity = this.container.createEntity(

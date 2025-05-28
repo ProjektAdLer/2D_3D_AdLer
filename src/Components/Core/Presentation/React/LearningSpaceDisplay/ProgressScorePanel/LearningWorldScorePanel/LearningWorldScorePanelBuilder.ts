@@ -1,7 +1,7 @@
 import { injectable } from "inversify";
 import ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces/ILearningWorldPort";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
-import CoreDIContainer from "../../../../../DependencyInjection/CoreDIContainer";
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import PresentationBuilder from "../../../../PresentationBuilder/PresentationBuilder";
 import LearningWorldScorePanelPresenter from "./LearningWorldScorePanelPresenter";
 import LearningWorldScorePanelViewModel from "./LearningWorldScorePanelViewModel";

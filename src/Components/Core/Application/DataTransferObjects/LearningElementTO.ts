@@ -18,4 +18,5 @@ export default class LearningElementTO {
   theme: LearningSpaceThemeType;
   isScoreable: boolean;
   isRequired: boolean | null;
+  difficulty: number;
 }

@@ -74,6 +74,10 @@ import IGetLearningWorldUseCase from "../../Application/UseCases/GetLearningWorl
 import GetLearningWorldUseCase from "../../Application/UseCases/GetLearningWorld/GetLearningWorldUseCase";
 import IGetNarrativeFrameworkInfoUseCase from "../../Application/UseCases/GetNarrativeFrameworkInfo/IGetNarrativeFrameworkInfoUseCase";
 import GetNarrativeFrameworkInfoUseCase from "../../Application/UseCases/GetNarrativeFrameworkInfo/GetNarrativeFrameworkInfoUseCase";
+import ICalculateInitialExperiencePointsUseCase from "../../Application/UseCases/CalculateInitialExperiencePoints/ICalculateInitialExperiencePointsUseCase";
+import CalculateInitialExperiencePointsUseCase from "../../Application/UseCases/CalculateInitialExperiencePoints/CalculateInitialExperiencePointsUseCase";
+import IUpdateExperiencePointsUseCase from "../../Application/UseCases/UpdateExperiencePoints/IUpdateExperiencePointsUseCase";
+import UpdateExperiencePointsUseCase from "../../Application/UseCases/UpdateExperiencePoints/UpdateExperiencePointsUseCase";
 
 const UseCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases
@@ -264,6 +268,16 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
     USECASE_TYPES.IGetNarrativeFrameworkInfoUseCase,
   )
     .to(GetNarrativeFrameworkInfoUseCase)
+    .inSingletonScope();
+  bind<ICalculateInitialExperiencePointsUseCase>(
+    USECASE_TYPES.ICalculateInitialExperiencePointsUseCase,
+  )
+    .to(CalculateInitialExperiencePointsUseCase)
+    .inSingletonScope();
+  bind<IUpdateExperiencePointsUseCase>(
+    USECASE_TYPES.IUpdateExperiencePointsUseCase,
+  )
+    .to(UpdateExperiencePointsUseCase)
     .inSingletonScope();
 });
 

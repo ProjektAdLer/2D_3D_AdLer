@@ -10,8 +10,12 @@ import {
 } from "react-circular-progressbar";
 import { useEffect, useState } from "react";
 import worldIcon from "../../../../../../../Assets/icons/world.svg";
+import { GradingStyle } from "src/Components/Core/Domain/Types/GradingStyle";
+import Progressbar from "~ReactComponents/ReactRelated/ReactBaseComponents/Progressbar";
 
-interface PanelProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface PanelProps extends React.HTMLAttributes<HTMLDivElement> {
+  gradingStyle: GradingStyle;
+}
 
 export default function LearningWorldScorePanel({
   ...rest
@@ -33,29 +37,44 @@ export default function LearningWorldScorePanel({
   if (!viewModel) return null;
 
   return (
-    <div className="w-[49px] lg:w-[70px] bg-buttonbgblue rounded-full">
-      <CircularProgressbarWithChildren
-        value={percentage}
-        strokeWidth={10}
-        styles={buildStyles({
-          strokeLinecap: "butt",
-          pathTransitionDuration: 1.5,
+    <>
+      {rest.gradingStyle === GradingStyle.point && (
+        <div className="w-[49px] lg:w-[70px] bg-buttonbgblue rounded-full">
+          <CircularProgressbarWithChildren
+            value={percentage}
+            strokeWidth={10}
+            styles={buildStyles({
+              strokeLinecap: "butt",
+              pathTransitionDuration: 1.5,
 
-          // Colors
-          trailColor: "#E64B17",
-          pathColor: `#59B347`,
-        })}
-      >
-        <img
-          className="w-[35px] lg:w-[50px] opacity-40"
-          src={worldIcon}
-          alt="icon"
-        />
+              // Colors
+              trailColor: "#E64B17",
+              pathColor: `#59B347`,
+            })}
+          >
+            <img
+              className="w-[35px] lg:w-[50px] opacity-40"
+              src={worldIcon}
+              alt="icon"
+            />
 
-        <div className="absolute text-adlerdarkblue text-[8px] lg:text-[10px] xl:[12px] font-bold leading-5 text-center">
-          {Math.round(percentage) + "%"}
+            <div className="absolute text-adlerdarkblue text-[8px] lg:text-[10px] xl:[12px] font-bold leading-5 text-center">
+              {Math.round(percentage) + "%"}
+            </div>
+          </CircularProgressbarWithChildren>
         </div>
-      </CircularProgressbarWithChildren>
-    </div>
+      )}
+      {rest.gradingStyle === GradingStyle.requirement && (
+        <Progressbar
+          button={false}
+          value={scoreInfo?.currentScore}
+          max={scoreInfo?.maxScore}
+          iconText="Text"
+          iconClassName="font-bold text-center text-yellow-300"
+          barClassName="w-20 font-bold text-center text-yellow-300 "
+          icon={worldIcon}
+        />
+      )}
+    </>
   );
 }
