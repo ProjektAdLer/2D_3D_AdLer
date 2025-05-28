@@ -55,7 +55,7 @@ export default class CalculateInitialExperiencePointsUseCase
     ) {
       this.logger.log(
         LogLevelTypes.WARN,
-        `CalculateInitialExperiencePointsUseCase: Experience Points for world ${worldId} already exist!`,
+        `CalculateInitialExperiencePointsUseCase: Experience points for world ${worldId} already exist!`,
       );
       return;
     }

@@ -9,6 +9,7 @@ import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE
 import Logger from "../../../../Core/Adapters/Logger/Logger";
 import LearningWorldEntity from "../../../../Core/Domain/Entities/LearningWorldEntity";
 import ExperiencePointsEntity from "../../../../Core/Domain/Entities/ExperiencePointsEntity";
+import UserDataEntity from "../../../../Core/Domain/Entities/UserDataEntity";
 
 const entityContainerMock = mock<IEntityContainer>();
 const notificationPortMock = mock<INotificationPort>();
@@ -100,5 +101,80 @@ describe("CalculateInitialExperiencePointsUseCase", () => {
     await systemUnderTest.internalExecute(42);
 
     expect(filterResult).toBe(true);
+  });
+  test("calls logger with warning if experience points already exist for the world", () => {
+    let userDataEntity = {
+      isLoggedIn: true,
+      availableWorlds: [{ worldID: 1, worldName: "World 1" }],
+      experiencePoints: [
+        { worldID: 1, baseExperiencePoints: 100, currentExperiencePoints: 0 },
+      ],
+    };
+
+    entityContainerMock.getEntitiesOfType.mockReturnValueOnce([userDataEntity]);
+
+    const worldEntityMock = {
+      id: 42,
+      name: "World 1",
+      spaces: [{ id: 1, elements: [{ id: 1, difficulty: 100 }] }],
+    };
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
+      worldEntityMock,
+    ]);
+
+    systemUnderTest.internalExecute(1);
+
+    expect(loggerMock.log).toHaveBeenCalledTimes(1);
+    expect(loggerMock.log).toHaveBeenCalledWith(
+      "WARN",
+      "CalculateInitialExperiencePointsUseCase: Experience points for world 1 already exist!",
+    );
+  });
+  test("calculates initial experience points correctly", () => {
+    let userDataEntity = {
+      isLoggedIn: true,
+      availableWorlds: [{ worldID: 1, worldName: "World 1" }],
+      experiencePoints: [],
+    };
+
+    entityContainerMock.getEntitiesOfType.mockReturnValueOnce([userDataEntity]);
+
+    const worldEntityMock = {
+      id: 1,
+      name: "World 1",
+      spaces: [
+        {
+          id: 1,
+          elements: [
+            { id: 1, difficulty: 100 },
+            { id: 2, difficulty: 200 },
+            { id: 3, difficulty: 0 },
+          ],
+        },
+        {
+          id: 2,
+          elements: [
+            { id: 4, difficulty: 100 },
+            { id: 5, difficulty: 100 },
+          ],
+        },
+      ],
+    };
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
+      worldEntityMock,
+    ]);
+
+    systemUnderTest.internalExecute(1);
+
+    const entityArg = entityContainerMock.createEntity.mock
+      .calls[0][0] as ExperiencePointsEntity;
+    console.log("Entity Argument:", entityArg);
+    expect(entityContainerMock.createEntity).toHaveBeenCalled();
+    expect(entityArg.worldID).toBe(1);
+    expect(entityArg.baseExperiencePoints).toBe(40);
+    expect(entityArg.currentExperiencePoints).toBe(0);
+    expect(entityArg.maxExperiencePoints).toBe(300);
+    expect(entityArg.maxLevel).toBe(3);
+    expect(entityArg.currentLevel).toBe(0);
   });
 });
