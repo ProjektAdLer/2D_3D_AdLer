@@ -50,6 +50,7 @@ export default class UpdateExperiencePointsUseCase
     }
 
     //Calculate Experience Points
+    //Check multiplicator of element in question
     let multiplicator = 1;
     let spaceEntity: LearningSpaceEntity;
     worldEntity.spaces.forEach((space) => {
@@ -69,15 +70,34 @@ export default class UpdateExperiencePointsUseCase
       multiplicator = 2;
     }
 
+    // Get correct experiencePointsEntity
     const userData = this.entityContainer.getEntitiesOfType(UserDataEntity);
     let experiencePointsEntity = userData[0].experiencePoints.find(
       (xpEntity) => xpEntity.worldID === userLocation.worldID,
     );
+    if (!experiencePointsEntity) {
+      this.logger.log(
+        LogLevelTypes.WARN,
+        "UpdateExperiencePointsUseCase: ExperiencePointsEntity not found!",
+      );
+      return;
+    }
 
-    experiencePointsEntity!.currentExperiencePoints +=
-      experiencePointsEntity!.baseExperiencePoints * multiplicator;
+    // Update experience points
+    experiencePointsEntity.currentExperiencePoints +=
+      experiencePointsEntity.baseExperiencePoints * multiplicator;
 
-    console.log("reached", userLocation.worldID);
+    if (
+      experiencePointsEntity.currentExperiencePoints >=
+      experiencePointsEntity.maxExperiencePoints /
+        experiencePointsEntity.maxLevel
+    ) {
+      experiencePointsEntity.currentLevel += 1;
+      experiencePointsEntity.currentExperiencePoints -=
+        experiencePointsEntity.maxExperiencePoints /
+        experiencePointsEntity.maxLevel;
+    }
+
     this.logger.log(
       LogLevelTypes.TRACE,
       "UpdateExperiencePointsUseCase: InternalExecute",
