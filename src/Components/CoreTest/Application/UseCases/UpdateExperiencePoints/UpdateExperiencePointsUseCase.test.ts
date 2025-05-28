@@ -10,6 +10,8 @@ import Logger from "../../../../Core/Adapters/Logger/Logger";
 import LearningWorldEntity from "../../../../Core/Domain/Entities/LearningWorldEntity";
 import IGetUserLocationUseCase from "../../../../Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
 import UserLocationTO from "../../../../Core/Application/DataTransferObjects/UserLocationTO";
+import ExperiencePointsEntity from "../../../../Core/Domain/Entities/ExperiencePointsEntity";
+import UserDataEntity from "../../../../Core/Domain/Entities/UserDataEntity";
 
 const entityContainerMock = mock<IEntityContainer>();
 const notificationPortMock = mock<INotificationPort>();
@@ -82,6 +84,7 @@ describe("UpdateExperiencePointsUseCase", () => {
     let userDataEntity = {
       isLoggedIn: true,
       availableWorlds: [{ worldID: 42, worldName: "World 1" }],
+      experiencePoints: [],
     };
 
     entityContainerMock.getEntitiesOfType.mockReturnValueOnce([userDataEntity]);
@@ -89,6 +92,7 @@ describe("UpdateExperiencePointsUseCase", () => {
     const worldEntityMock = {
       id: 42,
       name: "World 1",
+      spaces: [{ id: 1, elements: [{ id: 1, difficulty: 100 }] }],
     };
     let filterResult;
     entityContainerMock.filterEntitiesOfType.mockImplementationOnce(
@@ -100,7 +104,7 @@ describe("UpdateExperiencePointsUseCase", () => {
     // mock world response
     entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([]);
 
-    await systemUnderTest.internalExecute();
+    await systemUnderTest.internalExecute(1);
 
     expect(filterResult).toBe(true);
   });
