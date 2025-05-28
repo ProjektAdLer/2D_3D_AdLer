@@ -108,4 +108,97 @@ describe("UpdateExperiencePointsUseCase", () => {
 
     expect(filterResult).toBe(true);
   });
+  test("calculates updated experience points correctly", () => {
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
+      spaceID: 1,
+      worldID: 42,
+    } as UserLocationTO);
+    let userDataEntity = {
+      isLoggedIn: true,
+      availableWorlds: [{ worldID: 1, worldName: "World 1" }],
+      experiencePoints: [
+        {
+          worldID: 42,
+          maxLevel: 20,
+          currentLevel: 2,
+          maxExperiencePoints: 200,
+          currentExperiencePoints: 0,
+          baseExperiencePoints: 1,
+        },
+      ],
+    };
+
+    entityContainerMock.getEntitiesOfType.mockReturnValueOnce([userDataEntity]);
+
+    const worldEntityMock = {
+      id: 42,
+      name: "World 1",
+      spaces: [
+        {
+          id: 1,
+          elements: [
+            { id: 1, difficulty: 100 },
+            { id: 2, difficulty: 200 },
+            { id: 3, difficulty: 0 },
+          ],
+        },
+      ],
+    };
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
+      worldEntityMock,
+    ]);
+
+    systemUnderTest.internalExecute(3);
+
+    expect(userDataEntity.experiencePoints[0].worldID).toBe(42);
+    expect(userDataEntity.experiencePoints[0].currentExperiencePoints).toBe(1);
+    expect(userDataEntity.experiencePoints[0].currentLevel).toBe(2);
+  });
+
+  test("calculates updated experience points with levelUp correctly", () => {
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
+      spaceID: 1,
+      worldID: 42,
+    } as UserLocationTO);
+    let userDataEntity = {
+      isLoggedIn: true,
+      availableWorlds: [{ worldID: 1, worldName: "World 1" }],
+      experiencePoints: [
+        {
+          worldID: 42,
+          maxLevel: 20,
+          currentLevel: 2,
+          maxExperiencePoints: 200,
+          currentExperiencePoints: 0,
+          baseExperiencePoints: 10,
+        },
+      ],
+    };
+
+    entityContainerMock.getEntitiesOfType.mockReturnValueOnce([userDataEntity]);
+
+    const worldEntityMock = {
+      id: 42,
+      name: "World 1",
+      spaces: [
+        {
+          id: 1,
+          elements: [
+            { id: 1, difficulty: 100 },
+            { id: 2, difficulty: 200 },
+            { id: 3, difficulty: 0 },
+          ],
+        },
+      ],
+    };
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
+      worldEntityMock,
+    ]);
+
+    systemUnderTest.internalExecute(2);
+
+    expect(userDataEntity.experiencePoints[0].worldID).toBe(42);
+    expect(userDataEntity.experiencePoints[0].currentExperiencePoints).toBe(0);
+    expect(userDataEntity.experiencePoints[0].currentLevel).toBe(4);
+  });
 });

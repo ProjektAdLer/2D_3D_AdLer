@@ -87,7 +87,7 @@ export default class UpdateExperiencePointsUseCase
     experiencePointsEntity.currentExperiencePoints +=
       experiencePointsEntity.baseExperiencePoints * multiplicator;
 
-    if (
+    while (
       experiencePointsEntity.currentExperiencePoints >=
       experiencePointsEntity.maxExperiencePoints /
         experiencePointsEntity.maxLevel
