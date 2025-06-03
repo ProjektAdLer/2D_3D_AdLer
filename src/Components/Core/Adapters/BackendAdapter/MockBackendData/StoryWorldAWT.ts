@@ -44,7 +44,7 @@ const BigWorldAWT: AWT = {
           "Ziel des abgeschlossenen Raumes 2/3",
           "Ziel des abgeschlossenen Raumes 3/3",
         ],
-        spaceSlotContents: [1],
+        spaceSlotContents: [null, 1],
         requiredPointsToComplete: 1,
         requiredSpacesToEnter: "",
         spaceTemplate: "R_20X20_6L",
