@@ -17,8 +17,14 @@ import AvatarColorPalette, {
   AvatarColor,
 } from "../../../Domain/AvatarModels/AvatarColorPalette";
 import AvatarSkinColorPalette from "../../../Domain/AvatarModels/AvatarSkinColorPalette";
+// Neuer Import für Gesichtstexturen
+import {
+  AvatarEyeBrowTexture,
+  AvatarEyeTexture,
+  AvatarNoseTexture,
+  AvatarMouthTexture,
+} from "../../../Domain/AvatarModels/AvatarFaceUVTexture";
 
-// Statt RepositoryTypes und EventService – analog zu LoadAvatarConfigUseCase und SaveAvatarConfigUseCase:
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
@@ -62,9 +68,6 @@ export default class RandomizeAvatarConfigUseCase
 
   public async executeAsync(): Promise<void> {
     // 1. Hole die UserDataEntity über den EntityContainer:
-    console.log(
-      "RandomizeAvatarConfigUseCase: Executing randomization of avatar config...",
-    );
     const userDataEntities =
       this.entityContainer.getEntitiesOfType(UserDataEntity);
     if (userDataEntities.length === 0) {
@@ -160,6 +163,18 @@ export default class RandomizeAvatarConfigUseCase
       this.getRandomElement(generalColors) || avatarConfig.shoesColor;
     avatarConfig.roundness = Math.random(); // Zufälliger Wert zwischen 0 und 1
 
+    // Randomisiere zusätzlich die Gesichtstexturen: Augenbrauen, Augen, Nase und Mund
+    const randomEyebrow = this.getRandomElement(AvatarEyeBrowTexture);
+    const randomEye = this.getRandomElement(AvatarEyeTexture);
+    const randomNose = this.getRandomElement(AvatarNoseTexture);
+    const randomMouth = this.getRandomElement(AvatarMouthTexture);
+    avatarConfig.eyebrows = randomEyebrow
+      ? randomEyebrow.id
+      : avatarConfig.eyebrows;
+    avatarConfig.eyes = randomEye ? randomEye.id : avatarConfig.eyes;
+    avatarConfig.nose = randomNose ? randomNose.id : avatarConfig.nose;
+    avatarConfig.mouth = randomMouth ? randomMouth.id : avatarConfig.mouth;
+
     // 6. (Optional) Berechne ein Diff zwischen alter und neuer Konfiguration:
     const diff: Partial<AvatarConfigTO> = {};
     for (const key in avatarConfig) {
@@ -194,11 +209,6 @@ export default class RandomizeAvatarConfigUseCase
         `RandomizeAvatarConfigUseCase: Backend updated with randomized avatar config ${JSON.stringify(avatarConfig)}`,
       );
       // 9. Schicke die aktualisierte Konfiguration an den AvatarPort, damit die 3D-Szene aktualisiert wird:
-      console.log(
-        "RandomizeAvatarConfigUseCase: Sending new avatar config and diff to AvatarPort",
-        userDataEntity.avatar,
-        diff,
-      );
       this.avatarPort.onAvatarConfigChanged(
         Object.assign({}, userDataEntity.avatar),
         diff,
