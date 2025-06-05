@@ -58,15 +58,20 @@ export default class UpdateExperiencePointsUseCase
         spaceEntity = space;
       }
     });
-    let elementEntity: LearningElementEntity;
 
-    spaceEntity!.elements.forEach((element) => {
-      if (element!.id === elementID) elementEntity = element!;
-    });
-    if (elementEntity!.difficulty === 100) {
+    let elementEntity: LearningElementEntity | undefined | null =
+      spaceEntity!.elements.find((element) => {
+        return element?.id === elementID;
+      });
+
+    if (elementEntity === null || elementEntity === undefined) {
+      return;
+    }
+
+    if (elementEntity.difficulty === 100) {
       multiplicator = 1.5;
     }
-    if (elementEntity!.difficulty === 200) {
+    if (elementEntity.difficulty === 200) {
       multiplicator = 2;
     }
 
