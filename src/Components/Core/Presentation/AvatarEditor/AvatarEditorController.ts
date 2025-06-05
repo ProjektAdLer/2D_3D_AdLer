@@ -6,6 +6,7 @@ import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import ISaveAvatarConfigUseCase from "../../Application/UseCases/SaveAvatarConfig/ISaveAvatarConfigUseCase";
 import ILoadAvatarConfigUseCase from "../../Application/UseCases/LoadAvatarConfig/ILoadAvatarConfigUseCase";
 import AvatarEditorViewModel from "./AvatarEditorViewModel";
+import IRandomizeAvatarConfigUseCase from "../../Application/UseCases/RandomizeAvatarConfig/IRandomizeAvatarConfigUseCase";
 
 export default class AvatarEditorController implements IAvatarEditorController {
   constructor(private viewModel: AvatarEditorViewModel) {}
@@ -26,7 +27,15 @@ export default class AvatarEditorController implements IAvatarEditorController {
 
   resetAvatarConfig(): void {
     CoreDIContainer.get<ILoadAvatarConfigUseCase>(
-      USECASE_TYPES.ILoadAdaptivityElementUseCase,
+      USECASE_TYPES.ILoadAvatarConfigUseCase,
     ).executeAsync();
+    this.viewModel.hasChanged.Value = true;
+  }
+
+  randomizeAvatarConfig(): void {
+    CoreDIContainer.get<IRandomizeAvatarConfigUseCase>(
+      USECASE_TYPES.IRandomizeAvatarConfigUseCase,
+    ).executeAsync();
+    this.viewModel.hasChanged.Value = true;
   }
 }

@@ -78,6 +78,8 @@ import ICalculateInitialExperiencePointsUseCase from "../../Application/UseCases
 import CalculateInitialExperiencePointsUseCase from "../../Application/UseCases/CalculateInitialExperiencePoints/CalculateInitialExperiencePointsUseCase";
 import IUpdateExperiencePointsUseCase from "../../Application/UseCases/UpdateExperiencePoints/IUpdateExperiencePointsUseCase";
 import UpdateExperiencePointsUseCase from "../../Application/UseCases/UpdateExperiencePoints/UpdateExperiencePointsUseCase";
+import IRandomizeAvatarConfigUseCase from "../../Application/UseCases/RandomizeAvatarConfig/IRandomizeAvatarConfigUseCase"; // Neuer Import
+import RandomizeAvatarConfigUseCase from "../../Application/UseCases/RandomizeAvatarConfig/RandomizeAvatarConfigUseCase"; // Neuer Import
 
 const UseCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases
@@ -278,6 +280,13 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
     USECASE_TYPES.IUpdateExperiencePointsUseCase,
   )
     .to(UpdateExperiencePointsUseCase)
+    .inSingletonScope();
+
+  // Neuer Eintrag für RandomizeAvatarConfigUseCase
+  bind<IRandomizeAvatarConfigUseCase>(
+    USECASE_TYPES.IRandomizeAvatarConfigUseCase,
+  )
+    .to(RandomizeAvatarConfigUseCase)
     .inSingletonScope();
 });
 

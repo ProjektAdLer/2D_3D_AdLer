@@ -18,7 +18,7 @@ export default function AvatarEditorRandomizerButton(
     <>
       <StyledButton
         onClick={() => {
-          props.controller.saveAvatarConfig();
+          props.controller.randomizeAvatarConfig();
         }}
       >
         <img
