@@ -8,6 +8,13 @@ import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import UserDataEntity from "src/Components/Core/Domain/Entities/UserDataEntity";
 import LearningWorldEntity from "src/Components/Core/Domain/Entities/LearningWorldEntity";
 import ExperiencePointsEntity from "src/Components/Core/Domain/Entities/ExperiencePointsEntity";
+import { LearningElementDifficulty } from "src/Components/Core/Domain/Types/LearningElementDifficulty";
+import LearningElementEntity from "src/Components/Core/Domain/Entities/LearningElementEntity";
+
+class DifficultyCounter {
+  numberOfElements: number = 0;
+  numberOfCompletedElements: number = 0;
+}
 
 @injectable()
 export default class CalculateInitialExperiencePointsUseCase
@@ -59,31 +66,50 @@ export default class CalculateInitialExperiencePointsUseCase
       );
       return;
     }
+
     //Calculate Experience Points
+    const numberOfSpaces = worldEntity.spaces.length;
+    const easyElementCounter = new DifficultyCounter();
+    const mediumElementCounter = new DifficultyCounter();
+    const hardElementCounter = new DifficultyCounter();
 
-    let numberOfSpaces = worldEntity.spaces.length;
-
-    let numberOfElementsTotal = 0;
-    let numberOfMediumElements = 0;
-    let numberOfHardElements = 0;
     worldEntity.spaces.forEach((space) => {
-      numberOfElementsTotal += space.elements.filter(
-        (element) => element !== null,
-      ).length;
-      numberOfMediumElements += space.elements.filter(
-        (element) => element !== null && element!.difficulty === 100,
-      ).length;
-      numberOfHardElements += space.elements.filter(
-        (element) => element !== null && element!.difficulty === 200,
-      ).length;
+      this.calculateNumberOfDifficultyElements(
+        space.elements,
+        LearningElementDifficulty.easy,
+        easyElementCounter,
+      );
+      this.calculateNumberOfDifficultyElements(
+        space.elements,
+        LearningElementDifficulty.medium,
+        mediumElementCounter,
+      );
+      this.calculateNumberOfDifficultyElements(
+        space.elements,
+        LearningElementDifficulty.hard,
+        hardElementCounter,
+      );
     });
-    let maxLevel = Math.ceil(numberOfElementsTotal / numberOfSpaces);
-    let maxExperiencePoints = maxLevel * 100;
-    let numberOfCalculationUnits =
-      numberOfElementsTotal + // Einfach
-      numberOfMediumElements * 0.5 + // 1.5 fach
-      numberOfHardElements; // Zweifach
-    let baseExperiencePoints = maxExperiencePoints / numberOfCalculationUnits;
+
+    const numberOfElementsTotal =
+      easyElementCounter.numberOfElements +
+      mediumElementCounter.numberOfElements +
+      hardElementCounter.numberOfElements;
+    const maxLevel = Math.ceil(numberOfElementsTotal / numberOfSpaces);
+    const maxExperiencePoints = maxLevel * 100;
+    const numberOfCalculationUnits =
+      easyElementCounter.numberOfElements +
+      mediumElementCounter.numberOfElements * 1.5 +
+      hardElementCounter.numberOfElements * 2;
+    const baseExperiencePoints = maxExperiencePoints / numberOfCalculationUnits;
+    const currentExperiencePoints =
+      (easyElementCounter.numberOfCompletedElements +
+        mediumElementCounter.numberOfCompletedElements * 1.5 +
+        hardElementCounter.numberOfCompletedElements * 2) *
+      baseExperiencePoints;
+    const currentLevel = Math.round(
+      (currentExperiencePoints / maxExperiencePoints) * maxLevel,
+    );
 
     // Create Experience Points Entity
     const experiencePointsEntity =
@@ -91,9 +117,9 @@ export default class CalculateInitialExperiencePointsUseCase
         {
           worldID: worldEntity.id,
           maxLevel: maxLevel,
-          currentLevel: 0,
+          currentLevel: currentLevel,
           maxExperiencePoints: maxExperiencePoints,
-          currentExperiencePoints: 0,
+          currentExperiencePoints: currentExperiencePoints,
           baseExperiencePoints: baseExperiencePoints, // Points for an easy learningElement
         },
         ExperiencePointsEntity,
@@ -101,9 +127,26 @@ export default class CalculateInitialExperiencePointsUseCase
 
     // Add Experience Points Entity to User Data
     userDataEntity.experiencePoints.push(experiencePointsEntity);
-    this.logger.log(
-      LogLevelTypes.TRACE,
-      `CalculateInitialExperiencePointsUseCase: Number of Easy Elements: ${numberOfElementsTotal - numberOfMediumElements - numberOfHardElements}, Number of Medium Elements: ${numberOfMediumElements}, Number of Hard Elements: ${numberOfHardElements}, Base Experience Points: ${baseExperiencePoints}, Max Level: ${maxLevel}, Max Experience Points: ${maxExperiencePoints}. For World: ${worldEntity.name} (${worldEntity.id}).`,
+    // this.logger.log(
+    //   LogLevelTypes.TRACE,
+    //   `CalculateInitialExperiencePointsUseCase: Number of Easy Elements: ${numberOfElementsTotal - numberOfMediumElements - numberOfHardElements}, Number of Medium Elements: ${numberOfMediumElements}, Number of Hard Elements: ${numberOfHardElements}, Base Experience Points: ${baseExperiencePoints}, Max Level: ${maxLevel}, Max Experience Points: ${maxExperiencePoints}. For World: ${worldEntity.name} (${worldEntity.id}).`,
+    // );
+  }
+
+  private calculateNumberOfDifficultyElements(
+    elements: (LearningElementEntity | null)[],
+    difficulty: LearningElementDifficulty,
+    counter: DifficultyCounter,
+  ) {
+    const difficultyElements = elements.filter(
+      (element) => element !== null && element.difficulty === difficulty,
     );
+    const numberOfElements = difficultyElements.length;
+    const numberOfCompletedElements = difficultyElements.filter(
+      (element) => element?.hasScored === true,
+    ).length;
+
+    counter.numberOfCompletedElements += numberOfCompletedElements;
+    counter.numberOfElements += numberOfElements;
   }
 }
