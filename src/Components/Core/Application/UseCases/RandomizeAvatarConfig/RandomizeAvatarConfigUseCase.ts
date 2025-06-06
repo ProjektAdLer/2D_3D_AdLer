@@ -60,23 +60,14 @@ export default class RandomizeAvatarConfigUseCase
   }
 
   public async executeAsync(): Promise<void> {
-    // Erstelle eine komplett neue zufällige Konfiguration:
     const newAvatarConfig = new AvatarConfigTO();
     this.randomizeProperties(newAvatarConfig);
-
-    // Anstatt nur notifyAvatarSubscribers aufzurufen,
-    // rufe den UpdateAvatarConfigUseCase auf um das zentrale Model zu aktualisieren:
     CoreDIContainer.get<IUpdateAvatarConfigUseCase>(
       USECASE_TYPES.IUpdateAvatarConfigUseCase,
     ).executeAsync(newAvatarConfig);
-
-    // Optional: zusätzliche Notify - falls über den Port noch separate
-    // Preview-Updates abgesendet werden sollen:
-    // this.notifyAvatarSubscribers(newAvatarConfig);
   }
 
   private randomizeProperties(avatarConfig: AvatarConfigTO): void {
-    // Definiere mögliche Werte für Modelle:
     const hairModelValues = [
       ...Object.values(OAvatarHairModels),
       ...Object.values(AvatarNoneModel),
@@ -105,17 +96,15 @@ export default class RandomizeAvatarConfigUseCase
     const shirtModelValues = Object.values(OAvatarShirtModels);
     const shoesModelValues = Object.values(OAvatarShoesModels);
 
-    // Wähle zufällige Gesichtszüge:
     const randomEyebrow = this.getRandomElement(AvatarEyeBrowTexture);
     const randomEye = this.getRandomElement(AvatarEyeTexture);
     const randomNose = this.getRandomElement(AvatarNoseTexture);
     const randomMouth = this.getRandomElement(AvatarMouthTexture);
 
-    // Farben:
     const skinColors: AvatarColor[] = AvatarSkinColorPalette;
     const generalColors: AvatarColor[] = AvatarColorPalette;
 
-    // Setze alle Felder auf einen zufälligen Wert:
+    // Randomize the avatar configuration
     avatarConfig.hair = this.getRandomElement(hairModelValues) || "none";
     avatarConfig.beard = this.getRandomElement(beardModelValues) || "none";
     avatarConfig.headgear =
@@ -146,20 +135,5 @@ export default class RandomizeAvatarConfigUseCase
       this.getRandomElement(generalColors) || generalColors[0];
 
     avatarConfig.roundness = Math.random(); // Zufälliger Wert zwischen 0 und 1
-  }
-
-  private notifyAvatarSubscribers(newAvatarConfig: AvatarConfigTO): void {
-    // Logge die finale Konfiguration
-    this.logger.log(
-      LogLevelTypes.TRACE,
-      `RandomizeAvatarConfigUseCase: Final Avatar Config: ${JSON.stringify(newAvatarConfig)}`,
-    );
-    console.log(newAvatarConfig);
-
-    // Da alle Felder neu gesetzt werden, entspricht das diff einfach der neuen Konfiguration.
-    const diff: Partial<AvatarConfigTO> = { ...newAvatarConfig };
-
-    // Übergib die neue Konfiguration und das Diff an alle Adapter über den AvatarPort.
-    this.avatarPort.onAvatarConfigChanged(newAvatarConfig, diff);
   }
 }
