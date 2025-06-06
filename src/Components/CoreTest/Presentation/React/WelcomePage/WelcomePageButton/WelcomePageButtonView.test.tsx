@@ -173,4 +173,83 @@ describe("WelcomePageButton", () => {
       expect(button).not.toBeDisabled();
     });
   });
+
+  describe("Video interactions", () => {
+    let playMock: jest.SpyInstance;
+    let pauseMock: jest.SpyInstance;
+
+    beforeEach(() => {
+      playMock = jest
+        .spyOn(window.HTMLMediaElement.prototype, "play")
+        .mockImplementation(async () => {});
+      pauseMock = jest
+        .spyOn(window.HTMLMediaElement.prototype, "pause")
+        .mockImplementation(() => {});
+      // Ensure user is logged in and button is not a placeholder for video to be visible
+      getLoginStatusUseCaseMock.execute.mockReturnValue({
+        isLoggedIn: true,
+        userName: "",
+      });
+      useBuilderMock([mockViewModel, undefined]);
+    });
+
+    afterEach(() => {
+      playMock.mockRestore();
+      pauseMock.mockRestore();
+    });
+
+    test("video plays on mouse enter and pauses on mouse leave", async () => {
+      const componentUnderTest = render(
+        <Provider container={CoreDIContainer}>
+          <WelcomePageButton {...defaultProps} isPlaceholder={false} />
+        </Provider>,
+      );
+
+      // Wait for the component to update based on login status
+      await waitFor(() => {
+        expect(
+          componentUnderTest.container.querySelector("video:not(.grayscale)"),
+        ).toBeInTheDocument();
+      });
+
+      const videoElement = componentUnderTest.container.querySelector(
+        "video:not(.grayscale)",
+      );
+      if (!videoElement) throw new Error("Video element not found");
+
+      fireEvent.mouseEnter(videoElement);
+      expect(playMock).toHaveBeenCalledTimes(1);
+
+      fireEvent.mouseLeave(videoElement);
+      expect(pauseMock).toHaveBeenCalledTimes(1);
+    });
+
+    test("image hover triggers video play and pause", async () => {
+      const componentUnderTest = render(
+        <Provider container={CoreDIContainer}>
+          <WelcomePageButton
+            {...defaultProps}
+            isPlaceholder={false}
+            label="Test Button"
+            imageSrc="test.png"
+          />
+        </Provider>,
+      );
+
+      // Wait for the component to update based on login status
+      await waitFor(() => {
+        expect(
+          componentUnderTest.getByAltText("Test Button"),
+        ).toBeInTheDocument();
+      });
+
+      const imageElement = componentUnderTest.getByAltText("Test Button");
+
+      fireEvent.mouseEnter(imageElement);
+      expect(playMock).toHaveBeenCalledTimes(1);
+
+      fireEvent.mouseLeave(imageElement);
+      expect(pauseMock).toHaveBeenCalledTimes(1);
+    });
+  });
 });
