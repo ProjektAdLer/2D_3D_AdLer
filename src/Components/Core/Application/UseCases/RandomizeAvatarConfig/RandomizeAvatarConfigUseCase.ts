@@ -29,12 +29,10 @@ import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import type INotificationPort from "../../Ports/Interfaces/INotificationPort";
-import { NotificationMessages } from "src/Components/Core/Domain/Types/NotificationMessages";
-import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
-import type IBackendPort from "../../Ports/Interfaces/IBackendPort";
-import BackendAdapterUtils from "src/Components/Core/Adapters/BackendAdapter/BackendAdapterUtils";
-import UserDataEntity from "src/Components/Core/Domain/Entities/UserDataEntity";
 import type IAvatarPort from "../../Ports/Interfaces/IAvatarPort";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer"; // falls vorhanden
+import IUpdateAvatarConfigUseCase from "../UpdateAvatarConfig/IUpdateAvatarConfigUseCase";
 
 @injectable()
 export default class RandomizeAvatarConfigUseCase
@@ -45,10 +43,6 @@ export default class RandomizeAvatarConfigUseCase
     private logger: ILoggerPort,
     @inject(PORT_TYPES.INotificationPort)
     private notificationPort: INotificationPort,
-    @inject(CORE_TYPES.IEntityContainer)
-    private entityContainer: IEntityContainer,
-    @inject(CORE_TYPES.IBackendAdapter)
-    private backend: IBackendPort,
     @inject(PORT_TYPES.IAvatarPort)
     private avatarPort: IAvatarPort,
   ) {}
@@ -65,43 +59,24 @@ export default class RandomizeAvatarConfigUseCase
     return array[randomIndex];
   }
 
-  private getUserDataEntity(): UserDataEntity | undefined {
-    const userDataEntities =
-      this.entityContainer.getEntitiesOfType(UserDataEntity);
-    if (userDataEntities.length === 0) {
-      this.logger.log(LogLevelTypes.ERROR, "No user data entity found");
-      return undefined;
-    }
-    if (userDataEntities.length > 1) {
-      this.logger.log(LogLevelTypes.ERROR, "Multiple user data entities found");
-      return undefined;
-    }
+  public async executeAsync(): Promise<void> {
+    // Erstelle eine komplett neue zufällige Konfiguration:
+    const newAvatarConfig = new AvatarConfigTO();
+    this.randomizeProperties(newAvatarConfig);
 
-    const userDataEntity = userDataEntities[0];
-    if (!userDataEntity.avatar) {
-      this.logger.log(
-        LogLevelTypes.ERROR,
-        "No avatar config found in user data entity",
-      );
-      this.notificationPort.onNotificationTriggered(
-        LogLevelTypes.ERROR,
-        "No avatar config found to randomize.",
-        NotificationMessages.ELEMENT_NOT_FOUND,
-      );
-      return undefined;
-    }
-    return userDataEntity;
+    // Anstatt nur notifyAvatarSubscribers aufzurufen,
+    // rufe den UpdateAvatarConfigUseCase auf um das zentrale Model zu aktualisieren:
+    CoreDIContainer.get<IUpdateAvatarConfigUseCase>(
+      USECASE_TYPES.IUpdateAvatarConfigUseCase,
+    ).executeAsync(newAvatarConfig);
+
+    // Optional: zusätzliche Notify - falls über den Port noch separate
+    // Preview-Updates abgesendet werden sollen:
+    // this.notifyAvatarSubscribers(newAvatarConfig);
   }
 
-  private cloneAvatarConfig(currentConfig: AvatarConfigTO): AvatarConfigTO {
-    return Object.assign(new AvatarConfigTO(), structuredClone(currentConfig));
-  }
-
-  private randomizeProperties(
-    avatarConfig: AvatarConfigTO,
-    currentConfig: AvatarConfigTO,
-  ): void {
-    // Definiere mögliche Werte für die Modelle:
+  private randomizeProperties(avatarConfig: AvatarConfigTO): void {
+    // Definiere mögliche Werte für Modelle:
     const hairModelValues = [
       ...Object.values(OAvatarHairModels),
       ...Object.values(AvatarNoneModel),
@@ -130,134 +105,61 @@ export default class RandomizeAvatarConfigUseCase
     const shirtModelValues = Object.values(OAvatarShirtModels);
     const shoesModelValues = Object.values(OAvatarShoesModels);
 
+    // Wähle zufällige Gesichtszüge:
     const randomEyebrow = this.getRandomElement(AvatarEyeBrowTexture);
     const randomEye = this.getRandomElement(AvatarEyeTexture);
     const randomNose = this.getRandomElement(AvatarNoseTexture);
     const randomMouth = this.getRandomElement(AvatarMouthTexture);
 
+    // Farben:
     const skinColors: AvatarColor[] = AvatarSkinColorPalette;
     const generalColors: AvatarColor[] = AvatarColorPalette;
 
-    // Randomisiere die konfigurierbaren Felder:
-    avatarConfig.hair =
-      this.getRandomElement(hairModelValues) || currentConfig.hair;
-    avatarConfig.beard =
-      this.getRandomElement(beardModelValues) || currentConfig.beard;
+    // Setze alle Felder auf einen zufälligen Wert:
+    avatarConfig.hair = this.getRandomElement(hairModelValues) || "none";
+    avatarConfig.beard = this.getRandomElement(beardModelValues) || "none";
     avatarConfig.headgear =
-      this.getRandomElement(headgearModelValues) || currentConfig.headgear;
-    avatarConfig.glasses =
-      this.getRandomElement(glassesModelValues) || currentConfig.glasses;
+      this.getRandomElement(headgearModelValues) || "none";
+    avatarConfig.glasses = this.getRandomElement(glassesModelValues) || "none";
     avatarConfig.backpack =
-      this.getRandomElement(backpackModelValues) || currentConfig.backpack;
-    avatarConfig.other =
-      this.getRandomElement(otherModelValues) || currentConfig.other;
+      this.getRandomElement(backpackModelValues) || "none";
     avatarConfig.shirt =
-      this.getRandomElement(shirtModelValues) || currentConfig.shirt;
+      this.getRandomElement(shirtModelValues) || shirtModelValues[0];
     avatarConfig.pants =
-      this.getRandomElement(pantsModelValues) || currentConfig.pants;
+      this.getRandomElement(pantsModelValues) || pantsModelValues[0];
     avatarConfig.shoes =
-      this.getRandomElement(shoesModelValues) || currentConfig.shoes;
+      this.getRandomElement(shoesModelValues) || shoesModelValues[0];
 
-    avatarConfig.eyebrows = randomEyebrow?.id || currentConfig.eyebrows;
-    avatarConfig.eyes = randomEye?.id || currentConfig.eyes;
-    avatarConfig.nose = randomNose?.id || currentConfig.nose;
-    avatarConfig.mouth = randomMouth?.id || currentConfig.mouth;
+    avatarConfig.eyebrows = randomEyebrow?.id ?? 0;
+    avatarConfig.eyes = randomEye?.id ?? 0;
+    avatarConfig.nose = randomNose?.id ?? 0;
+    avatarConfig.mouth = randomMouth?.id ?? 0;
 
-    avatarConfig.skinColor =
-      this.getRandomElement(skinColors) || currentConfig.skinColor;
+    avatarConfig.skinColor = this.getRandomElement(skinColors) || skinColors[0];
     avatarConfig.hairColor =
-      this.getRandomElement(generalColors) || currentConfig.hairColor;
+      this.getRandomElement(generalColors) || generalColors[0];
     avatarConfig.shirtColor =
-      this.getRandomElement(generalColors) || currentConfig.shirtColor;
+      this.getRandomElement(generalColors) || generalColors[0];
     avatarConfig.pantsColor =
-      this.getRandomElement(generalColors) || currentConfig.pantsColor;
+      this.getRandomElement(generalColors) || generalColors[0];
     avatarConfig.shoesColor =
-      this.getRandomElement(generalColors) || currentConfig.shoesColor;
+      this.getRandomElement(generalColors) || generalColors[0];
 
     avatarConfig.roundness = Math.random(); // Zufälliger Wert zwischen 0 und 1
   }
 
-  private calculateDiff(
-    currentConfig: AvatarConfigTO,
-    newConfig: AvatarConfigTO,
-  ): Partial<AvatarConfigTO> {
-    const diff: Partial<AvatarConfigTO> = {};
-    for (const key in newConfig) {
-      if (newConfig.hasOwnProperty(key)) {
-        const newValue = newConfig[key as keyof AvatarConfigTO];
-        const oldValue = currentConfig[key as keyof AvatarConfigTO];
-        if (typeof newValue === "object" && newValue !== null) {
-          if (JSON.stringify(newValue) !== JSON.stringify(oldValue)) {
-            diff[key as keyof AvatarConfigTO] = newValue as any;
-          }
-        } else if (newValue !== oldValue) {
-          diff[key as keyof AvatarConfigTO] = newValue as any;
-        }
-      }
-    }
-    return diff;
-  }
-
-  private async updateBackendAndNotifyPorts(
-    userDataEntity: UserDataEntity,
-    newAvatarConfig: AvatarConfigTO,
-    diff: Partial<AvatarConfigTO>,
-  ): Promise<void> {
-    const backendAvatarConfigTO =
-      BackendAdapterUtils.convertAvatarConfigToBackendAvatarConfig(
-        newAvatarConfig,
-      );
-    const result = await this.backend.updateAvatarConfig(
-      userDataEntity.userToken,
-      backendAvatarConfigTO,
+  private notifyAvatarSubscribers(newAvatarConfig: AvatarConfigTO): void {
+    // Logge die finale Konfiguration
+    this.logger.log(
+      LogLevelTypes.TRACE,
+      `RandomizeAvatarConfigUseCase: Final Avatar Config: ${JSON.stringify(newAvatarConfig)}`,
     );
+    console.log(newAvatarConfig);
 
-    if (result) {
-      this.logger.log(
-        LogLevelTypes.TRACE,
-        `RandomizeAvatarConfigUseCase: Backend updated with randomized avatar config ${JSON.stringify(newAvatarConfig)}`,
-      );
-      this.avatarPort.onAvatarConfigChanged(
-        Object.assign({}, newAvatarConfig), // Sende eine Kopie
-        diff,
-      );
-    } else {
-      this.logger.log(
-        LogLevelTypes.ERROR,
-        "Backend update failed for randomized avatar config",
-      );
-      userDataEntity.avatar = userDataEntity.avatar; // Rollback zur alten Konfiguration in der Entity
-      this.notificationPort.onNotificationTriggered(
-        LogLevelTypes.ERROR,
-        "Failed to save randomized avatar to backend.",
-        NotificationMessages.BACKEND_ERROR,
-      );
-    }
-  }
+    // Da alle Felder neu gesetzt werden, entspricht das diff einfach der neuen Konfiguration.
+    const diff: Partial<AvatarConfigTO> = { ...newAvatarConfig };
 
-  public async executeAsync(): Promise<void> {
-    const userDataEntity = this.getUserDataEntity();
-    if (!userDataEntity || !userDataEntity.avatar) {
-      // Die Fehlerbehandlung und Benachrichtigung erfolgt bereits in getUserDataEntity
-      return;
-    }
-
-    const currentConfig = userDataEntity.avatar;
-    const newAvatarConfig = this.cloneAvatarConfig(currentConfig);
-
-    this.randomizeProperties(newAvatarConfig, currentConfig);
-
-    const diff = this.calculateDiff(currentConfig, newAvatarConfig);
-
-    // Aktualisiere die Konfiguration in der UserDataEntity vor dem Backend-Aufruf,
-    // damit die Entity den aktuellen Stand widerspiegelt.
-    // Bei einem Fehler im Backend wird dies in updateBackendAndNotifyPorts behandelt.
-    userDataEntity.avatar = newAvatarConfig;
-
-    await this.updateBackendAndNotifyPorts(
-      userDataEntity,
-      newAvatarConfig,
-      diff,
-    );
+    // Übergib die neue Konfiguration und das Diff an alle Adapter über den AvatarPort.
+    this.avatarPort.onAvatarConfigChanged(newAvatarConfig, diff);
   }
 }
