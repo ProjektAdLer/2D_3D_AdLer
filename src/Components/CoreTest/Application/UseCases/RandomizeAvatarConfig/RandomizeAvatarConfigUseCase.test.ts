@@ -22,8 +22,8 @@ import AvatarColorPalette, {
   AvatarColor,
 } from "../../../../Core/Domain/AvatarModels/AvatarColorPalette";
 import AvatarSkinColorPalette from "../../../../Core/Domain/AvatarModels/AvatarSkinColorPalette";
-import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
-import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
+import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
 import type IUpdateAvatarConfigUseCase from "../../../../Core/Application/UseCases/UpdateAvatarConfig/IUpdateAvatarConfigUseCase";
 import type ILoggerPort from "../../../../Core/Application/Ports/Interfaces/ILoggerPort";
 import type INotificationPort from "../../../../Core/Application/Ports/Interfaces/INotificationPort";
@@ -33,10 +33,7 @@ import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
 // Mock dependencies
 const mockLogger: ILoggerPort = {
   log: jest.fn(),
-  setLogLevel: jest.fn(),
-  setDefaultContext: jest.fn(),
-  getDefaultContext: jest.fn(() => ({})),
-  getLogLevel: jest.fn(() => LogLevelTypes.NONE),
+  exportLog: jest.fn(),
 };
 
 const mockNotificationPort: INotificationPort = {
@@ -44,6 +41,7 @@ const mockNotificationPort: INotificationPort = {
   registerAdapter: jest.fn(),
   unregisterAdapter: jest.fn(),
   name: jest.fn(() => "MockNotificationPort"),
+  displayBreakTimeNotification: jest.fn(),
 };
 
 const mockAvatarPort: IAvatarPort = {

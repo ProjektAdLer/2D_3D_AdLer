@@ -112,6 +112,7 @@ export default class RandomizeAvatarConfigUseCase
     avatarConfig.glasses = this.getRandomElement(glassesModelValues) || "none";
     avatarConfig.backpack =
       this.getRandomElement(backpackModelValues) || "none";
+    avatarConfig.other = this.getRandomElement(otherModelValues) || "none";
     avatarConfig.shirt =
       this.getRandomElement(shirtModelValues) || shirtModelValues[0];
     avatarConfig.pants =
