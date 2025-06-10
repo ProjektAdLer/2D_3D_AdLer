@@ -27,6 +27,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - WelcomeScreen responsive styling
 - WorldCompletionModal responsiv styling
 - logout not deleting player progress data
+- first items of face category not shown in 3D avatar preview
 
 ### Deprecated
 

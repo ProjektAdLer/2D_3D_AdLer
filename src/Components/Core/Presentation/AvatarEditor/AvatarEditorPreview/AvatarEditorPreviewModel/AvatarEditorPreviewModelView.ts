@@ -169,7 +169,7 @@ export default class AvatarEditorPreviewModelView {
   private async updateFaceModels(
     config: Partial<AvatarConfigTO>,
   ): Promise<void> {
-    if (config.eyebrows) {
+    if (config.eyebrows !== undefined && config.eyebrows !== null) {
       AvatarEditorUtils.setupAvatarTextures(
         config.eyebrows,
         this.viewModel.baseModelMeshes,
@@ -177,7 +177,7 @@ export default class AvatarEditorPreviewModelView {
         AvatarEyeBrowTexture,
       );
     }
-    if (config.eyes) {
+    if (config.eyes !== undefined && config.eyes !== null) {
       AvatarEditorUtils.setupAvatarTextures(
         config.eyes,
         this.viewModel.baseModelMeshes,
@@ -185,7 +185,7 @@ export default class AvatarEditorPreviewModelView {
         AvatarEyeTexture,
       );
     }
-    if (config.nose) {
+    if (config.nose !== undefined && config.nose !== null) {
       AvatarEditorUtils.setupAvatarTextures(
         config.nose,
         this.viewModel.baseModelMeshes,
@@ -193,13 +193,14 @@ export default class AvatarEditorPreviewModelView {
         AvatarNoseTexture,
       );
     }
-    if (config.mouth)
+    if (config.mouth !== undefined && config.mouth !== null) {
       AvatarEditorUtils.setupAvatarTextures(
         config.mouth,
         this.viewModel.baseModelMeshes,
         AvatarModelMaterialNames.mouth,
         AvatarMouthTexture,
       );
+    }
   }
 
   private async updateClothingModels(
