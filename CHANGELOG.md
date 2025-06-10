@@ -12,6 +12,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 - custom icons for save button in avatar editor and avatar preview controls
 - icon for xp
+- added randomize avatar feature
 
 ### Changed
 
