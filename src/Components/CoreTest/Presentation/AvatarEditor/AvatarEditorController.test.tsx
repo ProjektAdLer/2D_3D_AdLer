@@ -8,6 +8,7 @@ import AvatarEditorViewModel from "../../../Core/Presentation/AvatarEditor/Avata
 import ISaveAvatarConfigUseCase from "../../../Core/Application/UseCases/SaveAvatarConfig/ISaveAvatarConfigUseCase";
 import ILoadAvatarConfigUseCase from "../../../Core/Application/UseCases/LoadAvatarConfig/ILoadAvatarConfigUseCase";
 import IRandomizeAvatarConfigUseCase from "../../../Core/Application/UseCases/RandomizeAvatarConfig/IRandomizeAvatarConfigUseCase";
+import AvatarConfigTO from "../../../Core/Application/DataTransferObjects/AvatarConfigTO";
 
 const updateAvatarConfigUseCaseMock = mock<IUpdateAvatarConfigUseCase>();
 const saveAvatarConfigUseCaseMock = mock<ISaveAvatarConfigUseCase>();
@@ -72,10 +73,21 @@ describe("AvatarEditorController", () => {
     expect(avatarEditorViewModelMock.hasChanged.Value).toBe(true);
   });
 
-  test("randomizeAvatarConfig should call usecase and set hasChanged to true", () => {
-    systemUnderTest.randomizeAvatarConfig();
+  test("randomizeAvatarConfig should call randomize and update usecases and set hasChanged to true", async () => {
+    const mockNewConfig = new AvatarConfigTO();
+    // Mock the return value of randomizeAvatarConfigUseCase
+    randomizeAvatarConfigUseCaseMock.executeAsync.mockResolvedValue(
+      mockNewConfig,
+    );
+
+    await systemUnderTest.randomizeAvatarConfig();
+
     expect(randomizeAvatarConfigUseCaseMock.executeAsync).toHaveBeenCalledTimes(
       1,
+    );
+    expect(updateAvatarConfigUseCaseMock.executeAsync).toHaveBeenCalledTimes(1);
+    expect(updateAvatarConfigUseCaseMock.executeAsync).toHaveBeenCalledWith(
+      mockNewConfig,
     );
     expect(avatarEditorViewModelMock.hasChanged.Value).toBe(true);
   });

@@ -22,44 +22,13 @@ import AvatarColorPalette, {
   AvatarColor,
 } from "../../../../Core/Domain/AvatarModels/AvatarColorPalette";
 import AvatarSkinColorPalette from "../../../../Core/Domain/AvatarModels/AvatarSkinColorPalette";
-import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
-import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
-import type IUpdateAvatarConfigUseCase from "../../../../Core/Application/UseCases/UpdateAvatarConfig/IUpdateAvatarConfigUseCase";
 import type ILoggerPort from "../../../../Core/Application/Ports/Interfaces/ILoggerPort";
-import type INotificationPort from "../../../../Core/Application/Ports/Interfaces/INotificationPort";
-import type IAvatarPort from "../../../../Core/Application/Ports/Interfaces/IAvatarPort";
 import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
 
-// Mock dependencies
 const mockLogger: ILoggerPort = {
   log: jest.fn(),
   exportLog: jest.fn(),
 };
-
-const mockNotificationPort: INotificationPort = {
-  onNotificationTriggered: jest.fn(),
-  registerAdapter: jest.fn(),
-  unregisterAdapter: jest.fn(),
-  name: jest.fn(() => "MockNotificationPort"),
-  displayBreakTimeNotification: jest.fn(),
-};
-
-const mockAvatarPort: IAvatarPort = {
-  onAvatarConfigChanged: jest.fn(),
-  onAvatarConfigLoaded: jest.fn(),
-  registerAdapter: jest.fn(),
-  unregisterAdapter: jest.fn(),
-  name: jest.fn(() => "MockAvatarPort"),
-};
-
-const mockUpdateAvatarConfigUseCase: IUpdateAvatarConfigUseCase = {
-  executeAsync: jest.fn(),
-};
-
-// Mock CoreDIContainer
-jest.mock("~DependencyInjection/CoreDIContainer", () => ({
-  get: jest.fn(),
-}));
 
 // Helper to get all possible model values including "none"
 const getPossibleValuesWithNone = (modelEnum: object) => [
@@ -72,44 +41,18 @@ describe("RandomizeAvatarConfigUseCase", () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-
-    (CoreDIContainer.get as jest.Mock).mockImplementation((type: symbol) => {
-      if (type === USECASE_TYPES.IUpdateAvatarConfigUseCase) {
-        return mockUpdateAvatarConfigUseCase;
-      }
-      return undefined;
-    });
-
-    randomizeAvatarConfigUseCase = new RandomizeAvatarConfigUseCase(
-      mockLogger,
-      mockNotificationPort,
-      mockAvatarPort,
-    );
+    randomizeAvatarConfigUseCase = new RandomizeAvatarConfigUseCase(mockLogger);
   });
 
   describe("executeAsync", () => {
-    it("should call IUpdateAvatarConfigUseCase.executeAsync with a new AvatarConfigTO", async () => {
-      await randomizeAvatarConfigUseCase.executeAsync();
-
-      expect(CoreDIContainer.get).toHaveBeenCalledWith(
-        USECASE_TYPES.IUpdateAvatarConfigUseCase,
-      );
-      expect(mockUpdateAvatarConfigUseCase.executeAsync).toHaveBeenCalledTimes(
-        1,
-      );
-      expect(mockUpdateAvatarConfigUseCase.executeAsync).toHaveBeenCalledWith(
-        expect.any(AvatarConfigTO),
-      );
+    it("should return a new AvatarConfigTO with randomized properties", async () => {
+      const result = await randomizeAvatarConfigUseCase.executeAsync();
+      expect(result).toBeInstanceOf(AvatarConfigTO);
     });
 
     it("should populate AvatarConfigTO with valid randomized values", async () => {
-      await randomizeAvatarConfigUseCase.executeAsync();
+      const capturedConfig = await randomizeAvatarConfigUseCase.executeAsync();
 
-      const capturedConfig = (
-        mockUpdateAvatarConfigUseCase.executeAsync as jest.Mock
-      ).mock.calls[0][0] as AvatarConfigTO;
-
-      // Check model properties
       expect(getPossibleValuesWithNone(OAvatarHairModels)).toContain(
         capturedConfig.hair,
       );
@@ -125,9 +68,6 @@ describe("RandomizeAvatarConfigUseCase", () => {
       expect(getPossibleValuesWithNone(OAvatarBackpackModels)).toContain(
         capturedConfig.backpack,
       );
-      // OAvatarOtherModels is often empty in domain data, resulting in "none" if not explicitly set by randomizeProperties.
-      // If AvatarConfigTO initializes `other` to "none" or randomizeProperties sets it to "none" on empty OAvatarOtherModels, this test passes.
-      // If `other` is left undefined by both, and OAvatarOtherModels is empty, this test will fail (correctly).
       expect(getPossibleValuesWithNone(OAvatarOtherModels)).toContain(
         capturedConfig.other,
       );
@@ -136,13 +76,12 @@ describe("RandomizeAvatarConfigUseCase", () => {
       expect(Object.values(OAvatarPantsModels)).toContain(capturedConfig.pants);
       expect(Object.values(OAvatarShoesModels)).toContain(capturedConfig.shoes);
 
-      // Check texture ID properties
       const assertTextureId = (id: number, textureArray: { id: number }[]) => {
         expect(typeof id).toBe("number");
         if (textureArray.length > 0) {
           expect(textureArray.map((t) => t.id)).toContain(id);
         } else {
-          expect(id).toBe(0); // Fallback value (e.g., from `randomElement?.id ?? 0`)
+          expect(id).toBe(0); // Fallback value
         }
       };
 
@@ -151,36 +90,28 @@ describe("RandomizeAvatarConfigUseCase", () => {
       assertTextureId(capturedConfig.nose, AvatarNoseTexture);
       assertTextureId(capturedConfig.mouth, AvatarMouthTexture);
 
-      // Check color properties
       expect(AvatarSkinColorPalette).toContain(capturedConfig.skinColor);
       expect(AvatarColorPalette).toContain(capturedConfig.hairColor);
       expect(AvatarColorPalette).toContain(capturedConfig.shirtColor);
       expect(AvatarColorPalette).toContain(capturedConfig.pantsColor);
       expect(AvatarColorPalette).toContain(capturedConfig.shoesColor);
 
-      // Check roundness
       expect(typeof capturedConfig.roundness).toBe("number");
       expect(capturedConfig.roundness).toBeGreaterThanOrEqual(0);
       expect(capturedConfig.roundness).toBeLessThanOrEqual(1);
 
-      // Ensure all properties are defined (or explicitly "none" or 0 for IDs if textures are empty)
       for (const key in capturedConfig) {
         if (Object.prototype.hasOwnProperty.call(capturedConfig, key)) {
           const value = capturedConfig[key as keyof AvatarConfigTO];
           if (typeof value === "string" || typeof value === "number") {
             expect(value).toBeDefined();
           } else if (typeof value === "object" && value !== null) {
-            // Colors are objects
             expect(value).toBeDefined();
-            expect(typeof value.id).toBe("number"); // Basic check for color object structure
-            expect(typeof value.hexColor).toBe("string");
-          } else if (value === null && key === "roundness") {
-            // roundness could be null if not set, but test expects number
-            // This case should ideally not be hit if roundness is always set
+            expect(typeof (value as AvatarColor).id).toBe("number");
+            expect(typeof (value as AvatarColor).hexColor).toBe("string");
           } else if (value === null) {
-            // Allow null for properties that might not be set if not applicable,
-            // but specific checks above should cover most cases.
-            // This depends on AvatarConfigTO's strictness.
+            // No property should be null based on current randomization logic
+            fail(`Property ${key} was unexpectedly null.`);
           }
         }
       }
@@ -230,7 +161,4 @@ describe("RandomizeAvatarConfigUseCase", () => {
       );
     });
   });
-
-  // The notifyAvatarSubscribers method is commented out in the source code.
-  // If it were active, tests for it would go here.
 });

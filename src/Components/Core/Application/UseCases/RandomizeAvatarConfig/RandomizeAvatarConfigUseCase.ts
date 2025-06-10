@@ -30,9 +30,6 @@ import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
 import type INotificationPort from "../../Ports/Interfaces/INotificationPort";
 import type IAvatarPort from "../../Ports/Interfaces/IAvatarPort";
-import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
-import CoreDIContainer from "~DependencyInjection/CoreDIContainer"; // falls vorhanden
-import IUpdateAvatarConfigUseCase from "../UpdateAvatarConfig/IUpdateAvatarConfigUseCase";
 
 @injectable()
 export default class RandomizeAvatarConfigUseCase
@@ -41,10 +38,6 @@ export default class RandomizeAvatarConfigUseCase
   constructor(
     @inject(CORE_TYPES.ILogger)
     private logger: ILoggerPort,
-    @inject(PORT_TYPES.INotificationPort)
-    private notificationPort: INotificationPort,
-    @inject(PORT_TYPES.IAvatarPort)
-    private avatarPort: IAvatarPort,
   ) {}
 
   private getRandomElement<T>(array: readonly T[]): T | undefined {
