@@ -107,7 +107,7 @@ export default class CalculateInitialExperiencePointsUseCase
         mediumElementCounter.numberOfCompletedElements * 1.5 +
         hardElementCounter.numberOfCompletedElements * 2) *
       baseExperiencePoints;
-    const currentLevel = Math.round(
+    const currentLevel = Math.floor(
       (currentExperiencePoints / maxExperiencePoints) * maxLevel,
     );
 

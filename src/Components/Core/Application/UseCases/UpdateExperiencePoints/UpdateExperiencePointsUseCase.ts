@@ -106,9 +106,9 @@ export default class UpdateExperiencePointsUseCase
     experiencePointsEntity.currentExperiencePoints +=
       experiencePointsEntity.baseExperiencePoints * multiplicator;
 
-    experiencePointsEntity.currentLevel = Math.round(
+    experiencePointsEntity.currentLevel = Math.floor(
       (experiencePointsEntity.currentExperiencePoints /
-        experiencePointsEntity.maxExperiencePoints) *
+        experiencePointsEntity.maxExperiencePoints) * // value between 0 and 1
         experiencePointsEntity.maxLevel,
     ); // avoids floating-point errors
 
