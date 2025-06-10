@@ -12,8 +12,6 @@ interface AvatarEditorRandomizerButtonProps {
 export default function AvatarEditorRandomizerButton(
   props: AvatarEditorRandomizerButtonProps,
 ) {
-  const [hasChanged] = useObservable<boolean>(props.viewModel.hasChanged);
-
   return (
     <>
       <StyledButton

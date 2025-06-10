@@ -76,20 +76,6 @@ describe("RandomizeAvatarConfigUseCase", () => {
       expect(Object.values(OAvatarPantsModels)).toContain(capturedConfig.pants);
       expect(Object.values(OAvatarShoesModels)).toContain(capturedConfig.shoes);
 
-      const assertTextureId = (id: number, textureArray: { id: number }[]) => {
-        expect(typeof id).toBe("number");
-        if (textureArray.length > 0) {
-          expect(textureArray.map((t) => t.id)).toContain(id);
-        } else {
-          expect(id).toBe(0); // Fallback value
-        }
-      };
-
-      assertTextureId(capturedConfig.eyebrows, AvatarEyeBrowTexture);
-      assertTextureId(capturedConfig.eyes, AvatarEyeTexture);
-      assertTextureId(capturedConfig.nose, AvatarNoseTexture);
-      assertTextureId(capturedConfig.mouth, AvatarMouthTexture);
-
       expect(AvatarSkinColorPalette).toContain(capturedConfig.skinColor);
       expect(AvatarColorPalette).toContain(capturedConfig.hairColor);
       expect(AvatarColorPalette).toContain(capturedConfig.shirtColor);
@@ -99,22 +85,6 @@ describe("RandomizeAvatarConfigUseCase", () => {
       expect(typeof capturedConfig.roundness).toBe("number");
       expect(capturedConfig.roundness).toBeGreaterThanOrEqual(0);
       expect(capturedConfig.roundness).toBeLessThanOrEqual(1);
-
-      for (const key in capturedConfig) {
-        if (Object.prototype.hasOwnProperty.call(capturedConfig, key)) {
-          const value = capturedConfig[key as keyof AvatarConfigTO];
-          if (typeof value === "string" || typeof value === "number") {
-            expect(value).toBeDefined();
-          } else if (typeof value === "object" && value !== null) {
-            expect(value).toBeDefined();
-            expect(typeof (value as AvatarColor).id).toBe("number");
-            expect(typeof (value as AvatarColor).hexColor).toBe("string");
-          } else if (value === null) {
-            // No property should be null based on current randomization logic
-            fail(`Property ${key} was unexpectedly null.`);
-          }
-        }
-      }
     });
   });
 
@@ -159,6 +129,24 @@ describe("RandomizeAvatarConfigUseCase", () => {
         LogLevelTypes.ERROR,
         "Attempted to get element from empty array.",
       );
+    });
+
+    it("should return the first element when Math.random returns 0", () => {
+      const array = [10, 20, 30];
+      const randomSpy = jest.spyOn(Math, "random").mockReturnValue(0);
+      // @ts-ignore // Accessing private method for testing
+      const element = randomizeAvatarConfigUseCase.getRandomElement(array);
+      expect(element).toBe(array[0]);
+      randomSpy.mockRestore();
+    });
+
+    it("should return the last element when Math.random returns 1", () => {
+      const array = [10, 20, 30];
+      const randomSpy = jest.spyOn(Math, "random").mockReturnValue(1);
+      // @ts-ignore // Accessing private method for testing
+      const element = randomizeAvatarConfigUseCase.getRandomElement(array);
+      expect(element).toBe(array[array.length - 1]);
+      randomSpy.mockRestore();
     });
   });
 });

@@ -48,7 +48,7 @@ export default class RandomizeAvatarConfigUseCase
       );
       return undefined;
     }
-    const randomIndex = Math.floor(Math.random() * array.length);
+    const randomIndex = Math.round(Math.random() * (array.length - 1));
     return array[randomIndex];
   }
 
