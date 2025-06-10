@@ -59,12 +59,10 @@ export default class RandomizeAvatarConfigUseCase
     return array[randomIndex];
   }
 
-  public async executeAsync(): Promise<void> {
+  public async executeAsync(): Promise<AvatarConfigTO> {
     const newAvatarConfig = new AvatarConfigTO();
     this.randomizeProperties(newAvatarConfig);
-    CoreDIContainer.get<IUpdateAvatarConfigUseCase>(
-      USECASE_TYPES.IUpdateAvatarConfigUseCase,
-    ).executeAsync(newAvatarConfig);
+    return newAvatarConfig;
   }
 
   private randomizeProperties(avatarConfig: AvatarConfigTO): void {

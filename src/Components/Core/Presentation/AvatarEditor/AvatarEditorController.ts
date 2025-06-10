@@ -32,10 +32,15 @@ export default class AvatarEditorController implements IAvatarEditorController {
     this.viewModel.hasChanged.Value = true;
   }
 
-  randomizeAvatarConfig(): void {
-    CoreDIContainer.get<IRandomizeAvatarConfigUseCase>(
+  public async randomizeAvatarConfig(): Promise<void> {
+    const newConfig = await CoreDIContainer.get<IRandomizeAvatarConfigUseCase>(
       USECASE_TYPES.IRandomizeAvatarConfigUseCase,
     ).executeAsync();
+
+    await CoreDIContainer.get<IUpdateAvatarConfigUseCase>(
+      USECASE_TYPES.IUpdateAvatarConfigUseCase,
+    ).executeAsync(newConfig);
+
     this.viewModel.hasChanged.Value = true;
   }
 }
