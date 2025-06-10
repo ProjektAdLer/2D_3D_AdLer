@@ -65,6 +65,10 @@ export default class UpdateExperiencePointsUseCase
       });
 
     if (elementEntity === null || elementEntity === undefined) {
+      this.logger.log(
+        LogLevelTypes.WARN,
+        "UpdateExperiencePointsUseCase: No learning element is null or undefined",
+      );
       return;
     }
 
@@ -88,20 +92,25 @@ export default class UpdateExperiencePointsUseCase
       return;
     }
 
+    if (
+      experiencePointsEntity.currentLevel === experiencePointsEntity.maxLevel
+    ) {
+      this.logger.log(
+        LogLevelTypes.TRACE,
+        "UpdateExperiencePointsUseCase: User has reached maximum experience level",
+      );
+      return;
+    }
+
     // Update experience points
     experiencePointsEntity.currentExperiencePoints +=
       experiencePointsEntity.baseExperiencePoints * multiplicator;
 
-    while (
-      experiencePointsEntity.currentExperiencePoints >=
-      experiencePointsEntity.maxExperiencePoints /
-        experiencePointsEntity.maxLevel
-    ) {
-      experiencePointsEntity.currentLevel += 1;
-      experiencePointsEntity.currentExperiencePoints -=
-        experiencePointsEntity.maxExperiencePoints /
-        experiencePointsEntity.maxLevel;
-    }
+    experiencePointsEntity.currentLevel = Math.floor(
+      (experiencePointsEntity.currentExperiencePoints /
+        experiencePointsEntity.maxExperiencePoints) * // value between 0 and 1
+        experiencePointsEntity.maxLevel,
+    ); // avoids floating-point errors
 
     this.logger.log(
       LogLevelTypes.TRACE,

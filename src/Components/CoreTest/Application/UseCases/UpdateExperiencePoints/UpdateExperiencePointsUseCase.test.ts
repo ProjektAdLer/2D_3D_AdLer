@@ -12,6 +12,7 @@ import IGetUserLocationUseCase from "../../../../Core/Application/UseCases/GetUs
 import UserLocationTO from "../../../../Core/Application/DataTransferObjects/UserLocationTO";
 import ExperiencePointsEntity from "../../../../Core/Domain/Entities/ExperiencePointsEntity";
 import UserDataEntity from "../../../../Core/Domain/Entities/UserDataEntity";
+import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
 
 const entityContainerMock = mock<IEntityContainer>();
 const notificationPortMock = mock<INotificationPort>();
@@ -51,7 +52,7 @@ describe("UpdateExperiencePointsUseCase", () => {
       worldID: 1,
     } as UserLocationTO);
 
-    systemUnderTest.internalExecute();
+    systemUnderTest.internalExecute(0);
 
     expect(loggerMock.log).toHaveBeenCalledTimes(1);
     expect(loggerMock.log).toHaveBeenCalledWith(
@@ -68,7 +69,7 @@ describe("UpdateExperiencePointsUseCase", () => {
     // @ts-ignore
     entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([false]);
 
-    systemUnderTest.internalExecute();
+    systemUnderTest.internalExecute(0);
 
     expect(loggerMock.log).toHaveBeenCalledTimes(1);
     expect(loggerMock.log).toHaveBeenCalledWith(
@@ -76,6 +77,42 @@ describe("UpdateExperiencePointsUseCase", () => {
       "UpdateExperiencePointsUseCase: World entity not found!",
     );
   });
+
+  test("calls logger and returns if no learning element has been found", async () => {
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
+      spaceID: 1,
+      worldID: 42,
+    } as UserLocationTO);
+    let userDataEntity = {
+      isLoggedIn: true,
+      availableWorlds: [{ worldID: 42, worldName: "World 1" }],
+      experiencePoints: [],
+    };
+
+    //entityContainerMock.getEntitiesOfType.mockReturnValueOnce([userDataEntity]);
+
+    const worldEntityMock = {
+      id: 42,
+      name: "World 1",
+      spaces: [{ id: 1, elements: [null] }],
+    };
+    let filterResult;
+    entityContainerMock.filterEntitiesOfType.mockImplementationOnce(
+      (entityType, callback) => {
+        filterResult = callback(worldEntityMock as LearningWorldEntity);
+        return [worldEntityMock];
+      },
+    );
+    // mock world response
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([]);
+
+    await systemUnderTest.internalExecute(1);
+    expect(loggerMock.log).toHaveBeenCalledWith(
+      LogLevelTypes.WARN,
+      "UpdateExperiencePointsUseCase: No learning element is null or undefined",
+    );
+  });
+
   test("filter world function filters correctly", async () => {
     getUserLocationUseCaseMock.execute.mockReturnValueOnce({
       spaceID: 1,
@@ -108,6 +145,7 @@ describe("UpdateExperiencePointsUseCase", () => {
 
     expect(filterResult).toBe(true);
   });
+
   test("calculates updated experience points correctly", () => {
     getUserLocationUseCaseMock.execute.mockReturnValueOnce({
       spaceID: 1,
@@ -119,11 +157,11 @@ describe("UpdateExperiencePointsUseCase", () => {
       experiencePoints: [
         {
           worldID: 42,
-          maxLevel: 20,
+          maxLevel: 4,
           currentLevel: 2,
-          maxExperiencePoints: 200,
-          currentExperiencePoints: 0,
-          baseExperiencePoints: 1,
+          maxExperiencePoints: 400,
+          currentExperiencePoints: 200,
+          baseExperiencePoints: 10,
         },
       ],
     };
@@ -151,7 +189,9 @@ describe("UpdateExperiencePointsUseCase", () => {
     systemUnderTest.internalExecute(3);
 
     expect(userDataEntity.experiencePoints[0].worldID).toBe(42);
-    expect(userDataEntity.experiencePoints[0].currentExperiencePoints).toBe(1);
+    expect(userDataEntity.experiencePoints[0].currentExperiencePoints).toBe(
+      210,
+    );
     expect(userDataEntity.experiencePoints[0].currentLevel).toBe(2);
   });
 
@@ -166,11 +206,11 @@ describe("UpdateExperiencePointsUseCase", () => {
       experiencePoints: [
         {
           worldID: 42,
-          maxLevel: 20,
-          currentLevel: 2,
+          maxLevel: 2,
+          currentLevel: 0,
           maxExperiencePoints: 200,
           currentExperiencePoints: 0,
-          baseExperiencePoints: 10,
+          baseExperiencePoints: 50,
         },
       ],
     };
@@ -198,7 +238,57 @@ describe("UpdateExperiencePointsUseCase", () => {
     systemUnderTest.internalExecute(2);
 
     expect(userDataEntity.experiencePoints[0].worldID).toBe(42);
-    expect(userDataEntity.experiencePoints[0].currentExperiencePoints).toBe(0);
-    expect(userDataEntity.experiencePoints[0].currentLevel).toBe(4);
+    expect(userDataEntity.experiencePoints[0].currentExperiencePoints).toBe(
+      100,
+    );
+    expect(userDataEntity.experiencePoints[0].currentLevel).toBe(1);
+  });
+
+  test("does not calculates experience points if max level is reached", () => {
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
+      spaceID: 1,
+      worldID: 42,
+    } as UserLocationTO);
+    let userDataEntity = {
+      isLoggedIn: true,
+      availableWorlds: [{ worldID: 1, worldName: "World 1" }],
+      experiencePoints: [
+        {
+          worldID: 42,
+          maxLevel: 2,
+          currentLevel: 2,
+          maxExperiencePoints: 200,
+          currentExperiencePoints: 200,
+          baseExperiencePoints: 50,
+        },
+      ],
+    };
+
+    entityContainerMock.getEntitiesOfType.mockReturnValueOnce([userDataEntity]);
+
+    const worldEntityMock = {
+      id: 42,
+      name: "World 1",
+      spaces: [
+        {
+          id: 1,
+          elements: [
+            { id: 1, difficulty: 100 },
+            { id: 2, difficulty: 200 },
+            { id: 3, difficulty: 0 },
+          ],
+        },
+      ],
+    };
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
+      worldEntityMock,
+    ]);
+
+    systemUnderTest.internalExecute(2);
+
+    expect(loggerMock.log).toHaveBeenCalledWith(
+      LogLevelTypes.TRACE,
+      "UpdateExperiencePointsUseCase: User has reached maximum experience level",
+    );
   });
 });
