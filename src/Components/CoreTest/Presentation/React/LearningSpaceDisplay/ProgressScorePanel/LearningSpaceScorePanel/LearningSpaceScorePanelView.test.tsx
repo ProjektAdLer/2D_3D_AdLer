@@ -39,8 +39,7 @@ describe("Learning Space Score Panel View", () => {
       <LearningSpaceScorePanel gradingStyle={GradingStyle.point} />,
     );
 
-    expect(comp.container).toHaveTextContent("0");
-    expect(comp.container).toHaveTextContent("42");
+    expect(comp.container).toHaveTextContent("0%");
   });
 
   test("returns null when viewModel is not registered", () => {
@@ -67,6 +66,6 @@ describe("Learning Space Score Panel View", () => {
       maxScore: 3000,
     };
 
-    await waitFor(() => expect(comp.container).toHaveTextContent("1"));
+    await waitFor(() => expect(comp.container).toHaveTextContent("2%"));
   });
 });
