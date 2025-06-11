@@ -22,6 +22,12 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 </details>
 
+## Version 2.8.1 - 11.06.2025
+
+### Fixed
+
+- fixed wrong display of story npc models in learning space
+
 ## Version 2.8.0 - 05.03.2025
 
 ### Added
