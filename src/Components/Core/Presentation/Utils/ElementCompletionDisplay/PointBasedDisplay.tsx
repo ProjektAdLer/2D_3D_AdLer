@@ -6,7 +6,7 @@ export default class PointBasedDisplay implements IElementCompletionDisplay {
   bottomTooltip(value: number | boolean): JSX.Element {
     return (
       <div className="flex items-center ml-2">
-        {value}
+        {String(value)}
         <img src={coinIcon} alt="" className="w-8"></img>
       </div>
     );

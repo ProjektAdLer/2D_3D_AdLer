@@ -9,6 +9,7 @@ export enum LearningSpaceThemeType {
   CampusServerRoom = "CAMPUSSERVERROOM",
   CampusAuditorium = "CAMPUSAUDITORIUM",
   CampusLabor = "CAMPUSLABOR",
+  ThemeSubtheme = "THEMESUBTHEME",
   Arcade = "ARCADE",
   Suburb = "SUBURB",
 }
