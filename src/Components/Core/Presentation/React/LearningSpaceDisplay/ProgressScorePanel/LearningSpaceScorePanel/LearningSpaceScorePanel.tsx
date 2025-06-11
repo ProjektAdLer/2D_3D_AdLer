@@ -5,7 +5,6 @@ import LearningSpaceScorePanelViewModel, {
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
 import spaceIcon from "../../../../../../../Assets/icons/space.svg";
 
 import coinIcon from "../../../../../../../Assets/icons/coin.svg";
