@@ -19,6 +19,7 @@ import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementT
 import bind from "bind-decorator";
 import AdaptivityElementQuestionPresentationUpdateTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionPresentationUpdateTO";
 import NarrativeFrameworkTO from "../../DataTransferObjects/NarrativeFrameworkTO";
+import ExperiencePointsTO from "../../DataTransferObjects/ExperiencePointsTO";
 
 @injectable()
 export default class LearningWorldPort
@@ -114,6 +115,17 @@ export default class LearningWorldPort
           value.onLearningSpacePrecursorAndSuccessorLoaded(
             LearningSpacePrecursorAndSuccessorTO,
           );
+      });
+    });
+  }
+
+  public onExperiencePointsUpdated(
+    experiencePointsTO: ExperiencePointsTO,
+  ): void {
+    this.mappedAdapters.forEach((adapter) => {
+      adapter.forEach((value) => {
+        if (value.onExperiencePointsUpdated)
+          value.onExperiencePointsUpdated(experiencePointsTO);
       });
     });
   }

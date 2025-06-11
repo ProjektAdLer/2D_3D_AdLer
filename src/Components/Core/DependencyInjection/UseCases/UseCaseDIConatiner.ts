@@ -78,6 +78,8 @@ import ICalculateInitialExperiencePointsUseCase from "../../Application/UseCases
 import CalculateInitialExperiencePointsUseCase from "../../Application/UseCases/CalculateInitialExperiencePoints/CalculateInitialExperiencePointsUseCase";
 import IUpdateExperiencePointsUseCase from "../../Application/UseCases/UpdateExperiencePoints/IUpdateExperiencePointsUseCase";
 import UpdateExperiencePointsUseCase from "../../Application/UseCases/UpdateExperiencePoints/UpdateExperiencePointsUseCase";
+import IGetExperiencePointsUseCase from "../../Application/UseCases/GetExperiencePoints/IGetExperiencePoints";
+import GetExperiencePointsUseCase from "../../Application/UseCases/GetExperiencePoints/GetExperiencePoints";
 import IRandomizeAvatarConfigUseCase from "../../Application/UseCases/RandomizeAvatarConfig/IRandomizeAvatarConfigUseCase"; // Neuer Import
 import RandomizeAvatarConfigUseCase from "../../Application/UseCases/RandomizeAvatarConfig/RandomizeAvatarConfigUseCase"; // Neuer Import
 
@@ -280,6 +282,9 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
     USECASE_TYPES.IUpdateExperiencePointsUseCase,
   )
     .to(UpdateExperiencePointsUseCase)
+    .inSingletonScope();
+  bind<IGetExperiencePointsUseCase>(USECASE_TYPES.IGetExperiencePointsUseCase)
+    .to(GetExperiencePointsUseCase)
     .inSingletonScope();
 
   // Neuer Eintrag für RandomizeAvatarConfigUseCase

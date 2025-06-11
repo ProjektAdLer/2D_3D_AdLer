@@ -16,6 +16,7 @@ import StoryElementTO from "../../DataTransferObjects/StoryElementTO";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 import adaptivityElementQuestionPresentationUpdateTO from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionPresentationUpdateTO";
 import NarrativeFrameworkTO from "../../DataTransferObjects/NarrativeFrameworkTO";
+import ExperiencePointsTO from "../../DataTransferObjects/ExperiencePointsTO";
 
 export default interface ILearningWorldPort
   extends IAbstractPort<ILearningWorldAdapter> {
@@ -38,6 +39,7 @@ export default interface ILearningWorldPort
   onLearningSpacePrecursorAndSuccessorLoaded(
     LearningSpacePrecursorAndSuccessorTO: LearningSpacePrecursorAndSuccessorTO,
   ): void;
+  onExperiencePointsUpdated(experiencePointsTO: ExperiencePointsTO): void;
 
   // element
   onLearningElementLoaded(learningElementStartedTO: LearningElementTO): void;

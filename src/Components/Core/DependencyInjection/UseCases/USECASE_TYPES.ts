@@ -77,6 +77,7 @@ const USECASE_TYPES = {
     "ICalculateInitialExperiencePointsUseCase",
   ),
   IUpdateExperiencePointsUseCase: Symbol("IUpdateExperiencePointsUseCase"),
+  IGetExperiencePointsUseCase: Symbol("IGetExperiencePointsUseCase"),
 };
 
 export default USECASE_TYPES;
