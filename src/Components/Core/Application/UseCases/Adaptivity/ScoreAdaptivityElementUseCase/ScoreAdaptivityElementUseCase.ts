@@ -14,6 +14,7 @@ import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import type ILearningWorldPort from "../../../Ports/Interfaces/ILearningWorldPort";
 import type INotificationPort from "../../../Ports/Interfaces/INotificationPort";
 import { NotificationMessages } from "src/Components/Core/Domain/Types/NotificationMessages";
+import type IUpdateExperiencePointsUseCase from "../../UpdateExperiencePoints/IUpdateExperiencePointsUseCase";
 
 @injectable()
 export default class ScoreAdaptivityElementUseCase
@@ -34,6 +35,8 @@ export default class ScoreAdaptivityElementUseCase
     private worldPort: ILearningWorldPort,
     @inject(PORT_TYPES.INotificationPort)
     private notificationPort: INotificationPort,
+    @inject(USECASE_TYPES.IUpdateExperiencePointsUseCase)
+    private updateExperiencePointsUseCase: IUpdateExperiencePointsUseCase,
   ) {}
 
   internalExecute(elementID: ComponentID): void {
@@ -102,6 +105,8 @@ export default class ScoreAdaptivityElementUseCase
         `ScoreAdaptivityElementUseCase: Error calculating new space score: ${e}`,
       );
     }
+
+    this.updateExperiencePointsUseCase.internalExecute(elementID);
 
     this.worldPort.onLearningElementScored(true, elementID);
   }
