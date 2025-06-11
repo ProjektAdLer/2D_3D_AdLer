@@ -25,11 +25,8 @@ import AvatarColorPalette, {
 import AvatarSkinColorPalette from "../../../Domain/AvatarModels/AvatarSkinColorPalette";
 
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
-import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
-import type INotificationPort from "../../Ports/Interfaces/INotificationPort";
-import type IAvatarPort from "../../Ports/Interfaces/IAvatarPort";
 
 @injectable()
 export default class RandomizeAvatarConfigUseCase

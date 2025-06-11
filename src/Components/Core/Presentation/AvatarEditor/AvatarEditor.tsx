@@ -21,7 +21,6 @@ import ILoadAvatarConfigUseCase from "../../Application/UseCases/LoadAvatarConfi
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import AvatarEditorFaceCategory from "./AvatarEditorCategories/AvatarEditorCategoryContents/AvatarEditorFaceCategory";
 import AvatarEditorSaveButton from "./AvatarEditorSaveButton";
-import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import AvatarEditorRandomizerButton from "./AvatarEditorRandomizerButton";
 
 export default function AvatarEditor() {

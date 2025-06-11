@@ -1,7 +1,6 @@
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import IAvatarEditorController from "./IAvatarEditorController";
 import AvatarEditorViewModel from "./AvatarEditorViewModel";
-import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import randomizerIcon from "../../../../Assets/icons/random.svg";
 
 interface AvatarEditorRandomizerButtonProps {
