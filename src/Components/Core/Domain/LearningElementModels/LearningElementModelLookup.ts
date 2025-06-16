@@ -99,8 +99,8 @@ const LearningElementModelLookup: {
     .DefaultDarkFemaleNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-defaultdark-female.glb"),
   [LearningElementModelTypeEnums.QuizElementModelTypes
     .DefaultDarkMaleNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-defaultdark-male.glb"),
-  // [LearningElementModelTypeEnums.QuizElementModelTypes
-  //   .DefaultLightMaleNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-defaultlightmale.glb"),
+  [LearningElementModelTypeEnums.QuizElementModelTypes
+    .DefaultLightMaleNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-defaultlight-male.glb"),
   [LearningElementModelTypeEnums.QuizElementModelTypes
     .DozentAntoniaNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-dozentantonia.glb"),
   [LearningElementModelTypeEnums.QuizElementModelTypes

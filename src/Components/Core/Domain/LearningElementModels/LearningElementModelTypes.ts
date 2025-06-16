@@ -65,7 +65,7 @@ export enum QuizElementModelTypes {
   BullyMaleNPC = "a-npc-bully-male",
   DefaultDarkFemaleNPC = "a-npc-defaultdark-female",
   DefaultDarkMaleNPC = "a-npc-defaultdark-male",
-  // DefaultLightMaleNPC = "a-npc-defaultlight-male",
+  DefaultLightMaleNPC = "a-npc-defaultlight-male",
   DozentAntoniaNPC = "a-npc-dozentantonia",
   DozentDanielNPC = "a-npc-dozentdaniel",
   DozentGeorgNPC = "a-npc-dozentgeorg",
