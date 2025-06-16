@@ -63,6 +63,7 @@ const BUILDER_TYPES = {
   ),
   IProgressScorePanelBuilder: Symbol("ILearningWorldScorePanelBuilder"),
   ICinemaStripesBuilder: Symbol("ICinemaStripesBuilder"),
+  IExperiencePointsPanelBuilder: Symbol("IExperiencePointsPanelBuilder"),
 };
 
 export default BUILDER_TYPES;

@@ -127,10 +127,10 @@ export default class CalculateInitialExperiencePointsUseCase
 
     // Add Experience Points Entity to User Data
     userDataEntity.experiencePoints.push(experiencePointsEntity);
-    // this.logger.log(
-    //   LogLevelTypes.TRACE,
-    //   `CalculateInitialExperiencePointsUseCase: Number of Easy Elements: ${numberOfElementsTotal - numberOfMediumElements - numberOfHardElements}, Number of Medium Elements: ${numberOfMediumElements}, Number of Hard Elements: ${numberOfHardElements}, Base Experience Points: ${baseExperiencePoints}, Max Level: ${maxLevel}, Max Experience Points: ${maxExperiencePoints}. For World: ${worldEntity.name} (${worldEntity.id}).`,
-    // );
+    this.logger.log(
+      LogLevelTypes.TRACE,
+      `CalculateInitialExperiencePointsUseCase: Number of Easy Elements: ${easyElementCounter.numberOfElements}, Number of Medium Elements: ${mediumElementCounter.numberOfElements}, Number of Hard Elements: ${hardElementCounter.numberOfElements}, Base Experience Points: ${baseExperiencePoints}, Max Level: ${maxLevel}, Max Experience Points: ${maxExperiencePoints}. For World: ${worldEntity.name} (${worldEntity.id}).`,
+    );
   }
 
   private calculateNumberOfDifficultyElements(

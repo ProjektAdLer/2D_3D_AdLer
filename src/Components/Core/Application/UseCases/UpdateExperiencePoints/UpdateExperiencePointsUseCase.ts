@@ -11,6 +11,9 @@ import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type IGetUserLocationUseCase from "../GetUserLocation/IGetUserLocationUseCase";
 import LearningSpaceEntity from "src/Components/Core/Domain/Entities/LearningSpaceEntity";
 import LearningElementEntity from "src/Components/Core/Domain/Entities/LearningElementEntity";
+import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
+import type ILearningWorldPort from "../../Ports/Interfaces/ILearningWorldPort";
+import ExperiencePointsTO from "../../DataTransferObjects/ExperiencePointsTO";
 
 @injectable()
 export default class UpdateExperiencePointsUseCase
@@ -23,6 +26,8 @@ export default class UpdateExperiencePointsUseCase
     private entityContainer: IEntityContainer,
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
     private getUserLocationUseCase: IGetUserLocationUseCase,
+    @inject(PORT_TYPES.ILearningWorldPort)
+    private worldPort: ILearningWorldPort,
   ) {}
   internalExecute(elementID: ComponentID): void {
     // get the current user location
@@ -81,10 +86,10 @@ export default class UpdateExperiencePointsUseCase
 
     // Get correct experiencePointsEntity
     const userData = this.entityContainer.getEntitiesOfType(UserDataEntity);
-    let experiencePointsEntity = userData[0].experiencePoints.find(
+    const xpEntity = userData[0].experiencePoints.find(
       (xpEntity) => xpEntity.worldID === userLocation.worldID,
     );
-    if (!experiencePointsEntity) {
+    if (!xpEntity) {
       this.logger.log(
         LogLevelTypes.WARN,
         "UpdateExperiencePointsUseCase: ExperiencePointsEntity not found!",
@@ -92,9 +97,7 @@ export default class UpdateExperiencePointsUseCase
       return;
     }
 
-    if (
-      experiencePointsEntity.currentLevel === experiencePointsEntity.maxLevel
-    ) {
+    if (xpEntity.currentLevel === xpEntity.maxLevel) {
       this.logger.log(
         LogLevelTypes.TRACE,
         "UpdateExperiencePointsUseCase: User has reached maximum experience level",
@@ -103,14 +106,19 @@ export default class UpdateExperiencePointsUseCase
     }
 
     // Update experience points
-    experiencePointsEntity.currentExperiencePoints +=
-      experiencePointsEntity.baseExperiencePoints * multiplicator;
+    xpEntity.currentExperiencePoints +=
+      xpEntity.baseExperiencePoints * multiplicator;
 
-    experiencePointsEntity.currentLevel = Math.floor(
-      (experiencePointsEntity.currentExperiencePoints /
-        experiencePointsEntity.maxExperiencePoints) * // value between 0 and 1
-        experiencePointsEntity.maxLevel,
+    xpEntity.currentLevel = Math.floor(
+      (xpEntity.currentExperiencePoints / xpEntity.maxExperiencePoints) * // value between 0 and 1
+        xpEntity.maxLevel,
     ); // avoids floating-point errors
+
+    this.worldPort.onExperiencePointsUpdated({
+      maxLevel: xpEntity.maxLevel,
+      currentLevel: xpEntity.currentLevel,
+      currentExperiencePoints: xpEntity.currentExperiencePoints,
+    } as ExperiencePointsTO);
 
     this.logger.log(
       LogLevelTypes.TRACE,

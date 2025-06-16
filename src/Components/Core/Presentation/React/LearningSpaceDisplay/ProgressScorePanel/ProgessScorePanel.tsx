@@ -3,6 +3,7 @@ import LearningSpaceScorePanel from "./LearningSpaceScorePanel/LearningSpaceScor
 import LearningWorldScorePanel from "./LearningWorldScorePanel/LearningWorldScorePanel";
 import ProgressScorePanelViewModel from "./ProgessScorePanelViewModel";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
+import ExperiencePointsPanel from "./ExperiencePointsPanel/ExperiencePointsPanel";
 
 export default function ProgressScorePanel() {
   const [viewModel] = useBuilder<ProgressScorePanelViewModel, undefined>(
@@ -16,6 +17,7 @@ export default function ProgressScorePanel() {
     <>
       <LearningWorldScorePanel gradingStyle={viewModel.gradingStyle} />
       <LearningSpaceScorePanel gradingStyle={viewModel.gradingStyle} />
+      <ExperiencePointsPanel gradingStyle={viewModel.gradingStyle} />
     </>
   );
 }

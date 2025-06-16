@@ -52,6 +52,7 @@ import NarrativeFrameworkLearningSpaceContainerBuilder from "~ReactComponents/Ge
 import NarrativeFrameworkWorldCompletionModalContainerBuilder from "~ReactComponents/GeneralComponents/NarrativeFrameworkWorldCompletionModalContainer/NarrativeFrameworkWorldCompletionModalContainerBuilder";
 import ProgressScorePanelBuilder from "~ReactComponents/LearningSpaceDisplay/ProgressScorePanel/ProgressScorePanelBuilder";
 import CinemaStripesBuilder from "~ReactComponents/LearningSpaceDisplay/CinemaStripes/CinemaStripesBuilder";
+import ExperiencePointsPanelBuilder from "~ReactComponents/LearningSpaceDisplay/ProgressScorePanel/ExperiencePointsPanel/ExperiencePointsPanelBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -197,6 +198,9 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationBuilder>(BUILDER_TYPES.ICinemaStripesBuilder).to(
     CinemaStripesBuilder,
   );
+  bind<ExperiencePointsPanelBuilder>(
+    BUILDER_TYPES.IExperiencePointsPanelBuilder,
+  ).to(ExperiencePointsPanelBuilder);
 });
 
 export default BuilderDIContainer;
