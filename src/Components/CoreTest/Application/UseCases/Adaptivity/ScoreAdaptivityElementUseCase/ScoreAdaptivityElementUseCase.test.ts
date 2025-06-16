@@ -13,7 +13,7 @@ import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES
 import UserDataEntity from "../../../../../Core/Domain/Entities/UserDataEntity";
 import { LogLevelTypes } from "../../../../../Core/Domain/Types/LogLevelTypes";
 import IBeginStoryElementOutroCutSceneUseCase from "../../../../../Core/Application/UseCases/BeginStoryElementOutroCutScene/IBeginStoryElementOutroCutSceneUseCase";
-import LearningElementEntity from "../../../../../Core/Domain/Entities/LearningElementEntity";
+import IUpdateExperiencePointsUseCase from "../../../../../Core/Application/UseCases/UpdateExperiencePoints/IUpdateExperiencePointsUseCase";
 
 const entityContainerMock = mock<IEntityContainer>();
 const loggerMock = mock<ILoggerPort>();
@@ -25,6 +25,8 @@ const calculateSpaceScoreUseCaseMock =
 const worldPortMock = mock<ILearningWorldPort>();
 const beginStoryElementOutroCutSceneUseCaseMock =
   mock<IBeginStoryElementOutroCutSceneUseCase>();
+const updateExperiencePointsUseCaseMock =
+  mock<IUpdateExperiencePointsUseCase>();
 
 describe("ScoreAdaptivityElementUseCase", () => {
   let systemUnderTest: ScoreAdaptivityElementUseCase;
@@ -50,6 +52,9 @@ describe("ScoreAdaptivityElementUseCase", () => {
     CoreDIContainer.rebind(
       USECASE_TYPES.IBeginStoryElementOutroCutSceneUseCase,
     ).toConstantValue(beginStoryElementOutroCutSceneUseCaseMock);
+    CoreDIContainer.rebind(
+      USECASE_TYPES.IUpdateExperiencePointsUseCase,
+    ).toConstantValue(updateExperiencePointsUseCaseMock);
   });
 
   beforeEach(() => {
