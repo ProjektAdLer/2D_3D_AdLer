@@ -34,6 +34,7 @@ const PRESENTATION_TYPES = {
     "INarrativeFrameworkWorldCompletionModalContainerPresenter",
   ),
   ICinemaStripesPresenter: Symbol("ICinemaStripesPresenter"),
+  IExperiencePointsPanelPresenter: Symbol("IExperiencePointsPanelPresenter"),
 };
 
 export default PRESENTATION_TYPES;

@@ -8,6 +8,8 @@ import IGetExperiencePointsUseCase from "src/Components/Core/Application/UseCase
 import ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces/ILearningWorldPort";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import { HistoryWrapper } from "~ReactComponents/ReactRelated/ReactEntryPoint/HistoryWrapper";
+import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
+import IExperiencePointsPanelPresenter from "./IExperiencePointsPanelPresenter";
 
 @injectable()
 export default class ExperiencePointsPanelBuilder extends PresentationBuilder<
@@ -27,6 +29,20 @@ export default class ExperiencePointsPanelBuilder extends PresentationBuilder<
 
   override buildPresenter(): void {
     super.buildPresenter();
+
+    if (
+      CoreDIContainer.isBound(
+        PRESENTATION_TYPES.IExperiencePointsPanelPresenter,
+      )
+    ) {
+      CoreDIContainer.unbind(
+        PRESENTATION_TYPES.IExperiencePointsPanelPresenter,
+      );
+    }
+    CoreDIContainer.bind<IExperiencePointsPanelPresenter>(
+      PRESENTATION_TYPES.IExperiencePointsPanelPresenter,
+    ).toConstantValue(this.presenter!);
+
     CoreDIContainer.get<ILearningWorldPort>(
       PORT_TYPES.ILearningWorldPort,
     ).registerAdapter(this.presenter!, HistoryWrapper.currentLocationScope());
