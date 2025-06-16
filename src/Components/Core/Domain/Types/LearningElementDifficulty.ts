@@ -3,3 +3,8 @@ export enum LearningElementDifficulty {
   medium = 100,
   hard = 200,
 }
+
+export type DifficultyInfo = {
+  difficultyType: LearningElementDifficulty;
+  multiplicator: number;
+};

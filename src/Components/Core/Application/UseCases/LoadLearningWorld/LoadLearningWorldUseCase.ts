@@ -402,7 +402,10 @@ export default class LoadLearningWorldUseCase
             ?.hasScored || false,
         parentWorldID: worldID,
         isRequired: null,
-        difficulty: element.difficulty,
+        difficulty: {
+          difficultyType: element.difficulty,
+          multiplicator: 0,
+        },
       };
 
       newElementEntity = this.container.createEntity(

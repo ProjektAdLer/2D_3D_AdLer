@@ -86,7 +86,14 @@ describe("CalculateInitialExperiencePointsUseCase", () => {
     const worldEntityMock = {
       id: 42,
       name: "World 1",
-      spaces: [{ id: 1, elements: [{ id: 1, difficulty: 100 }] }],
+      spaces: [
+        {
+          id: 1,
+          elements: [
+            { id: 1, difficulty: { difficultyType: 100, multiplicator: 1.5 } },
+          ],
+        },
+      ],
     };
     let filterResult;
     entityContainerMock.filterEntitiesOfType.mockImplementationOnce(
@@ -116,7 +123,14 @@ describe("CalculateInitialExperiencePointsUseCase", () => {
     const worldEntityMock = {
       id: 42,
       name: "World 1",
-      spaces: [{ id: 1, elements: [{ id: 1, difficulty: 100 }] }],
+      spaces: [
+        {
+          id: 1,
+          elements: [
+            { id: 1, difficulty: { difficultyType: 100, multiplicator: 1.5 } },
+          ],
+        },
+      ],
     };
     entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
       worldEntityMock,
@@ -146,16 +160,16 @@ describe("CalculateInitialExperiencePointsUseCase", () => {
         {
           id: 1,
           elements: [
-            { id: 1, difficulty: 100 },
-            { id: 2, difficulty: 200 },
-            { id: 3, difficulty: 0 },
+            { id: 1, difficulty: { difficultyType: 100, multiplicator: 1.5 } },
+            { id: 2, difficulty: { difficultyType: 200, multiplicator: 2 } },
+            { id: 3, difficulty: { difficultyType: 0, multiplicator: 1 } },
           ],
         },
         {
           id: 2,
           elements: [
-            { id: 4, difficulty: 100 },
-            { id: 5, difficulty: 100 },
+            { id: 4, difficulty: { difficultyType: 100, multiplicator: 1.5 } },
+            { id: 5, difficulty: { difficultyType: 100, multiplicator: 1.5 } },
           ],
         },
       ],

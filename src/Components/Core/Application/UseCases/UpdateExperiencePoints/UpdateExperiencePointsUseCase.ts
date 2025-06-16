@@ -55,8 +55,6 @@ export default class UpdateExperiencePointsUseCase
     }
 
     //Calculate Experience Points
-    //Check multiplicator of element in question
-    let multiplicator = 1;
     let spaceEntity: LearningSpaceEntity;
     worldEntity.spaces.forEach((space) => {
       if (space.id === userLocation.spaceID) {
@@ -75,13 +73,6 @@ export default class UpdateExperiencePointsUseCase
         "UpdateExperiencePointsUseCase: No learning element is null or undefined",
       );
       return;
-    }
-
-    if (elementEntity.difficulty === 100) {
-      multiplicator = 1.5;
-    }
-    if (elementEntity.difficulty === 200) {
-      multiplicator = 2;
     }
 
     // Get correct experiencePointsEntity
@@ -105,9 +96,11 @@ export default class UpdateExperiencePointsUseCase
       return;
     }
 
+    const previousLevel = xpEntity.currentLevel;
+
     // Update experience points
     xpEntity.currentExperiencePoints +=
-      xpEntity.baseExperiencePoints * multiplicator;
+      xpEntity.baseExperiencePoints * elementEntity.difficulty.multiplicator;
 
     xpEntity.currentLevel = Math.floor(
       (xpEntity.currentExperiencePoints / xpEntity.maxExperiencePoints) * // value between 0 and 1
@@ -118,6 +111,7 @@ export default class UpdateExperiencePointsUseCase
       maxLevel: xpEntity.maxLevel,
       currentLevel: xpEntity.currentLevel,
       currentExperiencePoints: xpEntity.currentExperiencePoints,
+      numberOfLevelUps: xpEntity.currentLevel - previousLevel,
     } as ExperiencePointsTO);
 
     this.logger.log(

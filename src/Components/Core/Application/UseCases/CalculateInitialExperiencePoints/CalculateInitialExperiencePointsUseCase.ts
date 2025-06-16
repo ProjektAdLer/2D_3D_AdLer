@@ -74,6 +74,7 @@ export default class CalculateInitialExperiencePointsUseCase
     const hardElementCounter = new DifficultyCounter();
 
     worldEntity.spaces.forEach((space) => {
+      this.calculateDifficultyMultiplier(space.elements);
       this.calculateNumberOfDifficultyElements(
         space.elements,
         LearningElementDifficulty.easy,
@@ -139,7 +140,8 @@ export default class CalculateInitialExperiencePointsUseCase
     counter: DifficultyCounter,
   ) {
     const difficultyElements = elements.filter(
-      (element) => element !== null && element.difficulty === difficulty,
+      (element) =>
+        element !== null && element.difficulty.difficultyType === difficulty,
     );
     const numberOfElements = difficultyElements.length;
     const numberOfCompletedElements = difficultyElements.filter(
@@ -148,5 +150,39 @@ export default class CalculateInitialExperiencePointsUseCase
 
     counter.numberOfCompletedElements += numberOfCompletedElements;
     counter.numberOfElements += numberOfElements;
+  }
+
+  private calculateDifficultyMultiplier(
+    elements: (LearningElementEntity | null)[],
+  ) {
+    elements.forEach((element) => {
+      if (element === null) return;
+
+      // check if element is a adaptivity element
+      // const adaptivityElement = this.entityContainer.filterEntitiesOfType(
+      //   AdaptivityElementEntity,
+      //   (WorldEntity) =>
+      //     WorldEntity.element.parentWorldID === element.parentWorldID &&
+      //     WorldEntity.element.id === element.id,
+      // );
+
+      // if (adaptivityElement.length !== 0 && adaptivityElement.length < 2) {
+      //   const ae = adaptivityElement[0];
+      // }
+
+      switch (element.difficulty.difficultyType) {
+        case LearningElementDifficulty.easy:
+          element.difficulty.multiplicator = 1;
+          break;
+        case LearningElementDifficulty.medium:
+          element.difficulty.multiplicator = 1.5;
+          break;
+        case LearningElementDifficulty.hard:
+          element.difficulty.multiplicator = 2;
+          break;
+        default:
+          element.difficulty.multiplicator = 1;
+      }
+    });
   }
 }

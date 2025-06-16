@@ -16,6 +16,8 @@ export default class ExperiencePointsPanelPresenter
       experiencePointsTO.maxLevel,
       " / xp: ",
       experiencePointsTO.currentExperiencePoints,
+      " / level-ups: ",
+      experiencePointsTO.numberOfLevelUps,
     );
     this.viewModel.xpInfo.Value = {
       currentLevel: experiencePointsTO.currentLevel,
@@ -23,6 +25,7 @@ export default class ExperiencePointsPanelPresenter
       currentXP:
         experiencePointsTO.currentExperiencePoints -
         experiencePointsTO.currentLevel * 100,
+      numberOfLevelUps: experiencePointsTO.numberOfLevelUps,
     };
   }
 }

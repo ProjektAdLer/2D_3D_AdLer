@@ -4,6 +4,7 @@ export interface XPInfo {
   currentXP: number;
   currentLevel: number;
   maxLevel: number;
+  numberOfLevelUps: number;
 }
 
 export default class ExperiencePointsPanelViewModel {
@@ -11,5 +12,6 @@ export default class ExperiencePointsPanelViewModel {
     currentXP: 0,
     currentLevel: 0,
     maxLevel: 0,
+    numberOfLevelUps: 0,
   });
 }

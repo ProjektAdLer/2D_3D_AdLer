@@ -1,6 +1,7 @@
 import { LearningElementTypeStrings } from "../Types/LearningElementTypes";
 import { ComponentID } from "../Types/EntityTypes";
 import { LearningElementModel } from "../LearningElementModels/LearningElementModelTypes";
+import { DifficultyInfo } from "../Types/LearningElementDifficulty";
 
 export default class LearningElementEntity {
   public id: ComponentID;
@@ -13,5 +14,5 @@ export default class LearningElementEntity {
   public model: LearningElementModel;
   public parentWorldID: ComponentID;
   public isRequired: boolean | null;
-  public difficulty: number;
+  public difficulty: DifficultyInfo;
 }

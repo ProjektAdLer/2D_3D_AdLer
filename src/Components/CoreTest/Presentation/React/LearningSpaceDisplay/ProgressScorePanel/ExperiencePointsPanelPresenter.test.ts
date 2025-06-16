@@ -16,6 +16,7 @@ describe("ExperiencePointsPanelPresenter", () => {
       maxLevel: 3,
       currentLevel: 1,
       currentExperiencePoints: 120,
+      numberOfLevelUps: 0,
     };
 
     systemUnderTest.onExperiencePointsUpdated(xpTO);
@@ -23,6 +24,7 @@ describe("ExperiencePointsPanelPresenter", () => {
       maxLevel: 3,
       currentLevel: 1,
       currentXP: 20,
+      numberOfLevelUps: 0,
     });
   });
 });

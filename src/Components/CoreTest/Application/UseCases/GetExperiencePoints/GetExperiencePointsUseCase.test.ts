@@ -115,6 +115,7 @@ describe("GetExperiencePoints UseCase", () => {
       maxLevel: 4,
       currentLevel: 2,
       currentExperiencePoints: 240,
+      numberOfLevelUps: 0,
     });
   });
 });

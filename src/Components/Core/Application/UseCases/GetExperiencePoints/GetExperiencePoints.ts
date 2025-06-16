@@ -59,6 +59,7 @@ export default class GetExperiencePointsUseCase
         maxLevel: xpEntity?.maxLevel,
         currentLevel: xpEntity?.currentLevel,
         currentExperiencePoints: xpEntity?.currentExperiencePoints,
+        numberOfLevelUps: 0,
       } as ExperiencePointsTO;
       this.worldPort.onExperiencePointsUpdated(expierenceTO);
     }
