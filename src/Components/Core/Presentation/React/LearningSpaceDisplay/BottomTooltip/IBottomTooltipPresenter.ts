@@ -12,6 +12,7 @@ export default interface IBottomTooltipPresenter extends ILearningWorldAdapter {
     points?: number | undefined,
     hasScored?: Observable<boolean> | undefined,
     onClickCallback?: () => void,
+    elementXP?: number | null, // Hinzugefügter Parameter für XP
   ): number;
   hide(toolTipId: number): void;
   hideAll(): void;

@@ -95,6 +95,7 @@ const RequirementsGradingAWT: AWT = {
         elementFileType: "text",
         elementMaxScore: 1,
         elementModel: "l_trophy_bronze",
+        elementDifficulty: 300,
       },
       {
         $type: "LearningElement",
@@ -106,6 +107,7 @@ const RequirementsGradingAWT: AWT = {
         elementFileType: "video",
         elementMaxScore: 1,
         elementModel: "",
+        elementDifficulty: 200,
       },
       {
         $type: "LearningElement",
@@ -117,6 +119,7 @@ const RequirementsGradingAWT: AWT = {
         elementFileType: "image",
         elementMaxScore: 1,
         elementModel: "",
+        elementDifficulty: 100,
       },
       {
         $type: "AdaptivityElement",
@@ -136,6 +139,7 @@ const RequirementsGradingAWT: AWT = {
         elementName: "Hier steht ein externes Lernelement",
         elementCategory: "text",
         elementFileType: "text",
+        elementDifficulty: 200,
       },
       {
         $type: "LearningElement",
@@ -147,6 +151,7 @@ const RequirementsGradingAWT: AWT = {
         elementFileType: "h5p",
         elementMaxScore: 1,
         elementModel: "l_h5p_blackboard_1",
+        elementDifficulty: 300,
       },
       {
         $type: "LearningElement",
@@ -158,6 +163,7 @@ const RequirementsGradingAWT: AWT = {
         elementFileType: "pdf",
         elementMaxScore: 1,
         elementModel: "l_h5p_drawingtable_2",
+        elementDifficulty: 100,
       },
     ],
   },

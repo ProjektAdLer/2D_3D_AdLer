@@ -18,6 +18,8 @@ interface BottomTooltipData {
   showPoints: boolean;
   hasScored: Observable<boolean>;
   onClickCallback: () => void;
+  elementXP: number | null; // Added for XP
+  showXP: boolean; // Added for XP
 }
 
 @injectable()
@@ -35,6 +37,7 @@ export default class BottomTooltipPresenter implements IBottomTooltipPresenter {
     points: number | undefined = undefined,
     hasScored: Observable<boolean> | undefined = undefined,
     onClickCallback?: () => void,
+    elementXP: number | null = null, // Added elementXP parameter
   ): number {
     const data: BottomTooltipData = {
       id: this.idCounter++,
@@ -45,8 +48,15 @@ export default class BottomTooltipPresenter implements IBottomTooltipPresenter {
       showPoints: points !== undefined,
       hasScored: hasScored ? hasScored : new Observable<boolean>(false),
       onClickCallback: onClickCallback ?? (() => {}),
+      elementXP: elementXP, // Populate elementXP
+      showXP: elementXP !== null, // Populate showXP
     };
     this.dataQueue.push(data);
+
+    // Log new values when adding to queue
+    console.log(
+      `BottomTooltipPresenter: Displaying new tooltip data (ID: ${data.id}) - elementXP: ${data.elementXP}, showXP: ${data.showXP}`,
+    );
 
     this.updateViewModel();
 
@@ -64,6 +74,9 @@ export default class BottomTooltipPresenter implements IBottomTooltipPresenter {
 
   hideAll(): void {
     this.viewModel.show.Value = false;
+    // Also hide XP when all tooltips are hidden
+    this.viewModel.showXP.Value = false;
+    this.viewModel.elementXP.Value = null;
   }
 
   show(): void {
@@ -79,6 +92,9 @@ export default class BottomTooltipPresenter implements IBottomTooltipPresenter {
   private updateViewModel(): void {
     if (this.dataQueue.length <= 0) {
       this.viewModel.show.Value = false;
+      this.viewModel.showPoints.Value = false; // Ensure points are hidden
+      this.viewModel.showXP.Value = false; // Ensure XP is hidden
+      this.viewModel.elementXP.Value = null; // Ensure XP value is reset
     } else {
       const data = this.dataQueue[this.dataQueue.length - 1];
 
@@ -89,6 +105,8 @@ export default class BottomTooltipPresenter implements IBottomTooltipPresenter {
       this.viewModel.showPoints.Value = data.showPoints;
       this.viewModel.onClickCallback.Value = data.onClickCallback;
       this.viewModel.hasScored = data.hasScored;
+      this.viewModel.elementXP.Value = data.elementXP; // Update ViewModel with XP
+      this.viewModel.showXP.Value = data.showXP; // Update ViewModel with XP visibility
     }
   }
 }

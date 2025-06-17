@@ -15,4 +15,7 @@ export default class BottomTooltipViewModel {
   onClickCallback = new Observable<() => void>(undefined, true);
   hasScored = new Observable<boolean>(false);
   gradingStyle: IElementCompletionDisplay;
+
+  elementXP = new Observable<number | null>(null);
+  showXP = new Observable<boolean>(false);
 }
