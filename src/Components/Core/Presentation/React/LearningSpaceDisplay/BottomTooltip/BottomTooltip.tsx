@@ -17,7 +17,6 @@ import {
   DoorTypes,
   DoorTypeStrings,
 } from "src/Components/Core/Domain/Types/DoorTypes";
-import RequirementBasedDisplay from "../../../Utils/ElementCompletionDisplay/RequirementBasedDisplay";
 import { getDoorIcon } from "../../../Utils/GetDoorIcon";
 // Optional: Import für ein XP-Icon, falls gewünscht
 // import xpIcon from "../../../../../../Assets/icons/xp.svg";
@@ -64,19 +63,7 @@ export default function BottomTooltip({
             iconType === DoorTypes.exitDoor) &&
             getDoorIcon(iconType)}
           {text}
-          {showPoints &&
-            viewModel.gradingStyle.bottomTooltip(
-              viewModel.gradingStyle instanceof RequirementBasedDisplay
-                ? viewModel.hasScored.Value
-                : points,
-            )}
-          {/* Anzeige der möglichen XP */}
-          {showXP && elementXP !== null && (
-            <div className="flex items-center ml-2">
-              {/* Optional: <img src={xpIcon} alt="XP" className="w-5 h-5 mr-1" /> */}
-              <span className="mr-1 text-sm lg:text-xl">(+{elementXP} XP)</span>
-            </div>
-          )}
+          {showPoints && viewModel.gradingStyle.bottomTooltip(points)}
         </div>
       </StyledContainer>
     </div>
