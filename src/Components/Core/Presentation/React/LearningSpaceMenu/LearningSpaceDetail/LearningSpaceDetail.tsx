@@ -8,13 +8,13 @@ import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservab
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import LearningSpaceDetailController from "./LearningSpaceDetailController";
 import { getLearningElementIcon } from "../../../Utils/GetLearningElementIcon";
-import coinIcon from "../../../../../../Assets/icons/coin.svg";
 import TextWithLineBreaks from "~ReactComponents/ReactRelated/ReactBaseComponents/TextWithLineBreaks";
 import greenSwosh from "../../../../../../Assets/icons/check-solution.svg";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import { useTranslation } from "react-i18next";
 import { LearningElementInfo } from "src/Components/Core/Domain/Types/LearningElementInfo";
+import { useState } from "react";
 
 export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
   const [viewModel, controller] = useBuilder<
@@ -140,35 +140,11 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
             </div>
           </section>
         )}
-        {!!requiredPoints && (
-          <section className="flex flex-col gap-2">
-            <div className="flex flex-row items-center justify-between w-full xl:w-3/4">
-              <h3 className="self-center max-w-[75%] ml-2 text-lg font-black portrait:text-sm mobile-landscape:text-sm text-adlerdarkblue">
-                {translate("requiredPoints")}
-              </h3>
-              <div className="flex flex-row ml-6 text-lg font-medium portrait:text-xs portrait:ml-2 mobile-landscape:text-sm">
-                {requiredPoints}
-                <img
-                  src={coinIcon}
-                  className="self-center w-6 ml-1 portrait:w-4 lg:w-8"
-                  alt="Coin-Icon"
-                ></img>
-              </div>
-            </div>
-            <div className="flex flex-row items-center justify-between w-full xl:w-3/4">
-              <h3 className="max-w-[75%] self-center ml-2 text-lg font-black portrait:text-sm  text-adlerdarkblue">
-                {translate("maximumPoints")}
-              </h3>
-              <div className="flex flex-row items-start ml-6 text-lg font-medium portrait:text-xs mobile-landscape:text-sm portrait:ml-2">
-                {elements.reduce((acc, element) => acc + element.points, 0)}
-                <img
-                  src={coinIcon}
-                  className="self-center w-6 ml-1 portrait:w-4 lg:w-8"
-                  alt="Coin-Icon"
-                ></img>
-              </div>
-            </div>
-          </section>
+        {viewModel.completionDisplay.learningSpaceDetailSummary(
+          requiredPoints,
+          translate("requiredPoints"),
+          elements.reduce((acc, element) => acc + element.points, 0),
+          translate("maximumPoints"),
         )}
         {elements.length > 0 && (
           <div className="pb-2 border-b border-gray-500"></div>
