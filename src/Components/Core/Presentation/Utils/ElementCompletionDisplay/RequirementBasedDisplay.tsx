@@ -6,17 +6,12 @@ import CheckIcon from "../../../../../Assets/icons/check-solution.svg";
 export default class RequirementBasedDisplay
   implements IElementCompletionDisplay
 {
-  bottomTooltip(isCompleted: boolean): JSX.Element {
+  bottomTooltip(isRequired: boolean): JSX.Element {
     // Zeigt das Anforderungssymbol und dahinter den Haken, wenn abgeschlossen.
     return (
       <div className="relative inline-block mr-4">
-        <img src={RequiredIcon} alt="required" className="w-8" />
-        {isCompleted && (
-          <img
-            src={CheckIcon}
-            alt="completed"
-            className="absolute top-0 h-6 lg:h-9 lg:-top-3 -right-3 lg:-right-6 "
-          />
+        {!!isRequired && (
+          <img src={RequiredIcon} alt="required" className="w-8" />
         )}
       </div>
     );

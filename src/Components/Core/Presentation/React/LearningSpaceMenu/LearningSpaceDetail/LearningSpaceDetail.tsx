@@ -14,7 +14,6 @@ import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import { useTranslation } from "react-i18next";
 import { LearningElementInfo } from "src/Components/Core/Domain/Types/LearningElementInfo";
-import { useState } from "react";
 
 export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
   const [viewModel, controller] = useBuilder<

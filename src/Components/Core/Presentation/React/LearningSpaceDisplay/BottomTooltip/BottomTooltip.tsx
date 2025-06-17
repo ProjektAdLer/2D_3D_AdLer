@@ -17,7 +17,6 @@ import {
   DoorTypes,
   DoorTypeStrings,
 } from "src/Components/Core/Domain/Types/DoorTypes";
-import RequirementBasedDisplay from "../../../Utils/ElementCompletionDisplay/RequirementBasedDisplay";
 import { getDoorIcon } from "../../../Utils/GetDoorIcon";
 
 export default function BottomTooltip({
@@ -58,12 +57,7 @@ export default function BottomTooltip({
             iconType === DoorTypes.exitDoor) &&
             getDoorIcon(iconType)}
           {text}
-          {showPoints &&
-            viewModel.gradingStyle.bottomTooltip(
-              viewModel.gradingStyle instanceof RequirementBasedDisplay
-                ? viewModel.hasScored.Value
-                : points,
-            )}
+          {showPoints && viewModel.gradingStyle.bottomTooltip(points)}
         </div>
       </StyledContainer>
     </div>
