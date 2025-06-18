@@ -7,6 +7,8 @@ import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import { HistoryWrapper } from "~ReactComponents/ReactRelated/ReactEntryPoint/HistoryWrapper";
 import IGetLearningWorldUseCase from "src/Components/Core/Application/UseCases/GetLearningWorld/IGetLearningWorldUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
+import { IProgressScorePanelPresenter } from "./IProgressScorePanelPresenter";
 
 export default class ProgressScorePanelBuilder extends PresentationBuilder<
   ProgressScorePanelViewModel,
@@ -25,6 +27,17 @@ export default class ProgressScorePanelBuilder extends PresentationBuilder<
 
   override buildPresenter(): void {
     super.buildPresenter();
+
+    if (
+      CoreDIContainer.isBound(PRESENTATION_TYPES.IProgressScorePanelPresenter)
+    ) {
+      CoreDIContainer.unbind(PRESENTATION_TYPES.IProgressScorePanelPresenter);
+    }
+
+    CoreDIContainer.bind<IProgressScorePanelPresenter>(
+      PRESENTATION_TYPES.IProgressScorePanelPresenter,
+    ).toConstantValue(this.presenter!);
+
     CoreDIContainer.get<ILearningWorldPort>(
       PORT_TYPES.ILearningWorldPort,
     ).registerAdapter(this.presenter!, HistoryWrapper.currentLocationScope());
