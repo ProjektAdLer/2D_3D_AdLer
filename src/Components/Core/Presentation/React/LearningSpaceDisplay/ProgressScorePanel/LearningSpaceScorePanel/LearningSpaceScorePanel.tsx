@@ -4,13 +4,13 @@ import LearningSpaceScorePanelViewModel, {
 } from "./LearningSpaceScorePanelViewModel";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import spaceIcon from "../../../../../../../Assets/icons/space.svg";
-
 import coinIcon from "../../../../../../../Assets/icons/coin.svg";
 import LearningSpaceScorePanelController from "./LearningSpaceScorePanelController";
 import { GradingStyle } from "src/Components/Core/Domain/Types/GradingStyle";
 import Progressbar from "~ReactComponents/ReactRelated/ReactBaseComponents/Progressbar";
+import { useTranslation } from "react-i18next";
 
 interface PanelProps extends React.HTMLAttributes<HTMLDivElement> {
   gradingStyle: GradingStyle;
@@ -25,46 +25,24 @@ export default function LearningSpaceScorePanel({
   >(BUILDER_TYPES.ILearningSpaceScorePanelBuilder);
 
   const [scoreInfo] = useObservable<ScoreInfo>(viewModel?.scoreInfo);
-  const [percentage, setPercentage] = useState(0);
-
-  useEffect(() => {
-    if (!scoreInfo) return;
-    if (scoreInfo.requiredScore === 0) return setPercentage(100);
-    else {
-      setPercentage(
-        Math.min(
-          Math.round((scoreInfo.currentScore / scoreInfo.requiredScore) * 100),
-          100,
-        ),
-      );
-    }
-  }, [scoreInfo?.currentScore, scoreInfo?.requiredScore, scoreInfo]);
+  const [icon] = useState<string>(
+    rest.gradingStyle === GradingStyle.point ? coinIcon : spaceIcon,
+  );
+  const { t: translate } = useTranslation("learningSpace");
 
   if (!viewModel) return null;
   return (
-    <>
-      {rest.gradingStyle === GradingStyle.point && (
-        <Progressbar
-          button={false}
-          value={scoreInfo?.currentScore}
-          max={scoreInfo?.requiredScore}
-          progressbarText={percentage.toString() + "%"}
-          iconClassName="font-bold text-center text-yellow-300"
-          barClassName="w-20 font-bold text-center text-yellow-300 "
-          icon={coinIcon}
-        />
-      )}
-      {rest.gradingStyle === GradingStyle.requirement && (
-        <Progressbar
-          button={false}
-          value={scoreInfo?.currentScore}
-          max={scoreInfo?.requiredScore}
-          progressbarText={percentage.toString() + "%"}
-          iconClassName="font-bold text-center text-yellow-300"
-          barClassName="w-20 font-bold text-center text-yellow-300 "
-          icon={spaceIcon}
-        />
-      )}
-    </>
+    <Progressbar
+      button={false}
+      value={scoreInfo?.currentScore}
+      max={scoreInfo?.requiredScore}
+      progressbarText={translate("spaceScore", {
+        current: Math.min(scoreInfo?.currentScore, scoreInfo?.requiredScore),
+        required: scoreInfo?.requiredScore,
+      }).toString()}
+      iconClassName="font-bold text-center text-yellow-300"
+      barClassName="w-20 font-bold text-center text-yellow-300 "
+      icon={icon}
+    />
   );
 }

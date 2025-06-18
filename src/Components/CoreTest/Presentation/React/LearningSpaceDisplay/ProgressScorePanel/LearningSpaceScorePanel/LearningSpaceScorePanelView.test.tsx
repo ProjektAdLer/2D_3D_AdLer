@@ -15,7 +15,7 @@ let mockedViewModel = new LearningSpaceScorePanelViewModel();
 mockedViewModel.scoreInfo.Value = {
   currentScore: 0,
   requiredScore: 42,
-  maxScore: 3000,
+  maxScore: 300,
 };
 const mockedController = mock<ILearningSpaceScorePanelController>();
 const calculateWorldScoreMock = mock<ICalculateLearningWorldScoreUseCase>();
@@ -39,7 +39,7 @@ describe("Learning Space Score Panel View", () => {
       <LearningSpaceScorePanel gradingStyle={GradingStyle.point} />,
     );
 
-    expect(comp.container).toHaveTextContent("0%");
+    expect(comp.container).toHaveTextContent("0 von 42");
   });
 
   test("returns null when viewModel is not registered", () => {
@@ -58,7 +58,7 @@ describe("Learning Space Score Panel View", () => {
       <LearningSpaceScorePanel gradingStyle={GradingStyle.point} />,
     );
 
-    expect(comp.container).toHaveTextContent("0");
+    expect(comp.container).toHaveTextContent("0 von 42");
 
     mockedViewModel.scoreInfo.Value = {
       currentScore: 1,
@@ -66,6 +66,6 @@ describe("Learning Space Score Panel View", () => {
       maxScore: 3000,
     };
 
-    await waitFor(() => expect(comp.container).toHaveTextContent("2%"));
+    await waitFor(() => expect(comp.container).toHaveTextContent("1 von 42"));
   });
 });
