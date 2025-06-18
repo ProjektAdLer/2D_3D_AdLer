@@ -54,6 +54,7 @@ export default class LearningElementBuilder
     this.viewModel!.description = this.elementData.description;
     this.viewModel!.goals = this.elementData.goals;
     this.viewModel!.value = this.elementData.value;
+    this.viewModel!.difficulty = this.elementData.difficulty;
     this.viewModel!.modelType = this.elementData.model;
     this.viewModel!.theme = this.elementData.theme;
 

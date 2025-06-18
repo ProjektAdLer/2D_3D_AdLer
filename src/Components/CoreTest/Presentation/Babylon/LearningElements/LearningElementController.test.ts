@@ -21,19 +21,25 @@ describe("LearningElementController", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind(
-      USECASE_TYPES.ILoadLearningElementUseCase
+      USECASE_TYPES.ILoadLearningElementUseCase,
     ).toConstantValue(loadLearningElementUseCaseMock);
     CoreDIContainer.rebind(
-      USECASE_TYPES.ILoadAdaptivityElementUseCase
+      USECASE_TYPES.ILoadAdaptivityElementUseCase,
     ).toConstantValue(LoadAdaptivityElementUseCaseMock);
     CoreDIContainer.bind(
-      PRESENTATION_TYPES.IBottomTooltipPresenter
+      PRESENTATION_TYPES.IBottomTooltipPresenter,
     ).toConstantValue(bottomTooltipPresenterMock);
   });
 
   beforeEach(() => {
     viewModel = new LearningElementViewModel();
     systemUnderTest = new LearningElementController(viewModel);
+    viewModel.difficulty = {
+      // Initialize difficulty for tests
+      baseXP: 10,
+      multiplicator: 1,
+      difficultyType: 0,
+    };
   });
 
   afterAll(() => {
@@ -57,8 +63,8 @@ describe("LearningElementController", () => {
       new Vector3(
         viewModel.iconScaleUpOnHover,
         viewModel.iconScaleUpOnHover,
-        viewModel.iconScaleUpOnHover
-      )
+        viewModel.iconScaleUpOnHover,
+      ),
     );
   });
 
@@ -69,6 +75,17 @@ describe("LearningElementController", () => {
     systemUnderTest.pointerOut();
 
     expect(bottomTooltipPresenterMock.hide).toHaveBeenCalledTimes(1);
+    expect(bottomTooltipPresenterMock.display).toHaveBeenCalledWith(
+      viewModel.name,
+      viewModel.type,
+      expect.objectContaining({
+        points: viewModel.value,
+        hasScored: viewModel.hasScored,
+        xp: viewModel.difficulty.baseXP * viewModel.difficulty.multiplicator,
+        isRequired: viewModel.value > 0,
+      }),
+      expect.any(Function),
+    );
   });
 
   test("pointerOut scales down iconMeshes", () => {
@@ -98,7 +115,7 @@ describe("LearningElementController", () => {
     systemUnderTest.picked();
 
     expect(loadLearningElementUseCaseMock.executeAsync).toHaveBeenCalledTimes(
-      1
+      1,
     );
   });
 
@@ -111,7 +128,7 @@ describe("LearningElementController", () => {
     systemUnderTest.picked();
 
     expect(LoadAdaptivityElementUseCaseMock.executeAsync).toHaveBeenCalledTimes(
-      1
+      1,
     );
   });
 
@@ -123,10 +140,10 @@ describe("LearningElementController", () => {
     systemUnderTest.picked();
 
     expect(loadLearningElementUseCaseMock.executeAsync).toHaveBeenCalledTimes(
-      0
+      0,
     );
     expect(LoadAdaptivityElementUseCaseMock.executeAsync).toHaveBeenCalledTimes(
-      0
+      0,
     );
   });
 

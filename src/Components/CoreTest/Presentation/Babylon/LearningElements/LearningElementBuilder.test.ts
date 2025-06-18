@@ -37,6 +37,11 @@ const mockElementData: LearningElementTO = {
   model: LearningElementModelTypeEnums.H5pElementModelTypes.GreySlotmachine,
   theme: LearningSpaceThemeType.Campus,
   isScoreable: false,
+  difficulty: {
+    difficultyType: 0,
+    multiplicator: 1,
+    baseXP: 10,
+  },
 };
 const mockElementPosition: [Vector3, number] = [new Vector3(1, 2, 3), 0];
 
@@ -99,6 +104,9 @@ describe("LearningElementBuilder", () => {
     expect(systemUnderTest["viewModel"]!.type).toBe(mockElementData.type);
     expect(systemUnderTest["viewModel"]!.hasScored.Value).toBe(
       mockElementData.hasScored,
+    );
+    expect(systemUnderTest["viewModel"]!.difficulty).toBe(
+      mockElementData.difficulty,
     );
     expect(systemUnderTest["viewModel"]!.modelType).toBe(mockElementData.model);
     expect(systemUnderTest["viewModel"]!.value).toBe(mockElementData.value);

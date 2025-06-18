@@ -2,52 +2,76 @@ import IBottomTooltipPresenter from "../../../../../Core/Presentation/React/Lear
 import BottomTooltipPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/BottomTooltip/BottomTooltipPresenter";
 import BottomTooltipViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/BottomTooltip/BottomTooltipViewModel";
 import Observable from "../../../../../../Lib/Observable";
-import exp from "constants";
+import { LearningElementTypes } from "../../../../../Core/Domain/Types/LearningElementTypes";
+import LearningSpaceTO from "../../../../../Core/Application/DataTransferObjects/LearningSpaceTO";
+import PointBasedDisplay from "../../../../../Core/Presentation/Utils/ElementCompletionDisplay/PointBasedDisplay";
 
 describe("BottomTooltipPresenter", () => {
   let systemUnderTest: IBottomTooltipPresenter;
-  const vm = new BottomTooltipViewModel();
+  let vm: BottomTooltipViewModel;
 
   beforeEach(() => {
+    vm = new BottomTooltipViewModel();
     systemUnderTest = new BottomTooltipPresenter(vm);
   });
 
-  test("should set the value of the viewModel when hide is called", () => {
-    vm.show.Value = true;
-    systemUnderTest.hide(1);
+  test("hide should make the tooltip not show if the hidden tooltip was the only one", () => {
+    const id = systemUnderTest.display("test", LearningElementTypes.text);
+    expect(vm.show.Value).toBe(true);
+    systemUnderTest.hide(id);
     expect(vm.show.Value).toBe(false);
   });
 
   test("display should set the value of the viewModel when called", () => {
     const text = "test";
-    const iconType = "test";
+    const iconType = LearningElementTypes.h5p;
     const points = 1;
+    const xp = 10;
+    const isRequired = true;
     const hasScored = new Observable<boolean>(true);
     const onClickCallback = () => {};
 
-    systemUnderTest.display(text, iconType, points, hasScored, onClickCallback);
+    systemUnderTest.display(
+      text,
+      iconType,
+      {
+        points: points,
+        hasScored: hasScored,
+        xp: xp,
+        isRequired: isRequired,
+      },
+      onClickCallback,
+    );
 
     expect(vm.show.Value).toBe(true);
     expect(vm.text.Value).toBe(text);
     expect(vm.iconType.Value).toBe(iconType);
     expect(vm.points.Value).toBe(points);
-    expect(vm.showPoints.Value).toBe(true);
+    expect(vm.hasScored).toBe(hasScored);
     expect(vm.hasScored.Value).toBe(true);
     expect(vm.onClickCallback.Value).toBe(onClickCallback);
+    expect(vm.xp.Value).toBe(xp);
+    expect(vm.isRequired.Value).toBe(isRequired);
   });
 
-  test("display sets showPoints to false when points is undefined", () => {
+  test("display sets points to undefined when not provided in data", () => {
     const text = "test";
-    const iconType = "test";
+    const iconType = LearningElementTypes.image;
     const onClickCallback = () => {};
 
-    systemUnderTest.display(text, iconType, undefined, onClickCallback);
+    systemUnderTest.display(text, iconType, { xp: 5 }, onClickCallback);
 
-    expect(vm.showPoints.Value).toBe(false);
+    expect(vm.points.Value).toBeUndefined();
+  });
+
+  test("display sets default hasScored (false Observable) if not provided", () => {
+    systemUnderTest.display("test", LearningElementTypes.video);
+    expect(vm.hasScored).toBeInstanceOf(Observable);
+    expect(vm.hasScored.Value).toBe(false);
   });
 
   test("display sets default clickCallback if none is provided", () => {
-    systemUnderTest.display("test");
+    systemUnderTest.display("test", LearningElementTypes.pdf);
     expect(vm.onClickCallback.Value).toEqual(expect.any(Function));
   });
 
@@ -57,32 +81,63 @@ describe("BottomTooltipPresenter", () => {
     expect(vm.show.Value).toBe(false);
   });
 
-  test("hide removes tooltip from vm", () => {
-    systemUnderTest.display("test1");
-    systemUnderTest.display("test2");
-    systemUnderTest.hide(0);
-    expect(systemUnderTest["dataQueue"].length).toBe(1);
-    expect(systemUnderTest["dataQueue"][0].text).toBe("test2");
+  test("hide should show the previous tooltip if the hidden one was the latest", () => {
+    systemUnderTest.display("tooltip1", LearningElementTypes.text);
+    const id2 = systemUnderTest.display("tooltip2", LearningElementTypes.h5p);
+    expect(vm.show.Value).toBe(true);
+    expect(vm.text.Value).toBe("tooltip2");
+
+    systemUnderTest.hide(id2);
+    expect(vm.show.Value).toBe(true);
+    expect(vm.text.Value).toBe("tooltip1");
   });
 
-  test("show sets show in viewModel to false, if no tooltip exists", () => {
+  test("hide should correctly remove a non-latest tooltip and keep showing the latest", () => {
+    const id1 = systemUnderTest.display("tooltip1", LearningElementTypes.text);
+    systemUnderTest.display("tooltip2", LearningElementTypes.h5p);
+    expect(vm.text.Value).toBe("tooltip2");
+
+    systemUnderTest.hide(id1);
+    expect(vm.show.Value).toBe(true);
+    expect(vm.text.Value).toBe("tooltip2");
+    expect(systemUnderTest["dataQueue"].length).toBe(1);
+    expect(systemUnderTest["dataQueue"][0].text).toBe("tooltip2");
+  });
+
+  test("hide should not change show state if tooltipId does not exist and queue is not empty", () => {
+    systemUnderTest.display("test", LearningElementTypes.text);
+    expect(vm.show.Value).toBe(true);
+    systemUnderTest.hide(999); // Non-existent ID
+    expect(vm.show.Value).toBe(true);
+    expect(vm.text.Value).toBe("test");
+  });
+
+  test("hide should set show to false if tooltipId does not exist and queue is empty", () => {
+    expect(vm.show.Value).toBe(false);
+    systemUnderTest.hide(999); // Non-existent ID
+    expect(vm.show.Value).toBe(false);
+  });
+
+  test("show sets show in viewModel to false, if dataQueue is empty", () => {
     systemUnderTest.show();
     expect(vm.show.Value).toBe(false);
   });
 
-  test("show sets show in viewModel to true, if tooltip exists", () => {
-    systemUnderTest.display("test");
+  test("show sets show in viewModel to true, if a tooltip exists in dataQueue", () => {
+    systemUnderTest.display("test", LearningElementTypes.text);
     systemUnderTest.show();
     expect(vm.show.Value).toBe(true);
   });
 
   test("should clear queue if onLearningSpaceLoaded was called", () => {
     const text = "test";
-    const iconType = "test";
+    const iconType = LearningElementTypes.video;
     const points = 1;
     const onClickCallback = () => {};
-    systemUnderTest.display(text, iconType, points, onClickCallback);
-    systemUnderTest.onLearningSpaceLoaded({});
+    systemUnderTest.display(text, iconType, { points }, onClickCallback);
+    systemUnderTest.onLearningSpaceLoaded({
+      gradingStyle: new PointBasedDisplay(),
+    } as LearningSpaceTO);
 
     expect(systemUnderTest["dataQueue"].length).toBe(0);
     expect(vm.show.Value).toBe(false);

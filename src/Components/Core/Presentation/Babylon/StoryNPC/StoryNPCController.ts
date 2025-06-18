@@ -9,6 +9,7 @@ import i18next from "i18next";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILoggerPort";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
+import { LearningElementTypes } from "src/Components/Core/Domain/Types/LearningElementTypes";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 
 export default class StoryNPCController implements IStoryNPCController {
@@ -106,10 +107,9 @@ export default class StoryNPCController implements IStoryNPCController {
       this.viewModel.storyNpcName
         ? tooltipText + ": " + this.viewModel.storyNpcName
         : tooltipText,
-      undefined,
-      undefined,
-      undefined,
-      this.picked,
+      LearningElementTypes.notAnElement, // Provide a valid iconType
+      undefined, // data object (optional)
+      () => this.picked(), // onClickCallback (optional)
     );
   }
 

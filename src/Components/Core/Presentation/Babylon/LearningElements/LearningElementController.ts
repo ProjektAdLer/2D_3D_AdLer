@@ -16,6 +16,7 @@ export default class LearningElementController
   private bottomTooltipPresenter: IBottomTooltipPresenter;
   private proximityToolTipId: number = -1;
   private hoverToolTipId: number = -1;
+  private calculatedXp: number;
 
   constructor(private viewModel: LearningElementViewModel) {
     this.bottomTooltipPresenter = CoreDIContainer.get<IBottomTooltipPresenter>(
@@ -23,6 +24,9 @@ export default class LearningElementController
     );
 
     this.viewModel.isInteractable.subscribe(this.onAvatarInteractableChange);
+    this.calculatedXp =
+      (this.viewModel.difficulty?.baseXP ?? 0) *
+      (this.viewModel.difficulty?.multiplicator ?? 1);
   }
 
   @bind
@@ -80,9 +84,13 @@ export default class LearningElementController
     return this.bottomTooltipPresenter.display(
       this.viewModel.name,
       this.viewModel.type,
-      this.viewModel.value,
-      this.viewModel.hasScored,
-      this.picked,
+      {
+        points: this.viewModel.value,
+        hasScored: this.viewModel.hasScored,
+        xp: this.calculatedXp,
+        isRequired: this.viewModel.value > 0,
+      },
+      () => this.picked(),
     );
   }
 

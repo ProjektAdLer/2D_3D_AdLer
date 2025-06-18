@@ -7,4 +7,5 @@ export enum LearningElementDifficulty {
 export type DifficultyInfo = {
   difficultyType: LearningElementDifficulty;
   multiplicator: number;
+  baseXP: number;
 };

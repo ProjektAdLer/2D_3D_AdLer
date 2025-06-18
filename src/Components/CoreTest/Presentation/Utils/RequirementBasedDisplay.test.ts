@@ -13,33 +13,48 @@ describe("RequirementBasedDisplay", () => {
 
   describe("bottomTooltip", () => {
     test("should render required icon when not completed", () => {
-      const { container } = render(display.bottomTooltip(false));
+      const { container } = render(
+        display.bottomTooltip({
+          isRequired: true,
+          hasScored: false,
+          iconType: LearningElementTypes.h5p,
+        }),
+      );
       expect(screen.getByAltText("required")).toBeInTheDocument();
       expect(screen.queryByAltText("completed")).not.toBeInTheDocument();
-      // Check for specific class names to ensure structure
-      expect(container.firstChild).toHaveClass("relative inline-block mr-4");
+      expect(container.firstChild?.firstChild).toHaveClass(
+        "relative inline-block",
+      );
     });
 
     test("should render required and completed icons when completed", () => {
-      const { container } = render(display.bottomTooltip(true));
+      const { container } = render(
+        display.bottomTooltip({
+          isRequired: true,
+          hasScored: true,
+          iconType: LearningElementTypes.h5p,
+        }),
+      );
       expect(screen.getByAltText("required")).toBeInTheDocument();
       const completedIcon = screen.getByAltText("completed");
       expect(completedIcon).toBeInTheDocument();
-      expect(completedIcon).toHaveClass(
-        "absolute h-6 lg:h-9 top-0 lg:-top-3 -right-3 lg:-right-6",
+      // Corrected class to match component implementation
+      expect(completedIcon).toHaveClass("absolute w-5 -top-1 -right-3");
+      // Check the div wrapping the required icon
+      expect(container.firstChild?.firstChild).toHaveClass(
+        "relative inline-block",
       );
-      expect(container.firstChild).toHaveClass("relative inline-block mr-4");
     });
   });
 
   describe("learningSpaceDetail", () => {
     const baseElement: LearningElementInfo = {
-      id: "1",
       name: "Test Element",
       type: LearningElementTypes.text,
       hasScored: false,
       points: 0,
-      resourceLink: "",
+      // isRequired can be true, false, or null.
+      isRequired: false,
     };
 
     test("should render required icon when element has points and is not scored", () => {

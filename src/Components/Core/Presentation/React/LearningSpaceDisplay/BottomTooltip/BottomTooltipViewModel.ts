@@ -10,9 +10,10 @@ export default class BottomTooltipViewModel {
     undefined,
     true,
   );
-  points = new Observable<number>();
-  showPoints = new Observable<boolean>(true, true);
+  points = new Observable<number | undefined>();
   onClickCallback = new Observable<() => void>(undefined, true);
   hasScored = new Observable<boolean>(false);
   gradingStyle: IElementCompletionDisplay;
+  xp = new Observable<number | undefined>();
+  isRequired = new Observable<boolean | undefined>();
 }

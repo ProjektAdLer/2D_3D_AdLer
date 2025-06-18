@@ -405,6 +405,7 @@ export default class LoadLearningWorldUseCase
         difficulty: {
           difficultyType: element.difficulty,
           multiplicator: 0,
+          baseXP: 0, // Initialize baseXP
         },
       };
 

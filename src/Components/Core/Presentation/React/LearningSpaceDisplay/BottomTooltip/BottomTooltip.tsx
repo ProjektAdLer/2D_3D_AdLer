@@ -31,8 +31,9 @@ export default function BottomTooltip({
     LearningElementTypeStrings | DoorTypeStrings
   >(viewModel.iconType);
   const [text] = useObservable<string>(viewModel.text);
-  const [points] = useObservable<number>(viewModel.points);
-  const [showPoints] = useObservable<boolean>(viewModel.showPoints);
+  const [points] = useObservable<number | undefined>(viewModel.points);
+  const [xp] = useObservable<number | undefined>(viewModel.xp);
+  const [isRequired] = useObservable<boolean | undefined>(viewModel.isRequired);
 
   if (!show || !iconType) return null;
 
@@ -57,7 +58,13 @@ export default function BottomTooltip({
             iconType === DoorTypes.exitDoor) &&
             getDoorIcon(iconType)}
           {text}
-          {showPoints && viewModel.gradingStyle.bottomTooltip(points)}
+          {viewModel.gradingStyle.bottomTooltip({
+            points: points,
+            xp: xp,
+            isRequired: isRequired,
+            hasScored: viewModel.hasScored.Value,
+            iconType: iconType,
+          })}
         </div>
       </StyledContainer>
     </div>

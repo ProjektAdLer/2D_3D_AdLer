@@ -4,6 +4,7 @@ import Observable from "../../../../../Lib/Observable";
 import { LearningElementTypeStrings } from "src/Components/Core/Domain/Types/LearningElementTypes";
 import { LearningElementModel } from "src/Components/Core/Domain/LearningElementModels/LearningElementModelTypes";
 import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/LearningSpaceThemeTypes";
+import { DifficultyInfo } from "src/Components/Core/Domain/Types/LearningElementDifficulty";
 
 export default class LearningElementViewModel {
   // constants
@@ -27,6 +28,7 @@ export default class LearningElementViewModel {
   public description: string;
   public goals: string[];
   public value: number;
+  public difficulty: DifficultyInfo;
   public modelType: LearningElementModel;
   public theme: LearningSpaceThemeType;
 

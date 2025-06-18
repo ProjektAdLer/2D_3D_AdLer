@@ -1,15 +1,28 @@
 import { LearningElementInfo } from "src/Components/Core/Domain/Types/LearningElementInfo";
-import IElementCompletionDisplay from "./IElementCompletionDisplay";
+import IElementCompletionDisplay, {
+  BottomTooltipDisplayData,
+} from "./IElementCompletionDisplay";
 import coinIcon from "../../../../../Assets/icons/coin.svg";
+import { LearningElementTypes } from "src/Components/Core/Domain/Types/LearningElementTypes";
+import { DoorTypes } from "src/Components/Core/Domain/Types/DoorTypes";
 
 export default class PointBasedDisplay implements IElementCompletionDisplay {
-  bottomTooltip(value: number | boolean): JSX.Element {
-    return (
-      <div className="flex items-center ml-2">
-        {String(value)}
-        <img src={coinIcon} alt="" className="w-8"></img>
-      </div>
-    );
+  bottomTooltip(data: BottomTooltipDisplayData): JSX.Element {
+    // Only show points for actual learning elements, not for doors or NPCs
+    const isActualLearningElement =
+      data.iconType !== LearningElementTypes.notAnElement &&
+      data.iconType !== DoorTypes.entryDoor &&
+      data.iconType !== DoorTypes.exitDoor;
+
+    if (isActualLearningElement && data.points !== undefined) {
+      return (
+        <div className="flex items-center ml-2">
+          {String(data.points)}
+          <img src={coinIcon} alt="Points" className="w-8"></img>
+        </div>
+      );
+    }
+    return <></>; // Return empty fragment if no points should be shown
   }
 
   learningSpaceDetail(element: LearningElementInfo): JSX.Element {

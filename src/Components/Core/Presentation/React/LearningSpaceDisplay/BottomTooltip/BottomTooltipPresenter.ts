@@ -14,10 +14,11 @@ interface BottomTooltipData {
   show: boolean;
   text: string;
   iconType: LearningElementTypeStrings | DoorTypeStrings;
-  points: number;
-  showPoints: boolean;
+  points?: number;
   hasScored: Observable<boolean>;
   onClickCallback: () => void;
+  xp?: number;
+  isRequired?: boolean;
 }
 
 @injectable()
@@ -29,11 +30,13 @@ export default class BottomTooltipPresenter implements IBottomTooltipPresenter {
 
   display(
     text: string,
-    iconType:
-      | LearningElementTypeStrings
-      | DoorTypeStrings = LearningElementTypes.notAnElement,
-    points: number | undefined = undefined,
-    hasScored: Observable<boolean> | undefined = undefined,
+    iconType: LearningElementTypeStrings | DoorTypeStrings,
+    dataInput?: {
+      points?: number;
+      hasScored?: Observable<boolean>;
+      xp?: number;
+      isRequired?: boolean;
+    },
     onClickCallback?: () => void,
   ): number {
     const data: BottomTooltipData = {
@@ -41,10 +44,13 @@ export default class BottomTooltipPresenter implements IBottomTooltipPresenter {
       show: true,
       text: text,
       iconType: iconType,
-      points: points ? points : 0,
-      showPoints: points !== undefined,
-      hasScored: hasScored ? hasScored : new Observable<boolean>(false),
+      points: dataInput?.points,
+      hasScored: dataInput?.hasScored
+        ? dataInput.hasScored
+        : new Observable<boolean>(false),
       onClickCallback: onClickCallback ?? (() => {}),
+      xp: dataInput?.xp,
+      isRequired: dataInput?.isRequired,
     };
     this.dataQueue.push(data);
 
@@ -86,9 +92,10 @@ export default class BottomTooltipPresenter implements IBottomTooltipPresenter {
       this.viewModel.text.Value = data.text;
       this.viewModel.iconType.Value = data.iconType;
       this.viewModel.points.Value = data.points;
-      this.viewModel.showPoints.Value = data.showPoints;
       this.viewModel.onClickCallback.Value = data.onClickCallback;
       this.viewModel.hasScored = data.hasScored;
+      this.viewModel.xp.Value = data.xp;
+      this.viewModel.isRequired.Value = data.isRequired;
     }
   }
 }

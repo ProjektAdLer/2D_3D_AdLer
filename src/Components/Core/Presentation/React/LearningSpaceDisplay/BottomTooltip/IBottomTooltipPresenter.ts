@@ -8,13 +8,16 @@ import Observable from "src/Lib/Observable";
 export default interface IBottomTooltipPresenter extends ILearningWorldAdapter {
   display(
     text: string,
-    iconType?: LearningElementTypeStrings | DoorTypeStrings,
-    points?: number | undefined,
-    hasScored?: Observable<boolean> | undefined,
+    iconType: LearningElementTypeStrings | DoorTypeStrings,
+    data?: {
+      points?: number;
+      hasScored?: Observable<boolean>;
+      xp?: number;
+      isRequired?: boolean;
+    },
     onClickCallback?: () => void,
   ): number;
   hide(toolTipId: number): void;
   hideAll(): void;
   show(): void;
-  onLearningSpaceLoaded(learningSpaceTO: LearningSpaceTO): void;
 }

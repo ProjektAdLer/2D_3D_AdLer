@@ -86,8 +86,7 @@ export default class DoorController implements IDoorController {
         : i18next.t("enterDoor", { ns: "learningSpace" }),
       this.viewModel.isExit ? DoorTypes.exitDoor : DoorTypes.entryDoor,
       undefined,
-      undefined,
-      this.picked,
+      () => this.picked(),
     );
   }
 

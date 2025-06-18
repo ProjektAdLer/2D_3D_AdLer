@@ -1,17 +1,34 @@
 import { LearningElementInfo } from "src/Components/Core/Domain/Types/LearningElementInfo";
-import IElementCompletionDisplay from "./IElementCompletionDisplay";
+import IElementCompletionDisplay, {
+  BottomTooltipDisplayData,
+} from "./IElementCompletionDisplay";
 import RequiredIcon from "../../../../../Assets/icons/required.svg";
 import CheckIcon from "../../../../../Assets/icons/check-solution.svg";
+import XPIcon from "../../../../../Assets/icons/xp.svg";
 
 export default class RequirementBasedDisplay
   implements IElementCompletionDisplay
 {
-  bottomTooltip(isRequired: boolean): JSX.Element {
-    // Zeigt das Anforderungssymbol und dahinter den Haken, wenn abgeschlossen.
+  bottomTooltip(data: BottomTooltipDisplayData): JSX.Element {
     return (
-      <div className="relative inline-block mr-4">
-        {!!isRequired && (
-          <img src={RequiredIcon} alt="required" className="w-8" />
+      <div className="flex items-center gap-1">
+        {data.isRequired && (
+          <div className="relative inline-block">
+            <img src={RequiredIcon} alt="required" className="w-7" />
+            {data.hasScored && (
+              <img
+                src={CheckIcon}
+                alt="completed"
+                className="absolute w-5 -top-1 -right-3"
+              />
+            )}
+          </div>
+        )}
+        {data.xp !== undefined && data.xp > 0 && (
+          <div className="flex items-center ml-1">
+            <span className="font-semibold">{data.xp}</span>
+            <img src={XPIcon} alt="XP" className="w-5 h-5 ml-0.5" />
+          </div>
         )}
       </div>
     );
