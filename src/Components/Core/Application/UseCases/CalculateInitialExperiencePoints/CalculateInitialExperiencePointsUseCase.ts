@@ -10,6 +10,8 @@ import LearningWorldEntity from "src/Components/Core/Domain/Entities/LearningWor
 import ExperiencePointsEntity from "src/Components/Core/Domain/Entities/ExperiencePointsEntity";
 import { LearningElementDifficulty } from "src/Components/Core/Domain/Types/LearningElementDifficulty";
 import LearningElementEntity from "src/Components/Core/Domain/Entities/LearningElementEntity";
+import AdaptivityElementEntity from "src/Components/Core/Domain/Entities/Adaptivity/AdaptivityElementEntity";
+import { AdaptivityElementQuestionDifficultyTypes } from "src/Components/Core/Domain/Types/Adaptivity/AdaptivityElementQuestionDifficultyTypes";
 
 class DifficultyCounter {
   numberOfElements: number = 0;
@@ -165,17 +167,30 @@ export default class CalculateInitialExperiencePointsUseCase
     elements.forEach((element) => {
       if (element === null) return;
 
-      // check if element is a adaptivity element
-      // const adaptivityElement = this.entityContainer.filterEntitiesOfType(
-      //   AdaptivityElementEntity,
-      //   (WorldEntity) =>
-      //     WorldEntity.element.parentWorldID === element.parentWorldID &&
-      //     WorldEntity.element.id === element.id,
-      // );
+      // check if element is an adaptivity element
+      const adaptivityElements = this.entityContainer.filterEntitiesOfType(
+        AdaptivityElementEntity,
+        (WorldEntity) =>
+          WorldEntity.element.parentWorldID === element.parentWorldID &&
+          WorldEntity.element.id === element.id,
+      );
 
-      // if (adaptivityElement.length !== 0 && adaptivityElement.length < 2) {
-      //   const ae = adaptivityElement[0];
-      // }
+      if (adaptivityElements.length === 1) {
+        const ae = adaptivityElements[0];
+        // get highest question difficulty of adaptivity element
+        let highestDifficulty = AdaptivityElementQuestionDifficultyTypes.easy;
+        ae.tasks.forEach((task) => {
+          task.questions.forEach((question) => {
+            if (question.questionDifficulty > highestDifficulty) {
+              highestDifficulty = question.questionDifficulty;
+            }
+          });
+        });
+        element.difficulty.difficultyType =
+          this.mapAdaptivityDifficultyToLearningElementDifficulty(
+            highestDifficulty,
+          );
+      }
 
       switch (element.difficulty.difficultyType) {
         case LearningElementDifficulty.easy:
@@ -191,5 +206,20 @@ export default class CalculateInitialExperiencePointsUseCase
           element.difficulty.multiplicator = 1;
       }
     });
+  }
+
+  private mapAdaptivityDifficultyToLearningElementDifficulty(
+    difficulty: AdaptivityElementQuestionDifficultyTypes,
+  ) {
+    switch (difficulty) {
+      case AdaptivityElementQuestionDifficultyTypes.easy:
+        return LearningElementDifficulty.easy;
+      case AdaptivityElementQuestionDifficultyTypes.medium:
+        return LearningElementDifficulty.medium;
+      case AdaptivityElementQuestionDifficultyTypes.hard:
+        return LearningElementDifficulty.hard;
+      default:
+        return LearningElementDifficulty.easy;
+    }
   }
 }

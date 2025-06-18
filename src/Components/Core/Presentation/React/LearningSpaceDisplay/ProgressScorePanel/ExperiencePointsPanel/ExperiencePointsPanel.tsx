@@ -39,11 +39,13 @@ export default function ExperiencePointsPanel({
 
   return (
     <Progressbar
-      button={false}
+      button={true}
       value={percentage}
       max={100}
       progressbarText={percentage.toString() + "%"}
-      iconClassName="font-bold text-center text-yellow-300"
+      iconClassName="opacity-40"
+      iconTextClassName="font-bold text-2xl text-center text-black-300"
+      iconText={scoreInfo?.currentLevel.toString()}
       barClassName="w-20 font-bold text-center text-yellow-300 "
       icon={xpIcon}
     />

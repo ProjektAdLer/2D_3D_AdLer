@@ -1,3 +1,4 @@
+import AdaptivityElementEntity from "../../../../Core/Domain/Entities/Adaptivity/AdaptivityElementEntity";
 import { mock } from "jest-mock-extended";
 import CalculateInitialExperiencePointsUseCase from "../../../../Core/Application/UseCases/CalculateInitialExperiencePoints/CalculateInitialExperiencePointsUseCase";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";
@@ -9,7 +10,8 @@ import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE
 import Logger from "../../../../Core/Adapters/Logger/Logger";
 import LearningWorldEntity from "../../../../Core/Domain/Entities/LearningWorldEntity";
 import ExperiencePointsEntity from "../../../../Core/Domain/Entities/ExperiencePointsEntity";
-import UserDataEntity from "../../../../Core/Domain/Entities/UserDataEntity";
+import { AdaptivityElementQuestionDifficultyTypes } from "../../../../Core/Domain/Types/Adaptivity/AdaptivityElementQuestionDifficultyTypes";
+import { LearningElementDifficulty } from "../../../../Core/Domain/Types/LearningElementDifficulty";
 
 const entityContainerMock = mock<IEntityContainer>();
 const notificationPortMock = mock<INotificationPort>();
@@ -74,6 +76,7 @@ describe("CalculateInitialExperiencePointsUseCase", () => {
       "CalculateInitialExperiencePointsUseCase: World entity not found!",
     );
   });
+
   test("filter world function filters correctly", async () => {
     let userDataEntity = {
       isLoggedIn: true,
@@ -109,6 +112,7 @@ describe("CalculateInitialExperiencePointsUseCase", () => {
 
     expect(filterResult).toBe(true);
   });
+
   test("calls logger with warning if experience points already exist for the world", () => {
     let userDataEntity = {
       isLoggedIn: true,
@@ -144,6 +148,75 @@ describe("CalculateInitialExperiencePointsUseCase", () => {
       "CalculateInitialExperiencePointsUseCase: Experience points for world 1 already exist!",
     );
   });
+
+  test("calculates initial experience points of adaptivity elements correctt", () => {
+    let userDataEntity = {
+      isLoggedIn: true,
+      availableWorlds: [{ worldID: 1, worldName: "World 1" }],
+      experiencePoints: [],
+    };
+
+    entityContainerMock.getEntitiesOfType.mockReturnValueOnce([userDataEntity]);
+
+    const worldEntityMock = {
+      id: 1,
+      name: "World 1",
+      spaces: [
+        {
+          id: 1,
+          elements: [
+            { id: 3, difficulty: { difficultyType: 0 }, parentWorldID: 1 },
+            null,
+          ],
+        },
+        {
+          id: 2,
+          elements: [
+            { id: 4, difficulty: { difficultyType: 0 }, parentWorldID: 1 },
+            { id: 5, difficulty: { difficultyType: 0 }, parentWorldID: 1 },
+          ],
+        },
+      ],
+    };
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
+      worldEntityMock,
+    ]);
+
+    const adaptivityElementMock = {
+      element: {
+        id: 5,
+        parentWorldID: 1,
+      },
+      tasks: [
+        {
+          questions: [
+            {
+              questionDifficulty: AdaptivityElementQuestionDifficultyTypes.hard,
+            },
+          ],
+        },
+      ],
+    };
+
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([]);
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([]);
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
+      adaptivityElementMock,
+    ]);
+
+    systemUnderTest.internalExecute(1);
+
+    const entityArg = entityContainerMock.createEntity.mock
+      .calls[0][0] as ExperiencePointsEntity;
+    expect(entityContainerMock.createEntity).toHaveBeenCalled();
+    expect(entityArg.worldID).toBe(1);
+    expect(entityArg.currentLevel).toBe(0);
+    expect(entityArg.maxLevel).toBe(2);
+    expect(entityArg.currentExperiencePoints).toBe(0);
+    expect(entityArg.maxExperiencePoints).toBe(200);
+    expect(entityArg.baseExperiencePoints).toBe(50);
+  });
+
   test("calculates initial experience points correctly", () => {
     let userDataEntity = {
       isLoggedIn: true,
@@ -163,6 +236,7 @@ describe("CalculateInitialExperiencePointsUseCase", () => {
             { id: 1, difficulty: { difficultyType: 100, multiplicator: 1.5 } },
             { id: 2, difficulty: { difficultyType: 200, multiplicator: 2 } },
             { id: 3, difficulty: { difficultyType: 0, multiplicator: 1 } },
+            null,
           ],
         },
         {
@@ -177,6 +251,7 @@ describe("CalculateInitialExperiencePointsUseCase", () => {
     entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
       worldEntityMock,
     ]);
+    entityContainerMock.filterEntitiesOfType.mockReturnValue([]);
 
     systemUnderTest.internalExecute(1);
 
@@ -189,5 +264,28 @@ describe("CalculateInitialExperiencePointsUseCase", () => {
     expect(entityArg.maxExperiencePoints).toBe(300);
     expect(entityArg.maxLevel).toBe(3);
     expect(entityArg.currentLevel).toBe(0);
+  });
+
+  test("mapAdaptivityDifficultyToLearningElementDifficulty maps difficulty correct", () => {
+    expect(
+      systemUnderTest["mapAdaptivityDifficultyToLearningElementDifficulty"](
+        AdaptivityElementQuestionDifficultyTypes.easy,
+      ),
+    ).toEqual(LearningElementDifficulty.easy);
+    expect(
+      systemUnderTest["mapAdaptivityDifficultyToLearningElementDifficulty"](
+        AdaptivityElementQuestionDifficultyTypes.medium,
+      ),
+    ).toEqual(LearningElementDifficulty.medium);
+    expect(
+      systemUnderTest["mapAdaptivityDifficultyToLearningElementDifficulty"](
+        AdaptivityElementQuestionDifficultyTypes.hard,
+      ),
+    ).toEqual(LearningElementDifficulty.hard);
+    expect(
+      systemUnderTest["mapAdaptivityDifficultyToLearningElementDifficulty"](
+        300,
+      ),
+    ).toEqual(LearningElementDifficulty.easy);
   });
 });

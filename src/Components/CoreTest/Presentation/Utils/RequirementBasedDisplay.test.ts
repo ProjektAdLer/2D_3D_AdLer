@@ -28,13 +28,7 @@ describe("RequirementBasedDisplay", () => {
     });
 
     test("should render required and completed icons when completed", () => {
-      const { container } = render(
-        display.bottomTooltip({
-          isRequired: true,
-          hasScored: true,
-          iconType: LearningElementTypes.h5p,
-        }),
-      );
+      const { container } = render(display.bottomTooltip(true));
       expect(screen.getByAltText("required")).toBeInTheDocument();
       const completedIcon = screen.getByAltText("completed");
       expect(completedIcon).toBeInTheDocument();
