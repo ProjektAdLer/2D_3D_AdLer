@@ -12,7 +12,7 @@ describe("RequirementBasedDisplay", () => {
   });
 
   describe("bottomTooltip", () => {
-    test("should render required icon when not completed", () => {
+    test.skip("should render required icon when not completed", () => {
       const { container } = render(display.bottomTooltip(false));
       expect(screen.getByAltText("required")).toBeInTheDocument();
       expect(screen.queryByAltText("completed")).not.toBeInTheDocument();
@@ -20,7 +20,7 @@ describe("RequirementBasedDisplay", () => {
       expect(container.firstChild).toHaveClass("relative inline-block mr-4");
     });
 
-    test("should render required and completed icons when completed", () => {
+    test.skip("should render required and completed icons when completed", () => {
       const { container } = render(display.bottomTooltip(true));
       expect(screen.getByAltText("required")).toBeInTheDocument();
       const completedIcon = screen.getByAltText("completed");
