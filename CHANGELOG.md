@@ -31,6 +31,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - logout not deleting player progress data
 - first items of face category not shown in 3D avatar preview
 - inconsistent naming of npc files
+- cut header bar texts in menus
 
 ### Deprecated
 
