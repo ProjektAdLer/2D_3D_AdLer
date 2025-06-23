@@ -33,6 +33,7 @@ export default function SingleStoryLayout({
               shape="freeFloatLeft"
               onClick={() => controller.onBackToSelectionButtonClicked()}
               data-testid="back"
+              title="Zurück zur Auswahl"
             >
               {"\u21A9"}
             </StyledButton>
