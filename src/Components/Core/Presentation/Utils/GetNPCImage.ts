@@ -58,6 +58,26 @@ const ImageDB = {
       `../../../../Assets/misc/quizBackgrounds/a-npc-bullylight-male/a-npc-bullylight-male-${value}.png`,
     );
   }),
+  bullyDarkFemale: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-bullydark-female/a-npc-bullydark-female-${value}.png`,
+    );
+  }),
+  bullyDarkMale: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-bullydark-male/a-npc-bullydark-male-${value}.png`,
+    );
+  }),
+  bullyLightFemale: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-bullylight-female/a-npc-bullylight-female-${value}.png`,
+    );
+  }),
+  bullyLightMale: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-bullylight-male/a-npc-bullylight-male-${value}.png`,
+    );
+  }),
   defaultDarkFemale: keys.map((value) => {
     return require(
       `../../../../Assets/misc/quizBackgrounds/a-npc-defaultdark-female/a-npc-defaultdark-female-${value}.png`,
@@ -102,8 +122,28 @@ const ImageDB = {
     return require(
       `../../../../Assets/misc/quizBackgrounds/a-npc-hiphoplight-female/a-npc-hiphoplight-female-${value}.png`,
     );
-  }),
+  }), // for backwords compability
   hiphopMale: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-hiphoplight-male/a-npc-hiphoplight-male-${value}.png`,
+    );
+  }), // for backwords compability
+  hiphopDarkFemale: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-hiphopdark-female/a-npc-hiphopdark-female-${value}.png`,
+    );
+  }),
+  hiphopDarkMale: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-hiphopdark-male/a-npc-hiphopdark-male-${value}.png`,
+    );
+  }),
+  hiphopLightFemale: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-hiphoplight-female/a-npc-hiphoplight-female-${value}.png`,
+    );
+  }),
+  hiphopLightMale: keys.map((value) => {
     return require(
       `../../../../Assets/misc/quizBackgrounds/a-npc-hiphoplight-male/a-npc-hiphoplight-male-${value}.png`,
     );
@@ -196,6 +236,10 @@ const imageMap: ImageMap = new Map([
   [QuizElementModelTypes.AleRobotNPC, ImageDB.aleRobot],
   [QuizElementModelTypes.BullyFemaleNPC, ImageDB.bullyFemale],
   [QuizElementModelTypes.BullyMaleNPC, ImageDB.bullyMale],
+  [QuizElementModelTypes.BullyDarkFemaleNPC, ImageDB.bullyDarkFemale],
+  [QuizElementModelTypes.BullyDarkMaleNPC, ImageDB.bullyDarkMale],
+  [QuizElementModelTypes.BullyLightFemaleNPC, ImageDB.bullyLightFemale],
+  [QuizElementModelTypes.BullyLightMaleNPC, ImageDB.bullyLightMale],
   [QuizElementModelTypes.DefaultDarkFemaleNPC, ImageDB.defaultDarkFemale],
   [QuizElementModelTypes.DefaultDarkMaleNPC, ImageDB.defaultDarkMale],
   [QuizElementModelTypes.DefaultLightMaleNPC, ImageDB.defaultLightMale],
@@ -204,6 +248,18 @@ const imageMap: ImageMap = new Map([
   [QuizElementModelTypes.DozentGeorgNPC, ImageDB.dozentGeorg],
   [QuizElementModelTypes.DozentJoergNPC, ImageDB.dozentJoerg],
   [QuizElementModelTypes.DozentLukasNPC, ImageDB.dozentLukas],
+
+  [QuizElementModelTypes.TeamAMaleNPC, ImageDB.dozentLukas],
+  [QuizElementModelTypes.TeamBMaleNPC, ImageDB.dozentGeorg],
+  [QuizElementModelTypes.TeamCMaleNPC, ImageDB.dozentDaniel],
+  [QuizElementModelTypes.TeamDMaleNPC, ImageDB.dozentJoerg],
+  [QuizElementModelTypes.TeamEFemaleNPC, ImageDB.dozentAntonia],
+
+  [QuizElementModelTypes.HipHopDarkFemaleNPC, ImageDB.hiphopDarkFemale],
+  [QuizElementModelTypes.HipHopDarkMaleNPC, ImageDB.hiphopDarkMale],
+  [QuizElementModelTypes.HipHopLightFemaleNPC, ImageDB.hiphopLightFemale],
+  [QuizElementModelTypes.HipHopLightMaleNPC, ImageDB.hiphopLightMale],
+
   [QuizElementModelTypes.HiphopFemaleNPC, ImageDB.hiphopFemale],
   [QuizElementModelTypes.HiphopMaleNPC, ImageDB.hiphopMale],
   [QuizElementModelTypes.NerdDarkFemaleNPC, ImageDB.nerdDarkFemale],
@@ -234,7 +290,11 @@ export function getNPCImage(
 
   const index = Number(close) * EmotionMap[emotion];
 
-  const result = imageMap.get(model)?.[index];
+  let result = imageMap.get(model)?.[index];
+
+  if (!result) {
+    result = imageMap.get(model)?.[EmotionMap.welcome];
+  }
 
   if (!result) {
     return ImageDB.aleRobot[0];

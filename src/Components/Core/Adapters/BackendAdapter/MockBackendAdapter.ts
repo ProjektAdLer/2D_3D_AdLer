@@ -26,6 +26,7 @@ import { BackendAvatarConfigTO } from "../../Application/DataTransferObjects/Bac
 import SimpleWorldAWT from "./MockBackendData/SimpleWorldAWT";
 import SubthemeWorldAWT from "./MockBackendData/SubthemeWorldAWT";
 import RequirementsGradingAWT from "./MockBackendData/RequirementsGradingAWT";
+import NPCModelAWT from "./MockBackendData/NPCModelAWT";
 
 @injectable()
 export default class MockBackendAdapter implements IBackendPort {
@@ -84,6 +85,7 @@ export default class MockBackendAdapter implements IBackendPort {
     if (worldID === 1) worldToUse = ThemeWorldAWT;
     else if (worldID === 2) worldToUse = StoryWorldAWT;
     else if (worldID === 3) worldToUse = SubthemeWorldAWT;
+    else if (worldID === 4) worldToUse = NPCModelAWT;
     else if (worldID === 5) worldToUse = RequirementsGradingAWT;
     else worldToUse = SimpleWorldAWT;
 
@@ -175,6 +177,7 @@ export default class MockBackendAdapter implements IBackendPort {
     if (worldID === 1) worldToUse = SimpleWorldAWT;
     else if (worldID === 2) worldToUse = StoryWorldAWT;
     else if (worldID === 3) worldToUse = ThemeWorldAWT;
+    else if (worldID === 4) worldToUse = NPCModelAWT;
     else if (worldID === 5) worldToUse = RequirementsGradingAWT;
     else worldToUse = SubthemeWorldAWT;
 

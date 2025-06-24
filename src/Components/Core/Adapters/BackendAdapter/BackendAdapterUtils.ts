@@ -11,6 +11,7 @@ import {
 import BackendSpaceTO from "../../Application/DataTransferObjects/BackendSpaceTO";
 import BackendWorldTO from "../../Application/DataTransferObjects/BackendWorldTO";
 import {
+  CompabilityElementModelTypesLookUp,
   LearningElementModel,
   isValidLearningElementModelType,
 } from "../../Domain/LearningElementModels/LearningElementModelTypes";
@@ -223,14 +224,24 @@ export default class BackendAdapterUtils {
     elementTO.difficulty = apiElement.elementDifficulty ?? 0;
   }
   private static extractModelData(modelData?: string): string | undefined {
-    if (
-      modelData === undefined ||
-      !isValidLearningElementModelType(modelData)
-    ) {
-      return undefined;
+    if (modelData === undefined) return undefined;
+
+    if (!isValidLearningElementModelType(modelData) && modelData !== "") {
+      return this.checkLearningElementModelName(modelData);
     } else {
       return modelData;
     }
+  }
+
+  // checks incomming name with specific model name lookup table for compability reasons ~ sb
+  private static checkLearningElementModelName(
+    name: string,
+  ): string | undefined {
+    const result = CompabilityElementModelTypesLookUp[name];
+    if (result) {
+      return result;
+    }
+    return undefined;
   }
 
   private static extractAdaptivityData(
