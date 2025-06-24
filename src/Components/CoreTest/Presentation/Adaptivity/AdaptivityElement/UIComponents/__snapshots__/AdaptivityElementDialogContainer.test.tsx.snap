@@ -41,7 +41,7 @@ exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for mod
   alt="LearningImage!"
   class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
   data-testid="npcImage"
-  src="a-npc-dozentgeorg-welcome.png"
+  src="a-npc-teamb-male-welcome.png"
 />
 `;
 
@@ -50,7 +50,7 @@ exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for mod
   alt="LearningImage!"
   class="visible h-16 -scale-x-100 lg:invisible lg:h-0"
   data-testid="npcImage"
-  src="a-npc-dozentgeorg-welcome.png"
+  src="a-npc-teamb-male-welcome.png"
 />
 `;
 
@@ -59,7 +59,7 @@ exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for mod
   alt="LearningImage!"
   class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
   data-testid="npcImage"
-  src="a-npc-dozentjoerg-welcome.png"
+  src="a-npc-teamd-male-welcome.png"
 />
 `;
 
@@ -68,7 +68,7 @@ exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for mod
   alt="LearningImage!"
   class="visible h-16 -scale-x-100 lg:invisible lg:h-0"
   data-testid="npcImage"
-  src="a-npc-dozentjoerg-welcome.png"
+  src="a-npc-teamd-male-welcome.png"
 />
 `;
 
