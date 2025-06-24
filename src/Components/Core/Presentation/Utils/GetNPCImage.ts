@@ -68,6 +68,11 @@ const ImageDB = {
       `../../../../Assets/misc/quizBackgrounds/a-npc-defaultdark-male/a-npc-defaultdark-male-${value}.png`,
     );
   }),
+  defaultLightMale: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-defaultlight-male/a-npc-defaultlight-male-${value}.png`,
+    );
+  }),
   dozentAntonia: keys.map((value) => {
     return require(
       `../../../../Assets/misc/quizBackgrounds/a-npc-teame-female/a-npc-teame-female-${value}.png`,
@@ -193,7 +198,7 @@ const imageMap: ImageMap = new Map([
   [QuizElementModelTypes.BullyMaleNPC, ImageDB.bullyMale],
   [QuizElementModelTypes.DefaultDarkFemaleNPC, ImageDB.defaultDarkFemale],
   [QuizElementModelTypes.DefaultDarkMaleNPC, ImageDB.defaultDarkMale],
-  // [QuizElementModelTypes.DefaultLightMaleNPC, ImageDB.defaultLightMale],
+  [QuizElementModelTypes.DefaultLightMaleNPC, ImageDB.defaultLightMale],
   [QuizElementModelTypes.DozentAntoniaNPC, ImageDB.dozentAntonia],
   [QuizElementModelTypes.DozentDanielNPC, ImageDB.dozentDaniel],
   [QuizElementModelTypes.DozentGeorgNPC, ImageDB.dozentGeorg],
