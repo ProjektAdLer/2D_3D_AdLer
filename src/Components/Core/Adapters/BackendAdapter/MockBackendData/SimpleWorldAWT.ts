@@ -61,7 +61,7 @@ const SimpleWorldAWT: AWT = {
         elementDescription: "Beschreibung des Text-Lernelements",
         elementGoals: ["Elementziel 1/3", "Elementziel 2/3", "Elementziel 3/3"],
         elementFileType: "text",
-        elementMaxScore: 1,
+        elementMaxScore: 9,
         elementModel: "l_trophy_bronze",
         elementDifficulty: 200,
       },

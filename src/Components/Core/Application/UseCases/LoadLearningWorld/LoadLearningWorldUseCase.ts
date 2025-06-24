@@ -510,8 +510,6 @@ export default class LoadLearningWorldUseCase
   private createDisplayStrategy(
     flag?: string | null,
   ): IElementCompletionDisplay {
-    if (flag && flag === GradingStyle.requirement) {
-      return new RequirementBasedDisplay();
-    } else return new PointBasedDisplay();
+    return new RequirementBasedDisplay();
   }
 }
