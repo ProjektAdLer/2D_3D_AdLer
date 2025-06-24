@@ -29,7 +29,7 @@ const ImageDB = {
   // defaults
   defaultSuburbNPC: keys.map((value) => {
     return require(
-      `../../../../Assets/misc/quizBackgrounds/a-npc-dozentjoerg/a-npc-dozentjoerg-${value}.png`,
+      `../../../../Assets/misc/quizBackgrounds/a-npc-teamd-male/a-npc-teamd-male-${value}.png`,
     );
   }),
   defaultArcadeNPC: keys.map((value) => {
@@ -39,7 +39,7 @@ const ImageDB = {
   }),
   defaultCampusNPC: keys.map((value) => {
     return require(
-      `../../../../Assets/misc/quizBackgrounds/a-npc-dozentgeorg/a-npc-dozentgeorg-${value}.png`,
+      `../../../../Assets/misc/quizBackgrounds/a-npc-teamb-male/a-npc-teamb-male-${value}.png`,
     );
   }),
   // non defaults
@@ -50,12 +50,12 @@ const ImageDB = {
   }),
   bullyFemale: keys.map((value) => {
     return require(
-      `../../../../Assets/misc/quizBackgrounds/a-npc-bully-female/a-npc-bully-female-${value}.png`,
+      `../../../../Assets/misc/quizBackgrounds/a-npc-bullylight-female/a-npc-bullylight-female-${value}.png`,
     );
   }),
   bullyMale: keys.map((value) => {
     return require(
-      `../../../../Assets/misc/quizBackgrounds/a-npc-bully-male/a-npc-bully-male-${value}.png`,
+      `../../../../Assets/misc/quizBackgrounds/a-npc-bullylight-male/a-npc-bullylight-male-${value}.png`,
     );
   }),
   defaultDarkFemale: keys.map((value) => {
@@ -68,39 +68,44 @@ const ImageDB = {
       `../../../../Assets/misc/quizBackgrounds/a-npc-defaultdark-male/a-npc-defaultdark-male-${value}.png`,
     );
   }),
+  defaultLightMale: keys.map((value) => {
+    return require(
+      `../../../../Assets/misc/quizBackgrounds/a-npc-defaultlight-male/a-npc-defaultlight-male-${value}.png`,
+    );
+  }),
   dozentAntonia: keys.map((value) => {
     return require(
-      `../../../../Assets/misc/quizBackgrounds/a-npc-dozentantonia/a-npc-dozentantonia-${value}.png`,
+      `../../../../Assets/misc/quizBackgrounds/a-npc-teame-female/a-npc-teame-female-${value}.png`,
     );
   }),
   dozentDaniel: keys.map((value) => {
     return require(
-      `../../../../Assets/misc/quizBackgrounds/a-npc-dozentdaniel/a-npc-dozentdaniel-${value}.png`,
+      `../../../../Assets/misc/quizBackgrounds/a-npc-teamc-male/a-npc-teamc-male-${value}.png`,
     );
   }),
   dozentGeorg: keys.map((value) => {
     return require(
-      `../../../../Assets/misc/quizBackgrounds/a-npc-dozentgeorg/a-npc-dozentgeorg-${value}.png`,
+      `../../../../Assets/misc/quizBackgrounds/a-npc-teamb-male/a-npc-teamb-male-${value}.png`,
     );
   }),
   dozentJoerg: keys.map((value) => {
     return require(
-      `../../../../Assets/misc/quizBackgrounds/a-npc-dozentjoerg/a-npc-dozentjoerg-${value}.png`,
+      `../../../../Assets/misc/quizBackgrounds/a-npc-teamd-male/a-npc-teamd-male-${value}.png`,
     );
   }),
   dozentLukas: keys.map((value) => {
     return require(
-      `../../../../Assets/misc/quizBackgrounds/a-npc-dozentlukas/a-npc-dozentlukas-${value}.png`,
+      `../../../../Assets/misc/quizBackgrounds/a-npc-teama-male/a-npc-teama-male-${value}.png`,
     );
   }),
   hiphopFemale: keys.map((value) => {
     return require(
-      `../../../../Assets/misc/quizBackgrounds/a-npc-hiphop-female/a-npc-hiphop-female-${value}.png`,
+      `../../../../Assets/misc/quizBackgrounds/a-npc-hiphoplight-female/a-npc-hiphoplight-female-${value}.png`,
     );
   }),
   hiphopMale: keys.map((value) => {
     return require(
-      `../../../../Assets/misc/quizBackgrounds/a-npc-hiphop-male/a-npc-hiphop-male-${value}.png`,
+      `../../../../Assets/misc/quizBackgrounds/a-npc-hiphoplight-male/a-npc-hiphoplight-male-${value}.png`,
     );
   }),
   nerdDarkFemale: keys.map((value) => {
@@ -193,7 +198,7 @@ const imageMap: ImageMap = new Map([
   [QuizElementModelTypes.BullyMaleNPC, ImageDB.bullyMale],
   [QuizElementModelTypes.DefaultDarkFemaleNPC, ImageDB.defaultDarkFemale],
   [QuizElementModelTypes.DefaultDarkMaleNPC, ImageDB.defaultDarkMale],
-  // [QuizElementModelTypes.DefaultLightMaleNPC, ImageDB.defaultLightMale],
+  [QuizElementModelTypes.DefaultLightMaleNPC, ImageDB.defaultLightMale],
   [QuizElementModelTypes.DozentAntoniaNPC, ImageDB.dozentAntonia],
   [QuizElementModelTypes.DozentDanielNPC, ImageDB.dozentDaniel],
   [QuizElementModelTypes.DozentGeorgNPC, ImageDB.dozentGeorg],

@@ -13,6 +13,8 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - custom icons for save button in avatar editor and avatar preview controls
 - icon for xp
 - added randomize avatar feature
+- new npc glbs
+- new npc emotion renderings
 
 ### Changed
 
@@ -28,6 +30,8 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - WorldCompletionModal responsiv styling
 - logout not deleting player progress data
 - first items of face category not shown in 3D avatar preview
+- inconsistent naming of npc files
+- cut header bar texts in menus
 
 ### Deprecated
 

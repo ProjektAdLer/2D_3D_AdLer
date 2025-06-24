@@ -51,9 +51,9 @@ export default function MenuHeaderBar(props: Readonly<MenuHeaderBarProps>) {
           props.location === props.externContent.contentLocation &&
           props.externContent.content}
       </div>
-      <div className="flex justify-center w-full">
+      <div className="flex justify-center items-center w-full">
         <StyledContainer
-          className="text-xl truncate lg:text-4xl font-[roboto]"
+          className="text-xl truncate lg:text-4xl font-[roboto] py-2"
           textColor="darkblue"
         >
           {props.location === "space" ? currentWorldName : null}
