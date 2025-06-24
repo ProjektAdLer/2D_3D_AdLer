@@ -26,7 +26,7 @@ export default class RequirementBasedDisplay
         )}
         {data.xp !== undefined && data.xp > 0 && (
           <div className="flex items-center ml-1">
-            <span className="font-semibold">{data.xp}</span>
+            <span className="font-semibold">{Math.round(data.xp)}</span>
             <img src={XPIcon} alt="XP" className="w-5 h-5 ml-0.5" />
           </div>
         )}
