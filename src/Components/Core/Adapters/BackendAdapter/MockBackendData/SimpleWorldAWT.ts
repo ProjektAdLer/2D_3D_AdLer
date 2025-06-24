@@ -24,7 +24,7 @@ const SimpleWorldAWT: AWT = {
         spaceId: 1,
         spaceName: "Mensa Theme",
         spaceDescription: "Raumbeschreibung der kleinen Welt",
-        requiredPointsToComplete: 3,
+        requiredPointsToComplete: 10,
         spaceSlotContents: [
           1,
           2,
