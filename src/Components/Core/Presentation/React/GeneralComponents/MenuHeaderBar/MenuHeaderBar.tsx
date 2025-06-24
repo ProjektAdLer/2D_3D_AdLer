@@ -11,7 +11,9 @@ import worldIcon from "../../../../../../Assets/icons/world-menu.svg";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import HelpDeskModal from "../HelpDeskModal/HelpDeskModal";
 import HelpDeskButton from "../HelpDeskButton/HelpDeskButton";
+import ExperiencePointsPanel from "../../LearningSpaceDisplay/ProgressScorePanel/ExperiencePointsPanel/ExperiencePointsPanel";
 import { useTranslation } from "react-i18next";
+import { GradingStyle } from "src/Components/Core/Domain/Types/GradingStyle";
 
 type MenuHeaderBarProps = {
   className: string;
@@ -29,6 +31,9 @@ export default function MenuHeaderBar(props: Readonly<MenuHeaderBarProps>) {
   >(BUILDER_TYPES.IHeaderBarBuilder);
 
   const [currentWorldName] = useObservable<string>(viewModel?.currentWorldName);
+  const [gradingStyle] = useObservable<GradingStyle | undefined>(
+    viewModel?.gradingStyle,
+  );
 
   const { t: translate } = useTranslation("start");
 
@@ -66,6 +71,9 @@ export default function MenuHeaderBar(props: Readonly<MenuHeaderBarProps>) {
         </StyledContainer>
       </div>
       <div className="flex justify-end w-1/2 ">
+        {props.location === "space" && gradingStyle && (
+          <ExperiencePointsPanel gradingStyle={gradingStyle} />
+        )}
         <HelpDeskButton />
         <HelpDeskModal />
       </div>
