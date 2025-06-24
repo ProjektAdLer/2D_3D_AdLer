@@ -15,13 +15,6 @@ export default class RequirementBasedDisplay
         {data.isRequired && (
           <div className="relative inline-block">
             <img src={RequiredIcon} alt="required" className="w-7" />
-            {data.hasScored && (
-              <img
-                src={CheckIcon}
-                alt="completed"
-                className="absolute w-5 -top-1 -right-3"
-              />
-            )}
           </div>
         )}
         {data.xp !== undefined && data.xp > 0 && (
@@ -38,13 +31,6 @@ export default class RequirementBasedDisplay
     return element.points ? (
       <div className="relative inline-block">
         <img src={RequiredIcon} alt="required" className="w-8" />
-        {element.hasScored && (
-          <img
-            src={CheckIcon}
-            alt="completed"
-            className="absolute w-6 -top-1 -right-4"
-          />
-        )}
       </div>
     ) : (
       <></>
