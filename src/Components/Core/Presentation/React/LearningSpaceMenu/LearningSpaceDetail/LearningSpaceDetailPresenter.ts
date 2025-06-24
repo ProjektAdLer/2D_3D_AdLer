@@ -45,10 +45,13 @@ export default class LearningSpaceDetailPresenter
           hasScored: elementTO.hasScored,
           points: elementTO.value,
           isRequired: elementTO.isRequired,
+          xp:
+            (elementTO.difficulty?.baseXP ?? 0) *
+            (elementTO.difficulty?.multiplicator ?? 1),
         });
         return result;
       },
-      [] as LearningElementInfo[],
+      [] as (LearningElementInfo & { xp: number })[],
     );
 
     this.viewModel.requiredPoints.Value = spaceTO.requiredScore;

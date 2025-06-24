@@ -12,28 +12,40 @@ export default class RequirementBasedDisplay
   bottomTooltip(data: BottomTooltipDisplayData): JSX.Element {
     return (
       <div className="flex items-center gap-1">
+        {data.xp !== undefined && data.xp > 0 && (
+          <div className="flex items-center">
+            <span className="font-semibold">{Math.round(data.xp)}</span>
+            <img src={XPIcon} alt="XP" className="w-5 h-5 ml-0.5" />
+          </div>
+        )}
         {data.isRequired && (
           <div className="relative inline-block">
             <img src={RequiredIcon} alt="required" className="w-7" />
-          </div>
-        )}
-        {data.xp !== undefined && data.xp > 0 && (
-          <div className="flex items-center ml-1">
-            <span className="font-semibold">{Math.round(data.xp)}</span>
-            <img src={XPIcon} alt="XP" className="w-5 h-5 ml-0.5" />
           </div>
         )}
       </div>
     );
   }
 
-  learningSpaceDetail(element: LearningElementInfo): JSX.Element {
-    return element.points ? (
-      <div className="relative inline-block">
-        <img src={RequiredIcon} alt="required" className="w-8" />
+  learningSpaceDetail(
+    element: LearningElementInfo & { xp?: number },
+  ): JSX.Element {
+    return (
+      <div className="flex items-center gap-1">
+        {element.xp !== undefined && element.xp > 0 && (
+          <div className="flex items-center">
+            <span className="font-semibold">{Math.round(element.xp)}</span>
+            <img src={XPIcon} alt="XP" className="w-5 h-5 ml-0.5" />
+          </div>
+        )}
+        {element.points ? (
+          <div className="relative inline-block">
+            <img src={RequiredIcon} alt="required" className="w-8" />
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
-    ) : (
-      <></>
     );
   }
 
