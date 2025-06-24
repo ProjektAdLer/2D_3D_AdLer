@@ -4,7 +4,6 @@ import StyledButton from "../../ReactRelated/ReactBaseComponents/StyledButton";
 import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledContainer";
 import FullscreenSwitch from "~ReactComponents/LearningSpaceDisplay/FullscreenSwitch/FullscreenSwitch";
 import engineLogo from "../../../../../../Assets/icons/adler-engine.svg";
-// import hamburgerButton from "../../../../../../Assets/icons/hamburger-menu.svg";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import SideBarViewModel from "./SideBarViewModel";
 import SideBarController from "./SideBarController";
@@ -14,12 +13,12 @@ import spaceMenuIcon from "../../../../../../Assets/icons/space-menu.svg";
 import controlsIcon from "../../../../../../Assets/icons/controls.svg";
 import worldCompletedIcon from "../../../../../../Assets/icons/world-completed.svg";
 import smartphoneIcon from "../../../../../../Assets/icons/smartphone.svg";
-// import pauseIcon from "../../../../../../Assets/icons/pause.svg";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import HelpDeskButton from "~ReactComponents/GeneralComponents/HelpDeskButton/HelpDeskButton";
 import HelpDeskModal from "~ReactComponents/GeneralComponents/HelpDeskModal/HelpDeskModal";
 import { useTranslation } from "react-i18next";
+import VERSION from "src";
 
 export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
   const [viewModel, controller] = useBuilder<
@@ -52,7 +51,6 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
       initialOpen={false}
       useAsTriggerOnly={true}
     >
-      {/*<StyledContainer className="flex flex-col p-2 border-8 border-black rounded-lg w-44 lg:w-64 bg-whitetrans ">*/}
       <StyledContainer className="relative w-[11rem] md:w-[13rem] lg:w-60 border-8 rounded-2xl mobile-portrait:w-48 mobile-landscape:w-[65vw] mobile-landscape:max-h-64 mobile-landscape:ml-8 border-adlerdarkblue bg-white flex flex-col z-0">
         <header className="relative z-20 flex items-center justify-between w-full mt-1">
           <span className="ml-1 font-bold text-2xs lg:text-md text-adlerdarkblue">
@@ -136,58 +134,17 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
             >
               <img src={controlsIcon} alt="Steuerungserklärung" />
             </StyledButton>
-            <p className="font-bold break-all text-center text-2xs lg:text-md text-adlerdarkblue text-outline">
+            <p className="font-bold text-center break-all text-2xs lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_narrativeFrameworkIntro")}
             </p>
           </div>
-
-          {/* Empty placeholder containers for future functions/buttons */}
-          <div className="flex flex-col justify-start items-center max-h-[25%] invisible ">
-            <StyledButton
-              onClick={controller.onControlsExplanationButtonClicked}
-            >
-              <img src={controlsIcon} alt="Steuerungserklärung" />
-            </StyledButton>
-            <p className="font-bold text-center text-2xs lg:text-md text-adlerdarkblue text-outline">
-              {translate("sidebar_controls")}
-            </p>
-          </div>
-
-          <div className="flex flex-col justify-start items-center max-h-[25%] invisible ">
-            <StyledButton
-              onClick={controller.onControlsExplanationButtonClicked}
-            >
-              <img src={controlsIcon} alt="Steuerungserklärung" />
-            </StyledButton>
-            <p className="font-bold text-center text-2xs lg:text-md text-adlerdarkblue text-outline">
-              {translate("sidebar_controls")}
-            </p>
-          </div>
-
-          <div className="flex flex-col justify-start items-center max-h-[25%] invisible ">
-            <StyledButton
-              onClick={controller.onControlsExplanationButtonClicked}
-            >
-              <img src={controlsIcon} alt="Steuerungserklärung" />
-            </StyledButton>
-            <p className="font-bold text-center text-2xs lg:text-md text-adlerdarkblue text-outline">
-              {translate("sidebar_controls")}
-            </p>
-          </div>
-
-          <div className="flex flex-col justify-start items-center max-h-[25%] invisible ">
-            <StyledButton
-              onClick={controller.onControlsExplanationButtonClicked}
-            >
-              <img src={controlsIcon} alt="Steuerungserklärung" />
-            </StyledButton>
-            <p className="font-bold text-center text-2xs lg:text-md text-adlerdarkblue text-outline">
-              {translate("sidebar_controls")}
-            </p>
-          </div>
-          {/* End of empty placeholder containers*/}
         </div>
-        <footer className="z-20 self-center w-1/4 h-2 m-1 rounded-sm bg-adlerdarkblue"></footer>
+        <footer className="relative z-20 flex items-center justify-between w-full mt-1">
+          <span className="bg-adlerdarkblue h-2 w-1/6 rounded-full absolute left-[calc(41.6%-0.25rem)] mobile-landscape:hidden"></span>
+          <span className="ml-1 font-bold text-2xs lg:text-md text-adlerdarkblue">
+            {"Version: " + VERSION}
+          </span>
+        </footer>
         <img
           src={engineLogo}
           alt="inventory background"
