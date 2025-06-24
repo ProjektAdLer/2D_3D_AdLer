@@ -35,7 +35,7 @@ export default class LearningSpaceDetailPresenter
     this.viewModel.goals.Value = spaceTO.goals;
     this.viewModel.isAvailable.Value = spaceTO.isAvailable;
 
-    this.viewModel.elements.Value = spaceTO.elements.reduce(
+    const elementsWithXP = spaceTO.elements.reduce(
       (result, elementTO) => {
         if (!elementTO) return result;
 
@@ -53,7 +53,17 @@ export default class LearningSpaceDetailPresenter
       },
       [] as (LearningElementInfo & { xp: number })[],
     );
+    this.viewModel.elements.Value = elementsWithXP;
 
-    this.viewModel.requiredPoints.Value = spaceTO.requiredScore;
+    this.viewModel.currentXP.Value = elementsWithXP
+      .filter((e) => e.hasScored)
+      .reduce((acc, element) => acc + (element.xp ?? 0), 0);
+
+    this.viewModel.maxXP.Value = elementsWithXP.reduce(
+      (acc, element) => acc + (element.xp ?? 0),
+      0,
+    );
+
+    this.viewModel.completionDisplay = spaceTO.gradingStyle;
   }
 }

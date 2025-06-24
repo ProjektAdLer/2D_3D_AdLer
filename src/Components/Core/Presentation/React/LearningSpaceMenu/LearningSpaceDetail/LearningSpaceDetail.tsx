@@ -14,6 +14,7 @@ import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import { useTranslation } from "react-i18next";
 import { LearningElementInfo } from "src/Components/Core/Domain/Types/LearningElementInfo";
+import RequirementBasedDisplay from "../../../Utils/ElementCompletionDisplay/RequirementBasedDisplay";
 
 export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
   const [viewModel, controller] = useBuilder<
@@ -24,8 +25,12 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
   const [name] = useObservable<string>(viewModel.name);
   const [description] = useObservable<string>(viewModel.description);
   const [goals] = useObservable<string[]>(viewModel.goals);
-  const [elements] = useObservable<LearningElementInfo[]>(viewModel.elements);
+  const [elements] = useObservable<(LearningElementInfo & { xp: number })[]>(
+    viewModel.elements,
+  );
   const [requiredPoints] = useObservable<number>(viewModel.requiredPoints);
+  const [currentXP] = useObservable<number>(viewModel.currentXP);
+  const [maxXP] = useObservable<number>(viewModel.maxXP);
   const [spaces] = useObservable<LearningSpaceDetailLearningSpaceData[]>(
     viewModel.spaces,
   );
@@ -139,12 +144,19 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
             </div>
           </section>
         )}
-        {viewModel.completionDisplay.learningSpaceDetailSummary(
-          requiredPoints,
-          translate("requiredPoints"),
-          elements.reduce((acc, element) => acc + element.points, 0),
-          translate("maximumPoints"),
-        )}
+        {viewModel.completionDisplay instanceof RequirementBasedDisplay
+          ? viewModel.completionDisplay.learningSpaceDetailSummary(
+              currentXP,
+              "",
+              maxXP,
+              "",
+            )
+          : viewModel.completionDisplay.learningSpaceDetailSummary(
+              requiredPoints,
+              translate("requiredPoints"),
+              elements.reduce((acc, element) => acc + element.points, 0),
+              translate("maximumPoints"),
+            )}
         {elements.length > 0 && (
           <div className="pb-2 border-b border-gray-500"></div>
         )}

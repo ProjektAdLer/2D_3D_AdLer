@@ -21,11 +21,12 @@ export default class LearningSpaceDetailViewModel {
   description: Observable<string> = new Observable<string>("");
   goals: Observable<string[]> = new Observable<string[]>([]);
   requiredPoints: Observable<number> = new Observable<number>(0);
+  currentXP: Observable<number> = new Observable<number>(0);
+  maxXP: Observable<number> = new Observable<number>(0);
   isAvailable: Observable<boolean> = new Observable<boolean>(false);
 
   completionDisplay: IElementCompletionDisplay;
 
-  elements: Observable<LearningElementInfo[]> = new Observable<
-    LearningElementInfo[]
-  >([]);
+  elements: Observable<(LearningElementInfo & { xp: number })[]> =
+    new Observable<(LearningElementInfo & { xp: number })[]>([]);
 }
