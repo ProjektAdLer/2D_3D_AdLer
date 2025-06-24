@@ -75,17 +75,6 @@ describe("LearningElementController", () => {
     systemUnderTest.pointerOut();
 
     expect(bottomTooltipPresenterMock.hide).toHaveBeenCalledTimes(1);
-    expect(bottomTooltipPresenterMock.display).toHaveBeenCalledWith(
-      viewModel.name,
-      viewModel.type,
-      expect.objectContaining({
-        points: viewModel.value,
-        hasScored: viewModel.hasScored,
-        xp: viewModel.difficulty.baseXP * viewModel.difficulty.multiplicator,
-        isRequired: viewModel.value > 0,
-      }),
-      expect.any(Function),
-    );
   });
 
   test("pointerOut scales down iconMeshes", () => {

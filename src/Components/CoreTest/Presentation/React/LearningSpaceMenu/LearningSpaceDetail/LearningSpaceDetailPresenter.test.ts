@@ -102,6 +102,7 @@ describe("LearningSpaceDetailPresenter", () => {
         hasScored: false,
         points: 1,
         isRequired: undefined,
+        xp: 0,
       },
       {
         type: "text",
@@ -109,9 +110,8 @@ describe("LearningSpaceDetailPresenter", () => {
         hasScored: false,
         points: 1,
         isRequired: undefined,
+        xp: 0,
       },
-      // ["h5p", "Test Element 1", false, 1, undefined],
-      // ["text", "Test Element 2", false, 1, undefined],
     ]);
   });
 });

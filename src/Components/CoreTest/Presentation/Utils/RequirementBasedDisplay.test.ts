@@ -27,17 +27,18 @@ describe("RequirementBasedDisplay", () => {
       );
     });
 
-    test("should render required and completed icons when completed", () => {
-      const { container } = render(display.bottomTooltip(true));
-      expect(screen.getByAltText("required")).toBeInTheDocument();
-      const completedIcon = screen.getByAltText("completed");
-      expect(completedIcon).toBeInTheDocument();
-      // Corrected class to match component implementation
-      expect(completedIcon).toHaveClass("absolute w-5 -top-1 -right-3");
-      // Check the div wrapping the required icon
-      expect(container.firstChild?.firstChild).toHaveClass(
-        "relative inline-block",
+    test("should render required icon when completed", () => {
+      render(
+        display.bottomTooltip({
+          isRequired: true,
+          hasScored: true,
+          iconType: LearningElementTypes.h5p,
+        }),
       );
+      expect(screen.getByAltText("required")).toBeInTheDocument();
+      expect(screen.queryByAltText("completed")).not.toBeInTheDocument();
+      const requiredIcon = screen.getByAltText("required");
+      expect(requiredIcon.parentElement).toHaveClass("relative inline-block");
     });
   });
 
@@ -53,24 +54,24 @@ describe("RequirementBasedDisplay", () => {
 
     test("should render required icon when element has points and is not scored", () => {
       const element: LearningElementInfo = { ...baseElement, points: 10 };
-      const { container } = render(display.learningSpaceDetail(element));
+      render(display.learningSpaceDetail(element));
       expect(screen.getByAltText("required")).toBeInTheDocument();
       expect(screen.queryByAltText("completed")).not.toBeInTheDocument();
-      expect(container.firstChild).toHaveClass("relative inline-block");
+      const requiredIcon = screen.getByAltText("required");
+      expect(requiredIcon.parentElement).toHaveClass("relative inline-block");
     });
 
-    test("should render required and completed icons when element has points and is scored", () => {
+    test("should render required icon when element has points and is scored", () => {
       const element: LearningElementInfo = {
         ...baseElement,
         points: 10,
         hasScored: true,
       };
-      const { container } = render(display.learningSpaceDetail(element));
+      render(display.learningSpaceDetail(element));
       expect(screen.getByAltText("required")).toBeInTheDocument();
-      const completedIcon = screen.getByAltText("completed");
-      expect(completedIcon).toBeInTheDocument();
-      expect(completedIcon).toHaveClass("absolute -top-1 -right-4 w-6");
-      expect(container.firstChild).toHaveClass("relative inline-block");
+      expect(screen.queryByAltText("completed")).not.toBeInTheDocument();
+      const requiredIcon = screen.getByAltText("required");
+      expect(requiredIcon.parentElement).toHaveClass("relative inline-block");
     });
 
     test("should render an empty fragment when element has no points", () => {

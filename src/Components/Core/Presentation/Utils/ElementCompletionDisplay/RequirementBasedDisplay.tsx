@@ -30,6 +30,9 @@ export default class RequirementBasedDisplay
   learningSpaceDetail(
     element: LearningElementInfo & { xp?: number },
   ): JSX.Element {
+    if ((!element.xp || element.xp <= 0) && !element.points) {
+      return <></>;
+    }
     return (
       <div className="flex items-center gap-1">
         {element.xp !== undefined && element.xp > 0 && (
