@@ -17,6 +17,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - added randomize avatar feature
 - new npc glbs
 - new npc emotion renderings
+- Version number added to sidebar
 
 ### Changed
 
