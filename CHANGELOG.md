@@ -18,6 +18,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - new npc glbs
 - new npc emotion renderings
 - Version number added to sidebar
+- new level icon
 
 ### Changed
 

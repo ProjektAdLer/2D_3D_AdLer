@@ -5,7 +5,7 @@ import ExperiencePointsPanelViewModel, {
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import { useEffect, useState } from "react";
-import xpIcon from "../../../../../../../Assets/icons/xp.svg";
+import levelIcon from "../../../../../../../Assets/icons/level.svg";
 import { GradingStyle } from "src/Components/Core/Domain/Types/GradingStyle";
 import Progressbar from "~ReactComponents/ReactRelated/ReactBaseComponents/Progressbar";
 
@@ -48,7 +48,7 @@ export default function ExperiencePointsPanel({
       iconTextClassName="font-bold text-2xl text-center text-yellow-300"
       iconText={scoreInfo?.currentLevel.toString()}
       barClassName="w-20 font-bold text-center text-yellow-300 "
-      icon={xpIcon}
+      icon={levelIcon}
     />
   );
 }
