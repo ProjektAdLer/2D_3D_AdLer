@@ -35,7 +35,7 @@ const SimpleWorldAWT: AWT = {
           null,
           6,
           7,
-          null,
+          8,
           null,
           null,
           null,
@@ -74,7 +74,7 @@ const SimpleWorldAWT: AWT = {
         elementGoals: ["Elementziel 1/3", "Elementziel 2/3", "Elementziel 3/3"],
         elementFileType: "video",
         elementMaxScore: 2,
-        elementModel: "",
+        elementModel: "l-video-vrdesk-1",
       },
       {
         $type: "LearningElement",
@@ -126,7 +126,7 @@ const SimpleWorldAWT: AWT = {
         elementGoals: ["Elementziel 1/3", "Elementziel 2/3", "Elementziel 3/3"],
         elementFileType: "pdf",
         elementMaxScore: 1,
-        elementModel: "l_h5p_drawingtable_2",
+        elementModel: "l_h5p_drawingtable_2", // should load correct model via compability lookup table
       },
       {
         $type: "LearningElement",
@@ -137,7 +137,18 @@ const SimpleWorldAWT: AWT = {
         elementGoals: ["Elementziel 1/3", "Elementziel 2/3", "Elementziel 3/3"],
         elementFileType: "pdf",
         elementMaxScore: 1,
-        elementModel: "l-h5p-drawingtable-2",
+        elementModel: "l-h5p-drawingtable-2", //should load correct model natively
+      },
+      {
+        $type: "LearningElement",
+        elementId: 8,
+        elementName: "Ein zweites Video-Lernelement",
+        elementCategory: "video",
+        elementDescription: "Beschreibung des Video-Lernelements",
+        elementGoals: ["Elementziel 1/3", "Elementziel 2/3", "Elementziel 3/3"],
+        elementFileType: "video",
+        elementMaxScore: 2,
+        elementModel: "l_video_vrdesk_1",
       },
     ],
   },
