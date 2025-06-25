@@ -104,14 +104,18 @@ export default class CalculateInitialExperiencePointsUseCase
       easyElementCounter.numberOfElements +
       mediumElementCounter.numberOfElements * 1.5 +
       hardElementCounter.numberOfElements * 2;
-    const baseExperiencePoints = maxExperiencePoints / numberOfCalculationUnits;
+    const baseExperiencePoints = numberOfCalculationUnits
+      ? maxExperiencePoints / numberOfCalculationUnits
+      : 0;
     const currentExperiencePoints =
       (easyElementCounter.numberOfCompletedElements +
         mediumElementCounter.numberOfCompletedElements * 1.5 +
         hardElementCounter.numberOfCompletedElements * 2) *
       baseExperiencePoints;
     const currentLevel = Math.floor(
-      (currentExperiencePoints / maxExperiencePoints) * maxLevel,
+      (maxExperiencePoints
+        ? currentExperiencePoints / maxExperiencePoints
+        : 0) * maxLevel,
     );
 
     // Create Experience Points Entity
