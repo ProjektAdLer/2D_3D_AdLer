@@ -6,4 +6,5 @@ export enum EmotionType {
   angry = "angry",
   tired = "tired",
   shocked = "shocked",
+  default = "default",
 }
