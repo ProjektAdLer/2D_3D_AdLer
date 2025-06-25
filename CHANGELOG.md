@@ -13,12 +13,14 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 ### Added
 
 - custom icons for save button in avatar editor and avatar preview controls
+- xp bar
 - icon for xp
 - added randomize avatar feature
 - new npc glbs
 - new npc emotion renderings
 - Version number added to sidebar
 - new level icon
+- level-up window
 
 ### Changed
 

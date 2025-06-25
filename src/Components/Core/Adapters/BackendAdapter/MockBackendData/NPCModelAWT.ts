@@ -25,7 +25,7 @@ const spacesMock = [];
 
 for (let i = 0; i < introNPC.length; i++) {
   spacesMock.push({
-    spaceId: i,
+    spaceId: i + 1,
     spaceName: introNPC[i] + " / " + outroNPC[i],
     requiredPointsToComplete: 0,
     spaceSlotContents: [],
@@ -36,10 +36,12 @@ for (let i = 0; i < introNPC.length; i++) {
       introStory: {
         storyTexts: [""],
         elementModel: introNPC[i],
+        modelFacialExpression: "default",
       },
       outroStory: {
         storyTexts: [""],
         elementModel: outroNPC[i],
+        modelFacialExpression: "welcome",
       },
     },
   });

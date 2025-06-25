@@ -11,6 +11,7 @@ enum EmotionMap {
   angry,
   tired,
   shocked,
+  default,
 }
 
 // first welcome is substitute for not having a full-body image
@@ -23,6 +24,7 @@ const keys = [
   "angry",
   "tired",
   "shocked",
+  "default",
 ];
 
 const ImageDB = {
