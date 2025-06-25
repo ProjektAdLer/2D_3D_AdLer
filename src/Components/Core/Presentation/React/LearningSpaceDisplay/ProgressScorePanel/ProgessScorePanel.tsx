@@ -17,7 +17,10 @@ export default function ProgressScorePanel() {
     <>
       <LearningWorldScorePanel gradingStyle={viewModel.gradingStyle} />
       <LearningSpaceScorePanel gradingStyle={viewModel.gradingStyle} />
-      <ExperiencePointsPanel gradingStyle={viewModel.gradingStyle} />
+      <ExperiencePointsPanel
+        gradingStyle={viewModel.gradingStyle}
+        isButton={false}
+      />
     </>
   );
 }

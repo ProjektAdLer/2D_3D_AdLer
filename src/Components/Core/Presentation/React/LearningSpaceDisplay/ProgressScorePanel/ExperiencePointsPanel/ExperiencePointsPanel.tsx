@@ -11,6 +11,7 @@ import Progressbar from "~ReactComponents/ReactRelated/ReactBaseComponents/Progr
 
 interface PanelProps extends React.HTMLAttributes<HTMLDivElement> {
   gradingStyle: GradingStyle;
+  isButton: boolean;
 }
 
 export default function ExperiencePointsPanel({
@@ -39,12 +40,12 @@ export default function ExperiencePointsPanel({
 
   return (
     <Progressbar
-      button={true}
+      button={rest.isButton}
       value={percentage}
       max={100}
-      progressbarText={percentage.toString() + "%"}
-      iconClassName="opacity-40"
-      iconTextClassName="font-bold text-2xl text-center text-black-300"
+      progressbarText={percentage.toString() + " XP"}
+      iconClassName={rest.isButton ? "opacity-40" : ""}
+      iconTextClassName="font-bold text-2xl text-center text-yellow-300"
       iconText={scoreInfo?.currentLevel.toString()}
       barClassName="w-20 font-bold text-center text-yellow-300 "
       icon={xpIcon}

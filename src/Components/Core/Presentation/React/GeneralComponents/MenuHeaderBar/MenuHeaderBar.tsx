@@ -56,7 +56,7 @@ export default function MenuHeaderBar(props: Readonly<MenuHeaderBarProps>) {
           props.location === props.externContent.contentLocation &&
           props.externContent.content}
       </div>
-      <div className="flex justify-center items-center w-full">
+      <div className="flex items-center justify-center w-full">
         <StyledContainer
           className="text-xl truncate lg:text-4xl font-[roboto] py-2"
           textColor="darkblue"
@@ -72,7 +72,7 @@ export default function MenuHeaderBar(props: Readonly<MenuHeaderBarProps>) {
       </div>
       <div className="flex justify-end w-1/2 ">
         {props.location === "space" && gradingStyle && (
-          <ExperiencePointsPanel gradingStyle={gradingStyle} />
+          <ExperiencePointsPanel gradingStyle={gradingStyle} isButton={true} />
         )}
         <HelpDeskButton />
         <HelpDeskModal />
