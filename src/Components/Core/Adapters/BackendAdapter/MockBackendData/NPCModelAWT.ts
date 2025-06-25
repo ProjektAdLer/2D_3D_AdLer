@@ -36,10 +36,12 @@ for (let i = 0; i < introNPC.length; i++) {
       introStory: {
         storyTexts: [""],
         elementModel: introNPC[i],
+        modelFacialExpression: "default",
       },
       outroStory: {
         storyTexts: [""],
         elementModel: outroNPC[i],
+        modelFacialExpression: "welcome",
       },
     },
   });
