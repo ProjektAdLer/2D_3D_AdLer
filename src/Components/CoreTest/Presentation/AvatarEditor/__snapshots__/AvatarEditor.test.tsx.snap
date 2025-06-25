@@ -39,7 +39,7 @@ exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = 
         </div>
       </div>
       <div
-        class="flex justify-center items-center w-full"
+        class="flex items-center justify-center w-full"
       >
         <div
           class="text-xl truncate lg:text-4xl font-[roboto] py-2 flex gap-2 m-2 w-fit h-fit text-adlerdarkblue"
@@ -235,7 +235,7 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
         </div>
       </div>
       <div
-        class="flex justify-center items-center w-full"
+        class="flex items-center justify-center w-full"
       >
         <div
           class="text-xl truncate lg:text-4xl font-[roboto] py-2 flex gap-2 m-2 w-fit h-fit text-adlerdarkblue"
@@ -431,7 +431,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
         </div>
       </div>
       <div
-        class="flex justify-center items-center w-full"
+        class="flex items-center justify-center w-full"
       >
         <div
           class="text-xl truncate lg:text-4xl font-[roboto] py-2 flex gap-2 m-2 w-fit h-fit text-adlerdarkblue"
@@ -875,7 +875,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
         </div>
       </div>
       <div
-        class="flex justify-center items-center w-full"
+        class="flex items-center justify-center w-full"
       >
         <div
           class="text-xl truncate lg:text-4xl font-[roboto] py-2 flex gap-2 m-2 w-fit h-fit text-adlerdarkblue"
@@ -1284,7 +1284,7 @@ exports[`AvatarEditor should render 4 category when tab button is clicked 1`] = 
         </div>
       </div>
       <div
-        class="flex justify-center items-center w-full"
+        class="flex items-center justify-center w-full"
       >
         <div
           class="text-xl truncate lg:text-4xl font-[roboto] py-2 flex gap-2 m-2 w-fit h-fit text-adlerdarkblue"
@@ -1510,7 +1510,7 @@ exports[`AvatarEditor should renders 1`] = `
         </div>
       </div>
       <div
-        class="flex justify-center items-center w-full"
+        class="flex items-center justify-center w-full"
       >
         <div
           class="text-xl truncate lg:text-4xl font-[roboto] py-2 flex gap-2 m-2 w-fit h-fit text-adlerdarkblue"

@@ -35,7 +35,8 @@ const PRESENTATION_TYPES = {
   ),
   ICinemaStripesPresenter: Symbol("ICinemaStripesPresenter"),
   IExperiencePointsPanelPresenter: Symbol("IExperiencePointsPanelPresenter"),
-  IProgressScorePanelPresenter: Symbol("ProgressScorePanelPresenter"),
+  IProgressScorePanelPresenter: Symbol("IProgressScorePanelPresenter"),
+  ILevelUpModalPresenter: Symbol("LevelUpModalPresenter"),
 };
 
 export default PRESENTATION_TYPES;
