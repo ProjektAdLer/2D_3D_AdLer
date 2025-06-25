@@ -11,8 +11,8 @@ enum TextElementModelTypes {
 
 enum ImageElementModelTypes {
   //default
-  Painting1 = "l-image_painting-1",
-  Painting2 = "l-image_painting-2",
+  Painting1 = "l-image-painting-1",
+  Painting2 = "l-image-painting-2",
   PaintingEasel = "l-image-paintingeasel-1",
   //arcade
   Gameposter1 = "l-image-gameposter-1",
