@@ -18,7 +18,7 @@ import tailwindMerge from "../../../Utils/TailwindMerge";
 import HelpDeskButton from "~ReactComponents/GeneralComponents/HelpDeskButton/HelpDeskButton";
 import HelpDeskModal from "~ReactComponents/GeneralComponents/HelpDeskModal/HelpDeskModal";
 import { useTranslation } from "react-i18next";
-import VERSION from "src";
+import { config } from "src/config";
 
 export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
   const [viewModel, controller] = useBuilder<
@@ -142,7 +142,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
         <footer className="relative z-20 flex items-center justify-between w-full mt-1">
           <span className="bg-adlerdarkblue h-2 w-1/6 rounded-full absolute left-[calc(41.6%-0.25rem)] mobile-landscape:hidden"></span>
           <span className="ml-1 font-bold text-2xs lg:text-md text-adlerdarkblue">
-            {"Version: " + VERSION}
+            {"Version: " + config.version}
           </span>
         </footer>
         <img

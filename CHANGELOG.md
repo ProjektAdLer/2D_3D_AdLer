@@ -3,7 +3,7 @@
 This changelog follows the guidelines of [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) from version 1.1.0 onward.
 The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
-<!-- DO NOT FORGET TO UPDATE VERSION NUMBER IN INDEX.TS!!!!!! ~FK-->
+<!-- DO NOT FORGET TO UPDATE VERSION NUMBER IN CONFIG.TS!!!!!! ~FK-->
 
 ## Unreleased
 

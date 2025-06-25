@@ -44,10 +44,12 @@ export const config = {
   serverURL: getServerURL(),
   moodleURL: getMoodleURL(),
   useFakeBackend: parseBool(process.env.REACT_APP_USE_FAKEBACKEND || true),
+  version: "2.7.0",
 } as {
   isDebug: boolean;
   logLevel: LogLevel;
   serverURL: string;
   moodleURL: string;
   useFakeBackend: boolean;
+  version: string;
 };

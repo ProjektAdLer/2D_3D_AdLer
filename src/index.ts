@@ -6,10 +6,6 @@ import { config } from "./config";
 
 console.log("Current Config:", config);
 
-// Version number:
-const VERSION = "2.7.0";
-export default VERSION;
-
 // Setup the Logger to be constructed.
 CoreDIContainer.get(CORE_TYPES.ILogger);
 
