@@ -1,8 +1,10 @@
 import { LogLevel } from "./Components/Core/Adapters/Logger/Logger";
 import { parseBool } from "./Lib/ParseBool";
 
-// We can not use the logger in here, its loglevel gets defined here.
-// So we have to use console.log and console.error here.
+// We can not use the logger as its loglevel gets defined here.
+// We have to use console.log and console.error here.
+
+const version = "2.7.0";
 
 // Get the Server URL from config file in Public folder if we are in Production.
 export const getMoodleURL = () => {
@@ -44,7 +46,7 @@ export const config = {
   serverURL: getServerURL(),
   moodleURL: getMoodleURL(),
   useFakeBackend: parseBool(process.env.REACT_APP_USE_FAKEBACKEND || true),
-  version: "2.7.0",
+  version: version,
 } as {
   isDebug: boolean;
   logLevel: LogLevel;
