@@ -65,7 +65,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - styling of the welcome screen is now responsive
 - styling of the world completion modal is now responsive
 
-## Version 2.8.0
+## Version 2.8.0 - 05.03.25
 
 ### Added
 
