@@ -72,7 +72,7 @@ export default function LearningWorldSelection({
   if (!viewModel || !controller) return null;
 
   return (
-    <div className={tailwindMerge(className, "overflow-auto")}>
+    <div className={tailwindMerge(className, "overflow-auto max-h-[85dvh]")}>
       <ul className="flex flex-col w-full gap-4">
         {worlds?.map((world) => {
           let worldIcon: string;
