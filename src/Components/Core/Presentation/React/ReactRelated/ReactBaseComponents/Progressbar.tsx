@@ -60,7 +60,7 @@ export default function Progressbar(props: Readonly<ProgressbarProps>) {
         </div>
       )}
       {/* bar */}
-      <div className="relative w-full h-4 ml-2 bg-gray-400 rounded-lg">
+      <div className="relative flex items-center justify-center w-full px-2 py-3 h-4 ml-2 bg-gray-400 rounded-lg">
         <div
           className="absolute h-full rounded-full bg-adlerdarkblue -z-10"
           style={{
