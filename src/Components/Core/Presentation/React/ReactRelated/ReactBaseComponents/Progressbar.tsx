@@ -60,7 +60,13 @@ export default function Progressbar(props: Readonly<ProgressbarProps>) {
         </div>
       )}
       {/* bar */}
-      <div className="relative flex items-center justify-center w-full px-2 py-3 h-4 ml-2 bg-gray-400 rounded-lg">
+      {/* progress bar */}
+      <div
+        className={tailwindMerge(
+          props.barClassName,
+          "relative align-middle rounded-full bg-adlerblue/80 dark:bg-gray-700 -z-20",
+        )}
+      >
         <div
           className="absolute h-full rounded-full bg-adlerdarkblue -z-10"
           style={{

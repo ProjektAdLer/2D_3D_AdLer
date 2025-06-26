@@ -1,9 +1,6 @@
 import IBottomTooltipPresenter from "./IBottomTooltipPresenter";
 import BottomTooltipViewModel from "./BottomTooltipViewModel";
-import {
-  LearningElementTypeStrings,
-  LearningElementTypes,
-} from "src/Components/Core/Domain/Types/LearningElementTypes";
+import { LearningElementTypeStrings } from "src/Components/Core/Domain/Types/LearningElementTypes";
 import { injectable } from "inversify";
 import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
 import { DoorTypeStrings } from "src/Components/Core/Domain/Types/DoorTypes";
