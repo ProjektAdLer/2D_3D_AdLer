@@ -24,14 +24,13 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 </details>
 
-## Version 2.8.0 - 26.06.2025
+## Version 2.9.0 - 26.06.2025
 
 ### Added
 
 - added an experience bar with icon to track new experience system and the achieved levels
 - new level-up popup
 - new entries in world and space menus to depict experience related info
-- new custom icon for save button in avatar editor and avatar preview controls
 - new function: randomize avatar editor loadout
 - new npc previews with new emotions
 - several new npcs
@@ -65,6 +64,20 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - styling of the side bar smartphone is now responsive
 - styling of the welcome screen is now responsive
 - styling of the world completion modal is now responsive
+
+## Version 2.8.0
+
+### Added
+
+- custom icons for save button in avatar editor and avatar preview controls
+- new NPC 'Old Man'
+- new NPC 'Male School Bully'
+- new NPC 'Female School Bully'
+
+### Fixed
+
+- fixed world completion modal still sometimes showing erroneously
+- fixed several avatar animations
 
 ## Version 2.7.0 - 05.02.25
 
