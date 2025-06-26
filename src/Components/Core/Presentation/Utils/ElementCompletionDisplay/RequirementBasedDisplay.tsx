@@ -3,7 +3,6 @@ import IElementCompletionDisplay, {
   BottomTooltipDisplayData,
 } from "./IElementCompletionDisplay";
 import RequiredIcon from "../../../../../Assets/icons/required.svg";
-import CheckIcon from "../../../../../Assets/icons/check-solution.svg";
 import XPIcon from "../../../../../Assets/icons/xp.svg";
 
 export default class RequirementBasedDisplay

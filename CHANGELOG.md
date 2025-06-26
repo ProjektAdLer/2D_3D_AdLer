@@ -12,38 +12,59 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- custom icons for save button in avatar editor and avatar preview controls
-- xp bar
-- icon for xp
-- added randomize avatar feature
-- new npc glbs
-- new npc emotion renderings
-- Version number added to sidebar
-- new level icon
-- level-up window
-
 ### Changed
 
 ### Removed
 
-- wrongly displayed second "front-camera" in SideBar smartphone view on mobile-landscape
-
 ### Fixed
-
-- SideBar smartphone view on mobile-landscape
-- sketchy NarrativeFramework styling
-- WelcomeScreen responsive styling
-- WorldCompletionModal responsiv styling
-- logout not deleting player progress data
-- first items of face category not shown in 3D avatar preview
-- inconsistent naming of npc files
-- cut header bar texts in menus
 
 ### Deprecated
 
 ### Security
 
 </details>
+
+## Version 2.8.0 - 26.06.2025
+
+### Added
+
+- added an experience bar with icon to track new experience system and the achieved levels
+- new level-up popup
+- new entries in world and space menus to depict experience related info
+- new custom icon for save button in avatar editor and avatar preview controls
+- new function: randomize avatar editor loadout
+- new npc previews with new emotions
+- several new npcs
+- several new environments, themes and subthemes for learning spaces
+- entry and exit doors can now also be entry and exit elevators for spaces without walls
+- new system: narrative framework, allowing the creator of learning worlds to set the stage of their learning spaces better
+- version number added to sidebar
+
+### Changed
+
+- intro and outro locked animations now turn off UI and sport black bars to appear more cutscene like
+- intro and outro locked animations zoom in has been adjusted
+- zoom out has been added to intro and outro locked animations, once they're done
+- some environments allow learning spaces to be instanciated without walls, allowing the player to roam a bit further within the environments
+
+### Removed
+
+- removed incorrectly displayed second "front-camera" in SideBar smartphone view on mobile-landscape
+
+### Fixed
+
+- fixed logout not deleting some player progress data
+- fixed avatar editors first items within the face category not displaying in 3D avatar preview
+- fixed header bar texts in world and space menus being unintentionally cropped
+- fixed learning world list in learning world menu not being scrollable
+- fixed tooltips in the 3d view not displaying icons correctly in rare cases
+- fixed avatar not navigating to entry and exit door correctly
+- fixed doors sometimes not being placed correctly
+- fixed door animations sometimes not working or being faulty
+- it is no longer possible to open learning elements in cutscene
+- styling of the side bar smartphone is now responsive
+- styling of the welcome screen is now responsive
+- styling of the world completion modal is now responsive
 
 ## Version 2.7.0 - 05.02.25
 

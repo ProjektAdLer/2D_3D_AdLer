@@ -6,7 +6,7 @@ exports[`Progressbar should render 1`] = `
     class="flex items-center text-center"
   >
     <div
-      class="relative flex items-center justify-center w-full px-2 py-3 h-4 ml-2 bg-gray-400 rounded-lg"
+      class="relative align-middle rounded-full bg-adlerblue/80 dark:bg-gray-700 -z-20"
     >
       <div
         class="absolute h-full rounded-full bg-adlerdarkblue -z-10"
