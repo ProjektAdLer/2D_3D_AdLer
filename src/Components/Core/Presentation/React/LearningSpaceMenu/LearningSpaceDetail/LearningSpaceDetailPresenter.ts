@@ -34,6 +34,7 @@ export default class LearningSpaceDetailPresenter
     this.viewModel.description.Value = spaceTO.description;
     this.viewModel.goals.Value = spaceTO.goals;
     this.viewModel.isAvailable.Value = spaceTO.isAvailable;
+    this.viewModel.requiredPoints.Value = spaceTO.requiredScore;
 
     const elementsWithXP = spaceTO.elements.reduce(
       (result, elementTO) => {

@@ -70,9 +70,14 @@ export default function MenuHeaderBar(props: Readonly<MenuHeaderBarProps>) {
             : null}
         </StyledContainer>
       </div>
-      <div className="flex justify-end w-1/2 ">
+      <div className="flex items-center justify-end w-1/2 gap-4 lg:gap-8">
         {props.location === "space" && gradingStyle && (
-          <ExperiencePointsPanel gradingStyle={gradingStyle} isButton={true} />
+          <div className="items-center hidden md:flex">
+            <ExperiencePointsPanel
+              gradingStyle={gradingStyle}
+              isButton={false}
+            />
+          </div>
         )}
         <HelpDeskButton />
         <HelpDeskModal />
