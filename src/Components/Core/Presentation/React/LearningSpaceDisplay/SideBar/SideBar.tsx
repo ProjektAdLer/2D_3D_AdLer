@@ -9,6 +9,7 @@ import SideBarViewModel from "./SideBarViewModel";
 import SideBarController from "./SideBarController";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import worldIcon from "../../../../../../Assets/icons/world-menu.svg";
+import worldStoryIcon from "../../../../../../Assets/icons/world-story.svg";
 import spaceMenuIcon from "../../../../../../Assets/icons/space-menu.svg";
 import controlsIcon from "../../../../../../Assets/icons/controls.svg";
 import worldCompletedIcon from "../../../../../../Assets/icons/world-completed.svg";
@@ -132,7 +133,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
             <StyledButton
               onClick={controller.onNarrativeFrameworkIntroButtonClicked}
             >
-              <img src={controlsIcon} alt="Steuerungserklärung" />
+              <img src={worldStoryIcon} alt="Welt-Story" />
             </StyledButton>
             <p className="font-bold text-center break-all text-2xs lg:text-md text-adlerdarkblue text-outline">
               {translate("sidebar_narrativeFrameworkIntro")}

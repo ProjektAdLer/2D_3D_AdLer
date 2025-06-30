@@ -12,6 +12,8 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+- new icons for "world-story" and "space-story"
+
 ### Changed
 
 ### Removed
