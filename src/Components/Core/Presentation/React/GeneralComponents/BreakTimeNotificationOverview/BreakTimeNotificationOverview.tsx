@@ -8,6 +8,7 @@ import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservab
 import IBreakTimeNotification from "src/Components/Core/Domain/BreakTimeNotifications/IBreakTimeNotification";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import BreakTimeNotificationContent from "./BreakTimeNotificationContent";
+import i18next from "i18next";
 
 function BreakTimeNotificationThumbnail({
   notification,
@@ -49,7 +50,7 @@ function BreakTimeNotificationThumbnailSection({
 }) {
   return (
     <div>
-      <h1 className="text-lg pt-2 pb-2">{title}</h1>
+      <h1 className="pt-2 pb-2 text-lg">{title}</h1>
       <div className="grid portrait:grid-cols-2 grid-cols-5 gap-5 pt-4 bg-whitetrans rounded-lg p-4 max-h-[30vh] overflow-y-auto">
         {notifications.map((notification) => (
           <BreakTimeNotificationThumbnail
@@ -82,6 +83,9 @@ export default function BreakTimeNotificationOverview() {
       title={translate("Pausenhinweise")!}
       onClose={controller.closeModal}
       showModal={showModal}
+      closeButtonToolTip={i18next
+        .t("closeToolTip", { ns: "helpMenu" })
+        .toString()}
     >
       {/* Selection */}
       {!selectedNotification && (

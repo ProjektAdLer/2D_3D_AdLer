@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import CustomDropdown from "../../ReactRelated/ReactBaseComponents/CustomDropdown";
 import StyledButton from "../../ReactRelated/ReactBaseComponents/StyledButton";
 import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledContainer";
@@ -41,7 +41,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
     <CustomDropdown
       className={tailwindMerge(className, "w-20")}
       headerPart={
-        <StyledButton>
+        <StyledButton title={translate("sidebar_menuToolTip").toString()}>
           <img
             src={smartphoneIcon}
             className="lg:w-20 md:w-16 sm:w-14"
@@ -65,7 +65,10 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
         <span className="bg-adlerdarkblue h-2 w-2 rounded-full absolute left-[calc(50%-0.25rem)] mobile-landscape:left-2 mobile-landscape:top-[calc(50%-0.25rem)] hidden mobile-landscape:block"></span>
         <div className="z-20 grid grid-flow-row grid-cols-3 gap-1 p-1 rounded-lg mobile-landscape:ml-8 mobile-landscape:grid-flow-row mobile-landscape:auto-cols-max mobile-landscape:grid-rows-2 mobile-landscape:grid-cols-auto auto-rows-max">
           <div className="flex flex-col justify-start items-center max-h-[25%]">
-            <StyledButton onClick={controller.onMainMenuButtonClicked}>
+            <StyledButton
+              onClick={controller.onMainMenuButtonClicked}
+              title={translate("sidebar_mainMenuToolTip").toString()}
+            >
               <img src={engineLogo} alt="" />
             </StyledButton>
             <p className="font-bold text-center text-2xs lg:text-md text-adlerdarkblue text-outline">
@@ -74,7 +77,10 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
           </div>
 
           <div className="flex flex-col justify-start items-center max-h-[25%]">
-            <StyledButton onClick={controller.onWorldMenuButtonClicked}>
+            <StyledButton
+              onClick={controller.onWorldMenuButtonClicked}
+              title={translate("sidebar_learningWorldToolTip").toString()}
+            >
               <img src={worldIcon} alt="" />
             </StyledButton>
             <p className="font-bold text-center text-2xs lg:text-md text-adlerdarkblue text-outline">
@@ -83,7 +89,10 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
           </div>
 
           <div className="flex flex-col justify-startr items-center max-h-[25%]">
-            <StyledButton onClick={controller.onSpaceMenuButtonClicked}>
+            <StyledButton
+              onClick={controller.onSpaceMenuButtonClicked}
+              title={translate("sidebar_learningSpaceToolTip").toString()}
+            >
               <img src={spaceMenuIcon} alt="" />
             </StyledButton>
             <p className="font-bold text-center text-2xs lg:text-md text-adlerdarkblue text-outline">
@@ -94,6 +103,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
           <div className="flex flex-col justify-start items-center max-h-[25%]">
             <StyledButton
               onClick={controller.onControlsExplanationButtonClicked}
+              title={translate("sidebar_controlsToolTip").toString()}
             >
               <img src={controlsIcon} alt="Steuerungserklärung" />
             </StyledButton>
@@ -121,6 +131,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
             <StyledButton
               disabled={!viewModel.allowWorldCompletionModalButtonClick}
               onClick={controller.onWorldCompletionModalButtonClicked}
+              title={translate("sidebar_worldCompleteToolTip").toString()}
             >
               <img src={worldCompletedIcon} alt="Weltabschlussmodal" />
             </StyledButton>
@@ -132,6 +143,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
           <div className="flex flex-col justify-start items-center max-h-[25%]">
             <StyledButton
               onClick={controller.onNarrativeFrameworkIntroButtonClicked}
+              title={translate("sidebar_narrativeFrameworkToolTip").toString()}
             >
               <img src={worldStoryIcon} alt="Welt-Story" />
             </StyledButton>

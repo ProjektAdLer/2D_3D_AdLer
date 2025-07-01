@@ -7,6 +7,7 @@ import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import ControlsExplanationContent from "./ControlsExplanationContent";
+import i18next from "i18next";
 
 export default function ControlsExplanationModal({
   className,
@@ -29,6 +30,9 @@ export default function ControlsExplanationModal({
       onClose={() => {
         setIsOpen(false);
       }}
+      closeButtonToolTip={i18next
+        .t("closeToolTip", { ns: "helpMenu" })
+        .toString()}
     >
       <ControlsExplanationContent className={tailwindMerge(className, "")} />
     </StyledModal>

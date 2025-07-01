@@ -13,6 +13,7 @@ exports[`AdaptivityElementAnswerSelection answer button is green if answer is co
       >
         <button
           class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-adlergreen landscape:hover:bg-adleryellow active:bg-adleryellow"
+          title="answerToolTip"
         >
           <p
             class="text-sm"
@@ -34,6 +35,7 @@ exports[`AdaptivityElementAnswerSelection answer button is green if answer is co
           <button
             class="px-2 py-1 justify-center box-border text-adlerdeactivatedtext bg-adlerbuttonlocked flex items-center text-sm rounded-lg lg:text-xl font-regular overflow-hidden grayscale"
             disabled=""
+            title="submitTooltip"
           >
             <p
               class="text-sm"
@@ -61,6 +63,7 @@ exports[`AdaptivityElementAnswerSelection should render 1`] = `
       >
         <button
           class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+          title="answerToolTip"
         >
           <p
             class="text-sm"
@@ -82,6 +85,7 @@ exports[`AdaptivityElementAnswerSelection should render 1`] = `
           <button
             class="px-2 py-1 justify-center box-border text-adlerdeactivatedtext bg-adlerbuttonlocked flex items-center text-sm rounded-lg lg:text-xl font-regular overflow-hidden grayscale"
             disabled=""
+            title="submitTooltip"
           >
             <p
               class="text-sm"

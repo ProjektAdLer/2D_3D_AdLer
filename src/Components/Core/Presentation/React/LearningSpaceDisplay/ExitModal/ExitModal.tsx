@@ -25,7 +25,7 @@ export default function ExitModal({ className }: AdLerUIComponent<{}>) {
     setOpen(false);
   }, [setOpen]);
 
-  const { t: translate } = useTranslation("learningSpace");
+  const { t: translate } = useTranslation(["learningSpace", "helpMenu"]);
 
   if (!viewModel || !controller) return null;
   if (!isOpen) return null;
@@ -39,6 +39,7 @@ export default function ExitModal({ className }: AdLerUIComponent<{}>) {
         className,
         "flex flex-col justify-center gap-2 p-5 rounded-lg",
       )}
+      closeButtonToolTip={translate("closeToolTip").toString()}
     >
       <StyledButton
         disabled={false}

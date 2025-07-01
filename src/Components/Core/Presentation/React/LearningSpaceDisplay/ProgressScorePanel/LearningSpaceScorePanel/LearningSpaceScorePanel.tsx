@@ -43,6 +43,11 @@ export default function LearningSpaceScorePanel({
       iconClassName="font-bold text-center text-yellow-300"
       barClassName="w-20 font-bold text-center text-yellow-300 "
       icon={icon}
+      tooltip={
+        rest.gradingStyle === GradingStyle.point
+          ? translate("pointSpaceScoreToolTip").toString()
+          : translate("requirementSpaceScoreToolTip").toString()
+      }
     />
   );
 }

@@ -95,7 +95,7 @@ describe("AdaptivityElementQuestionSelection", () => {
         setHeaderText={() => {}}
         onSelectQuestion={() => {}}
         onSelectHint={() => {}}
-      />
+      />,
     );
 
     expect(container).toMatchSnapshot();
@@ -148,7 +148,7 @@ describe("AdaptivityElementQuestionSelection", () => {
         setHeaderText={() => {}}
         onSelectQuestion={() => {}}
         onSelectHint={() => {}}
-      />
+      />,
     );
 
     expect(container).toMatchSnapshot();
@@ -185,7 +185,7 @@ describe("AdaptivityElementQuestionSelection", () => {
         setHeaderText={() => {}}
         onSelectQuestion={onSelectQuestionMock}
         onSelectHint={() => {}}
-      />
+      />,
     );
     getByText("easy").click();
 
@@ -233,9 +233,9 @@ describe("AdaptivityElementQuestionSelection", () => {
         setHeaderText={() => {}}
         onSelectQuestion={() => {}}
         onSelectHint={onSelectHintMock}
-      />
+      />,
     );
-    getByText("Hinweis").click();
+    getByText("hintButton").click();
 
     expect(onSelectHintMock).toHaveBeenCalledTimes(1);
     expect(onSelectHintMock).toHaveBeenCalledWith(hint, question);

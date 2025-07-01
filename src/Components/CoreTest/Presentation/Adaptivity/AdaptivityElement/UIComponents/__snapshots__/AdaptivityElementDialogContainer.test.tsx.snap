@@ -104,6 +104,7 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
             >
               <button
                 class="mr-2 roboto-black xl:w-10 xl:h-10 justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+                title="backToolTip"
               >
                 ◀
               </button>
@@ -121,6 +122,7 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
             </div>
             <button
               class="justify-center mobile-portrait:rounded-md aspect-square flex items-center rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue w-8 h-8 p-1 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
+              title="closeToolTip"
             >
               <img
                 alt="CloseButton"
@@ -146,6 +148,7 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
                   >
                     <button
                       class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+                      title="answerToolTip"
                     >
                       <p
                         class="text-sm"
@@ -167,6 +170,7 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
                       <button
                         class="px-2 py-1 justify-center box-border text-adlerdeactivatedtext bg-adlerbuttonlocked flex items-center text-sm rounded-lg lg:text-xl font-regular overflow-hidden grayscale"
                         disabled=""
+                        title="submitTooltip"
                       >
                         <p
                           class="text-sm"

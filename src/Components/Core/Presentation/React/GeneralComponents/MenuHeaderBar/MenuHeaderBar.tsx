@@ -1,4 +1,3 @@
-import React from "react";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
@@ -44,11 +43,18 @@ export default function MenuHeaderBar(props: Readonly<MenuHeaderBarProps>) {
       className={tailwindMerge(props.className, "flex place-content-stretch")}
     >
       <div className="flex items-center w-1/2 place-content-stretch justify-self-start ">
-        <StyledButton onClick={controller.onHomeButtonClicked} className="mr-4">
+        <StyledButton
+          onClick={controller.onHomeButtonClicked}
+          className="mr-4"
+          title={translate("HomeButtonToolTip").toString()}
+        >
           <img className="w-10 xl:w-12 " src={homeIcon} alt="Home Icon" />
         </StyledButton>
         {props.location === "space" && (
-          <StyledButton onClick={controller.onLearningWorldButtonClicked}>
+          <StyledButton
+            onClick={controller.onLearningWorldButtonClicked}
+            title={translate("LearningWorldButtonToolTip").toString()}
+          >
             <img className="w-10 xl:w-12" src={worldIcon} alt="World Icon" />
           </StyledButton>
         )}

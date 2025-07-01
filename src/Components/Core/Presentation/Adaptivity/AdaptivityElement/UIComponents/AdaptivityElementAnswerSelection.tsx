@@ -73,6 +73,7 @@ export default function AdaptivityElementAnswerSelection({
                 ? "success"
                 : answerColors[index]
             }
+            title={translate("answerToolTip").toString()}
           >
             <p className="text-sm">{answer.answerText}</p>
           </StyledButton>
@@ -88,6 +89,7 @@ export default function AdaptivityElementAnswerSelection({
               submitSelection();
             }}
             disabled={!isAnyAnswerSelected || question.isCompleted === true}
+            title={translate("submitTooltip").toString()}
           >
             <p className="text-sm">
               {question.isCompleted

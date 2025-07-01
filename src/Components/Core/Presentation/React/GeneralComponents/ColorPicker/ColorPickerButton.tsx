@@ -16,7 +16,11 @@ export default function ColorPickerButton({
   const { t: translate } = useTranslation("avatarEditor");
   return (
     <div className={tailwindMerge(className, "")}>
-      <StyledButton onClick={onClick} shape="freeFloatCenter">
+      <StyledButton
+        onClick={onClick}
+        shape="freeFloatCenter"
+        title={translate("ColorButtonToolTip").toString()}
+      >
         {/* <img className="w-10 xl:w-12" src={helpIcon} alt="Help Icon" /> */}
         <div
           className={`border-2 border-black rounded m-2 h-5 w-5`}

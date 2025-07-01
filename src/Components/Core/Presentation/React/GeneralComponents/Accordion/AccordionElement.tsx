@@ -10,6 +10,7 @@ export interface AccordionProps {
   className?: string;
   buttonClassName?: string;
   headerClassName?: string;
+  toolTip?: string;
 }
 
 export default function AccordionElement(props: AccordionProps) {
@@ -40,22 +41,23 @@ export default function AccordionElement(props: AccordionProps) {
       <div
         className={tailwindMerge(
           "pb-2 border-b border-gray-500",
-          props.className ? props.className : "",
+          props.className ?? "",
         )}
       >
         <button
           className={tailwindMerge(
             "content-start w-full text-left",
-            props.buttonClassName ? props.buttonClassName : "",
+            props.buttonClassName ?? "",
           )}
           onClick={() => {
             setIsOpen(!isOpen);
           }}
+          title={props.toolTip}
         >
           <h1
             className={tailwindMerge(
               "text-2xl portrait:text-lg font-bold",
-              props.headerClassName ? props.headerClassName : "",
+              props.headerClassName ?? "",
             )}
           >
             {arrowSymbol + " " + props.header}

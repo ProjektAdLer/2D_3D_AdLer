@@ -3,6 +3,7 @@ import IAvatarEditorController from "./IAvatarEditorController";
 import AvatarEditorViewModel from "./AvatarEditorViewModel";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import saveIcon from "../../../../Assets/icons/save.svg";
+import { useTranslation } from "react-i18next";
 
 interface AvatarEditorSaveButtonProps {
   controller: IAvatarEditorController;
@@ -14,12 +15,15 @@ export default function AvatarEditorSaveButton(
 ) {
   const [hasChanged] = useObservable<boolean>(props.viewModel.hasChanged);
 
+  const { t: translate } = useTranslation("avatarEditor");
+
   return (
     <>
       <StyledButton
         onClick={() => {
           props.controller.saveAvatarConfig();
         }}
+        title={translate("saveButtonToolTip").toString()}
       >
         <img className="w-10 xl:w-12 " src={saveIcon} alt="Save Icon" />
       </StyledButton>

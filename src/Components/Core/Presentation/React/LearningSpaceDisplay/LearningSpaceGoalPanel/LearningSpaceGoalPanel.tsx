@@ -26,7 +26,10 @@ export default function LearningSpaceGoalPanel() {
 
   return (
     <div>
-      <StyledButton onClick={controller.openOrCloseGoals}>
+      <StyledButton
+        onClick={controller.openOrCloseGoals}
+        title={translate("learningGoalToolTip").toString()}
+      >
         <img
           className="w-[48px] lg:w-[69px] hover:cursor-pointer"
           src={GoalIcon}

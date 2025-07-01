@@ -18,6 +18,7 @@ type WelcomePageButtonProps = {
   label?: string;
   historyPath: string;
   imageSrc: string;
+  toolTip?: string;
   isPlaceholder?: boolean;
 } & AdLerUIComponent;
 
@@ -56,7 +57,7 @@ export default function WelcomePageButton(props: WelcomePageButtonProps) {
       )}
     >
       {!props.isPlaceholder && userLoggedIn ? (
-        <div className="flex justify-center w-full h-full bg-gray-100 align-center opacity-90 hover:opacity-100 relative">
+        <div className="relative flex justify-center w-full h-full bg-gray-100 align-center opacity-90 hover:opacity-100">
           <video
             ref={videoRef}
             src={props.backgroundVideo}
@@ -65,11 +66,12 @@ export default function WelcomePageButton(props: WelcomePageButtonProps) {
             loop={true}
             muted={true}
             className="object-cover w-full h-full mobile-landscape:hidden"
+            title={props.toolTip}
           >
             <track kind="captions"></track>
           </video>
           <img
-            className="landscape:lg:hidden w-full h-full object-cover"
+            className="object-cover w-full h-full landscape:lg:hidden"
             ref={pictureRef}
             src={props.backgroundPicture}
             alt="Avatar Editor"
@@ -80,6 +82,7 @@ export default function WelcomePageButton(props: WelcomePageButtonProps) {
             alt={props.label}
             onMouseEnter={() => videoRef.current?.play()}
             onMouseLeave={() => videoRef.current?.pause()}
+            title={props.toolTip}
           />
         </div>
       ) : (
@@ -88,14 +91,10 @@ export default function WelcomePageButton(props: WelcomePageButtonProps) {
             ref={videoRef}
             src={props.backgroundVideo}
             className="object-cover w-full h-full grayscale"
+            title={translate("DisabledButtonTooltip").toString()}
           >
             <track kind="captions"></track>
           </video>
-          {(props.isPlaceholder ?? false) && userLoggedIn && (
-            <p className="absolute p-4 mx-auto font-bold rounded-lg !text-xs lg:text-2xl text-center bg-buttonbgblue lg:bottom-[42%] portrait:bottom-[20%] bottom-32 text-adlerdarkblue ">
-              {translate("comingSoon") + props.label}
-            </p>
-          )}
         </div>
       )}
     </StyledButton>

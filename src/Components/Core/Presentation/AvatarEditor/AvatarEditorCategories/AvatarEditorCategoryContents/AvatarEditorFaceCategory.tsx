@@ -163,21 +163,33 @@ export default function AvatarEditorFaceCategory(
         header={translate("eyebrowsTitle").toString()}
         isOpen={props.viewModel.uiVisiblity.faceMenu.eyebrows}
         content={TileGridEyebrows()}
+        toolTip={translate("accordionCategoryToolTip", {
+          subCategory: translate("eyebrowsTitle").toString(),
+        }).toString()}
       />
       <AccordionElement
         header={translate("eyesTitle").toString()}
         isOpen={props.viewModel.uiVisiblity.faceMenu.eyes}
         content={TileGridEyes()}
+        toolTip={translate("accordionCategoryToolTip", {
+          subCategory: translate("eyesTitle").toString(),
+        }).toString()}
       />
       <AccordionElement
         header={translate("noseTitle").toString()}
         isOpen={props.viewModel.uiVisiblity.faceMenu.noses}
         content={TileGridNoses()}
+        toolTip={translate("accordionCategoryToolTip", {
+          subCategory: translate("noseTitle").toString(),
+        }).toString()}
       />
       <AccordionElement
         header={translate("mouthTitle").toString()}
         isOpen={props.viewModel.uiVisiblity.faceMenu.mouths}
         content={TielGridMouths()}
+        toolTip={translate("accordionCategoryToolTip", {
+          subCategory: translate("mouthTitle").toString(),
+        }).toString()}
       />
     </div>
   );

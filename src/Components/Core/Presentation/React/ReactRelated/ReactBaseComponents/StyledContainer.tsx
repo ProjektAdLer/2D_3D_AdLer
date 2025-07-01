@@ -2,6 +2,7 @@ import React from "react";
 
 interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   textColor?: "white" | "black" | "darkblue";
+  toolTip?: string;
 }
 
 export default function StyledContainer({
@@ -25,6 +26,7 @@ export default function StyledContainer({
         `flex gap-2 m-2 w-fit h-fit ${containerConfig[textColor]}`
       }
       {...rest}
+      title={rest.toolTip}
     >
       {children}
     </div>

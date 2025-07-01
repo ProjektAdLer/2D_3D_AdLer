@@ -81,6 +81,7 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
           disabled={
             viewModel.type.Value === LearningElementTypes.h5p && !hasScored
           }
+          title={translate("learningElementSubmitToolTip").toString()}
           animatedTransition={true}
           onClick={async () => {
             let result: boolean = true;
@@ -122,6 +123,7 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
         modalStyleByTypeMap[elementType as keyof typeof modalStyleByTypeMap],
       )}
       style={{ visibility: isVisible ? "visible" : "hidden" }}
+      closeButtonToolTip={translate("closeLearningElementToolTip").toString()}
     >
       {createModalContent(viewModel, controller)}
     </StyledModal>

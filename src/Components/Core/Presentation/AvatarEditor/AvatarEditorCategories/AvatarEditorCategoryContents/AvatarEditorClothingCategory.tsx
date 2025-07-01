@@ -188,16 +188,25 @@ export default function AvatarEditorClothingCategory(
         header={translate("shirtsTitle").toString()}
         isOpen={props.viewModel.uiVisiblity.clothingMenu.shirts}
         content={TileGridShirts()}
+        toolTip={translate("accordionCategoryToolTip", {
+          subCategory: translate("shirtsTitle").toString(),
+        }).toString()}
       />
       <AccordionElement
         header={translate("pantsTitle").toString()}
         isOpen={props.viewModel.uiVisiblity.clothingMenu.pants}
         content={TileGridPants()}
+        toolTip={translate("accordionCategoryToolTip", {
+          subCategory: translate("shirtsTitle").toString(),
+        }).toString()}
       />
       <AccordionElement
         header={translate("shoesTitle").toString()}
         isOpen={props.viewModel.uiVisiblity.clothingMenu.shoes}
         content={TileGridShoes()}
+        toolTip={translate("accordionCategoryToolTip", {
+          subCategory: translate("shirtsTitle").toString(),
+        }).toString()}
       />
     </div>
   );

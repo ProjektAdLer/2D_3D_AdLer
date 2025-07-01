@@ -16,6 +16,7 @@ exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = 
         >
           <button
             class="mr-4 justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            title="Klicken Sie hier, um zur Willkommen-Seite zurückzukehren"
           >
             <img
               alt="Home Icon"
@@ -29,6 +30,7 @@ exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = 
         >
           <button
             class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            title="Klicken Sie hier, um Ihren erstellten Avatar zu speichern"
           >
             <img
               alt="Save Icon"
@@ -58,11 +60,13 @@ exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = 
           >
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              title="Öffnet das Hilfe-Fenster, um Hilfe und weitere Informationen zur 3D-Lernumgebung zu erhalten"
             >
               <img
                 alt="Help Icon"
                 class="w-10 xl:w-12 mobile-landscape:w-6"
                 src="help.svg"
+                title="HelpButtonToolTip"
               />
             </button>
           </div>
@@ -97,6 +101,7 @@ exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = 
             <button
               class="!bg-adleryellow translate-x-[1px] translate-y-[1px] !border-b-2 !border-r-2 !border-transparent justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-adleryellow landscape:hover:bg-adleryellow active:bg-adleryellow"
               data-testid="avatar-editor-category-tab-0"
+              title="Öffnet die Kategorie Haare"
             >
               <img
                 alt=""
@@ -111,6 +116,7 @@ exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = 
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
               data-testid="avatar-editor-category-tab-1"
+              title="Öffnet die Kategorie Gesicht"
             >
               <img
                 alt=""
@@ -125,6 +131,7 @@ exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = 
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
               data-testid="avatar-editor-category-tab-2"
+              title="Öffnet die Kategorie Accessoires"
             >
               <img
                 alt=""
@@ -139,6 +146,7 @@ exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = 
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
               data-testid="avatar-editor-category-tab-3"
+              title="Öffnet die Kategorie Kleidung"
             >
               <img
                 alt=""
@@ -153,6 +161,7 @@ exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = 
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
               data-testid="avatar-editor-category-tab-4"
+              title="Öffnet die Kategorie Körper"
             >
               <img
                 alt=""
@@ -166,6 +175,7 @@ exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = 
           >
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              title="Erstellt einen zufällig aussehenden Avatar"
             >
               <img
                 alt="Randomizer Icon"
@@ -212,6 +222,7 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
         >
           <button
             class="mr-4 justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            title="Klicken Sie hier, um zur Willkommen-Seite zurückzukehren"
           >
             <img
               alt="Home Icon"
@@ -225,6 +236,7 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
         >
           <button
             class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            title="Klicken Sie hier, um Ihren erstellten Avatar zu speichern"
           >
             <img
               alt="Save Icon"
@@ -254,11 +266,13 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
           >
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              title="Öffnet das Hilfe-Fenster, um Hilfe und weitere Informationen zur 3D-Lernumgebung zu erhalten"
             >
               <img
                 alt="Help Icon"
                 class="w-10 xl:w-12 mobile-landscape:w-6"
                 src="help.svg"
+                title="HelpButtonToolTip"
               />
             </button>
           </div>
@@ -293,6 +307,7 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
               data-testid="avatar-editor-category-tab-0"
+              title="Öffnet die Kategorie Haare"
             >
               <img
                 alt=""
@@ -307,6 +322,7 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
             <button
               class="!bg-adleryellow translate-x-[1px] translate-y-[1px] !border-b-2 !border-r-2 !border-transparent justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-adleryellow landscape:hover:bg-adleryellow active:bg-adleryellow"
               data-testid="avatar-editor-category-tab-1"
+              title="Öffnet die Kategorie Gesicht"
             >
               <img
                 alt=""
@@ -321,6 +337,7 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
               data-testid="avatar-editor-category-tab-2"
+              title="Öffnet die Kategorie Accessoires"
             >
               <img
                 alt=""
@@ -335,6 +352,7 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
               data-testid="avatar-editor-category-tab-3"
+              title="Öffnet die Kategorie Kleidung"
             >
               <img
                 alt=""
@@ -349,6 +367,7 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
               data-testid="avatar-editor-category-tab-4"
+              title="Öffnet die Kategorie Körper"
             >
               <img
                 alt=""
@@ -362,6 +381,7 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
           >
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              title="Erstellt einen zufällig aussehenden Avatar"
             >
               <img
                 alt="Randomizer Icon"
@@ -408,6 +428,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
         >
           <button
             class="mr-4 justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            title="Klicken Sie hier, um zur Willkommen-Seite zurückzukehren"
           >
             <img
               alt="Home Icon"
@@ -421,6 +442,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
         >
           <button
             class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            title="Klicken Sie hier, um Ihren erstellten Avatar zu speichern"
           >
             <img
               alt="Save Icon"
@@ -450,11 +472,13 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
           >
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              title="Öffnet das Hilfe-Fenster, um Hilfe und weitere Informationen zur 3D-Lernumgebung zu erhalten"
             >
               <img
                 alt="Help Icon"
                 class="w-10 xl:w-12 mobile-landscape:w-6"
                 src="help.svg"
+                title="HelpButtonToolTip"
               />
             </button>
           </div>
@@ -489,6 +513,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
               data-testid="avatar-editor-category-tab-0"
+              title="Öffnet die Kategorie Haare"
             >
               <img
                 alt=""
@@ -503,6 +528,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
               data-testid="avatar-editor-category-tab-1"
+              title="Öffnet die Kategorie Gesicht"
             >
               <img
                 alt=""
@@ -517,6 +543,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
             <button
               class="!bg-adleryellow translate-x-[1px] translate-y-[1px] !border-b-2 !border-r-2 !border-transparent justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-adleryellow landscape:hover:bg-adleryellow active:bg-adleryellow"
               data-testid="avatar-editor-category-tab-2"
+              title="Öffnet die Kategorie Accessoires"
             >
               <img
                 alt=""
@@ -531,6 +558,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
               data-testid="avatar-editor-category-tab-3"
+              title="Öffnet die Kategorie Kleidung"
             >
               <img
                 alt=""
@@ -545,6 +573,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
               data-testid="avatar-editor-category-tab-4"
+              title="Öffnet die Kategorie Körper"
             >
               <img
                 alt=""
@@ -558,6 +587,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
           >
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              title="Erstellt einen zufällig aussehenden Avatar"
             >
               <img
                 alt="Randomizer Icon"
@@ -578,6 +608,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
             >
               <button
                 class="content-start w-full text-left"
+                title="Klappt die Kategorie Kopfbedeckung auf und zeigt alle Optionen"
               >
                 <h1
                   class="text-2xl portrait:text-lg font-bold"
@@ -772,6 +803,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
             >
               <button
                 class="content-start w-full text-left"
+                title="Klappt die Kategorie Brille auf und zeigt alle Optionen"
               >
                 <h1
                   class="text-2xl portrait:text-lg font-bold"
@@ -790,6 +822,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
             >
               <button
                 class="content-start w-full text-left"
+                title="Klappt die Kategorie Rucksack auf und zeigt alle Optionen"
               >
                 <h1
                   class="text-2xl portrait:text-lg font-bold"
@@ -808,6 +841,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
             >
               <button
                 class="content-start w-full text-left"
+                title="Klappt die Kategorie Sonstiges auf und zeigt alle Optionen"
               >
                 <h1
                   class="text-2xl portrait:text-lg font-bold"
@@ -852,6 +886,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
         >
           <button
             class="mr-4 justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            title="Klicken Sie hier, um zur Willkommen-Seite zurückzukehren"
           >
             <img
               alt="Home Icon"
@@ -865,6 +900,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
         >
           <button
             class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            title="Klicken Sie hier, um Ihren erstellten Avatar zu speichern"
           >
             <img
               alt="Save Icon"
@@ -894,11 +930,13 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
           >
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              title="Öffnet das Hilfe-Fenster, um Hilfe und weitere Informationen zur 3D-Lernumgebung zu erhalten"
             >
               <img
                 alt="Help Icon"
                 class="w-10 xl:w-12 mobile-landscape:w-6"
                 src="help.svg"
+                title="HelpButtonToolTip"
               />
             </button>
           </div>
@@ -933,6 +971,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
               data-testid="avatar-editor-category-tab-0"
+              title="Öffnet die Kategorie Haare"
             >
               <img
                 alt=""
@@ -947,6 +986,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
               data-testid="avatar-editor-category-tab-1"
+              title="Öffnet die Kategorie Gesicht"
             >
               <img
                 alt=""
@@ -961,6 +1001,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
               data-testid="avatar-editor-category-tab-2"
+              title="Öffnet die Kategorie Accessoires"
             >
               <img
                 alt=""
@@ -975,6 +1016,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
             <button
               class="!bg-adleryellow translate-x-[1px] translate-y-[1px] !border-b-2 !border-r-2 !border-transparent justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-adleryellow landscape:hover:bg-adleryellow active:bg-adleryellow"
               data-testid="avatar-editor-category-tab-3"
+              title="Öffnet die Kategorie Kleidung"
             >
               <img
                 alt=""
@@ -989,6 +1031,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
               data-testid="avatar-editor-category-tab-4"
+              title="Öffnet die Kategorie Körper"
             >
               <img
                 alt=""
@@ -1002,6 +1045,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
           >
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              title="Erstellt einen zufällig aussehenden Avatar"
             >
               <img
                 alt="Randomizer Icon"
@@ -1022,6 +1066,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
             >
               <button
                 class="content-start w-full text-left"
+                title="Klappt die Kategorie Oberteil auf und zeigt alle Optionen"
               >
                 <h1
                   class="text-2xl portrait:text-lg font-bold"
@@ -1182,6 +1227,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
                     >
                       <button
                         class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+                        title="Öffnet ein Fenster zur Farbauswahl"
                       >
                         <div
                           class="border-2 border-black rounded m-2 h-5 w-5"
@@ -1199,6 +1245,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
             >
               <button
                 class="content-start w-full text-left"
+                title="Klappt die Kategorie Oberteil auf und zeigt alle Optionen"
               >
                 <h1
                   class="text-2xl portrait:text-lg font-bold"
@@ -1217,6 +1264,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
             >
               <button
                 class="content-start w-full text-left"
+                title="Klappt die Kategorie Oberteil auf und zeigt alle Optionen"
               >
                 <h1
                   class="text-2xl portrait:text-lg font-bold"
@@ -1261,6 +1309,7 @@ exports[`AvatarEditor should render 4 category when tab button is clicked 1`] = 
         >
           <button
             class="mr-4 justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            title="Klicken Sie hier, um zur Willkommen-Seite zurückzukehren"
           >
             <img
               alt="Home Icon"
@@ -1274,6 +1323,7 @@ exports[`AvatarEditor should render 4 category when tab button is clicked 1`] = 
         >
           <button
             class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            title="Klicken Sie hier, um Ihren erstellten Avatar zu speichern"
           >
             <img
               alt="Save Icon"
@@ -1303,11 +1353,13 @@ exports[`AvatarEditor should render 4 category when tab button is clicked 1`] = 
           >
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              title="Öffnet das Hilfe-Fenster, um Hilfe und weitere Informationen zur 3D-Lernumgebung zu erhalten"
             >
               <img
                 alt="Help Icon"
                 class="w-10 xl:w-12 mobile-landscape:w-6"
                 src="help.svg"
+                title="HelpButtonToolTip"
               />
             </button>
           </div>
@@ -1342,6 +1394,7 @@ exports[`AvatarEditor should render 4 category when tab button is clicked 1`] = 
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
               data-testid="avatar-editor-category-tab-0"
+              title="Öffnet die Kategorie Haare"
             >
               <img
                 alt=""
@@ -1356,6 +1409,7 @@ exports[`AvatarEditor should render 4 category when tab button is clicked 1`] = 
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
               data-testid="avatar-editor-category-tab-1"
+              title="Öffnet die Kategorie Gesicht"
             >
               <img
                 alt=""
@@ -1370,6 +1424,7 @@ exports[`AvatarEditor should render 4 category when tab button is clicked 1`] = 
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
               data-testid="avatar-editor-category-tab-2"
+              title="Öffnet die Kategorie Accessoires"
             >
               <img
                 alt=""
@@ -1384,6 +1439,7 @@ exports[`AvatarEditor should render 4 category when tab button is clicked 1`] = 
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
               data-testid="avatar-editor-category-tab-3"
+              title="Öffnet die Kategorie Kleidung"
             >
               <img
                 alt=""
@@ -1398,6 +1454,7 @@ exports[`AvatarEditor should render 4 category when tab button is clicked 1`] = 
             <button
               class="!bg-adleryellow translate-x-[1px] translate-y-[1px] !border-b-2 !border-r-2 !border-transparent justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-adleryellow landscape:hover:bg-adleryellow active:bg-adleryellow"
               data-testid="avatar-editor-category-tab-4"
+              title="Öffnet die Kategorie Körper"
             >
               <img
                 alt=""
@@ -1411,6 +1468,7 @@ exports[`AvatarEditor should render 4 category when tab button is clicked 1`] = 
           >
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              title="Erstellt einen zufällig aussehenden Avatar"
             >
               <img
                 alt="Randomizer Icon"
@@ -1446,6 +1504,7 @@ exports[`AvatarEditor should render 4 category when tab button is clicked 1`] = 
                 >
                   <button
                     class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+                    title="Öffnet ein Fenster zur Farbauswahl"
                   >
                     <div
                       class="border-2 border-black rounded m-2 h-5 w-5"
@@ -1487,6 +1546,7 @@ exports[`AvatarEditor should renders 1`] = `
         >
           <button
             class="mr-4 justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            title="Klicken Sie hier, um zur Willkommen-Seite zurückzukehren"
           >
             <img
               alt="Home Icon"
@@ -1500,6 +1560,7 @@ exports[`AvatarEditor should renders 1`] = `
         >
           <button
             class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            title="Klicken Sie hier, um Ihren erstellten Avatar zu speichern"
           >
             <img
               alt="Save Icon"
@@ -1529,11 +1590,13 @@ exports[`AvatarEditor should renders 1`] = `
           >
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              title="Öffnet das Hilfe-Fenster, um Hilfe und weitere Informationen zur 3D-Lernumgebung zu erhalten"
             >
               <img
                 alt="Help Icon"
                 class="w-10 xl:w-12 mobile-landscape:w-6"
                 src="help.svg"
+                title="HelpButtonToolTip"
               />
             </button>
           </div>
@@ -1568,6 +1631,7 @@ exports[`AvatarEditor should renders 1`] = `
             <button
               class="!bg-adleryellow translate-x-[1px] translate-y-[1px] !border-b-2 !border-r-2 !border-transparent justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-adleryellow landscape:hover:bg-adleryellow active:bg-adleryellow"
               data-testid="avatar-editor-category-tab-0"
+              title="Öffnet die Kategorie Haare"
             >
               <img
                 alt=""
@@ -1582,6 +1646,7 @@ exports[`AvatarEditor should renders 1`] = `
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
               data-testid="avatar-editor-category-tab-1"
+              title="Öffnet die Kategorie Gesicht"
             >
               <img
                 alt=""
@@ -1596,6 +1661,7 @@ exports[`AvatarEditor should renders 1`] = `
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
               data-testid="avatar-editor-category-tab-2"
+              title="Öffnet die Kategorie Accessoires"
             >
               <img
                 alt=""
@@ -1610,6 +1676,7 @@ exports[`AvatarEditor should renders 1`] = `
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
               data-testid="avatar-editor-category-tab-3"
+              title="Öffnet die Kategorie Kleidung"
             >
               <img
                 alt=""
@@ -1624,6 +1691,7 @@ exports[`AvatarEditor should renders 1`] = `
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
               data-testid="avatar-editor-category-tab-4"
+              title="Öffnet die Kategorie Körper"
             >
               <img
                 alt=""
@@ -1637,6 +1705,7 @@ exports[`AvatarEditor should renders 1`] = `
           >
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              title="Erstellt einen zufällig aussehenden Avatar"
             >
               <img
                 alt="Randomizer Icon"

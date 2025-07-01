@@ -18,6 +18,7 @@ import {
   DoorTypeStrings,
 } from "src/Components/Core/Domain/Types/DoorTypes";
 import { getDoorIcon } from "../../../Utils/GetDoorIcon";
+import { useTranslation } from "react-i18next";
 
 export default function BottomTooltip({
   className,
@@ -35,6 +36,8 @@ export default function BottomTooltip({
   const [xp] = useObservable<number | undefined>(viewModel.xp);
   const [isRequired] = useObservable<boolean | undefined>(viewModel.isRequired);
 
+  const { t: translate } = useTranslation("learningSpace");
+
   if (!show || !iconType) return null;
 
   return (
@@ -47,6 +50,7 @@ export default function BottomTooltip({
       <StyledContainer
         className="cursor-pointer pointer-events-auto"
         onClick={viewModel.onClickCallback.Value} // didn't use useObservable because react has problems with functions in states
+        toolTip={translate("bottomToolTip").toString()}
       >
         <div className="flex items-center gap-1 p-2 font-bold rounded-lg lg:p-4 text-adlerdarkblue text-md lg:text-2xl bg-buttonbgblue hover:bg-adleryellow hover:border-adlerdarkblue portrait:border-b-2 portrait:border-r-2 portrait:border-adlerdarkblue portrait:animate-wiggle transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 hover:border-b-2 hover:border-r-2 active:border-transparent">
           {iconType !== LearningElementTypes.notAnElement &&

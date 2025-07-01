@@ -4,6 +4,7 @@ import tailwindMerge from "../../../Utils/TailwindMerge";
 type ProgressbarProps = {
   /* Progress bar arguments */
   value: number;
+  tooltip?: string;
   max: number;
   progressbarText?: string; // if no displaytext is defined progressbar displays value
   barClassName?: string;
@@ -17,7 +18,7 @@ type ProgressbarProps = {
 
 export default function Progressbar(props: Readonly<ProgressbarProps>) {
   return (
-    <div className="flex items-center text-center">
+    <div className="flex items-center text-center" title={props.tooltip}>
       {/* icon */}
       {props.icon && (
         <div className="relative items-center align-middle">

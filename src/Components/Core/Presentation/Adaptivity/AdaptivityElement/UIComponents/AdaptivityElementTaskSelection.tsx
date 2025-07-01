@@ -53,6 +53,10 @@ export default function AdaptivityElementTaskSelection({
     setHeaderText(translate("adaptivityIntro"));
   }, [setHeaderText, translate]);
 
+  const taskToolTip = translate("taskToolTip").toString();
+  const taskRequiredToolTip = translate("legendTaskRequired").toString();
+  const taskSolvedToolTip = translate("legendTaskRequiredSolved").toString();
+
   useEffect(() => {
     setTaskButtons(
       tasks.map((task, i) => {
@@ -87,6 +91,7 @@ export default function AdaptivityElementTaskSelection({
               shape="freeFloatCenter"
               className="w-full max-w-2xl"
               onClick={() => onSelectTask(task)}
+              title={taskToolTip}
             >
               <div className="grid items-center justify-between w-full h-full grid-cols-7 align-center">
                 <AdaptivityElementDifficultyStars
@@ -106,6 +111,7 @@ export default function AdaptivityElementTaskSelection({
                       alt=""
                       className={"h-6 lg:h-8 pl-4 xl:pl-8"}
                       src={requiredTaskIcon}
+                      title={taskRequiredToolTip}
                     />
                   )}
                   {task.isRequired && task.isCompleted && (
@@ -113,6 +119,7 @@ export default function AdaptivityElementTaskSelection({
                       alt=""
                       className={"h-6 lg:h-8 pl-4 xl:pl-8"}
                       src={solvedTaskIcon}
+                      title={taskSolvedToolTip}
                     />
                   )}
                   {!task.isRequired && <div className="w-16"></div>}
@@ -123,7 +130,14 @@ export default function AdaptivityElementTaskSelection({
         );
       }),
     );
-  }, [tasks, onSelectTask, resetting]);
+  }, [
+    tasks,
+    onSelectTask,
+    resetting,
+    taskSolvedToolTip,
+    taskRequiredToolTip,
+    taskToolTip,
+  ]);
 
   return (
     <div className="grid justify-center gap-4 lg:grid-cols-2 gap-x-8">

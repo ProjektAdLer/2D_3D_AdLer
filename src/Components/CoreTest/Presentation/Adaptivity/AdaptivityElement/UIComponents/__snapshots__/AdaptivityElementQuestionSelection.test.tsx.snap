@@ -13,6 +13,7 @@ exports[`AdaptivityElementQuestionSelection should render (every required combin
       >
         <button
           class="w-full col-span-2 md:col-span-1 px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+          title="questionToolTip"
         >
           <div
             class="grid items-center w-full h-full grid-cols-5 "
@@ -49,6 +50,7 @@ exports[`AdaptivityElementQuestionSelection should render (every required combin
                 alt=""
                 class="h-5 md:h-7"
                 src="check-solution.svg"
+                title="legendTaskRequiredSolved"
               />
             </div>
           </div>
@@ -66,6 +68,7 @@ exports[`AdaptivityElementQuestionSelection should render (every required combin
       >
         <button
           class="w-full col-span-2 md:col-span-1 px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+          title="questionToolTip"
         >
           <div
             class="grid items-center w-full h-full grid-cols-5 "
@@ -102,6 +105,7 @@ exports[`AdaptivityElementQuestionSelection should render (every required combin
                 alt=""
                 class="h-5 md:h-7"
                 src="required.svg"
+                title="legendTaskRequired"
               />
             </div>
           </div>
@@ -128,6 +132,7 @@ exports[`AdaptivityElementQuestionSelection should render (with all difficulties
       >
         <button
           class="w-full col-span-2 md:col-span-1 px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+          title="questionToolTip"
         >
           <div
             class="grid items-center w-full h-full grid-cols-5 "
@@ -179,6 +184,7 @@ exports[`AdaptivityElementQuestionSelection should render (with all difficulties
       >
         <button
           class="w-full col-span-2 md:col-span-1 px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+          title="questionToolTip"
         >
           <div
             class="grid items-center w-full h-full grid-cols-5 "
@@ -226,11 +232,12 @@ exports[`AdaptivityElementQuestionSelection should render (with all difficulties
         >
           <button
             class="w-full h-full px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            title="hintToolTip"
           >
             <p
               class="text-sm"
             >
-              Hinweis
+              hintButton
             </p>
           </button>
         </div>
@@ -244,6 +251,7 @@ exports[`AdaptivityElementQuestionSelection should render (with all difficulties
       >
         <button
           class="w-full col-span-2 md:col-span-1 px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+          title="questionToolTip"
         >
           <div
             class="grid items-center w-full h-full grid-cols-5 "
@@ -291,11 +299,12 @@ exports[`AdaptivityElementQuestionSelection should render (with all difficulties
         >
           <button
             class="w-full h-full px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            title="hintToolTip"
           >
             <p
               class="text-sm"
             >
-              Hinweis
+              hintButton
             </p>
           </button>
         </div>

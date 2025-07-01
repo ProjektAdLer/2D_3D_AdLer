@@ -2,6 +2,7 @@ import IStoryElementController from "./IStoryElementController";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import { useEffect, useState } from "react";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 export default function SingleStoryLayout({
   contentTexts,
@@ -18,6 +19,8 @@ export default function SingleStoryLayout({
     setPageId(0);
   }, [contentTexts]);
 
+  const { t: translate } = useTranslation("learningSpace");
+
   return (
     <React.Fragment>
       {/* Story Text */}
@@ -33,7 +36,7 @@ export default function SingleStoryLayout({
               shape="freeFloatLeft"
               onClick={() => controller.onBackToSelectionButtonClicked()}
               data-testid="back"
-              title="Zurück zur Auswahl"
+              title={translate("storySelectionToolTip").toString()}
             >
               {"\u21A9"}
             </StyledButton>
@@ -51,6 +54,7 @@ export default function SingleStoryLayout({
                 onClick={() => setPageId(Math.max(0, pageId - 1))}
                 disabled={pageId <= 0}
                 data-testid="prev-page" // Umbenannt, um Konflikt zu vermeiden
+                title={translate("previousToolTip").toString()}
               >
                 {"\u25B2"}
               </StyledButton>
@@ -65,6 +69,7 @@ export default function SingleStoryLayout({
                 }
                 disabled={pageId >= contentTexts.length - 1}
                 data-testid="next"
+                title={translate("nextToolTip").toString()}
               >
                 {"\u25BC"}
               </StyledButton>

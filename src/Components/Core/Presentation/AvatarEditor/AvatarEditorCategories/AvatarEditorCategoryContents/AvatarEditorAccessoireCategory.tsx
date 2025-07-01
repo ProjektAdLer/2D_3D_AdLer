@@ -160,21 +160,33 @@ export default function AvatarEditorAccessoireCategory(
         header={translate("headgearTitle").toString()}
         isOpen={props.viewModel.uiVisiblity.accessoireMenu.headgear}
         content={TileGridHeadGear()}
+        toolTip={translate("accordionCategoryToolTip", {
+          subCategory: translate("headgearTitle").toString(),
+        }).toString()}
       />
       <AccordionElement
         header={translate("glassesTitle").toString()}
         isOpen={props.viewModel.uiVisiblity.accessoireMenu.glasses}
         content={TileGridGlasses()}
+        toolTip={translate("accordionCategoryToolTip", {
+          subCategory: translate("glassesTitle").toString(),
+        }).toString()}
       />
       <AccordionElement
         header={translate("backpackTitle").toString()}
         isOpen={props.viewModel.uiVisiblity.accessoireMenu.backpack}
         content={TileGridBackpacks()}
+        toolTip={translate("accordionCategoryToolTip", {
+          subCategory: translate("backpackTitle").toString(),
+        }).toString()}
       />
       <AccordionElement
         header={translate("otherTitle").toString()}
         isOpen={props.viewModel.uiVisiblity.accessoireMenu.other}
         content={TileGridOthers()}
+        toolTip={translate("accordionCategoryToolTip", {
+          subCategory: translate("otherTitle").toString(),
+        }).toString()}
       />
     </div>
   );

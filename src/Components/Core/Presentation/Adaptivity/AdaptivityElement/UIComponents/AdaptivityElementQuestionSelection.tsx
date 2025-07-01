@@ -74,6 +74,7 @@ export default function AdaptivityElementQuestionSelection({
               shape="freeFloatCenter"
               className="w-full col-span-2 md:col-span-1"
               onClick={() => onSelectQuestion(question)}
+              title={translate("questionToolTip").toString()}
             >
               <div className="grid items-center w-full h-full grid-cols-5 ">
                 {question.difficulty ===
@@ -118,10 +119,16 @@ export default function AdaptivityElementQuestionSelection({
                       alt=""
                       className={"h-5 md:h-7"}
                       src={requiredTaskIcon}
+                      title={translate("legendTaskRequired").toString()}
                     />
                   )}
                   {question.isRequired && question.isCompleted && (
-                    <img alt="" className={"h-5 md:h-7"} src={solvedTaskIcon} />
+                    <img
+                      alt=""
+                      className={"h-5 md:h-7"}
+                      src={solvedTaskIcon}
+                      title={translate("legendTaskRequiredSolved").toString()}
+                    />
                   )}
 
                   {!question.isRequired && <div className="w-16"></div>}
@@ -141,8 +148,11 @@ export default function AdaptivityElementQuestionSelection({
                         className="w-full h-full "
                         key={"hint-" + hint.hintID}
                         onClick={() => onSelectHint(hint, question)}
+                        title={translate("hintToolTip").toString()}
                       >
-                        <p className="text-sm">Hinweis</p>
+                        <p className="text-sm">
+                          {translate("hintButton").toString()}
+                        </p>
                       </StyledButton>
                     );
                   } else return null;

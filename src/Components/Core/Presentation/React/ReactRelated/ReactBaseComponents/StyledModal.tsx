@@ -13,6 +13,7 @@ type Props = Partial<{
   canClose: boolean;
   onClose: () => void;
   footer: JSX.Element;
+  closeButtonToolTip?: string;
   [x: string]: any;
 }>;
 
@@ -39,9 +40,11 @@ export default function StyledModal({
   canClose = true,
   onClose,
   footer,
+  closeButtonToolTip,
   ...restProps
 }: Readonly<Props>) {
   if (!showModal) return null;
+
   return (
     <StyledContainer
       {...restProps}
@@ -68,6 +71,7 @@ export default function StyledModal({
                 onClick={(event) => {
                   onClose?.();
                 }}
+                title={closeButtonToolTip}
               >
                 <img
                   src={closeIcon}

@@ -5,9 +5,8 @@ import tailwindMerge from "../../../Utils/TailwindMerge";
 import { useTranslation } from "react-i18next";
 
 export default function InternetLossModal({ className }: AdLerUIComponent<{}>) {
+  const { t: translate } = useTranslation(["internetLoss", "helpMenu"]);
   const [isOpen, setOpen] = useState<boolean>(false);
-
-  const { t: translate } = useTranslation("internetLoss");
 
   const openModal = useCallback(() => {
     setOpen(true);
@@ -36,6 +35,7 @@ export default function InternetLossModal({ className }: AdLerUIComponent<{}>) {
         onClose={closeModal}
         showModal={isOpen}
         className={tailwindMerge(className, "p-5 rounded-lg")}
+        closeButtonToolTip={translate("closeToolTip").toString()}
       >
         <p className="m-1 my-4 font-bold text-adlerdarkblue">
           {translate("info")}

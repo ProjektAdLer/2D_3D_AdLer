@@ -98,11 +98,17 @@ export default function AvatarEditorHairCategory(
         header={translate("hairstylesTitle").toString()}
         isOpen={props.viewModel.uiVisiblity.hairMenu.hairstyles}
         content={TileGridHairStyles()}
+        toolTip={translate("accordionCategoryToolTip", {
+          subCategory: translate("hairstylesTitle").toString(),
+        }).toString()}
       />
       <AccordionElement
         header={translate("beardsTitle").toString()}
         isOpen={props.viewModel.uiVisiblity.hairMenu.beards}
         content={TileGridBeards()}
+        toolTip={translate("accordionCategoryToolTip", {
+          subCategory: translate("beardsTitle").toString(),
+        }).toString()}
       />
       <div className="w-full p-2 m-2">
         <ColorPickerButton

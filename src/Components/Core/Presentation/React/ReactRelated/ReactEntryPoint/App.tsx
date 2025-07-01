@@ -15,6 +15,7 @@ import "src/localize/i18next-config";
 import AvatarEditor from "src/Components/Core/Presentation/AvatarEditor/AvatarEditor";
 import LoadingScreenControlsExplanation from "~ReactComponents/GeneralComponents/LoadingScreen/LoadingScreenContent/LoadingScreenControlsExplanation";
 import LoadingScreenHomePageInformation from "~ReactComponents/GeneralComponents/LoadingScreen/LoadingScreenContent/LoadingScreenHomePageInformation";
+import i18next from "i18next";
 
 export interface IAppProps {}
 
@@ -52,6 +53,9 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
             onLoading: "loadLearningSpace",
             onLoadingFinished: "finishedLoadingLearningSpace",
           }}
+          tooltip={i18next
+            .t("openLearningSpaceToolTip", { ns: "learningSpace" })
+            .toString()}
         />
         <LearningSpace />
         <InternetLossModal />
@@ -68,6 +72,9 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
             onLoading: "loadLearningWorldOverview",
           }}
           autoClose={true}
+          tooltip={i18next
+            .t("openLearningWorldToolTip", { ns: "worldMenu" })
+            .toString()}
         />
         <LearningWorldMenu />
         <InternetLossModal />

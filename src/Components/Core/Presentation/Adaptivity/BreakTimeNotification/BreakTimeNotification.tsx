@@ -35,6 +35,7 @@ export default function BreakTimeNotification({ className }: AdLerUIComponent) {
         <StyledButton
           shape="square"
           onClick={() => controller.minimizeOrMaximizeBreakNotification()}
+          title={translate("pauseNotificationToolTip").toString()}
         >
           <img src={pauseIcon} className="h-fit" alt="Pause Icon" />
         </StyledButton>

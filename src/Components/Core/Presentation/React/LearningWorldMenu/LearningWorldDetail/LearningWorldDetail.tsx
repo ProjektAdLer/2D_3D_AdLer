@@ -46,8 +46,9 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
         <StyledButton
           color="highlight"
           shape="freeFloatLeft"
-          className="self-center block m-2 portrait:p-2 justify-self-center animate-bounce-once font-bold bg-nodehandlecolor"
+          className="self-center block m-2 font-bold portrait:p-2 justify-self-center animate-bounce-once bg-nodehandlecolor"
           onClick={controller.onEnterLearningWorldButtonClicked}
+          title={translate("worldOpenButtonToolTip").toString()}
         >
           {translate("openLearningWorldButton")}
         </StyledButton>

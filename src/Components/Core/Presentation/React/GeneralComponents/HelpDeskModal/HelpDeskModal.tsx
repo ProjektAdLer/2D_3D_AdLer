@@ -18,10 +18,10 @@ import { Trans, useTranslation } from "react-i18next";
 
 export default function HelpDeskModal({ className }: AdLerUIComponent<{}>) {
   const [viewModel] = useBuilder<HelpDeskModalViewModel, undefined>(
-    BUILDER_TYPES.IHelpDeskModalBuilder
+    BUILDER_TYPES.IHelpDeskModalBuilder,
   );
   const scenePresenter = useInjection<ScenePresenterFactory>(
-    SCENE_TYPES.ScenePresenterFactory
+    SCENE_TYPES.ScenePresenterFactory,
   )(LearningSpaceSceneDefinition);
 
   const { t: translate } = useTranslation("helpMenu");
@@ -41,6 +41,7 @@ export default function HelpDeskModal({ className }: AdLerUIComponent<{}>) {
         onClose={closeModal}
         showModal={isOpen}
         className={tailwindMerge(className, "p-5 rounded-lg")}
+        closeButtonToolTip={translate("closeToolTip").toString()}
       >
         <button
           className="fixed bottom-0 left-0 w-10 h-10"

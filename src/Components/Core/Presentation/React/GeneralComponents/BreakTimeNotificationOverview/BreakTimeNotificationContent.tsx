@@ -24,16 +24,17 @@ export default function BreakTimeNotificationContent({
           </p>
 
           {/* Image Slider */}
-          <div className="w-full flex flex-row justify-center align-center">
+          <div className="flex flex-row justify-center w-full align-center">
             {/* Button left*/}
-            <div className="flex justify-start items-center w-12">
+            <div className="flex items-center justify-start w-12">
               {currentSlide > 0 && (
                 <StyledButton
                   shape="smallSquare"
-                  className=" bg-whitetrans rounded-xl w-full "
+                  className="w-full  bg-whitetrans rounded-xl"
                   onClick={() => {
                     setCurrentSlide(currentSlide - 1);
                   }}
+                  title={translate("previousSlideToolTip").toString()}
                 >
                   <p className="rotate-180">&#10140;</p>
                 </StyledButton>
@@ -48,14 +49,15 @@ export default function BreakTimeNotificationContent({
               alt=""
             />
             {/* Button right*/}
-            <div className="flex justify-end items-center w-12">
+            <div className="flex items-center justify-end w-12">
               {currentSlide < breakTimeNotification.images.length - 1 && (
                 <StyledButton
                   shape="smallSquare"
-                  className="bg-whitetrans rounded-xl w-full  "
+                  className="w-full bg-whitetrans rounded-xl "
                   onClick={() => {
                     setCurrentSlide(currentSlide + 1);
                   }}
+                  title={translate("nextSlideToolTip").toString()}
                 >
                   <p className="">&#10140;</p>
                 </StyledButton>

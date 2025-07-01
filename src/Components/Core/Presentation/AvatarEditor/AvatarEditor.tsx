@@ -22,6 +22,7 @@ import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import AvatarEditorFaceCategory from "./AvatarEditorCategories/AvatarEditorCategoryContents/AvatarEditorFaceCategory";
 import AvatarEditorSaveButton from "./AvatarEditorSaveButton";
 import AvatarEditorRandomizerButton from "./AvatarEditorRandomizerButton";
+import { useTranslation } from "react-i18next";
 
 export default function AvatarEditor() {
   const [viewModel, controller] = useBuilder<
@@ -35,6 +36,16 @@ export default function AvatarEditor() {
   const loadAvatarConfigUseCase = useInjection<ILoadAvatarConfigUseCase>(
     USECASE_TYPES.ILoadAvatarConfigUseCase,
   );
+
+  const [categoryNameKeys] = useState<string[]>([
+    "hair",
+    "face",
+    "accessoires",
+    "clothing",
+    "body",
+  ]);
+
+  const { t: translate } = useTranslation("avatarEditor");
 
   useEffect(() => {
     if (!controller) return;
@@ -66,12 +77,13 @@ export default function AvatarEditor() {
           <div className="flex flex-row items-center justify-center">
             <div className="flex flex-col items-center justify-center">
               <div className="text-2xl font-bold text-darkblue portrait:text-xl">
-                {activeTab === OAvatarEditorCategory.HAIR && "Haare"}
-                {activeTab === OAvatarEditorCategory.FACE && "Gesicht"}
+                {activeTab === OAvatarEditorCategory.HAIR && translate("hair")}
+                {activeTab === OAvatarEditorCategory.FACE && translate("face")}
                 {activeTab === OAvatarEditorCategory.ACCESSOIRE &&
-                  "Accessoires"}
-                {activeTab === OAvatarEditorCategory.CLOTHING && "Kleidung"}
-                {activeTab === OAvatarEditorCategory.BODY && "Körper"}
+                  translate("accessoires")}
+                {activeTab === OAvatarEditorCategory.CLOTHING &&
+                  translate("clothing")}
+                {activeTab === OAvatarEditorCategory.BODY && translate("body")}
               </div>
             </div>
           </div>
@@ -84,6 +96,9 @@ export default function AvatarEditor() {
                   category={category as AvatarEditorCategory}
                   active={activeTab === category}
                   onClick={() => setActiveTab(category)}
+                  toolTip={translate("categoryToolTip", {
+                    category: translate(categoryNameKeys[category]),
+                  }).toString()}
                 />
               ))}
             <AvatarEditorRandomizerButton

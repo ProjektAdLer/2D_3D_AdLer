@@ -70,6 +70,7 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
             shape="freeFloatLeft"
             className="self-center block m-2 font-bold portrait:p-2 justify-self-center animate-bounce-once bg-nodehandlecolor"
             onClick={controller.onLearningSpaceButtonClicked}
+            title={translate("spaceOpenButtonToolTip").toString()}
           >
             {translate("learningSpaceButton")}
           </StyledButton>

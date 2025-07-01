@@ -150,13 +150,17 @@ export default function AdaptivityElementDialogContainer({
                   <StyledButton
                     onClick={controller.back}
                     className="w-8 h-8 p-1 mr-2 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
+                    title={translate("backToolTip").toString()}
                   >
                     {"\u25C0"}
                   </StyledButton>
                 )}
 
               {currentTask === null && currentQuestion === null && (
-                <div className="w-[50px] lg:w-[50px] bg-buttonbgblue rounded-full text-sm">
+                <div
+                  className="w-[50px] lg:w-[50px] bg-buttonbgblue rounded-full text-sm"
+                  title={translate("adaptivityProgressToolTip").toString()}
+                >
                   <CircularProgressbarWithChildren
                     value={progressPercentage}
                     strokeWidth={10}
@@ -199,6 +203,7 @@ export default function AdaptivityElementDialogContainer({
               <CloseButton
                 onClick={controller.closeModal}
                 className="w-8 h-8 p-1 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
+                title={translate("closeToolTip").toString()}
               >
                 <img
                   src={closeIcon}
@@ -281,6 +286,7 @@ export default function AdaptivityElementDialogContainer({
                         onClick={() => {
                           controller.showFooterTooltip();
                         }}
+                        title={translate("legendToolTip").toString()}
                       >
                         {showFooterTooltip
                           ? translate("legendClose")

@@ -9,7 +9,7 @@ exports[`AvatarEditorPreview should render 1`] = `
       class="rounded-xl w-full h-full"
     />
     <div
-      class="absolute bottom-4 portrait:bottom-2 flex justify-center w-full space-x-2 p-2"
+      class="absolute flex justify-center w-full p-2 space-x-2 bottom-4 portrait:bottom-2"
     >
       <div
         class=""
@@ -17,6 +17,7 @@ exports[`AvatarEditorPreview should render 1`] = `
         <button
           class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
           data-testid="left-turn-button"
+          title="Dreht die Avatardarstellung im Uhrzeigersinn"
         >
           <img
             alt="Left Icon"
@@ -31,6 +32,7 @@ exports[`AvatarEditorPreview should render 1`] = `
         <button
           class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
           data-testid="zoom-in-button"
+          title="Zoomt näher an das Gesicht des Avatars heran"
         >
           <img
             alt="Plus Icon"
@@ -45,6 +47,7 @@ exports[`AvatarEditorPreview should render 1`] = `
         <button
           class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
           data-testid="zoom-out-button"
+          title="Zoomt weiter vom Geischt des Avatars heraus"
         >
           <img
             alt="Minus Icon"
@@ -59,6 +62,7 @@ exports[`AvatarEditorPreview should render 1`] = `
         <button
           class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
           data-testid="right-turn-button"
+          title="Dreht die Avatardarstellung gegen den Uhrzeigersinn"
         >
           <img
             alt="Right Icon"

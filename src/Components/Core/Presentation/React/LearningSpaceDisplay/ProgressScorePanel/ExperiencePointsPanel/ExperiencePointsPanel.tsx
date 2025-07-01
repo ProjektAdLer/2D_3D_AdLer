@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import levelIcon from "../../../../../../../Assets/icons/level.svg";
 import { GradingStyle } from "src/Components/Core/Domain/Types/GradingStyle";
 import Progressbar from "~ReactComponents/ReactRelated/ReactBaseComponents/Progressbar";
+import { useTranslation } from "react-i18next";
 
 interface PanelProps extends React.HTMLAttributes<HTMLDivElement> {
   gradingStyle: GradingStyle;
@@ -23,6 +24,8 @@ export default function ExperiencePointsPanel({
 
   const [scoreInfo] = useObservable<XPInfo>(viewModel?.xpInfo);
   const [percentage, setPercentage] = useState(0);
+
+  const { t: translate } = useTranslation("learningSpace");
 
   useEffect(() => {
     if (!scoreInfo) return;
@@ -49,6 +52,7 @@ export default function ExperiencePointsPanel({
       iconText={scoreInfo?.currentLevel.toString()}
       barClassName="w-20 font-bold text-center text-yellow-300 "
       icon={levelIcon}
+      tooltip={translate("xpBarToolTip").toString()}
     />
   );
 }

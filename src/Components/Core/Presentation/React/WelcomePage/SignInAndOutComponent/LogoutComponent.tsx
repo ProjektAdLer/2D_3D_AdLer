@@ -11,6 +11,7 @@ import { useInjection } from "inversify-react";
 import IGetLoginStatusUseCase from "src/Components/Core/Application/UseCases/GetLoginStatus/IGetLoginStatusUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function LogoutComponent({
   className,
@@ -27,6 +28,8 @@ export default function LogoutComponent({
     viewModel?.userLoggedIn,
   );
   const [userName, setUserName] = useObservable<string>(viewModel?.userName);
+
+  const { t: translate } = useTranslation("start");
 
   useEffect(() => {
     const loginStatus = getLoginStatusUseCase.execute();
@@ -46,7 +49,7 @@ export default function LogoutComponent({
           <img className="w-10" src={moodleIcon} alt="Moodle-Icon"></img>
           {userLoggedIn && (
             <p className="text-sm mobile-landscape:text-xs font-regular portrait:hidden">
-              {"Eingeloggt als " + userName}
+              {translate("loginName", { userName: userName })}
             </p>
           )}
         </StyledButton>
@@ -57,8 +60,11 @@ export default function LogoutComponent({
           className="h-6 !bg-red-300 w-fit absolute bottom-12 right-1 portrait:-left-2 portrait:-top-4"
           onClick={() => controller.logout()}
           data-testid="logout"
+          title={translate("LogoutButtonToolTip").toString()}
         >
-          <p className="text-xs portrait:text-2xs rounded-lg">Ausloggen</p>
+          <p className="text-xs rounded-lg portrait:text-2xs">
+            {translate("logout").toString()}
+          </p>
         </StyledButton>
       )}
     </div>

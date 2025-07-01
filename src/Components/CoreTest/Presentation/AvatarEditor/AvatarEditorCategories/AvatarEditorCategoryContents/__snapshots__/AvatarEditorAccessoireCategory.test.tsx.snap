@@ -10,6 +10,7 @@ exports[`AvatarEditorHairCategory should render 1`] = `
     >
       <button
         class="content-start w-full text-left"
+        title="accordionCategoryToolTip"
       >
         <h1
           class="text-2xl portrait:text-lg font-bold"
@@ -204,6 +205,7 @@ exports[`AvatarEditorHairCategory should render 1`] = `
     >
       <button
         class="content-start w-full text-left"
+        title="accordionCategoryToolTip"
       >
         <h1
           class="text-2xl portrait:text-lg font-bold"
@@ -436,6 +438,7 @@ exports[`AvatarEditorHairCategory should render 1`] = `
     >
       <button
         class="content-start w-full text-left"
+        title="accordionCategoryToolTip"
       >
         <h1
           class="text-2xl portrait:text-lg font-bold"
@@ -516,6 +519,7 @@ exports[`AvatarEditorHairCategory should render 1`] = `
     >
       <button
         class="content-start w-full text-left"
+        title="accordionCategoryToolTip"
       >
         <h1
           class="text-2xl portrait:text-lg font-bold"

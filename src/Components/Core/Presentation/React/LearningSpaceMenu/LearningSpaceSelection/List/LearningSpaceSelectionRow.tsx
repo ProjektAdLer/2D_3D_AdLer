@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 
 export default function LearningSpaceSelectionRow({
@@ -13,6 +14,8 @@ export default function LearningSpaceSelectionRow({
   locked: boolean;
   onClickCallback: () => void;
 }) {
+  const { t: translate } = useTranslation("spaceMenu");
+
   return (
     <StyledButton
       icon={icon}
@@ -21,7 +24,7 @@ export default function LearningSpaceSelectionRow({
       shape="freeFloatCenter"
       onClick={onClickCallback}
       color={selected ? "pressed" : "default"}
-      title={spaceTitle}
+      title={translate("spaceButtonToolTip").toString()}
     >
       {spaceTitle}
     </StyledButton>

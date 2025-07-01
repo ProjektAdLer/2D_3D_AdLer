@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 
 export default function LearningWorldSelectionRow({
@@ -11,6 +12,8 @@ export default function LearningWorldSelectionRow({
   title: string;
   onClickCallback: () => void;
 }) {
+  const { t: translate } = useTranslation("worldMenu");
+
   return (
     <StyledButton
       icon={icon}
@@ -19,6 +22,7 @@ export default function LearningWorldSelectionRow({
       shape="freeFloatCenter"
       onClick={onClickCallback}
       color={selected ? "pressed" : "default"}
+      title={translate("worldButtonToolTip").toString()}
     >
       {title}
     </StyledButton>

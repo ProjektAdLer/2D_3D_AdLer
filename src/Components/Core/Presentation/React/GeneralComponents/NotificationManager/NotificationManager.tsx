@@ -11,6 +11,7 @@ import StyledModal from "../../ReactRelated/ReactBaseComponents/StyledModal";
 import NotificationManagerController from "./NotificationManagerController";
 import NotificationManagerViewModel from "./NotificationManagerViewModel";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
+import { useTranslation } from "react-i18next";
 
 export default function NotificationManager({
   className,
@@ -24,6 +25,8 @@ export default function NotificationManager({
   const [notifications, setNotifications] = useObservable<Message[]>(
     viewModel?.messages,
   );
+
+  const { t: translate } = useTranslation("helpMenu");
 
   if (notifications == null || notifications.length === 0) return null;
 
@@ -46,6 +49,7 @@ export default function NotificationManager({
         remainingNotifications.pop();
         setNotifications(remainingNotifications);
       }}
+      closeButtonToolTip={translate("closeToolTip").toString()}
       {...restProps}
     >
       {notifications[notifications.length - 1].message}

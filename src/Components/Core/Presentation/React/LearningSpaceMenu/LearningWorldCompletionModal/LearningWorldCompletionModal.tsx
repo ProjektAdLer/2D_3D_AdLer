@@ -21,7 +21,7 @@ export default function LearningWorldCompletionModal({
   const [showModal] = useObservable(viewModel.showModal);
   const [evaluationLink] = useObservable(viewModel.evaluationLink);
 
-  const { t: translate } = useTranslation("spaceMenu");
+  const { t: translate } = useTranslation(["spaceMenu", "helpmenu"]);
 
   if (!viewModel || !controller) return null;
 
@@ -36,6 +36,7 @@ export default function LearningWorldCompletionModal({
       onClose={() => {
         controller.CloseButtonClicked();
       }}
+      closeButtonToolTip={translate("closeToolTip").toString()}
     >
       <div className="flex flex-col items-center justify-center">
         {
@@ -45,7 +46,7 @@ export default function LearningWorldCompletionModal({
             alt=""
           ></img>
         }
-        <div className="w-full flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center w-full">
           <p className="mb-4">{translate("congratulation")}</p>
           {viewModel.worldCompletionText && (
             <div className="flex justify-center">
@@ -61,6 +62,7 @@ export default function LearningWorldCompletionModal({
                   href={evaluationLink}
                   target="_blank"
                   rel="noreferrer"
+                  title={translate("linkToolTip").toString()}
                 >
                   {translate("survey")}
                 </a>
@@ -78,6 +80,7 @@ export default function LearningWorldCompletionModal({
               href="https://projekt-adler.eu"
               target="_blank"
               rel="noreferrer"
+              title={translate("homepageToolTip").toString()}
             >
               Homepage
             </a>

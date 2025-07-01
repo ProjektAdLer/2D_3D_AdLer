@@ -17,6 +17,7 @@ type LoadinScreenProps = {
     onLoading?: string;
     onLoadingFinished?: string;
   };
+  tooltip?: string;
   autoClose?: boolean;
 };
 
@@ -57,7 +58,7 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
 
   return (
     <div className="fixed top-0 left-0 w-screen h-screen z-[20000] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto flex justify-center items-center pb-24">
-      <div className="grid w-full p-3 justify-center">
+      <div className="grid justify-center w-full p-3">
         <section className="flex items-center justify-center w-full gap-8 portrait:flex mobile-landscape:pt-10 xl:m-3 xl:mt-6">
           <img
             className="w-full xs:w-16 md:w-24 lg:w-32 xl:w-20 onek:w-32 twok:w-40 portrait:w-16 animate-wiggle place-self-end mobile-landscape:w-12 mobile-landscape:m-2"
@@ -102,6 +103,7 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
                 shape={"freeFloatCenter"}
                 onClick={() => controller.closeLoadingScreen()}
                 className="p-5 font-bold scale-60 lg:scale-90"
+                title={props.tooltip}
               >
                 {translate(props.i18nKeys.button)}
               </StyledButton>

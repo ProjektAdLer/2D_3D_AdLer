@@ -66,7 +66,7 @@ export default function LoginComponent({
 
   return (
     <div className={tailwindMerge(className)}>
-      <h2 className="col-span-6 col-start-2 row-start-2 mt-2 pt-1 text-xl text-adlerdarkblue font-extrabold text-center justify-self-center text-outline mobile-landscape:text-sm mobile-landscape:pt-0 mobile-landscape:mt-2 portrait:text-sm portrait:row-start-1 portrait:col-start-1 portrait:col-span-8 md:mt-4 lg:text-2xl">
+      <h2 className="col-span-6 col-start-2 row-start-2 pt-1 mt-2 text-xl font-extrabold text-center text-adlerdarkblue justify-self-center text-outline mobile-landscape:text-sm mobile-landscape:pt-0 mobile-landscape:mt-2 portrait:text-sm portrait:row-start-1 portrait:col-start-1 portrait:col-span-8 md:mt-4 lg:text-2xl">
         {userLoggedIn
           ? translate("loginSuccessfullSubheading")
           : translate("moodleLoginSubheading")}
@@ -75,7 +75,7 @@ export default function LoginComponent({
       {!userLoggedIn && (
         <div className="flex flex-col items-start justify-center">
           <form
-            className="flex flex-col md:flex-row items-center justify-center col-span-6 col-start-2 row-start-2 gap-2 m-4 text-xl font-bold text-center rounded-lg portrait:self-end portrait:row-start-1 mobile-landscape:scale-75 portrait:col-start-1 portrait:col-span-8"
+            className="flex flex-col items-center justify-center col-span-6 col-start-2 row-start-2 gap-2 m-4 text-xl font-bold text-center rounded-lg md:flex-row portrait:self-end portrait:row-start-1 mobile-landscape:scale-75 portrait:col-start-1 portrait:col-span-8"
             onSubmit={(e) => {
               e.preventDefault();
               handleSubmit();
@@ -88,6 +88,7 @@ export default function LoginComponent({
               onChange={(newVal) => {
                 setUserName(newVal.target.value);
               }}
+              title={translate("NameInputToolTip").toString()}
             />
             <StyledPasswordField
               className="text-adlerdarkblue"
@@ -96,18 +97,20 @@ export default function LoginComponent({
               onChange={(newVal) => {
                 setPassword(newVal.target.value);
               }}
+              title={translate("PasswordInputToolTip").toString()}
             />
             <StyledButton
               shape="freeFloatCenter"
               data-testid="loginButton"
               onClick={handleSubmit}
+              title={translate("LoginButtonToolTip").toString()}
             >
               <p>{translate("loginButton")}</p>
             </StyledButton>
           </form>
 
           {loginFailed && (
-            <div className="bg-red-100 rounded-lg mobile-landscape:w-64 self-center z-50">
+            <div className="z-50 self-center bg-red-100 rounded-lg mobile-landscape:w-64">
               <p className="m-1 text-xs font-bold text-center text-red-500">
                 {viewModel.errorMessage.Value}
               </p>

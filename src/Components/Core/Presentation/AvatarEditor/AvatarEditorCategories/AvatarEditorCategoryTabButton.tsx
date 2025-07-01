@@ -14,6 +14,7 @@ import bodyCategoryIcon from "../../../../../Assets/icons/body.svg";
 type AvatarEditorCategoryTabButtonProps = {
   category: AvatarEditorCategory;
   active: boolean;
+  toolTip?: string;
   onClick: () => void;
 } & AdLerUIComponent;
 
@@ -35,6 +36,7 @@ export default function AvatarEditorCategoryTabButton(
       color={props.active ? "active" : "default"}
       onClick={props.onClick}
       icon={AvatarEditorCategoryIcons[props.category]}
+      title={props.toolTip}
     ></StyledButton>
   );
 }

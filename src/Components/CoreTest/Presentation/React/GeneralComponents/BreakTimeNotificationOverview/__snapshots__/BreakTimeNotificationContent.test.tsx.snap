@@ -18,10 +18,10 @@ exports[`BreakTimeNotificationContent should render 1`] = `
           infoMobilization 
         </p>
         <div
-          class="w-full flex flex-row justify-center align-center"
+          class="flex flex-row justify-center w-full align-center"
         >
           <div
-            class="flex justify-start items-center w-12"
+            class="flex items-center justify-start w-12"
           />
           <img
             alt=""
@@ -31,13 +31,14 @@ exports[`BreakTimeNotificationContent should render 1`] = `
             title="Pausenhinweis"
           />
           <div
-            class="flex justify-end items-center w-12"
+            class="flex items-center justify-end w-12"
           >
             <div
               class=""
             >
               <button
                 class="w-full justify-center px-2 py-1 aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+                title="nextSlideToolTip"
               >
                 <p
                   class=""

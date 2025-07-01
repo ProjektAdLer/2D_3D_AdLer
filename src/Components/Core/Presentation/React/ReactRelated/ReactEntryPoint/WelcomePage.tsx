@@ -43,7 +43,7 @@ export default function WelcomePage() {
           />
         </video>
         <img
-          className="lg:landscape:hidden w-64 mobile-landscape:w-96 tablet-portrait:w-full mobile-landscape:block"
+          className="w-64 lg:landscape:hidden mobile-landscape:w-96 tablet-portrait:w-full mobile-landscape:block"
           src={welcomePicture}
           alt="3D Welcome Text"
         />
@@ -56,24 +56,23 @@ export default function WelcomePage() {
           backgroundPicture={learningWorldMenuButtonBackground}
           historyPath="/worldmenu"
           imageSrc={learningEngineIcon}
+          toolTip={translate("LearningWorldsToolTip").toString()}
         />
         <WelcomePageButton
           backgroundVideo={avatarEditorButtonBackgroundVideo}
           backgroundPicture={avatarButtonBackground}
           historyPath="/avatarEditor"
           imageSrc={avatarEditorIcon}
+          toolTip={translate("AvatarEditorToolTip").toString()}
         />
       </section>
 
       <LogoutComponent className="relative z-0 flex flex-col self-end col-span-2 col-start-7 row-start-6 gap-2 justify-self-end" />
 
       {/* <CookieModal /> */}
-      <LMSButton className="w-32 mobile-portrait:w-28 col-start-1 row-start-1 col-span-1 row-span-1" />
+      <LMSButton className="w-32 col-span-1 col-start-1 row-span-1 row-start-1 mobile-portrait:w-28" />
 
-      <p
-        className="self-end p-2 text-2xs md:text-xs text-center rounded-lg portrait:row-start-6 portrait:col-start-1
-       portrait:col-span-6 portrait:text-2xs mobile-landscape:text-2xs mobile-landscape:col-start-2 mobile-landscape:col-span-5 landscape:col-span-4 landscape:col-start-3 landscape:row-start-6 text-adlerdarkblue lg:text-md lg:font-semibold font-regular justify-self-center lg:landscape:row-start-6"
-      >
+      <p className="self-end p-2 text-center rounded-lg text-2xs md:text-xs portrait:row-start-6 portrait:col-start-1 portrait:col-span-6 portrait:text-2xs mobile-landscape:text-2xs mobile-landscape:col-start-2 mobile-landscape:col-span-5 landscape:col-span-4 landscape:col-start-3 landscape:row-start-6 text-adlerdarkblue lg:text-md lg:font-semibold font-regular justify-self-center lg:landscape:row-start-6">
         {translate("copyright")}
       </p>
     </div>

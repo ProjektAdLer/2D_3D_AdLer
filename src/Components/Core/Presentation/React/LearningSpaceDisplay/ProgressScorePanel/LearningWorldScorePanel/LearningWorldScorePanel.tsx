@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import worldIcon from "../../../../../../../Assets/icons/world.svg";
 import { GradingStyle } from "src/Components/Core/Domain/Types/GradingStyle";
 import Progressbar from "~ReactComponents/ReactRelated/ReactBaseComponents/Progressbar";
+import { useTranslation } from "react-i18next";
 
 interface PanelProps extends React.HTMLAttributes<HTMLDivElement> {
   gradingStyle: GradingStyle;
@@ -22,6 +23,8 @@ export default function LearningWorldScorePanel({
 
   const [scoreInfo] = useObservable<ScoreInfo>(viewModel?.scoreInfo);
   const [percentage, setPercentage] = useState(0);
+
+  const { t: translate } = useTranslation("learningSpace");
 
   useEffect(() => {
     if (!scoreInfo) return;
@@ -47,6 +50,7 @@ export default function LearningWorldScorePanel({
       iconClassName="font-bold text-center text-yellow-300"
       barClassName="w-20 font-bold text-center text-yellow-300 "
       icon={worldIcon}
+      tooltip={translate("worldScoreToolTip").toString()}
     />
   );
 }

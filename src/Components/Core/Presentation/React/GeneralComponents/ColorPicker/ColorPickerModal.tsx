@@ -4,6 +4,7 @@ import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import AvatarColorPalette, {
   AvatarColor,
 } from "src/Components/Core/Domain/AvatarModels/AvatarColorPalette";
+import { useTranslation } from "react-i18next";
 
 type Props = AdLerUIComponent<{
   title: string;
@@ -21,11 +22,13 @@ export default function ColorPickerModal({
   onColorClickFunction,
   ...restProps
 }: AdLerUIComponent<Props>) {
+  const { t: translate } = useTranslation("avatarEditor");
+
   if (!showModal) return null;
   return (
     <div
       onClick={onClose}
-      className="fixed top-0 bottom-0 left-0 right-0 z-10 portrait:z-20 flex items-center justify-center h-full bg-blacktrans"
+      className="fixed top-0 bottom-0 left-0 right-0 z-10 flex items-center justify-center h-full portrait:z-20 bg-blacktrans"
     >
       <div className="z-50 flex items-center justify-center w-full h-full portrait:flex-col">
         <div
@@ -43,8 +46,9 @@ export default function ColorPickerModal({
             className="self-center"
             onClick={onClose}
             shape={"freeFloatCenter"}
+            title={translate("ColorButtonBackToolTip").toString()}
           >
-            Zurück
+            {translate("back").toString()}
           </StyledButton>
         </div>
         <div className="w-1/2"></div>

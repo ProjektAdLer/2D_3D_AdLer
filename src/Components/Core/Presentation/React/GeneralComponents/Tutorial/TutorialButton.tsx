@@ -3,6 +3,7 @@ import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/Styl
 import manualIcon from "../../../../../../Assets/icons/manual.svg";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
+import { useTranslation } from "react-i18next";
 
 export default function TutorialButton({
   className,
@@ -12,10 +13,13 @@ export default function TutorialButton({
     window.open(url, "_blank", "noreferrer");
   }, []);
 
+  const { t: translate } = useTranslation("helpMenu");
+
   return (
     <StyledButton
       onClick={() => openInNewTab(url)}
       className={tailwindMerge(className)}
+      title={translate("manualToolTip").toString()}
     >
       <img className="w-10 xl:w-12" src={manualIcon} alt="Help Icon" />
     </StyledButton>

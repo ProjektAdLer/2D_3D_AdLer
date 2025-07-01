@@ -25,6 +25,7 @@ exports[`AvatarEditorBodyCategory should render 1`] = `
         >
           <button
             class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            title="ColorButtonToolTip"
           >
             <div
               class="border-2 border-black rounded m-2 h-5 w-5"
