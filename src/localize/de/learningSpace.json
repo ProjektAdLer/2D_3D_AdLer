@@ -5,6 +5,7 @@
   "projectInformation": "Sie wollen mehr über das Projekt AdLer erfahren? Dann schauen Sie doch mal auf unserer <0>{{homepageLink}}</0> vorbei.",
   "homepage": "Projekt-Homepage",
   "linkInfo": "Dieser Link öffnet die AdLer Projekthomepage https://projekt-adler.eu in einem neuen Tab.",
+  "openLearningSpaceToolTip": "Öffnet den Lernraum",
 
   "enterDoor": "Eingangstür",
   "exitDoor": "Ausgangstür",
@@ -22,6 +23,11 @@
   "outroLockedText": "Dieses Element ist noch nicht verfügbar. Schließen Sie zuerst den Raum ab!",
   "backButton": "Intro/Outro Auswahl",
 
+  "previousToolTip": "Zurück",
+  "nextToolTip": "Weiter",
+  "storySelectionToolTip": "Zurück zur Auswahl",
+  "closeStoryToolTip": "Beende den Story Monolog und fahre im Lernraum fort",
+
   "spaceScore": "{{current}} von {{required}}",
 
   "sidebar_learningSpaceMenu": "Lernraum-Menü",
@@ -33,6 +39,23 @@
   "sidebar_breakTime": "Pausenhinweise",
   "sidebar_worldCompleted": "Lernwelt-Abschluss-Modal",
   "sidebar_narrativeFrameworkIntro": "Rahmenhandlung Intro",
+
+  "sidebar_menuToolTip": "Öffnet das Smartphone Menü",
+  "sidebar_mainMenuToolTip": "Führt zurück zur Startseite der 3D-Lernumgebung",
+  "sidebar_learningWorldToolTip": "Zurück zum Lernwelt Menü",
+  "sidebar_learningSpaceToolTip": "Zurück zum Lernraum Menü",
+  "sidebar_controlsToolTip": "Öffnet eine Erklärung der Steuerung der 3D-Lernumgebung",
+  "sidebar_fullscreenToolTip": "Versetzt die 3D-Lernumgebung in den Vollbildmodus",
+  "sidebar_helpToolTip": "Öffnet das Hilfe-Fenster, um Hilfe und weitere Informationen zur 3D-Lernumgebung zu erhalten",
+  "sidebar_worldCompleteToolTip": "Öffnet das Lernwelt-Abschlussfenster - wird aktiv, wenn die aktuelle Lernwelt abgeschlossen wurde",
+  "sidebar_narrativeFrameworkToolTip": "Öffnet erneut, die vor dem ersten Lernraum angezeigte Rahmenhandlung",
+
+  "requirementSpaceScoreToolTip": "Anzahl abgeschlossener, benötigter Lernelemente im Raum",
+  "pointSpaceScoreToolTip": "Anzahl erreichter, benötigter Punkte im Raum",
+  "worldScoreToolTip": "Prozentual Anzeige abgeschlossener Lernelemente in der Lernwelt",
+  "xpBarToolTip": "Erreichtes Level und erhaltene Erfahrungspunkte",
+
+  "bottomToolTip": "Öffnet dieses Lernelement",
 
   "hint_controlsExplanationModal": "Sie können die Steuerungs-Erklärung jederzeit über das Menü in der 3D-Ansicht erneut aufrufen."
 }

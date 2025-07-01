@@ -3,6 +3,10 @@
   "pauseInfo": "Zeit für eine Pause!",
   "pauseExplanation": "Klicken Sie auf die Tasse, um Informationen zu Pausen zu erhalten oder schließen Sie die Meldung über den 'x' Button.",
 
+  "pauseNotificationToolTip": "Öffnet das Pausenfenster mit hilfreichen Hinweisen zur Pausengestaltung",
+  "nextSlideToolTip": "Nächste Slide",
+  "previousSlideToolTip": "Vorherige Slide",
+
   "shortBreakBase": "Sie haben nun 30 Minuten am Stück mit AdLer gelernt. Wie wäre es denn mit einer 5-minütigen Pause?",
   "infoMobilization": "Auf dem Bild sehen Sie eine kurze Übung zur Mobilisation.",
   "infoNutrition": "Vielleicht interessiert Sie in dem Zusammenhang auch, dass auch die Ernährung für das Lernen wichtig ist.",

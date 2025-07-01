@@ -1,0 +1,12 @@
+{
+  "adaptivityProgressToolTip": "Displays progress in current adaptivity element",
+  "taskToolTip": "Task which contains up to three questions",
+  "backToolTip": "Back to task selection",
+  "questionToolTip": "Opens the question",
+  "closeToolTip": "Closes the adaptivity element. Progress on questions will be saved",
+  "answerToolTip": "Possible answer. Click to select",
+  "submitTooltip": "Submits your chosen answer",
+  "legendToolTip": "Opens a window with symbols explained",
+  "hintToolTip": "Opens a hint to this question",
+  "solvedToolTip": "This task was answered successfully"
+}

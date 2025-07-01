@@ -17,5 +17,10 @@
   "congratulation": "Sie haben alle Lernräume erfolgreich abgeschlossen und somit die Lernwelt bestanden, herzlichen Glückwunsch!",
   "survey": "Fragebogen",
   "thanks": "Vielen Dank für Ihre Unterstützung!",
-  "link_Homepage": "Wenn Sie mehr über das Projekt AdLer erfahren möchten, besuchen Sie gerne unsere "
+  "link_Homepage": "Wenn Sie mehr über das Projekt AdLer erfahren möchten, besuchen Sie gerne unsere ",
+  "linkToolTip": "Öffnet einen von den Lehrenden hinterlegten Link",
+  "homepageToolTip": "Öffnet die AdLer Webseite",
+
+  "spaceButtonToolTip": "Öffnet die Metadaten dieses Lernraums",
+  "spaceOpenButtonToolTip": "Öffnet den ausgewählten Lernraum"
 }

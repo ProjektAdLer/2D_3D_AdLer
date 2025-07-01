@@ -105,5 +105,24 @@
   "Green 5": "Grün 5",
   "Green 6": "Grün 6",
   "Green 7": "Grün 7",
-  "Green 8": "Grün 8"
+  "Green 8": "Grün 8",
+
+  "saveButtonToolTip": "Klicken Sie hier, um Ihren erstellten Avatar zu speichern",
+  "categoryToolTip": "Öffnet die Kategorie {{category}}",
+  "hair": "Haare",
+  "face": "Gesicht",
+  "accessoires": "Accessoires",
+  "clothing": "Kleidung",
+  "body": "Körper",
+  "randomizerButtonToolTip": "Erstellt einen zufällig aussehenden Avatar",
+  "accordionCategoryToolTip": "Klappt die Kategorie {{subCategory}} auf und zeigt alle Optionen",
+
+  "ColorButtonToolTip": "Öffnet ein Fenster zur Farbauswahl",
+  "back": "Zurück",
+  "ColorButtonBackToolTip": "Kehren Sie zum Avatar-Editor zurück",
+
+  "leftToolTip": "Dreht die Avatardarstellung im Uhrzeigersinn",
+  "plusToolTip": "Zoomt näher an das Gesicht des Avatars heran",
+  "minusToolTip": "Zoomt weiter vom Geischt des Avatars heraus",
+  "rightToolTip": "Dreht die Avatardarstellung gegen den Uhrzeigersinn"
 }

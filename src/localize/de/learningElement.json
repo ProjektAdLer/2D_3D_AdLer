@@ -20,9 +20,21 @@
   "questionAlreadyAnswered": "Frage bereits abgeschlossen",
   "submitAnswer": "Antwort abgeben",
   "submitAnswers": "Antworten abgeben",
+  "hintButton": "Hinweis",
   "hintTitle": "Ich helfe Ihnen auf die Sprünge",
   "taskSelectionTitle": "Sie haben Aufgabengebiet {{selectedTaskTitle}} ausgewählt. Wählen Sie jetzt eine Schwierigkeit aus.",
   "adaptivityIntro": "Hallo, ich helfe Ihnen zu lernen. Suchen Sie sich ein Thema aus und wir arbeiten gemeinsam an Ihrem Wissen.",
+
+  "adaptivityProgressToolTip": "Zeigt den Fortschritt im Adaptivitätselement an",
+  "taskToolTip": "Aufgabe, welche bis zu drei Fragen enthält",
+  "backToolTip": "Zurück zur Aufgabenauswahl",
+  "questionToolTip": "Öffnet diese Frage",
+  "closeToolTip": "Schließt das Adaptivitätselement. Abgeschlossene Fragen bleiben erhhalten",
+  "answerToolTip": "Mögliche Antwort. Anklicken zum auswählen",
+  "submitTooltip": "Gibt die Antwort ab und startet die Bewertung der Frage",
+  "legendToolTip": "Öffnet ein Fenster mit der Symbollegende",
+  "hintToolTip": "Öffnet einen Hinweis zu dieser Frage",
+  "solvedToolTip": "Diese Aufgabe wurde erfolgreich abgeschlossen",
 
   "legendHover": "Klicken Sie hier, um die Symbollegende anzuzeigen",
   "legendClose": "Klicken Sie hier, um die Symbollegende zu schließen",
@@ -44,5 +56,8 @@
   "legendStarNotRequiredSolved": "optionale Schwierigkeit erfolgreich abgeschlossen",
   "legendNoStar": "Schwierigkeitsgrad nicht vorhanden",
   "headerlegendInteraction": "Symbole für Interaktionen",
-  "legendReset": "Fragen werden kurzfristig zurückgesetzt zum erneut beantworten"
+  "legendReset": "Fragen werden kurzfristig zurückgesetzt zum erneut beantworten",
+
+  "learningElementSubmitToolTip": "Schließt das Element ab. So wird es den abgeschlossenen Lernelementen gutgeschrieben",
+  "closeLearningElementToolTip": "Schließt dieses Fenster. Das Lernelement wird nicht abgeschlossen. Das Lernelement wird nicht zu den abgeschlossenen gutgeschrieben."
 }

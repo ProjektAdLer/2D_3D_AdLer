@@ -1,0 +1,6 @@
+{
+  "closeToolTip": "Closes this window",
+  "manualToolTip": "Opens the user documentation of the 3d-learning environment in a new",
+  "bugToolTip": "Opens the online form for reporting bugs in a new browser tab",
+  "logToolTip": "Export a text file with logs. Attach it to your bug report"
+}
