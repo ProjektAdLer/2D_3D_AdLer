@@ -24,7 +24,7 @@ export default function SingleStoryLayout({
   return (
     <React.Fragment>
       {/* Story Text */}
-      <div className="flex items-center w-full p-2 italic font-bold whitespace-pre-line bg-buttonbgblue rounded-xl text-justifiy text-adlerdarkblue">
+      <div className="flex items-center w-full p-2 italic font-bold whitespace-pre-line bg-buttonbgblue rounded-xl text-justifiy text-adlerdarkblue overflow-auto">
         {`"${contentTexts[pageId]}"`}
       </div>
 
