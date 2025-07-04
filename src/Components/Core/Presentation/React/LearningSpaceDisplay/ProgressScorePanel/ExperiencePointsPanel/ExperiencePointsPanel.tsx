@@ -50,7 +50,7 @@ export default function ExperiencePointsPanel({
       iconClassName={rest.isButton ? "opacity-40" : ""}
       iconTextClassName="font-bold text-2xl text-center adlerdarkblue"
       iconText={scoreInfo?.currentLevel.toString()}
-      barClassName="w-20 font-bold text-center text-yellow-300 "
+      barClassName="w-20 font-bold text-center text-yellow-300 mx-2"
       icon={levelIcon}
       tooltip={translate("xpBarToolTip").toString()}
     />

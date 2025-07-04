@@ -46,14 +46,14 @@ export default function LearningWorldCompletionModal({
             alt=""
           ></img>
         }
+        <NarrativeFrameworkWorldCompletionModalContainer />
         <div className="flex flex-col items-center justify-center w-full">
-          <p className="mb-4">{translate("congratulation")}</p>
+          <p className="mt-6 font-bold text-lg">{translate("linktitle")}</p>
           {viewModel.worldCompletionText && (
             <div className="flex justify-center">
               {viewModel.worldCompletionText}
             </div>
           )}
-          <NarrativeFrameworkWorldCompletionModalContainer />
           {evaluationLink && (
             <div>
               <div className="flex justify-center">
@@ -64,16 +64,16 @@ export default function LearningWorldCompletionModal({
                   rel="noreferrer"
                   title={translate("linkToolTip").toString()}
                 >
-                  {translate("survey")}
+                  {translate("furtherLink").toString()}
                 </a>
               </div>
-              <div className="flex justify-center m-2 font-bold">
-                <p>{translate("thanks")}</p>
+              <div className="flex justify-center m-2 max-w-96">
+                <p>{translate("congratulationStandardText")}</p>
               </div>
             </div>
           )}
 
-          <p>
+          <p className="text-sm mt-8">
             {translate("link_Homepage")}
             <a
               className="font-bold underline text-adlergreen"

@@ -78,7 +78,7 @@ export default function MenuHeaderBar(props: Readonly<MenuHeaderBarProps>) {
       </div>
       <div className="flex items-center justify-end w-1/2 gap-4 lg:gap-8">
         {props.location === "space" && gradingStyle && (
-          <div className="z-10 items-center hidden md:flex">
+          <div className="z-0 items-center hidden md:flex">
             <ExperiencePointsPanel
               gradingStyle={gradingStyle}
               isButton={false}

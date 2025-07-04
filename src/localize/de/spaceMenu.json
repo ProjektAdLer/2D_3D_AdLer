@@ -14,9 +14,9 @@
   "nodeOR": "ODER",
 
   "learningWorldCompleted": "Lernwelt abgeschlossen!",
-  "congratulation": "Sie haben alle Lernräume erfolgreich abgeschlossen und somit die Lernwelt bestanden, herzlichen Glückwunsch!",
-  "survey": "Fragebogen",
-  "thanks": "Vielen Dank für Ihre Unterstützung!",
+  "linktitle": "Ich bin der Linktitel und maximal 50 Zeichen lang!",
+  "congratulationStandardText": "Sie haben alle Lernräume erfolgreich abgeschlossen und somit die Lernwelt bestanden, herzlichen Glückwunsch!",
+  "furtherLink": "Weiterführender Link",
   "link_Homepage": "Wenn Sie mehr über das Projekt AdLer erfahren möchten, besuchen Sie gerne unsere ",
   "linkToolTip": "Öffnet einen von den Lehrenden hinterlegten Link",
   "homepageToolTip": "Öffnet die AdLer Webseite",
