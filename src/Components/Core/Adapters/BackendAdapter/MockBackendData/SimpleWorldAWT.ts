@@ -64,6 +64,7 @@ const SimpleWorldAWT: AWT = {
         elementMaxScore: 9,
         elementModel: "l_trophy_bronze",
         elementDifficulty: 200,
+        elementEstimatedTimeInMinutes: 10,
       },
       {
         $type: "LearningElement",
@@ -75,6 +76,8 @@ const SimpleWorldAWT: AWT = {
         elementFileType: "video",
         elementMaxScore: 2,
         elementModel: "l-video-vrdesk-1",
+        elementDifficulty: 100,
+        elementEstimatedTimeInMinutes: 5,
       },
       {
         $type: "LearningElement",

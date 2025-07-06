@@ -222,6 +222,8 @@ export default class BackendAdapterUtils {
       apiElement.elementModel,
     ) as LearningElementModel;
     elementTO.difficulty = apiElement.elementDifficulty ?? 0;
+    elementTO.estimatedTimeInMinutes =
+      apiElement.elementEstimatedTimeInMinutes ?? null;
   }
   private static extractModelData(modelData?: string): string | undefined {
     if (modelData === undefined) return undefined;

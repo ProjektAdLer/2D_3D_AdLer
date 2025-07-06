@@ -1,8 +1,6 @@
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
-import LearningSpaceDetailViewModel, {
-  LearningSpaceDetailLearningSpaceData,
-} from "./LearningSpaceDetailViewModel";
+import LearningSpaceDetailViewModel from "./LearningSpaceDetailViewModel";
 import spaceIcon from "../../../../../../Assets/icons/space.svg";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
@@ -25,15 +23,14 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
   const [name] = useObservable<string>(viewModel.name);
   const [description] = useObservable<string>(viewModel.description);
   const [goals] = useObservable<string[]>(viewModel.goals);
-  const [elements] = useObservable<(LearningElementInfo & { xp: number })[]>(
-    viewModel.elements,
-  );
+  const [elements] = useObservable<LearningElementInfo[]>(viewModel.elements);
   const [requiredPoints] = useObservable<number>(viewModel.requiredPoints);
   const [currentXP] = useObservable<number>(viewModel.currentXP);
   const [maxXP] = useObservable<number>(viewModel.maxXP);
-  const [spaces] = useObservable<LearningSpaceDetailLearningSpaceData[]>(
-    viewModel.spaces,
+  const [accumulatedEstimatedTime] = useObservable<number>(
+    viewModel.accumulatedEstimatedTime,
   );
+
   const [isAvailable] = useObservable<boolean>(viewModel.isAvailable);
 
   const { t: translate } = useTranslation("spaceMenu");
@@ -45,10 +42,11 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
     description === undefined ||
     goals === undefined ||
     elements === undefined ||
-    requiredPoints === undefined ||
-    spaces === undefined
+    requiredPoints === undefined
   )
     return null;
+
+  console.log(accumulatedEstimatedTime, "accumulatedEstimatedTime");
 
   return (
     <main
@@ -102,6 +100,16 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
                   );
                 })}
               </ul>
+            </div>
+          </section>
+        )}
+        {accumulatedEstimatedTime > 0 && (
+          <section className="pb-2 border-b border-gray-500">
+            <h3 className="self-center ml-2 font-black portrait:text-sm text-adlerdarkblue lg:mb-2 mobile-landscape:text-sm">
+              {translate("estimatedTime")}
+            </h3>
+            <div className="items-start ml-6 font-medium portrait:ml-3 portrait:text-xs lg:text-lg mobile-landscape:text-xs">
+              {accumulatedEstimatedTime + " " + translate("minutes")}
             </div>
           </section>
         )}

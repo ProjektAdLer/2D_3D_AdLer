@@ -7,6 +7,8 @@
   "learningElement_other": "Lernelemente:",
   "requiredPoints": "Benötigte Punkte:",
   "maximumPoints": "Maximal erreichbare Punkte:",
+  "estimatedTime": "Geschätzte Bearbeitungszeit:",
+  "minutes": "Minuten",
 
   "graph": "Lernpfad",
   "list": "Liste",

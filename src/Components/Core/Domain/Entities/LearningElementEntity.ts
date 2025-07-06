@@ -15,4 +15,5 @@ export default class LearningElementEntity {
   public parentWorldID: ComponentID;
   public isRequired: boolean | null;
   public difficulty: DifficultyInfo;
+  public estimatedTimeInMinutes: number | null;
 }
