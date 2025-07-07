@@ -2,11 +2,16 @@ import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects
 import ILearningSpaceDetailPresenter from "./ILearningSpaceDetailPresenter";
 import LearningSpaceDetailViewModel from "./LearningSpaceDetailViewModel";
 import { LearningElementInfo } from "src/Components/Core/Domain/Types/LearningElementInfo";
+import LearningWorldTO from "src/Components/Core/Application/DataTransferObjects/LearningWorldTO";
 
 export default class LearningSpaceDetailPresenter
   implements ILearningSpaceDetailPresenter
 {
   constructor(private viewModel: LearningSpaceDetailViewModel) {}
+
+  onLearningWorldLoaded(world: LearningWorldTO): void {
+    this.viewModel.completionDisplay = world.gradingStyle;
+  }
 
   onLearningSpaceLoaded(spaceTO: LearningSpaceTO): void {
     this.viewModel.id.Value = spaceTO.id;

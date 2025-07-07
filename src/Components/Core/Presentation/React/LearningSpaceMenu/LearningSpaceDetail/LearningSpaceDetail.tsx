@@ -46,8 +46,6 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
   )
     return null;
 
-  console.log(accumulatedEstimatedTime, "accumulatedEstimatedTime");
-
   return (
     <main
       className={tailwindMerge(
