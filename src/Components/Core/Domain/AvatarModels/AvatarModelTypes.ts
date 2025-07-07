@@ -115,6 +115,7 @@ export type AvatarOtherModels =
 
 //clothing
 export const OAvatarPantsModels = {
+  PantsCloud: "pants-pantscloud",
   PantsCargo: "pants-cargo",
   PantsFlared: "pants-flared",
   PantsJeans: "pants-jeans",
@@ -126,6 +127,7 @@ export type AvatarPantsModels =
   (typeof OAvatarPantsModels)[keyof typeof OAvatarPantsModels];
 
 export const OAvatarShirtModels = {
+  ShirtCloud: "shirts-topcloud",
   ShirtsDress: "shirts-dress",
   ShirtsHoodie: "shirts-hoodie",
   ShirtsLongdress: "shirts-longdress",
@@ -139,6 +141,7 @@ export type AvatarShirtModels =
   (typeof OAvatarShirtModels)[keyof typeof OAvatarShirtModels];
 
 export const OAvatarShoesModels = {
+  ShoesCloud: "shoes-shoescloud",
   ShoesBoots: "shoes-boots",
   ShoesSantaboots: "shoes-santaboots",
   ShoesSantaheels: "shoes-santaheels",
