@@ -58,8 +58,6 @@ export default class BackendAdapterUtils {
   public static parseAWT(awt: AWT): BackendWorldTO {
     const elements: BackendTO[] = this.mapElements(awt.world.elements);
 
-    const spaces: BackendSpaceTO[] = this.mapSpaces(awt.world.spaces, elements);
-
     // every BackendBaseElementTO is an external learning element
     const externalLearningElements: BackendBaseElementTO[] = elements.filter(
       (e) => {
@@ -73,17 +71,33 @@ export default class BackendAdapterUtils {
 
     // assigns the world the right theme
     let theme: LearningSpaceThemeType;
-    if (
-      !awt.world.theme ||
-      !Object.values<string>(LearningSpaceThemeType).includes(
-        awt.world.theme.toUpperCase(),
-      )
-    ) {
-      theme = LearningSpaceThemeType.Campus;
-    } else {
-      // cast to enum
-      theme = awt.world.theme!.toUpperCase() as LearningSpaceThemeType;
+    const awtTheme = awt.world.theme?.toUpperCase();
+
+    switch (awtTheme) {
+      case "CAMPUSASCHAFFENBURG":
+        theme = LearningSpaceThemeType.CampusAB;
+        break;
+      case "CAMPUSKEMPTEN":
+        theme = LearningSpaceThemeType.CampusKE;
+        break;
+      case "SUBURB":
+        theme = LearningSpaceThemeType.Suburb;
+        break;
+      case "COMPANY":
+        theme = LearningSpaceThemeType.Company;
+        break;
+      case "CAMPUS": // Legacy support
+        theme = LearningSpaceThemeType.Campus;
+        break;
+      default:
+        theme = LearningSpaceThemeType.Campus; // Default fallback for unknown or missing themes
     }
+
+    const spaces: BackendSpaceTO[] = this.mapSpaces(
+      awt.world.spaces,
+      elements,
+      theme,
+    );
 
     const response: BackendWorldTO = {
       worldName: awt.world.worldName,
@@ -104,6 +118,7 @@ export default class BackendAdapterUtils {
   private static mapSpaces(
     spaces: APISpace[],
     elements: BackendTO[],
+    worldTheme: LearningSpaceThemeType,
   ): BackendSpaceTO[] {
     return spaces.map((space) => {
       // compare template type to supported templates
@@ -118,18 +133,10 @@ export default class BackendAdapterUtils {
         template = space.spaceTemplate.toUpperCase();
       }
 
-      let templateStyle: LearningSpaceThemeType;
-      if (
-        !Object.values<string>(LearningSpaceThemeType).includes(
-          space.spaceTemplateStyle.toUpperCase(),
-        )
-      ) {
-        templateStyle = LearningSpaceThemeType.Campus;
-      } else {
-        // cast to enum
-        templateStyle =
-          space.spaceTemplateStyle.toUpperCase() as LearningSpaceThemeType;
-      }
+      const templateStyle = this.getThemeForSpace(
+        worldTheme,
+        space.spaceTemplateStyle,
+      );
 
       return {
         id: space.spaceId,
@@ -175,6 +182,54 @@ export default class BackendAdapterUtils {
       }
       return backendStoryTO;
     }
+  }
+
+  /**
+   * Determines the final theme for a space based on world and space settings.
+   * This method ensures backward compatibility with older AWT versions.
+   */
+  private static getThemeForSpace(
+    worldTheme: LearningSpaceThemeType,
+    spaceStyle: string | undefined,
+  ): LearningSpaceThemeType {
+    const upperSpaceStyle = spaceStyle?.toUpperCase();
+
+    if (!upperSpaceStyle) {
+      return worldTheme;
+    }
+
+    // 1. Check for standalone themes (legacy themes) which should be used directly.
+    const standaloneThemes = [
+      // Main World Themes
+      LearningSpaceThemeType.Campus,
+      LearningSpaceThemeType.CampusAB,
+      LearningSpaceThemeType.CampusKE,
+      LearningSpaceThemeType.Suburb,
+      LearningSpaceThemeType.Company,
+      LearningSpaceThemeType.Arcade,
+      // Legacy Sub-Themes
+      LearningSpaceThemeType.CampusMensa,
+      LearningSpaceThemeType.CampusLibrary,
+      LearningSpaceThemeType.CampusStudentClub,
+      LearningSpaceThemeType.CampusServerRoom,
+      LearningSpaceThemeType.CampusAuditorium,
+      LearningSpaceThemeType.CampusLabor,
+    ];
+
+    if (standaloneThemes.includes(upperSpaceStyle as LearningSpaceThemeType)) {
+      return upperSpaceStyle as LearningSpaceThemeType;
+    }
+
+    // 2. Handle new theme system by combining world and space themes.
+    const combinedThemeString = `${worldTheme}_${upperSpaceStyle}`;
+    const allThemeValues = Object.values(LearningSpaceThemeType) as string[];
+
+    if (allThemeValues.includes(combinedThemeString)) {
+      return combinedThemeString as LearningSpaceThemeType;
+    }
+
+    // 3. Fallback to the world's main theme if no specific mapping is found.
+    return worldTheme;
   }
 
   // creates BackendElementTOs from the AWT if the element type is supported
