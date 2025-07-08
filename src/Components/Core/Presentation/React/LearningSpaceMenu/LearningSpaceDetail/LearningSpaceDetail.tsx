@@ -139,6 +139,33 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
                           {" " + element.name}
                         </div>
                       </div>
+                      {element.difficultyInfo?.difficultyType !== undefined && (
+                        <div className="flex flex-row items-center justify-center w-1/5 px-2 ml-1 justify-self-end">
+                          {element.difficultyInfo.difficultyType === 0 && (
+                            <div className="flex flex-row items-center rounded-[1vw] bg-adlergreen p-1">
+                              {translate("difficultyEasy")}
+                            </div>
+                          )}
+                          {element.difficultyInfo.difficultyType === 100 && (
+                            <div className="flex flex-row items-center px-2 ml-1 rounded-[1vw] bg-adleryellow p-1">
+                              {translate("difficultyMedium")}
+                            </div>
+                          )}
+                          {element.difficultyInfo.difficultyType === 200 && (
+                            <div className="flex flex-row items-center text-white px-2 ml-1 rounded-[1vw] bg-babylonbg p-1">
+                              {translate("difficultyHard")}
+                            </div>
+                          )}
+                        </div>
+                      )}
+                      {element.estimatedTimeInMinutes != null &&
+                        element.estimatedTimeInMinutes > 0 && (
+                          <div className="flex justify-end w-1/6">
+                            <div className="flex flex-row items-center px-2 ml-1 rounded-[1vw] bg-adlerbggradientfrom justify-self-end w-full justify-center">
+                              {element.estimatedTimeInMinutes + " min"}
+                            </div>
+                          </div>
+                        )}
                       <div className="flex flex-row items-center ml-1 place-items-end">
                         {viewModel.completionDisplay.learningSpaceDetail(
                           element,
