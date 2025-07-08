@@ -9,6 +9,9 @@
   "maximumPoints": "Maximal erreichbare Punkte:",
   "estimatedTime": "Geschätzte Bearbeitungszeit:",
   "minutes": "Minuten",
+  "difficultyEasy": "Einfach",
+  "difficultyMedium": "Mittel",
+  "difficultyHard": "Schwierig",
 
   "graph": "Lernpfad",
   "list": "Liste",
