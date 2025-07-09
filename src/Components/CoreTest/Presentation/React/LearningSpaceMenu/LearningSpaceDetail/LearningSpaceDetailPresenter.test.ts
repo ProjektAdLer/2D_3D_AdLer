@@ -1,6 +1,10 @@
 import LearningSpaceDetailPresenter from "../../../../../Core/Presentation/React/LearningSpaceMenu/LearningSpaceDetail/LearningSpaceDetailPresenter";
 import LearningSpaceDetailViewModel from "../../../../../Core/Presentation/React/LearningSpaceMenu/LearningSpaceDetail/LearningSpaceDetailViewModel";
 import LearningSpaceTO from "../../../../../Core/Application/DataTransferObjects/LearningSpaceTO";
+import { GradingStyle } from "../../../../../Core/Domain/Types/GradingStyle";
+import { LearningElementModelTypeEnums } from "../../../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
+import LearningElementTO from "../../../../../Core/Application/DataTransferObjects/LearningElementTO";
+import { LearningSpaceThemeType } from "../../../../../Core/Domain/Types/LearningSpaceThemeTypes";
 
 describe("LearningSpaceDetailPresenter", () => {
   let systemUnderTest: LearningSpaceDetailPresenter;
@@ -13,37 +17,11 @@ describe("LearningSpaceDetailPresenter", () => {
 
   test("onLearningWorldLoaded should set viewModel data", () => {
     systemUnderTest.onLearningWorldLoaded({
-      spaces: [{ id: 1, name: "test" }],
+      gradingStyle: GradingStyle.point,
     });
 
-    expect(systemUnderTest["viewModel"].spaces.Value).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({ id: 1, name: "test" }),
-      ]),
-    );
-  });
-
-  test("onLearningWorldLoaded should set isCompleted of a space to false, if currentScore is lower than requiredScore", () => {
-    systemUnderTest.onLearningWorldLoaded({
-      spaces: [{ id: 1, name: "test", currentScore: 0, requiredScore: 42 }],
-    });
-
-    expect(systemUnderTest["viewModel"].spaces.Value).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({ id: 1, name: "test", isCompleted: false }),
-      ]),
-    );
-  });
-
-  test("onLearningWorldLoaded should set isCompleted of a space to true, if currentScore is higher/equal than requiredScore", () => {
-    systemUnderTest.onLearningWorldLoaded({
-      spaces: [{ id: 1, name: "test", currentScore: 42, requiredScore: 42 }],
-    });
-
-    expect(systemUnderTest["viewModel"].spaces.Value).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({ id: 1, name: "test", isCompleted: true }),
-      ]),
+    expect(systemUnderTest["viewModel"].completionDisplay).toContain(
+      GradingStyle.point,
     );
   });
 
@@ -64,12 +42,22 @@ describe("LearningSpaceDetailPresenter", () => {
           id: 1,
           name: "Test Element 1",
           parentSpaceID: 42,
+          model: LearningElementModelTypeEnums.TextElementModelTypes.Bookshelf1,
           type: "h5p",
           description: "Test Description 1",
           goals: ["TestGoal"],
           value: 1,
-          hasScored: false,
+          hasScored: true,
           parentWorldID: 42,
+          theme: LearningSpaceThemeType.Arcade,
+          isScoreable: true,
+          isRequired: null,
+          estimatedTimeInMinutes: 10,
+          difficulty: {
+            baseXP: 10,
+            multiplicator: 1,
+            difficultyType: 0,
+          },
         },
         {
           id: 2,
@@ -78,20 +66,34 @@ describe("LearningSpaceDetailPresenter", () => {
           type: "text",
           description: "Test Description 1",
           goals: ["TestGoal"],
+          model: LearningElementModelTypeEnums.TextElementModelTypes.Bookshelf1,
           value: 1,
           hasScored: false,
           parentWorldID: 42,
+          theme: LearningSpaceThemeType.Arcade,
+          isScoreable: true,
+          isRequired: true,
+          estimatedTimeInMinutes: 10,
+          difficulty: {
+            baseXP: 20,
+            multiplicator: 2,
+            difficultyType: 0,
+          },
         },
       ],
     };
 
     systemUnderTest.onLearningSpaceLoaded(spaceTO);
 
+    expect(systemUnderTest["viewModel"].id.Value).toEqual(spaceTO.id);
     expect(systemUnderTest["viewModel"].name.Value).toEqual(spaceTO.name);
     expect(systemUnderTest["viewModel"].description.Value).toEqual(
       spaceTO.description,
     );
     expect(systemUnderTest["viewModel"].goals.Value).toEqual(spaceTO.goals);
+    expect(systemUnderTest["viewModel"].isAvailable.Value).toEqual(
+      spaceTO.isAvailable,
+    );
     expect(systemUnderTest["viewModel"].requiredPoints.Value).toEqual(
       spaceTO.requiredScore,
     );
@@ -99,19 +101,61 @@ describe("LearningSpaceDetailPresenter", () => {
       {
         type: "h5p",
         name: "Test Element 1",
-        hasScored: false,
+        hasScored: true,
         points: 1,
-        isRequired: undefined,
-        xp: 0,
+        isRequired: null,
+        difficultyInfo: {
+          baseXP: 10,
+          multiplicator: 1,
+          difficultyType: 0,
+        },
+        estimatedTimeInMinutes: 10,
       },
       {
         type: "text",
         name: "Test Element 2",
         hasScored: false,
         points: 1,
-        isRequired: undefined,
-        xp: 0,
+        isRequired: true,
+        difficultyInfo: {
+          baseXP: 20,
+          multiplicator: 2,
+          difficultyType: 0,
+        },
+        estimatedTimeInMinutes: 10,
       },
     ]);
+  });
+
+  test("onLearningSpaceLoaded sets data in the view model even if no ElementTO is present", () => {
+    const spaceTO: LearningSpaceTO = {
+      id: 42,
+      description: "description",
+      goals: ["goals"],
+      requiredScore: 42,
+      currentScore: 0,
+      maxScore: 42,
+      isAvailable: true,
+      requirementsString: "",
+      requirementsSyntaxTree: null,
+      name: "Test Space",
+      elements: [null],
+    };
+
+    systemUnderTest.onLearningSpaceLoaded(spaceTO);
+
+    expect(systemUnderTest["viewModel"].id.Value).toEqual(spaceTO.id);
+    expect(systemUnderTest["viewModel"].name.Value).toEqual(spaceTO.name);
+    expect(systemUnderTest["viewModel"].description.Value).toEqual(
+      spaceTO.description,
+    );
+    expect(systemUnderTest["viewModel"].goals.Value).toEqual(spaceTO.goals);
+    expect(systemUnderTest["viewModel"].isAvailable.Value).toEqual(
+      spaceTO.isAvailable,
+    );
+    expect(systemUnderTest["viewModel"].requiredPoints.Value).toEqual(
+      spaceTO.requiredScore,
+    );
+    expect(systemUnderTest["viewModel"].elements.Value).toEqual([]);
   });
 });
