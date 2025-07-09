@@ -23,6 +23,9 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
   const [description] = useObservable<string>(viewModel.description);
   const [goals] = useObservable<string[]>(viewModel.goals);
   const [spaces] = useObservable<LearningSpaceTO[]>(viewModel.spaces);
+  const [estimatedTimeInMinutes] = useObservable<number>(
+    viewModel.estimatedTimeInMinutes,
+  );
 
   const { t: translate } = useTranslation("worldMenu");
 
@@ -78,6 +81,16 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
               </div>
             </div>
           ))}
+        {estimatedTimeInMinutes !== undefined && estimatedTimeInMinutes > 0 && (
+          <div className="pb-2 border-b border-gray-500">
+            <h3 className="self-center ml-2 font-black text-adlerdarkblue portrait:text-sm lg:mb-2 mobile-landscape:text-sm">
+              {translate("estimatedTime")}
+            </h3>
+            <div className="items-start ml-6 font-medium portrait:text-xs mobile-landscape:text-xs lg:text:lg">
+              {estimatedTimeInMinutes + " " + translate("minutes")}
+            </div>
+          </div>
+        )}
         <section className="pb-2 border-b border-gray-500">
           <h3 className="self-center ml-2 font-black portrait:text-sm text-adlerdarkblue lg:mb-2 mobile-landscape:text-sm">
             {translate("rooms", { count: spaces?.length })}

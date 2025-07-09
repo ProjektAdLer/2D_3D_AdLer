@@ -8,5 +8,9 @@ export default class LearningWorldDetailViewModel {
   description: Observable<string> = new Observable<string>(undefined);
   goals: Observable<string[]> = new Observable<string[]>(undefined);
 
+  estimatedTimeInMinutes: Observable<number> = new Observable<number>(
+    undefined,
+  );
+
   spaces: Observable<LearningSpaceTO[]> = new Observable<LearningSpaceTO[]>([]);
 }

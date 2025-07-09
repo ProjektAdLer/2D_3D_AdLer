@@ -6,6 +6,7 @@ import ColorPickerModal from "~ReactComponents/GeneralComponents/ColorPicker/Col
 import { useState } from "react";
 import AccordionElement from "~ReactComponents/GeneralComponents/Accordion/AccordionElement";
 import {
+  AvatarNoneModel,
   OAvatarPantsModels,
   AvatarPantsModels,
   OAvatarShirtModels,
@@ -14,39 +15,46 @@ import {
   AvatarShoesModels,
 } from "src/Components/Core/Domain/AvatarModels/AvatarModelTypes";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
+import noneIcon from "../../../../../../Assets/avatarEditorThumbnails/aa-none_Thumbnail.png";
 
 const shirtThumbnails = Object.values(OAvatarShirtModels).map<{
   type: AvatarShirtModels;
   image: string;
 }>((type) => ({
   type: type,
-  image: require(
-    `../../../../../../Assets/avatarEditorThumbnails/clothing/shirts/aa-${type}.png`,
-  ),
+  image:
+    type === OAvatarShirtModels.ShirtCloud
+      ? noneIcon
+      : require(
+          `../../../../../../Assets/avatarEditorThumbnails/clothing/shirts/aa-${type}.png`,
+        ),
 }));
-//shirtThumbnails.unshift(noneThumbnail);
 
 const pantsThumbnails = Object.values(OAvatarPantsModels).map<{
   type: AvatarPantsModels;
   image: string;
 }>((type) => ({
   type: type,
-  image: require(
-    `../../../../../../Assets/avatarEditorThumbnails/clothing/pants/aa-${type}.png`,
-  ),
+  image:
+    type === OAvatarPantsModels.PantsCloud
+      ? noneIcon
+      : require(
+          `../../../../../../Assets/avatarEditorThumbnails/clothing/pants/aa-${type}.png`,
+        ),
 }));
-//pantsThumbnails.unshift(noneThumbnail);
 
 const shoesThumbnails = Object.values(OAvatarShoesModels).map<{
   type: AvatarShoesModels;
   image: string;
 }>((type) => ({
   type: type,
-  image: require(
-    `../../../../../../Assets/avatarEditorThumbnails/clothing/shoes/aa-${type}.png`,
-  ),
+  image:
+    type === OAvatarShoesModels.ShoesCloud
+      ? noneIcon
+      : require(
+          `../../../../../../Assets/avatarEditorThumbnails/clothing/shoes/aa-${type}.png`,
+        ),
 }));
-//shoesThumbnails.unshift(noneThumbnail);
 
 export default function AvatarEditorClothingCategory(
   props: AvatarEditorCategoryContentProps,

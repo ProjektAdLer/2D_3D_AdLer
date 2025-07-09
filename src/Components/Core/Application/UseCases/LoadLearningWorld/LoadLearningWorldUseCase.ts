@@ -407,6 +407,7 @@ export default class LoadLearningWorldUseCase
           multiplicator: 0,
           baseXP: 0, // Initialize baseXP
         },
+        estimatedTimeInMinutes: element.estimatedTimeInMinutes ?? null,
       };
 
       newElementEntity = this.container.createEntity(
@@ -420,7 +421,6 @@ export default class LoadLearningWorldUseCase
           element.adaptivity,
         );
       }
-
       return newElementEntity;
     });
   }

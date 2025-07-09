@@ -1,10 +1,8 @@
 import LearningSpaceTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceTO";
 import ILearningSpaceDetailPresenter from "./ILearningSpaceDetailPresenter";
-import LearningSpaceDetailViewModel, {
-  LearningSpaceDetailLearningSpaceData,
-} from "./LearningSpaceDetailViewModel";
-import LearningWorldTO from "src/Components/Core/Application/DataTransferObjects/LearningWorldTO";
+import LearningSpaceDetailViewModel from "./LearningSpaceDetailViewModel";
 import { LearningElementInfo } from "src/Components/Core/Domain/Types/LearningElementInfo";
+import LearningWorldTO from "src/Components/Core/Application/DataTransferObjects/LearningWorldTO";
 
 export default class LearningSpaceDetailPresenter
   implements ILearningSpaceDetailPresenter
@@ -12,20 +10,8 @@ export default class LearningSpaceDetailPresenter
   constructor(private viewModel: LearningSpaceDetailViewModel) {}
 
   onLearningWorldLoaded(world: LearningWorldTO): void {
-    let newSpaces: LearningSpaceDetailLearningSpaceData[] = [];
-
-    world.spaces.forEach((space) => {
-      newSpaces.push({
-        id: space.id,
-        name: space.name,
-        isCompleted: space.currentScore >= space.requiredScore,
-      });
-    });
-
+    console.log("onLearningWorldLoaded", world.gradingStyle);
     this.viewModel.completionDisplay = world.gradingStyle;
-
-    // set all values at once to avoid multiple re-renders
-    this.viewModel.spaces.Value = newSpaces;
   }
 
   onLearningSpaceLoaded(spaceTO: LearningSpaceTO): void {
@@ -36,32 +22,42 @@ export default class LearningSpaceDetailPresenter
     this.viewModel.isAvailable.Value = spaceTO.isAvailable;
     this.viewModel.requiredPoints.Value = spaceTO.requiredScore;
 
-    const elementsWithXP = spaceTO.elements.reduce(
-      (result, elementTO) => {
-        if (!elementTO) return result;
+    const elements = spaceTO.elements.reduce((result, elementTO) => {
+      if (!elementTO) return result;
 
-        result.push({
-          type: elementTO.type,
-          name: elementTO.name,
-          hasScored: elementTO.hasScored,
-          points: elementTO.value,
-          isRequired: elementTO.isRequired,
-          xp:
-            (elementTO.difficulty?.baseXP ?? 0) *
-            (elementTO.difficulty?.multiplicator ?? 1),
-        });
-        return result;
-      },
-      [] as (LearningElementInfo & { xp: number })[],
-    );
-    this.viewModel.elements.Value = elementsWithXP;
+      result.push({
+        type: elementTO.type,
+        name: elementTO.name,
+        hasScored: elementTO.hasScored,
+        points: elementTO.value,
+        isRequired: elementTO.isRequired,
+        difficultyInfo: elementTO.difficulty,
+        estimatedTimeInMinutes: elementTO.estimatedTimeInMinutes,
+      });
+      return result;
+    }, [] as LearningElementInfo[]);
+    this.viewModel.elements.Value = elements;
 
-    this.viewModel.currentXP.Value = elementsWithXP
+    this.viewModel.currentXP.Value = elements
       .filter((e) => e.hasScored)
-      .reduce((acc, element) => acc + (element.xp ?? 0), 0);
+      .reduce(
+        (acc, element) =>
+          acc +
+          (element.difficultyInfo?.baseXP ?? 0) *
+            (element.difficultyInfo?.multiplicator ?? 1),
+        0,
+      );
 
-    this.viewModel.maxXP.Value = elementsWithXP.reduce(
-      (acc, element) => acc + (element.xp ?? 0),
+    this.viewModel.maxXP.Value = elements.reduce(
+      (acc, element) =>
+        acc +
+        (element.difficultyInfo?.baseXP ?? 0) *
+          (element.difficultyInfo?.multiplicator ?? 1),
+      0,
+    );
+
+    this.viewModel.accumulatedEstimatedTime.Value = elements.reduce(
+      (acc, element) => acc + (element.estimatedTimeInMinutes ?? 0),
       0,
     );
 

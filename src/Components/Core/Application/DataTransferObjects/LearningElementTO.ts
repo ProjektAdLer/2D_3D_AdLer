@@ -20,4 +20,5 @@ export default class LearningElementTO {
   isScoreable: boolean;
   isRequired: boolean | null;
   difficulty: DifficultyInfo;
+  estimatedTimeInMinutes: number | null;
 }

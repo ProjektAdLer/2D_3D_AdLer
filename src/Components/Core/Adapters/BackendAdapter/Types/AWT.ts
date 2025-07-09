@@ -64,6 +64,7 @@ export interface APIElement {
   elementModel?: string;
   adaptivityContent?: APIAdaptivity;
   elementDifficulty?: number;
+  elementEstimatedTimeInMinutes?: number | null;
 }
 
 export interface APIAdaptivity {

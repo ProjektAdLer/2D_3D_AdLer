@@ -8,6 +8,8 @@
   "goal_one": "Lernziel:",
   "goal_other": "Lernziele:",
   "rooms_one": "Raum:",
+  "estimatedTime": "Geschätzte Bearbeitungszeit:",
+  "minutes": "Minuten",
   "rooms_other": "Räume:",
   "roomCount": "Anzahl Räume:",
   "NoAvailableCoursesReturnHomeTitle": "Keinen Kurs gefunden",

@@ -15,6 +15,7 @@ export class BackendLearningElementTO extends BackendBaseElementTO {
   goals: string[];
   model: LearningElementModel;
   difficulty: number;
+  estimatedTimeInMinutes: number | null;
 }
 
 export class BackendAdaptivityElementTO extends BackendLearningElementTO {

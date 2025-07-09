@@ -4,21 +4,12 @@ import { LearningElementTypeStrings } from "../../../../../Core/Domain/Types/Lea
 import Observable from "../../../../../../Lib/Observable";
 import LearningSpaceDetail from "../../../../../Core/Presentation/React/LearningSpaceMenu/LearningSpaceDetail/LearningSpaceDetail";
 import LearningSpaceDetailController from "../../../../../Core/Presentation/React/LearningSpaceMenu/LearningSpaceDetail/LearningSpaceDetailController";
-import LearningSpaceDetailViewModel, {
-  LearningSpaceDetailLearningSpaceData,
-} from "../../../../../Core/Presentation/React/LearningSpaceMenu/LearningSpaceDetail/LearningSpaceDetailViewModel";
+import LearningSpaceDetailViewModel from "../../../../../Core/Presentation/React/LearningSpaceMenu/LearningSpaceDetail/LearningSpaceDetailViewModel";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 import React from "react";
 import PointBasedDisplay from "../../../../../Core/Presentation/Utils/ElementCompletionDisplay/PointBasedDisplay";
 
 let mockViewModel = new LearningSpaceDetailViewModel();
-//world data
-const mockSpaces: Observable<LearningSpaceDetailLearningSpaceData[]> =
-  new Observable([
-    { id: 1, name: "spacesTest1", isCompleted: true },
-    { id: 2, name: "spacesTest2", isCompleted: false },
-  ]);
-//space data
 const mockName: Observable<string> = new Observable("nameTest");
 const mockDescription: Observable<string> = new Observable("descriptionTest");
 const mockGoals: Observable<string[]> = new Observable(["GoalsTest"]);
@@ -29,7 +20,9 @@ const mockElements: Observable<
   ["image" as LearningElementTypeStrings, "elementsTest2", true],
 ]);
 const mockRequiredPoints: Observable<number> = new Observable(1);
-const mockRequirements: Observable<number[]> = new Observable([2]);
+const mockCurrentXP: Observable<number> = new Observable(0);
+const mockMaxXP: Observable<number> = new Observable(1);
+const mockAccumulatedEstimatedTime: Observable<number> = new Observable(30);
 
 describe("LearningSpaceDetail in Space Menu", () => {
   beforeEach(() => {
@@ -42,8 +35,11 @@ describe("LearningSpaceDetail in Space Menu", () => {
     mockViewModel.goals = mockGoals;
     mockViewModel.elements = mockElements;
     mockViewModel.requiredPoints = mockRequiredPoints;
-    mockViewModel.spaces = mockSpaces;
     mockViewModel.completionDisplay = new PointBasedDisplay();
+    mockViewModel.currentXP = mockCurrentXP;
+    mockViewModel.maxXP = mockMaxXP;
+    mockViewModel.accumulatedEstimatedTime = mockAccumulatedEstimatedTime;
+    mockViewModel.isAvailable = new Observable(true);
   });
 
   test("should render", () => {
@@ -76,12 +72,6 @@ describe("LearningSpaceDetail in Space Menu", () => {
 
   test("should not render if requiredPoints is undefined", () => {
     mockViewModel.requiredPoints = undefined;
-    const componentUnderTest = render(<LearningSpaceDetail />);
-    expect(componentUnderTest.container).toBeEmptyDOMElement();
-  });
-
-  test("should not render if spaces is undefined", () => {
-    mockViewModel.spaces = undefined;
     const componentUnderTest = render(<LearningSpaceDetail />);
     expect(componentUnderTest.container).toBeEmptyDOMElement();
   });
