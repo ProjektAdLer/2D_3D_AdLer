@@ -3,6 +3,7 @@ import ILearningElementPresenter from "./ILearningElementPresenter";
 import LearningElementViewModel from "./LearningElementViewModel";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 import bind from "bind-decorator";
+import { FocusalbeTypes } from "../Avatar/AvatarFocusSelection/IAvatarFocusable";
 
 export default class LearningElementPresenter
   implements ILearningElementPresenter
@@ -23,6 +24,13 @@ export default class LearningElementPresenter
     }
 
     return this.centerPosition;
+  }
+
+  getID(): { id: number; type: FocusalbeTypes } {
+    return {
+      id: this.viewModel.id,
+      type: FocusalbeTypes.learningElement,
+    };
   }
 
   onLearningElementScored(hasScored: boolean, elementID: number): void {
@@ -57,6 +65,21 @@ export default class LearningElementPresenter
   @bind
   onFocused(): void {
     this.viewModel.isInteractable.Value = true;
+  }
+
+  @bind
+  isSpecialFocused(): boolean {
+    return this.viewModel.isSpecialFocused;
+  }
+
+  @bind
+  onSpecialFocused(): void {
+    this.viewModel.isSpecialFocused = true;
+  }
+
+  @bind
+  onSpecialUnfocused(): void {
+    this.viewModel.isSpecialFocused = false;
   }
 
   @bind

@@ -1,7 +1,9 @@
 import { mock, mockDeep } from "jest-mock-extended";
 import AvatarFocusSelection from "../../../../../Core/Presentation/Babylon/Avatar/AvatarFocusSelection/AvatarFocusSelection";
 import IAvatarPresenter from "../../../../../Core/Presentation/Babylon/Avatar/IAvatarPresenter";
-import IAvatarFocusable from "../../../../../Core/Presentation/Babylon/Avatar/AvatarFocusSelection/IAvatarFocusable";
+import IAvatarFocusable, {
+  FocusalbeTypes,
+} from "../../../../../Core/Presentation/Babylon/Avatar/AvatarFocusSelection/IAvatarFocusable";
 import IScenePresenter from "../../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import SCENE_TYPES from "../../../../../Core/DependencyInjection/Scenes/SCENE_TYPES";
@@ -30,6 +32,7 @@ describe("AvatarFocusSelection", () => {
 
   afterAll(() => {
     CoreDIContainer.restore();
+    jest.restoreAllMocks();
   });
 
   test("registerAvatarPresenter sets the presenter member", () => {
@@ -243,5 +246,40 @@ describe("AvatarFocusSelection", () => {
     );
 
     expect(freshInstance).not.toBe(systemUnderTest);
+  });
+
+  test("setSpecialFocus sets specialFocus to true if corresponding id exists", () => {
+    systemUnderTest["specialFocus"] = false;
+    const focusable = mock<IAvatarFocusable>();
+    jest.spyOn(focusable, "getID").mockReturnValue({
+      id: 42,
+      type: FocusalbeTypes.learningElement,
+    });
+
+    systemUnderTest.registerFocusable(focusable);
+
+    systemUnderTest["setSpecialFocus"](42, FocusalbeTypes.learningElement);
+    expect(systemUnderTest["specialFocus"]).toBe(true);
+  });
+
+  test("setSpecialFocus sets specialFocus to false if no corresponding id exists", () => {
+    systemUnderTest["specialFocus"] = true;
+    const focusable = mock<IAvatarFocusable>();
+    jest.spyOn(focusable, "getID").mockReturnValue({
+      id: 42,
+      type: FocusalbeTypes.learningElement,
+    });
+
+    systemUnderTest.registerFocusable(focusable);
+
+    systemUnderTest["setSpecialFocus"](undefined, undefined);
+    expect(systemUnderTest["specialFocus"]).toBe(false);
+  });
+
+  test("hasSpecialFocus return specialFocus", () => {
+    systemUnderTest["specialFocus"] = true;
+    expect(systemUnderTest.hasSpecialFocus()).toBe(true);
+    systemUnderTest["specialFocus"] = false;
+    expect(systemUnderTest.hasSpecialFocus()).toBe(false);
   });
 });

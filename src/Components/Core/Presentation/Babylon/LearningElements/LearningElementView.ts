@@ -21,6 +21,7 @@ import HighlightColors from "../HighlightColors";
 import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILoggerPort";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
+import { FocusalbeTypes } from "../Avatar/AvatarFocusSelection/IAvatarFocusable";
 
 const iconLinks: { [key in LearningElementTypes]?: any } = {
   [LearningElementTypes.h5p]: require("../../../../../Assets/3dModels/sharedModels/3dIcons/l-3dicons-h5p-interactive-element.glb"),
@@ -87,6 +88,12 @@ export default class LearningElementView {
       modelLink,
       true,
     )) as Mesh[];
+
+    // set model name and id for double click functionality
+    this.viewModel.modelMeshes.forEach((model) => {
+      model.name = FocusalbeTypes.learningElement.toString();
+      model.id = this.viewModel.id.toString();
+    });
 
     this.viewModel.modelMeshes[0].accessibilityTag = {
       description:

@@ -36,4 +36,5 @@ export default class LearningElementViewModel {
   public hasScored = new Observable<boolean>();
   public isHighlighted = new Observable<boolean>(false);
   public isInteractable = new Observable<boolean>(false, true);
+  public isSpecialFocused: boolean = false;
 }

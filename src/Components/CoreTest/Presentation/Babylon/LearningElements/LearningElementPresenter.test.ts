@@ -3,6 +3,7 @@ import LearningElementPresenter from "../../../../Core/Presentation/Babylon/Lear
 import LearningElementViewModel from "../../../../Core/Presentation/Babylon/LearningElements/LearningElementViewModel";
 import { Mesh, Vector3 } from "@babylonjs/core";
 import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
+import { FocusalbeTypes } from "../../../../Core/Presentation/Babylon/Avatar/AvatarFocusSelection/IAvatarFocusable";
 
 describe("LearningElementPresenter", () => {
   let systemUnderTest: LearningElementPresenter;
@@ -36,6 +37,32 @@ describe("LearningElementPresenter", () => {
     expect(systemUnderTest.getFocusableCenterPosition()).toEqual(
       new Vector3(0, 0, 21),
     );
+  });
+
+  test("isSpecialFocused returns value of isSpecialFocused in viewmodel", () => {
+    systemUnderTest["viewModel"].isSpecialFocused = true;
+    expect(systemUnderTest.isSpecialFocused()).toEqual(true);
+  });
+
+  test("onSpecialFocues sets isSpecialFocused to true", () => {
+    systemUnderTest["viewModel"].isSpecialFocused = false;
+    systemUnderTest.onSpecialFocused();
+    expect(systemUnderTest["viewModel"].isSpecialFocused).toBe(true);
+  });
+
+  test("onSpecialUnFocues sets isSpecialFocused to false", () => {
+    systemUnderTest["viewModel"].isSpecialFocused = true;
+    systemUnderTest.onSpecialUnfocused();
+    expect(systemUnderTest["viewModel"].isSpecialFocused).toBe(false);
+  });
+
+  test("getID returns id and type of learningelement", () => {
+    systemUnderTest["viewModel"].id = 42;
+    systemUnderTest["viewModel"].type = FocusalbeTypes.learningElement;
+    expect(systemUnderTest.getID()).toEqual({
+      id: 42,
+      type: FocusalbeTypes.learningElement,
+    });
   });
 
   test("onLearningElementScored sets is hasScored if the id matches", () => {

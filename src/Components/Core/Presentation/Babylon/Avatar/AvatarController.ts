@@ -20,6 +20,7 @@ import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpac
 import AvatarViewModel from "./AvatarViewModel";
 import IAvatarController from "./IAvatarController";
 import ILearningSpacePresenter from "../LearningSpaces/ILearningSpacePresenter";
+import { FocusalbeTypes } from "./AvatarFocusSelection/IAvatarFocusable";
 
 const validKeys = ["w", "a", "s", "d"];
 
@@ -123,11 +124,34 @@ export default class AvatarController implements IAvatarController {
   private processPointerEvent(pointerInfo: PointerInfo) {
     // abort if the pointer event is not a tap or if no collision was detected
     if (
-      pointerInfo.type !== PointerEventTypes.POINTERTAP ||
+      (pointerInfo.type !== PointerEventTypes.POINTERTAP &&
+        pointerInfo.type !== PointerEventTypes.POINTERDOUBLETAP) ||
       pointerInfo.pickInfo === null ||
       pointerInfo.pickInfo.pickedPoint === null
     )
       return;
+
+    if (
+      this.viewModel.focusSelection.hasSpecialFocus() &&
+      pointerInfo.type === PointerEventTypes.POINTERTAP
+    ) {
+      this.viewModel.focusSelection.setSpecialFocus(undefined, undefined);
+    }
+
+    if (pointerInfo.type === PointerEventTypes.POINTERDOUBLETAP) {
+      const type =
+        pointerInfo.pickInfo.pickedMesh?.name !== undefined
+          ? Number(pointerInfo.pickInfo.pickedMesh?.name)
+          : undefined;
+      const id =
+        pointerInfo.pickInfo.pickedMesh?.id !== undefined
+          ? Number(pointerInfo.pickInfo.pickedMesh?.id)
+          : undefined;
+
+      if (type !== undefined && type in FocusalbeTypes) {
+        this.viewModel.focusSelection.setSpecialFocus(id, type);
+      }
+    }
 
     // project the picked point to the ground and snap it to the navmesh
     const pickedPointOnGround =

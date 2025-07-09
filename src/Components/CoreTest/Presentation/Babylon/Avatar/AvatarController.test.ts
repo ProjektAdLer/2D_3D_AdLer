@@ -4,6 +4,7 @@ import {
   IMouseEvent,
   KeyboardEventTypes,
   KeyboardInfo,
+  Mesh,
   PickingInfo,
   PointerEventTypes,
   PointerInfo,
@@ -19,8 +20,8 @@ import AvatarController from "../../../../Core/Presentation/Babylon/Avatar/Avata
 import AvatarViewModel from "../../../../Core/Presentation/Babylon/Avatar/AvatarViewModel";
 import INavigation from "../../../../Core/Presentation/Babylon/Navigation/INavigation";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
-import ILearningSpacePresenter from "../../../../Core/Presentation/Babylon/LearningSpaces/ILearningSpacePresenter";
 import CharacterNavigator from "../../../../Core/Presentation/Babylon/CharacterNavigator/CharacterNavigator";
+import AvatarFocusSelection from "../../../../Core/Presentation/Babylon/Avatar/AvatarFocusSelection/AvatarFocusSelection";
 
 jest.mock("@babylonjs/core/Materials");
 jest.mock("@babylonjs/core/Meshes");
@@ -78,12 +79,14 @@ describe("AvatarController", () => {
   beforeEach(() => {
     viewModel = new AvatarViewModel();
     viewModel.characterNavigator = characterNavigatorMock;
+    viewModel.focusSelection = mock<AvatarFocusSelection>();
 
     systemUnderTest = new AvatarController(viewModel);
   });
 
   afterAll(() => {
     CoreDIContainer.restore();
+    jest.restoreAllMocks();
   });
 
   describe("callbacks", () => {
@@ -331,6 +334,58 @@ describe("AvatarController", () => {
     expect(systemUnderTest["pointerMovementTarget"]!.x).toBe(42);
     expect(systemUnderTest["pointerMovementTarget"]!.y).toBe(0);
     expect(systemUnderTest["pointerMovementTarget"]!.z).toBe(42.5);
+  });
+
+  test("processPointerEvent calls setSepcialFocus if pointer tap was registered and special focus is true", () => {
+    const pointerInfo = setupMockedPointerInfo(
+      PointerEventTypes.POINTERTAP,
+      false,
+      new Vector3(42, 42, 42),
+    );
+    jest
+      .spyOn(systemUnderTest["viewModel"].focusSelection, "hasSpecialFocus")
+      .mockReturnValue(true);
+    recastJSPluginMock.getClosestPoint.mockReturnValueOnce(
+      new Vector3(42, 0, 42.5),
+    );
+    recastJSPluginMock.getClosestPoint.mockImplementationOnce((target) => {
+      return target;
+    });
+    viewModel.parentNode = new TransformNode("mockParentNode");
+    viewModel.parentNode.position = new Vector3(42, 0, 43);
+
+    systemUnderTest["processPointerEvent"](pointerInfo);
+    expect(
+      systemUnderTest["viewModel"].focusSelection.setSpecialFocus,
+    ).toHaveBeenCalledWith(undefined, undefined);
+  });
+
+  test("processPointerEvent calls setSpecialFocus if pointerInfo was doubletap and clicked mesh was a learningelement", () => {
+    const pointerInfo = setupMockedPointerInfo(
+      PointerEventTypes.POINTERDOUBLETAP,
+      false,
+      new Vector3(42, 42, 42),
+    );
+    pointerInfo.pickInfo!.pickedMesh = new Mesh("testMesh");
+    pointerInfo.pickInfo!.pickedMesh.id = "42";
+    pointerInfo.pickInfo!.pickedMesh.name = "0";
+
+    jest
+      .spyOn(systemUnderTest["viewModel"].focusSelection, "hasSpecialFocus")
+      .mockReturnValue(true);
+    recastJSPluginMock.getClosestPoint.mockReturnValueOnce(
+      new Vector3(42, 0, 42.5),
+    );
+    recastJSPluginMock.getClosestPoint.mockImplementationOnce((target) => {
+      return target;
+    });
+    viewModel.parentNode = new TransformNode("mockParentNode");
+    viewModel.parentNode.position = new Vector3(42, 0, 43);
+
+    systemUnderTest["processPointerEvent"](pointerInfo);
+    expect(
+      systemUnderTest["viewModel"].focusSelection.setSpecialFocus,
+    ).toHaveBeenCalledWith(42, 0);
   });
 
   test("onMovementTargetReached sets movementTarget in view model to null", () => {

@@ -30,6 +30,7 @@ function buildSystemUnderTest(): [
 ] {
   const viewModel = new LearningElementViewModel();
   viewModel.type = "h5p";
+  viewModel.id = 1;
   viewModel.position = new Vector3(1, 2, 3);
   const controller = mock<ILearningElementController>();
   const view = new LearningElementView(viewModel, controller);

@@ -1,6 +1,6 @@
 import Observable from "src/Lib/Observable";
 import IAvatarPresenter from "../IAvatarPresenter";
-import IAvatarFokusable from "./IAvatarFocusable";
+import IAvatarFokusable, { FocusalbeTypes } from "./IAvatarFocusable";
 import IAvatarFocusSelection from "./IAvatarFokusSelection";
 import { injectable } from "inversify";
 import SCENE_TYPES, {
@@ -29,6 +29,7 @@ export default class AvatarFocusSelection implements IAvatarFocusSelection {
   private focusables: IAvatarFokusable[] = [];
   private avatarPresenter: IAvatarPresenter | null = null;
   private lastUpdateAvatarPosition: Vector3 | null = null;
+  private specialFocus: boolean = false;
 
   readonly CurrentFocus: Observable<Readonly<IAvatarFokusable | null>> =
     new Observable<Readonly<IAvatarFokusable | null>>(null);
@@ -59,6 +60,35 @@ export default class AvatarFocusSelection implements IAvatarFocusSelection {
 
   isInFocus(focusable: IAvatarFokusable): boolean {
     return this.CurrentFocus.Value === focusable;
+  }
+
+  hasSpecialFocus(): boolean {
+    return this.specialFocus;
+  }
+
+  setSpecialFocus(
+    id: number | undefined,
+    type: FocusalbeTypes | undefined,
+  ): void {
+    this.focusables.forEach((focusable) => {
+      const ids = focusable.getID ? focusable.getID() : null;
+      if (
+        id !== undefined &&
+        type !== undefined &&
+        ids !== null &&
+        ids.id === id &&
+        ids.type === type
+      ) {
+        focusable.onSpecialFocused && focusable.onSpecialFocused();
+        this.specialFocus = true;
+      } else {
+        focusable.onSpecialUnfocused && focusable.onSpecialUnfocused();
+      }
+
+      if (id === undefined && type === undefined) {
+        this.specialFocus = false;
+      }
+    });
   }
 
   @bind

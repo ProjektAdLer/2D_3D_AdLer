@@ -14,6 +14,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 - new icons for "world-story" and "space-story"
 - added tooltips
+- added automatic opening of learning elements if double-clicked
 
 ### Changed
 
