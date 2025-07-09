@@ -7,11 +7,11 @@ describe("LearningWorldDetailPresenter", () => {
 
   beforeEach(() => {
     systemUnderTest = new LearningWorldDetailPresenter(
-      new LearningWorldDetailViewModel()
+      new LearningWorldDetailViewModel(),
     );
   });
 
-  test("onLearningWorldLoaded should set viewModel data", () => {
+  test("onLearningWorldLoaded should set viewModel data (no elements)", () => {
     systemUnderTest.onLearningWorldLoaded({
       name: "test",
       spaces: [{ id: 1, name: "test" }],
@@ -28,5 +28,33 @@ describe("LearningWorldDetailPresenter", () => {
     expect(systemUnderTest["viewModel"].name.Value).toEqual("test");
     expect(systemUnderTest["viewModel"].goals.Value).toEqual(["test"]);
     expect(systemUnderTest["viewModel"].description.Value).toEqual("test");
+    expect(systemUnderTest["viewModel"].estimatedTimeInMinutes.Value).toEqual(
+      0,
+    );
+  });
+
+  test("onLearningWorldLoaded should set viewModel data (with elements)", () => {
+    systemUnderTest.onLearningWorldLoaded({
+      name: "test",
+      spaces: [
+        { id: 1, name: "test", elements: [{ estimatedTimeInMinutes: 30 }] },
+      ],
+      goals: ["test"],
+      description: "test",
+    } as Partial<LearningWorldTO>);
+
+    expect(systemUnderTest["viewModel"].spaces.Value).toEqual([
+      {
+        id: 1,
+        name: "test",
+        elements: [{ estimatedTimeInMinutes: 30 }],
+      },
+    ]);
+    expect(systemUnderTest["viewModel"].name.Value).toEqual("test");
+    expect(systemUnderTest["viewModel"].goals.Value).toEqual(["test"]);
+    expect(systemUnderTest["viewModel"].description.Value).toEqual("test");
+    expect(systemUnderTest["viewModel"].estimatedTimeInMinutes.Value).toEqual(
+      30,
+    );
   });
 });

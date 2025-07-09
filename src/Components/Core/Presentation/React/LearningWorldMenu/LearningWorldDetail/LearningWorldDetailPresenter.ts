@@ -15,11 +15,13 @@ export default class LearningWorldDetailPresenter
     this.viewModel.estimatedTimeInMinutes.Value = world.spaces.reduce(
       (spaceAcc, space) =>
         spaceAcc +
-        (space.elements.reduce(
-          (elementAcc, element) =>
-            elementAcc + (element?.estimatedTimeInMinutes ?? 0),
-          0,
-        ) ?? 0),
+        ((space.elements &&
+          space.elements.reduce(
+            (elementAcc, element) =>
+              elementAcc + (element?.estimatedTimeInMinutes ?? 0),
+            0,
+          )) ??
+          0),
       0,
     );
   }
