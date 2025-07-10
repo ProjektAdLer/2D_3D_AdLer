@@ -120,8 +120,8 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
               {elements.map((element) => {
                 return (
                   <div key={element.name} className="w-full">
-                    <div className="flex flex-row justify-between w-full xl:w-3/4">
-                      <div className="flex flex-row items-center portrait:gap-x-0.5 gap-x-2 max-w-[72%]">
+                    <div className="flex flex-row justify-between w-full pr-4">
+                      <div className="flex flex-row relative items-center portrait:gap-x-0.5 gap-x-2 max-w-[72%]">
                         {/* icon of element */}
                         <div className="relative w-6 portrait:w-4 mx-2 portrait:mx-0.5 lg:w-8">
                           {getLearningElementIcon(element.type)}
@@ -135,37 +135,47 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
                           )}
                         </div>
                         {/* name of element */}
-                        <div className="flex flex-row items-center ml-1">
-                          {" " + element.name}
+                        <div
+                          title={element.name}
+                          className="flex flex-row items-center ml-1 max-w-16 xl:min-w-52 onek:min-w-64 md:max-w-76 overflow-hidden group"
+                        >
+                          <span
+                            className="text-ellipsis inline-block hover:animate-marquee lg:hover:animate-none whitespace-nowrap"
+                            style={{ minWidth: "100%" }}
+                          >
+                            {" " + element.name}
+                          </span>
                         </div>
                       </div>
                       {element.difficultyInfo?.difficultyType !== undefined && (
                         <div className="flex flex-row items-center justify-center w-1/5 px-2 ml-1 justify-self-end">
                           {element.difficultyInfo.difficultyType === 0 && (
-                            <div className="flex flex-row items-center rounded-[1vw] bg-adlergreen p-1">
+                            <div className="flex flex-row items-center rounded-lg bg-diffeasy p-1 min-w-24 justify-center lg:scale-75">
                               {translate("difficultyEasy")}
                             </div>
                           )}
                           {element.difficultyInfo.difficultyType === 100 && (
-                            <div className="flex flex-row items-center px-2 ml-1 rounded-[1vw] bg-adleryellow p-1">
+                            <div className="flex flex-row items-center px-2 ml-1 rounded-lg bg-diffmedium p-1 min-w-24 justify-center lg:scale-75">
                               {translate("difficultyMedium")}
                             </div>
                           )}
                           {element.difficultyInfo.difficultyType === 200 && (
-                            <div className="flex flex-row items-center text-white px-2 ml-1 rounded-[1vw] bg-babylonbg p-1">
+                            <div className="flex flex-row items-center text-white px-2 ml-1 rounded-lg bg-diffhard p-1 md:w-24 justify-center lg:scale-75">
                               {translate("difficultyHard")}
                             </div>
                           )}
                         </div>
                       )}
                       {element.estimatedTimeInMinutes != null &&
-                        element.estimatedTimeInMinutes > 0 && (
-                          <div className="flex justify-end w-1/6">
-                            <div className="flex flex-row items-center px-2 ml-1 rounded-[1vw] bg-adlerbggradientfrom justify-self-end w-full justify-center">
-                              {element.estimatedTimeInMinutes + " min"}
-                            </div>
+                      element.estimatedTimeInMinutes > 0 ? (
+                        <div className="flex justify-end w-12 md:w-24">
+                          <div className="flex flex-row items-center rounded-lg bg-adlerbggradientfrom w-full justify-center m-1 lg:scale-75">
+                            {element.estimatedTimeInMinutes + " min"}
                           </div>
-                        )}
+                        </div>
+                      ) : (
+                        <div className="flex justify-end w-12 md:w-24"></div>
+                      )}
                       <div className="flex flex-row items-center ml-1 place-items-end">
                         {viewModel.completionDisplay.learningSpaceDetail(
                           element,

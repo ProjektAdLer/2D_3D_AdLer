@@ -188,6 +188,10 @@ module.exports = {
           "90%": { border: "1.25rem solid #172d4d" },
           "100%": { border: "1.25rem solid #e9d6b3" },
         },
+        marquee: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-200%)" },
+        },
       },
       animation: {
         loadtileone: "bluetogoldone 8s ease-in-out 0s infinite",
@@ -202,6 +206,7 @@ module.exports = {
         loadtileten: "bluetogoldten 8s ease-in-out 0s infinite",
         wiggle: "wiggle 2s ease-in-out infinite",
         buttonTransition: "buttonTransition 0.5s linear 4",
+        marquee: "marquee 2s linear 1",
       },
       colors: {
         babylonbg: "#33334d", //Babylon Default Hintergrundfarbe
@@ -223,6 +228,9 @@ module.exports = {
         adleryellow: "#f0d642",
         adleroceanblue: "#45a0e5",
         iconfillcolor: "#cfd8e5",
+        diffhard: "#ff5858",
+        diffmedium: "#f0d642",
+        diffeasy: "#59b347",
         // Neue Farben, immer direkt in Styleguide 2D in der Dokumentation der Engine dokumentieren!
       },
       gridTemplateRows: {
