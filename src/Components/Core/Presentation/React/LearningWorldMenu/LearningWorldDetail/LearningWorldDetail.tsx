@@ -36,45 +36,45 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
     <main
       className={tailwindMerge(
         className,
-        "flex flex-col gap-2 w-full self-start h-[100svh] portrait:h-[62dvh]",
+        "flex h-[100svh] w-full flex-col gap-2 self-start portrait:h-[62dvh]",
       )}
     >
-      <article className="flex flex-row portrait:flex-col portrait:items-between portrait:justify-center portrait:h-[25%] portrait:gap-2 items-center justify-between h-[10%] p-1 pb-4 border-b border-gray-500">
+      <article className="portrait:items-between flex h-[10%] flex-row items-center justify-between border-b border-gray-500 p-1 pb-4 portrait:h-12 portrait:justify-center portrait:gap-2">
         <div className="flex flex-row">
           <img src={worldIcon} className="w-6 xl:w-8" alt="Lernwelt-Icon"></img>
-          <div className="flex-wrap ml-2 overflow-x-auto font-black break-words text-md text-adlerdarkblue lg:text-2xl mobile-landscape:text-sm">
+          <div className="text-md ml-2 flex-wrap overflow-x-auto break-words font-black text-adlerdarkblue lg:text-2xl mobile-landscape:text-sm">
             {name}
           </div>
         </div>
         <StyledButton
           color="highlight"
           shape="freeFloatLeft"
-          className="self-center block m-2 font-bold portrait:p-2 justify-self-center animate-bounce-once bg-nodehandlecolor"
+          className="animate-bounce-once m-2 block self-center justify-self-center bg-nodehandlecolor font-bold portrait:p-2"
           onClick={controller.onEnterLearningWorldButtonClicked}
           title={translate("worldOpenButtonToolTip").toString()}
         >
           {translate("openLearningWorldButton")}
         </StyledButton>
       </article>
-      <article className="flex flex-col w-full gap-2 landscape:lg-[75%] h-[68%] overflow-y-auto">
+      <article className="landscape:lg-[75%] flex h-[68%] w-full flex-col gap-2 overflow-y-auto">
         {description === undefined ||
           (description !== "" && (
-            <div className="pb-2 border-b border-gray-500">
-              <h3 className="self-center ml-2 font-black portrait:text-sm text-adlerdarkblue lg:mb-2 mobile-landscape:text-sm">
+            <div className="border-b border-gray-500 pb-2">
+              <h3 className="ml-2 self-center font-black text-adlerdarkblue lg:mb-2 mobile-landscape:text-sm portrait:text-sm">
                 {translate("description")}
               </h3>
-              <div className="items-start ml-6 font-medium portrait:text-xs mobile-landscape:text-xs">
+              <div className="ml-6 items-start font-medium mobile-landscape:text-xs portrait:text-xs">
                 <TextWithLineBreaks text={description} />
               </div>
             </div>
           ))}
         {goals === undefined ||
           (goals.length > 0 && (
-            <div className="pb-2 border-b border-gray-500">
-              <h3 className="self-center ml-2 font-black text-adlerdarkblue portrait:text-sm lg:mb-2 mobile-landscape:text-sm">
+            <div className="border-b border-gray-500 pb-2">
+              <h3 className="ml-2 self-center font-black text-adlerdarkblue lg:mb-2 mobile-landscape:text-sm portrait:text-sm">
                 {translate("goal", { count: goals?.length })}
               </h3>
-              <div className="items-start ml-6 font-medium mobile-landscape:text-xs portrait:text-xs lg:text:lg">
+              <div className="lg:text:lg ml-6 items-start font-medium mobile-landscape:text-xs portrait:text-xs">
                 {goals.map((goal) => {
                   return <TextWithLineBreaks text={goal} key={goal} />;
                 })}
@@ -82,36 +82,36 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
             </div>
           ))}
         {estimatedTimeInMinutes !== undefined && estimatedTimeInMinutes > 0 && (
-          <div className="pb-2 border-b border-gray-500">
-            <h3 className="self-center ml-2 font-black text-adlerdarkblue portrait:text-sm lg:mb-2 mobile-landscape:text-sm">
+          <div className="border-b border-gray-500 pb-2">
+            <h3 className="ml-2 self-center font-black text-adlerdarkblue lg:mb-2 mobile-landscape:text-sm portrait:text-sm">
               {translate("estimatedTime")}
             </h3>
-            <div className="items-start ml-6 font-medium portrait:text-xs mobile-landscape:text-xs lg:text:lg">
+            <div className="lg:text:lg ml-6 items-start font-medium mobile-landscape:text-xs portrait:text-xs">
               {estimatedTimeInMinutes + " " + translate("minutes")}
             </div>
           </div>
         )}
-        <section className="pb-2 border-b border-gray-500">
-          <h3 className="self-center ml-2 font-black portrait:text-sm text-adlerdarkblue lg:mb-2 mobile-landscape:text-sm">
+        <section className="border-b border-gray-500 pb-2">
+          <h3 className="ml-2 self-center font-black text-adlerdarkblue lg:mb-2 mobile-landscape:text-sm portrait:text-sm">
             {translate("rooms", { count: spaces?.length })}
           </h3>
-          <div className="items-start ml-6 font-medium portrait:ml-3 mobile-landscape:text-xs portrait:text-xs lg:text:lg">
+          <div className="lg:text:lg ml-6 items-start font-medium mobile-landscape:text-xs portrait:ml-3 portrait:text-xs">
             {spaces?.map((space) => {
               return (
                 <div key={space.id}>
                   <div className="flex flex-row items-center lg:text-lg">
-                    <div className="relative flex my-2 ml-2 mobile-landscape:my-1">
+                    <div className="relative my-2 ml-2 flex mobile-landscape:my-1">
                       <img
                         src={spaceIcon}
                         alt=""
-                        className="w-8 mr-4 portrait:w-6 portrait:mr-1 xl:w-12"
+                        className="mr-4 w-8 xl:w-12 portrait:mr-1 portrait:w-6"
                       />
                       {space.currentScore >= space.requiredScore && (
                         <img
                           src={greenSwosh}
                           data-testid="greenSwosh"
                           alt=""
-                          className="absolute w-6 bottom-3 left-4 xl:w-8 xl:left-6 xl:bottom-4"
+                          className="absolute bottom-3 left-4 w-6 xl:bottom-4 xl:left-6 xl:w-8"
                         />
                       )}
                     </div>
@@ -122,11 +122,11 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
             })}
           </div>
         </section>
-        <section className="pb-2 border-b border-gray-500">
-          <h3 className="self-center ml-2 font-black text-adlerdarkblue portrait:text-sm lg:mb-2 mobile-landscape:text-sm">
+        <section className="border-b border-gray-500 pb-2">
+          <h3 className="ml-2 self-center font-black text-adlerdarkblue lg:mb-2 mobile-landscape:text-sm portrait:text-sm">
             {translate("roomCount")}
           </h3>
-          <div className="items-start ml-6 font-medium portrait:text-xs lg:text:lg mobile-landscape:text-xs">
+          <div className="lg:text:lg ml-6 items-start font-medium mobile-landscape:text-xs portrait:text-xs">
             {spaces?.length}
           </div>
         </section>

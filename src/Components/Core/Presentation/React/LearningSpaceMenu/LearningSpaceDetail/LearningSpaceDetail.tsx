@@ -50,10 +50,10 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
     <main
       className={tailwindMerge(
         className,
-        "flex h-[100svh] w-full flex-col gap-2 self-start portrait:h-[45svh]",
+        "flex h-[100svh] w-full flex-col gap-2 self-start portrait:h-[40svh]",
       )}
     >
-      <article className="portrait:items-between flex h-[10%] flex-row items-center justify-between border-b border-gray-500 p-1 pb-4 portrait:h-[25%] portrait:flex-col portrait:justify-center portrait:gap-2">
+      <article className="flex h-[10%] flex-row items-center justify-between border-b border-gray-500 p-1 pb-4 portrait:h-16 portrait:justify-center portrait:gap-2">
         <div className="flex flex-row">
           <img src={spaceIcon} className="w-6 xl:w-8" alt="Lernraum-Icon"></img>
           <div className="text-md ml-2 flex-wrap overflow-x-auto break-words font-black text-adlerdarkblue lg:text-2xl mobile-landscape:text-sm">
@@ -137,7 +137,7 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
                         {/* name of element */}
                         <div
                           title={element.name}
-                          className="md:max-w-76 group ml-1 flex max-w-16 flex-row items-center overflow-hidden xl:min-w-52 xl:max-w-56 onek:min-w-64"
+                          className="ml-1 flex max-w-16 flex-row items-center overflow-hidden xl:min-w-52 xl:max-w-56 onek:min-w-64 tablet-portrait:min-w-64"
                         >
                           <span className="inline-block text-ellipsis whitespace-nowrap">
                             {" " + element.name}

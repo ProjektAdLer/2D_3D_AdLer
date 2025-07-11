@@ -121,7 +121,7 @@ export default function LearningSpaceSelectionGraph(props: {
   );
 
   return (
-    <div className="w-full h-[95%] lg:w-full lg:h-full ">
+    <div className="h-[95%] w-full lg:h-full lg:w-full">
       <ReactFlow
         defaultNodes={[]}
         nodeTypes={nodeTypes}
