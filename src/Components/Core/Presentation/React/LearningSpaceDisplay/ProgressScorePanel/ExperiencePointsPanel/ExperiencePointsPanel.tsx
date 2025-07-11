@@ -48,7 +48,7 @@ export default function ExperiencePointsPanel({
       max={100}
       progressbarText={percentage.toString() + " XP"}
       iconClassName={rest.isButton ? "opacity-40" : ""}
-      iconTextClassName="font-bold text-2xl text-center adlerdarkblue"
+      iconTextClassName="font-bold text-lg onek:text-2xl text-center adlerdarkblue"
       iconText={scoreInfo?.currentLevel.toString()}
       barClassName="w-20 font-bold text-center text-yellow-300 mx-2"
       icon={levelIcon}

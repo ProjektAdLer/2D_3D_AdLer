@@ -137,12 +137,9 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
                         {/* name of element */}
                         <div
                           title={element.name}
-                          className="flex flex-row items-center ml-1 max-w-16 xl:min-w-52 onek:min-w-64 md:max-w-76 overflow-hidden group"
+                          className="flex flex-row items-center ml-1 max-w-16 xl:min-w-52 xl:max-w-56 onek:min-w-64 md:max-w-76 overflow-hidden group"
                         >
-                          <span
-                            className="text-ellipsis inline-block hover:animate-marquee lg:hover:animate-none whitespace-nowrap"
-                            style={{ minWidth: "100%" }}
-                          >
+                          <span className="text-ellipsis inline-block whitespace-nowrap">
                             {" " + element.name}
                           </span>
                         </div>
@@ -150,17 +147,17 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
                       {element.difficultyInfo?.difficultyType !== undefined && (
                         <div className="flex flex-row items-center justify-center w-1/5 px-2 ml-1 justify-self-end">
                           {element.difficultyInfo.difficultyType === 0 && (
-                            <div className="flex flex-row items-center rounded-lg bg-diffeasy p-1 min-w-24 justify-center lg:scale-75">
+                            <div className="flex flex-row items-center rounded-lg bg-diffeasy p-1 mobile-landscape:w-24 justify-center lg:scale-75">
                               {translate("difficultyEasy")}
                             </div>
                           )}
                           {element.difficultyInfo.difficultyType === 100 && (
-                            <div className="flex flex-row items-center px-2 ml-1 rounded-lg bg-diffmedium p-1 min-w-24 justify-center lg:scale-75">
+                            <div className="flex flex-row items-center px-2 ml-1 rounded-lg bg-diffmedium p-1 mobile-landscape:w-24 justify-center lg:scale-75">
                               {translate("difficultyMedium")}
                             </div>
                           )}
                           {element.difficultyInfo.difficultyType === 200 && (
-                            <div className="flex flex-row items-center text-white px-2 ml-1 rounded-lg bg-diffhard p-1 md:w-24 justify-center lg:scale-75">
+                            <div className="flex flex-row items-center text-white px-2 ml-1 rounded-lg bg-diffhard p-1 mobile-landscape:w-24 justify-center lg:scale-75">
                               {translate("difficultyHard")}
                             </div>
                           )}
