@@ -4,9 +4,11 @@ import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIConta
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import LearningWorldSelectionController from "../../../../../Core/Presentation/React/LearningWorldMenu/LearningWorldSelection/LearningWorldSelectionController";
 import LearningWorldSelectionViewModel from "../../../../../Core/Presentation/React/LearningWorldMenu/LearningWorldSelection/LearningWorldSelectionViewModel";
+import history from "history/browser";
 
 const viewModel = new LearningWorldSelectionViewModel();
 const loadWorldUseCaseMock = mock<ILoadLearningWorldUseCase>();
+const mockHistoryPush = jest.spyOn(history, "push");
 
 describe("LearningWorldSelectionController", () => {
   let systemUnderTest: LearningWorldSelectionController;
@@ -14,7 +16,7 @@ describe("LearningWorldSelectionController", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind(
-      USECASE_TYPES.ILoadLearningWorldUseCase
+      USECASE_TYPES.ILoadLearningWorldUseCase,
     ).toConstantValue(loadWorldUseCaseMock);
   });
   beforeEach(() => {
@@ -28,5 +30,9 @@ describe("LearningWorldSelectionController", () => {
     expect(loadWorldUseCaseMock.executeAsync).toBeCalledWith({
       worldID: 420,
     });
+  });
+  test("onLearningWorldRowDoubleClicked calls history.push", () => {
+    systemUnderTest.onLearningWorldRowDoubleClicked(40);
+    expect(mockHistoryPush).toBeCalled();
   });
 });

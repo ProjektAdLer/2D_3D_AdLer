@@ -1,4 +1,3 @@
-import { logger } from "../../../../../../Lib/Logger";
 import history from "history/browser";
 import LearningWorldDetailController from "../../../../../Core/Presentation/React/LearningWorldMenu/LearningWorldDetail/LearningWorldDetailController";
 import LearningWorldDetailViewModel from "../../../../../Core/Presentation/React/LearningWorldMenu/LearningWorldDetail/LearningWorldDetailViewModel";

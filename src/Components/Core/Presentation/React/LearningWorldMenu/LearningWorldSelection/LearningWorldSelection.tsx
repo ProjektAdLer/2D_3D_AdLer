@@ -96,6 +96,9 @@ export default function LearningWorldSelection({
                 onClickCallback={() =>
                   controller.onLearningWorldRowClicked(world.id)
                 }
+                onDoubleClickCallback={() =>
+                  controller.onLearningWorldRowDoubleClicked(world.id)
+                }
               />
             </li>
           );

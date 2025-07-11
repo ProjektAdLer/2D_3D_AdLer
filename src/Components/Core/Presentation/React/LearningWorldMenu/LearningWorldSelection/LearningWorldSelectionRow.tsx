@@ -6,11 +6,13 @@ export default function LearningWorldSelectionRow({
   selected,
   title,
   onClickCallback,
+  onDoubleClickCallback,
 }: {
   icon: string;
   selected: boolean;
   title: string;
   onClickCallback: () => void;
+  onDoubleClickCallback?: () => void;
 }) {
   const { t: translate } = useTranslation("worldMenu");
 
@@ -21,8 +23,9 @@ export default function LearningWorldSelectionRow({
       className="w-full xl:pl-8 "
       shape="freeFloatCenter"
       onClick={onClickCallback}
+      onDoubleClick={onDoubleClickCallback}
       color={selected ? "pressed" : "default"}
-      title={translate("worldButtonToolTip").toString()}
+      title={title + ": " + translate("worldButtonToolTip").toString()}
     >
       {title}
     </StyledButton>
