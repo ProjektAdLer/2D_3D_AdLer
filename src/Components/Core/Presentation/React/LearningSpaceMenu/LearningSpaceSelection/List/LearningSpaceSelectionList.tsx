@@ -26,6 +26,10 @@ export default function LearningSpaceSelectionList(props: {
     (id: ComponentID) => props.controller.onLearningSpaceClicked(id),
     [props.controller],
   );
+  const onRowDoubleClicked = useCallback(
+    (id: ComponentID) => props.controller.onLearningSpaceDoubleClicked(id),
+    [props.controller],
+  );
 
   const scrollTarget = useRef<HTMLLIElement>(null);
   const [firstTimeFocus, setFirstTimeFocus] = useState<boolean>(true);
@@ -58,6 +62,7 @@ export default function LearningSpaceSelectionList(props: {
               spaceTitle={space.name}
               selected={selectedRowID === space.id}
               onClickCallback={() => onRowClicked(space.id)}
+              onDoubleClickCallback={() => onRowDoubleClicked(space.id)}
             />
           </li>
         );

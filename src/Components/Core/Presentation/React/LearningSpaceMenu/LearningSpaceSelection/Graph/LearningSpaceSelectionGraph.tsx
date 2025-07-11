@@ -120,6 +120,17 @@ export default function LearningSpaceSelectionGraph(props: {
     [props.controller, reactFlowInstance],
   );
 
+  const onNodeDoubleClickCallback = useCallback<NodeMouseHandler>(
+    (event: React.MouseEvent, clickedNode: Node) => {
+      console.log("onNodeDoubleClickCallback called", clickedNode);
+      // only register double clicks on space nodes
+      if (clickedNode.type === "spaceNode") {
+        props.controller.onLearningSpaceDoubleClicked(parseInt(clickedNode.id));
+      }
+    },
+    [props.controller],
+  );
+
   return (
     <div className="h-[95%] w-full lg:h-full lg:w-full">
       <ReactFlow
@@ -128,6 +139,7 @@ export default function LearningSpaceSelectionGraph(props: {
         nodesDraggable={false}
         nodesConnectable={false}
         onNodeClick={onNodeClickCallback}
+        onNodeDoubleClick={onNodeDoubleClickCallback}
         defaultEdges={[]}
         fitView={true}
         fitViewOptions={{ padding: 0.2 }}

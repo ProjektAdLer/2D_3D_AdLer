@@ -26,6 +26,6 @@
   "linkToolTip": "Öffnet einen von den Lehrenden hinterlegten Link",
   "homepageToolTip": "Öffnet die AdLer Webseite",
 
-  "spaceButtonToolTip": "Öffnet die Metadaten dieses Lernraums",
+  "spaceButtonToolTip": "\nEinfachklick: Öffnet die Metadaten dieses Lernraums\nDoppelklick: Öffnet den Lernraum",
   "spaceOpenButtonToolTip": "Öffnet den ausgewählten Lernraum"
 }

@@ -3,6 +3,8 @@ import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import ILearningSpaceSelectionController from "./ILearningSpaceSelectionController";
 import LearningSpaceSelectionViewModel from "./LearningSpaceSelectionViewModel";
+import history from "history/browser";
+import bind from "bind-decorator";
 
 export default class LearningSpaceSelectionController
   implements ILearningSpaceSelectionController
@@ -11,7 +13,7 @@ export default class LearningSpaceSelectionController
 
   constructor(private viewModel: LearningSpaceSelectionViewModel) {
     this.loadLearningSpaceUseCase = CoreDIContainer.get(
-      USECASE_TYPES.ILoadLearningSpaceUseCase
+      USECASE_TYPES.ILoadLearningSpaceUseCase,
     );
   }
 
@@ -21,5 +23,10 @@ export default class LearningSpaceSelectionController
       spaceID: spaceID,
       worldID: this.viewModel.worldID.Value,
     });
+  }
+
+  @bind
+  onLearningSpaceDoubleClicked(spaceID: number): void {
+    history.push("/spacedisplay/" + spaceID);
   }
 }

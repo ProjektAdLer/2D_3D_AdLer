@@ -3,7 +3,7 @@
 exports[`LearningSpaceSelectionGraph should render 1`] = `
 <div>
   <div
-    class="w-full h-[95%] lg:w-full lg:h-full "
+    class="w-full h-[95%] lg:w-full lg:h-full"
   >
     <div
       class="react-flow"

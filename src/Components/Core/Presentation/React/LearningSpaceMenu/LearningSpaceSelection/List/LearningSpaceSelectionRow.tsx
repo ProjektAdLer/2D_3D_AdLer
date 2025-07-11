@@ -7,12 +7,14 @@ export default function LearningSpaceSelectionRow({
   icon,
   locked,
   onClickCallback,
+  onDoubleClickCallback,
 }: {
   icon: string;
   spaceTitle: string;
   selected: boolean;
   locked: boolean;
   onClickCallback: () => void;
+  onDoubleClickCallback: () => void;
 }) {
   const { t: translate } = useTranslation("spaceMenu");
 
@@ -23,8 +25,9 @@ export default function LearningSpaceSelectionRow({
       className="xl:pl-8 w-[100%]"
       shape="freeFloatCenter"
       onClick={onClickCallback}
+      onDoubleClick={onDoubleClickCallback}
       color={selected ? "pressed" : "default"}
-      title={translate("spaceButtonToolTip").toString()}
+      title={spaceTitle + ": " + translate("spaceButtonToolTip").toString()}
     >
       {spaceTitle}
     </StyledButton>
