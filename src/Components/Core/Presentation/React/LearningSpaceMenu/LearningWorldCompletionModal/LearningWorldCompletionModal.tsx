@@ -41,14 +41,14 @@ export default function LearningWorldCompletionModal({
       <div className="flex flex-col items-center justify-center">
         {
           <img
-            className="w-20 mb-4 mobile-portrait:w-16 mobile-landscape:w-10"
+            className="mb-4 w-20 mobile-landscape:w-10 mobile-portrait:w-16"
             src={SolutionIcon}
             alt=""
           ></img>
         }
         <NarrativeFrameworkWorldCompletionModalContainer />
-        <div className="flex flex-col items-center justify-center w-full">
-          <p className="mt-6 font-bold text-lg">{translate("linktitle")}</p>
+        <div className="flex w-full flex-col items-center justify-center">
+          <p className="mt-6 text-lg font-bold">{translate("linktitle")}</p>
           {viewModel.worldCompletionText && (
             <div className="flex justify-center">
               {viewModel.worldCompletionText}
@@ -58,7 +58,7 @@ export default function LearningWorldCompletionModal({
             <div>
               <div className="flex justify-center">
                 <a
-                  className="m-3 text-2xl font-bold underline text-adlergreen"
+                  className="m-3 text-2xl font-bold text-adlergreen underline"
                   href={evaluationLink}
                   target="_blank"
                   rel="noreferrer"
@@ -67,16 +67,16 @@ export default function LearningWorldCompletionModal({
                   {translate("furtherLink").toString()}
                 </a>
               </div>
-              <div className="flex justify-center m-2 max-w-96">
+              <div className="m-2 flex max-w-96 justify-center">
                 <p>{translate("congratulationStandardText")}</p>
               </div>
             </div>
           )}
 
-          <p className="text-sm mt-8">
+          <p className="mt-8 text-sm">
             {translate("link_Homepage")}
             <a
-              className="font-bold underline text-adlergreen"
+              className="font-bold text-adlergreen underline"
               href="https://projekt-adler.eu"
               target="_blank"
               rel="noreferrer"

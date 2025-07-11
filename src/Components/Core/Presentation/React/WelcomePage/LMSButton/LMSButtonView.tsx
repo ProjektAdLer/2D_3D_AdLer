@@ -17,17 +17,13 @@ export default function LMSButton({ className }: AdLerUIComponent) {
   return (
     <StyledButton
       shape="freeFloatCenter"
-      containerClassName=" w-full h-full"
+      containerClassName="w-full h-full"
       onClick={controller.openLMSPage}
-      className={`relative gap-2 flex m-2` + tailwindMerge(className)}
+      className={`relative m-2 flex gap-2` + tailwindMerge(className)}
       title={translate("lmsButtonToolTip").toString()}
     >
-      <img
-        className="mobile-portrait:w-8 w-[35px] lg:w-[50px]"
-        src={moodleIcon}
-        alt="icon"
-      />
-      <p className="font-bold mobile-portrait:text-2xs">
+      <img className="w-8 lg:w-12 onek:w-14" src={moodleIcon} alt="icon" />
+      <p className="text-2xs font-bold xl:text-sm">
         {translate("moodleButton")}
       </p>
     </StyledButton>

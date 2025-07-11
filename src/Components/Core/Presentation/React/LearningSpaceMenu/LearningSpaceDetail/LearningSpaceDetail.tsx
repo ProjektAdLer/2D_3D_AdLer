@@ -50,13 +50,13 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
     <main
       className={tailwindMerge(
         className,
-        "flex flex-col gap-2 w-full self-start h-[100svh] portrait:h-[45svh]",
+        "flex h-[100svh] w-full flex-col gap-2 self-start portrait:h-[45svh]",
       )}
     >
-      <article className="flex flex-row portrait:flex-col portrait:items-between portrait:justify-center portrait:h-[25%] portrait:gap-2 items-center justify-between h-[10%] p-1 pb-4 border-b border-gray-500">
+      <article className="portrait:items-between flex h-[10%] flex-row items-center justify-between border-b border-gray-500 p-1 pb-4 portrait:h-[25%] portrait:flex-col portrait:justify-center portrait:gap-2">
         <div className="flex flex-row">
           <img src={spaceIcon} className="w-6 xl:w-8" alt="Lernraum-Icon"></img>
-          <div className="flex-wrap ml-2 overflow-x-auto font-black break-words text-md text-adlerdarkblue lg:text-2xl mobile-landscape:text-sm">
+          <div className="text-md ml-2 flex-wrap overflow-x-auto break-words font-black text-adlerdarkblue lg:text-2xl mobile-landscape:text-sm">
             {name}
           </div>
         </div>
@@ -64,7 +64,7 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
           <StyledButton
             color="highlight"
             shape="freeFloatLeft"
-            className="self-center block m-2 font-bold portrait:p-2 justify-self-center animate-bounce-once bg-nodehandlecolor"
+            className="animate-bounce-once m-2 block self-center justify-self-center bg-nodehandlecolor font-bold portrait:p-2"
             onClick={controller.onLearningSpaceButtonClicked}
             title={translate("spaceOpenButtonToolTip").toString()}
           >
@@ -72,23 +72,23 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
           </StyledButton>
         )}
       </article>
-      <article className="flex flex-col w-full gap-2 h-[75%] overflow-auto">
+      <article className="flex h-[75%] w-full flex-col gap-2 overflow-auto">
         {description !== "" && (
-          <section className="pb-2 border-b border-gray-500">
-            <h3 className="self-center ml-2 font-black portrait:text-sm mobile-landscape:text-sm text-adlerdarkblue lg:mb-2">
+          <section className="border-b border-gray-500 pb-2">
+            <h3 className="ml-2 self-center font-black text-adlerdarkblue lg:mb-2 mobile-landscape:text-sm portrait:text-sm">
               {translate("description")}
             </h3>
-            <div className="items-start ml-6 font-medium portrait:ml-3 portrait:text-xs mobile-landscape:text-xs">
+            <div className="ml-6 items-start font-medium mobile-landscape:text-xs portrait:ml-3 portrait:text-xs">
               <TextWithLineBreaks text={description} />
             </div>
           </section>
         )}
         {goals.length > 0 && goals[0] !== "" && (
-          <section className="pb-2 border-b border-gray-500">
-            <h3 className="self-center ml-2 font-black portrait:text-sm text-adlerdarkblue lg:mb-2 mobile-landscape:text-sm">
+          <section className="border-b border-gray-500 pb-2">
+            <h3 className="ml-2 self-center font-black text-adlerdarkblue lg:mb-2 mobile-landscape:text-sm portrait:text-sm">
               {translate("goal", { count: goals?.length })}
             </h3>
-            <div className="items-start ml-6 font-medium portrait:text-xs portrait:ml-3 lg:text:lg mobile-landscape:text-xs">
+            <div className="lg:text:lg ml-6 items-start font-medium mobile-landscape:text-xs portrait:ml-3 portrait:text-xs">
               <ul className="ml-4 list-disc">
                 {goals.map((goal, index) => {
                   return (
@@ -102,62 +102,62 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
           </section>
         )}
         {accumulatedEstimatedTime > 0 && (
-          <section className="pb-2 border-b border-gray-500">
-            <h3 className="self-center ml-2 font-black portrait:text-sm text-adlerdarkblue lg:mb-2 mobile-landscape:text-sm">
+          <section className="border-b border-gray-500 pb-2">
+            <h3 className="ml-2 self-center font-black text-adlerdarkblue lg:mb-2 mobile-landscape:text-sm portrait:text-sm">
               {translate("estimatedTime")}
             </h3>
-            <div className="items-start ml-6 font-medium portrait:ml-3 portrait:text-xs lg:text-lg mobile-landscape:text-xs">
+            <div className="ml-6 items-start font-medium lg:text-lg mobile-landscape:text-xs portrait:ml-3 portrait:text-xs">
               {accumulatedEstimatedTime + " " + translate("minutes")}
             </div>
           </section>
         )}
         {elements.length > 0 && (
-          <section className="pb-2 border-b border-gray-500">
-            <h3 className="self-center ml-2 font-black portrait:text-sm text-adlerdarkblue lg:mb-2 mobile-landscape:text-sm">
+          <section className="border-b border-gray-500 pb-2">
+            <h3 className="ml-2 self-center font-black text-adlerdarkblue lg:mb-2 mobile-landscape:text-sm portrait:text-sm">
               {translate("learningElement", { count: elements?.length })}
             </h3>
-            <div className="flex flex-col items-start ml-6 font-medium portrait:ml-3 portrait:text-xs lg:text-lg mobile-landscape:text-xs">
+            <div className="ml-6 flex flex-col items-start font-medium lg:text-lg mobile-landscape:text-xs portrait:ml-3 portrait:text-xs">
               {elements.map((element) => {
                 return (
                   <div key={element.name} className="w-full">
-                    <div className="flex flex-row justify-between w-full pr-4">
-                      <div className="flex flex-row relative items-center portrait:gap-x-0.5 gap-x-2 max-w-[72%]">
+                    <div className="flex w-full flex-row justify-between pr-4">
+                      <div className="relative flex max-w-[72%] flex-row items-center gap-x-2 portrait:gap-x-0.5">
                         {/* icon of element */}
-                        <div className="relative w-6 portrait:w-4 mx-2 portrait:mx-0.5 lg:w-8">
+                        <div className="relative mx-2 w-6 lg:w-8 portrait:mx-0.5 portrait:w-4">
                           {getLearningElementIcon(element.type)}
                           {element.hasScored && (
                             <img
                               src={greenSwosh}
                               alt=""
                               data-testid="checkMark"
-                              className="absolute h-4 portrait:h-2 lg:h-6 portrait:bottom-5 portrait:left-3 bottom-3 left-4 lg:bottom-6 lg:left-6 "
+                              className="absolute bottom-3 left-4 h-4 lg:bottom-6 lg:left-6 lg:h-6 portrait:bottom-5 portrait:left-3 portrait:h-2"
                             />
                           )}
                         </div>
                         {/* name of element */}
                         <div
                           title={element.name}
-                          className="flex flex-row items-center ml-1 max-w-16 xl:min-w-52 xl:max-w-56 onek:min-w-64 md:max-w-76 overflow-hidden group"
+                          className="md:max-w-76 group ml-1 flex max-w-16 flex-row items-center overflow-hidden xl:min-w-52 xl:max-w-56 onek:min-w-64"
                         >
-                          <span className="text-ellipsis inline-block whitespace-nowrap">
+                          <span className="inline-block text-ellipsis whitespace-nowrap">
                             {" " + element.name}
                           </span>
                         </div>
                       </div>
                       {element.difficultyInfo?.difficultyType !== undefined && (
-                        <div className="flex flex-row items-center justify-center w-1/5 px-2 ml-1 justify-self-end">
+                        <div className="ml-1 flex w-1/5 flex-row items-center justify-center justify-self-end px-2">
                           {element.difficultyInfo.difficultyType === 0 && (
-                            <div className="flex flex-row items-center rounded-lg bg-diffeasy p-1 mobile-landscape:w-24 justify-center lg:scale-75">
+                            <div className="flex flex-row items-center justify-center rounded-lg bg-diffeasy p-1 lg:scale-75 mobile-landscape:w-24">
                               {translate("difficultyEasy")}
                             </div>
                           )}
                           {element.difficultyInfo.difficultyType === 100 && (
-                            <div className="flex flex-row items-center px-2 ml-1 rounded-lg bg-diffmedium p-1 mobile-landscape:w-24 justify-center lg:scale-75">
+                            <div className="ml-1 flex flex-row items-center justify-center rounded-lg bg-diffmedium p-1 px-2 lg:scale-75 mobile-landscape:w-24">
                               {translate("difficultyMedium")}
                             </div>
                           )}
                           {element.difficultyInfo.difficultyType === 200 && (
-                            <div className="flex flex-row items-center text-white px-2 ml-1 rounded-lg bg-diffhard p-1 mobile-landscape:w-24 justify-center lg:scale-75">
+                            <div className="ml-1 flex flex-row items-center justify-center rounded-lg bg-diffhard p-1 px-2 text-white lg:scale-75 mobile-landscape:w-24">
                               {translate("difficultyHard")}
                             </div>
                           )}
@@ -165,15 +165,15 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
                       )}
                       {element.estimatedTimeInMinutes != null &&
                       element.estimatedTimeInMinutes > 0 ? (
-                        <div className="flex justify-end w-12 md:w-24">
-                          <div className="flex flex-row items-center rounded-lg bg-adlerbggradientfrom w-full justify-center m-1 lg:scale-75">
+                        <div className="flex w-12 justify-end md:w-24">
+                          <div className="m-1 flex w-full flex-row items-center justify-center rounded-lg bg-adlerbggradientfrom lg:scale-75">
                             {element.estimatedTimeInMinutes + " min"}
                           </div>
                         </div>
                       ) : (
-                        <div className="flex justify-end w-12 md:w-24"></div>
+                        <div className="flex w-12 justify-end md:w-24"></div>
                       )}
-                      <div className="flex flex-row items-center ml-1 place-items-end">
+                      <div className="ml-1 flex flex-row place-items-end items-center">
                         {viewModel.completionDisplay.learningSpaceDetail(
                           element,
                         )}
@@ -199,7 +199,7 @@ export default function LearningSpaceDetail({ className }: AdLerUIComponent) {
               translate("maximumPoints"),
             )}
         {elements.length > 0 && (
-          <div className="pb-2 border-b border-gray-500"></div>
+          <div className="border-b border-gray-500 pb-2"></div>
         )}
       </article>
     </main>
