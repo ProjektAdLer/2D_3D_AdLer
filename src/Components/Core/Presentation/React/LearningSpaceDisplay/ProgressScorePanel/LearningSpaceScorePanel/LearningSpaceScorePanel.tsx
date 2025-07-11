@@ -40,8 +40,8 @@ export default function LearningSpaceScorePanel({
         current: Math.min(scoreInfo?.currentScore, scoreInfo?.requiredScore),
         required: scoreInfo?.requiredScore,
       }).toString()}
-      iconClassName="font-bold text-center text-yellow-300"
-      barClassName="w-20 font-bold text-center text-yellow-300 "
+      iconClassName="font-bold text-center text-yellow-300 mobile-portrait:scale-75"
+      barClassName="w-20 font-bold text-center text-yellow-300 mobile-portrait:scale-75"
       icon={icon}
       tooltip={
         rest.gradingStyle === GradingStyle.point

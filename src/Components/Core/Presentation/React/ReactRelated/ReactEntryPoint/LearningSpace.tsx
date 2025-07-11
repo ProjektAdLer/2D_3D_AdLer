@@ -19,20 +19,20 @@ import CinemaStripes from "~ReactComponents/LearningSpaceDisplay/CinemaStripes/C
 
 export default function LearningSpace() {
   return (
-    <div className="grid h-0 min-h-[90vh] lg:min-h-[90vh] grid-cols-9 grid-rows-6 root">
-      <section className="fixed z-20 flex flex-col-reverse items-center justify-center col-span-2 col-start-8 row-start-1 gap-1 space-x-reverse portrait:flex-col lg:space-x-2 lg:flex-row-reverse right-2 top-2">
+    <div className="root grid h-0 min-h-[90vh] grid-cols-9 grid-rows-6 lg:min-h-[90vh]">
+      <section className="fixed right-2 top-2 z-20 col-span-2 col-start-8 row-start-1 flex flex-col-reverse items-center justify-center gap-1 space-x-reverse lg:flex-row-reverse lg:space-x-2 portrait:flex-col">
         <ProgressScorePanel />
         <LearningSpaceGoalPanel />
       </section>
-      <LearningSpaceNamePanel className="z-10 col-span-5 col-start-3 row-start-1 pointer-events-none justify-self-center" />
+      <LearningSpaceNamePanel className="pointer-events-none z-10 col-span-5 col-start-3 row-start-1 justify-self-center" />
 
       <BabylonCanvas
         sceneDefinitionType={LearningSpaceSceneDefinition}
-        className="w-screen h-screen col-span-9 col-start-1 row-span-6 row-start-1"
+        className="col-span-9 col-start-1 row-span-6 row-start-1 h-screen w-screen"
         engineOptions={{ stencil: true }}
       />
-      <SideBar className="z-10 col-span-3 col-start-1 row-start-1 m-2 pointer-events-none" />
-      <BottomTooltip className="z-10 items-start justify-center col-span-7 col-start-2 row-start-6 lg:col-span-5 lg:col-start-3" />
+      <SideBar className="pointer-events-none z-10 col-span-3 col-start-1 row-start-1 m-2" />
+      <BottomTooltip className="z-10 col-span-7 col-start-2 row-start-6 items-start justify-center lg:col-span-5 lg:col-start-3" />
       <AdaptivityElementDialogContainer className="z-50" />
       <LearningElementModal className="z-10" />
       <ExitModal className="z-30" />
