@@ -34,7 +34,7 @@ exports[`ControlsExplanationModal should render 1`] = `
           class="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter mobile-portrait:text-xs mobile-landscape:text-xs"
         >
           <div
-            class="grid grid-rows-6 grid-flow-row gap-x-8 gap-y-3 pb-4 text-xs max-w-[85vw] mobile-landscape:justify-center mobile-landscape:grid-cols-1 mobile-landscape:grid-rows-auto mobile-landscape:grid-flow-row mobile-landscape:gap-y-3 mobile-landscape:pb-0 mobile-landscape:text-2xs mobile-landscape:gap-x-1 portrait:grid-flow-row portrait:grid-cols-1 portrait:grid-rows-auto portrait-gap-y-1 lg:text-sm xl:gap-2"
+            class="mobile-landscape:grid-rows-auto portrait:grid-rows-auto portrait-gap-y-1 grid max-w-[85vw] grid-flow-row grid-rows-6 gap-x-8 gap-y-3 pb-4 text-xs lg:text-sm xl:gap-2 mobile-landscape:grid-flow-row mobile-landscape:grid-cols-1 mobile-landscape:justify-center mobile-landscape:gap-x-1 mobile-landscape:gap-y-3 mobile-landscape:pb-0 mobile-landscape:text-2xs portrait:grid-flow-row portrait:grid-cols-1"
           >
             <h3
               class="self-center font-bold text-adlerdarkblue"
@@ -66,7 +66,7 @@ exports[`ControlsExplanationModal should render 1`] = `
               </p>
             </div>
             <div
-              class="flex flex-row items-start justify-start gap-2 portrait:pb-3 "
+              class="flex flex-row items-start justify-start gap-2 portrait:pb-3"
             >
               <img
                 alt="Icon"
@@ -92,6 +92,18 @@ exports[`ControlsExplanationModal should render 1`] = `
               />
               <p>
                 Linksklick auf ein 3D Objekt
+              </p>
+            </div>
+            <div
+              class="flex flex-row items-start justify-start gap-2"
+            >
+              <img
+                alt="Icon"
+                class="w-6"
+                src="left-click.svg"
+              />
+              <p>
+                Doppelklick auf ein 3D Objekt - Inhalte werden automatisch bei Annährung geöffnet
               </p>
             </div>
             <div

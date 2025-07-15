@@ -180,7 +180,7 @@ exports[`AvatarEditorClothingCategory should render 1`] = `
           </div>
         </div>
         <div
-          class="w-full p-2 m-2"
+          class="m-2 w-full p-2"
         >
           <div
             class=""
@@ -340,7 +340,7 @@ exports[`AvatarEditorClothingCategory should render 1`] = `
           </div>
         </div>
         <div
-          class="w-full p-2 m-2"
+          class="m-2 w-full p-2"
         >
           <div
             class=""
@@ -481,7 +481,7 @@ exports[`AvatarEditorClothingCategory should render 1`] = `
           </div>
         </div>
         <div
-          class="w-full p-2 m-2"
+          class="m-2 w-full p-2"
         >
           <div
             class=""
