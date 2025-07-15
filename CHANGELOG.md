@@ -16,6 +16,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - added tooltips
 - added automatic opening of learning elements if double-clicked
 - added difficulty and estimated time for learning elements to show in learning space menu
+- new doubleclick functionality in world and space menus
 
 ### Changed
 
