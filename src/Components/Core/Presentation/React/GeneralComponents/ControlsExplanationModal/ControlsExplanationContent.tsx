@@ -22,7 +22,7 @@ export default function ControlsExplanationContent({
     <div
       className={tailwindMerge(
         className,
-        "grid grid-rows-6 grid-flow-row gap-x-8 gap-y-3 pb-4 text-xs max-w-[85vw] mobile-landscape:justify-center mobile-landscape:grid-cols-1 mobile-landscape:grid-rows-auto mobile-landscape:grid-flow-row mobile-landscape:gap-y-3 mobile-landscape:pb-0 mobile-landscape:text-2xs mobile-landscape:gap-x-1 portrait:grid-flow-row portrait:grid-cols-1 portrait:grid-rows-auto portrait-gap-y-1 lg:text-sm xl:gap-2",
+        "mobile-landscape:grid-rows-auto portrait:grid-rows-auto portrait-gap-y-1 grid max-w-[85vw] grid-flow-row grid-rows-6 gap-x-8 gap-y-3 pb-4 text-xs lg:text-sm xl:gap-2 mobile-landscape:grid-flow-row mobile-landscape:grid-cols-1 mobile-landscape:justify-center mobile-landscape:gap-x-1 mobile-landscape:gap-y-3 mobile-landscape:pb-0 mobile-landscape:text-2xs portrait:grid-flow-row portrait:grid-cols-1",
       )}
     >
       {/* Avatar Controls */}
@@ -37,7 +37,7 @@ export default function ControlsExplanationContent({
         <img className="w-6" alt="Einfacher Touch" src={touchIcon}></img>
         <p>{translate("controlAvatarTouch")}</p>
       </div>
-      <div className="flex flex-row items-start justify-start gap-2 portrait:pb-3 ">
+      <div className="flex flex-row items-start justify-start gap-2 portrait:pb-3">
         <img className="w-6" alt="Icon" src={hintIcon}></img>
         <p>{translate("controlAvatarHint")}</p>
       </div>
@@ -49,6 +49,10 @@ export default function ControlsExplanationContent({
       <div className="flex flex-row items-start justify-start gap-2">
         <img className="w-6" alt="Icon" src={leftClickIcon}></img>
         <p>{translate("openContentMouse")}</p>
+      </div>
+      <div className="flex flex-row items-start justify-start gap-2">
+        <img className="w-6" alt="Icon" src={leftClickIcon}></img>
+        <p>{translate("openContentMouseDouble")}</p>
       </div>
       <div className="flex flex-row items-start justify-start gap-2">
         <img className="w-6" alt="Icon" src={touchIcon}></img>
