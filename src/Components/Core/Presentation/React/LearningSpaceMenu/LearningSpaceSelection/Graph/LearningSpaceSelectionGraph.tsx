@@ -182,6 +182,7 @@ function createSpaceNodes(
       position: { x: 0, y: 0 },
       connectable: false,
       deletable: false,
+      className: "nopan",
     };
     return node;
   });
