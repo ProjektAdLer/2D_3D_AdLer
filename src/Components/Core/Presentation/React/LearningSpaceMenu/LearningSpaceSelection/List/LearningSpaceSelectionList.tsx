@@ -27,7 +27,8 @@ export default function LearningSpaceSelectionList(props: {
     [props.controller],
   );
   const onRowDoubleClicked = useCallback(
-    (id: ComponentID) => props.controller.onLearningSpaceDoubleClicked(id),
+    (id: ComponentID, isAvailable: boolean) =>
+      props.controller.onLearningSpaceDoubleClicked(id, isAvailable),
     [props.controller],
   );
 
@@ -44,7 +45,7 @@ export default function LearningSpaceSelectionList(props: {
   let spaceIcon: string;
 
   return (
-    <ul className="flex flex-col w-full gap-4 p-2 pt-4 lg:p-8">
+    <ul className="flex w-full flex-col gap-4 p-2 pt-4 lg:p-8">
       {spaces?.map((space) => {
         if (space.isCompleted) spaceIcon = spaceSolved;
         else if (space.isAvailable) spaceIcon = spaceAvailable;
@@ -62,7 +63,9 @@ export default function LearningSpaceSelectionList(props: {
               spaceTitle={space.name}
               selected={selectedRowID === space.id}
               onClickCallback={() => onRowClicked(space.id)}
-              onDoubleClickCallback={() => onRowDoubleClicked(space.id)}
+              onDoubleClickCallback={() =>
+                onRowDoubleClicked(space.id, space.isAvailable)
+              }
             />
           </li>
         );

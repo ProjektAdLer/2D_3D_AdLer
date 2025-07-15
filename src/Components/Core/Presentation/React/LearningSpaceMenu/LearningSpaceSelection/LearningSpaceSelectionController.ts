@@ -26,7 +26,11 @@ export default class LearningSpaceSelectionController
   }
 
   @bind
-  onLearningSpaceDoubleClicked(spaceID: number): void {
-    history.push("/spacedisplay/" + spaceID);
+  onLearningSpaceDoubleClicked(spaceID: number, isAvailable: boolean): void {
+    if (isAvailable) {
+      history.push("/spacedisplay/" + spaceID);
+    } else {
+      this.onLearningSpaceClicked(spaceID);
+    }
   }
 }

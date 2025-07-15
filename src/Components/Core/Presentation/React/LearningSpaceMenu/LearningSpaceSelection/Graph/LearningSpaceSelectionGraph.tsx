@@ -122,10 +122,13 @@ export default function LearningSpaceSelectionGraph(props: {
 
   const onNodeDoubleClickCallback = useCallback<NodeMouseHandler>(
     (event: React.MouseEvent, clickedNode: Node) => {
-      console.log("onNodeDoubleClickCallback called", clickedNode);
       // only register double clicks on space nodes
       if (clickedNode.type === "spaceNode") {
-        props.controller.onLearningSpaceDoubleClicked(parseInt(clickedNode.id));
+        props.controller.onLearningSpaceDoubleClicked(
+          parseInt(clickedNode.id),
+          clickedNode.data.icon === spaceAvailable ||
+            clickedNode.data.icon === spaceSolved,
+        );
       }
     },
     [props.controller],

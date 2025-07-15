@@ -130,7 +130,36 @@ describe("LearningSpaceSelectionList", () => {
 
     fireEvent.doubleClick(container.getByRole("button"));
 
-    expect(controllerMock.onLearningSpaceDoubleClicked).toBeCalledWith(2);
+    expect(controllerMock.onLearningSpaceDoubleClicked).toBeCalledWith(2, true);
+  });
+
+  test("should render and call controller on doubleclick on unavailable space", () => {
+    const vm = new LearningSpaceSelectionViewModel();
+    vm.spaces.Value = [
+      {
+        id: 2,
+        name: "test",
+        isAvailable: false,
+        isCompleted: false,
+      } as LearningSpaceSelectionLearningSpaceData,
+    ];
+    const controllerMock = mock<ILearningSpaceSelectionController>();
+
+    const container = render(
+      <Provider container={CoreDIContainer}>
+        <LearningSpaceSelectionList
+          controller={controllerMock}
+          viewModel={vm}
+        />
+      </Provider>,
+    );
+
+    fireEvent.doubleClick(container.getByRole("button"));
+
+    expect(controllerMock.onLearningSpaceDoubleClicked).toBeCalledWith(
+      2,
+      false,
+    );
   });
 
   test("should render uncompleted room buttons without issues.", () => {
