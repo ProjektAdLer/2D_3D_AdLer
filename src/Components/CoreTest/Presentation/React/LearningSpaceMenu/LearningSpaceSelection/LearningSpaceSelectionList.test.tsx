@@ -1,5 +1,5 @@
 import { mock } from "jest-mock-extended";
-import { render } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 import LearningSpaceSelectionViewModel, {
   LearningSpaceSelectionLearningSpaceData,
 } from "../../../../../Core/Presentation/React/LearningSpaceMenu/LearningSpaceSelection/LearningSpaceSelectionViewModel";
@@ -105,6 +105,32 @@ describe("LearningSpaceSelectionList", () => {
     container.getByRole("button").click();
 
     expect(controllerMock.onLearningSpaceClicked).toBeCalledWith(1);
+  });
+
+  test("should render and call controller on doubleclick on available space", () => {
+    const vm = new LearningSpaceSelectionViewModel();
+    vm.spaces.Value = [
+      {
+        id: 2,
+        name: "test",
+        isAvailable: true,
+        isCompleted: false,
+      } as LearningSpaceSelectionLearningSpaceData,
+    ];
+    const controllerMock = mock<ILearningSpaceSelectionController>();
+
+    const container = render(
+      <Provider container={CoreDIContainer}>
+        <LearningSpaceSelectionList
+          controller={controllerMock}
+          viewModel={vm}
+        />
+      </Provider>,
+    );
+
+    fireEvent.doubleClick(container.getByRole("button"));
+
+    expect(controllerMock.onLearningSpaceDoubleClicked).toBeCalledWith(2);
   });
 
   test("should render uncompleted room buttons without issues.", () => {
