@@ -6,7 +6,6 @@ import ColorPickerModal from "~ReactComponents/GeneralComponents/ColorPicker/Col
 import { useState } from "react";
 import AccordionElement from "~ReactComponents/GeneralComponents/Accordion/AccordionElement";
 import {
-  AvatarNoneModel,
   OAvatarPantsModels,
   AvatarPantsModels,
   OAvatarShirtModels,
@@ -88,7 +87,7 @@ export default function AvatarEditorClothingCategory(
             });
           }}
         />
-        <div className="w-full p-2 m-2">
+        <div className="m-2 w-full p-2">
           <ColorPickerButton
             currentColor={
               shirtColor ?? { id: 0, nameKey: "Black 1", hexColor: "#000000" }
@@ -128,7 +127,7 @@ export default function AvatarEditorClothingCategory(
             });
           }}
         />
-        <div className="w-full p-2 m-2">
+        <div className="m-2 w-full p-2">
           <ColorPickerButton
             currentColor={
               pantsColor ?? { id: 0, nameKey: "Black 1", hexColor: "#000000" }
@@ -168,7 +167,7 @@ export default function AvatarEditorClothingCategory(
             });
           }}
         />
-        <div className="w-full p-2 m-2">
+        <div className="m-2 w-full p-2">
           <ColorPickerButton
             currentColor={
               shoesColor ?? { id: 0, nameKey: "Black 1", hexColor: "#000000" }

@@ -74,6 +74,7 @@ export default class LearningSpaceThemeLookup {
       case LearningSpaceThemeType.Company_FnE:
       case LearningSpaceThemeType.Company_SocialArea:
       case LearningSpaceThemeType.Company_TechnicalArea:
+        return LearningSpaceTheme_Suburb; // PLACEHOLDER
       // TODO: Add a specific Company Theme object when it exists
       // For now, fall back to a default theme
       default:
