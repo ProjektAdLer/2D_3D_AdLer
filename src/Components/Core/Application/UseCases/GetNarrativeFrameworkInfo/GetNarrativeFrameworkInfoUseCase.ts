@@ -39,15 +39,13 @@ export default class GetNarrativeFrameworkInfoUseCase
         LogLevelTypes.WARN,
         `GetNarrativeFrameworkInfoUseCase: World ${worldEntity.id} has no narrative framework.`,
       );
-      return;
     }
-    let narrativeFrameworkTO = new NarrativeFrameworkTO();
-    narrativeFrameworkTO.introText = worldEntity.narrativeFramework!.introText;
-    narrativeFrameworkTO.outroText = worldEntity.narrativeFramework!.outroText;
+    const narrativeFrameworkTO = new NarrativeFrameworkTO();
+    narrativeFrameworkTO.introText = worldEntity.narrativeFramework?.introText;
+    narrativeFrameworkTO.outroText = worldEntity.narrativeFramework?.outroText;
     narrativeFrameworkTO.theme = worldEntity.theme;
 
     //check all spaces if they have at least one scored learningelement
-    //if so, set the narrative framework to shown
     narrativeFrameworkTO.shownBefore = worldEntity.spaces.some((space) => {
       if (!space.elements) {
         return false;
