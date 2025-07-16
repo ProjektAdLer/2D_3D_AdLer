@@ -463,6 +463,8 @@ export default class LoadLearningWorldUseCase
         id: worldID,
         description: apiWorldDataResponse.description,
         evaluationLink: apiWorldDataResponse.evaluationLink,
+        evaluationLinkName: apiWorldDataResponse.evaluationLinkName,
+        evaluationLinkText: apiWorldDataResponse.evaluationLinkText,
         narrativeFramework: narrativeFrameworkEntity,
         theme: apiWorldDataResponse.theme,
         gradingStyle: this.createDisplayStrategy(
@@ -471,7 +473,7 @@ export default class LoadLearningWorldUseCase
       },
       LearningWorldEntity,
     );
-
+    console.log(worldEntity, "worldEntity created");
     return worldEntity;
   }
 

@@ -10,7 +10,9 @@ export default class LearningWorldEntity {
   spaces: LearningSpaceEntity[];
   goals: string[];
   description: string;
-  evaluationLink: string;
+  evaluationLink: string | null;
+  evaluationLinkName: string | null;
+  evaluationLinkText: string | null;
   completionModalShown: boolean | undefined;
   lastVisitedSpaceID: ComponentID | undefined;
   narrativeFramework: NarrativeFrameworkEntity | null;

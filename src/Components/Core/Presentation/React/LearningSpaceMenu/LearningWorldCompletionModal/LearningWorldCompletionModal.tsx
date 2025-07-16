@@ -20,8 +20,12 @@ export default function LearningWorldCompletionModal({
 
   const [showModal] = useObservable(viewModel.showModal);
   const [evaluationLink] = useObservable(viewModel.evaluationLink);
+  const [evaluationLinkName] = useObservable(viewModel.evaluationLinkName);
+  const [evaluationLinkText] = useObservable(viewModel.evaluationLinkText);
 
   const { t: translate } = useTranslation(["spaceMenu", "helpmenu"]);
+
+  console.log("LearningWorldCompletionModal", viewModel);
 
   if (!viewModel || !controller) return null;
 
@@ -48,30 +52,29 @@ export default function LearningWorldCompletionModal({
         }
         <NarrativeFrameworkWorldCompletionModalContainer />
         <div className="flex w-full flex-col items-center justify-center">
-          <p className="mt-6 text-lg font-bold">{translate("linktitle")}</p>
-          {viewModel.worldCompletionText && (
-            <div className="flex justify-center">
-              {viewModel.worldCompletionText}
+          <p className="mt-6 text-lg font-bold"></p>
+          {evaluationLink && evaluationLinkName && (
+            <div className="flex flex-col justify-center">
+              <p className="mt-6 text-lg font-bold">{evaluationLinkName}</p>
+              <a
+                className="m-3 text-2xl font-bold text-adlergreen underline"
+                href={evaluationLink}
+                target="_blank"
+                rel="noreferrer"
+                title={translate("linkToolTip").toString()}
+              >
+                {translate("furtherLink").toString()}
+              </a>
             </div>
           )}
-          {evaluationLink && (
-            <div>
-              <div className="flex justify-center">
-                <a
-                  className="m-3 text-2xl font-bold text-adlergreen underline"
-                  href={evaluationLink}
-                  target="_blank"
-                  rel="noreferrer"
-                  title={translate("linkToolTip").toString()}
-                >
-                  {translate("furtherLink").toString()}
-                </a>
-              </div>
-              <div className="m-2 flex max-w-96 justify-center">
-                <p>{translate("congratulationStandardText")}</p>
-              </div>
-            </div>
-          )}
+
+          <div className="m-2 flex max-w-96 justify-center">
+            {evaluationLinkText ? (
+              <p>{evaluationLinkText}</p>
+            ) : (
+              <p>{translate("congratulationStandardText")}</p>
+            )}
+          </div>
 
           <p className="mt-8 text-sm">
             {translate("link_Homepage")}

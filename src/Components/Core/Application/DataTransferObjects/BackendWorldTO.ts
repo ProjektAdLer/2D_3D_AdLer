@@ -8,7 +8,9 @@ export default class BackendWorldTO {
   spaces: BackendSpaceTO[];
   goals: string[];
   description: string;
-  evaluationLink: string;
+  evaluationLink: string | null;
+  evaluationLinkName: string | null;
+  evaluationLinkText: string | null;
   externalElements: BackendBaseElementTO[];
   narrativeFramework: BackendNarrativeFrameworkTO | null;
   theme: LearningSpaceThemeType;

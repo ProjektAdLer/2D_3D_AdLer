@@ -12,6 +12,9 @@ const SimpleWorldAWT: AWT = {
     worldDescription: "",
     worldGoals: [""],
     evaluationLink: "https://www.th-ab.de",
+    evaluationLinkName: "50 Zeichen: This is a test name. MMWWMWMWMMWMMWWMM",
+    evaluationLinkText:
+      "200 Zeichen: MWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMWMMWMWMWMWMWMWMWMWMWMWMWMMWMWMMWMWM",
     topics: [
       {
         topicId: 7,

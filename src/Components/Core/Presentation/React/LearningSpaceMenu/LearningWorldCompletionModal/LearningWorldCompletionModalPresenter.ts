@@ -14,9 +14,11 @@ export default class LearningWorldCompletionModalPresenter
         (space) => space.currentScore >= space.requiredScore,
       );
     }
-    this.viewModel.worldCompletionText = world.worldCompletionText;
     this.viewModel.evaluationLink.Value = world.evaluationLink;
+    this.viewModel.evaluationLinkName.Value = world.evaluationLinkName;
+    this.viewModel.evaluationLinkText.Value = world.evaluationLinkText;
     this.viewModel.currentWorldId.Value = world.id;
+    console.log("viewmodel", this.viewModel);
   }
 
   onLearningWorldScored(learningWorldScoreTO: LearningWorldScoreTO): void {
@@ -37,6 +39,8 @@ export default class LearningWorldCompletionModalPresenter
       this.viewModel.wasClosedOnce = true;
     }
     this.viewModel.evaluationLink.Value = world.evaluationLink;
+    this.viewModel.evaluationLinkName.Value = world.evaluationLinkName;
+    this.viewModel.evaluationLinkText.Value = world.evaluationLinkText;
     this.viewModel.currentWorldId.Value = world.id;
   }
 

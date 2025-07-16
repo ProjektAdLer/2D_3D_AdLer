@@ -8,8 +8,9 @@ export default class LearningWorldTO {
   spaces: LearningSpaceTO[];
   goals: string[];
   description: string;
-  worldCompletionText: string;
-  evaluationLink: string;
+  evaluationLink: string | null;
+  evaluationLinkName: string | null;
+  evaluationLinkText: string | null;
   completionModalShown: boolean | undefined;
   lastVisitedSpaceID: ComponentID | undefined;
   gradingStyle: IElementCompletionDisplay;

@@ -17,6 +17,8 @@ export interface APIWorld {
   spaces: APISpace[];
   elements: APIElement[];
   evaluationLink?: string;
+  evaluationLinkName?: string;
+  evaluationLinkText?: string;
   frameStory?: APIFrameStory;
   theme?: string;
 }

@@ -21,12 +21,12 @@ describe("ProgressScorePanelPresenter", () => {
       spaces: [],
       goals: [],
       description: "",
-      worldCompletionText: "",
       evaluationLink: "",
+
       completionModalShown: false,
       lastVisitedSpaceID: 1,
       gradingStyle: new PointBasedDisplay(),
-    };
+    } as Partial<LearningWorldTO> as LearningWorldTO;
 
     systemUnderTest.onLearningWorldEntityLoaded(learningWorldTO);
     expect(viewModel.gradingStyle).toEqual(GradingStyle.point);
@@ -39,12 +39,11 @@ describe("ProgressScorePanelPresenter", () => {
       spaces: [],
       goals: [],
       description: "",
-      worldCompletionText: "",
       evaluationLink: "",
       completionModalShown: false,
       lastVisitedSpaceID: 1,
       gradingStyle: new PointBasedDisplay(),
-    };
+    } as Partial<LearningWorldTO> as LearningWorldTO;
 
     systemUnderTest.onLearningWorldEntityLoaded(learningWorldTO);
     expect(viewModel.gradingStyle).toEqual(GradingStyle.point);
@@ -57,12 +56,11 @@ describe("ProgressScorePanelPresenter", () => {
       spaces: [],
       goals: [],
       description: "",
-      worldCompletionText: "",
       evaluationLink: "",
       completionModalShown: false,
       lastVisitedSpaceID: 1,
       gradingStyle: new RequirementBasedDisplay(),
-    };
+    } as Partial<LearningWorldTO> as LearningWorldTO;
 
     systemUnderTest.onLearningWorldEntityLoaded(learningWorldTO);
     expect(viewModel.gradingStyle).toEqual(GradingStyle.requirement);
