@@ -52,7 +52,9 @@ export const expectedWorldTO: BackendWorldTO = {
   goals: expect.arrayContaining([expect.any(String)]),
   spaces: expect.any(Array),
   description: expect.any(String),
-  evaluationLink: expect.any(String),
+  evaluationLink: expect.toBeOneOf([expect.any(String), null]),
+  evaluationLinkName: expect.toBeOneOf([expect.any(String), null]),
+  evaluationLinkText: expect.toBeOneOf([expect.any(String), null]),
   externalElements: expect.any(Array<BackendBaseElementTO>),
 };
 
@@ -60,7 +62,7 @@ export const expectedSpaceTO: BackendSpaceTO = {
   id: expect.any(Number),
   name: expect.any(String),
   elements: expect.any(
-    Array<BackendLearningElementTO | BackendAdaptivityElementTO | null>
+    Array<BackendLearningElementTO | BackendAdaptivityElementTO | null>,
   ),
   description: expect.any(String),
   goals: expect.arrayContaining([expect.any(String)]),
