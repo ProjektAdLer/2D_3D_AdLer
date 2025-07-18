@@ -21,6 +21,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 ### Changed
 
 - Spacetitle now has an opaque background to improve readability
+- changed text to match adler text guidelines
 
 ### Removed
 
