@@ -18,7 +18,7 @@
   "alreadyLoggedIn": "Sie sind bereits angemeldet.",
   "loginFailAdvise": "Bitte überprüfen sie Ihre Eingaben.",
   "loginButton": "Login",
-  "moodleButton": "Zu Moodle",
+  "moodleButton": "Zum AdLerLMS",
   "loginName": "Eingeloggt als {{userName}}",
   "logout": "Ausloggen",
 

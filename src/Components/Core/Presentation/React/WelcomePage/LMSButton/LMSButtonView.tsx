@@ -23,7 +23,7 @@ export default function LMSButton({ className }: AdLerUIComponent) {
       title={translate("lmsButtonToolTip").toString()}
     >
       <img className="w-8 lg:w-12 onek:w-14" src={moodleIcon} alt="icon" />
-      <p className="text-2xs font-bold xl:text-sm">
+      <p className="text-2xs font-bold xl:text-sm 2xl:pl-2 2xl:text-lg">
         {translate("moodleButton")}
       </p>
     </StyledButton>

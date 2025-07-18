@@ -70,7 +70,7 @@ export default function WelcomePage() {
       <LogoutComponent className="relative z-0 col-span-2 col-start-7 row-start-6 flex flex-col gap-2 self-end justify-self-end" />
 
       {/* <CookieModal /> */}
-      <LMSButton className="col-span-1 col-start-1 row-span-1 row-start-1 w-32 mobile-portrait:w-24" />
+      <LMSButton className="col-span-1 col-start-1 row-span-1 row-start-1 w-32 2xl:w-44 mobile-portrait:w-24" />
 
       <p className="lg:text-md row-start-6 self-end justify-self-center rounded-lg p-2 text-center text-2xs text-adlerdarkblue md:text-xs lg:col-span-4 lg:col-start-3 lg:font-semibold mobile-landscape:col-span-6 mobile-landscape:col-start-2 mobile-portrait:col-start-1 portrait:col-span-6 portrait:col-start-2 portrait:row-start-6 portrait:text-2xs">
         {translate("copyright")}
