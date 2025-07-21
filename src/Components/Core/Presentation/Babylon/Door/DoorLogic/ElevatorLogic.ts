@@ -38,13 +38,25 @@ export default class ElevatorLogic implements IDoorLogic {
     }
   }
 
-  open(): void {
-    this.elevatorAnimationLiftUp?.start(false);
-    this.elevatorAnimationLiftUp?.onAnimationEndObservable.add(() => {
-      this.elevatorIsLifted = true;
-      this.elevatorAnimationLiftUp?.onAnimationEndObservable.clear();
-    });
-    this.enableProximityBehaviour = true;
+  open(onAnimationEnd?: () => void): void {
+    if (this.elevatorAnimationLiftUp) {
+      this.elevatorAnimationLiftUp.speedRatio = 1;
+      this.elevatorAnimationLiftUp.play(false);
+      this.elevatorAnimationLiftUp.onAnimationEndObservable.addOnce(() => {
+        this.elevatorIsLifted = true;
+        if (onAnimationEnd) {
+          onAnimationEnd();
+        }
+      });
+    }
+  }
+
+  close(): void {
+    if (this.elevatorAnimationLiftUp) {
+      this.elevatorAnimationLiftUp.speedRatio = -1;
+      this.elevatorAnimationLiftUp.play(false);
+      this.elevatorIsLifted = false;
+    }
   }
 
   avatarClose(): void {

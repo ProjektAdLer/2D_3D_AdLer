@@ -31,6 +31,7 @@ import HighlightColors from "../HighlightColors";
 import iconLink from "../../../../../Assets/3dModels/sharedModels/3dIcons/l-3dicons-story-speech-bubble-dots.glb";
 import AvatarAnimationNames from "src/Components/Core/Domain/AvatarModels/AvatarAnimationNames";
 import IAvatarPresenter from "../Avatar/IAvatarPresenter";
+import IDoorPresenter from "../Door/IDoorPresenter";
 
 export default class StoryNPCView {
   private scenePresenter: IScenePresenter;
@@ -269,7 +270,32 @@ export default class StoryNPCView {
       case StoryNPCState.CutScene:
         this.startCutSceneMovement();
         break;
+      case StoryNPCState.ExitRoom:
+        this.moveToExit();
+        break;
     }
+  }
+
+  private moveToExit(): void {
+    const doorPresenter = CoreDIContainer.getAll<IDoorPresenter>(
+      PRESENTATION_TYPES.IDoorPresenter,
+    ).find((p) => p.isExit());
+
+    if (!doorPresenter) return;
+
+    const exitPosition = doorPresenter.getEnterablePosition();
+
+    // Delay before NPC starts walking
+    setTimeout(() => {
+      this.viewModel.characterNavigator.startMovement(exitPosition, () => {
+        // This callback is executed when the NPC reaches the door
+        doorPresenter.open(() => {
+          // This callback is executed when the door animation has finished
+          this.viewModel.parentNode.dispose();
+          doorPresenter.close();
+        });
+      });
+    }, 1000); // 1 second delay
   }
 
   private moveToIdlePosition(): void {

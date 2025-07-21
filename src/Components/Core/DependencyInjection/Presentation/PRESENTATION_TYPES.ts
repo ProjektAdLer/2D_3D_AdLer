@@ -5,6 +5,7 @@ const PRESENTATION_TYPES = {
   IExitModalPresenter: Symbol("IExitModalPresenter"),
   IStoryElementPresenter: Symbol("IStoryElementPresenter"),
   IStoryNPCPresenter: Symbol("IStoryNPCPresenter"),
+  IDoorPresenter: Symbol("IDoorPresenter"),
   IMovementIndicator: Symbol("IMovementIndicator"),
   IHelpDeskModalPresenter: Symbol("IHelpDeskModalPresenter"),
   ILearningSpaceGoalPanelPresenter: Symbol("ILearningSpaceGoalPanelPresenter"),

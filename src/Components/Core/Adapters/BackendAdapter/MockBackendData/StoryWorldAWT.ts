@@ -84,6 +84,7 @@ const BigWorldAWT: AWT = {
             ],
             elementModel: "a-quizbg-defaultnpc",
             storyNpcName: "Yoda der Zweite",
+            exitAfterStorySequence: true,
           },
         },
       },
@@ -106,11 +107,13 @@ const BigWorldAWT: AWT = {
             ],
             elementModel: "a-npc-averagenerdmaledark",
             modelFacialExpression: "default",
+            exitAfterStorySequence: true,
           },
           outroStory: {
             storyTexts: ["Tschüss", "Du bist mit diesem Raum fertig"],
             elementModel: "a-quizbg-defaultnpc",
             modelFacialExpression: "happy",
+            exitAfterStorySequence: true,
           },
         },
       },
@@ -132,6 +135,7 @@ const BigWorldAWT: AWT = {
               "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
             ],
             elementModel: "a-npc-sheriffjustice",
+            exitAfterStorySequence: true,
           },
           outroStory: {
             storyTexts: [
@@ -140,6 +144,7 @@ const BigWorldAWT: AWT = {
               "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
             ],
             elementModel: "a_npc_sheriffjustice",
+            exitAfterStorySequence: true,
           },
         },
       },

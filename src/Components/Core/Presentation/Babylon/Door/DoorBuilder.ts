@@ -72,6 +72,11 @@ export default class DoorBuilder
 
   override buildPresenter(): void {
     super.buildPresenter();
+
+    CoreDIContainer.bind<IDoorPresenter>(
+      PRESENTATION_TYPES.IDoorPresenter,
+    ).toConstantValue(this.presenter!);
+
     CoreDIContainer.get<ILearningWorldPort>(
       PORT_TYPES.ILearningWorldPort,
     ).registerAdapter(this.presenter!, LocationScope._sceneRendering);

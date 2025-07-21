@@ -1,5 +1,6 @@
 export default interface IDoorLogic {
-  open(): void;
+  open(onAnimationEnd?: () => void): void;
+  close?(): void;
   avatarClose?(): void;
   avatarFar?(): void;
   // ggf. weitere Methoden, die beide Logiken benötigen

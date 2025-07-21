@@ -50,12 +50,24 @@ export default class DoorLogic implements IDoorLogic {
     this.setDoorOpenAnimationGroup?.play(false);
   }
 
-  open(): void {
+  open(onAnimationEnd?: () => void): void {
     if (this.openDoorAnimationGroup) {
+      if (onAnimationEnd) {
+        this.openDoorAnimationGroup.onAnimationEndObservable.addOnce(() => {
+          onAnimationEnd();
+        });
+      }
       this.openDoorAnimationGroup.play(false);
     }
     if (this.openTheDoorSound) {
       this.openTheDoorSound.play();
+    }
+  }
+
+  close(): void {
+    if (this.openDoorAnimationGroup) {
+      this.openDoorAnimationGroup.speedRatio = -1;
+      this.openDoorAnimationGroup.play(false);
     }
   }
 }
