@@ -12,16 +12,21 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- new icons for "world-story" and "space-story"
-- added tooltips
 - added automatic opening of learning elements if double-clicked
-- added difficulty and estimated time for learning elements to show in learning space menu
+- added difficulty and estimated time for learning elements to show in world and space menus
 - new doubleclick functionality in world and space menus
+- new doublecklick functionality in learning spaces
+- added several new tooltips in menus
+- new 'cloud'-like clothers for avatars who have no clothing selected
+- new opaque background behind the learningspace title to improve readability
 
 ### Changed
 
+- new icons for "world-story" and "space-story"
 - Spacetitle now has an opaque background to improve readability
 - changed text to match adler text guidelines
+- loadingscreen to learning space now once again shows control explanations if there is no narrative framework intro
+- Learningworldcompletion modals can now show more info, if available
 
 ### Removed
 
