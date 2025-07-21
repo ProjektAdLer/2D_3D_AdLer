@@ -10,4 +10,6 @@ export default class StoryElementTO {
   storyNpcName: string | null;
   introEmotion: EmotionType | null;
   outroEmotion: EmotionType | null;
+  exitAfterIntro: boolean | null;
+  exitAfterOutro: boolean | null;
 }

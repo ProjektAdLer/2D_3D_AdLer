@@ -9,4 +9,6 @@ export default interface IStoryNPCBuilder extends IAsyncPresentationBuilder {
   noLearningElementHasScored: boolean;
   learningSpaceCompleted: boolean;
   learningSpaceTemplateType: LearningSpaceTemplateType;
+  exitAfterIntro: boolean | null;
+  exitAfterOutro: boolean | null;
 }

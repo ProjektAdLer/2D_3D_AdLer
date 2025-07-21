@@ -61,7 +61,11 @@ export default class StoryNPCPresenter implements IStoryNPCPresenter {
       }
       this.logger.log(
         LogLevelTypes.INFO,
-        `StoryNPCPresenter (onStoryElementCutSceneFinished): ${this.viewModel.storyType} Cutscene finished. New state: ${this.viewModel.state.Value}`,
+        `StoryNPCPresenter (onStoryElementCutSceneFinished): ${
+          this.viewModel.storyType
+        } Cutscene finished. New state: ${
+          StoryNPCState[this.viewModel.state.Value]
+        }`,
       );
     }
   }

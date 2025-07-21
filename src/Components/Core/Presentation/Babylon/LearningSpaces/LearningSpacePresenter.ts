@@ -167,6 +167,8 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
         storyNPCBuilder.learningSpaceCompleted =
           spaceTO.currentScore >= spaceTO.requiredScore;
         storyNPCBuilder.storyNpcName = spaceTO.storyElements[0].storyNpcName;
+        storyNPCBuilder.exitAfterIntro = storyElement.exitAfterIntro;
+        storyNPCBuilder.exitAfterOutro = storyElement.exitAfterOutro;
 
         await this.director.buildAsync(storyNPCBuilder);
 
