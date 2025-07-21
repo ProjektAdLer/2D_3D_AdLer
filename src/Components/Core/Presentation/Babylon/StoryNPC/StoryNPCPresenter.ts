@@ -46,13 +46,22 @@ export default class StoryNPCPresenter implements IStoryNPCPresenter {
     );
   }
 
-  onStoryElementCutSceneFinished(): void {
+  onStoryElementCutSceneFinished(storyType: StoryElementType): void {
     // go back to walking after own cutscene is finished
     if (this.viewModel.state.Value === StoryNPCState.CutScene) {
-      this.viewModel.state.Value = StoryNPCState.RandomMovement;
+      const shouldExit =
+        (storyType === StoryElementType.Intro &&
+          this.viewModel.exitAfterIntro) ||
+        (storyType === StoryElementType.Outro && this.viewModel.exitAfterOutro);
+
+      if (shouldExit) {
+        this.viewModel.state.Value = StoryNPCState.ExitRoom;
+      } else {
+        this.viewModel.state.Value = StoryNPCState.RandomMovement;
+      }
       this.logger.log(
         LogLevelTypes.INFO,
-        `StoryNPCPresenter (onStoryElementCutSceneFinished): ${this.viewModel.storyType} Cutscene finished`,
+        `StoryNPCPresenter (onStoryElementCutSceneFinished): ${this.viewModel.storyType} Cutscene finished. New state: ${this.viewModel.state.Value}`,
       );
     }
   }

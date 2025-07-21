@@ -18,10 +18,10 @@ describe("StoryElementController", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind<IEndStoryElementCutScene>(
-      USECASE_TYPES.IEndStoryElementCutSceneUseCase
+      USECASE_TYPES.IEndStoryElementCutSceneUseCase,
     ).toConstantValue(endStoryElementCutSceneUseCaseMock);
     CoreDIContainer.bind<IStoryNPCPresenter>(
-      PRESENTATION_TYPES.IStoryNPCPresenter
+      PRESENTATION_TYPES.IStoryNPCPresenter,
     ).toConstantValue(storyNPCPresenterMock);
   });
 
@@ -47,9 +47,12 @@ describe("StoryElementController", () => {
 
   test("closePanel calls EndStoryElementCutSceneUseCase when isIntroCutsceneRunning is true", () => {
     viewModelMock.isIntroCutsceneRunning.Value = true;
+    viewModelMock.storyTypeToDisplay.Value = StoryElementType.Intro;
     systemUnderTest = new StoryElementController(viewModelMock);
     systemUnderTest.closePanel();
-    expect(endStoryElementCutSceneUseCaseMock.execute).toBeCalled();
+    expect(endStoryElementCutSceneUseCaseMock.execute).toBeCalledWith({
+      storyType: StoryElementType.Intro,
+    });
   });
 
   test("closePanel doesn't call EndStoryElementCutSceneUseCase when isOutroCutsceneRunning is false", () => {
@@ -62,7 +65,7 @@ describe("StoryElementController", () => {
   test("closePanel calls changeStateToRandomMovement", () => {
     systemUnderTest.closePanel();
     expect(
-      storyNPCPresenterMock.changeStateFromStopToRandomMovement
+      storyNPCPresenterMock.changeStateFromStopToRandomMovement,
     ).toHaveBeenCalled();
   });
 
@@ -87,7 +90,7 @@ describe("StoryElementController", () => {
     systemUnderTest = new StoryElementController(viewModelMock);
     systemUnderTest.onBackToSelectionButtonClicked();
     expect(viewModelMock.storyTypeToDisplay.Value).toBe(
-      StoryElementType.IntroOutro
+      StoryElementType.IntroOutro,
     );
   });
 });

@@ -20,13 +20,13 @@ describe("EndStoryElementCutSceneUseCase", () => {
     CoreDIContainer.snapshot();
 
     CoreDIContainer.rebind(CORE_TYPES.IEntityContainer).toConstantValue(
-      entityContainerMock
+      entityContainerMock,
     );
     CoreDIContainer.rebind(
-      USECASE_TYPES.IGetUserLocationUseCase
+      USECASE_TYPES.IGetUserLocationUseCase,
     ).toConstantValue(getUserLocationUseCaseMock);
     CoreDIContainer.rebind(PORT_TYPES.ILearningWorldPort).toConstantValue(
-      learnignWorldPortMock
+      learnignWorldPortMock,
     );
   });
 
@@ -46,9 +46,11 @@ describe("EndStoryElementCutSceneUseCase", () => {
     });
     entityContainerMock.filterEntitiesOfType.mockReturnValue([{}]);
 
-    systemUnderTest.execute();
+    systemUnderTest.execute({ storyType: StoryElementType.Intro });
 
-    expect(learnignWorldPortMock.onStoryElementCutSceneFinished).toBeCalled();
+    expect(learnignWorldPortMock.onStoryElementCutSceneFinished).toBeCalledWith(
+      StoryElementType.Intro,
+    );
   });
 
   //ANF-ID: [EWE0043]
@@ -59,10 +61,10 @@ describe("EndStoryElementCutSceneUseCase", () => {
     });
     entityContainerMock.filterEntitiesOfType.mockReturnValue([]);
 
-    systemUnderTest.execute();
+    systemUnderTest.execute({ storyType: StoryElementType.Intro });
 
     expect(
-      learnignWorldPortMock.onStoryElementCutSceneFinished
+      learnignWorldPortMock.onStoryElementCutSceneFinished,
     ).not.toBeCalled();
   });
 
@@ -80,9 +82,9 @@ describe("EndStoryElementCutSceneUseCase", () => {
       (entityType, callback) => {
         filterResult = callback(storyElement as StoryElementEntity);
         return [storyElement];
-      }
+      },
     );
-    systemUnderTest.execute();
+    systemUnderTest.execute({ storyType: StoryElementType.Intro });
 
     expect(filterResult).toBe(true);
   });

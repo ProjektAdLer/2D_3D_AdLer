@@ -23,11 +23,11 @@ export default class StoryElementController implements IStoryElementController {
       this.viewModel.isIntroCutsceneRunning.Value = false;
 
       CoreDIContainer.get<IEndStoryElementCutScene>(
-        USECASE_TYPES.IEndStoryElementCutSceneUseCase
-      ).execute();
+        USECASE_TYPES.IEndStoryElementCutSceneUseCase,
+      ).execute({ storyType: this.viewModel.storyTypeToDisplay.Value });
     } else {
       CoreDIContainer.get<IStoryNPCPresenter>(
-        PRESENTATION_TYPES.IStoryNPCPresenter
+        PRESENTATION_TYPES.IStoryNPCPresenter,
       ).changeStateFromStopToRandomMovement();
     }
   }

@@ -66,7 +66,7 @@ export default interface ILearningWorldAdapter {
   // story
   onStoryElementLoaded?(storyElementTextTO: StoryElementTO): void;
   onStoryElementCutSceneTriggered?(storyType: StoryElementType): void;
-  onStoryElementCutSceneFinished?(): void;
+  onStoryElementCutSceneFinished?(storyType: StoryElementType): void;
 
   // narrative Framework
   onNarrativeFrameworkInfoLoadedOrUpdated?(

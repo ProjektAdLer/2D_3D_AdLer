@@ -229,11 +229,11 @@ export default class LearningWorldPort
     });
   }
 
-  public onStoryElementCutSceneFinished(): void {
+  public onStoryElementCutSceneFinished(storyType: StoryElementType): void {
     this.mappedAdapters.forEach((adapter) => {
       adapter.forEach((value) => {
         if (value.onStoryElementCutSceneFinished)
-          value.onStoryElementCutSceneFinished();
+          value.onStoryElementCutSceneFinished(storyType);
       });
     });
   }

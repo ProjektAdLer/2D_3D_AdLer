@@ -7,6 +7,7 @@ import type ILearningWorldPort from "../../Ports/Interfaces/ILearningWorldPort";
 import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
 import StoryElementEntity from "src/Components/Core/Domain/Entities/StoryElementEntity";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
+import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 
 @injectable()
 export default class EndStoryElementCutSceneUseCase
@@ -18,10 +19,10 @@ export default class EndStoryElementCutSceneUseCase
     @inject(USECASE_TYPES.IGetUserLocationUseCase)
     private getUserLocationUseCase: IGetUserLocationUseCase,
     @inject(PORT_TYPES.ILearningWorldPort)
-    private worldPort: ILearningWorldPort
+    private worldPort: ILearningWorldPort,
   ) {}
 
-  execute(): void {
+  execute({ storyType }: { storyType: StoryElementType }): void {
     const userLocation = this.getUserLocationUseCase.execute();
 
     const elements =
@@ -29,11 +30,11 @@ export default class EndStoryElementCutSceneUseCase
         StoryElementEntity,
         (entity) =>
           entity.worldID === userLocation.worldID &&
-          entity.spaceID === userLocation.spaceID
+          entity.spaceID === userLocation.spaceID,
       );
 
     if (elements.length === 0) return;
 
-    this.worldPort.onStoryElementCutSceneFinished();
+    this.worldPort.onStoryElementCutSceneFinished(storyType);
   }
 }

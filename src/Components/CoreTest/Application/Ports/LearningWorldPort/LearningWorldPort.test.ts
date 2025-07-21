@@ -244,9 +244,11 @@ describe("LearningWorldPort", () => {
     const worldAdapterMock = mock<ILearningWorldAdapter>();
     systemUnderTest.registerAdapter(worldAdapterMock);
 
-    systemUnderTest.onStoryElementCutSceneFinished();
+    systemUnderTest.onStoryElementCutSceneFinished(StoryElementType.Intro);
 
-    expect(worldAdapterMock.onStoryElementCutSceneFinished).toBeCalled();
+    expect(worldAdapterMock.onStoryElementCutSceneFinished).toBeCalledWith(
+      StoryElementType.Intro,
+    );
   });
 
   test("onNarrativeFrameworkInfoLoadedOrUpdated calls a registered adapter", () => {

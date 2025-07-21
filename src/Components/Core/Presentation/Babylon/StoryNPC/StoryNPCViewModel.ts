@@ -14,6 +14,7 @@ export enum StoryNPCState {
   WaitOnCutSceneTrigger,
   CutScene,
   Stop,
+  ExitRoom,
 }
 
 export default class StoryNPCViewModel {
@@ -37,6 +38,8 @@ export default class StoryNPCViewModel {
   modelRootNode: TransformNode;
   storyType: StoryElementType;
   storyNpcName: string | null;
+  exitAfterIntro: boolean | null;
+  exitAfterOutro: boolean | null;
   idleTimer: NodeJS.Timeout;
   cutSceneTimer: NodeJS.Timeout;
   introIdlePosition: Vector3 = new Vector3(0, 0, 0);
