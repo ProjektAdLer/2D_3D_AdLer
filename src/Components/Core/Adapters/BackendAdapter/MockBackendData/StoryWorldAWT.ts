@@ -59,6 +59,7 @@ const BigWorldAWT: AWT = {
             elementModel: "a-npc-defaultlight-male",
             modelFacialExpression: "happy",
             storyNpcName: "Yoda",
+            exitAfterStorySequence: true,
           },
           outroStory: null,
         },

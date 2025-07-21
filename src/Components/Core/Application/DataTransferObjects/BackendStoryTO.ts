@@ -6,4 +6,5 @@ export default class BackendStoryTO {
   elementModel: LearningElementModel;
   facialExpression: EmotionType;
   storyNpcName?: string;
+  exitAfterStorySequence?: boolean;
 }

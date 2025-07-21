@@ -170,6 +170,8 @@ export default class BackendAdapterUtils {
       backendStoryTO.elementModel = this.extractModelData(
         storyElement.elementModel,
       ) as LearningElementModel;
+      backendStoryTO.exitAfterStorySequence =
+        storyElement.exitAfterStorySequence;
 
       if (
         storyElement.modelFacialExpression &&

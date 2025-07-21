@@ -14,4 +14,6 @@ export default class StoryElementEntity {
   hasOutroTriggered: boolean | null;
   introEmotion: EmotionType | null;
   outroEmotion: EmotionType | null;
+  exitAfterIntro: boolean | null;
+  exitAfterOutro: boolean | null;
 }

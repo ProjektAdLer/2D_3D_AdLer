@@ -52,6 +52,7 @@ export interface APIStoryElement {
   elementModel: string;
   modelFacialExpression?: string;
   storyNpcName?: string;
+  exitAfterStorySequence?: boolean;
 }
 
 export interface APIElement {
