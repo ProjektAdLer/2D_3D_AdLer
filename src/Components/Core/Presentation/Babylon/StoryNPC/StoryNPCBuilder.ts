@@ -14,7 +14,7 @@ import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
 import LearningSpaceTemplateLookup from "src/Components/Core/Domain/LearningSpaceTemplates/LearningSpaceTemplatesLookup";
-import { Vector3 } from "@babylonjs/core";
+import { Vector3, Matrix, Quaternion, Tools } from "@babylonjs/core";
 import IScenePresenter from "../SceneManagement/IScenePresenter";
 import SCENE_TYPES, {
   ScenePresenterFactory,
@@ -43,7 +43,7 @@ export default class StoryNPCBuilder
   public learningSpaceCompleted: boolean = false;
   public learningSpaceTemplateType: LearningSpaceTemplateType;
 
-  private scenePresenter: IScenePresenter;
+  private readonly scenePresenter: IScenePresenter;
 
   constructor() {
     super(
@@ -113,6 +113,27 @@ export default class StoryNPCBuilder
       );
       this.viewModel!.outroIdlePosRotation =
         template.outroStoryElementIdlePoint.orientation.rotation;
+
+      // Calculate and store the enterable position for the exit door directly
+      const exitDoorPosition = new Vector3(
+        template.exitDoor.position.x,
+        0,
+        template.exitDoor.position.y,
+      );
+      // Offset rotated 270° total (180° + 90° counter-clockwise): was (0,0,-1.5), now (-0.75,0,0)
+      const localOffset = new Vector3(-0.75, 0, 0);
+      const transformMatrix = Matrix.Compose(
+        Vector3.One(), // scale
+        Quaternion.RotationAxis(
+          Vector3.Up(),
+          Tools.ToRadians(template.exitDoor.orientation.rotation),
+        ), // rotation
+        exitDoorPosition, // translation
+      );
+      this.viewModel!.exitDoorEnterablePosition = Vector3.TransformCoordinates(
+        localOffset,
+        transformMatrix,
+      );
     }
   }
 

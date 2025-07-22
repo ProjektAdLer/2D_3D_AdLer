@@ -1,4 +1,4 @@
-import { Vector3, Matrix, Quaternion, Tools } from "@babylonjs/core";
+import { Vector3 } from "@babylonjs/core";
 import DoorViewModel from "./DoorViewModel";
 import IDoorPresenter from "./IDoorPresenter";
 import LearningSpaceScoreTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceScoreTO";
@@ -43,25 +43,6 @@ export default class DoorPresenter implements IDoorPresenter {
 
   isExit(): boolean {
     return this.viewModel.isExit;
-  }
-
-  getEnterablePosition(): Vector3 {
-    // This vector defines the position relative to the door's origin.
-    // The values are chosen to place the NPC centered in front of the door.
-    const localOffset = new Vector3(0, 0, 0);
-
-    // Create a transformation matrix from the door's rotation and position
-    const transformMatrix = Matrix.Compose(
-      Vector3.One(), // scale
-      Quaternion.RotationAxis(
-        Vector3.Up(),
-        Tools.ToRadians(this.viewModel.rotation),
-      ), // rotation
-      this.viewModel.position, // translation
-    );
-
-    // Transform the local offset into world coordinates
-    return Vector3.TransformCoordinates(localOffset, transformMatrix);
   }
 
   open(onAnimationEnd?: () => void): void {

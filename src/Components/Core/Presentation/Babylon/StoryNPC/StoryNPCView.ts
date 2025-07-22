@@ -27,11 +27,11 @@ import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 import bind from "bind-decorator";
 import HighlightColors from "../HighlightColors";
+import IDoorPresenter from "../Door/IDoorPresenter";
 
 import iconLink from "../../../../../Assets/3dModels/sharedModels/3dIcons/l-3dicons-story-speech-bubble-dots.glb";
 import AvatarAnimationNames from "src/Components/Core/Domain/AvatarModels/AvatarAnimationNames";
 import IAvatarPresenter from "../Avatar/IAvatarPresenter";
-import IDoorPresenter from "../Door/IDoorPresenter";
 
 export default class StoryNPCView {
   private scenePresenter: IScenePresenter;
@@ -277,25 +277,40 @@ export default class StoryNPCView {
   }
 
   private moveToExit(): void {
-    const doorPresenter = CoreDIContainer.getAll<IDoorPresenter>(
-      PRESENTATION_TYPES.IDoorPresenter,
-    ).find((p) => p.isExit());
-
-    if (!doorPresenter) return;
-
-    const exitPosition = doorPresenter.getEnterablePosition();
+    // Use the pre-calculated enterable position from the viewModel
+    const exitPosition = this.viewModel.exitDoorEnterablePosition;
 
     // Delay before NPC starts walking
     setTimeout(() => {
       this.viewModel.characterNavigator.startMovement(exitPosition, () => {
-        // This callback is executed when the NPC reaches the door
-        doorPresenter.open(() => {
-          // This callback is executed when the door animation has finished
-          this.viewModel.parentNode.dispose();
-          doorPresenter.close();
-        });
+        this.handleNPCReachedDoor();
       });
     }, 1000); // 1 second delay
+  }
+
+  private handleNPCReachedDoor(): void {
+    // Small delay to make it look more natural before opening the door
+    setTimeout(() => {
+      this.openExitDoorAndDispose();
+    }, 500); // 0.5 second delay before opening door
+  }
+
+  private openExitDoorAndDispose(): void {
+    // Find the exit door presenter and open it with animation callback
+    const exitDoorPresenter = CoreDIContainer.getAll<IDoorPresenter>(
+      PRESENTATION_TYPES.IDoorPresenter,
+    ).find((door) => door.isExit());
+
+    if (exitDoorPresenter) {
+      // Open the door and wait for animation to complete before disposing NPC
+      exitDoorPresenter.open(() => {
+        // This callback is executed when the door opening animation ends
+        this.viewModel.parentNode.dispose();
+      });
+    } else {
+      // Fallback: if no exit door found, dispose immediately
+      this.viewModel.parentNode.dispose();
+    }
   }
 
   private moveToIdlePosition(): void {

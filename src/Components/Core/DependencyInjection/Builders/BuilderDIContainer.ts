@@ -72,7 +72,9 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationBuilder>(BUILDER_TYPES.ILoadingScreenBuilder).to(
     LoadingScreenBuilder,
   );
-  bind<IPresentationBuilder>(BUILDER_TYPES.IDoorBuilder).to(DoorBuilder);
+  bind<IPresentationBuilder>(BUILDER_TYPES.IDoorBuilder)
+    .to(DoorBuilder)
+    .inTransientScope();
   bind<IPresentationBuilder>(BUILDER_TYPES.IWindowBuilder).to(WindowBuilder);
   bind<IPresentationBuilder>(BUILDER_TYPES.ILearningSpaceScorePanelBuilder).to(
     LearningSpaceScorePanelBuilder,
