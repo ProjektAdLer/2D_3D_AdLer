@@ -38,11 +38,13 @@ export default class StoryNPCPresenter implements IStoryNPCPresenter {
       return;
     }
 
+    // Track which sequence is currently running for IntroOutro NPCs
+    this.viewModel.currentlyRunningSequence = storyType;
     this.viewModel.state.Value = StoryNPCState.CutScene;
 
     this.logger.log(
       LogLevelTypes.INFO,
-      `StoryNPCPresenter (onStoryElementCutSceneTriggered): ${this.viewModel.storyType} Cutscene triggered`,
+      `StoryNPCPresenter (onStoryElementCutSceneTriggered): ${this.viewModel.storyType} Cutscene triggered (sequence: ${storyType})`,
     );
   }
 

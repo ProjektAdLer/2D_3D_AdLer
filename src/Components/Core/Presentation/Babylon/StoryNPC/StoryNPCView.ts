@@ -18,6 +18,7 @@ import {
 } from "@babylonjs/core";
 import { config } from "src/config";
 import IStoryNPCController from "./IStoryNPCController";
+import IStoryNPCPresenter from "./IStoryNPCPresenter";
 import LearningElementModelLookup from "src/Components/Core/Domain/LearningElementModels/LearningElementModelLookup";
 import ICharacterAnimator from "../CharacterAnimator/ICharacterAnimator";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
@@ -268,6 +269,12 @@ export default class StoryNPCView {
         this.startRandomMovementIdleTimeout();
         break;
       case StoryNPCState.CutScene:
+        if (
+          this.viewModel.storyType === StoryElementType.IntroOutro &&
+          !this.viewModel.parentNode.isEnabled()
+        ) {
+          this.showNPC();
+        }
         this.startCutSceneMovement();
         break;
       case StoryNPCState.ExitRoom:
@@ -277,49 +284,100 @@ export default class StoryNPCView {
   }
 
   private moveToExit(): void {
-    // Use the pre-calculated enterable position from the viewModel
     const exitPosition = this.viewModel.exitDoorEnterablePosition;
 
-    // Delay before NPC starts walking
     setTimeout(() => {
       this.viewModel.characterNavigator.startMovement(exitPosition, () => {
         this.handleNPCReachedDoor();
       });
-    }, 1000); // 1 second delay
+    }, 1000);
   }
 
   private handleNPCReachedDoor(): void {
-    // Small delay to make it look more natural before opening the door
     setTimeout(() => {
       this.openExitDoorAndDispose();
-    }, 500); // 0.5 second delay before opening door
+    }, 500);
   }
 
   private openExitDoorAndDispose(): void {
-    // Find the exit door presenter and open it with animation callback
     const exitDoorPresenter = CoreDIContainer.getAll<IDoorPresenter>(
       PRESENTATION_TYPES.IDoorPresenter,
     ).find((door) => door.isExit());
 
-    const isIntro = this.viewModel.storyType === StoryElementType.Intro;
+    const isCurrentlyIntro = this.isCurrentlyIntroSequence();
+    const isIntroOutro =
+      this.viewModel.storyType === StoryElementType.IntroOutro;
 
-    if (exitDoorPresenter && isIntro) {
-      // Intro: Open the door, wait for animation, dispose NPC, then close door
+    if (exitDoorPresenter && isCurrentlyIntro) {
+      let hasCallbackExecuted = false;
+
       exitDoorPresenter.open(() => {
-        // This callback is executed when the door opening animation ends
-        this.viewModel.parentNode.dispose();
-        // Close the door after NPC is disposed (only for Intro)
-        setTimeout(() => {
-          exitDoorPresenter.close();
-        }, 500); // Small delay before closing
+        if (hasCallbackExecuted) return;
+        hasCallbackExecuted = true;
+
+        if (isIntroOutro) {
+          this.hideNPC();
+        } else {
+          this.viewModel.parentNode.dispose();
+        }
+
+        const shouldKeepDoorOpen = this.shouldKeepDoorOpenForOtherNPCs();
+
+        if (!shouldKeepDoorOpen) {
+          setTimeout(() => {
+            exitDoorPresenter.close();
+          }, 500);
+        }
       });
-    } else if (exitDoorPresenter && !isIntro) {
-      // Outro: Door is already open, just dispose NPC (don't close door)
+    } else if (exitDoorPresenter && !isCurrentlyIntro) {
       this.viewModel.parentNode.dispose();
+    } else if (isCurrentlyIntro && isIntroOutro) {
+      this.hideNPC();
     } else {
-      // Fallback: if no exit door found, dispose immediately
       this.viewModel.parentNode.dispose();
     }
+  }
+
+  private isCurrentlyIntroSequence(): boolean {
+    if (this.viewModel.storyType === StoryElementType.Intro) {
+      return true;
+    }
+    if (this.viewModel.storyType === StoryElementType.Outro) {
+      return false;
+    }
+    if (this.viewModel.storyType === StoryElementType.IntroOutro) {
+      return this.viewModel.currentlyRunningSequence === StoryElementType.Intro;
+    }
+    return false;
+  }
+
+  private shouldKeepDoorOpenForOtherNPCs(): boolean {
+    return false;
+  }
+
+  private hideNPC(): void {
+    this.viewModel.parentNode.setEnabled(false);
+
+    if (this.viewModel.characterNavigator) {
+      this.viewModel.characterNavigator.stopMovement();
+    }
+  }
+
+  private showNPC(): void {
+    this.viewModel.parentNode.setEnabled(true);
+    this.setSpawnLocationForOutro();
+
+    if (this.viewModel.characterAnimator) {
+      // The character animator will automatically handle animation switching based on movement
+    }
+  }
+
+  private setSpawnLocationForOutro(): void {
+    this.viewModel.parentNode.position = this.viewModel.outroIdlePosition;
+    this.viewModel.modelRootNode.rotationQuaternion = Quaternion.RotationAxis(
+      Vector3.Up(),
+      Tools.ToRadians(this.viewModel.outroIdlePosRotation),
+    );
   }
 
   private moveToIdlePosition(): void {
@@ -353,10 +411,13 @@ export default class StoryNPCView {
       .scale(this.viewModel.cutSceneDistanceFromAvatar);
     const target = this.avatarPresenter.AvatarPosition.subtract(targetOffset);
 
-    // go to avatar
     this.viewModel.cutSceneTimer = setTimeout(() => {
       this.viewModel.characterNavigator.startMovement(target, () => {
-        this.viewModel.storyElementPresenter.open(this.viewModel.storyType);
+        const sequenceToOpen =
+          this.viewModel.storyType === StoryElementType.IntroOutro
+            ? this.viewModel.currentlyRunningSequence
+            : this.viewModel.storyType;
+        this.viewModel.storyElementPresenter.open(sequenceToOpen);
       });
     }, this.viewModel.cutSceneStartDelay);
   }
