@@ -301,12 +301,21 @@ export default class StoryNPCView {
       PRESENTATION_TYPES.IDoorPresenter,
     ).find((door) => door.isExit());
 
-    if (exitDoorPresenter) {
-      // Open the door and wait for animation to complete before disposing NPC
+    const isIntro = this.viewModel.storyType === StoryElementType.Intro;
+
+    if (exitDoorPresenter && isIntro) {
+      // Intro: Open the door, wait for animation, dispose NPC, then close door
       exitDoorPresenter.open(() => {
         // This callback is executed when the door opening animation ends
         this.viewModel.parentNode.dispose();
+        // Close the door after NPC is disposed (only for Intro)
+        setTimeout(() => {
+          exitDoorPresenter.close();
+        }, 500); // Small delay before closing
       });
+    } else if (exitDoorPresenter && !isIntro) {
+      // Outro: Door is already open, just dispose NPC (don't close door)
+      this.viewModel.parentNode.dispose();
     } else {
       // Fallback: if no exit door found, dispose immediately
       this.viewModel.parentNode.dispose();
