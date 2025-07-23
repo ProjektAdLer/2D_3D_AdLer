@@ -119,6 +119,7 @@ export default class StoryNPCView {
   }
 
   private setupModel(): void {
+    console.log("Story Type:" + this.viewModel.storyType);
     this.viewModel.modelMeshes[0].position = new Vector3(0, 0.05, 0);
 
     // create separate root node for model
@@ -283,81 +284,54 @@ export default class StoryNPCView {
     }
   }
 
-  private moveToExit(): void {
+  private async moveToExit(): Promise<void> {
     const exitPosition = this.viewModel.exitDoorEnterablePosition;
-
-    setTimeout(() => {
-      this.viewModel.characterNavigator.startMovement(exitPosition, () => {
-        this.handleNPCReachedDoor();
-      });
-    }, 1000);
+    await new Promise<void>((resolve) => setTimeout(resolve, 1000));
+    this.viewModel.characterNavigator.startMovement(exitPosition, async () => {
+      await new Promise<void>((resolve) => setTimeout(resolve, 500));
+      await this.openExitDoorAndDispose();
+    });
   }
 
-  private handleNPCReachedDoor(): void {
-    setTimeout(() => {
-      this.openExitDoorAndDispose();
-    }, 500);
-  }
-
-  private openExitDoorAndDispose(): void {
+  private async openExitDoorAndDispose(): Promise<void> {
     const exitDoorPresenter = CoreDIContainer.getAll<IDoorPresenter>(
       PRESENTATION_TYPES.IDoorPresenter,
     ).find((door) => door.isExit());
 
-    const isCurrentlyIntro = this.isCurrentlyIntroSequence();
-    const isIntroOutro =
-      this.viewModel.storyType === StoryElementType.IntroOutro;
+    if (!exitDoorPresenter) {
+      this.viewModel.parentNode.dispose(); // Dispose NPC as a fallback
+      return;
+    }
 
-    if (exitDoorPresenter && isCurrentlyIntro) {
-      let hasCallbackExecuted = false;
+    const openDoorAndThen = async (action: () => void) => {
+      await new Promise<void>((resolve) => exitDoorPresenter.open(resolve));
+      await new Promise<void>((resolve) => setTimeout(resolve, 500));
+      action();
+      exitDoorPresenter.close();
+    };
 
-      exitDoorPresenter.open(() => {
-        if (hasCallbackExecuted) return;
-        hasCallbackExecuted = true;
+    switch (this.viewModel.storyType) {
+      case StoryElementType.Intro:
+        await openDoorAndThen(() => this.viewModel.parentNode.dispose());
+        break;
 
-        if (isIntroOutro) {
-          this.hideNPC();
+      case StoryElementType.Outro:
+        this.viewModel.parentNode.dispose();
+        break;
+
+      case StoryElementType.IntroOutro:
+        if (!this.viewModel.introWasTriggered) {
+          this.viewModel.introWasTriggered = true;
+          await openDoorAndThen(() => this.hideNPC());
         } else {
           this.viewModel.parentNode.dispose();
         }
-
-        const shouldKeepDoorOpen = this.shouldKeepDoorOpenForOtherNPCs();
-
-        if (!shouldKeepDoorOpen) {
-          setTimeout(() => {
-            exitDoorPresenter.close();
-          }, 500);
-        }
-      });
-    } else if (exitDoorPresenter && !isCurrentlyIntro) {
-      this.viewModel.parentNode.dispose();
-    } else if (isCurrentlyIntro && isIntroOutro) {
-      this.hideNPC();
-    } else {
-      this.viewModel.parentNode.dispose();
+        break;
     }
-  }
-
-  private isCurrentlyIntroSequence(): boolean {
-    if (this.viewModel.storyType === StoryElementType.Intro) {
-      return true;
-    }
-    if (this.viewModel.storyType === StoryElementType.Outro) {
-      return false;
-    }
-    if (this.viewModel.storyType === StoryElementType.IntroOutro) {
-      return this.viewModel.currentlyRunningSequence === StoryElementType.Intro;
-    }
-    return false;
-  }
-
-  private shouldKeepDoorOpenForOtherNPCs(): boolean {
-    return false;
   }
 
   private hideNPC(): void {
     this.viewModel.parentNode.setEnabled(false);
-
     if (this.viewModel.characterNavigator) {
       this.viewModel.characterNavigator.stopMovement();
     }
@@ -366,10 +340,6 @@ export default class StoryNPCView {
   private showNPC(): void {
     this.viewModel.parentNode.setEnabled(true);
     this.setSpawnLocationForOutro();
-
-    if (this.viewModel.characterAnimator) {
-      // The character animator will automatically handle animation switching based on movement
-    }
   }
 
   private setSpawnLocationForOutro(): void {
@@ -391,8 +361,8 @@ export default class StoryNPCView {
       this.viewModel.modelRootNode.rotationQuaternion = Quaternion.RotationAxis(
         Vector3.Up(),
         this.viewModel.storyType === StoryElementType.Intro
-          ? this.viewModel.introIdlePosRotation
-          : this.viewModel.outroIdlePosRotation,
+          ? Tools.ToRadians(this.viewModel.introIdlePosRotation)
+          : Tools.ToRadians(this.viewModel.outroIdlePosRotation),
       );
     });
   }
