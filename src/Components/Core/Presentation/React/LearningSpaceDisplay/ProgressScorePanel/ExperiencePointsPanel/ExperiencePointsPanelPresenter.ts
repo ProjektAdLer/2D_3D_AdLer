@@ -8,17 +8,6 @@ export default class ExperiencePointsPanelPresenter
   constructor(private viewModel: ExperiencePointsPanelViewModel) {}
 
   onExperiencePointsUpdated(experiencePointsTO: ExperiencePointsTO): void {
-    console.log(
-      "XP: ",
-      "current: ",
-      experiencePointsTO.currentLevel,
-      " / max: ",
-      experiencePointsTO.maxLevel,
-      " / xp: ",
-      experiencePointsTO.currentExperiencePoints,
-      " / level-ups: ",
-      experiencePointsTO.numberOfLevelUps,
-    );
     this.viewModel.xpInfo.Value = {
       currentLevel: experiencePointsTO.currentLevel,
       maxLevel: experiencePointsTO.maxLevel,

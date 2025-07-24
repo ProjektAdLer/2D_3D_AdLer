@@ -84,6 +84,9 @@ export default class StoryNPCController implements IStoryNPCController {
       this.bottomTooltipPresenter.hide(this.proximityToolTipId);
       this.proximityToolTipId = -1;
     }
+    if (isInteractable && this.viewModel.isSpecialFocused) {
+      this.picked();
+    }
   }
 
   private displayTooltip(): number {

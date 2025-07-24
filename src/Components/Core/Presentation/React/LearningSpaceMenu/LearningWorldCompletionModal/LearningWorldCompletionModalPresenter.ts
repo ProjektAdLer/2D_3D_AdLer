@@ -18,7 +18,6 @@ export default class LearningWorldCompletionModalPresenter
     this.viewModel.evaluationLinkName.Value = world.evaluationLinkName;
     this.viewModel.evaluationLinkText.Value = world.evaluationLinkText;
     this.viewModel.currentWorldId.Value = world.id;
-    console.log("viewmodel", this.viewModel);
   }
 
   onLearningWorldScored(learningWorldScoreTO: LearningWorldScoreTO): void {

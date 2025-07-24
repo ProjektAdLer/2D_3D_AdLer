@@ -10,7 +10,6 @@ export default class LearningSpaceDetailPresenter
   constructor(private viewModel: LearningSpaceDetailViewModel) {}
 
   onLearningWorldLoaded(world: LearningWorldTO): void {
-    console.log("onLearningWorldLoaded", world.gradingStyle);
     this.viewModel.completionDisplay = world.gradingStyle;
   }
 

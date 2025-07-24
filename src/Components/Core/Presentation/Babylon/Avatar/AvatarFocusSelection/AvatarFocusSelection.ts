@@ -1,6 +1,6 @@
 import Observable from "src/Lib/Observable";
 import IAvatarPresenter from "../IAvatarPresenter";
-import IAvatarFokusable, { FocusalbeTypes } from "./IAvatarFocusable";
+import IAvatarFokusable, { FocusableTypes } from "./IAvatarFocusable";
 import IAvatarFocusSelection from "./IAvatarFokusSelection";
 import { injectable } from "inversify";
 import SCENE_TYPES, {
@@ -66,9 +66,24 @@ export default class AvatarFocusSelection implements IAvatarFocusSelection {
     return this.specialFocus;
   }
 
+  setStorySpecialFocus(type: FocusableTypes | undefined): void {
+    // set special focus based on type
+    this.focusables.forEach((focusable) => {
+      if (focusable.getType && focusable.getType() !== null) {
+        focusable.onSpecialFocused && focusable.onSpecialFocused();
+        this.specialFocus = true;
+      } else {
+        focusable.onSpecialUnfocused && focusable.onSpecialUnfocused();
+      }
+      if (type === undefined) {
+        this.specialFocus = false;
+      }
+    });
+  }
+
   setSpecialFocus(
     id: number | undefined,
-    type: FocusalbeTypes | undefined,
+    type: FocusableTypes | undefined,
   ): void {
     this.focusables.forEach((focusable) => {
       const ids = focusable.getID ? focusable.getID() : null;
