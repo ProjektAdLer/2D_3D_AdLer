@@ -77,6 +77,9 @@ export default class DoorController implements IDoorController {
       this.resetIconScale();
       this.proximityToolTipId = -1;
     }
+    if (isInteractable && this.viewModel.isSpecialFocused) {
+      this.picked();
+    }
   }
 
   private displayTooltip(): number {
