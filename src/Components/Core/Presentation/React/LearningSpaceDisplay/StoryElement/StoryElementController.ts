@@ -26,9 +26,21 @@ export default class StoryElementController implements IStoryElementController {
         USECASE_TYPES.IEndStoryElementCutSceneUseCase,
       ).execute({ storyType: this.viewModel.storyTypeToDisplay.Value });
     } else {
-      CoreDIContainer.get<IStoryNPCPresenter>(
-        PRESENTATION_TYPES.IStoryNPCPresenter,
-      ).changeStateFromStopToRandomMovement();
+      // Only try to change NPC state if NPC presenter is available and not ambiguous
+      try {
+        if (CoreDIContainer.isBound(PRESENTATION_TYPES.IStoryNPCPresenter)) {
+          CoreDIContainer.get<IStoryNPCPresenter>(
+            PRESENTATION_TYPES.IStoryNPCPresenter,
+          ).changeStateFromStopToRandomMovement();
+        }
+      } catch (error) {
+        // Ignore errors when NPC presenter is not available or ambiguous
+        // This can happen when story modal is opened via sidebar and NPC has already exited
+        console.debug(
+          "StoryElementController: Could not access StoryNPCPresenter, likely because modal was opened via sidebar and NPC has exited",
+          error,
+        );
+      }
     }
   }
 

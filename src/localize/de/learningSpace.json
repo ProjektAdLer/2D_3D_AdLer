@@ -39,6 +39,8 @@
   "sidebar_breakTime": "Pausenhinweise",
   "sidebar_worldCompleted": "Lernwelt-Abschluss-Modal",
   "sidebar_narrativeFrameworkIntro": "Rahmenhandlung Intro",
+  "sidebar_introStory": "Intro-Story",
+  "sidebar_outroStory": "Outro-Story",
 
   "sidebar_menuToolTip": "Öffnet das Smartphone Menü",
   "sidebar_mainMenuToolTip": "Führt zurück zur Startseite der 3D-Lernumgebung",
@@ -49,6 +51,8 @@
   "sidebar_helpToolTip": "Öffnet das Hilfe-Fenster, um Hilfe und weitere Informationen zur 3D-Lernumgebung zu erhalten",
   "sidebar_worldCompleteToolTip": "Öffnet das Lernwelt-Abschlussfenster - wird aktiv, wenn die aktuelle Lernwelt abgeschlossen wurde",
   "sidebar_narrativeFrameworkToolTip": "Öffnet erneut, die vor dem ersten Lernraum angezeigte Rahmenhandlung",
+  "sidebar_introStoryToolTip": "Öffnet die Intro-Story des aktuellen Lernraums",
+  "sidebar_outroStoryToolTip": "Öffnet die Outro-Story des aktuellen Lernraums - wird erst nach Abschluss des Raums aktiv",
 
   "requirementSpaceScoreToolTip": "Anzahl abgeschlossener, benötigter Lernelemente im Raum",
   "pointSpaceScoreToolTip": "Anzahl erreichter, benötigter Punkte im Raum",

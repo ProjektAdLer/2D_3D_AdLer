@@ -5,4 +5,7 @@ export default interface ISideBarController {
   onControlsExplanationButtonClicked(): void;
   onBreakTimeButtonClicked(): void;
   onWorldCompletionModalButtonClicked(): void;
+  onNarrativeFrameworkIntroButtonClicked(): void;
+  onIntroStoryButtonClicked(): void;
+  onOutroStoryButtonClicked(): void;
 }

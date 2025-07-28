@@ -6,6 +6,8 @@ import IControlsExplanationModalPresenter from "~ReactComponents/GeneralComponen
 import IBreakTimeNotificationOverviewPresenter from "~ReactComponents/GeneralComponents/BreakTimeNotificationOverview/IBreakTimeNotificationOverviewPresenter";
 import ILearningWorldCompletionModalPresenter from "~ReactComponents/LearningSpaceMenu/LearningWorldCompletionModal/ILearningWorldCompletionModalPresenter";
 import INarrativeFrameworkLearningSpaceContainerPresenter from "~ReactComponents/GeneralComponents/NarrativeFrameworkLearningSpaceContainer/INarrativeFrameworkLearningSpaceContainerPresenter";
+import IStoryElementPresenter from "../StoryElement/IStoryElementPresenter";
+import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 
 export default class SideBarController implements ISideBarController {
   onMainMenuButtonClicked(): void {
@@ -40,5 +42,17 @@ export default class SideBarController implements ISideBarController {
     CoreDIContainer.get<INarrativeFrameworkLearningSpaceContainerPresenter>(
       PRESENTATION_TYPES.INarrativeFrameworkLearningSpaceContainerPresenter,
     ).openModal();
+  }
+
+  onIntroStoryButtonClicked(): void {
+    CoreDIContainer.get<IStoryElementPresenter>(
+      PRESENTATION_TYPES.IStoryElementPresenter,
+    ).open(StoryElementType.Intro);
+  }
+
+  onOutroStoryButtonClicked(): void {
+    CoreDIContainer.get<IStoryElementPresenter>(
+      PRESENTATION_TYPES.IStoryElementPresenter,
+    ).open(StoryElementType.Outro);
   }
 }
