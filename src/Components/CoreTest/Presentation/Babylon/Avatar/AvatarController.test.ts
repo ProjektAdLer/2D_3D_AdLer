@@ -388,6 +388,34 @@ describe("AvatarController", () => {
     ).toHaveBeenCalledWith(42, 0);
   });
 
+  test("processPointerEvent calls setSpecialFocus if pointerInfo was doubletap and clicked mesh was not a learningelement", () => {
+    const pointerInfo = setupMockedPointerInfo(
+      PointerEventTypes.POINTERDOUBLETAP,
+      false,
+      new Vector3(42, 42, 42),
+    );
+    pointerInfo.pickInfo!.pickedMesh = new Mesh("testMesh");
+    pointerInfo.pickInfo!.pickedMesh.id = "blabla"; // not a learning element
+    pointerInfo.pickInfo!.pickedMesh.name = "2";
+
+    jest
+      .spyOn(systemUnderTest["viewModel"].focusSelection, "hasSpecialFocus")
+      .mockReturnValue(true);
+    recastJSPluginMock.getClosestPoint.mockReturnValueOnce(
+      new Vector3(42, 0, 42.5),
+    );
+    recastJSPluginMock.getClosestPoint.mockImplementationOnce((target) => {
+      return target;
+    });
+    viewModel.parentNode = new TransformNode("mockParentNode");
+    viewModel.parentNode.position = new Vector3(42, 0, 43);
+
+    systemUnderTest["processPointerEvent"](pointerInfo);
+    expect(
+      systemUnderTest["viewModel"].focusSelection.setStorySpecialFocus,
+    ).toHaveBeenCalledWith(2);
+  });
+
   test("onMovementTargetReached sets movementTarget in view model to null", () => {
     systemUnderTest["onMovementTargetReached"]();
 
