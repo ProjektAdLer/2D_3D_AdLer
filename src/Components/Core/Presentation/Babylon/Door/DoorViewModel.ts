@@ -29,4 +29,5 @@ export default class DoorViewModel {
   public isExit: boolean;
   public spaceID: ComponentID;
   public isInputEnabled: Observable<boolean> = new Observable<boolean>(true);
+  public isSpecialFocused: boolean = false;
 }

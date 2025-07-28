@@ -45,6 +45,7 @@ export default class StoryNPCViewModel {
   introCutsceneRotation: number = 0;
   outroIdlePosition: Vector3 = new Vector3(0, 0, 0);
   outroIdlePosRotation: number = 0;
+  public isSpecialFocused: boolean = false;
 
   // readonly configuration properties
   readonly cutSceneDistanceFromAvatar: number = 1.5;

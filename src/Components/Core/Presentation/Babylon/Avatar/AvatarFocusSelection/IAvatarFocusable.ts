@@ -1,14 +1,17 @@
 import { Vector3 } from "@babylonjs/core";
 
-export enum FocusalbeTypes {
+export enum FocusableTypes {
   learningElement = 0,
-  storyElement,
-  exit,
+  introStory,
+  outroStory,
+  entryDoor,
+  exitDoor,
 }
 
 export default interface IAvatarFokusable {
   getFocusableCenterPosition(): Vector3;
-  getID?(): { id: number; type: FocusalbeTypes };
+  getID?(): { id: number; type: FocusableTypes };
+  getType?(): { type: FocusableTypes };
   // based on distance
   onFocused?(): void;
   onUnfocused?(): void;

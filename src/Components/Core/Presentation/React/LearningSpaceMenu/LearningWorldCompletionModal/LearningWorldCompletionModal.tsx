@@ -25,8 +25,6 @@ export default function LearningWorldCompletionModal({
 
   const { t: translate } = useTranslation(["spaceMenu", "helpmenu"]);
 
-  console.log("LearningWorldCompletionModal", viewModel);
-
   if (!viewModel || !controller) return null;
 
   return (

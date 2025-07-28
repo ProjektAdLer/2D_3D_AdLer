@@ -473,7 +473,6 @@ export default class LoadLearningWorldUseCase
       },
       LearningWorldEntity,
     );
-    console.log(worldEntity, "worldEntity created");
     return worldEntity;
   }
 

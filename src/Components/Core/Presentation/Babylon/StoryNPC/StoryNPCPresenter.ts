@@ -6,6 +6,7 @@ import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILogge
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
+import { FocusableTypes } from "../Avatar/AvatarFocusSelection/IAvatarFocusable";
 
 export default class StoryNPCPresenter implements IStoryNPCPresenter {
   private logger: ILoggerPort;
@@ -22,9 +23,25 @@ export default class StoryNPCPresenter implements IStoryNPCPresenter {
     if (this.viewModel.state.Value === StoryNPCState.Stop)
       this.viewModel.state.Value = StoryNPCState.RandomMovement;
   }
+  getType(): { type: FocusableTypes } {
+    if (this.viewModel.storyType === StoryElementType.Outro) {
+      return { type: FocusableTypes.outroStory };
+    } else return { type: FocusableTypes.introStory };
+  }
 
   onFocused(): void {
     this.viewModel.isInteractable.Value = true;
+  }
+  isSpecialFocused(): boolean {
+    return this.viewModel.isSpecialFocused;
+  }
+
+  onSpecialFocused(): void {
+    this.viewModel.isSpecialFocused = true;
+  }
+
+  onSpecialUnfocused(): void {
+    this.viewModel.isSpecialFocused = false;
   }
 
   onUnfocused(): void {

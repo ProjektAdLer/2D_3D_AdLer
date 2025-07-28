@@ -3,7 +3,7 @@ import LearningElementPresenter from "../../../../Core/Presentation/Babylon/Lear
 import LearningElementViewModel from "../../../../Core/Presentation/Babylon/LearningElements/LearningElementViewModel";
 import { Mesh, Vector3 } from "@babylonjs/core";
 import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
-import { FocusalbeTypes } from "../../../../Core/Presentation/Babylon/Avatar/AvatarFocusSelection/IAvatarFocusable";
+import { FocusableTypes } from "../../../../Core/Presentation/Babylon/Avatar/AvatarFocusSelection/IAvatarFocusable";
 
 describe("LearningElementPresenter", () => {
   let systemUnderTest: LearningElementPresenter;
@@ -58,10 +58,10 @@ describe("LearningElementPresenter", () => {
 
   test("getID returns id and type of learningelement", () => {
     systemUnderTest["viewModel"].id = 42;
-    systemUnderTest["viewModel"].type = FocusalbeTypes.learningElement;
+    systemUnderTest["viewModel"].type = FocusableTypes.learningElement;
     expect(systemUnderTest.getID()).toEqual({
       id: 42,
-      type: FocusalbeTypes.learningElement,
+      type: FocusableTypes.learningElement,
     });
   });
 

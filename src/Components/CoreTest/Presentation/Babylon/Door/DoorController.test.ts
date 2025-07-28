@@ -21,13 +21,13 @@ describe("DoorController", () => {
     CoreDIContainer.snapshot();
     CoreDIContainer.unbindAll();
     CoreDIContainer.bind(
-      PRESENTATION_TYPES.IBottomTooltipPresenter
+      PRESENTATION_TYPES.IBottomTooltipPresenter,
     ).toConstantValue(bottomTooltipPresenterMock);
     CoreDIContainer.bind(
-      PRESENTATION_TYPES.IExitModalPresenter
+      PRESENTATION_TYPES.IExitModalPresenter,
     ).toConstantValue(exitModalPresenterMock);
     CoreDIContainer.bind(
-      USECASE_TYPES.IGetLearningSpacePrecursorAndSuccessorUseCase
+      USECASE_TYPES.IGetLearningSpacePrecursorAndSuccessorUseCase,
     ).toConstantValue(getLearningSpacePrecursorAndSuccessorUseCaseMock);
   });
 
@@ -74,7 +74,7 @@ describe("DoorController", () => {
     systemUnderTest.picked();
 
     expect(
-      getLearningSpacePrecursorAndSuccessorUseCaseMock.execute
+      getLearningSpacePrecursorAndSuccessorUseCaseMock.execute,
     ).toHaveBeenCalledTimes(1);
   });
 
@@ -111,5 +111,25 @@ describe("DoorController", () => {
     systemUnderTest["onAvatarInteractableChange"](false);
 
     expect(systemUnderTest["proximityToolTipId"]).toBe(-1);
+  });
+
+  test("onAvatarInteractableChange calls picked if its special focused", () => {
+    systemUnderTest["viewModel"].isInteractable.Value = true;
+    systemUnderTest["viewModel"].isSpecialFocused = true;
+
+    const pickedSpy = jest.spyOn(systemUnderTest, "picked");
+
+    systemUnderTest["onAvatarInteractableChange"](true);
+
+    expect(pickedSpy).toHaveBeenCalledTimes(1);
+  });
+
+  test("accessibilityPicked calls onPicked", () => {
+    //@ts-ignore
+    const onPickedSpy = jest.spyOn(systemUnderTest, "onPicked");
+
+    systemUnderTest.accessibilityPicked();
+
+    expect(onPickedSpy).toHaveBeenCalledTimes(1);
   });
 });
