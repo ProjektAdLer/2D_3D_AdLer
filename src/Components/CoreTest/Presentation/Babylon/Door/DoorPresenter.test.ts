@@ -92,4 +92,34 @@ describe("DoorPresenter", () => {
 
     expect(viewModel.isInputEnabled.Value).toBe(true);
   });
+
+  test("getType gets correct type if its an entry door", () => {
+    viewModel.isExit = false;
+
+    expect(systemUnderTest.getType()).toStrictEqual({ type: 3 });
+  });
+  test("getType gets correct type if its an exit door", () => {
+    viewModel.isExit = true;
+
+    expect(systemUnderTest.getType()).toStrictEqual({ type: 4 });
+  });
+  test("isSpecialFocused returns isSpecialfocused from viewModel", () => {
+    viewModel.isSpecialFocused = true;
+
+    expect(systemUnderTest.isSpecialFocused()).toBe(true);
+  });
+  test("onSpecialFocused sets isSpecialFocused to true", () => {
+    viewModel.isSpecialFocused = false;
+
+    systemUnderTest.onSpecialFocused();
+
+    expect(viewModel.isSpecialFocused).toBe(true);
+  });
+  test("onSpecialUnfocused sets isSpecialFocused to false", () => {
+    viewModel.isSpecialFocused = true;
+
+    systemUnderTest.onSpecialUnfocused();
+
+    expect(viewModel.isSpecialFocused).toBe(false);
+  });
 });
