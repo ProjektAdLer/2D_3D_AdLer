@@ -73,7 +73,6 @@ export default class DoorBuilder
   override buildPresenter(): void {
     super.buildPresenter();
 
-    // Bind each door presenter to a multi-bind, so getAll() can find all instances
     CoreDIContainer.bind<IDoorPresenter>(
       PRESENTATION_TYPES.IDoorPresenter,
     ).toConstantValue(this.presenter!);

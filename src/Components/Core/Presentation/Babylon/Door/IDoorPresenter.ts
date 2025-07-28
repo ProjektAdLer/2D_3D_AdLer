@@ -8,6 +8,7 @@ export default interface IDoorPresenter
   onStoryElementCutSceneTriggered(storyType: StoryElementType): void;
   onStoryElementCutSceneFinished(storyType: StoryElementType): void;
   isExit(): boolean;
+  belongsToSpace(spaceID: number): boolean;
   open(onAnimationEnd?: () => void): void;
   close(): void;
 }

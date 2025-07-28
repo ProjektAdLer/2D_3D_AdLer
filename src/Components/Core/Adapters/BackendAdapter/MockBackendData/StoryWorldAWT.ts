@@ -107,7 +107,7 @@ const BigWorldAWT: AWT = {
             ],
             elementModel: "a-npc-averagenerdmaledark",
             modelFacialExpression: "default",
-            exitAfterStorySequence: true,
+            exitAfterStorySequence: false,
           },
           outroStory: {
             storyTexts: ["Tschüss", "Du bist mit diesem Raum fertig"],
@@ -144,7 +144,7 @@ const BigWorldAWT: AWT = {
               "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
             ],
             elementModel: "a_npc_sheriffjustice",
-            exitAfterStorySequence: true,
+            exitAfterStorySequence: false,
           },
         },
       },

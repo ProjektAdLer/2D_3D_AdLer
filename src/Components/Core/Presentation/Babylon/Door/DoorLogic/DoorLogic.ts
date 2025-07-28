@@ -56,8 +56,8 @@ export default class DoorLogic implements IDoorLogic {
       this.openDoorAnimationGroup.speedRatio = 1;
 
       if (onAnimationEnd) {
-        // Use add() instead of addOnce() to support multiple callbacks
-        this.openDoorAnimationGroup.onAnimationEndObservable.add(() => {
+        // Use addOnce() to prevent memory leaks from multiple callbacks
+        this.openDoorAnimationGroup.onAnimationEndObservable.addOnce(() => {
           onAnimationEnd();
         });
       }
@@ -86,6 +86,9 @@ export default class DoorLogic implements IDoorLogic {
   close(): void {
     if (this.openDoorAnimationGroup) {
       this.openDoorAnimationGroup.speedRatio = -1;
+      this.openDoorAnimationGroup.onAnimationEndObservable.addOnce(() => {
+        this.openDoorAnimationGroup.stop(); // Stop animation when it reaches the start
+      });
       this.openDoorAnimationGroup.play(false);
     }
   }

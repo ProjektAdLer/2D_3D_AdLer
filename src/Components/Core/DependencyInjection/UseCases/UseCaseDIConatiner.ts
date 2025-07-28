@@ -58,6 +58,8 @@ import IEndStoryElementCutScene from "../../Application/UseCases/EndStoryElement
 import EndStoryElementCutSceneUseCase from "../../Application/UseCases/EndStoryElementCutScene/EndStoryElementCutSceneUseCase";
 import IBeginStoryElementOutroCutSceneUseCase from "../../Application/UseCases/BeginStoryElementOutroCutScene/IBeginStoryElementOutroCutSceneUseCase";
 import BeginStoryElementOutroCutSceneUseCase from "../../Application/UseCases/BeginStoryElementOutroCutScene/BeginStoryElementOutroCutScene";
+import IHandleStoryNPCExitUseCase from "../../Application/UseCases/HandleStoryNPCExit/IHandleStoryNPCExitUseCase";
+import HandleStoryNPCExitUseCase from "../../Application/UseCases/HandleStoryNPCExit/HandleStoryNPCExitUseCase";
 import IStartOverallTimeSpentTimerUseCase from "../../Application/UseCases/Adaptivity/OverallTimeSpent/StartOverallTimeSpentTimer/IStartOverallTimeSpentTimerUseCase";
 import StartOverallTimeSpentTimerUseCase from "../../Application/UseCases/Adaptivity/OverallTimeSpent/StartOverallTimeSpentTimer/StartOverallTimeSpentTimerUseCase";
 import ICreateOverallTimeSpentTimerUseCase from "../../Application/UseCases/Adaptivity/OverallTimeSpent/CreateOverallTimeSpentTimer/ICreateOverallTimeSpentTimerUseCase";
@@ -285,6 +287,9 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
     .inSingletonScope();
   bind<IGetExperiencePointsUseCase>(USECASE_TYPES.IGetExperiencePointsUseCase)
     .to(GetExperiencePointsUseCase)
+    .inSingletonScope();
+  bind<IHandleStoryNPCExitUseCase>(USECASE_TYPES.IHandleStoryNPCExitUseCase)
+    .to(HandleStoryNPCExitUseCase)
     .inSingletonScope();
 
   // Neuer Eintrag für RandomizeAvatarConfigUseCase

@@ -60,6 +60,10 @@ export default class DoorPresenter implements IDoorPresenter {
     return this.viewModel.isExit;
   }
 
+  belongsToSpace(spaceID: number): boolean {
+    return this.viewModel.spaceID === spaceID;
+  }
+
   open(onAnimationEnd?: () => void): void {
     this.viewModel.doorLogic.open(onAnimationEnd);
   }

@@ -4,7 +4,9 @@ import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import SCENE_TYPES, {
   ScenePresenterFactory,
 } from "~DependencyInjection/Scenes/SCENE_TYPES";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
+import IHandleStoryNPCExitUseCase from "src/Components/Core/Application/UseCases/HandleStoryNPCExit/IHandleStoryNPCExitUseCase";
 import {
   ActionManager,
   AnimationGroup,
@@ -28,7 +30,6 @@ import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 import bind from "bind-decorator";
 import HighlightColors from "../HighlightColors";
-import IDoorPresenter from "../Door/IDoorPresenter";
 
 import iconLink from "../../../../../Assets/3dModels/sharedModels/3dIcons/l-3dicons-story-speech-bubble-dots.glb";
 import AvatarAnimationNames from "src/Components/Core/Domain/AvatarModels/AvatarAnimationNames";
@@ -301,20 +302,18 @@ export default class StoryNPCView {
   }
 
   private async openExitDoorAndDispose(): Promise<void> {
-    const exitDoorPresenter = CoreDIContainer.getAll<IDoorPresenter>(
-      PRESENTATION_TYPES.IDoorPresenter,
-    ).find((door) => door.isExit());
-
-    if (!exitDoorPresenter) {
-      this.viewModel.parentNode.dispose(); // Dispose NPC as a fallback
-      return;
-    }
+    // Use the proper Use Case for handling Story NPC exit behavior
+    const handleStoryNPCExitUseCase =
+      CoreDIContainer.get<IHandleStoryNPCExitUseCase>(
+        USECASE_TYPES.IHandleStoryNPCExitUseCase,
+      );
 
     const openDoorAndThen = async (action: () => void) => {
-      await new Promise<void>((resolve) => exitDoorPresenter.open(resolve));
-      await new Promise<void>((resolve) => setTimeout(resolve, 500));
+      // Wait for the door animation to complete before executing the action
+      await handleStoryNPCExitUseCase.executeAsync({
+        storyType: this.viewModel.storyType,
+      });
       action();
-      exitDoorPresenter.close();
     };
 
     switch (this.viewModel.storyType) {
