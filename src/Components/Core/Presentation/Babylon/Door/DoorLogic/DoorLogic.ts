@@ -52,30 +52,25 @@ export default class DoorLogic implements IDoorLogic {
 
   open(onAnimationEnd?: () => void): void {
     if (this.openDoorAnimationGroup) {
-      // Reset speedRatio to 1 for forward playback
       this.openDoorAnimationGroup.speedRatio = 1;
 
       if (onAnimationEnd) {
-        // Use addOnce() to prevent memory leaks from multiple callbacks
         this.openDoorAnimationGroup.onAnimationEndObservable.addOnce(() => {
           onAnimationEnd();
         });
       }
 
-      // Only start animation if it's not already playing
       if (!this.openDoorAnimationGroup.isPlaying) {
         this.openDoorAnimationGroup.play(false);
       } else if (onAnimationEnd) {
-        // If animation is already playing, call callback immediately
         setTimeout(() => {
           onAnimationEnd();
         }, 100);
       }
     } else if (onAnimationEnd) {
-      // If no animation group exists, call callback immediately
       setTimeout(() => {
         onAnimationEnd();
-      }, 100); // Small delay to simulate animation
+      }, 100);
     }
 
     if (this.openTheDoorSound && !this.openTheDoorSound.isPlaying) {
@@ -87,7 +82,7 @@ export default class DoorLogic implements IDoorLogic {
     if (this.openDoorAnimationGroup) {
       this.openDoorAnimationGroup.speedRatio = -1;
       this.openDoorAnimationGroup.onAnimationEndObservable.addOnce(() => {
-        this.openDoorAnimationGroup.stop(); // Stop animation when it reaches the start
+        this.openDoorAnimationGroup.stop();
       });
       this.openDoorAnimationGroup.play(false);
     }

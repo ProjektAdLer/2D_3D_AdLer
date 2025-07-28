@@ -49,25 +49,33 @@ export default class StoryNPCPresenter implements IStoryNPCPresenter {
   }
 
   onStoryElementCutSceneTriggered(storyType: StoryElementType): void {
-    // go to idle when another cutscene is started
     if ((this.viewModel.storyType & storyType) !== storyType) {
       this.viewModel.state.Value = StoryNPCState.Idle;
       return;
     }
 
-    // Track which sequence is currently running for IntroOutro NPCs
     this.viewModel.currentlyRunningSequence = storyType;
     this.viewModel.state.Value = StoryNPCState.CutScene;
 
     this.logger.log(
       LogLevelTypes.INFO,
-      `StoryNPCPresenter (onStoryElementCutSceneTriggered): ${this.viewModel.storyType} Cutscene triggered (sequence: ${storyType})`,
+      `StoryNPCPresenter: ${this.viewModel.storyType} cutscene triggered (sequence: ${storyType})`,
     );
   }
 
   onStoryElementCutSceneFinished(storyType: StoryElementType): void {
-    // go back to walking after own cutscene is finished
     if (this.viewModel.state.Value === StoryNPCState.CutScene) {
+      if (
+        this.viewModel.storyType === StoryElementType.IntroOutro &&
+        storyType === StoryElementType.Intro
+      ) {
+        this.viewModel.introWasTriggered = true;
+        this.logger.log(
+          LogLevelTypes.INFO,
+          `StoryNPCPresenter: IntroOutro NPC intro completed, introWasTriggered flag set`,
+        );
+      }
+
       const shouldExit =
         (storyType === StoryElementType.Intro &&
           this.viewModel.exitAfterIntro) ||
@@ -78,13 +86,10 @@ export default class StoryNPCPresenter implements IStoryNPCPresenter {
       } else {
         this.viewModel.state.Value = StoryNPCState.RandomMovement;
       }
+
       this.logger.log(
         LogLevelTypes.INFO,
-        `StoryNPCPresenter (onStoryElementCutSceneFinished): ${
-          this.viewModel.storyType
-        } Cutscene finished. New state: ${
-          StoryNPCState[this.viewModel.state.Value]
-        }`,
+        `StoryNPCPresenter: ${this.viewModel.storyType} cutscene finished. New state: ${StoryNPCState[this.viewModel.state.Value]}`,
       );
     }
   }

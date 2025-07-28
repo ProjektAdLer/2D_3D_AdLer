@@ -36,7 +36,6 @@ export default class HandleStoryNPCExitUseCase
       return;
     }
 
-    // Find the exit door presenter that belongs to the current space
     const exitDoorPresenter = CoreDIContainer.getAll<IDoorPresenter>(
       PRESENTATION_TYPES.IDoorPresenter,
     ).find(
@@ -56,14 +55,12 @@ export default class HandleStoryNPCExitUseCase
       `HandleStoryNPCExitUseCase: Opening exit door for story type ${StoryElementType[storyType]} in space ${userLocation.spaceID}`,
     );
 
-    // Return a Promise that resolves when the door animation is finished
     return new Promise<void>((resolve) => {
       exitDoorPresenter.open(() => {
-        // Door animation is finished, wait a bit then close the door
         setTimeout(() => {
           exitDoorPresenter.close();
-          resolve(); // Resolve when everything is done
-        }, 2000);
+          resolve();
+        }, 500);
       });
     });
   }

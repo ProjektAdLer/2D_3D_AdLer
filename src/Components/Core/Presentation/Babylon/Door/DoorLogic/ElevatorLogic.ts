@@ -55,7 +55,7 @@ export default class ElevatorLogic implements IDoorLogic {
     if (this.elevatorAnimationLiftUp) {
       this.elevatorAnimationLiftUp.speedRatio = -1;
       this.elevatorAnimationLiftUp.onAnimationEndObservable.addOnce(() => {
-        this.elevatorAnimationLiftUp.stop(); // Stop animation when it reaches the start
+        this.elevatorAnimationLiftUp.stop();
         this.elevatorIsLifted = false;
       });
       this.elevatorAnimationLiftUp.play(false);

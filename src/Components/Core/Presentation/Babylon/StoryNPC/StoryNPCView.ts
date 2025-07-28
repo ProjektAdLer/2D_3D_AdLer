@@ -127,11 +127,8 @@ export default class StoryNPCView {
   }
 
   private setupModel(): void {
-    console.log("Story Type:" + this.viewModel.storyType);
     this.viewModel.modelMeshes[0].position = new Vector3(0, 0.05, 0);
 
-    // create separate root node for model
-    // so that it can be rotated without affecting gltf coordinate system conversions in __root__ node created by Babylon
     this.viewModel.modelRootNode = new TransformNode(
       "NPCRootNode",
       this.scenePresenter.Scene,
@@ -258,11 +255,10 @@ export default class StoryNPCView {
   }
 
   private setupCleanup(): void {
-    // timer needs to be cleared, else StoryNPC won't be cleaned up by garbage collection
     this.scenePresenter.addDisposeSceneCallback(() => {
       clearTimeout(this.viewModel.idleTimer);
       clearTimeout(this.viewModel.cutSceneTimer);
-      this.viewModel.state.Value = StoryNPCState.Idle; // prevent random movement calls after scene is disposed
+      this.viewModel.state.Value = StoryNPCState.Idle;
     });
   }
 
@@ -294,22 +290,20 @@ export default class StoryNPCView {
 
   private async moveToExit(): Promise<void> {
     const exitPosition = this.viewModel.exitDoorEnterablePosition;
-    await new Promise<void>((resolve) => setTimeout(resolve, 1000));
+    await new Promise<void>((resolve) => setTimeout(resolve, 500));
     this.viewModel.characterNavigator.startMovement(exitPosition, async () => {
-      await new Promise<void>((resolve) => setTimeout(resolve, 500));
+      await new Promise<void>((resolve) => setTimeout(resolve, 200));
       await this.openExitDoorAndDispose();
     });
   }
 
   private async openExitDoorAndDispose(): Promise<void> {
-    // Use the proper Use Case for handling Story NPC exit behavior
     const handleStoryNPCExitUseCase =
       CoreDIContainer.get<IHandleStoryNPCExitUseCase>(
         USECASE_TYPES.IHandleStoryNPCExitUseCase,
       );
 
     const openDoorAndThen = async (action: () => void) => {
-      // Wait for the door animation to complete before executing the action
       await handleStoryNPCExitUseCase.executeAsync({
         storyType: this.viewModel.storyType,
       });
@@ -327,7 +321,6 @@ export default class StoryNPCView {
 
       case StoryElementType.IntroOutro:
         if (!this.viewModel.introWasTriggered) {
-          this.viewModel.introWasTriggered = true;
           await openDoorAndThen(() => this.hideNPC());
         } else {
           this.viewModel.parentNode.dispose();
@@ -379,7 +372,7 @@ export default class StoryNPCView {
         PRESENTATION_TYPES.IAvatarPresenter,
       );
     }
-    // npc stops in specific distance from avatar
+
     const targetOffset = this.avatarPresenter.AvatarPosition.subtract(
       this.viewModel.parentNode.position,
     )
@@ -400,7 +393,6 @@ export default class StoryNPCView {
 
   @bind
   private setRandomMovementTarget() {
-    // prevent movement when in invalid state
     if (this.viewModel.state.Value !== StoryNPCState.RandomMovement) return;
 
     let target: Vector3;

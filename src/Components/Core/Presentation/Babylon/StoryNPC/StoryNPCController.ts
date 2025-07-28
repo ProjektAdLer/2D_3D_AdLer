@@ -51,15 +51,12 @@ export default class StoryNPCController implements IStoryNPCController {
       this.viewModel.state.Value !== StoryNPCState.CutScene
     ) {
       this.onPicked();
-    } else
+    } else {
       this.logger.log(
         LogLevelTypes.TRACE,
-        "[StoryNPCController.picked]: StoryNPC is not interactable or in cutscene state (state: " +
-          this.viewModel.state.Value +
-          "isInteractable: " +
-          this.viewModel.isInteractable.Value +
-          ")",
+        `StoryNPCController: NPC not interactable (state: ${this.viewModel.state.Value}, interactable: ${this.viewModel.isInteractable.Value})`,
       );
+    }
   }
 
   @bind

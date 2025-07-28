@@ -114,21 +114,19 @@ export default class StoryNPCBuilder
       this.viewModel!.outroIdlePosRotation =
         template.outroStoryElementIdlePoint.orientation.rotation;
 
-      // Calculate and store the enterable position for the exit door directly
       const exitDoorPosition = new Vector3(
         template.exitDoor.position.x,
         0,
         template.exitDoor.position.y,
       );
-      // Offset rotated 270° total (180° + 90° counter-clockwise): was (0,0,-1.5), now (-0.75,0,0)
       const localOffset = new Vector3(-0.75, 0, 0);
       const transformMatrix = Matrix.Compose(
-        Vector3.One(), // scale
+        Vector3.One(),
         Quaternion.RotationAxis(
           Vector3.Up(),
           Tools.ToRadians(template.exitDoor.orientation.rotation),
-        ), // rotation
-        exitDoorPosition, // translation
+        ),
+        exitDoorPosition,
       );
       this.viewModel!.exitDoorEnterablePosition = Vector3.TransformCoordinates(
         localOffset,
@@ -147,10 +145,6 @@ export default class StoryNPCBuilder
 
   override buildPresenter(): void {
     super.buildPresenter();
-
-    if (CoreDIContainer.isBound(PRESENTATION_TYPES.IStoryNPCPresenter)) {
-      CoreDIContainer.unbind(PRESENTATION_TYPES.IStoryNPCPresenter);
-    }
 
     CoreDIContainer.bind<IStoryNPCPresenter>(
       PRESENTATION_TYPES.IStoryNPCPresenter,

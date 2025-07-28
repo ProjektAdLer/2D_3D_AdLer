@@ -40,8 +40,8 @@ export default class StoryNPCViewModel {
   storyNpcName: string | null;
   exitAfterIntro: boolean | null;
   exitAfterOutro: boolean | null;
-  currentlyRunningSequence: StoryElementType = StoryElementType.None; // Track which sequence is currently running
-  introWasTriggered: boolean = false; // Track if intro was triggered
+  currentlyRunningSequence: StoryElementType = StoryElementType.None;
+  introWasTriggered: boolean = false;
   idleTimer: NodeJS.Timeout;
   cutSceneTimer: NodeJS.Timeout;
   introIdlePosition: Vector3 = new Vector3(0, 0, 0);
