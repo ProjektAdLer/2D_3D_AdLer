@@ -33,6 +33,7 @@ import IDoorPresenter from "../Door/IDoorPresenter";
 import iconLink from "../../../../../Assets/3dModels/sharedModels/3dIcons/l-3dicons-story-speech-bubble-dots.glb";
 import AvatarAnimationNames from "src/Components/Core/Domain/AvatarModels/AvatarAnimationNames";
 import IAvatarPresenter from "../Avatar/IAvatarPresenter";
+import { FocusableTypes } from "../Avatar/AvatarFocusSelection/IAvatarFocusable";
 
 export default class StoryNPCView {
   private scenePresenter: IScenePresenter;
@@ -77,6 +78,12 @@ export default class StoryNPCView {
     const result = await this.scenePresenter.loadGLTFModel(modelLink);
     this.viewModel.modelMeshes = result.meshes as Mesh[];
     this.setupModel();
+    // set model name for double click functionality
+    this.viewModel.modelMeshes.forEach((model) => {
+      if (this.viewModel.storyType === StoryElementType.Outro) {
+        model.name = FocusableTypes.outroStory.toString();
+      } else model.name = FocusableTypes.introStory.toString();
+    });
 
     this.viewModel.modelMeshes[0].accessibilityTag = {
       description: "storyNPC of type: " + this.viewModel.storyType,

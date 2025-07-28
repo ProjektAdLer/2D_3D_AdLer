@@ -2,7 +2,7 @@ import { mock, mockDeep } from "jest-mock-extended";
 import AvatarFocusSelection from "../../../../../Core/Presentation/Babylon/Avatar/AvatarFocusSelection/AvatarFocusSelection";
 import IAvatarPresenter from "../../../../../Core/Presentation/Babylon/Avatar/IAvatarPresenter";
 import IAvatarFocusable, {
-  FocusalbeTypes,
+  FocusableTypes,
 } from "../../../../../Core/Presentation/Babylon/Avatar/AvatarFocusSelection/IAvatarFocusable";
 import IScenePresenter from "../../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
@@ -253,12 +253,12 @@ describe("AvatarFocusSelection", () => {
     const focusable = mock<IAvatarFocusable>();
     jest.spyOn(focusable, "getID").mockReturnValue({
       id: 42,
-      type: FocusalbeTypes.learningElement,
+      type: FocusableTypes.learningElement,
     });
 
     systemUnderTest.registerFocusable(focusable);
 
-    systemUnderTest["setSpecialFocus"](42, FocusalbeTypes.learningElement);
+    systemUnderTest["setSpecialFocus"](42, FocusableTypes.learningElement);
     expect(systemUnderTest["specialFocus"]).toBe(true);
   });
 
@@ -267,7 +267,7 @@ describe("AvatarFocusSelection", () => {
     const focusable = mock<IAvatarFocusable>();
     jest.spyOn(focusable, "getID").mockReturnValue({
       id: 42,
-      type: FocusalbeTypes.learningElement,
+      type: FocusableTypes.learningElement,
     });
 
     systemUnderTest.registerFocusable(focusable);

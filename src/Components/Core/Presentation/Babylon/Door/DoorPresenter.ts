@@ -3,6 +3,7 @@ import DoorViewModel from "./DoorViewModel";
 import IDoorPresenter from "./IDoorPresenter";
 import LearningSpaceScoreTO from "src/Components/Core/Application/DataTransferObjects/LearningSpaceScoreTO";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
+import { FocusableTypes } from "../Avatar/AvatarFocusSelection/IAvatarFocusable";
 
 export default class DoorPresenter implements IDoorPresenter {
   constructor(private viewModel: DoorViewModel) {
@@ -14,9 +15,23 @@ export default class DoorPresenter implements IDoorPresenter {
   getFocusableCenterPosition(): Vector3 {
     return this.viewModel.position;
   }
+  getType(): { type: FocusableTypes } {
+    if (this.viewModel.isExit === false) {
+      return { type: FocusableTypes.entryDoor };
+    } else return { type: FocusableTypes.exitDoor };
+  }
 
   onFocused(): void {
     this.viewModel.isInteractable.Value = true;
+  }
+  isSpecialFocused(): boolean {
+    return this.viewModel.isSpecialFocused;
+  }
+  onSpecialFocused(): void {
+    this.viewModel.isSpecialFocused = true;
+  }
+  onSpecialUnfocused(): void {
+    this.viewModel.isSpecialFocused = false;
   }
 
   onUnfocused(): void {

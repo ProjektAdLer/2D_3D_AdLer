@@ -20,7 +20,7 @@ import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpac
 import AvatarViewModel from "./AvatarViewModel";
 import IAvatarController from "./IAvatarController";
 import ILearningSpacePresenter from "../LearningSpaces/ILearningSpacePresenter";
-import { FocusalbeTypes } from "./AvatarFocusSelection/IAvatarFocusable";
+import { FocusableTypes } from "./AvatarFocusSelection/IAvatarFocusable";
 
 const validKeys = ["w", "a", "s", "d"];
 
@@ -141,15 +141,16 @@ export default class AvatarController implements IAvatarController {
     if (pointerInfo.type === PointerEventTypes.POINTERDOUBLETAP) {
       const type =
         pointerInfo.pickInfo.pickedMesh?.name !== undefined
-          ? Number(pointerInfo.pickInfo.pickedMesh?.name)
+          ? parseInt(pointerInfo.pickInfo.pickedMesh?.name)
           : undefined;
       const id =
         pointerInfo.pickInfo.pickedMesh?.id !== undefined
-          ? Number(pointerInfo.pickInfo.pickedMesh?.id)
+          ? parseInt(pointerInfo.pickInfo.pickedMesh?.id)
           : undefined;
-
-      if (type !== undefined && type in FocusalbeTypes) {
+      if (type !== undefined && type in FocusableTypes && !Number.isNaN(id)) {
         this.viewModel.focusSelection.setSpecialFocus(id, type);
+      } else if (type !== undefined && type in FocusableTypes) {
+        this.viewModel.focusSelection.setStorySpecialFocus(type);
       }
     }
 

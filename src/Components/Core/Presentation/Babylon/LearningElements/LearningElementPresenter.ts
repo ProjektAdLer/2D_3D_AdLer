@@ -3,7 +3,7 @@ import ILearningElementPresenter from "./ILearningElementPresenter";
 import LearningElementViewModel from "./LearningElementViewModel";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 import bind from "bind-decorator";
-import { FocusalbeTypes } from "../Avatar/AvatarFocusSelection/IAvatarFocusable";
+import { FocusableTypes } from "../Avatar/AvatarFocusSelection/IAvatarFocusable";
 
 export default class LearningElementPresenter
   implements ILearningElementPresenter
@@ -26,10 +26,10 @@ export default class LearningElementPresenter
     return this.centerPosition;
   }
 
-  getID(): { id: number; type: FocusalbeTypes } {
+  getID(): { id: number; type: FocusableTypes } {
     return {
       id: this.viewModel.id,
-      type: FocusalbeTypes.learningElement,
+      type: FocusableTypes.learningElement,
     };
   }
 

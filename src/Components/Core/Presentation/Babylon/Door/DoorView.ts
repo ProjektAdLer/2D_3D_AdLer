@@ -24,6 +24,7 @@ import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import HighlightColors from "../HighlightColors";
 import ElevatorLogic from "./DoorLogic/ElevatorLogic";
 import DoorLogic from "./DoorLogic/DoorLogic";
+import { FocusableTypes } from "../Avatar/AvatarFocusSelection/IAvatarFocusable";
 
 const iconLinkEntryDoor = require("../../../../../Assets/3dModels/sharedModels/3dIcons/d-3dicons-door-in.glb");
 const iconLinkExitDoor = require("../../../../../Assets/3dModels/sharedModels/3dIcons/d-3dicons-door-out.glb");
@@ -92,11 +93,17 @@ export default class DoorView extends Readyable {
     );
     if (elevatorMesh) {
       this.viewModel.doorLogic = new ElevatorLogic(this.viewModel);
+      this.viewModel.isExit
+        ? (elevatorMesh.name = FocusableTypes.exitDoor.toString())
+        : (elevatorMesh.name = FocusableTypes.entryDoor.toString());
     } else if (doorMesh) {
       this.viewModel.doorLogic = new DoorLogic(
         this.viewModel,
         this.scenePresenter,
       );
+      this.viewModel.isExit
+        ? (doorMesh.name = FocusableTypes.exitDoor.toString())
+        : (doorMesh.name = FocusableTypes.entryDoor.toString());
     } else {
       this.logger.log(
         LogLevelTypes.WARN,

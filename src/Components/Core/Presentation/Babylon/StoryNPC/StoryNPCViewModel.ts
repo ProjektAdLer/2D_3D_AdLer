@@ -50,6 +50,7 @@ export default class StoryNPCViewModel {
   introCutsceneRotation: number = 0;
   outroIdlePosition: Vector3 = new Vector3(0, 0, 0);
   outroIdlePosRotation: number = 0;
+  public isSpecialFocused: boolean = false;
   exitDoorEnterablePosition: Vector3 = new Vector3(0, 0, 0);
 
   // readonly configuration properties
