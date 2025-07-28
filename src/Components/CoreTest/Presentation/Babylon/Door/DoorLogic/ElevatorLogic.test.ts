@@ -12,6 +12,7 @@ const createMockAnimationGroup = (name: string) => ({
   speedRatio: 0,
   onAnimationEndObservable: {
     add: jest.fn(),
+    addOnce: jest.fn(),
     clear: jest.fn(),
   },
 });
@@ -57,18 +58,15 @@ describe("ElevatorLogic", () => {
   test("open() should start the lift-up animation and register an onAnimationEnd callback", () => {
     const elevatorLogic = new ElevatorLogic(viewModel);
     elevatorLogic.open();
-    expect(elevatorLiftUpAnimation.start).toHaveBeenCalledWith(false);
+    expect(elevatorLiftUpAnimation.play).toHaveBeenCalledWith(false);
     expect(
-      elevatorLiftUpAnimation.onAnimationEndObservable.add,
+      elevatorLiftUpAnimation.onAnimationEndObservable.addOnce,
     ).toHaveBeenCalled();
 
     // Simulate the end of the animation by manually calling the registered callback
     const callback =
-      elevatorLiftUpAnimation.onAnimationEndObservable.add.mock.calls[0][0];
+      elevatorLiftUpAnimation.onAnimationEndObservable.addOnce.mock.calls[0][0];
     callback();
-    expect(
-      elevatorLiftUpAnimation.onAnimationEndObservable.clear,
-    ).toHaveBeenCalled();
     // After the animation ends, the internal state elevatorIsLifted should be set to true.
   });
 

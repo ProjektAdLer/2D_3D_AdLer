@@ -170,6 +170,12 @@ describe("StoryNPCView", () => {
           new AnimationGroup("TestAnimation"),
           new Scene(new NullEngine()),
         ],
+        particleSystems: [],
+        skeletons: [],
+        transformNodes: [],
+        geometries: [],
+        lights: [],
+        spriteManagers: [],
       } as ISceneLoaderAsyncResult);
 
       await systemUnderTest["loadIconModel"]();
@@ -404,7 +410,7 @@ describe("StoryNPCView", () => {
     test("moveToIdlePosition sets idlePosRotation on modelRootNode when idle position is reached", () => {
       viewModel.storyType = StoryElementType.Intro;
       viewModel.introIdlePosition = new Vector3(4, 2, 0);
-      viewModel.introIdlePosRotation = Math.PI;
+      viewModel.introIdlePosRotation = 180; // 180 degrees, not radians
       viewModel.modelRootNode = new TransformNode(
         "mockRootNode",
         new Scene(new NullEngine()),

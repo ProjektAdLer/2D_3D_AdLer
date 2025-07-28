@@ -292,7 +292,7 @@ export default class StoryNPCView {
     const exitPosition = this.viewModel.exitDoorEnterablePosition;
     await new Promise<void>((resolve) => setTimeout(resolve, 500));
     this.viewModel.characterNavigator.startMovement(exitPosition, async () => {
-      await new Promise<void>((resolve) => setTimeout(resolve, 200));
+      await new Promise<void>((resolve) => setTimeout(resolve, 500));
       await this.openExitDoorAndDispose();
     });
   }

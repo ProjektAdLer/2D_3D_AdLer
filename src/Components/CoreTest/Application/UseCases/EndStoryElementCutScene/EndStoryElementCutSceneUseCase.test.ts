@@ -8,6 +8,7 @@ import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import StoryElementEntity from "../../../../Core/Domain/Entities/StoryElementEntity";
+import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
 
 const entityContainerMock = mock<IEntityContainer>();
 const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();

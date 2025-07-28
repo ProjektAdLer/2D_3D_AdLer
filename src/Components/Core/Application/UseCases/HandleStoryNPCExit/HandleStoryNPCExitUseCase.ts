@@ -60,7 +60,7 @@ export default class HandleStoryNPCExitUseCase
         setTimeout(() => {
           exitDoorPresenter.close();
           resolve();
-        }, 500);
+        }, 100);
       });
     });
   }
