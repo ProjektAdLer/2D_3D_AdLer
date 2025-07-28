@@ -4,9 +4,7 @@ import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import SCENE_TYPES, {
   ScenePresenterFactory,
 } from "~DependencyInjection/Scenes/SCENE_TYPES";
-import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
-import IHandleStoryNPCExitUseCase from "src/Components/Core/Application/UseCases/HandleStoryNPCExit/IHandleStoryNPCExitUseCase";
 import {
   ActionManager,
   AnimationGroup,
@@ -298,15 +296,8 @@ export default class StoryNPCView {
   }
 
   private async openExitDoorAndDispose(): Promise<void> {
-    const handleStoryNPCExitUseCase =
-      CoreDIContainer.get<IHandleStoryNPCExitUseCase>(
-        USECASE_TYPES.IHandleStoryNPCExitUseCase,
-      );
-
     const openDoorAndThen = async (action: () => void) => {
-      await handleStoryNPCExitUseCase.executeAsync({
-        storyType: this.viewModel.storyType,
-      });
+      await this.controller.handleNPCExit(this.viewModel.storyType);
       action();
     };
 

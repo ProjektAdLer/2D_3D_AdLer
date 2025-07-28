@@ -11,6 +11,8 @@ import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILogge
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import { LearningElementTypes } from "src/Components/Core/Domain/Types/LearningElementTypes";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+import IHandleStoryNPCExitUseCase from "src/Components/Core/Application/UseCases/HandleStoryNPCExit/IHandleStoryNPCExitUseCase";
 
 export default class StoryNPCController implements IStoryNPCController {
   private logger: ILoggerPort;
@@ -128,5 +130,17 @@ export default class StoryNPCController implements IStoryNPCController {
       mesh.scaling = Vector3.One();
     });
     this.viewModel.iconMeshes[0].rotation = new Vector3(0, -Math.PI / 4, 0);
+  }
+
+  @bind
+  async handleNPCExit(storyType: StoryElementType): Promise<void> {
+    const handleStoryNPCExitUseCase =
+      CoreDIContainer.get<IHandleStoryNPCExitUseCase>(
+        USECASE_TYPES.IHandleStoryNPCExitUseCase,
+      );
+
+    await handleStoryNPCExitUseCase.executeAsync({
+      storyType: storyType,
+    });
   }
 }
