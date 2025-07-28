@@ -48,7 +48,7 @@ export default function LearningWorldScorePanel({
       max={scoreInfo?.requiredScore}
       progressbarText={percentage.toString() + "%"}
       iconClassName="font-bold text-center text-yellow-300 mobile-portrait:scale-75"
-      barClassName="w-20 font-bold text-center text-yellow-300 mobile-portrait:scale-75"
+      barClassName="w-20 font-bold text-center text-yellow-300 mobile-portrait:scale-75 mx-1"
       icon={worldIcon}
       tooltip={translate("worldScoreToolTip").toString()}
     />

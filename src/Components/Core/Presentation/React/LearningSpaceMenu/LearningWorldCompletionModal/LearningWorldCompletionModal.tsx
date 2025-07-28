@@ -45,7 +45,7 @@ export default function LearningWorldCompletionModal({
       <div className="flex flex-col items-center justify-center">
         {
           <img
-            className="mb-4 w-20 mobile-landscape:w-10 mobile-portrait:w-16"
+            className="my-1 w-20 mobile-landscape:w-10 mobile-portrait:w-16"
             src={SolutionIcon}
             alt=""
           ></img>
@@ -57,7 +57,7 @@ export default function LearningWorldCompletionModal({
             <div className="flex flex-col justify-center">
               <p className="mt-6 text-lg font-bold">{evaluationLinkName}</p>
               <a
-                className="m-3 text-2xl font-bold text-adlergreen underline"
+                className="m-3 text-center text-2xl font-bold text-adlergreen underline"
                 href={evaluationLink}
                 target="_blank"
                 rel="noreferrer"
@@ -68,7 +68,7 @@ export default function LearningWorldCompletionModal({
             </div>
           )}
 
-          <div className="m-2 flex max-w-96 justify-center">
+          <div className="m-2 flex max-w-96 justify-center break-all">
             {evaluationLinkText ? (
               <p>{evaluationLinkText}</p>
             ) : (
@@ -79,7 +79,7 @@ export default function LearningWorldCompletionModal({
           <p className="mt-8 text-sm">
             {translate("link_Homepage")}
             <a
-              className="font-bold text-adlergreen underline"
+              className="text-center font-bold text-adlergreen underline"
               href="https://projekt-adler.eu"
               target="_blank"
               rel="noreferrer"

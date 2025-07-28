@@ -28,7 +28,7 @@ export default function Progressbar(props: Readonly<ProgressbarProps>) {
               <img
                 className={tailwindMerge(
                   props.iconClassName,
-                  "absolute align-middle items-center w-[48px] lg:w-[69px]",
+                  "absolute w-[48px] items-center align-middle lg:w-[69px]",
                 )}
                 src={props.icon}
                 alt="Temp Icon"
@@ -42,11 +42,11 @@ export default function Progressbar(props: Readonly<ProgressbarProps>) {
           )}
           {/* no button */}
           {props.button === false && (
-            <div className="relative flex items-center justify-center w-10 h-10 p-1 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 sm:w-10 sm:h-10 md:w-14 md:h-14 lg:w-16 lg:h-16">
+            <div className="relative flex aspect-square h-10 w-10 items-center justify-center p-1 sm:h-10 sm:w-10 xl:h-12 xl:w-12 onek:h-16 onek:w-16 mobile-landscape:h-9 mobile-landscape:w-9">
               <img
                 className={tailwindMerge(
                   props.iconClassName,
-                  "absolute align-middle items-center w-[48px] lg:w-[69px]",
+                  "absolute w-[48px] items-center align-middle lg:w-[69px]",
                 )}
                 src={props.icon}
                 alt="Temp Icon"
@@ -65,11 +65,11 @@ export default function Progressbar(props: Readonly<ProgressbarProps>) {
       <div
         className={tailwindMerge(
           props.barClassName,
-          "relative align-middle rounded-full bg-adlerblue/80 dark:bg-gray-700 -z-20",
+          "relative -z-20 rounded-full bg-adlerblue/80 align-middle dark:bg-gray-700",
         )}
       >
         <div
-          className="absolute h-full rounded-full bg-adlerdarkblue -z-10"
+          className="absolute -z-10 h-full rounded-full bg-adlerdarkblue"
           style={{
             width:
               Math.min((props.value / props.max) * 100, 100).toString() + "%",

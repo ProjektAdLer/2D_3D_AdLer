@@ -22,13 +22,13 @@ export default function LearningSpaceNamePanel({
 
   return (
     <StyledContainer className={tailwindMerge(className)}>
-      <div className="flex items-center justify-between rounded-full bg-white bg-opacity-45 p-1 px-6">
+      <div className="max-w-1/4 flex items-center justify-between rounded-full bg-white bg-opacity-45 p-1 px-6 xl:scale-75 onek:scale-100">
         <img
           className="mr-4 w-8 lg:w-14 portrait:mr-1.5"
           src={spaceIcon}
           alt="Learning-Space-Icon"
         ></img>
-        <h1 className="text-md text-outline font-black text-adlerdarkblue lg:text-4xl">
+        <h1 className="text-md text-outline truncate font-black text-adlerdarkblue lg:text-4xl">
           {name}
         </h1>
       </div>

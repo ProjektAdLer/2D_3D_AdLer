@@ -57,16 +57,16 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
   if (!viewModel || !controller || !isOpen) return null;
 
   return (
-    <div className="fixed top-0 left-0 w-screen h-screen z-[20000] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto flex justify-center items-center pb-24">
-      <div className="grid justify-center w-full p-3">
-        <section className="flex items-center justify-center w-full gap-8 portrait:flex mobile-landscape:pt-10 xl:m-3 xl:mt-6">
+    <div className="fixed left-0 top-0 z-[20000] flex h-screen w-screen items-center justify-center bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto pb-24">
+      <div className="grid w-full justify-center p-3">
+        <section className="flex w-full items-center justify-center gap-8 xl:m-3 xl:mt-6 mobile-landscape:pt-10 portrait:flex">
           <img
-            className="w-full xs:w-16 md:w-24 lg:w-32 xl:w-20 onek:w-32 twok:w-40 portrait:w-16 animate-wiggle place-self-end mobile-landscape:w-12 mobile-landscape:m-2"
+            className="xs:w-16 w-full animate-wiggle place-self-end md:w-24 lg:w-32 xl:w-20 onek:w-32 twok:w-40 mobile-landscape:m-2 mobile-landscape:w-12 portrait:w-16"
             src={logo}
             alt="AdlerEngine Logo"
           />
           {loadingText && (
-            <p className="text-sm font-bold lg:text-lg xl:text-2xl text-outline mobile-landscape:text-lg tablet-portrait:text-xl text-adlerdarkblue">
+            <p className="text-outline text-sm font-bold text-adlerdarkblue lg:text-lg xl:text-2xl mobile-landscape:text-lg tablet-portrait:text-xl">
               {loadingText}
             </p>
           )}
@@ -81,28 +81,28 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
 
         {/* Loading screen controls */}
 
-        <div className="flex flex-col items-center justify-center h-16 pt-16 portrait:pt-8 mobile-landscape:pt-4">
+        <div className="flex h-16 flex-col items-center justify-center pt-16 xl:pt-4 mobile-landscape:pt-4 portrait:pt-8">
           {!canClose && (
-            <div className="flex gap-1 border-4 border-white rounded-lg ">
-              <div className="w-6 h-6 animateColor"></div>
-              <div className="w-6 h-6 animateColor1"></div>
-              <div className="w-6 h-6 animateColor2"></div>
-              <div className="w-6 h-6 animateColor3"></div>
-              <div className="w-6 h-6 animateColor4"></div>
-              <div className="w-6 h-6 animateColor5"></div>
-              <div className="w-6 h-6 animateColor6"></div>
-              <div className="w-6 h-6 animateColor7"></div>
-              <div className="w-6 h-6 animateColor8"></div>
-              <div className="w-6 h-6 animateColor9"></div>
+            <div className="flex gap-1 rounded-lg border-4 border-white">
+              <div className="animateColor h-6 w-6"></div>
+              <div className="animateColor1 h-6 w-6"></div>
+              <div className="animateColor2 h-6 w-6"></div>
+              <div className="animateColor3 h-6 w-6"></div>
+              <div className="animateColor4 h-6 w-6"></div>
+              <div className="animateColor5 h-6 w-6"></div>
+              <div className="animateColor6 h-6 w-6"></div>
+              <div className="animateColor7 h-6 w-6"></div>
+              <div className="animateColor8 h-6 w-6"></div>
+              <div className="animateColor9 h-6 w-6"></div>
             </div>
           )}
 
           {canClose && !autoClose && (
-            <section className="flex justify-center h-12">
+            <section className="flex h-12 justify-center">
               <StyledButton
                 shape={"freeFloatCenter"}
                 onClick={() => controller.closeLoadingScreen()}
-                className="p-5 font-bold scale-60 lg:scale-90"
+                className="scale-60 p-5 font-bold lg:scale-90 xl:p-1"
                 title={props.tooltip}
               >
                 {translate(props.i18nKeys.button)}
@@ -111,8 +111,8 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
           )}
         </div>
       </div>
-      <div className="fixed flex flex-col items-center justify-center w-full gap-2 px-4 bottom-4">
-        <p className="text-sm portrait:text-[10px] font-medium mobile-landscape:text-xs text-adlerdarkblue portrait:leading-normal">
+      <div className="fixed bottom-4 flex w-full flex-col items-center justify-center gap-2 px-4">
+        <p className="text-sm font-medium text-adlerdarkblue mobile-landscape:text-xs portrait:text-[10px] portrait:leading-normal">
           <Trans
             i18nKey="projectInformation"
             ns="learningSpace"
@@ -123,7 +123,7 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
                 href="https://projekt-adler.eu"
                 title={translate("linkInfo").toString()}
                 rel="noreferrer"
-                className="underline text-adleroceanblue hover:text-nodehandlecolor"
+                className="text-adleroceanblue underline hover:text-nodehandlecolor"
               >
                 {}
               </a>,
@@ -132,7 +132,7 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
           />
         </p>
 
-        <p className="text-xs portrait:text-[8px] portrait:leading-normal mobile-landscape:text-2xs text-center">
+        <p className="text-center text-xs mobile-landscape:text-2xs portrait:text-[8px] portrait:leading-normal">
           {translate("copyright", { ns: "start" })}
         </p>
       </div>
