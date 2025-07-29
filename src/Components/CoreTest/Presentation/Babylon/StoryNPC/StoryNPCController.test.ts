@@ -143,4 +143,13 @@ describe("StoryNPCController", () => {
     expect(bottomTooltipPresenterMock.hide).toHaveBeenCalledTimes(1);
     expect(bottomTooltipPresenterMock.hide).toHaveBeenCalledWith(42);
   });
+
+  test("accessibilityPicked calls onPicked", () => {
+    //@ts-ignore
+    const onPickedSpy = jest.spyOn(systemUnderTest, "onPicked");
+
+    systemUnderTest.accessibilityPicked();
+
+    expect(onPickedSpy).toHaveBeenCalledTimes(1);
+  });
 });
