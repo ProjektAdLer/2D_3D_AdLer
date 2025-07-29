@@ -24,12 +24,24 @@ describe("NarrativeFrameworkView", () => {
   afterAll(() => {
     CoreDIContainer.restore();
   });
-  test("should render", () => {
+
+  //ANF-ID: [ELG0037]
+  test("should render if type intro", () => {
     mockViewModel.introText = "blah";
     useBuilderMock([mockViewModel, mockController]);
     render(
       <Provider container={CoreDIContainer}>
         <NarrativeFramework type="intro" />
+      </Provider>,
+    );
+  });
+  //ANF-ID: [ELG0038]
+  test("should render if type outro", () => {
+    mockViewModel.outroText = "blah";
+    useBuilderMock([mockViewModel, mockController]);
+    render(
+      <Provider container={CoreDIContainer}>
+        <NarrativeFramework type="outro" />
       </Provider>,
     );
   });
