@@ -20,7 +20,7 @@ import CinemaStripes from "~ReactComponents/LearningSpaceDisplay/CinemaStripes/C
 export default function LearningSpace() {
   return (
     <div className="root grid h-0 min-h-[90vh] grid-cols-9 grid-rows-6 lg:min-h-[90vh]">
-      <section className="fixed right-2 top-2 z-20 col-span-2 col-start-8 row-start-1 flex flex-col-reverse items-center justify-center gap-1 space-x-reverse lg:flex-row-reverse lg:space-x-2 portrait:flex-col">
+      <section className="fixed right-2 top-2 z-20 col-span-2 col-start-8 row-start-1 flex flex-col-reverse items-center justify-center gap-1 space-x-reverse lg:flex-row-reverse lg:space-x-2 xl:flex-col xl:items-start xl:justify-start onek:flex-row onek:items-center onek:justify-center portrait:flex-col">
         <ProgressScorePanel />
         <LearningSpaceGoalPanel />
       </section>

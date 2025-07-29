@@ -152,6 +152,15 @@ describe("StoryNPCController", () => {
   });
 
   test("accessibilityPicked calls onPicked", () => {
+    //@ts-ignore
+    const onPickedSpy = jest.spyOn(systemUnderTest, "onPicked");
+
+    systemUnderTest.accessibilityPicked();
+
+    expect(onPickedSpy).toHaveBeenCalledTimes(1);
+  });
+
+  test("accessibilityPicked calls onPicked", () => {
     const onPickedSpy = jest.spyOn(systemUnderTest, "onPicked" as any);
 
     systemUnderTest.accessibilityPicked();

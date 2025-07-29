@@ -252,4 +252,34 @@ describe("StoryNPCPresenter", () => {
     expect(viewModel.currentlyRunningSequence).toBe(StoryElementType.Outro);
     expect(viewModel.state.Value).toBe(StoryNPCState.CutScene);
   });
+
+  test("getType gets correct type if its an outro", () => {
+    viewModel.storyType = StoryElementType.Outro;
+
+    expect(systemUnderTest.getType()).toStrictEqual({ type: 2 });
+  });
+  test("getType gets correct type if its not an outro", () => {
+    viewModel.storyType = StoryElementType.Intro;
+
+    expect(systemUnderTest.getType()).toStrictEqual({ type: 1 });
+  });
+  test("isSpecialFocused returns isSpecialfocused from viewModel", () => {
+    viewModel.isSpecialFocused = true;
+
+    expect(systemUnderTest.isSpecialFocused()).toBe(true);
+  });
+  test("onSpecialFocused sets isSpecialFocused to true", () => {
+    viewModel.isSpecialFocused = false;
+
+    systemUnderTest.onSpecialFocused();
+
+    expect(viewModel.isSpecialFocused).toBe(true);
+  });
+  test("onSpecialUnfocused sets isSpecialFocused to false", () => {
+    viewModel.isSpecialFocused = true;
+
+    systemUnderTest.onSpecialUnfocused();
+
+    expect(viewModel.isSpecialFocused).toBe(false);
+  });
 });

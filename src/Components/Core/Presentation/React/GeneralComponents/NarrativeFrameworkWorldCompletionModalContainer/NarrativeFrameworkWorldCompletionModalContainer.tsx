@@ -13,7 +13,7 @@ export default function NarrativeFrameworkWorldCompletionModalContainer() {
   if (!viewModel || !controller) return null;
 
   return (
-    <div className="w-full h-80">
+    <div className="h-80 w-full">
       <NarrativeFramework type="outro" />
     </div>
   );
