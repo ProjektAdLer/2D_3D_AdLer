@@ -1,4 +1,4 @@
-import { AnimationGroup, Scene, NullEngine } from "@babylonjs/core";
+import { AnimationGroup } from "@babylonjs/core";
 import DoorViewModel from "../../../../../Core/Presentation/Babylon/Door/DoorViewModel";
 import ElevatorLogic from "../../../../../Core/Presentation/Babylon/Door/DoorLogic/ElevatorLogic";
 
@@ -10,6 +10,7 @@ const createMockAnimationGroup = (name: string) => ({
   play: jest.fn(),
   start: jest.fn(),
   speedRatio: 0,
+  isPlaying: false,
   onAnimationEndObservable: {
     add: jest.fn(),
     addOnce: jest.fn(),
@@ -43,11 +44,28 @@ describe("ElevatorLogic", () => {
     // For an entry door, the elevator open animation is played during initialization.
   });
 
-  test("should enable proximity behavior when isExit and isOpen are set for exit doors", () => {
-    // Simulate an exit door that is already open
+  test("should stop all animations with children on initialization", () => {
+    new ElevatorLogic(viewModel);
+    expect(elevatorOpenAnimation.stop).toHaveBeenCalled();
+    expect(elevatorLiftUpAnimation.stop).toHaveBeenCalled();
+  });
+
+  test("should not stop animations without children", () => {
+    elevatorOpenAnimation.children = null;
+    elevatorLiftUpAnimation.children = null;
+
+    new ElevatorLogic(viewModel);
+
+    expect(elevatorOpenAnimation.stop).not.toHaveBeenCalled();
+    expect(elevatorLiftUpAnimation.stop).not.toHaveBeenCalled();
+  });
+
+  test("should enable proximity behavior for exit elevators that are open", () => {
     viewModel.isExit = true;
     viewModel.isOpen = { Value: true };
+
     const elevatorLogic = new ElevatorLogic(viewModel);
+
     // Clear any previous calls for a fresh check
     elevatorLiftUpAnimation.play.mockClear();
     elevatorLogic.avatarFar();
@@ -55,9 +73,24 @@ describe("ElevatorLogic", () => {
     expect(elevatorLiftUpAnimation.play).toHaveBeenCalledWith(false);
   });
 
+  test("should not enable proximity behavior for exit elevators that are not open", () => {
+    viewModel.isExit = true;
+    viewModel.isOpen = { Value: false };
+
+    const elevatorLogic = new ElevatorLogic(viewModel);
+
+    elevatorLiftUpAnimation.play.mockClear();
+    elevatorLogic.avatarFar();
+    expect(elevatorLiftUpAnimation.play).not.toHaveBeenCalled();
+  });
+
   test("open() should start the lift-up animation and register an onAnimationEnd callback", () => {
     const elevatorLogic = new ElevatorLogic(viewModel);
-    elevatorLogic.open();
+    const onAnimationEnd = jest.fn();
+
+    elevatorLogic.open(onAnimationEnd);
+
+    expect(elevatorLiftUpAnimation.speedRatio).toBe(1);
     expect(elevatorLiftUpAnimation.play).toHaveBeenCalledWith(false);
     expect(
       elevatorLiftUpAnimation.onAnimationEndObservable.addOnce,
@@ -67,7 +100,38 @@ describe("ElevatorLogic", () => {
     const callback =
       elevatorLiftUpAnimation.onAnimationEndObservable.addOnce.mock.calls[0][0];
     callback();
-    // After the animation ends, the internal state elevatorIsLifted should be set to true.
+
+    expect(onAnimationEnd).toHaveBeenCalled();
+  });
+
+  test("open() should work without onAnimationEnd callback", () => {
+    const elevatorLogic = new ElevatorLogic(viewModel);
+
+    expect(() => {
+      elevatorLogic.open();
+    }).not.toThrow();
+
+    expect(elevatorLiftUpAnimation.speedRatio).toBe(1);
+    expect(elevatorLiftUpAnimation.play).toHaveBeenCalledWith(false);
+  });
+
+  test("close() should reverse the lift animation and stop it when done", () => {
+    const elevatorLogic = new ElevatorLogic(viewModel);
+
+    elevatorLogic.close();
+
+    expect(elevatorLiftUpAnimation.speedRatio).toBe(-1);
+    expect(elevatorLiftUpAnimation.play).toHaveBeenCalledWith(false);
+    expect(
+      elevatorLiftUpAnimation.onAnimationEndObservable.addOnce,
+    ).toHaveBeenCalled();
+
+    // Simulate animation end
+    const callback =
+      elevatorLiftUpAnimation.onAnimationEndObservable.addOnce.mock.calls[0][0];
+    callback();
+
+    expect(elevatorLiftUpAnimation.stop).toHaveBeenCalled();
   });
 
   test("avatarClose() should play the animation with speedRatio 1 if elevator is not lifted", () => {
@@ -78,6 +142,34 @@ describe("ElevatorLogic", () => {
     elevatorLogic.avatarClose();
     expect(elevatorLiftUpAnimation.speedRatio).toBe(1);
     expect(elevatorLiftUpAnimation.play).toHaveBeenCalledWith(false);
+  });
+
+  test("avatarClose() should not play animation if proximity behavior is disabled", () => {
+    viewModel.isExit = true;
+    viewModel.isOpen = { Value: false }; // This disables proximity behavior
+
+    const elevatorLogic = new ElevatorLogic(viewModel);
+    elevatorLiftUpAnimation.play.mockClear();
+
+    elevatorLogic.avatarClose();
+
+    expect(elevatorLiftUpAnimation.play).not.toHaveBeenCalled();
+  });
+
+  test("avatarClose() should not play animation if elevator is already lifted", () => {
+    const elevatorLogic = new ElevatorLogic(viewModel);
+
+    // First lift the elevator
+    elevatorLogic.open();
+    const callback =
+      elevatorLiftUpAnimation.onAnimationEndObservable.addOnce.mock.calls[0][0];
+    callback(); // This sets elevatorIsLifted to true
+
+    elevatorLiftUpAnimation.play.mockClear();
+
+    elevatorLogic.avatarClose();
+
+    expect(elevatorLiftUpAnimation.play).not.toHaveBeenCalled();
   });
 
   test("avatarFar() should play the animation with speedRatio -1 and reset elevatorIsLifted", () => {
@@ -91,5 +183,93 @@ describe("ElevatorLogic", () => {
     elevatorLiftUpAnimation.play.mockClear();
     elevatorLogic.avatarClose();
     expect(elevatorLiftUpAnimation.play).toHaveBeenCalledWith(false);
+  });
+
+  test("avatarFar() should not play animation if proximity behavior is disabled", () => {
+    viewModel.isExit = true;
+    viewModel.isOpen = { Value: false }; // This disables proximity behavior
+
+    const elevatorLogic = new ElevatorLogic(viewModel);
+    elevatorLiftUpAnimation.play.mockClear();
+
+    elevatorLogic.avatarFar();
+
+    expect(elevatorLiftUpAnimation.play).not.toHaveBeenCalled();
+  });
+
+  test("should handle missing animations gracefully", () => {
+    viewModel.doorAnimations = [];
+
+    expect(() => {
+      new ElevatorLogic(viewModel);
+    }).not.toThrow();
+  });
+
+  test("should handle undefined doorAnimations gracefully", () => {
+    viewModel.doorAnimations = undefined;
+
+    expect(() => {
+      new ElevatorLogic(viewModel);
+    }).not.toThrow();
+  });
+
+  test("should handle open() when elevatorAnimationLiftUp is undefined", () => {
+    viewModel.doorAnimations = [elevatorOpenAnimation]; // Only one animation
+
+    const elevatorLogic = new ElevatorLogic(viewModel);
+
+    expect(() => {
+      elevatorLogic.open();
+    }).not.toThrow();
+  });
+
+  test("should handle close() when elevatorAnimationLiftUp is undefined", () => {
+    viewModel.doorAnimations = [elevatorOpenAnimation]; // Only one animation
+
+    const elevatorLogic = new ElevatorLogic(viewModel);
+
+    expect(() => {
+      elevatorLogic.close();
+    }).not.toThrow();
+  });
+
+  test("should handle avatarClose() when elevatorAnimationLiftUp is undefined", () => {
+    viewModel.doorAnimations = [elevatorOpenAnimation]; // Only one animation
+
+    const elevatorLogic = new ElevatorLogic(viewModel);
+
+    expect(() => {
+      elevatorLogic.avatarClose();
+    }).not.toThrow();
+  });
+
+  test("should handle avatarFar() when elevatorAnimationLiftUp is undefined", () => {
+    viewModel.doorAnimations = [elevatorOpenAnimation]; // Only one animation
+
+    const elevatorLogic = new ElevatorLogic(viewModel);
+
+    // This should throw because the implementation tries to set speedRatio on undefined
+    expect(() => {
+      elevatorLogic.avatarFar();
+    }).toThrow();
+  });
+
+  test("should set initial state correctly for entry elevator", () => {
+    viewModel.isExit = false;
+
+    new ElevatorLogic(viewModel);
+
+    // For entry elevators, the initial elevator animation should play
+    expect(elevatorOpenAnimation.play).toHaveBeenCalledWith(false);
+  });
+
+  test("should not play initial animation for exit elevator", () => {
+    viewModel.isExit = true;
+    viewModel.isOpen = { Value: false };
+
+    new ElevatorLogic(viewModel);
+
+    // For exit elevators that aren't open, no initial animation should play
+    expect(elevatorOpenAnimation.play).not.toHaveBeenCalled();
   });
 });

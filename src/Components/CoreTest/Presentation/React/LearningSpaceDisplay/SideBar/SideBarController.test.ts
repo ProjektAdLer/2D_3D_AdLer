@@ -7,13 +7,28 @@ import PRESENTATION_TYPES from "../../../../../Core/DependencyInjection/Presenta
 import IBreakTimeNotificationOverviewPresenter from "../../../../../Core/Presentation/React/GeneralComponents/BreakTimeNotificationOverview/IBreakTimeNotificationOverviewPresenter";
 import ILearningWorldCompletionModalPresenter from "../../../../../Core/Presentation/React/LearningSpaceMenu/LearningWorldCompletionModal/ILearningWorldCompletionModalPresenter";
 import INarrativeFrameworkLearningSpaceContainerPresenter from "../../../../../Core/Presentation/React/GeneralComponents/NarrativeFrameworkLearningSpaceContainer/INarrativeFrameworkLearningSpaceContainerPresenter";
+import IStoryElementPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/StoryElement/IStoryElementPresenter";
+import { StoryElementType } from "../../../../../Core/Domain/Types/StoryElementType";
 const historyPushMock = jest.spyOn(history, "push");
 
 describe("SideBarController", () => {
   let systemUnderTest: SideBarController;
 
+  beforeAll(() => {
+    CoreDIContainer.snapshot();
+  });
+
+  afterAll(() => {
+    CoreDIContainer.restore();
+  });
+
   beforeEach(() => {
     systemUnderTest = new SideBarController();
+  });
+
+  afterEach(() => {
+    CoreDIContainer.restore();
+    CoreDIContainer.snapshot();
   });
 
   test("onMainMenuButtonClicked calls history.push with '/'", () => {
@@ -74,5 +89,29 @@ describe("SideBarController", () => {
     systemUnderTest.onNarrativeFrameworkIntroButtonClicked();
 
     expect(presenterMock.openModal).toHaveBeenCalledTimes(1);
+  });
+
+  test("onIntroStoryButtonClicked calls open on DI-bound IStoryElementPresenter with Intro type", () => {
+    const presenterMock = mock<IStoryElementPresenter>();
+    CoreDIContainer.bind<IStoryElementPresenter>(
+      PRESENTATION_TYPES.IStoryElementPresenter,
+    ).toConstantValue(presenterMock);
+
+    systemUnderTest.onIntroStoryButtonClicked();
+
+    expect(presenterMock.open).toHaveBeenCalledTimes(1);
+    expect(presenterMock.open).toHaveBeenCalledWith(StoryElementType.Intro);
+  });
+
+  test("onOutroStoryButtonClicked calls open on DI-bound IStoryElementPresenter with Outro type", () => {
+    const presenterMock = mock<IStoryElementPresenter>();
+    CoreDIContainer.bind<IStoryElementPresenter>(
+      PRESENTATION_TYPES.IStoryElementPresenter,
+    ).toConstantValue(presenterMock);
+
+    systemUnderTest.onOutroStoryButtonClicked();
+
+    expect(presenterMock.open).toHaveBeenCalledTimes(1);
+    expect(presenterMock.open).toHaveBeenCalledWith(StoryElementType.Outro);
   });
 });

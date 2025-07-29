@@ -10,6 +10,7 @@ import IStoryElementPresenter from "../../../../Core/Presentation/React/Learning
 import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
 import ILoggerPort from "../../../../Core/Application/Ports/Interfaces/ILoggerPort";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
+import { FocusableTypes } from "../../../../Core/Presentation/Babylon/Avatar/AvatarFocusSelection/IAvatarFocusable";
 
 const storyElementPresenterMock = mockDeep<IStoryElementPresenter>();
 const loggerMock = mock<ILoggerPort>();
@@ -86,7 +87,7 @@ describe("StoryNPCPresenter", () => {
   // ANF-ID: [EZZ0025,EWE0043]
   test("onStoryElementCutSceneFinished sets state to RandomMovement when currently CutScene is set", () => {
     viewModel.state.Value = StoryNPCState.CutScene;
-    systemUnderTest.onStoryElementCutSceneFinished();
+    systemUnderTest.onStoryElementCutSceneFinished(StoryElementType.Intro);
 
     expect(viewModel.state.Value).toBe(StoryNPCState.RandomMovement);
   });
@@ -95,5 +96,160 @@ describe("StoryNPCPresenter", () => {
     viewModel.state.Value = StoryNPCState.Stop;
     systemUnderTest.changeStateFromStopToRandomMovement();
     expect(viewModel.state.Value).toBe(StoryNPCState.RandomMovement);
+  });
+
+  test("changeStateFromStopToRandomMovement does not change state when not Stop", () => {
+    viewModel.state.Value = StoryNPCState.Idle;
+    systemUnderTest.changeStateFromStopToRandomMovement();
+    expect(viewModel.state.Value).toBe(StoryNPCState.Idle);
+  });
+
+  test("getType returns outroStory for Outro story type", () => {
+    viewModel.storyType = StoryElementType.Outro;
+
+    const result = systemUnderTest.getType();
+
+    expect(result.type).toBe(FocusableTypes.outroStory);
+  });
+
+  test("getType returns introStory for Intro story type", () => {
+    viewModel.storyType = StoryElementType.Intro;
+
+    const result = systemUnderTest.getType();
+
+    expect(result.type).toBe(FocusableTypes.introStory);
+  });
+
+  test("getType returns introStory for IntroOutro story type", () => {
+    viewModel.storyType = StoryElementType.IntroOutro;
+
+    const result = systemUnderTest.getType();
+
+    expect(result.type).toBe(FocusableTypes.introStory);
+  });
+
+  test("isSpecialFocused returns viewModel isSpecialFocused value", () => {
+    viewModel.isSpecialFocused = true;
+
+    expect(systemUnderTest.isSpecialFocused()).toBe(true);
+
+    viewModel.isSpecialFocused = false;
+
+    expect(systemUnderTest.isSpecialFocused()).toBe(false);
+  });
+
+  test("onSpecialFocused sets isSpecialFocused to true", () => {
+    viewModel.isSpecialFocused = false;
+
+    systemUnderTest.onSpecialFocused();
+
+    expect(viewModel.isSpecialFocused).toBe(true);
+  });
+
+  test("onSpecialUnfocused sets isSpecialFocused to false", () => {
+    viewModel.isSpecialFocused = true;
+
+    systemUnderTest.onSpecialUnfocused();
+
+    expect(viewModel.isSpecialFocused).toBe(false);
+  });
+
+  test("onStoryElementCutSceneTriggered sets currentlyRunningSequence for matching story type", () => {
+    viewModel.storyType = StoryElementType.IntroOutro;
+
+    systemUnderTest.onStoryElementCutSceneTriggered(StoryElementType.Intro);
+
+    expect(viewModel.currentlyRunningSequence).toBe(StoryElementType.Intro);
+    expect(viewModel.state.Value).toBe(StoryNPCState.CutScene);
+  });
+
+  test("onStoryElementCutSceneTriggered logs info message for matching story type", () => {
+    viewModel.storyType = StoryElementType.Intro;
+
+    systemUnderTest.onStoryElementCutSceneTriggered(StoryElementType.Intro);
+
+    expect(loggerMock.log).toHaveBeenCalledWith(
+      expect.any(String), // LogLevelTypes.INFO
+      expect.stringContaining("cutscene triggered"),
+    );
+  });
+
+  test("onStoryElementCutSceneFinished sets introWasTriggered for IntroOutro NPC", () => {
+    viewModel.state.Value = StoryNPCState.CutScene;
+    viewModel.storyType = StoryElementType.IntroOutro;
+    viewModel.introWasTriggered = false;
+
+    systemUnderTest.onStoryElementCutSceneFinished(StoryElementType.Intro);
+
+    expect(viewModel.introWasTriggered).toBe(true);
+  });
+
+  test("onStoryElementCutSceneFinished sets state to ExitRoom when exitAfterIntro is true", () => {
+    viewModel.state.Value = StoryNPCState.CutScene;
+    viewModel.exitAfterIntro = true;
+
+    systemUnderTest.onStoryElementCutSceneFinished(StoryElementType.Intro);
+
+    expect(viewModel.state.Value).toBe(StoryNPCState.ExitRoom);
+  });
+
+  test("onStoryElementCutSceneFinished sets state to ExitRoom when exitAfterOutro is true", () => {
+    viewModel.state.Value = StoryNPCState.CutScene;
+    viewModel.exitAfterOutro = true;
+
+    systemUnderTest.onStoryElementCutSceneFinished(StoryElementType.Outro);
+
+    expect(viewModel.state.Value).toBe(StoryNPCState.ExitRoom);
+  });
+
+  test("onStoryElementCutSceneFinished sets state to RandomMovement when no exit condition", () => {
+    viewModel.state.Value = StoryNPCState.CutScene;
+    viewModel.exitAfterIntro = false;
+    viewModel.exitAfterOutro = false;
+
+    systemUnderTest.onStoryElementCutSceneFinished(StoryElementType.Intro);
+
+    expect(viewModel.state.Value).toBe(StoryNPCState.RandomMovement);
+  });
+
+  test("onStoryElementCutSceneFinished does not change state when not in CutScene", () => {
+    viewModel.state.Value = StoryNPCState.Idle;
+
+    systemUnderTest.onStoryElementCutSceneFinished(StoryElementType.Intro);
+
+    expect(viewModel.state.Value).toBe(StoryNPCState.Idle);
+  });
+
+  test("onStoryElementCutSceneFinished logs info message about state change", () => {
+    viewModel.state.Value = StoryNPCState.CutScene;
+    viewModel.storyType = StoryElementType.Intro;
+
+    systemUnderTest.onStoryElementCutSceneFinished(StoryElementType.Intro);
+
+    expect(loggerMock.log).toHaveBeenCalledWith(
+      expect.any(String), // LogLevelTypes.INFO
+      expect.stringContaining("cutscene finished"),
+    );
+  });
+
+  test("onStoryElementCutSceneFinished logs info message about introWasTriggered flag", () => {
+    viewModel.state.Value = StoryNPCState.CutScene;
+    viewModel.storyType = StoryElementType.IntroOutro;
+
+    systemUnderTest.onStoryElementCutSceneFinished(StoryElementType.Intro);
+
+    expect(loggerMock.log).toHaveBeenCalledWith(
+      expect.any(String), // LogLevelTypes.INFO
+      expect.stringContaining("introWasTriggered flag set"),
+    );
+  });
+
+  test("onStoryElementCutSceneTriggered handles IntroOutro story type with Outro sequence", () => {
+    viewModel.storyType = StoryElementType.IntroOutro;
+
+    systemUnderTest.onStoryElementCutSceneTriggered(StoryElementType.Outro);
+
+    expect(viewModel.currentlyRunningSequence).toBe(StoryElementType.Outro);
+    expect(viewModel.state.Value).toBe(StoryNPCState.CutScene);
   });
 });

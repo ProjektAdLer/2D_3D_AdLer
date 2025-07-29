@@ -14,6 +14,7 @@ import {
   LocationScope,
 } from "../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/HistoryWrapper";
 import IAvatarFocusSelection from "../../../../Core/Presentation/Babylon/Avatar/AvatarFocusSelection/IAvatarFokusSelection";
+import IDoorPresenter from "../../../../Core/Presentation/Babylon/Door/IDoorPresenter";
 
 jest.mock("@babylonjs/core");
 jest.mock("../../../../Core/Presentation/Babylon/Door/DoorView");
@@ -46,6 +47,8 @@ describe("DoorBuilder", () => {
     jest
       .spyOn(HistoryWrapper, "currentLocationScope")
       .mockReturnValue(LocationScope.spaceDisplay);
+
+    jest.clearAllMocks();
   });
 
   afterAll(() => {
@@ -57,10 +60,101 @@ describe("DoorBuilder", () => {
     expect(systemUnderTest).toBeInstanceOf(PresentationBuilder);
   });
 
-  test("buildViewModel throws an error when position, rotation, isexit or spaceid is not defined", () => {
+  test("buildViewModel throws an error when position is undefined", () => {
+    systemUnderTest.rotation = 0;
+    systemUnderTest.isExit = false;
+    systemUnderTest.spaceID = 0;
+    systemUnderTest.isOpen = false;
+    systemUnderTest.theme = LearningSpaceThemeType.Campus;
+
     expect(() => {
       systemUnderTest.buildViewModel();
     }).toThrowError("DoorBuilder: one or more properties are undefined.");
+  });
+
+  test("buildViewModel throws an error when rotation is undefined", () => {
+    systemUnderTest.position = new Vector3(0, 0, 0);
+    systemUnderTest.isExit = false;
+    systemUnderTest.spaceID = 0;
+    systemUnderTest.isOpen = false;
+    systemUnderTest.theme = LearningSpaceThemeType.Campus;
+
+    expect(() => {
+      systemUnderTest.buildViewModel();
+    }).toThrowError("DoorBuilder: one or more properties are undefined.");
+  });
+
+  test("buildViewModel throws an error when theme is undefined", () => {
+    systemUnderTest.position = new Vector3(0, 0, 0);
+    systemUnderTest.rotation = 0;
+    systemUnderTest.isExit = false;
+    systemUnderTest.spaceID = 0;
+    systemUnderTest.isOpen = false;
+
+    expect(() => {
+      systemUnderTest.buildViewModel();
+    }).toThrowError("DoorBuilder: one or more properties are undefined.");
+  });
+
+  test("buildViewModel throws an error when isExit is undefined", () => {
+    systemUnderTest.position = new Vector3(0, 0, 0);
+    systemUnderTest.rotation = 0;
+    systemUnderTest.spaceID = 0;
+    systemUnderTest.isOpen = false;
+    systemUnderTest.theme = LearningSpaceThemeType.Campus;
+
+    expect(() => {
+      systemUnderTest.buildViewModel();
+    }).toThrowError("DoorBuilder: one or more properties are undefined.");
+  });
+
+  test("buildViewModel throws an error when spaceID is undefined", () => {
+    systemUnderTest.position = new Vector3(0, 0, 0);
+    systemUnderTest.rotation = 0;
+    systemUnderTest.isExit = false;
+    systemUnderTest.isOpen = false;
+    systemUnderTest.theme = LearningSpaceThemeType.Campus;
+
+    expect(() => {
+      systemUnderTest.buildViewModel();
+    }).toThrowError("DoorBuilder: one or more properties are undefined.");
+  });
+
+  test("buildViewModel throws an error when isOpen is undefined", () => {
+    systemUnderTest.position = new Vector3(0, 0, 0);
+    systemUnderTest.rotation = 0;
+    systemUnderTest.isExit = false;
+    systemUnderTest.spaceID = 0;
+    systemUnderTest.theme = LearningSpaceThemeType.Campus;
+
+    expect(() => {
+      systemUnderTest.buildViewModel();
+    }).toThrowError("DoorBuilder: one or more properties are undefined.");
+  });
+
+  test("buildViewModel successfully sets all properties on viewModel", () => {
+    const position = new Vector3(1, 2, 3);
+    const rotation = 90;
+    const theme = LearningSpaceThemeType.CampusAB;
+    const isExit = true;
+    const spaceID = 123;
+    const isOpen = true;
+
+    systemUnderTest.position = position;
+    systemUnderTest.rotation = rotation;
+    systemUnderTest.theme = theme;
+    systemUnderTest.isExit = isExit;
+    systemUnderTest.spaceID = spaceID;
+    systemUnderTest.isOpen = isOpen;
+
+    systemUnderTest.buildViewModel();
+
+    expect(systemUnderTest["viewModel"]!.position).toBe(position);
+    expect(systemUnderTest["viewModel"]!.rotation).toBe(rotation);
+    expect(systemUnderTest["viewModel"]!.theme).toBe(theme);
+    expect(systemUnderTest["viewModel"]!.isExit).toBe(isExit);
+    expect(systemUnderTest["viewModel"]!.spaceID).toBe(spaceID);
+    expect(systemUnderTest["viewModel"]!.isOpen.Value).toBe(isOpen);
   });
 
   test("buildView resolves isCompleted promise when the asyncSetup of the view resolves", async () => {
@@ -100,7 +194,7 @@ describe("DoorBuilder", () => {
 
     systemUnderTest.buildView();
 
-    waitFor(() => {
+    await waitFor(() => {
       expect(consoleErrorMock).toHaveBeenCalledTimes(1);
       expect(consoleErrorMock).toHaveBeenCalledWith("Test Error");
     });
@@ -116,6 +210,7 @@ describe("DoorBuilder", () => {
 
     systemUnderTest.buildViewModel();
     systemUnderTest.buildPresenter();
+
     expect(worldPortMock.registerAdapter).toHaveBeenCalledWith(
       systemUnderTest["presenter"],
       LocationScope._sceneRendering,
@@ -132,8 +227,38 @@ describe("DoorBuilder", () => {
 
     systemUnderTest.buildViewModel();
     systemUnderTest.buildPresenter();
+
     expect(avatarFocusSelectionMock.registerFocusable).toHaveBeenCalledWith(
       systemUnderTest["presenter"],
     );
+  });
+
+  test("buildPresenter binds presenter to DI container", () => {
+    systemUnderTest.position = new Vector3(0, 0, 0);
+    systemUnderTest.rotation = 0;
+    systemUnderTest.isExit = false;
+    systemUnderTest.spaceID = 0;
+    systemUnderTest.isOpen = false;
+    systemUnderTest.theme = LearningSpaceThemeType.Campus;
+
+    systemUnderTest.buildViewModel();
+    systemUnderTest.buildPresenter();
+
+    // Verify that the presenter is bound to the DI container
+    const boundPresenter = CoreDIContainer.getAll<IDoorPresenter>(
+      PRESENTATION_TYPES.IDoorPresenter,
+    );
+    expect(boundPresenter).toContain(systemUnderTest["presenter"]);
+  });
+
+  test("builder properties can be set in fluent interface style", () => {
+    const position = new Vector3(1, 2, 3);
+    const rotation = 45;
+
+    systemUnderTest.position = position;
+    systemUnderTest.rotation = rotation;
+
+    expect(systemUnderTest.position).toBe(position);
+    expect(systemUnderTest.rotation).toBe(rotation);
   });
 });
