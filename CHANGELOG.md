@@ -19,6 +19,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - added several new tooltips in menus
 - new 'cloud'-like clothers for avatars who have no clothing selected
 - new opaque background behind the learningspace title to improve readability
+- Story NPCs exit space after story sequence if author configured it
 
 ### Changed
 
