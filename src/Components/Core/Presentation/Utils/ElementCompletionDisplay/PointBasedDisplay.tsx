@@ -16,7 +16,7 @@ export default class PointBasedDisplay implements IElementCompletionDisplay {
 
     if (isActualLearningElement && data.points !== undefined) {
       return (
-        <div className="flex items-center ml-2">
+        <div className="ml-2 flex items-center">
           {String(data.points)}
           <img src={coinIcon} alt="Points" className="w-8"></img>
         </div>
@@ -33,7 +33,7 @@ export default class PointBasedDisplay implements IElementCompletionDisplay {
           : "0/" + element.points}
         <img
           src={coinIcon}
-          className="self-center w-6 ml-1 portrait:w-4 lg:w-8"
+          className="ml-1 w-6 self-center lg:w-8 portrait:w-4"
           alt="Coin-Icon"
         ></img>
       </>
@@ -48,28 +48,28 @@ export default class PointBasedDisplay implements IElementCompletionDisplay {
   ): JSX.Element {
     return (
       <section className="flex flex-col gap-2">
-        <div className="flex flex-row items-center justify-between w-full xl:w-3/4">
-          <h3 className="self-center max-w-[75%] ml-2 text-lg font-black portrait:text-sm mobile-landscape:text-sm text-adlerdarkblue">
+        <div className="flex w-full flex-row items-center justify-between xl:w-3/4">
+          <h3 className="ml-2 max-w-[75%] self-center text-lg font-black text-adlerdarkblue mobile-landscape:text-sm portrait:text-sm">
             {requiredText}
           </h3>
-          <div className="flex flex-row ml-6 text-lg font-medium portrait:text-xs portrait:ml-2 mobile-landscape:text-sm">
+          <div className="ml-6 flex flex-row text-lg font-medium mobile-landscape:text-sm portrait:ml-2 portrait:text-xs">
             {required}
             <img
               src={coinIcon}
-              className="self-center w-6 ml-1 portrait:w-4 lg:w-8"
+              className="ml-1 w-6 self-center lg:w-8 portrait:w-4"
               alt="Coin-Icon"
             ></img>
           </div>
         </div>
-        <div className="flex flex-row items-center justify-between w-full xl:w-3/4">
-          <h3 className="max-w-[75%] self-center ml-2 text-lg font-black portrait:text-sm  text-adlerdarkblue">
+        <div className="flex w-full flex-row items-center justify-between xl:w-3/4">
+          <h3 className="ml-2 max-w-[75%] self-center text-lg font-black text-adlerdarkblue mobile-landscape:text-sm portrait:text-sm">
             {maxText}
           </h3>
-          <div className="flex flex-row items-start ml-6 text-lg font-medium portrait:text-xs mobile-landscape:text-sm portrait:ml-2">
+          <div className="ml-6 flex flex-row items-start text-lg font-medium mobile-landscape:text-sm portrait:ml-2 portrait:text-xs">
             {max}
             <img
               src={coinIcon}
-              className="self-center w-6 ml-1 portrait:w-4 lg:w-8"
+              className="ml-1 w-6 self-center lg:w-8 portrait:w-4"
               alt="Coin-Icon"
             ></img>
           </div>

@@ -66,7 +66,7 @@ export default function LearningWorldCompletionModal({
             </div>
           )}
 
-          <div className="m-2 flex max-w-96 justify-center break-all">
+          <div className="break-word m-2 flex max-w-96 justify-center">
             {evaluationLinkText ? (
               <p>{evaluationLinkText}</p>
             ) : (

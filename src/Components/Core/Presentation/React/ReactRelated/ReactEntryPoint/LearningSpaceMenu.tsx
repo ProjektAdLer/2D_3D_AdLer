@@ -19,17 +19,17 @@ export default function LearningSpaceMenu() {
 
   return (
     <React.Fragment>
-      <div className="flex flex-col h-[100svh] mobile-landscape:w-[100dvw] mobile-landscape:h-[100dvh] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto overflow-hidden">
-        <div className="grid order-2 grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-2 portrait:gap-4 grow lg:rounded-lg">
-          <SpaceSelection className="col-start-1 p-2 portrait:row-start-1 lg:pb-8" />
-          <LearningSpaceDetail className="flex col-start-2 p-2 portrait:col-start-1 portrait:row-start-2 lg:p-8" />
-        </div>
+      <div className="flex h-[100dvh] flex-col overflow-hidden bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto mobile-landscape:h-[100dvh] mobile-landscape:w-[100dvw] portrait:h-[100dvh]">
         <MenuHeaderBar
           location="space"
-          className="self-center order-1 w-full p-2 font-semibold"
+          className="w-full flex-shrink-0 self-center px-2 font-semibold"
         />
+        <div className="grid min-h-0 flex-1 grid-cols-[1fr_1fr] grid-rows-1 lg:rounded-lg mobile-landscape:overflow-hidden portrait:grid-cols-1 portrait:grid-rows-[1fr_2fr] portrait:gap-4">
+          <SpaceSelection className="col-start-1 m-2 rounded-lg p-2 lg:p-8 mobile-landscape:max-h-full mobile-landscape:overflow-auto portrait:col-span-1 portrait:col-start-1 portrait:row-start-1 portrait:overflow-auto" />
+          <LearningSpaceDetail className="col-start-2 flex p-2 lg:p-8 mobile-landscape:min-h-0 mobile-landscape:overflow-hidden portrait:col-start-1 portrait:row-start-2 portrait:min-h-0 portrait:overflow-hidden" />
+        </div>
       </div>
-      <LearningWorldCompletionModal className="transition-opacity duration-100 ease-in delay-75" />
+      <LearningWorldCompletionModal className="transition-opacity delay-75 duration-100 ease-in" />
       <BreakTimeNotification />
     </React.Fragment>
   );
