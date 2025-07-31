@@ -149,7 +149,8 @@ describe("CalculateInitialExperiencePointsUseCase", () => {
     );
   });
 
-  test("calculates initial experience points of adaptivity elements correctt", () => {
+  //ANF-ID: [ELG0041]
+  test("calculates initial experience points of adaptivity elements correctly", () => {
     let userDataEntity = {
       isLoggedIn: true,
       availableWorlds: [{ worldID: 1, worldName: "World 1" }],
