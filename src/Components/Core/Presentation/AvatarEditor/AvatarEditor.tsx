@@ -55,10 +55,10 @@ export default function AvatarEditor() {
   if (!viewModel || !controller) return null;
 
   return (
-    <div className="flex flex-col portrait:flex-col h-[100svh] bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto overflow-hidden text-adlerdarkblue">
+    <div className="flex h-[100svh] flex-col overflow-hidden bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto text-adlerdarkblue">
       <MenuHeaderBar
         location="editor"
-        className="self-center w-full p-2 font-semibold"
+        className="w-full flex-shrink-0 self-center p-2 font-semibold"
         externContent={{
           contentLocation: "editor",
           content: (
@@ -69,14 +69,13 @@ export default function AvatarEditor() {
           ),
         }}
       />
-      <div className="grid grid-cols-2 grid-rows-1 portrait:grid-cols-1 portrait:grid-rows-3 grow lg:rounded-lg">
+      <div className="grid min-h-0 flex-1 grid-cols-2 grid-rows-1 lg:rounded-lg portrait:grid-cols-1 portrait:grid-rows-[auto_1fr_auto]">
         {/* Categories (Left Side) */}
-        <div className="flex flex-col portrait:order-2 portrait:row-span-2">
-          {/* Category Tabs */}
-          {/* Category Header */}
-          <div className="flex flex-row items-center justify-center">
+        <div className="flex min-h-0 flex-col portrait:order-2 portrait:row-start-2">
+          {/* Category Header - Fixed */}
+          <div className="flex flex-shrink-0 flex-row items-center justify-center p-2">
             <div className="flex flex-col items-center justify-center">
-              <div className="text-2xl font-bold text-darkblue portrait:text-xl">
+              <div className="text-base font-bold text-adlerdarkblue">
                 {activeTab === OAvatarEditorCategory.HAIR && translate("hair")}
                 {activeTab === OAvatarEditorCategory.FACE && translate("face")}
                 {activeTab === OAvatarEditorCategory.ACCESSOIRE &&
@@ -87,7 +86,9 @@ export default function AvatarEditor() {
               </div>
             </div>
           </div>
-          <div className="flex flex-row justify-center p-2 space-x-4">
+
+          {/* Category Tabs - Fixed */}
+          <div className="flex flex-shrink-0 flex-row justify-center space-x-4 p-2">
             {Object.values(OAvatarEditorCategory)
               .filter((category) => typeof category === "number")
               .map((category) => (
@@ -107,8 +108,8 @@ export default function AvatarEditor() {
             />
           </div>
 
-          {/* Category Contents */}
-          <div className="p-4 max-h-[77vh] portrait:max-h-[35svh] overflow-auto">
+          {/* Category Contents - Scrollable */}
+          <div className="min-h-0 flex-1 overflow-auto p-4">
             {activeTab === OAvatarEditorCategory.HAIR && (
               <AvatarEditorHairCategory
                 controller={controller}
@@ -142,11 +143,12 @@ export default function AvatarEditor() {
           </div>
         </div>
 
-        {/* Avatar Preview (Right Side) */}
-        <div className="p-4 flex justify-start items-start portrait:w-full portrait:max-h-[40svh] portrait:order-1">
-          <AvatarEditorPreview className="relative z-10 w-full h-full" />
+        {/* Avatar Preview (Right Side) - Fixed, no scroll */}
+        <div className="flex min-h-0 items-center justify-center overflow-hidden p-4 portrait:order-1 portrait:row-start-1 portrait:h-[40vh]">
+          <AvatarEditorPreview className="relative z-10 h-full max-h-full w-full" />
         </div>
       </div>
+
       <LoadingScreen
         content={<LoadingScreenHomePageInformation />}
         i18nKeys={{
