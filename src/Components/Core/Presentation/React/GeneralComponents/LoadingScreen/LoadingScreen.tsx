@@ -59,7 +59,7 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
   return (
     <div className="fixed left-0 top-0 z-[20000] flex h-screen w-screen items-center justify-center bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto pb-24">
       <div className="grid w-full justify-center p-3">
-        <section className="flex w-full items-center justify-center gap-8 xl:m-3 xl:mt-6 mobile-landscape:pt-10 portrait:flex">
+        <section className="flex w-full items-center justify-center gap-8 xl:-mb-4 xl:mt-6 mobile-landscape:pt-10 portrait:flex">
           <img
             className="xs:w-16 w-full animate-wiggle place-self-end md:w-24 lg:w-32 xl:w-20 onek:w-32 twok:w-40 mobile-landscape:m-2 mobile-landscape:w-12 portrait:w-16"
             src={logo}
@@ -80,8 +80,7 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
         )}
 
         {/* Loading screen controls */}
-
-        <div className="flex h-16 flex-col items-center justify-center pt-16 xl:pt-4 mobile-landscape:pt-4 portrait:pt-8">
+        <div className="flex h-16 flex-col items-center justify-center pt-16 xl:pt-2 mobile-landscape:pt-4 portrait:pt-8">
           {!canClose && (
             <div className="flex gap-1 rounded-lg border-4 border-white">
               <div className="animateColor h-6 w-6"></div>
