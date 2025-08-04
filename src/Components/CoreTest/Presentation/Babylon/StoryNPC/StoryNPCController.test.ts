@@ -12,6 +12,7 @@ import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentatio
 import IStoryElementPresenter from "../../../../Core/Presentation/React/LearningSpaceDisplay/StoryElement/IStoryElementPresenter";
 import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
 import IBottomTooltipPresenter from "../../../../Core/Presentation/React/LearningSpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
+import { LearningElementTypes } from "../../../../Core/Domain/Types/LearningElementTypes";
 
 const characterNavigatorMock = mock<CharacterNavigator>();
 const navigationMock = mockDeep<INavigation>();
@@ -132,6 +133,22 @@ describe("StoryNPCController", () => {
     viewModel.isInteractable.Value = true; // should automatically call onAvatarInteractableChange
 
     expect(bottomTooltipPresenterMock.display).toHaveBeenCalledTimes(1);
+  });
+
+  test.each([
+    [StoryElementType.Intro, "Intro-NPC"],
+    [StoryElementType.Outro, "Outro-NPC"],
+    [StoryElementType.IntroOutro, "Intro/Outro-NPC"],
+    [StoryElementType.None, "Intro/Outro-NPC"],
+  ])("displayTooltip calls display of type %s with text %s", (type, result) => {
+    viewModel.storyType = type;
+    systemUnderTest["displayTooltip"]();
+    expect(bottomTooltipPresenterMock.display).toHaveBeenCalledWith(
+      result,
+      LearningElementTypes.notAnElement,
+      undefined,
+      expect.anything(),
+    );
   });
 
   test("onAvatarInteractableChange calls hide on bottomTooltipPresenter when isInteractable is false", () => {
