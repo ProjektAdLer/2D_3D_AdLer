@@ -147,6 +147,22 @@ describe("StoryNPCController", () => {
     expect(bottomTooltipPresenterMock.display).toHaveBeenCalledTimes(1);
   });
 
+  test.each([
+    [StoryElementType.Intro, "Intro-NPC"],
+    [StoryElementType.Outro, "Outro-NPC"],
+    [StoryElementType.IntroOutro, "Intro/Outro-NPC"],
+    [StoryElementType.None, "Intro/Outro-NPC"],
+  ])("displayTooltip calls display of type %s with text %s", (type, result) => {
+    viewModel.storyType = type;
+    systemUnderTest["displayTooltip"]();
+    expect(bottomTooltipPresenterMock.display).toHaveBeenCalledWith(
+      result,
+      LearningElementTypes.notAnElement,
+      undefined,
+      expect.anything(),
+    );
+  });
+
   test("onAvatarInteractableChange calls hide on bottomTooltipPresenter when isInteractable is false", () => {
     systemUnderTest["proximityToolTipId"] = 42; // set tooltip id to non-default value
 

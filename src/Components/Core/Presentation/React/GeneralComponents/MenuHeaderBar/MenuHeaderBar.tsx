@@ -40,15 +40,18 @@ export default function MenuHeaderBar(props: Readonly<MenuHeaderBarProps>) {
 
   return (
     <div
-      className={tailwindMerge(props.className, "flex place-content-stretch")}
+      className={tailwindMerge(
+        props.className,
+        "flex place-content-stretch lg:p-2 tablet-portrait:p-2",
+      )}
     >
-      <div className="flex items-center w-1/2 place-content-stretch justify-self-start ">
+      <div className="flex w-1/2 place-content-stretch items-center justify-self-start">
         <StyledButton
           onClick={controller.onHomeButtonClicked}
           className="mr-4"
           title={translate("HomeButtonToolTip").toString()}
         >
-          <img className="w-10 xl:w-12 " src={homeIcon} alt="Home Icon" />
+          <img className="w-10 xl:w-12" src={homeIcon} alt="Home Icon" />
         </StyledButton>
         {props.location === "space" && (
           <StyledButton
@@ -62,9 +65,9 @@ export default function MenuHeaderBar(props: Readonly<MenuHeaderBarProps>) {
           props.location === props.externContent.contentLocation &&
           props.externContent.content}
       </div>
-      <div className="flex items-center justify-center w-full">
+      <div className="flex w-full items-center justify-center">
         <StyledContainer
-          className="text-xl truncate lg:text-4xl font-[roboto] py-2"
+          className="truncate py-2 font-[roboto] text-xl lg:text-4xl mobile-landscape:text-2xl tablet-portrait:text-2xl"
           textColor="darkblue"
         >
           {props.location === "space" ? currentWorldName : null}
@@ -76,9 +79,9 @@ export default function MenuHeaderBar(props: Readonly<MenuHeaderBarProps>) {
             : null}
         </StyledContainer>
       </div>
-      <div className="flex items-center justify-end w-1/2 gap-4 lg:gap-8">
+      <div className="flex w-1/2 items-center justify-end gap-4 lg:gap-8">
         {props.location === "space" && gradingStyle && (
-          <div className="z-0 items-center hidden md:flex">
+          <div className="z-0 hidden items-center md:flex">
             <ExperiencePointsPanel
               gradingStyle={gradingStyle}
               isButton={false}

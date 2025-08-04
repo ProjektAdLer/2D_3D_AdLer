@@ -17,6 +17,13 @@ describe("LevelUpModal", () => {
     jest.useRealTimers();
   });
 
+  //ANF-ID: [ELG0040]
+  test("renders", () => {
+    useBuilderMock([viewModelMock, controllerMock]);
+    const comp = render(<LevelUpModal></LevelUpModal>);
+    expect(comp.container).toBeInTheDocument();
+  });
+
   test("returns null when viewModel and controller are not registered", () => {
     useBuilderMock([undefined, undefined]);
     const comp = render(<LevelUpModal></LevelUpModal>);

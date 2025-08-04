@@ -27,6 +27,7 @@ describe("ExperiencePointsPanel", () => {
     expect(comp.container).toBeEmptyDOMElement();
   });
 
+  //ANF-ID: [ELG0039]
   test("renders the current experience points", () => {
     useBuilderMock([viewModelMock, undefined]);
     const comp = render(

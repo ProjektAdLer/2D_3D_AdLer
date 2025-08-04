@@ -45,6 +45,7 @@ describe("RandomizeAvatarConfigUseCase", () => {
   });
 
   describe("executeAsync", () => {
+    //ANF-ID: [ELG0042]
     it("should return a new AvatarConfigTO with randomized properties", async () => {
       const result = await randomizeAvatarConfigUseCase.executeAsync();
       expect(result).toBeInstanceOf(AvatarConfigTO);

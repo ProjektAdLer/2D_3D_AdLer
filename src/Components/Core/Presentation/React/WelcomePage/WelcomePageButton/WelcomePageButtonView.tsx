@@ -37,7 +37,6 @@ export default function WelcomePageButton(props: WelcomePageButtonProps) {
   const translate = useTranslation("start").t;
 
   const videoRef = useRef<HTMLVideoElement>(null);
-  const pictureRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     setUserLoggedIn(getLoginStatusUseCase.execute().isLoggedIn);
@@ -52,12 +51,16 @@ export default function WelcomePageButton(props: WelcomePageButtonProps) {
       feedback="nothing"
       className={tailwindMerge(
         `relative col-span-3 col-start-6 flex !h-full !w-full flex-col items-center justify-end bg-cover !px-0 !py-0`,
-        props.backgroundVideo,
         props.className ?? "",
       )}
+      style={{
+        backgroundImage: `url(${props.backgroundPicture})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
     >
       {!props.isPlaceholder && userLoggedIn ? (
-        <div className="align-center relative flex h-full w-full justify-center bg-gray-100 opacity-90 hover:opacity-100">
+        <div className="align-center relative flex h-full w-full justify-center hover:opacity-100">
           <video
             ref={videoRef}
             src={props.backgroundVideo}
@@ -65,20 +68,17 @@ export default function WelcomePageButton(props: WelcomePageButtonProps) {
             onMouseLeave={() => videoRef.current?.pause()}
             loop={true}
             muted={true}
-            className="h-full w-full object-cover"
+            playsInline={true}
+            preload="metadata"
+            className="absolute inset-0 hidden h-full w-full bg-black object-cover lg:block"
             title={props.toolTip}
+            style={{ backgroundColor: "black" }}
           >
             <track kind="captions"></track>
           </video>
           <img
-            className="h-full w-full object-cover lg:hidden"
-            ref={pictureRef}
-            src={props.backgroundPicture}
-            alt="Avatar Editor"
-          />
-          <img
             src={props.imageSrc}
-            className="absolute bottom-32 mx-auto rounded-lg p-4 lg:bottom-[42%] mobile-landscape:bottom-6 portrait:bottom-[20%]"
+            className="absolute bottom-32 z-10 mx-auto rounded-lg p-4 lg:bottom-[42%] mobile-landscape:bottom-6 portrait:bottom-[20%]"
             alt={props.label}
             onMouseEnter={() => videoRef.current?.play()}
             onMouseLeave={() => videoRef.current?.pause()}
@@ -86,12 +86,21 @@ export default function WelcomePageButton(props: WelcomePageButtonProps) {
           />
         </div>
       ) : (
-        <div className="align-center flex h-full w-full justify-center bg-gray-100 opacity-90">
+        <div
+          className="align-center flex h-full w-full justify-center bg-gray-500 bg-opacity-60"
+          style={{
+            backgroundImage: `url(${props.backgroundPicture})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
           <video
             ref={videoRef}
             src={props.backgroundVideo}
-            className="h-full w-full object-cover grayscale"
+            className="absolute inset-0 hidden h-full w-full object-cover grayscale lg:block"
             title={translate("DisabledButtonTooltip").toString()}
+            muted={true}
+            playsInline={true}
           >
             <track kind="captions"></track>
           </video>

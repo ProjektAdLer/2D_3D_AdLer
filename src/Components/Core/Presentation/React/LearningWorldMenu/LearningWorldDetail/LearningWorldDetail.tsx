@@ -36,7 +36,7 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
     <main
       className={tailwindMerge(
         className,
-        "flex h-[100svh] w-full flex-col gap-2 self-start portrait:h-[62dvh]",
+        "flex h-full w-full flex-col gap-2 self-start mobile-landscape:h-full mobile-landscape:max-h-full",
       )}
     >
       <article className="portrait:items-between flex h-[10%] flex-row items-center justify-between border-b border-gray-500 p-1 pb-4 portrait:h-12 portrait:justify-center portrait:gap-2">
@@ -56,7 +56,9 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
           {translate("openLearningWorldButton")}
         </StyledButton>
       </article>
-      <article className="landscape:lg-[75%] flex h-[68%] w-full flex-col gap-2 overflow-y-auto">
+
+      {/* Hier ist die Lösung: flex-1 und min-h-0 */}
+      <article className="flex min-h-0 w-full flex-1 flex-col gap-2 overflow-y-auto mobile-landscape:min-h-0 mobile-landscape:overflow-y-auto">
         {description === undefined ||
           (description !== "" && (
             <div className="border-b border-gray-500 pb-2">

@@ -14,7 +14,7 @@ export default class RequirementBasedDisplay
         {data.xp !== undefined && data.xp > 0 && (
           <div className="flex items-center">
             <span className="font-semibold">{Math.round(data.xp)}</span>
-            <img src={XPIcon} alt="XP" className="w-5 h-5 ml-0.5" />
+            <img src={XPIcon} alt="XP" className="ml-0.5 h-5 w-5" />
           </div>
         )}
         {data.isRequired && (
@@ -44,7 +44,7 @@ export default class RequirementBasedDisplay
         {element.xp !== undefined && element.xp > 0 && (
           <div className="flex items-center">
             <span className="font-semibold">{Math.round(element.xp)}</span>
-            <img src={XPIcon} alt="XP" className="w-5 h-5 ml-0.5" />
+            <img src={XPIcon} alt="XP" className="ml-0.5 h-5 w-5" />
           </div>
         )}
       </div>
@@ -59,22 +59,22 @@ export default class RequirementBasedDisplay
   ): JSX.Element {
     return (
       <section className="flex flex-col gap-2">
-        <div className="flex flex-row items-center justify-between w-full xl:w-3/4">
-          <h3 className="self-center max-w-[75%] ml-2 text-lg font-black portrait:text-sm mobile-landscape:text-sm text-adlerdarkblue">
+        <div className="flex w-full flex-row items-center justify-between xl:w-3/4">
+          <h3 className="ml-2 max-w-[75%] self-center text-lg font-black text-adlerdarkblue mobile-landscape:text-sm portrait:text-sm">
             {"Aktuell erreichte XP:"}
           </h3>
-          <div className="flex flex-row items-center ml-6 text-lg font-medium portrait:text-xs portrait:ml-2 mobile-landscape:text-sm">
+          <div className="ml-6 flex flex-row items-center text-lg font-medium mobile-landscape:text-sm portrait:ml-2 portrait:text-xs">
             {Math.round(currentXP)}
-            <img src={XPIcon} alt="XP" className="self-center w-5 h-5 ml-0.5" />
+            <img src={XPIcon} alt="XP" className="ml-0.5 h-5 w-5 self-center" />
           </div>
         </div>
-        <div className="flex flex-row items-center justify-between w-full xl:w-3/4">
-          <h3 className="max-w-[75%] self-center ml-2 text-lg font-black portrait:text-sm  text-adlerdarkblue">
+        <div className="flex w-full flex-row items-center justify-between xl:w-3/4">
+          <h3 className="ml-2 max-w-[75%] self-center text-lg font-black text-adlerdarkblue mobile-landscape:text-sm portrait:text-sm">
             {"Maximal erreichbare XP:"}
           </h3>
-          <div className="flex flex-row items-center ml-6 text-lg font-medium portrait:text-xs mobile-landscape:text-sm portrait:ml-2">
+          <div className="ml-6 flex flex-row items-center text-lg font-medium mobile-landscape:text-sm portrait:ml-2 portrait:text-xs">
             {Math.round(maxXP)}
-            <img src={XPIcon} alt="XP" className="self-center w-5 h-5 ml-0.5" />
+            <img src={XPIcon} alt="XP" className="ml-0.5 h-5 w-5 self-center" />
           </div>
         </div>
       </section>

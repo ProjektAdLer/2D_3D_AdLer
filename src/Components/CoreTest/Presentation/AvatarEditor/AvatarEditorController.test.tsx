@@ -73,6 +73,7 @@ describe("AvatarEditorController", () => {
     expect(avatarEditorViewModelMock.hasChanged.Value).toBe(true);
   });
 
+  //ANF-ID: [ELG0042]
   test("randomizeAvatarConfig should call randomize and update usecases and set hasChanged to true", async () => {
     const mockNewConfig = new AvatarConfigTO();
     // Mock the return value of randomizeAvatarConfigUseCase

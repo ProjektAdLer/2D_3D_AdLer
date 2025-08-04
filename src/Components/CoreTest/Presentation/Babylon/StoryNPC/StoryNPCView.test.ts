@@ -30,6 +30,7 @@ import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType
 import HighlightColors from "../../../../Core/Presentation/Babylon/HighlightColors";
 import AvatarAnimationNames from "../../../../Core/Domain/AvatarModels/AvatarAnimationNames";
 import IAvatarPresenter from "../../../../Core/Presentation/Babylon/Avatar/IAvatarPresenter";
+import { config } from "../../../../../config";
 
 // setup scene presenter mock
 const scenePresenterMock = mockDeep<IScenePresenter>();
@@ -445,6 +446,38 @@ describe("StoryNPCView", () => {
       );
     });
 
+    test("cleanup resets state to idle", () => {
+      systemUnderTest["cleanup"]();
+      expect(viewModel.state.Value).toBe(StoryNPCState.Idle);
+    });
+
+    test("createCharacterNavigator sets up characterNavigator", () => {
+      viewModel.state.Value = StoryNPCState.RandomMovement;
+      navigationMock.Plugin.getRandomPointAround.mockReturnValue(
+        new Vector3(2, 0, 2),
+      );
+      viewModel.parentNode = new TransformNode(
+        "mockParentNode",
+        new Scene(new NullEngine()),
+      );
+      viewModel.parentNode.position = new Vector3(0, 0, 0);
+      jest.useFakeTimers();
+      const setRandomMovementTargetMock = jest.spyOn(
+        systemUnderTest,
+        // prevent incorrect ts error for spying on private method
+        // @ts-ignore
+        "setRandomMovementTarget",
+      );
+
+      systemUnderTest["createCharacterNavigator"]();
+
+      expect(viewModel.characterNavigator.setup).toHaveBeenCalledWith(
+        viewModel.parentNode,
+        viewModel.characterAnimator,
+        config.isDebug,
+      );
+    });
+
     test("toggleIconFloatAnimation restarts animation when interactable is true", () => {
       const mockAnimation = new AnimationGroup(
         "floatingAnimation",
@@ -496,6 +529,18 @@ describe("StoryNPCView", () => {
       );
 
       expect(controllerMock.picked).toHaveBeenCalledTimes(1);
+    });
+
+    test("toogleIconFloatAnimation restarts icon animation if interactable", () => {
+      viewModel.iconFloatingAnimation = mock<AnimationGroup>();
+      systemUnderTest["toggleIconFloatAnimation"](true);
+      expect(viewModel.iconFloatingAnimation.restart).toHaveBeenCalled();
+    });
+
+    test("toogleIconFloatAnimation pauses icon animation if not interactable", () => {
+      viewModel.iconFloatingAnimation = mock<AnimationGroup>();
+      systemUnderTest["toggleIconFloatAnimation"](false);
+      expect(viewModel.iconFloatingAnimation.pause).toHaveBeenCalled();
     });
   });
 

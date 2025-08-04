@@ -40,13 +40,13 @@ export default function AccordionElement(props: AccordionProps) {
     <>
       <div
         className={tailwindMerge(
-          "pb-2 border-b border-gray-500",
+          "border-b border-gray-500 pb-2 mobile-landscape:ml-6",
           props.className ?? "",
         )}
       >
         <button
           className={tailwindMerge(
-            "content-start w-full text-left",
+            "w-full content-start text-left",
             props.buttonClassName ?? "",
           )}
           onClick={() => {
@@ -56,7 +56,7 @@ export default function AccordionElement(props: AccordionProps) {
         >
           <h1
             className={tailwindMerge(
-              "text-2xl portrait:text-lg font-bold",
+              "text-lg font-bold xl:text-2xl",
               props.headerClassName ?? "",
             )}
           >
