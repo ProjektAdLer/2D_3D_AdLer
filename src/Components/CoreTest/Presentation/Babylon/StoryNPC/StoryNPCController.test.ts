@@ -13,14 +13,19 @@ import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE
 import IStoryElementPresenter from "../../../../Core/Presentation/React/LearningSpaceDisplay/StoryElement/IStoryElementPresenter";
 import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
 import IBottomTooltipPresenter from "../../../../Core/Presentation/React/LearningSpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
+import IGetUserLocationUseCase from "../../../../Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
+import UserLocationTO from "../../../../Core/Application/DataTransferObjects/UserLocationTO";
+import IDoorPresenter from "../../../../Core/Presentation/Babylon/Door/IDoorPresenter";
+import ILoggerPort from "../../../../Core/Application/Ports/Interfaces/ILoggerPort";
 
 const characterNavigatorMock = mock<CharacterNavigator>();
 const navigationMock = mockDeep<INavigation>();
 const storyElementPresenterMock = mockDeep<IStoryElementPresenter>();
 const bottomTooltipPresenterMock = mock<IBottomTooltipPresenter>();
-const mockNPCExitUseCase = {
-  executeAsync: jest.fn().mockResolvedValue(undefined),
-};
+const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
+const doorPresenterMock1 = mock<IDoorPresenter>();
+const doorPresenterMock2 = mock<IDoorPresenter>();
+const loggerMock = mock<ILoggerPort>();
 
 describe("StoryNPCController", () => {
   let systemUnderTest: StoryNPCController;
@@ -38,8 +43,9 @@ describe("StoryNPCController", () => {
       PRESENTATION_TYPES.IBottomTooltipPresenter,
     ).toConstantValue(bottomTooltipPresenterMock);
     CoreDIContainer.rebind(
-      USECASE_TYPES.IHandleStoryNPCExitUseCase,
-    ).toConstantValue(mockNPCExitUseCase);
+      USECASE_TYPES.IGetUserLocationUseCase,
+    ).toConstantValue(getUserLocationUseCaseMock);
+    CoreDIContainer.rebind(CORE_TYPES.ILogger).toConstantValue(loggerMock);
   });
 
   beforeEach(() => {
@@ -342,12 +348,59 @@ describe("StoryNPCController", () => {
     expect(pickedSpy).toHaveBeenCalledTimes(1);
   });
 
-  test("handleNPCExit calls executeAsync on HandleStoryNPCExitUseCase", async () => {
+  test("handleNPCExit successfully opens and closes exit door", async () => {
+    const userLocation = new UserLocationTO();
+    userLocation.spaceID = 123;
+    getUserLocationUseCaseMock.execute.mockReturnValue(userLocation);
+
+    doorPresenterMock1.isExit.mockReturnValue(true);
+    doorPresenterMock1.belongsToSpace.mockReturnValue(true);
+    doorPresenterMock1.open.mockImplementation((callback) => {
+      if (callback) callback();
+    });
+
+    CoreDIContainer.getAll = jest.fn().mockReturnValue([doorPresenterMock1]);
+
+    jest.useFakeTimers();
+
+    const promise = systemUnderTest.handleNPCExit(StoryElementType.Intro);
+    jest.advanceTimersByTime(100);
+
+    await promise;
+
+    expect(doorPresenterMock1.open).toHaveBeenCalledTimes(1);
+    expect(doorPresenterMock1.close).toHaveBeenCalledTimes(1);
+
+    jest.useRealTimers();
+  });
+
+  test("handleNPCExit logs warning when user is not in a space", async () => {
+    const userLocation = new UserLocationTO();
+    userLocation.spaceID = undefined;
+    getUserLocationUseCaseMock.execute.mockReturnValue(userLocation);
+
     await systemUnderTest.handleNPCExit(StoryElementType.Intro);
 
-    expect(mockNPCExitUseCase.executeAsync).toHaveBeenCalledWith({
-      storyType: StoryElementType.Intro,
-    });
+    expect(loggerMock.log).toHaveBeenCalledWith(
+      expect.any(String),
+      "StoryNPCController: User is not in a space!",
+    );
+  });
+
+  test("handleNPCExit logs warning when no exit door is found", async () => {
+    const userLocation = new UserLocationTO();
+    userLocation.spaceID = 123;
+    getUserLocationUseCaseMock.execute.mockReturnValue(userLocation);
+
+    doorPresenterMock1.isExit.mockReturnValue(false);
+    CoreDIContainer.getAll = jest.fn().mockReturnValue([doorPresenterMock1]);
+
+    await systemUnderTest.handleNPCExit(StoryElementType.Intro);
+
+    expect(loggerMock.log).toHaveBeenCalledWith(
+      expect.any(String),
+      "StoryNPCController: No exit door found for space 123",
+    );
   });
 
   test("pointerOver does not scale icon when proximityToolTipId is not -1", () => {

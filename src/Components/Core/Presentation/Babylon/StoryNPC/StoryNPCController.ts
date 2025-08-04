@@ -12,11 +12,13 @@ import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import { LearningElementTypes } from "src/Components/Core/Domain/Types/LearningElementTypes";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
-import IHandleStoryNPCExitUseCase from "src/Components/Core/Application/UseCases/HandleStoryNPCExit/IHandleStoryNPCExitUseCase";
+import IGetUserLocationUseCase from "src/Components/Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
+import IDoorPresenter from "../Door/IDoorPresenter";
 
 export default class StoryNPCController implements IStoryNPCController {
   private logger: ILoggerPort;
   private bottomTooltipPresenter: IBottomTooltipPresenter;
+  private getUserLocationUseCase: IGetUserLocationUseCase;
   private proximityToolTipId: number = -1;
   private hoverToolTipId: number = -1;
 
@@ -25,6 +27,9 @@ export default class StoryNPCController implements IStoryNPCController {
       PRESENTATION_TYPES.IBottomTooltipPresenter,
     );
     this.logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
+    this.getUserLocationUseCase = CoreDIContainer.get<IGetUserLocationUseCase>(
+      USECASE_TYPES.IGetUserLocationUseCase,
+    );
 
     this.viewModel.isInteractable.subscribe(this.onAvatarInteractableChange);
   }
@@ -134,13 +139,42 @@ export default class StoryNPCController implements IStoryNPCController {
 
   @bind
   async handleNPCExit(storyType: StoryElementType): Promise<void> {
-    const handleStoryNPCExitUseCase =
-      CoreDIContainer.get<IHandleStoryNPCExitUseCase>(
-        USECASE_TYPES.IHandleStoryNPCExitUseCase,
-      );
+    const userLocation = this.getUserLocationUseCase.execute();
 
-    await handleStoryNPCExitUseCase.executeAsync({
-      storyType: storyType,
+    if (!userLocation.spaceID) {
+      this.logger.log(
+        LogLevelTypes.WARN,
+        "StoryNPCController: User is not in a space!",
+      );
+      return;
+    }
+
+    const exitDoorPresenter = CoreDIContainer.getAll<IDoorPresenter>(
+      PRESENTATION_TYPES.IDoorPresenter,
+    ).find(
+      (door) => door.isExit() && door.belongsToSpace(userLocation.spaceID!),
+    );
+
+    if (!exitDoorPresenter) {
+      this.logger.log(
+        LogLevelTypes.WARN,
+        `StoryNPCController: No exit door found for space ${userLocation.spaceID}`,
+      );
+      return;
+    }
+
+    this.logger.log(
+      LogLevelTypes.INFO,
+      `StoryNPCController: Opening exit door for story type ${StoryElementType[storyType]} in space ${userLocation.spaceID}`,
+    );
+
+    return new Promise<void>((resolve) => {
+      exitDoorPresenter.open(() => {
+        setTimeout(() => {
+          exitDoorPresenter.close();
+          resolve();
+        }, 100);
+      });
     });
   }
 }

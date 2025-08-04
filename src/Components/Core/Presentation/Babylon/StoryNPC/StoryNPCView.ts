@@ -311,9 +311,14 @@ export default class StoryNPCView {
         break;
 
       case StoryElementType.IntroOutro:
-        if (!this.viewModel.introWasTriggered) {
+        // For IntroOutro NPCs, check which sequence is currently running to decide the action
+        if (
+          this.viewModel.currentlyRunningSequence === StoryElementType.Intro
+        ) {
+          // If exiting after intro, hide NPC so it can reappear for outro
           await openDoorAndThen(() => this.hideNPC());
         } else {
+          // If exiting after outro or both sequences are done, dispose completely
           this.viewModel.parentNode.dispose();
         }
         break;
