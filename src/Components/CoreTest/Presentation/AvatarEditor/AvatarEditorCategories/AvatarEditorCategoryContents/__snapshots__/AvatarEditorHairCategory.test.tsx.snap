@@ -6,14 +6,14 @@ exports[`AvatarEditorHairCategory should render 1`] = `
     class="flex flex-col"
   >
     <div
-      class="pb-2 border-b border-gray-500"
+      class="border-b border-gray-500 pb-2 mobile-landscape:ml-6"
     >
       <button
-        class="content-start w-full text-left"
+        class="w-full content-start text-left"
         title="accordionCategoryToolTip"
       >
         <h1
-          class="text-2xl portrait:text-lg font-bold"
+          class="text-lg font-bold xl:text-2xl"
         >
           ▼ hairstylesTitle
         </h1>
@@ -600,14 +600,14 @@ exports[`AvatarEditorHairCategory should render 1`] = `
       </div>
     </div>
     <div
-      class="pb-2 border-b border-gray-500"
+      class="border-b border-gray-500 pb-2 mobile-landscape:ml-6"
     >
       <button
-        class="content-start w-full text-left"
+        class="w-full content-start text-left"
         title="accordionCategoryToolTip"
       >
         <h1
-          class="text-2xl portrait:text-lg font-bold"
+          class="text-lg font-bold xl:text-2xl"
         >
           ▼ beardsTitle
         </h1>

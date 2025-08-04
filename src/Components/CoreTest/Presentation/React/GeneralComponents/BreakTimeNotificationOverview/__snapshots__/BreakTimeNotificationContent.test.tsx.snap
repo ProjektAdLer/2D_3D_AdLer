@@ -3,35 +3,35 @@
 exports[`BreakTimeNotificationContent should render 1`] = `
 <div>
   <div
-    class="pb-4 max-h-[90vh] portrait:max-w-[90vw]"
+    class="max-h-[90vh] pb-4 portrait:max-w-[90vw]"
   >
     <div
-      class="flex flex-col items-center gap-6 mx-0 my-auto slider-wrapper"
+      class="slider-wrapper mx-0 my-auto flex flex-col items-center gap-6"
     >
       <div
-        class="flex flex-col gap-4 overflow-y-auto items-center justify-center slider portrait:max-w-[90vw] max-h-[90vh]"
+        class="slider flex max-h-[90vh] flex-col items-center justify-center gap-4 overflow-y-auto portrait:max-w-[90vw]"
       >
         <p
-          class="w-full pb-4 pl-6 text-sm font-bold md:text-xl lg:text-xl max-w-[60vw] ultraWide:max-w-[40vw] text-adlerdarkblue"
+          class="w-full max-w-[60vw] pb-4 pl-6 text-sm font-bold text-adlerdarkblue md:text-xl lg:text-xl ultraWide:max-w-[40vw] mobile-landscape:pb-0 mobile-landscape:text-2xs mobile-portrait:max-w-[90dvw]"
         >
           shortBreakBase 
           infoMobilization 
         </p>
         <div
-          class="flex flex-row justify-center w-full align-center"
+          class="align-center flex w-full flex-row justify-center"
         >
           <div
-            class="flex items-center justify-start w-12"
+            class="flex w-12 items-center justify-start"
           />
           <img
             alt=""
-            class="object-cover max-h-[60vh] portrait:max-w-[70vw] rounded-lg"
+            class="max-h-[60vh] rounded-lg object-cover portrait:max-w-[70vw]"
             id="slide-2"
             src="smallBreakContent-B3-slide1.png"
             title="Pausenhinweis"
           />
           <div
-            class="flex items-center justify-end w-12"
+            class="flex w-12 items-center justify-end"
           >
             <div
               class=""
@@ -51,14 +51,14 @@ exports[`BreakTimeNotificationContent should render 1`] = `
         </div>
       </div>
       <div
-        class="z-10 flex gap-4 lg:gap-6 slider-nav"
+        class="slider-nav z-10 flex gap-4 lg:gap-6"
       >
         <button
-          class="bg-yellow-400 w-2 h-2 transition duration-200 ease-in-out rounded-full opacity-75 lg:w-4 lg:h-4 hover:opacity-100"
+          class="bg-yellow-400 h-2 w-2 rounded-full opacity-75 transition duration-200 ease-in-out hover:opacity-100 lg:h-4 lg:w-4"
           data-testid="breakSliderButton0"
         />
         <button
-          class="bg-white w-2 h-2 transition duration-200 ease-in-out rounded-full opacity-75 lg:w-4 lg:h-4 hover:opacity-100"
+          class="bg-white h-2 w-2 rounded-full opacity-75 transition duration-200 ease-in-out hover:opacity-100 lg:h-4 lg:w-4"
           data-testid="breakSliderButton1"
         />
       </div>
