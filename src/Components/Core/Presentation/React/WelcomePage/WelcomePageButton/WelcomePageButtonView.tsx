@@ -37,7 +37,6 @@ export default function WelcomePageButton(props: WelcomePageButtonProps) {
   const translate = useTranslation("start").t;
 
   const videoRef = useRef<HTMLVideoElement>(null);
-  const pictureRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     setUserLoggedIn(getLoginStatusUseCase.execute().isLoggedIn);
