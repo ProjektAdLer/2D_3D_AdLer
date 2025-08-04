@@ -878,7 +878,7 @@ describe("StoryNPCView", () => {
 
     test("openExitDoorAndDispose handles IntroOutro when intro was not triggered", async () => {
       viewModel.storyType = StoryElementType.IntroOutro;
-      viewModel.introWasTriggered = false;
+      viewModel.currentlyRunningSequence = StoryElementType.Intro;
       viewModel.parentNode = new TransformNode(
         "parent",
         new Scene(new NullEngine()),
@@ -896,7 +896,7 @@ describe("StoryNPCView", () => {
 
     test("openExitDoorAndDispose handles IntroOutro when intro was triggered", async () => {
       viewModel.storyType = StoryElementType.IntroOutro;
-      viewModel.introWasTriggered = true;
+      viewModel.currentlyRunningSequence = StoryElementType.Outro;
       viewModel.parentNode = new TransformNode(
         "parent",
         new Scene(new NullEngine()),

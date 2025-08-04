@@ -69,10 +69,9 @@ export default class StoryNPCPresenter implements IStoryNPCPresenter {
         this.viewModel.storyType === StoryElementType.IntroOutro &&
         storyType === StoryElementType.Intro
       ) {
-        this.viewModel.introWasTriggered = true;
         this.logger.log(
           LogLevelTypes.INFO,
-          `StoryNPCPresenter: IntroOutro NPC intro completed, introWasTriggered flag set`,
+          `StoryNPCPresenter: IntroOutro NPC intro completed`,
         );
       }
 

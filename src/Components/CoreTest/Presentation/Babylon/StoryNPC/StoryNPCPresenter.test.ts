@@ -174,16 +174,6 @@ describe("StoryNPCPresenter", () => {
     );
   });
 
-  test("onStoryElementCutSceneFinished sets introWasTriggered for IntroOutro NPC", () => {
-    viewModel.state.Value = StoryNPCState.CutScene;
-    viewModel.storyType = StoryElementType.IntroOutro;
-    viewModel.introWasTriggered = false;
-
-    systemUnderTest.onStoryElementCutSceneFinished(StoryElementType.Intro);
-
-    expect(viewModel.introWasTriggered).toBe(true);
-  });
-
   test("onStoryElementCutSceneFinished sets state to ExitRoom when exitAfterIntro is true", () => {
     viewModel.state.Value = StoryNPCState.CutScene;
     viewModel.exitAfterIntro = true;
@@ -229,18 +219,6 @@ describe("StoryNPCPresenter", () => {
     expect(loggerMock.log).toHaveBeenCalledWith(
       expect.any(String), // LogLevelTypes.INFO
       expect.stringContaining("cutscene finished"),
-    );
-  });
-
-  test("onStoryElementCutSceneFinished logs info message about introWasTriggered flag", () => {
-    viewModel.state.Value = StoryNPCState.CutScene;
-    viewModel.storyType = StoryElementType.IntroOutro;
-
-    systemUnderTest.onStoryElementCutSceneFinished(StoryElementType.Intro);
-
-    expect(loggerMock.log).toHaveBeenCalledWith(
-      expect.any(String), // LogLevelTypes.INFO
-      expect.stringContaining("introWasTriggered flag set"),
     );
   });
 
