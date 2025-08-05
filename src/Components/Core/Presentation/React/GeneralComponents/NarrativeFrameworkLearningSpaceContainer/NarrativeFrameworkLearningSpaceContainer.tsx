@@ -27,7 +27,7 @@ export default function NarrativeFrameworkLearningSpaceContainer() {
           .t("closeToolTip", { ns: "helpMenu" })
           .toString()}
       >
-        <div className="w-[80vw] h-80 mt-10 mobile-landscape:h-32 mobile-landscape:mt-1 mobile-landscape:w-full tablet-portrait:h-[60vh] lg:w-[80vw] lg:h-[50vh] onek:h-[38vh] tablet-portrait:w-[70vw]">
+        <div className="mt-10 w-[80vw] lg:h-[50vh] lg:w-[80vw] onek:h-[38vh] mobile-landscape:mt-1 mobile-landscape:h-32 mobile-landscape:w-full tablet-portrait:h-[60vh] tablet-portrait:w-[70vw]">
           <NarrativeFramework type="intro" />
         </div>
       </StyledModal>
