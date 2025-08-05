@@ -306,14 +306,10 @@ export default class StoryNPCView {
   }
 
   private async openExitDoorAndDispose(): Promise<void> {
-    const openDoorAndThen = async (action: () => void) => {
-      await this.controller.handleNPCExit(this.viewModel.storyType);
-      action();
-    };
-
     switch (this.viewModel.storyType) {
       case StoryElementType.Intro:
-        await openDoorAndThen(() => this.viewModel.parentNode.dispose());
+        await this.controller.handleNPCExit(this.viewModel.storyType);
+        await this.viewModel.parentNode.dispose();
         break;
 
       case StoryElementType.Outro:
@@ -326,7 +322,8 @@ export default class StoryNPCView {
           this.viewModel.currentlyRunningSequence === StoryElementType.Intro
         ) {
           // If exiting after intro, hide NPC so it can reappear for outro
-          await openDoorAndThen(() => this.hideNPC());
+          await this.controller.handleNPCExit(this.viewModel.storyType);
+          await this.hideNPC();
         } else {
           // If exiting after outro or both sequences are done, dispose completely
           this.viewModel.parentNode.dispose();
