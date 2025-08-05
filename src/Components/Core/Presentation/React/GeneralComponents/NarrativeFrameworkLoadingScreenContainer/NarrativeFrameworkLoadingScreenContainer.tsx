@@ -22,7 +22,7 @@ export default function NarrativeFrameworkLoadingScreenContainer() {
   if (isShowingContent !== true) return null;
 
   return (
-    <div className="mt-10 h-80 w-full lg:w-[70vw] mobile-landscape:mt-1 mobile-landscape:h-32 mobile-landscape:w-full tablet-portrait:h-[60vh] tablet-portrait:w-[70vw]">
+    <div className="mt-10 w-full lg:w-[70vw] mobile-landscape:mt-1 mobile-landscape:h-32 mobile-landscape:w-full tablet-portrait:h-[60vh] tablet-portrait:w-[70vw]">
       {showNarrativeFramework ? (
         <NarrativeFramework type="intro" />
       ) : (
