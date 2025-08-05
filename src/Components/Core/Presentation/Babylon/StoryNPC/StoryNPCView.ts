@@ -253,12 +253,14 @@ export default class StoryNPCView {
       });
   }
 
+  @bind
   private cleanup(): void {
     clearTimeout(this.viewModel.idleTimer);
     clearTimeout(this.viewModel.cutSceneTimer);
     this.viewModel.state.Value = StoryNPCState.Idle; // prevent random movement calls after scene is disposed
   }
 
+  @bind
   private setupCleanup(): void {
     // timer needs to be cleared, else StoryNPC won't be cleaned up by garbage collection
     this.scenePresenter.addDisposeSceneCallback(this.cleanup);
