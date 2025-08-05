@@ -252,6 +252,7 @@ export default class StoryNPCView {
       });
   }
 
+  @bind
   private cleanup(): void {
     clearTimeout(this.viewModel.idleTimer);
     clearTimeout(this.viewModel.cutSceneTimer);
@@ -290,6 +291,11 @@ export default class StoryNPCView {
   }
 
   private async moveToExit(): Promise<void> {
+    if (!this.viewModel.characterNavigator) {
+      console.error("CharacterNavigator is not initialized yet");
+      return;
+    }
+
     const exitPosition = this.viewModel.exitDoorEnterablePosition;
     await new Promise<void>((resolve) => setTimeout(resolve, 500));
     this.viewModel.characterNavigator.startMovement(exitPosition, async () => {
@@ -349,6 +355,11 @@ export default class StoryNPCView {
   }
 
   private moveToIdlePosition(): void {
+    if (!this.viewModel.characterNavigator) {
+      console.error("CharacterNavigator is not initialized yet");
+      return;
+    }
+
     const idlePosition =
       this.viewModel.storyType === StoryElementType.Intro
         ? this.viewModel.introIdlePosition
@@ -380,6 +391,10 @@ export default class StoryNPCView {
     const target = this.avatarPresenter.AvatarPosition.subtract(targetOffset);
 
     this.viewModel.cutSceneTimer = setTimeout(() => {
+      if (!this.viewModel.characterNavigator) {
+        console.error("CharacterNavigator is not initialized yet");
+        return;
+      }
       this.viewModel.characterNavigator.startMovement(target, () => {
         const sequenceToOpen =
           this.viewModel.storyType === StoryElementType.IntroOutro
@@ -393,6 +408,11 @@ export default class StoryNPCView {
   @bind
   private setRandomMovementTarget() {
     if (this.viewModel.state.Value !== StoryNPCState.RandomMovement) return;
+
+    if (!this.viewModel.characterNavigator) {
+      console.error("CharacterNavigator is not initialized yet");
+      return;
+    }
 
     let target: Vector3;
     let distance: number = 0;

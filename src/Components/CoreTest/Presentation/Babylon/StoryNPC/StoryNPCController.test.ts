@@ -12,6 +12,7 @@ import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentatio
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import IStoryElementPresenter from "../../../../Core/Presentation/React/LearningSpaceDisplay/StoryElement/IStoryElementPresenter";
 import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
+import { LearningElementTypes } from "../../../../Core/Domain/Types/LearningElementTypes";
 import IBottomTooltipPresenter from "../../../../Core/Presentation/React/LearningSpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
 import IGetUserLocationUseCase from "../../../../Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
 import UserLocationTO from "../../../../Core/Application/DataTransferObjects/UserLocationTO";
