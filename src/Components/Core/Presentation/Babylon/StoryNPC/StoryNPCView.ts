@@ -309,7 +309,7 @@ export default class StoryNPCView {
     switch (this.viewModel.storyType) {
       case StoryElementType.Intro:
         await this.controller.handleNPCExit(this.viewModel.storyType);
-        await this.viewModel.parentNode.dispose();
+        this.viewModel.parentNode.dispose();
         break;
 
       case StoryElementType.Outro:
@@ -317,15 +317,12 @@ export default class StoryNPCView {
         break;
 
       case StoryElementType.IntroOutro:
-        // For IntroOutro NPCs, check which sequence is currently running to decide the action
         if (
           this.viewModel.currentlyRunningSequence === StoryElementType.Intro
         ) {
-          // If exiting after intro, hide NPC so it can reappear for outro
           await this.controller.handleNPCExit(this.viewModel.storyType);
-          await this.hideNPC();
+          this.hideNPC();
         } else {
-          // If exiting after outro or both sequences are done, dispose completely
           this.viewModel.parentNode.dispose();
         }
         break;
