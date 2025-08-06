@@ -31,7 +31,7 @@ describe("SideBarPresenter", () => {
       ],
     } as LearningWorldTO;
     systemUnderTest.onLearningWorldLoaded(worldTO);
-    expect(vm.allowWorldCompletionModalButtonClick).toBe(true);
+    expect(vm.allowWorldCompletionModalButtonClick.valueOf()).toBe(true);
   });
   test("OnLearningWorldScored sets allowWorldCompletionModalButtonClick", () => {
     const worldScoreTo = {
@@ -45,7 +45,7 @@ describe("SideBarPresenter", () => {
 
   test("onNarrativeFrameworkInfoLoadedOrUpdated sets allowNarrativeFrameworkIntroButtonClick", () => {
     systemUnderTest.onNarrativeFrameworkInfoLoadedOrUpdated({});
-    expect(vm.allowNarrativeFrameworkIntroButtonClick).toBe(true);
+    expect(vm.allowNarrativeFrameworkIntroButtonClick.Value).toBe(true);
   });
 
   describe("Story Button Tests", () => {

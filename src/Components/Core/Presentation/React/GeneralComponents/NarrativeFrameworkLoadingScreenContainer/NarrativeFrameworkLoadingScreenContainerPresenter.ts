@@ -14,9 +14,6 @@ export default class NarrativeFrameworkLoadingScreenContainerPresenter
     narrativeFrameWorkTO: NarrativeFrameworkTO,
   ): void {
     // set narrative framework to open if it has not been shown before
-    const showNarrative =
-      !narrativeFrameWorkTO.shownBefore && !!narrativeFrameWorkTO.introText;
-    this.viewModel.showNarrativeFramework.Value = showNarrative;
     this.viewModel.isShowingContent.Value = !narrativeFrameWorkTO.shownBefore;
   }
 }

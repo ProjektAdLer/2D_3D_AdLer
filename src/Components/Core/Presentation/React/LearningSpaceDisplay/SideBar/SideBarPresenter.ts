@@ -14,6 +14,8 @@ export default class SideBarPresenter implements ISideBarPresenter {
     this.viewModel.allowWorldCompletionModalButtonClick = world.spaces.every(
       (space) => space.currentScore >= space.requiredScore,
     );
+
+    console.log("FrameStory: ", world.narrativeFramework);
   }
 
   onLearningWorldScored(learningWorldScoreTO: LearningWorldScoreTO): void {
@@ -24,7 +26,7 @@ export default class SideBarPresenter implements ISideBarPresenter {
   onNarrativeFrameworkInfoLoadedOrUpdated(
     narrativeFrameworkTO: NarrativeFrameworkTO,
   ): void {
-    this.viewModel.allowNarrativeFrameworkIntroButtonClick = true;
+    this.viewModel.allowNarrativeFrameworkIntroButtonClick.Value = true;
   }
 
   onLearningSpaceLoaded(learningSpaceTO: LearningSpaceTO): void {

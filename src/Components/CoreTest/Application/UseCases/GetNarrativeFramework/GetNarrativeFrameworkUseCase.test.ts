@@ -34,7 +34,7 @@ describe("GetNarrativeFrameworkInfoUseCase", () => {
     CoreDIContainer.restore();
   });
 
-  test("should call port even if world entity has no narrative framework", () => {
+  test("shouldn't call port if world entity has no narrative framework", () => {
     const worldEntity = {
       id: 1,
       spaces: [],
@@ -49,13 +49,7 @@ describe("GetNarrativeFrameworkInfoUseCase", () => {
 
     expect(
       worldPortMock.onNarrativeFrameworkInfoLoadedOrUpdated,
-    ).toHaveBeenCalledWith(
-      expect.objectContaining({
-        introText: undefined,
-        outroText: undefined,
-        shownBefore: false,
-      }),
-    );
+    ).not.toHaveBeenCalled();
   });
 
   test("should call port with correct loaded narrative framework info (shownBefore false)", () => {

@@ -4,7 +4,8 @@ import INarrativeFrameworkLoadingScreenContainerController from "./INarrativeFra
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import NarrativeFramework from "~ReactComponents/GeneralComponents/NarrativeFramework/NarrativeFramework";
-import ControlsExplanationContent from "../ControlsExplanationModal/ControlsExplanationContent";
+import LoadingScreenControlsExplanation from "../LoadingScreen/LoadingScreenContent/LoadingScreenControlsExplanation";
+import { useEffect, useState } from "react";
 
 export default function NarrativeFrameworkLoadingScreenContainer() {
   const [viewModel, controller] = useBuilder<
@@ -14,22 +15,23 @@ export default function NarrativeFrameworkLoadingScreenContainer() {
   const [isShowingContent] = useObservable<boolean>(
     viewModel?.isShowingContent,
   );
-  const [showNarrativeFramework] = useObservable<boolean>(
-    viewModel?.showNarrativeFramework,
+  const [content, setContent] = useState<JSX.Element>(
+    <LoadingScreenControlsExplanation />,
   );
+
+  useEffect(() => {
+    if (isShowingContent) {
+      setContent(
+        <div className="mt-10 w-full lg:w-[70vw] mobile-landscape:mt-1 mobile-landscape:h-32 mobile-landscape:w-full tablet-portrait:h-[60vh] tablet-portrait:w-[70vw]">
+          <NarrativeFramework type="intro" />
+        </div>,
+      );
+    } else {
+      setContent(<LoadingScreenControlsExplanation />);
+    }
+  }, [isShowingContent]);
 
   if (!viewModel || !controller) return null;
-  if (isShowingContent !== true) return null;
 
-  return (
-    <div className="mt-10 w-full lg:w-[70vw] mobile-landscape:mt-1 mobile-landscape:h-32 mobile-landscape:w-full tablet-portrait:h-[60vh] tablet-portrait:w-[70vw]">
-      {showNarrativeFramework ? (
-        <NarrativeFramework type="intro" />
-      ) : (
-        <div className="h-full overflow-y-auto rounded-lg bg-buttonbgblue p-4 px-8">
-          <ControlsExplanationContent />
-        </div>
-      )}
-    </div>
-  );
+  return content;
 }

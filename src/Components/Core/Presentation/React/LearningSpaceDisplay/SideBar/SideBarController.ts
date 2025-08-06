@@ -8,6 +8,8 @@ import ILearningWorldCompletionModalPresenter from "~ReactComponents/LearningSpa
 import INarrativeFrameworkLearningSpaceContainerPresenter from "~ReactComponents/GeneralComponents/NarrativeFrameworkLearningSpaceContainer/INarrativeFrameworkLearningSpaceContainerPresenter";
 import IStoryElementPresenter from "../StoryElement/IStoryElementPresenter";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
+import IGetNarrativeFrameworkInfoUseCase from "src/Components/Core/Application/UseCases/GetNarrativeFrameworkInfo/IGetNarrativeFrameworkInfoUseCase";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 
 export default class SideBarController implements ISideBarController {
   onMainMenuButtonClicked(): void {
@@ -54,5 +56,11 @@ export default class SideBarController implements ISideBarController {
     CoreDIContainer.get<IStoryElementPresenter>(
       PRESENTATION_TYPES.IStoryElementPresenter,
     ).open(StoryElementType.Outro);
+  }
+
+  checkNarrativeFramework(): void {
+    CoreDIContainer.get<IGetNarrativeFrameworkInfoUseCase>(
+      USECASE_TYPES.IGetNarrativeFrameworkInfoUseCase,
+    ).execute();
   }
 }

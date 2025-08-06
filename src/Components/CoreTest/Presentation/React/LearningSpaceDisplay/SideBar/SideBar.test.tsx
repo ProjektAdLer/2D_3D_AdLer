@@ -6,6 +6,7 @@ import ISideBarController from "../../../../../Core/Presentation/React/LearningS
 import SideBar from "../../../../../Core/Presentation/React/LearningSpaceDisplay/SideBar/SideBar";
 import React from "react";
 import SideBarViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/SideBar/SideBarViewModel";
+import Observable from "../../../../../../Lib/Observable";
 
 jest.mock(
   "../../../../../Core/Presentation/React/LearningSpaceDisplay/FullscreenSwitch/FullscreenSwitch",
@@ -316,6 +317,10 @@ describe("SideBar", () => {
     });
 
     test("calls onNarrativeFrameworkIntroButtonClicked when narrative framework button is clicked", () => {
+      viewModel.allowNarrativeFrameworkIntroButtonClick = new Observable(
+        true,
+        false,
+      );
       useBuilderMock([viewModel, controllerMock]);
 
       render(<SideBar />);
@@ -443,6 +448,10 @@ describe("SideBar", () => {
       viewModel.allowIntroStoryButtonClick = true;
       viewModel.allowOutroStoryButtonClick = true;
       viewModel.allowWorldCompletionModalButtonClick = true;
+      viewModel.allowNarrativeFrameworkIntroButtonClick = new Observable(
+        true,
+        false,
+      );
 
       useBuilderMock([viewModel, controllerMock]);
 

@@ -21,6 +21,7 @@ import HelpDeskButton from "~ReactComponents/GeneralComponents/HelpDeskButton/He
 import HelpDeskModal from "~ReactComponents/GeneralComponents/HelpDeskModal/HelpDeskModal";
 import { useTranslation } from "react-i18next";
 import { config } from "src/config";
+import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 
 export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
   const [viewModel, controller] = useBuilder<
@@ -29,6 +30,9 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
   >(BUILDER_TYPES.IMenuBarBuilder);
   const { t: translate } = useTranslation("learningSpace");
   const [time, setTime] = useState(new Date());
+  const [enableNarrativeFrameWorkButton] = useObservable<boolean>(
+    viewModel?.allowNarrativeFrameworkIntroButtonClick,
+  );
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -38,7 +42,13 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
     return () => clearInterval(interval);
   }, []);
 
-  if (!viewModel) return null;
+  useEffect(() => {
+    if (controller) {
+      controller.checkNarrativeFramework();
+    }
+  }, [controller]);
+
+  if (!viewModel || !controller) return null;
 
   return (
     <CustomDropdown
@@ -143,17 +153,21 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
             </p>
           </div>
 
-          <div className="flex max-h-[25%] flex-col items-center justify-start">
-            <StyledButton
-              onClick={controller.onNarrativeFrameworkIntroButtonClicked}
-              title={translate("sidebar_narrativeFrameworkToolTip").toString()}
-            >
-              <img src={worldStoryIcon} alt="Welt-Story" />
-            </StyledButton>
-            <p className="lg:text-md text-outline break-all text-center text-2xs font-bold text-adlerdarkblue">
-              {translate("sidebar_narrativeFrameworkIntro")}
-            </p>
-          </div>
+          {enableNarrativeFrameWorkButton && (
+            <div className="flex max-h-[25%] flex-col items-center justify-start">
+              <StyledButton
+                onClick={controller.onNarrativeFrameworkIntroButtonClicked}
+                title={translate(
+                  "sidebar_narrativeFrameworkToolTip",
+                ).toString()}
+              >
+                <img src={worldStoryIcon} alt="Welt-Story" />
+              </StyledButton>
+              <p className="lg:text-md text-outline break-all text-center text-2xs font-bold text-adlerdarkblue">
+                {translate("sidebar_narrativeFrameworkIntro")}
+              </p>
+            </div>
+          )}
 
           {viewModel.hasIntroStory && (
             <div className="flex max-h-[25%] flex-col items-center justify-start">

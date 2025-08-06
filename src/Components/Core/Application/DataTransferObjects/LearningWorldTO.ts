@@ -1,6 +1,7 @@
 import { ComponentID } from "../../Domain/Types/EntityTypes";
 import IElementCompletionDisplay from "../../Presentation/Utils/ElementCompletionDisplay/IElementCompletionDisplay";
 import LearningSpaceTO from "./LearningSpaceTO";
+import NarrativeFrameworkTO from "./NarrativeFrameworkTO";
 
 export default class LearningWorldTO {
   id: ComponentID;
@@ -14,4 +15,5 @@ export default class LearningWorldTO {
   completionModalShown: boolean | undefined;
   lastVisitedSpaceID: ComponentID | undefined;
   gradingStyle: IElementCompletionDisplay;
+  narrativeFramework: NarrativeFrameworkTO | null;
 }

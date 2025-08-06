@@ -17,7 +17,6 @@ describe("NarrativeFrameworkLoadingScreenContainerPresenter", () => {
     const to = { shownBefore: true } as NarrativeFrameworkTO;
     systemUnderTest.onNarrativeFrameworkInfoLoadedOrUpdated(to);
     expect(viewModel.isShowingContent.Value).toBe(false);
-    expect(viewModel.showNarrativeFramework.Value).toBe(false);
   });
 
   test("should show controls explanation if not shown before and no intro text exists", () => {
@@ -27,7 +26,6 @@ describe("NarrativeFrameworkLoadingScreenContainerPresenter", () => {
     } as NarrativeFrameworkTO;
     systemUnderTest.onNarrativeFrameworkInfoLoadedOrUpdated(to);
     expect(viewModel.isShowingContent.Value).toBe(true);
-    expect(viewModel.showNarrativeFramework.Value).toBe(false);
   });
 
   test("should show narrative framework if not shown before and intro text exists", () => {
@@ -37,6 +35,5 @@ describe("NarrativeFrameworkLoadingScreenContainerPresenter", () => {
     } as NarrativeFrameworkTO;
     systemUnderTest.onNarrativeFrameworkInfoLoadedOrUpdated(to);
     expect(viewModel.isShowingContent.Value).toBe(true);
-    expect(viewModel.showNarrativeFramework.Value).toBe(true);
   });
 });
