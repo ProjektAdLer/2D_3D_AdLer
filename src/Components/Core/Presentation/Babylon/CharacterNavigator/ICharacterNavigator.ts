@@ -7,8 +7,11 @@ export default interface ICharacterNavigator extends IReadyable {
   setup(
     parentNode: TransformNode,
     characterAnimator: ICharacterAnimator,
-    verbose?: boolean
+    verbose?: boolean,
   ): void;
   startMovement(target: Vector3, onTargetReached?: () => void): void;
   stopMovement(): void;
+  removeAgent(): void;
+  hideAgent(): void;
+  showAgent(): void;
 }

@@ -227,4 +227,18 @@ export default class CharacterNavigator
     circle.position = this.parentNode.position;
     circle.setParent(this.parentNode);
   }
+
+  @bind
+  public removeAgent(): void {
+    this.stopMovement();
+    this.navigation.Crowd.removeAgent(this.agentIndex);
+  }
+
+  public hideAgent(): void {
+    this.agentParams.separationWeight = 0.0;
+  }
+
+  public showAgent(): void {
+    this.agentParams.separationWeight = 1.0;
+  }
 }

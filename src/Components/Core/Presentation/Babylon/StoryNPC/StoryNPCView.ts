@@ -310,10 +310,12 @@ export default class StoryNPCView {
       case StoryElementType.Intro:
         await this.controller.handleNPCExit(this.viewModel.storyType);
         this.viewModel.parentNode.dispose();
+        this.viewModel.characterNavigator.removeAgent();
         break;
 
       case StoryElementType.Outro:
         this.viewModel.parentNode.dispose();
+        this.viewModel.characterNavigator.removeAgent();
         break;
 
       case StoryElementType.IntroOutro:
@@ -324,6 +326,7 @@ export default class StoryNPCView {
           this.hideNPC();
         } else {
           this.viewModel.parentNode.dispose();
+          this.viewModel.characterNavigator.removeAgent();
         }
         break;
     }
@@ -333,12 +336,14 @@ export default class StoryNPCView {
     this.viewModel.parentNode.setEnabled(false);
     if (this.viewModel.characterNavigator) {
       this.viewModel.characterNavigator.stopMovement();
+      this.viewModel.characterNavigator.hideAgent();
     }
   }
 
   private showNPC(): void {
     this.viewModel.parentNode.setEnabled(true);
     this.setSpawnLocationForOutro();
+    this.viewModel.characterNavigator?.showAgent();
   }
 
   private setSpawnLocationForOutro(): void {
