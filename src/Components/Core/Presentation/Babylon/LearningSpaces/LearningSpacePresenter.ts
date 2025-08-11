@@ -155,6 +155,10 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
   private async createStoryNPCs(spaceTO: LearningSpaceTO): Promise<void> {
     for (const storyElement of spaceTO.storyElements) {
       if (storyElement.storyType !== StoryElementType.None) {
+        if (!this.shouldLoadStoryNPC(storyElement, spaceTO)) {
+          continue;
+        }
+
         const storyNPCBuilder = CoreDIContainer.get<IStoryNPCBuilder>(
           BUILDER_TYPES.IStoryNPCBuilder,
         );
@@ -175,6 +179,42 @@ export default class LearningSpacePresenter implements ILearningSpacePresenter {
         this.storyNPCPresenters.push(storyNPCBuilder.getPresenter());
       }
     }
+  }
+
+  /** Determines whether a Story NPC should be loaded based on exit conditions. */
+  private shouldLoadStoryNPC(
+    storyElement: any,
+    spaceTO: LearningSpaceTO,
+  ): boolean {
+    const hasPointsInSpace = spaceTO.elements.some((e) => e?.hasScored);
+
+    switch (storyElement.storyType) {
+      case StoryElementType.Intro:
+        if (hasPointsInSpace && storyElement.exitAfterIntro === true) {
+          return false;
+        }
+        break;
+
+      case StoryElementType.Outro:
+        if (
+          storyElement.hasOutroTriggered === true &&
+          storyElement.exitAfterOutro === true
+        ) {
+          return false;
+        }
+        break;
+
+      case StoryElementType.IntroOutro:
+        if (
+          storyElement.hasOutroTriggered === true &&
+          storyElement.exitAfterOutro === true
+        ) {
+          return false;
+        }
+        break;
+    }
+
+    return true;
   }
 
   private computeWallCoordinates(): void {
