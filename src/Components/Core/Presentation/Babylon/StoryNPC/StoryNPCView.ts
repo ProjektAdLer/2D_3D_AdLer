@@ -357,14 +357,28 @@ export default class StoryNPCView {
     this.viewModel.parentNode.setEnabled(false);
     if (this.viewModel.characterNavigator) {
       this.viewModel.characterNavigator.stopMovement();
-      this.viewModel.characterNavigator.hideAgent();
+      // Remove agent completely from NavMesh instead of just hiding
+      this.viewModel.characterNavigator.removeAgent();
     }
   }
 
   private showNPC(): void {
     this.viewModel.parentNode.setEnabled(true);
     this.setSpawnLocationForOutro();
-    this.viewModel.characterNavigator?.showAgent();
+
+    // Re-register the focusable when showing NPC again
+    if (this.viewModel.presenter) {
+      this.avatarFocusSelection.registerFocusable(this.viewModel.presenter);
+    }
+
+    // Re-setup the character navigator since the agent was removed
+    if (this.viewModel.characterNavigator) {
+      this.viewModel.characterNavigator.setup(
+        this.viewModel.parentNode,
+        this.viewModel.characterAnimator,
+        config.isDebug,
+      );
+    }
   }
 
   private setSpawnLocationForOutro(): void {
