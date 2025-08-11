@@ -14,11 +14,13 @@ import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import IGetUserLocationUseCase from "src/Components/Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
 import IDoorPresenter from "../Door/IDoorPresenter";
+import IAvatarFocusSelection from "../Avatar/AvatarFocusSelection/IAvatarFokusSelection";
 
 export default class StoryNPCController implements IStoryNPCController {
   private logger: ILoggerPort;
   private bottomTooltipPresenter: IBottomTooltipPresenter;
   private getUserLocationUseCase: IGetUserLocationUseCase;
+  private avatarFocusSelection: IAvatarFocusSelection;
   private proximityToolTipId: number = -1;
   private hoverToolTipId: number = -1;
 
@@ -29,6 +31,9 @@ export default class StoryNPCController implements IStoryNPCController {
     this.logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
     this.getUserLocationUseCase = CoreDIContainer.get<IGetUserLocationUseCase>(
       USECASE_TYPES.IGetUserLocationUseCase,
+    );
+    this.avatarFocusSelection = CoreDIContainer.get<IAvatarFocusSelection>(
+      PRESENTATION_TYPES.IAvatarFocusSelection,
     );
 
     this.viewModel.isInteractable.subscribe(this.onAvatarInteractableChange);
@@ -176,5 +181,18 @@ export default class StoryNPCController implements IStoryNPCController {
         }, 100);
       });
     });
+  }
+
+  // Methods for managing AvatarFocusSelection
+  unregisterFromFocusSelection(): void {
+    if (this.viewModel.presenter) {
+      this.avatarFocusSelection.unregisterFocusable(this.viewModel.presenter);
+    }
+  }
+
+  registerToFocusSelection(): void {
+    if (this.viewModel.presenter) {
+      this.avatarFocusSelection.registerFocusable(this.viewModel.presenter);
+    }
   }
 }

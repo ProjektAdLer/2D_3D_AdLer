@@ -33,13 +33,11 @@ import iconLink from "../../../../../Assets/3dModels/sharedModels/3dIcons/l-3dic
 import AvatarAnimationNames from "src/Components/Core/Domain/AvatarModels/AvatarAnimationNames";
 import IAvatarPresenter from "../Avatar/IAvatarPresenter";
 import { FocusableTypes } from "../Avatar/AvatarFocusSelection/IAvatarFocusable";
-import IAvatarFocusSelection from "../Avatar/AvatarFocusSelection/IAvatarFokusSelection";
 
 export default class StoryNPCView {
   private scenePresenter: IScenePresenter;
   private navigation: INavigation;
   private avatarPresenter: IAvatarPresenter;
-  private avatarFocusSelection: IAvatarFocusSelection;
 
   private walkAnimation: AnimationGroup;
   private idleAnimation: AnimationGroup;
@@ -53,9 +51,6 @@ export default class StoryNPCView {
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
     this.navigation = CoreDIContainer.get<INavigation>(CORE_TYPES.INavigation);
-    this.avatarFocusSelection = CoreDIContainer.get<IAvatarFocusSelection>(
-      PRESENTATION_TYPES.IAvatarFocusSelection,
-    );
 
     this.viewModel.state.subscribe(this.onStateChanged);
     this.viewModel.isInteractable.subscribe((newValue) => {
@@ -312,9 +307,7 @@ export default class StoryNPCView {
 
   private async openExitDoorAndDispose(): Promise<void> {
     // Remove from focus selection before disposal
-    if (this.viewModel.presenter) {
-      this.avatarFocusSelection.unregisterFocusable(this.viewModel.presenter);
-    }
+    this.controller.unregisterFromFocusSelection();
 
     switch (this.viewModel.storyType) {
       case StoryElementType.Intro:
@@ -350,9 +343,7 @@ export default class StoryNPCView {
 
   private hideNPC(): void {
     // Remove from focus selection when hiding
-    if (this.viewModel.presenter) {
-      this.avatarFocusSelection.unregisterFocusable(this.viewModel.presenter);
-    }
+    this.controller.unregisterFromFocusSelection();
 
     this.viewModel.parentNode.setEnabled(false);
     if (this.viewModel.characterNavigator) {
@@ -367,9 +358,7 @@ export default class StoryNPCView {
     this.setSpawnLocationForOutro();
 
     // Re-register the focusable when showing NPC again
-    if (this.viewModel.presenter) {
-      this.avatarFocusSelection.registerFocusable(this.viewModel.presenter);
-    }
+    this.controller.registerToFocusSelection();
 
     // Re-setup the character navigator since the agent was removed
     if (this.viewModel.characterNavigator) {

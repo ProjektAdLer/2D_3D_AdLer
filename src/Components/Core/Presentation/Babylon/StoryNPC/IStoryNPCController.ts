@@ -6,4 +6,6 @@ export default interface IStoryNPCController extends IAccessibilityControls {
   pointerOver(): void;
   pointerOut(): void;
   handleNPCExit(storyType: StoryElementType): Promise<void>;
+  unregisterFromFocusSelection(): void;
+  registerToFocusSelection(): void;
 }
