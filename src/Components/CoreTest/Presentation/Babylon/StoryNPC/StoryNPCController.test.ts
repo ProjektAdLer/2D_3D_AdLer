@@ -18,11 +18,13 @@ import IGetUserLocationUseCase from "../../../../Core/Application/UseCases/GetUs
 import UserLocationTO from "../../../../Core/Application/DataTransferObjects/UserLocationTO";
 import IDoorPresenter from "../../../../Core/Presentation/Babylon/Door/IDoorPresenter";
 import ILoggerPort from "../../../../Core/Application/Ports/Interfaces/ILoggerPort";
+import IAvatarFocusSelection from "../../../../Core/Presentation/Babylon/Avatar/AvatarFocusSelection/IAvatarFokusSelection";
 
 const characterNavigatorMock = mock<CharacterNavigator>();
 const navigationMock = mockDeep<INavigation>();
 const storyElementPresenterMock = mockDeep<IStoryElementPresenter>();
 const bottomTooltipPresenterMock = mock<IBottomTooltipPresenter>();
+const avatarFocusSelectionMock = mock<IAvatarFocusSelection>();
 const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
 const doorPresenterMock1 = mock<IDoorPresenter>();
 const doorPresenterMock2 = mock<IDoorPresenter>();
@@ -47,6 +49,9 @@ describe("StoryNPCController", () => {
       USECASE_TYPES.IGetUserLocationUseCase,
     ).toConstantValue(getUserLocationUseCaseMock);
     CoreDIContainer.rebind(CORE_TYPES.ILogger).toConstantValue(loggerMock);
+    CoreDIContainer.rebind(
+      PRESENTATION_TYPES.IAvatarFocusSelection,
+    ).toConstantValue(avatarFocusSelectionMock);
   });
 
   beforeEach(() => {
