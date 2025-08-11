@@ -7,6 +7,7 @@ import { StoryElementType } from "../../../Domain/Types/StoryElementType";
 import IStoryElementPresenter from "~ReactComponents/LearningSpaceDisplay/StoryElement/IStoryElementPresenter";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
+import IStoryNPCPresenter from "./IStoryNPCPresenter";
 
 export enum StoryNPCState {
   Idle,
@@ -30,6 +31,7 @@ export default class StoryNPCViewModel {
   // non-observable runtime properties
   characterNavigator: ICharacterNavigator;
   characterAnimator: ICharacterAnimator;
+  presenter: IStoryNPCPresenter | null = null;
   modelType: LearningElementModel;
   modelMeshes: Mesh[];
   iconMeshes: Mesh[];

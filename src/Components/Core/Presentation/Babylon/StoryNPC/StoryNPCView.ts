@@ -33,11 +33,13 @@ import iconLink from "../../../../../Assets/3dModels/sharedModels/3dIcons/l-3dic
 import AvatarAnimationNames from "src/Components/Core/Domain/AvatarModels/AvatarAnimationNames";
 import IAvatarPresenter from "../Avatar/IAvatarPresenter";
 import { FocusableTypes } from "../Avatar/AvatarFocusSelection/IAvatarFocusable";
+import IAvatarFocusSelection from "../Avatar/AvatarFocusSelection/IAvatarFokusSelection";
 
 export default class StoryNPCView {
   private scenePresenter: IScenePresenter;
   private navigation: INavigation;
   private avatarPresenter: IAvatarPresenter;
+  private avatarFocusSelection: IAvatarFocusSelection;
 
   private walkAnimation: AnimationGroup;
   private idleAnimation: AnimationGroup;
@@ -51,6 +53,9 @@ export default class StoryNPCView {
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
     this.navigation = CoreDIContainer.get<INavigation>(CORE_TYPES.INavigation);
+    this.avatarFocusSelection = CoreDIContainer.get<IAvatarFocusSelection>(
+      PRESENTATION_TYPES.IAvatarFocusSelection,
+    );
 
     this.viewModel.state.subscribe(this.onStateChanged);
     this.viewModel.isInteractable.subscribe((newValue) => {
@@ -306,16 +311,25 @@ export default class StoryNPCView {
   }
 
   private async openExitDoorAndDispose(): Promise<void> {
+    // Remove from focus selection before disposal
+    if (this.viewModel.presenter) {
+      this.avatarFocusSelection.unregisterFocusable(this.viewModel.presenter);
+    }
+
     switch (this.viewModel.storyType) {
       case StoryElementType.Intro:
         await this.controller.handleNPCExit(this.viewModel.storyType);
         this.viewModel.parentNode.dispose();
-        this.viewModel.characterNavigator.removeAgent();
+        if (this.viewModel.characterNavigator) {
+          this.viewModel.characterNavigator.removeAgent();
+        }
         break;
 
       case StoryElementType.Outro:
         this.viewModel.parentNode.dispose();
-        this.viewModel.characterNavigator.removeAgent();
+        if (this.viewModel.characterNavigator) {
+          this.viewModel.characterNavigator.removeAgent();
+        }
         break;
 
       case StoryElementType.IntroOutro:
@@ -326,13 +340,20 @@ export default class StoryNPCView {
           this.hideNPC();
         } else {
           this.viewModel.parentNode.dispose();
-          this.viewModel.characterNavigator.removeAgent();
+          if (this.viewModel.characterNavigator) {
+            this.viewModel.characterNavigator.removeAgent();
+          }
         }
         break;
     }
   }
 
   private hideNPC(): void {
+    // Remove from focus selection when hiding
+    if (this.viewModel.presenter) {
+      this.avatarFocusSelection.unregisterFocusable(this.viewModel.presenter);
+    }
+
     this.viewModel.parentNode.setEnabled(false);
     if (this.viewModel.characterNavigator) {
       this.viewModel.characterNavigator.stopMovement();

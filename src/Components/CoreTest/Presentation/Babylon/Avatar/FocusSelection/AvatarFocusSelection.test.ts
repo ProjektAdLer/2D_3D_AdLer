@@ -282,4 +282,39 @@ describe("AvatarFocusSelection", () => {
     systemUnderTest["specialFocus"] = false;
     expect(systemUnderTest.hasSpecialFocus()).toBe(false);
   });
+
+  test("unregisterFocusable removes focusable from list", () => {
+    const focusable = mock<IAvatarFocusable>();
+    systemUnderTest.registerFocusable(focusable);
+
+    expect(systemUnderTest["focusables"]).toContain(focusable);
+
+    systemUnderTest.unregisterFocusable(focusable);
+
+    expect(systemUnderTest["focusables"]).not.toContain(focusable);
+  });
+
+  test("unregisterFocusable unfocuses focusable if it is currently focused", () => {
+    const focusable = mock<IAvatarFocusable>();
+    systemUnderTest.registerFocusable(focusable);
+    systemUnderTest.CurrentFocus.Value = focusable;
+
+    systemUnderTest.unregisterFocusable(focusable);
+
+    expect(focusable.onUnfocused).toHaveBeenCalled();
+    expect(systemUnderTest.CurrentFocus.Value).toBeNull();
+  });
+
+  test("unregisterFocusable does nothing if focusable is not in list", () => {
+    const focusable1 = mock<IAvatarFocusable>();
+    const focusable2 = mock<IAvatarFocusable>();
+    systemUnderTest.registerFocusable(focusable1);
+
+    expect(systemUnderTest["focusables"]).toHaveLength(1);
+
+    systemUnderTest.unregisterFocusable(focusable2);
+
+    expect(systemUnderTest["focusables"]).toHaveLength(1);
+    expect(systemUnderTest["focusables"]).toContain(focusable1);
+  });
 });

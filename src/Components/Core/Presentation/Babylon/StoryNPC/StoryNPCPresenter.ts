@@ -16,6 +16,10 @@ export default class StoryNPCPresenter implements IStoryNPCPresenter {
   }
 
   getFocusableCenterPosition(): Vector3 {
+    // If the NPC is hidden (disabled) or disposed, return a position far away to prevent interaction
+    if (!this.viewModel.parentNode || !this.viewModel.parentNode.isEnabled()) {
+      return new Vector3(Number.MAX_SAFE_INTEGER, 0, Number.MAX_SAFE_INTEGER);
+    }
     return this.viewModel.parentNode.position;
   }
 

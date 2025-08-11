@@ -161,8 +161,17 @@ export default class StoryNPCBuilder
       learningWorldPort.unregisterAdapter(this.presenter!);
     });
 
-    CoreDIContainer.get<IAvatarFocusSelection>(
+    const avatarFocusSelection = CoreDIContainer.get<IAvatarFocusSelection>(
       PRESENTATION_TYPES.IAvatarFocusSelection,
-    ).registerFocusable(this.presenter!);
+    );
+    avatarFocusSelection.registerFocusable(this.presenter!);
+
+    // Store presenter reference in viewModel for later cleanup
+    this.viewModel!.presenter = this.presenter!;
+
+    // Ensure cleanup when scene is disposed
+    this.scenePresenter.addDisposeSceneCallback(() => {
+      avatarFocusSelection.unregisterFocusable(this.presenter!);
+    });
   }
 }

@@ -6,6 +6,7 @@ export default interface IAvatarFocusSelection {
   get CurrentFocus(): Observable<IAvatarFocusable | null>;
   registerAvatarPresenter(avatarPresenter: IAvatarPresenter): void;
   registerFocusable(focusable: IAvatarFocusable): void;
+  unregisterFocusable(focusable: IAvatarFocusable): void;
   isInFocus(focusable: IAvatarFocusable): boolean;
   // based on user interaction
   setStorySpecialFocus(type: FocusableTypes | undefined): void;

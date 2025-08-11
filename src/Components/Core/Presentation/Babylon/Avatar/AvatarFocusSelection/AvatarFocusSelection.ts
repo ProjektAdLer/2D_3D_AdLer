@@ -58,6 +58,19 @@ export default class AvatarFocusSelection implements IAvatarFocusSelection {
     this.focusables.push(focusable);
   }
 
+  unregisterFocusable(focusable: IAvatarFokusable): void {
+    const index = this.focusables.indexOf(focusable);
+    if (index > -1) {
+      // If the focusable being removed is currently focused, unfocus it
+      if (this.CurrentFocus.Value === focusable) {
+        this.CurrentFocus.Value.onUnfocused &&
+          this.CurrentFocus.Value.onUnfocused();
+        this.CurrentFocus.Value = null;
+      }
+      this.focusables.splice(index, 1);
+    }
+  }
+
   isInFocus(focusable: IAvatarFokusable): boolean {
     return this.CurrentFocus.Value === focusable;
   }
