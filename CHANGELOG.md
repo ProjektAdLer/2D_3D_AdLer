@@ -20,6 +20,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - new 'cloud'-like clothers for avatars who have no clothing selected
 - new opaque background behind the learningspace title to improve readability
 - Story NPCs exit space after story sequence if author configured it
+- added functionality to enter other available learning spaces on exiting learning space
 
 ### Changed
 
@@ -32,6 +33,8 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 ### Removed
 
 ### Fixed
+
+- fixed enabled button for narrative framework, if no narrative framework exists in learning world
 
 ### Deprecated
 

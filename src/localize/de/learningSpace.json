@@ -12,6 +12,10 @@
 
   "exitRoomTitle": "Raum verlassen?",
   "exitRoomButton": "zurück zum Lernraum-Menü",
+  "availableSpaces_one": "Weiterer verfügbarer Raum",
+  "availableSpaces_other": "Weitere verfügbare Räume",
+  "nextLearningSpace_one": "Nächster Lernraum",
+  "nextLearningSpace_other": "Nächste Lernräume",
 
   "introNPC": "Intro-NPC",
   "outroNPC": "Outro-NPC",

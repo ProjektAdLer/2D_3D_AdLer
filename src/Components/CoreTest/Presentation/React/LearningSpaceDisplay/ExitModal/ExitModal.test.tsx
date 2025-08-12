@@ -15,6 +15,7 @@ describe("ExitModal", () => {
   beforeEach(() => {
     viewModel.successorSpaces.Value = [];
     viewModel.precursorSpaces.Value = [];
+    viewModel.availableSpaces.Value = [];
   });
 
   test("doesn't render without controller", () => {
@@ -58,7 +59,7 @@ describe("ExitModal", () => {
 
     expect(viewModel.isOpen.Value).toBe(false);
     await waitFor(() =>
-      expect(componentUnderTest.container).toBeEmptyDOMElement()
+      expect(componentUnderTest.container).toBeEmptyDOMElement(),
     );
   });
 

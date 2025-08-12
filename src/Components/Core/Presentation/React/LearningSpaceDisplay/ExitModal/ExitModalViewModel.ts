@@ -6,6 +6,7 @@ export default class ExitModalViewModel {
   exitButtonTitle = new Observable<string>("exitRoomButton");
   successorSpaces = new Observable<LearningSpaceTO[]>();
   precursorSpaces = new Observable<LearningSpaceTO[]>();
+  availableSpaces = new Observable<LearningSpaceTO[]>();
 
   isOpen: Observable<boolean> = new Observable<boolean>(false);
 

@@ -47,7 +47,7 @@ export default class GetLearningSpacePrecursorAndSuccessorUseCase
         LogLevelTypes.WARN,
         `GetLearningSpacePrecursorAndSuccessorUseCase: User is not logged in!`,
       );
-      return { precursorSpaces: [], successorSpaces: [] };
+      return { precursorSpaces: [], successorSpaces: [], availableSpaces: [] };
     }
 
     // Load current world data
@@ -59,7 +59,7 @@ export default class GetLearningSpacePrecursorAndSuccessorUseCase
         LogLevelTypes.WARN,
         `GetLearningSpacePrecursorAndSuccessorUseCase: World ${userLocation.worldID} not found!`,
       );
-      return { precursorSpaces: [], successorSpaces: [] };
+      return { precursorSpaces: [], successorSpaces: [], availableSpaces: [] };
     }
 
     // Load current space data
@@ -71,7 +71,7 @@ export default class GetLearningSpacePrecursorAndSuccessorUseCase
         LogLevelTypes.WARN,
         `GetLearningSpacePrecursorAndSuccessorUseCase: Space ${userLocation.spaceID} not found!`,
       );
-      return { precursorSpaces: [], successorSpaces: [] };
+      return { precursorSpaces: [], successorSpaces: [], availableSpaces: [] };
     }
 
     //Determine precursor room IDs
@@ -112,9 +112,50 @@ export default class GetLearningSpacePrecursorAndSuccessorUseCase
       worldEntity.id,
     );
 
+    let allSpaces: LearningSpaceTO[] = [];
+    worldEntity.spaces.forEach((space) => {
+      let spaceTO = this.toTO(space);
+      allSpaces.push(spaceTO);
+    });
+    const spaces = this.fillSpaceWithScoringAndAvailabilityData(
+      allSpaces,
+      worldEntity.id,
+    );
+
+    let successerPrecoursors: number[] = [];
+    if (successorSpaces.every((space) => space.isAvailable === false)) {
+      console.log("every successor is not available");
+      // successorSpaces.forEach((space) => {
+      //   let ids = LearningSpaceAvailabilityStringParser.parseToIdArray(
+      //     space.requirementsString,
+      //   );
+      //   ids = ids.filter((id) => {
+      //     return id !== currentSpace.id;
+      //   });
+      //   console.log("filtered ids: ", ids);
+      //   successerPrecoursors = successerPrecoursors.concat(ids);
+      // });
+    }
+
+    let availableSpaces: LearningSpaceTO[] = [];
+    availableSpaces = spaces.filter((space) => {
+      return (
+        space.isAvailable &&
+        space.currentScore < space.requiredScore &&
+        space.id !== currentSpace.id &&
+        successorSpaces.some((s) => s.id === space.id) === false // removes successor spaces from available spaces (removes displaying duplicates)
+      );
+    });
+
+    console.log("Precursor Spaces: ", precursorSpaces);
+    console.log("Successor Spaces: ", successorSpaces);
+    console.log("available Spaces: ", availableSpaces);
+    console.log("SP Spaces: ", successerPrecoursors);
+
     const returnValue = {
       precursorSpaces: precursorSpaces,
       successorSpaces: successorSpaces,
+      availableSpaces: availableSpaces,
     } as LearningSpacePrecursorAndSuccessorTO;
 
     this.worldPort.onLearningSpacePrecursorAndSuccessorLoaded(returnValue);

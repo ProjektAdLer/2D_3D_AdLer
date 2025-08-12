@@ -37,18 +37,46 @@ export default function ExitModal({ className }: AdLerUIComponent<{}>) {
       showModal={isOpen}
       className={tailwindMerge(
         className,
-        "flex flex-col justify-center gap-2 p-5 rounded-lg",
+        "flex flex-col justify-center gap-2 rounded-lg p-5",
       )}
       closeButtonToolTip={translate("closeToolTip").toString()}
     >
       <StyledButton
         disabled={false}
         shape="freeFloatCenter"
-        className="flex w-[100%] mb-2 "
+        className="mb-2 flex w-[100%]"
         onClick={controller.onExitButtonClicked}
       >
         {translate(viewModel.exitButtonTitle.Value).toString()}
       </StyledButton>
+
+      {viewModel.isExit.Value && viewModel.availableSpaces.Value.length > 0 && (
+        <h1 className="text-xl">
+          <b>
+            {translate("availableSpaces", {
+              count: viewModel.availableSpaces.Value.length,
+            })}
+          </b>
+        </h1>
+      )}
+
+      {viewModel.isExit.Value &&
+        viewModel.availableSpaces.Value.length > 0 &&
+        viewModel.availableSpaces.Value.map((availableSpace) => {
+          return createSpaceButton(availableSpace, controller);
+        })}
+
+      {viewModel.isExit.Value &&
+        viewModel.successorSpaces.Value.length > 0 &&
+        viewModel.availableSpaces.Value.length > 0 && (
+          <h1 className="text-xl">
+            <b>
+              {translate("nextLearningSpace", {
+                count: viewModel.successorSpaces.Value.length,
+              })}
+            </b>
+          </h1>
+        )}
 
       {viewModel.isExit.Value &&
         viewModel.successorSpaces.Value.length > 0 &&
@@ -82,7 +110,7 @@ function createSpaceButton(
       key={learningSpaceTO.id}
       disabled={!learningSpaceTO.isAvailable}
       shape="freeFloatCenter"
-      className="flex w-[100%] mb-2"
+      className="mb-2 flex w-[100%]"
       onClick={() =>
         controller.onPrecursorOrSuccessorSpaceClicked(learningSpaceTO.id)
       }

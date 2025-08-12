@@ -155,7 +155,7 @@ const BigWorldAWT: AWT = {
       },
       {
         spaceId: 5,
-        spaceName: "Intro + Outro 2 NPC",
+        spaceName: "Intro + Outro 3 NPC",
         spaceDescription: "rdescription5",
         spaceGoals: ["rgoals5"],
         spaceSlotContents: [5],

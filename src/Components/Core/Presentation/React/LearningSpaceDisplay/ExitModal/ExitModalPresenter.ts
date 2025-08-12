@@ -11,11 +11,13 @@ export default class ExitModalPresenter implements IExitModalPresenter {
   }
 
   onLearningSpacePrecursorAndSuccessorLoaded(
-    LearningSpacePrecursorAndSuccessorTO: LearningSpacePrecursorAndSuccessorTO
+    LearningSpacePrecursorAndSuccessorTO: LearningSpacePrecursorAndSuccessorTO,
   ): void {
     this.viewModel.precursorSpaces.Value =
       LearningSpacePrecursorAndSuccessorTO.precursorSpaces;
     this.viewModel.successorSpaces.Value =
       LearningSpacePrecursorAndSuccessorTO.successorSpaces;
+    this.viewModel.availableSpaces.Value =
+      LearningSpacePrecursorAndSuccessorTO.availableSpaces;
   }
 }
