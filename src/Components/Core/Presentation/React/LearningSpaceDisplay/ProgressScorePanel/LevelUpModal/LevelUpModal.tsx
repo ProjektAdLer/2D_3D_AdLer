@@ -5,19 +5,13 @@ import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import LevelUpModalViewModel from "./LevelUpModalViewModel";
 import { useEffect } from "react";
 import LevelUpModalController from "./LevelUpModalController";
-
-const badgePictures: { [key: number]: string } = {
-  1: require("../../../../../../../../src/Assets/graphics/level-up.png"),
-  2: require("../../../../../../../../src/Assets/graphics/level-up.png"),
-  3: require("../../../../../../../../src/Assets/graphics/level-up.png"),
-  4: require("../../../../../../../../src/Assets/graphics/level-up.png"),
-  5: require("../../../../../../../../src/Assets/graphics/level-up.png"),
-  6: require("../../../../../../../../src/Assets/graphics/level-up.png"),
-  7: require("../../../../../../../../src/Assets/graphics/level-up.png"),
-  8: require("../../../../../../../../src/Assets/graphics/level-up.png"),
-  9: require("../../../../../../../../src/Assets/graphics/level-up.png"),
-  10: require("../../../../../../../../src/Assets/graphics/level-up.png"),
-};
+import {
+  badgePicturesAB,
+  badgePicturesCompany,
+  badgePicturesKE,
+  badgePicturesSuburb,
+} from "./BadgePictureLookup";
+import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/LearningSpaceThemeTypes";
 
 export default function LevelUpModal() {
   const [viewModel, controller] = useBuilder<
@@ -43,9 +37,25 @@ export default function LevelUpModal() {
         <img
           className="max-h-[75vh] max-w-[90vw] object-scale-down"
           alt="LearningImage!"
-          src={badgePictures[viewModel.level]}
+          src={getBadgePicture(viewModel.level, viewModel.worldTheme)}
         />
       </div>
     </StyledModal>
   );
+}
+
+function getBadgePicture(level: number, worldTheme: LearningSpaceThemeType) {
+  if (worldTheme === LearningSpaceThemeType.CampusAB)
+    return badgePicturesAB[level];
+
+  if (worldTheme === LearningSpaceThemeType.CampusKE)
+    return badgePicturesKE[level];
+
+  if (worldTheme === LearningSpaceThemeType.Suburb)
+    return badgePicturesSuburb[level];
+
+  if (worldTheme === LearningSpaceThemeType.Company)
+    return badgePicturesCompany[level];
+
+  return badgePicturesKE[1];
 }
