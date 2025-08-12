@@ -120,11 +120,13 @@ const minimalCombinedStoryElementBackendWorldTO: BackendWorldTO = {
         storyTexts: ["hello"],
         elementModel:
           LearningElementModelTypeEnums.QuizElementModelTypes.AleRobotNPC,
+        storyNpcName: "Test NPC",
       } as BackendStoryTO,
       outroStory: {
         storyTexts: ["hello"],
         elementModel:
           LearningElementModelTypeEnums.QuizElementModelTypes.AleRobotNPC,
+        storyNpcName: "Test NPC",
       } as BackendStoryTO,
     },
   ],
@@ -180,11 +182,13 @@ const minimalSeperateStoryElementBackendWorldTO: BackendWorldTO = {
         storyTexts: ["hello"],
         elementModel:
           LearningElementModelTypeEnums.QuizElementModelTypes.DefaultArcadeNPC,
+        storyNpcName: "Intro NPC",
       } as BackendStoryTO,
       outroStory: {
         storyTexts: ["hello"],
         elementModel:
           LearningElementModelTypeEnums.QuizElementModelTypes.AleRobotNPC,
+        storyNpcName: "Outro NPC",
       } as BackendStoryTO,
     },
   ],
@@ -671,6 +675,89 @@ describe("LoadLearningWorldUseCase", () => {
     entityContainerMock.createEntity.mockReturnValueOnce(mockedWorldEntity);
 
     await systemUnderTest.executeAsync({ worldID: 42 });
+    expect(entityContainerMock.createEntity).toHaveBeenCalledTimes(6);
+  });
+
+  // Test that separate NPCs are created when model is same but names are different
+  test("creates separate intro and outro story elements when model is same but names are different", async () => {
+    const differentNamesBackendWorldTO: BackendWorldTO = {
+      worldName: "TestWorld",
+      goals: ["TestGoal"],
+      description: "TestDescription",
+      evaluationLink: "TestLink",
+      spaces: [
+        {
+          description: "TestDescription",
+          goals: ["TestGoals"],
+          requirements: "",
+          id: 1,
+          name: "TestSpace",
+          requiredScore: 0,
+          elements: [backendAdaptivityElementTOMock],
+          template: LearningSpaceTemplateType.L,
+          templateStyle: LearningSpaceThemeType.Arcade,
+          introStory: {
+            storyTexts: ["hello"],
+            elementModel:
+              LearningElementModelTypeEnums.QuizElementModelTypes.AleRobotNPC,
+            storyNpcName: "Intro NPC",
+          } as BackendStoryTO,
+          outroStory: {
+            storyTexts: ["hello"],
+            elementModel:
+              LearningElementModelTypeEnums.QuizElementModelTypes.AleRobotNPC,
+            storyNpcName: "Outro NPC",
+          } as BackendStoryTO,
+        },
+      ],
+      externalElements: [],
+    };
+
+    // mock user data response
+    entityContainerMock.getEntitiesOfType.mockReturnValue(
+      mockedGetEntitiesOfTypeUserDataReturnValue,
+    );
+
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([]);
+
+    backendMock.getWorldData.mockResolvedValue(differentNamesBackendWorldTO);
+
+    backendMock.getWorldStatus.mockResolvedValue({
+      worldID: 42,
+      elements: [{}],
+    } as LearningWorldStatusTO);
+
+    entityContainerMock.createEntity.mockReturnValueOnce(
+      mock<LearningElementEntity>(),
+    );
+
+    entityContainerMock.createEntity.mockReturnValueOnce(
+      mock<StoryElementEntity>(),
+    );
+
+    entityContainerMock.createEntity.mockReturnValueOnce(
+      mock<StoryElementEntity>(),
+    );
+
+    entityContainerMock.createEntity.mockReturnValueOnce(
+      mock<LearningSpaceEntity>(),
+    );
+
+    entityContainerMock.createEntity.mockReturnValueOnce(
+      mock<AdaptivityElementEntity>(),
+    );
+
+    // mock world response
+    const mockedWorldEntity = new LearningWorldEntity();
+    mockedWorldEntity.name = minimalAdaptivityBackendWorldTO.worldName;
+    mockedWorldEntity.goals = minimalAdaptivityBackendWorldTO.goals;
+    mockedWorldEntity.spaces = [];
+    mockedWorldEntity.completionModalShown = true;
+
+    entityContainerMock.createEntity.mockReturnValueOnce(mockedWorldEntity);
+
+    await systemUnderTest.executeAsync({ worldID: 42 });
+    // Should create 6 entities (intro story, outro story, space, adaptivity element, world)
     expect(entityContainerMock.createEntity).toHaveBeenCalledTimes(6);
   });
 

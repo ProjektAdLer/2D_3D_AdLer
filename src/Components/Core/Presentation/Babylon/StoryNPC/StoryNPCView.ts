@@ -18,7 +18,6 @@ import {
 } from "@babylonjs/core";
 import { config } from "src/config";
 import IStoryNPCController from "./IStoryNPCController";
-import IStoryNPCPresenter from "./IStoryNPCPresenter";
 import LearningElementModelLookup from "src/Components/Core/Domain/LearningElementModels/LearningElementModelLookup";
 import ICharacterAnimator from "../CharacterAnimator/ICharacterAnimator";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";

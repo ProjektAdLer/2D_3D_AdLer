@@ -281,11 +281,12 @@ export default class LoadLearningWorldUseCase
       outroStoryElement?.elementModel,
     );
 
-    // create combined intro-outro story element if both are present and have the same model
+    // create combined intro-outro story element if both are present and have the same model and name
     if (
       introStoryElement !== null &&
       outroStoryElement !== null &&
-      introStoryModel === outroStoryModel
+      introStoryModel === outroStoryModel &&
+      introStoryElement.storyNpcName === outroStoryElement.storyNpcName
     ) {
       storyElementEntities.push(
         this.container.createEntity<StoryElementEntity>(
