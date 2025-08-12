@@ -12,6 +12,7 @@ const SmallWorldAWT: AWT = {
     worldDescription:
       "Small World with only one topic and one space but with all elements",
     worldGoals: ["Weltziel 1/3", "Weltziel 2/3", "Weltziel 3/3"],
+    theme: "Company",
     evaluationLink: "https://www.th-ab.de",
     frameStory: {
       frameStoryIntro:

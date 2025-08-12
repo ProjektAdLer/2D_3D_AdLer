@@ -11,6 +11,7 @@ const BigWorldAWT: AWT = {
     worldName: "Story World",
     worldDescription: "Beschreibung der großen Welt",
     worldGoals: ["Weltziel 1/3", "Weltziel 2/3", "Weltziel 3/3"],
+    theme: "CampusAschaffenburg",
     frameStory: {
       frameStoryIntro:
         "Die Jedi sind die Friedenswächter der Galaxis. Sie nutzen ihre Kraft zur Verteidigung und zum Schutz anderer, nie jedoch zum Angriff. Die Jedi achten alles Leben, in jeder Form. Die Jedi dienen, anstatt zu herrschen, zum Wohle der Galaxis. Die Jedi streben nach Vervollkommnung durch Wissen und Ausbildung. Die Jedi leben in der Macht. Die Macht ist die Energie, die alles Leben verbindet, die Macht umgibt uns, sie durchdringt uns, sie hält die Galaxis zusammen. Die Jedi vertrauen auf die Macht. Möge die Macht mit dir sein. Immer. Ich war dein Bruder Anakin. Ich liebte dich. Ich hasse dich! Meis.",
