@@ -1,5 +1,5 @@
 import { BackendBaseElementTO } from "./BackendElementTO";
-import { LearningSpaceThemeType } from "../../Domain/Types/LearningSpaceThemeTypes";
+import { ThemeType } from "../../Domain/Types/ThemeTypes";
 import BackendNarrativeFrameworkTO from "./BackendNarrativeFrameworkTO";
 import BackendSpaceTO from "./BackendSpaceTO";
 
@@ -13,6 +13,6 @@ export default class BackendWorldTO {
   evaluationLinkText: string | null;
   externalElements: BackendBaseElementTO[];
   narrativeFramework: BackendNarrativeFrameworkTO | null;
-  theme: LearningSpaceThemeType;
+  theme: ThemeType;
   gradingStyle: string | null;
 }

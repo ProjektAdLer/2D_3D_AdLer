@@ -5,7 +5,7 @@ import WindowViewModel from "./WindowViewModel";
 import IWindowPresenter from "./IWindowPresenter";
 import AsyncPresentationBuilder from "../../PresentationBuilder/AsyncPresentationBuilder";
 import { Vector3 } from "@babylonjs/core";
-import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/LearningSpaceThemeTypes";
+import { ThemeType } from "src/Components/Core/Domain/Types/ThemeTypes";
 
 @injectable()
 export default class WindowBuilder extends AsyncPresentationBuilder<
@@ -16,7 +16,7 @@ export default class WindowBuilder extends AsyncPresentationBuilder<
 > {
   position: Vector3;
   rotation: number;
-  theme: LearningSpaceThemeType;
+  theme: ThemeType;
 
   constructor() {
     super(WindowViewModel, undefined, WindowView, WindowPresenter);
@@ -46,7 +46,7 @@ export default class WindowBuilder extends AsyncPresentationBuilder<
       },
       (error) => {
         console.error(error);
-      }
+      },
     );
   }
 }

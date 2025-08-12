@@ -9,7 +9,7 @@ import { Vector3 } from "@babylonjs/core";
 import LearningElementView from "../../../../Core/Presentation/Babylon/LearningElements/LearningElementView";
 import { waitFor } from "@testing-library/react";
 import { LearningElementModelTypeEnums } from "../../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
-import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
+import { ThemeType } from "../../../../Core/Domain/Types/ThemeTypes";
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 import {
   HistoryWrapper,
@@ -35,7 +35,7 @@ const mockElementData: LearningElementTO = {
   type: "h5p",
   hasScored: false,
   model: LearningElementModelTypeEnums.H5pElementModelTypes.GreySlotmachine,
-  theme: LearningSpaceThemeType.Campus,
+  theme: ThemeType.Campus,
   isScoreable: false,
   difficulty: {
     difficultyType: 0,

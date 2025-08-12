@@ -17,7 +17,7 @@ import DoorViewModel from "../../../../Core/Presentation/Babylon/Door/DoorViewMo
 import IDoorController from "../../../../Core/Presentation/Babylon/Door/IDoorController";
 import ElevatorLogic from "../../../../Core/Presentation/Babylon/Door/DoorLogic/ElevatorLogic";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
-import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
+import { ThemeType } from "../../../../Core/Domain/Types/ThemeTypes";
 import ILoggerPort from "../../../../Core/Application/Ports/Interfaces/ILoggerPort";
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
@@ -85,7 +85,7 @@ describe("DoorView", () => {
     const viewModel = new DoorViewModel();
     viewModel.isOpen.Value = true;
     viewModel.position = new Vector3(1, 2, 3);
-    viewModel.theme = LearningSpaceThemeType.Campus;
+    viewModel.theme = ThemeType.Campus;
 
     const controller = mock<IDoorController>();
     const systemUnderTest = new DoorView(viewModel, controller);
@@ -104,7 +104,7 @@ describe("DoorView", () => {
       ],
     } as ISceneLoaderAsyncResult);
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
-    viewModel.theme = LearningSpaceThemeType.Campus;
+    viewModel.theme = ThemeType.Campus;
 
     await systemUnderTest.asyncSetup();
 
@@ -143,7 +143,7 @@ describe("DoorView", () => {
     } as ISceneLoaderAsyncResult);
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
 
-    viewModel.theme = LearningSpaceThemeType.Campus;
+    viewModel.theme = ThemeType.Campus;
 
     // await systemUnderTest.asyncSetup();
     await systemUnderTest["loadMeshAsync"]();
@@ -168,7 +168,7 @@ describe("DoorView", () => {
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
     const newRotation = 42;
     viewModel.rotation = newRotation;
-    viewModel.theme = LearningSpaceThemeType.Campus;
+    viewModel.theme = ThemeType.Campus;
 
     await systemUnderTest["loadMeshAsync"]();
     systemUnderTest["positionMesh"]();
@@ -225,16 +225,16 @@ describe("DoorView", () => {
 
   //ANF-ID: [ELG0019]
   test.each([
-    { theme: LearningSpaceThemeType.Arcade, isExit: true },
-    { theme: LearningSpaceThemeType.Arcade, isExit: false },
-    { theme: LearningSpaceThemeType.Campus, isExit: true },
-    { theme: LearningSpaceThemeType.Campus, isExit: false },
-    { theme: LearningSpaceThemeType.CampusAB, isExit: true },
-    { theme: LearningSpaceThemeType.CampusAB, isExit: false },
-    { theme: LearningSpaceThemeType.CampusKE, isExit: true },
-    { theme: LearningSpaceThemeType.CampusKE, isExit: false },
-    { theme: LearningSpaceThemeType.Suburb, isExit: true },
-    { theme: LearningSpaceThemeType.Suburb, isExit: false },
+    { theme: ThemeType.Arcade, isExit: true },
+    { theme: ThemeType.Arcade, isExit: false },
+    { theme: ThemeType.Campus, isExit: true },
+    { theme: ThemeType.Campus, isExit: false },
+    { theme: ThemeType.CampusAB, isExit: true },
+    { theme: ThemeType.CampusAB, isExit: false },
+    { theme: ThemeType.CampusKE, isExit: true },
+    { theme: ThemeType.CampusKE, isExit: false },
+    { theme: ThemeType.Suburb, isExit: true },
+    { theme: ThemeType.Suburb, isExit: false },
   ])(
     "getModelLinkByThemeAndType returns valid model link for $theme and isExit=$isExit",
     ({ theme, isExit }) => {
@@ -256,7 +256,7 @@ describe("DoorView", () => {
       ],
     } as ISceneLoaderAsyncResult);
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
-    viewModel.theme = LearningSpaceThemeType.Campus;
+    viewModel.theme = ThemeType.Campus;
 
     await systemUnderTest.asyncSetup();
 

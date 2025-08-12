@@ -1,15 +1,5 @@
 // IMPORTANT: type string names have to be all-uppercase
-export enum LearningSpaceThemeType {
-  // Legacy Themes for backwards compatibility
-  Campus = "CAMPUS",
-  CampusMensa = "CAMPUSMENSA",
-  CampusLibrary = "CAMPUSLIBRARY",
-  CampusStudentClub = "CAMPUSSTUDENTCLUB",
-  CampusServerRoom = "CAMPUSSERVERROOM",
-  CampusAuditorium = "CAMPUSAUDITORIUM",
-  CampusLabor = "CAMPUSLABOR",
-  Arcade = "ARCADE",
-
+export enum ThemeType {
   // World Themes
   CampusAB = "CAMPUSASCHAFFENBURG",
   CampusKE = "CAMPUSKEMPTEN",
@@ -48,4 +38,14 @@ export enum LearningSpaceThemeType {
   Company_FnE = "COMPANY_FNE",
   Company_SocialArea = "COMPANY_SOCIALAREA",
   Company_TechnicalArea = "COMPANY_TECHNICALAREA",
+
+  // Legacy Themes for backwards compatibility
+  Campus = "CAMPUS",
+  CampusMensa = "CAMPUSMENSA",
+  CampusLibrary = "CAMPUSLIBRARY",
+  CampusStudentClub = "CAMPUSSTUDENTCLUB",
+  CampusServerRoom = "CAMPUSSERVERROOM",
+  CampusAuditorium = "CAMPUSAUDITORIUM",
+  CampusLabor = "CAMPUSLABOR",
+  Arcade = "ARCADE",
 }

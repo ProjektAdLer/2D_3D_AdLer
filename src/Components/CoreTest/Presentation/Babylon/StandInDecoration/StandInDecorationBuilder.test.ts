@@ -4,10 +4,10 @@ import StandInDecorationView from "../../../../Core/Presentation/Babylon/StandIn
 import PresentationBuilder from "../../../../Core/Presentation/PresentationBuilder/PresentationBuilder";
 import { Vector3 } from "@babylonjs/core";
 import { waitFor } from "@testing-library/react";
-import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
+import { ThemeType } from "../../../../Core/Domain/Types/ThemeTypes";
 
 jest.mock(
-  "../../../../Core/Presentation/Babylon/StandInDecoration/StandInDecorationView"
+  "../../../../Core/Presentation/Babylon/StandInDecoration/StandInDecorationView",
 );
 
 describe("StandInDecorationBuilder", () => {
@@ -26,7 +26,7 @@ describe("StandInDecorationBuilder", () => {
     systemUnderTest.rotation = 1;
     systemUnderTest.spaceName = "Test";
     systemUnderTest.slotNumber = 1;
-    systemUnderTest.theme = LearningSpaceThemeType.Campus;
+    systemUnderTest.theme = ThemeType.Campus;
     systemUnderTest.buildViewModel();
     const viewMock = mock<StandInDecorationView>();
     viewMock.asyncSetup.mockResolvedValue(undefined);
@@ -42,7 +42,7 @@ describe("StandInDecorationBuilder", () => {
     systemUnderTest.rotation = 1;
     systemUnderTest.spaceName = "Test";
     systemUnderTest.slotNumber = 1;
-    systemUnderTest.theme = LearningSpaceThemeType.Campus;
+    systemUnderTest.theme = ThemeType.Campus;
     systemUnderTest.buildViewModel();
     const viewMock = mock<StandInDecorationView>();
     viewMock.asyncSetup.mockRejectedValue("Test Error");
@@ -62,7 +62,7 @@ describe("StandInDecorationBuilder", () => {
     expect(() => {
       systemUnderTest.buildViewModel();
     }).toThrowError(
-      "Position: undefined, Rotation: undefined, SpaceName: undefined or SlotNumber: undefined is not defined. Set before using the builder."
+      "Position: undefined, Rotation: undefined, SpaceName: undefined or SlotNumber: undefined is not defined. Set before using the builder.",
     );
   });
 });

@@ -2,7 +2,7 @@ import { ComponentID } from "../../../Domain/Types/EntityTypes";
 import { injectable } from "inversify";
 import { Mesh, StandardMaterial, Vector3 } from "@babylonjs/core";
 import { LearningSpaceTemplateType } from "src/Components/Core/Domain/Types/LearningSpaceTemplateType";
-import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/LearningSpaceThemeTypes";
+import { ThemeType } from "src/Components/Core/Domain/Types/ThemeTypes";
 
 export type LearningSpaceWallSegmentLocationData = {
   index: number;
@@ -18,7 +18,7 @@ export type LearningSpaceCornerPoleLocationData = {
 export default class LearningSpaceViewModel {
   public id: ComponentID;
   public learningSpaceTemplateType: LearningSpaceTemplateType;
-  public theme: LearningSpaceThemeType;
+  public theme: ThemeType;
 
   // space constants
   public readonly doorWidth = 0.95;

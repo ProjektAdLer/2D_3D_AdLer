@@ -11,7 +11,7 @@ import { Vector3 } from "@babylonjs/core";
 import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import AsyncPresentationBuilder from "../../PresentationBuilder/AsyncPresentationBuilder";
 import IDoorBuilder from "./IDoorBuilder";
-import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/LearningSpaceThemeTypes";
+import { ThemeType } from "src/Components/Core/Domain/Types/ThemeTypes";
 import { LocationScope } from "~ReactComponents/ReactRelated/ReactEntryPoint/HistoryWrapper";
 import IAvatarFocusSelection from "../Avatar/AvatarFocusSelection/IAvatarFokusSelection";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
@@ -28,7 +28,7 @@ export default class DoorBuilder
 {
   position: Vector3;
   rotation: number;
-  theme: LearningSpaceThemeType;
+  theme: ThemeType;
   isExit: boolean;
   spaceID: ComponentID;
   isOpen: boolean;

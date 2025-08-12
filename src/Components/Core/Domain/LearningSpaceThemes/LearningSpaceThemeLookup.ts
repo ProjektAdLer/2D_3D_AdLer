@@ -1,4 +1,4 @@
-import { LearningSpaceThemeType } from "../Types/LearningSpaceThemeTypes";
+import { ThemeType } from "../Types/ThemeTypes";
 import {
   LearningSpaceTheme_CampusAB,
   LearningSpaceTheme_CampusKE,
@@ -13,67 +13,67 @@ import LearningSpaceTheme_Arcade from "./LearningSpaceTheme_Arcade";
 import LearningSpaceTheme_Suburb from "./LearningSpaceTheme_Suburb";
 
 export default class LearningSpaceThemeLookup {
-  static getLearningSpaceTheme(type: LearningSpaceThemeType) {
+  static getLearningSpaceTheme(type: ThemeType) {
     switch (type) {
       // --- Legacy & World Themes ---
-      case LearningSpaceThemeType.Campus: // kept for backwards campatibility
-      case LearningSpaceThemeType.CampusAB:
-      case LearningSpaceThemeType.CampusAB_EatingArea:
-      case LearningSpaceThemeType.CampusAB_LearningArea:
-      case LearningSpaceThemeType.CampusAB_SocialArea:
-      case LearningSpaceThemeType.CampusAB_TechnicalArea:
-      case LearningSpaceThemeType.CampusAB_FnE:
-      case LearningSpaceThemeType.CampusAB_Presentation:
+      case ThemeType.Campus: // kept for backwards campatibility
+      case ThemeType.CampusAB:
+      case ThemeType.CampusAB_EatingArea:
+      case ThemeType.CampusAB_LearningArea:
+      case ThemeType.CampusAB_SocialArea:
+      case ThemeType.CampusAB_TechnicalArea:
+      case ThemeType.CampusAB_FnE:
+      case ThemeType.CampusAB_Presentation:
         return LearningSpaceTheme_CampusAB;
 
-      case LearningSpaceThemeType.CampusKE:
+      case ThemeType.CampusKE:
         return LearningSpaceTheme_CampusKE;
 
       // --- Legacy & CampusKE Sub-Themes ---
-      case LearningSpaceThemeType.CampusMensa:
-      case LearningSpaceThemeType.CampusKE_EatingArea:
+      case ThemeType.CampusMensa:
+      case ThemeType.CampusKE_EatingArea:
         return LearningSpaceTheme_CampusMensa;
 
-      case LearningSpaceThemeType.CampusLibrary:
-      case LearningSpaceThemeType.CampusKE_LearningArea:
+      case ThemeType.CampusLibrary:
+      case ThemeType.CampusKE_LearningArea:
         return LearningSpaceTheme_CampusLibrary;
 
-      case LearningSpaceThemeType.CampusStudentClub:
-      case LearningSpaceThemeType.CampusKE_SocialArea:
+      case ThemeType.CampusStudentClub:
+      case ThemeType.CampusKE_SocialArea:
         return LearningSpaceTheme_CampusStudentClub;
 
-      case LearningSpaceThemeType.CampusServerRoom:
-      case LearningSpaceThemeType.CampusKE_TechnicalArea:
+      case ThemeType.CampusServerRoom:
+      case ThemeType.CampusKE_TechnicalArea:
         return LearningSpaceTheme_CampusServerRoom;
 
-      case LearningSpaceThemeType.CampusLabor:
-      case LearningSpaceThemeType.CampusKE_FnE:
+      case ThemeType.CampusLabor:
+      case ThemeType.CampusKE_FnE:
         return LearningSpaceTheme_CampusLabor;
 
-      case LearningSpaceThemeType.CampusAuditorium:
-      case LearningSpaceThemeType.CampusKE_Presentation:
+      case ThemeType.CampusAuditorium:
+      case ThemeType.CampusKE_Presentation:
         return LearningSpaceTheme_CampusAuditorium;
 
-      case LearningSpaceThemeType.Arcade:
+      case ThemeType.Arcade:
         return LearningSpaceTheme_Arcade;
 
       // --- Suburb & Company Themes (currently fall back to a single theme) ---
-      case LearningSpaceThemeType.Suburb:
-      case LearningSpaceThemeType.Suburb_LearningArea:
-      case LearningSpaceThemeType.Suburb_EatingArea:
-      case LearningSpaceThemeType.Suburb_Presentation:
-      case LearningSpaceThemeType.Suburb_FnE:
-      case LearningSpaceThemeType.Suburb_SocialArea:
-      case LearningSpaceThemeType.Suburb_TechnicalArea:
+      case ThemeType.Suburb:
+      case ThemeType.Suburb_LearningArea:
+      case ThemeType.Suburb_EatingArea:
+      case ThemeType.Suburb_Presentation:
+      case ThemeType.Suburb_FnE:
+      case ThemeType.Suburb_SocialArea:
+      case ThemeType.Suburb_TechnicalArea:
         return LearningSpaceTheme_Suburb;
 
-      case LearningSpaceThemeType.Company:
-      case LearningSpaceThemeType.Company_LearningArea:
-      case LearningSpaceThemeType.Company_EatingArea:
-      case LearningSpaceThemeType.Company_Presentation:
-      case LearningSpaceThemeType.Company_FnE:
-      case LearningSpaceThemeType.Company_SocialArea:
-      case LearningSpaceThemeType.Company_TechnicalArea:
+      case ThemeType.Company:
+      case ThemeType.Company_LearningArea:
+      case ThemeType.Company_EatingArea:
+      case ThemeType.Company_Presentation:
+      case ThemeType.Company_FnE:
+      case ThemeType.Company_SocialArea:
+      case ThemeType.Company_TechnicalArea:
         return LearningSpaceTheme_Suburb; // PLACEHOLDER
       // TODO: Add a specific Company Theme object when it exists
       // For now, fall back to a default theme

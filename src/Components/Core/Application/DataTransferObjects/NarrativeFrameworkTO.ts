@@ -1,8 +1,8 @@
-import { LearningSpaceThemeType } from "../../Domain/Types/LearningSpaceThemeTypes";
+import { ThemeType } from "../../Domain/Types/ThemeTypes";
 
 export default class NarrativeFrameworkTO {
   introText?: string;
   outroText?: string;
-  theme: LearningSpaceThemeType;
+  theme: ThemeType;
   shownBefore: boolean;
 }

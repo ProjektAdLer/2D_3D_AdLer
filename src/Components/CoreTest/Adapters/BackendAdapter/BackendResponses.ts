@@ -2,7 +2,7 @@ import AWT from "../../../Core/Adapters/BackendAdapter/Types/AWT";
 import BackendWorldTO from "../../../Core/Application/DataTransferObjects/BackendWorldTO";
 import BackendSpaceTO from "../../../Core/Application/DataTransferObjects/BackendSpaceTO";
 import { LearningSpaceTemplateType } from "../../../Core/Domain/Types/LearningSpaceTemplateType";
-import { LearningSpaceThemeType } from "../../../Core/Domain/Types/LearningSpaceThemeTypes";
+import { ThemeType } from "../../../Core/Domain/Types/ThemeTypes";
 import { LearningElementModelTypeEnums } from "../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
 import {
   BackendAdaptivityElementTO,
@@ -37,7 +37,7 @@ export const minimalGetWorldDataResponse: BackendWorldTO = {
         null,
       ],
       template: LearningSpaceTemplateType.L,
-      templateStyle: LearningSpaceThemeType.Campus,
+      templateStyle: ThemeType.Campus,
       introStory: null,
       outroStory: null,
     },

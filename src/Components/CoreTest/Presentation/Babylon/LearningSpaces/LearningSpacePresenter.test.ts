@@ -15,7 +15,7 @@ import DoorBuilder from "../../../../Core/Presentation/Babylon/Door/DoorBuilder"
 import WindowBuilder from "../../../../Core/Presentation/Babylon/Window/WindowBuilder";
 import LearningElementBuilder from "../../../../Core/Presentation/Babylon/LearningElements/LearningElementBuilder";
 import StandInDecorationBuilder from "../../../../Core/Presentation/Babylon/StandInDecoration/StandInDecorationBuilder";
-import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
+import { ThemeType } from "../../../../Core/Domain/Types/ThemeTypes";
 import SeededRNG from "../../../../Core/Presentation/Utils/SeededRNG";
 import { LearningElementModelTypeEnums } from "../../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
 import IStoryNPCBuilder from "../../../../Core/Presentation/Babylon/StoryNPC/IStoryNPCBuilder";
@@ -55,14 +55,14 @@ const spaceTO: LearningSpaceTO = {
       hasScored: false,
       parentWorldID: 1,
       model: LearningElementModelTypeEnums.H5pElementModelTypes.Blackboard,
-      theme: LearningSpaceThemeType.Campus,
+      theme: ThemeType.Campus,
       isScoreable: true,
     },
   ],
   requirementsSyntaxTree: null,
   isAvailable: true,
   template: LearningSpaceTemplateType.L,
-  theme: LearningSpaceThemeType.Campus,
+  theme: ThemeType.Campus,
   storyElements: [
     {
       introStoryTexts: null,

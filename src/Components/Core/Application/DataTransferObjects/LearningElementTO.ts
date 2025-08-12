@@ -1,7 +1,7 @@
 import { ComponentID } from "../../Domain/Types/EntityTypes";
 import { LearningElementModel } from "../../Domain/LearningElementModels/LearningElementModelTypes";
 import { LearningElementTypeStrings } from "../../Domain/Types/LearningElementTypes";
-import { LearningSpaceThemeType } from "../../Domain/Types/LearningSpaceThemeTypes";
+import { ThemeType } from "../../Domain/Types/ThemeTypes";
 import { DifficultyInfo } from "../../Domain/Types/LearningElementDifficulty";
 
 export default class LearningElementTO {
@@ -16,7 +16,7 @@ export default class LearningElementTO {
   hasScored: boolean;
   filePath?: string;
   model: LearningElementModel;
-  theme: LearningSpaceThemeType;
+  theme: ThemeType;
   isScoreable: boolean;
   isRequired: boolean | null;
   difficulty: DifficultyInfo;

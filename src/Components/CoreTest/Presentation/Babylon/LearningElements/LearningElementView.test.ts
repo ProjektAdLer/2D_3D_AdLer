@@ -16,7 +16,7 @@ import {
   Vector3,
 } from "@babylonjs/core";
 import { ActionManager } from "@babylonjs/core/Actions/actionManager";
-import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
+import { ThemeType } from "../../../../Core/Domain/Types/ThemeTypes";
 import HighlightColors from "../../../../Core/Presentation/Babylon/HighlightColors";
 
 // setup scene presenter mock
@@ -105,7 +105,7 @@ describe("LearningElementView", () => {
       setupScenePresenterMockLoadingResults();
 
       const [viewModel, , systemUnderTest] = buildSystemUnderTest();
-      viewModel.theme = LearningSpaceThemeType.Campus;
+      viewModel.theme = ThemeType.Campus;
 
       await systemUnderTest.setupLearningElement();
 
@@ -126,7 +126,7 @@ describe("LearningElementView", () => {
       setupScenePresenterMockLoadingResults();
 
       const [viewModel, , systemUnderTest] = buildSystemUnderTest();
-      viewModel.theme = LearningSpaceThemeType.Campus;
+      viewModel.theme = ThemeType.Campus;
       viewModel.hasScored.Value = true;
       viewModel.isHighlighted.Value = true;
       viewModel.isInteractable.Value = true;
@@ -148,7 +148,7 @@ describe("LearningElementView", () => {
       setupScenePresenterMockLoadingResults();
 
       const [viewModel, , systemUnderTest] = buildSystemUnderTest();
-      viewModel.theme = LearningSpaceThemeType.Campus;
+      viewModel.theme = ThemeType.Campus;
 
       await systemUnderTest.setupLearningElement();
 
@@ -167,7 +167,7 @@ describe("LearningElementView", () => {
       const mesh = setupScenePresenterMockLoadingResults().modelMesh;
 
       const [viewModel, , systemUnderTest] = buildSystemUnderTest();
-      viewModel.theme = LearningSpaceThemeType.Campus;
+      viewModel.theme = ThemeType.Campus;
 
       await systemUnderTest.setupLearningElement();
 
@@ -184,7 +184,7 @@ describe("LearningElementView", () => {
       setupScenePresenterMockLoadingResults();
 
       const [viewModel, , systemUnderTest] = buildSystemUnderTest();
-      viewModel.theme = LearningSpaceThemeType.Campus;
+      viewModel.theme = ThemeType.Campus;
 
       await systemUnderTest.setupLearningElement();
 
@@ -215,7 +215,7 @@ describe("LearningElementView", () => {
 
       const [viewModel, , systemUnderTest] = buildSystemUnderTest();
       viewModel.position = new Vector3(42, 42, 42);
-      viewModel.theme = LearningSpaceThemeType.Campus;
+      viewModel.theme = ThemeType.Campus;
 
       await systemUnderTest.setupLearningElement();
 
@@ -233,7 +233,7 @@ describe("LearningElementView", () => {
 
       const [viewModel, , systemUnderTest] = buildSystemUnderTest();
       viewModel.rotation = 42;
-      viewModel.theme = LearningSpaceThemeType.Campus;
+      viewModel.theme = ThemeType.Campus;
 
       await systemUnderTest.setupLearningElement();
 
@@ -263,7 +263,7 @@ describe("LearningElementView", () => {
       });
       const [viewModel, , systemUnderTest] = buildSystemUnderTest();
       viewModel.modelType = "";
-      viewModel.theme = LearningSpaceThemeType.Campus;
+      viewModel.theme = ThemeType.Campus;
 
       await systemUnderTest.setupLearningElement();
 
@@ -290,7 +290,7 @@ describe("LearningElementView", () => {
       });
 
       const [viewModel, , systemUnderTest] = buildSystemUnderTest();
-      viewModel.theme = LearningSpaceThemeType.Campus;
+      viewModel.theme = ThemeType.Campus;
 
       await systemUnderTest.setupLearningElement();
 
@@ -308,7 +308,7 @@ describe("LearningElementView", () => {
       setupScenePresenterMockLoadingResults();
 
       const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
-      viewModel.theme = LearningSpaceThemeType.Campus;
+      viewModel.theme = ThemeType.Campus;
 
       await systemUnderTest.setupLearningElement();
 
@@ -333,7 +333,7 @@ describe("LearningElementView", () => {
       setupScenePresenterMockLoadingResults();
 
       const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
-      viewModel.theme = LearningSpaceThemeType.Campus;
+      viewModel.theme = ThemeType.Campus;
 
       await systemUnderTest.setupLearningElement();
 
@@ -358,7 +358,7 @@ describe("LearningElementView", () => {
       setupScenePresenterMockLoadingResults();
 
       const [viewModel, controller, systemUnderTest] = buildSystemUnderTest();
-      viewModel.theme = LearningSpaceThemeType.Campus;
+      viewModel.theme = ThemeType.Campus;
 
       await systemUnderTest.setupLearningElement();
 

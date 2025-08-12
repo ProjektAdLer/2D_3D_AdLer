@@ -11,7 +11,7 @@ import {
   badgePicturesKE,
   badgePicturesSuburb,
 } from "./BadgePictureLookup";
-import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/LearningSpaceThemeTypes";
+import { ThemeType } from "src/Components/Core/Domain/Types/ThemeTypes";
 
 export default function LevelUpModal() {
   const [viewModel, controller] = useBuilder<
@@ -44,18 +44,14 @@ export default function LevelUpModal() {
   );
 }
 
-function getBadgePicture(level: number, worldTheme: LearningSpaceThemeType) {
-  if (worldTheme === LearningSpaceThemeType.CampusAB)
-    return badgePicturesAB[level];
+function getBadgePicture(level: number, worldTheme: ThemeType) {
+  if (worldTheme === ThemeType.CampusAB) return badgePicturesAB[level];
 
-  if (worldTheme === LearningSpaceThemeType.CampusKE)
-    return badgePicturesKE[level];
+  if (worldTheme === ThemeType.CampusKE) return badgePicturesKE[level];
 
-  if (worldTheme === LearningSpaceThemeType.Suburb)
-    return badgePicturesSuburb[level];
+  if (worldTheme === ThemeType.Suburb) return badgePicturesSuburb[level];
 
-  if (worldTheme === LearningSpaceThemeType.Company)
-    return badgePicturesCompany[level];
+  if (worldTheme === ThemeType.Company) return badgePicturesCompany[level];
 
   return badgePicturesKE[1];
 }

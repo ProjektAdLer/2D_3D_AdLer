@@ -1,7 +1,7 @@
 import IElementCompletionDisplay from "../../Presentation/Utils/ElementCompletionDisplay/IElementCompletionDisplay";
 import { ComponentID } from "../Types/EntityTypes";
 import { LearningSpaceTemplateType } from "../Types/LearningSpaceTemplateType";
-import { LearningSpaceThemeType } from "../Types/LearningSpaceThemeTypes";
+import { ThemeType } from "../Types/ThemeTypes";
 import LearningElementEntity from "./LearningElementEntity";
 import StoryElementEntity from "./StoryElementEntity";
 
@@ -14,7 +14,7 @@ export default class LearningSpaceEntity {
   public requirements: string;
   public requiredScore: number;
   public template: LearningSpaceTemplateType;
-  public theme: LearningSpaceThemeType;
+  public theme: ThemeType;
   public parentWorldID: ComponentID;
   public storyElements: StoryElementEntity[];
   public gradingStyle: IElementCompletionDisplay;

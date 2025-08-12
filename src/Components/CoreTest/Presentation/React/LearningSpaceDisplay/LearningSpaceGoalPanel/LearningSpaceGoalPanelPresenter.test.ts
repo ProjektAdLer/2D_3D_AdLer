@@ -2,7 +2,7 @@ import LearningSpaceGoalPanelViewModel from "../../../../../Core/Presentation/Re
 import LearningSpaceGoalPanelPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningSpaceGoalPanel/LearningSpaceGoalPanelPresenter";
 import LearningSpaceTO from "../../../../../Core/Application/DataTransferObjects/LearningSpaceTO";
 import { LearningSpaceTemplateType } from "../../../../../Core/Domain/Types/LearningSpaceTemplateType";
-import { LearningSpaceThemeType } from "../../../../../Core/Domain/Types/LearningSpaceThemeTypes";
+import { ThemeType } from "../../../../../Core/Domain/Types/ThemeTypes";
 
 describe("LearningSpaceGoalPanel", () => {
   let systemUnderTest: LearningSpaceGoalPanelPresenter;
@@ -28,8 +28,8 @@ describe("LearningSpaceGoalPanel", () => {
       requirementsSyntaxTree: null,
       isAvailable: false,
       template: LearningSpaceTemplateType.None,
-      theme: LearningSpaceThemeType.Arcade,
-    };
+      theme: ThemeType.Arcade,
+    } as any as LearningSpaceTO;
 
     systemUnderTest.onLearningSpaceLoaded(spaceTO);
 

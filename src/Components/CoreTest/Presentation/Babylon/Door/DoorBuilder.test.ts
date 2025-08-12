@@ -7,7 +7,7 @@ import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import { Vector3 } from "@babylonjs/core";
 import DoorView from "../../../../Core/Presentation/Babylon/Door/DoorView";
 import { waitFor } from "@testing-library/react";
-import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
+import { ThemeType } from "../../../../Core/Domain/Types/ThemeTypes";
 import PRESENTATION_TYPES from "../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 import {
   HistoryWrapper,
@@ -65,7 +65,7 @@ describe("DoorBuilder", () => {
     systemUnderTest.isExit = false;
     systemUnderTest.spaceID = 0;
     systemUnderTest.isOpen = false;
-    systemUnderTest.theme = LearningSpaceThemeType.Campus;
+    systemUnderTest.theme = ThemeType.Campus;
 
     expect(() => {
       systemUnderTest.buildViewModel();
@@ -77,7 +77,7 @@ describe("DoorBuilder", () => {
     systemUnderTest.isExit = false;
     systemUnderTest.spaceID = 0;
     systemUnderTest.isOpen = false;
-    systemUnderTest.theme = LearningSpaceThemeType.Campus;
+    systemUnderTest.theme = ThemeType.Campus;
 
     expect(() => {
       systemUnderTest.buildViewModel();
@@ -101,7 +101,7 @@ describe("DoorBuilder", () => {
     systemUnderTest.rotation = 0;
     systemUnderTest.spaceID = 0;
     systemUnderTest.isOpen = false;
-    systemUnderTest.theme = LearningSpaceThemeType.Campus;
+    systemUnderTest.theme = ThemeType.Campus;
 
     expect(() => {
       systemUnderTest.buildViewModel();
@@ -113,7 +113,7 @@ describe("DoorBuilder", () => {
     systemUnderTest.rotation = 0;
     systemUnderTest.isExit = false;
     systemUnderTest.isOpen = false;
-    systemUnderTest.theme = LearningSpaceThemeType.Campus;
+    systemUnderTest.theme = ThemeType.Campus;
 
     expect(() => {
       systemUnderTest.buildViewModel();
@@ -125,7 +125,7 @@ describe("DoorBuilder", () => {
     systemUnderTest.rotation = 0;
     systemUnderTest.isExit = false;
     systemUnderTest.spaceID = 0;
-    systemUnderTest.theme = LearningSpaceThemeType.Campus;
+    systemUnderTest.theme = ThemeType.Campus;
 
     expect(() => {
       systemUnderTest.buildViewModel();
@@ -135,7 +135,7 @@ describe("DoorBuilder", () => {
   test("buildViewModel successfully sets all properties on viewModel", () => {
     const position = new Vector3(1, 2, 3);
     const rotation = 90;
-    const theme = LearningSpaceThemeType.CampusAB;
+    const theme = ThemeType.CampusAB;
     const isExit = true;
     const spaceID = 123;
     const isOpen = true;
@@ -163,7 +163,7 @@ describe("DoorBuilder", () => {
     systemUnderTest.isExit = false;
     systemUnderTest.spaceID = 0;
     systemUnderTest.isOpen = false;
-    systemUnderTest.theme = LearningSpaceThemeType.Campus;
+    systemUnderTest.theme = ThemeType.Campus;
 
     systemUnderTest.buildViewModel();
     systemUnderTest.buildController();
@@ -182,7 +182,7 @@ describe("DoorBuilder", () => {
     systemUnderTest.isExit = false;
     systemUnderTest.spaceID = 0;
     systemUnderTest.isOpen = false;
-    systemUnderTest.theme = LearningSpaceThemeType.Campus;
+    systemUnderTest.theme = ThemeType.Campus;
 
     systemUnderTest.buildViewModel();
     systemUnderTest.buildController();
@@ -206,7 +206,7 @@ describe("DoorBuilder", () => {
     systemUnderTest.isExit = false;
     systemUnderTest.spaceID = 0;
     systemUnderTest.isOpen = false;
-    systemUnderTest.theme = LearningSpaceThemeType.Campus;
+    systemUnderTest.theme = ThemeType.Campus;
 
     systemUnderTest.buildViewModel();
     systemUnderTest.buildPresenter();
@@ -223,7 +223,7 @@ describe("DoorBuilder", () => {
     systemUnderTest.isExit = false;
     systemUnderTest.spaceID = 0;
     systemUnderTest.isOpen = false;
-    systemUnderTest.theme = LearningSpaceThemeType.Campus;
+    systemUnderTest.theme = ThemeType.Campus;
 
     systemUnderTest.buildViewModel();
     systemUnderTest.buildPresenter();
@@ -239,7 +239,7 @@ describe("DoorBuilder", () => {
     systemUnderTest.isExit = false;
     systemUnderTest.spaceID = 0;
     systemUnderTest.isOpen = false;
-    systemUnderTest.theme = LearningSpaceThemeType.Campus;
+    systemUnderTest.theme = ThemeType.Campus;
 
     systemUnderTest.buildViewModel();
     systemUnderTest.buildPresenter();

@@ -18,7 +18,7 @@ import Logger from "../../../../Core/Adapters/Logger/Logger";
 import { LogLevelTypes } from "../../../../Core/Domain/Types/LogLevelTypes";
 import { LearningElementModelTypeEnums } from "../../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
 import IBeginStoryElementOutroCutSceneUseCase from "../../../../Core/Application/UseCases/BeginStoryElementOutroCutScene/IBeginStoryElementOutroCutSceneUseCase";
-import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
+import { ThemeType } from "../../../../Core/Domain/Types/ThemeTypes";
 import UpdateExperiencePointsUseCase from "../../../../Core/Application/UseCases/UpdateExperiencePoints/UpdateExperiencePointsUseCase";
 
 const entityContainerMock = mock<IEntityContainer>();
@@ -60,7 +60,7 @@ const getNewTestEntities = () => {
     requiredScore: 0,
     parentWorldID: 200,
     template: LearningSpaceTemplateType.None,
-    theme: LearningSpaceThemeType.Suburb,
+    theme: ThemeType.Suburb,
     storyElements: [],
   };
 

@@ -4,7 +4,7 @@ import LearningSpaceTO from "../../../../../Core/Application/DataTransferObjects
 import { GradingStyle } from "../../../../../Core/Domain/Types/GradingStyle";
 import { LearningElementModelTypeEnums } from "../../../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
 import LearningElementTO from "../../../../../Core/Application/DataTransferObjects/LearningElementTO";
-import { LearningSpaceThemeType } from "../../../../../Core/Domain/Types/LearningSpaceThemeTypes";
+import { ThemeType } from "../../../../../Core/Domain/Types/ThemeTypes";
 
 describe("LearningSpaceDetailPresenter", () => {
   let systemUnderTest: LearningSpaceDetailPresenter;
@@ -49,7 +49,7 @@ describe("LearningSpaceDetailPresenter", () => {
           value: 1,
           hasScored: true,
           parentWorldID: 42,
-          theme: LearningSpaceThemeType.Arcade,
+          theme: ThemeType.Arcade,
           isScoreable: true,
           isRequired: null,
           estimatedTimeInMinutes: 10,
@@ -70,7 +70,7 @@ describe("LearningSpaceDetailPresenter", () => {
           value: 1,
           hasScored: false,
           parentWorldID: 42,
-          theme: LearningSpaceThemeType.Arcade,
+          theme: ThemeType.Arcade,
           isScoreable: true,
           isRequired: true,
           estimatedTimeInMinutes: 10,

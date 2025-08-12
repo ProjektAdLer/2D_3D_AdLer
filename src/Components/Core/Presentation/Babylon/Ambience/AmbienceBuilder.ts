@@ -4,7 +4,7 @@ import AmbienceView from "./AmbienceView";
 import AmbienceViewModel from "./AmbienceViewModel";
 import IAmbiencePresenter from "./IAmbiencePresenter";
 import AsyncPresentationBuilder from "../../PresentationBuilder/AsyncPresentationBuilder";
-import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/LearningSpaceThemeTypes";
+import { ThemeType } from "src/Components/Core/Domain/Types/ThemeTypes";
 import { IAmbienceBuilder } from "./IAmbienceBuilder";
 
 @injectable()
@@ -17,7 +17,7 @@ export default class AmbienceBuilder
   >
   implements IAmbienceBuilder
 {
-  theme: LearningSpaceThemeType;
+  theme: ThemeType;
 
   constructor() {
     super(AmbienceViewModel, undefined, AmbienceView, AmbiencePresenter);
@@ -38,7 +38,7 @@ export default class AmbienceBuilder
       },
       (error) => {
         console.error(error);
-      }
+      },
     );
   }
 }
