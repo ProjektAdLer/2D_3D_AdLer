@@ -13,7 +13,7 @@ import WindowView from "../../../../Core/Presentation/Babylon/Window/WindowView"
 import WindowViewModel from "../../../../Core/Presentation/Babylon/Window/WindowViewModel";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
 import LearningSpace from "../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/LearningSpace";
-import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
+import { ThemeType } from "../../../../Core/Domain/Types/ThemeTypes";
 
 // setup scene presenter mock
 const scenePresenterMock = mockDeep<IScenePresenter>();
@@ -29,7 +29,7 @@ describe("WindowView", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind(SCENE_TYPES.ScenePresenterFactory).toConstantValue(
-      scenePresenterFactoryMock
+      scenePresenterFactoryMock,
     );
   });
 
@@ -53,7 +53,7 @@ describe("WindowView", () => {
     ]);
 
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
-    viewModel.theme = LearningSpaceThemeType.Campus;
+    viewModel.theme = ThemeType.Campus;
 
     await systemUnderTest.asyncSetup();
     expect(scenePresenterMock.loadModel).toHaveBeenCalledTimes(1);
@@ -67,7 +67,7 @@ describe("WindowView", () => {
     scenePresenterMock.loadModel.mockResolvedValue([mesh1, mesh2]);
 
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
-    viewModel.theme = LearningSpaceThemeType.Campus;
+    viewModel.theme = ThemeType.Campus;
 
     await systemUnderTest.asyncSetup();
     expect(mesh1.rotationQuaternion).toBeNull();

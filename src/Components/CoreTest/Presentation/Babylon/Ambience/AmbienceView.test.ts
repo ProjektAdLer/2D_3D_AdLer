@@ -5,7 +5,7 @@ import SCENE_TYPES from "../../../../Core/DependencyInjection/Scenes/SCENE_TYPES
 import AmbienceView from "../../../../Core/Presentation/Babylon/Ambience/AmbienceView";
 import AmbienceViewModel from "../../../../Core/Presentation/Babylon/Ambience/AmbienceViewModel";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
-import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
+import { ThemeType } from "../../../../Core/Domain/Types/ThemeTypes";
 
 // setup scene presenter mock
 const scenePresenterMock = mockDeep<IScenePresenter>();
@@ -21,7 +21,7 @@ describe("AmbienceView", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind(SCENE_TYPES.ScenePresenterFactory).toConstantValue(
-      scenePresenterFactoryMock
+      scenePresenterFactoryMock,
     );
   });
 
@@ -47,7 +47,7 @@ describe("AmbienceView", () => {
     ]);
 
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
-    viewModel.theme = LearningSpaceThemeType.Arcade;
+    viewModel.theme = ThemeType.Arcade;
 
     await systemUnderTest.asyncSetup();
 

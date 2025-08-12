@@ -1,7 +1,7 @@
 import { AnimationGroup, Mesh, Vector3 } from "@babylonjs/core";
 import Observable from "../../../../../Lib/Observable";
 import { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
-import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/LearningSpaceThemeTypes";
+import { ThemeType } from "src/Components/Core/Domain/Types/ThemeTypes";
 import IDoorLogic from "./DoorLogic/IDoorLogic";
 
 export default class DoorViewModel {
@@ -23,7 +23,7 @@ export default class DoorViewModel {
   //door properties
   public position: Vector3;
   public rotation: number;
-  public theme: LearningSpaceThemeType;
+  public theme: ThemeType;
   public isOpen: Observable<boolean> = new Observable<boolean>(false);
   public isInteractable: Observable<boolean> = new Observable<boolean>(false);
   public isExit: boolean;

@@ -6,7 +6,7 @@ import StandInDecorationPresenter from "./StandInDecorationPresenter";
 import { Vector3 } from "@babylonjs/core";
 import AsyncPresentationBuilder from "../../PresentationBuilder/AsyncPresentationBuilder";
 import IStandInDecorationBuilder from "./IStandInDecorationBuilder";
-import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/LearningSpaceThemeTypes";
+import { ThemeType } from "src/Components/Core/Domain/Types/ThemeTypes";
 
 @injectable()
 export default class StandInDecorationBuilder
@@ -22,14 +22,14 @@ export default class StandInDecorationBuilder
   rotation: number;
   spaceName: string;
   slotNumber: number;
-  theme: LearningSpaceThemeType;
+  theme: ThemeType;
 
   constructor() {
     super(
       StandInDecorationViewModel,
       undefined,
       StandInDecorationView,
-      StandInDecorationPresenter
+      StandInDecorationPresenter,
     );
   }
 
@@ -42,7 +42,7 @@ export default class StandInDecorationBuilder
       this.theme === undefined
     )
       throw new Error(
-        `Position: ${this.position}, Rotation: ${this.rotation}, SpaceName: ${this.spaceName} or SlotNumber: ${this.slotNumber} is not defined. Set before using the builder.`
+        `Position: ${this.position}, Rotation: ${this.rotation}, SpaceName: ${this.spaceName} or SlotNumber: ${this.slotNumber} is not defined. Set before using the builder.`,
       );
     super.buildViewModel();
 
@@ -62,7 +62,7 @@ export default class StandInDecorationBuilder
       },
       (error) => {
         console.error(error);
-      }
+      },
     );
   }
 }

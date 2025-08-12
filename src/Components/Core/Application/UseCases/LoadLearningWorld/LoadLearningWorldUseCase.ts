@@ -29,7 +29,7 @@ import AdaptivityElementEntity from "src/Components/Core/Domain/Entities/Adaptiv
 import { AdaptivityElementDataTO } from "../../DataTransferObjects/AdaptivityElement/AdaptivityElementDataTO";
 import ExternalLearningElementEntity from "src/Components/Core/Domain/Entities/Adaptivity/ExternalLearningElementEntity";
 import LearningSpaceThemeLookup from "src/Components/Core/Domain/LearningSpaceThemes/LearningSpaceThemeLookup";
-import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/LearningSpaceThemeTypes";
+import { ThemeType } from "src/Components/Core/Domain/Types/ThemeTypes";
 import { LearningElementTypes } from "src/Components/Core/Domain/Types/LearningElementTypes";
 import ArrayItemRandomizer from "src/Components/Core/Presentation/Utils/ArrayItemRandomizer/ArrayItemRandomizer";
 import {
@@ -268,7 +268,7 @@ export default class LoadLearningWorldUseCase
     outroStoryElement: BackendStoryTO | null,
     worldID: number,
     spaceID: number,
-    spaceTheme: LearningSpaceThemeType,
+    spaceTheme: ThemeType,
   ): StoryElementEntity[] {
     const storyElementEntities: StoryElementEntity[] = [];
 
@@ -355,7 +355,7 @@ export default class LoadLearningWorldUseCase
   }
 
   getStoryElementModelType(
-    spaceTheme: LearningSpaceThemeType,
+    spaceTheme: ThemeType,
     modelType?: LearningElementModel,
   ): LearningElementModel {
     if (
@@ -373,7 +373,7 @@ export default class LoadLearningWorldUseCase
     worldID: number,
     elements: (BackendLearningElementTO | BackendAdaptivityElementTO | null)[],
     worldStatus: LearningWorldStatusTO,
-    spaceTheme: LearningSpaceThemeType,
+    spaceTheme: ThemeType,
   ): (LearningElementEntity | null)[] {
     return elements.map((element) => {
       if (element === null) {

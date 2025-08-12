@@ -6,7 +6,7 @@ import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManageme
 import SCENE_TYPES from "../../../../Core/DependencyInjection/Scenes/SCENE_TYPES";
 import { AbstractMesh, NullEngine, Scene, Vector3 } from "@babylonjs/core";
 import ArrayItemRandomizer from "../../../../Core/Presentation/Utils/ArrayItemRandomizer/ArrayItemRandomizer";
-import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
+import { ThemeType } from "../../../../Core/Domain/Types/ThemeTypes";
 
 // setup scene presenter mock
 const scenePresenterMock = mockDeep<IScenePresenter>();
@@ -15,7 +15,7 @@ const scenePresenterFactoryMock = () => scenePresenterMock;
 
 function buildSystemUnderTest(): [
   StandInDecorationViewModel,
-  StandInDecorationView
+  StandInDecorationView,
 ] {
   const viewModel = new StandInDecorationViewModel();
   viewModel.position = new Vector3(1, 2, 3);
@@ -33,7 +33,7 @@ describe("StandInDecorationView", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind(SCENE_TYPES.ScenePresenterFactory).toConstantValue(
-      scenePresenterFactoryMock
+      scenePresenterFactoryMock,
     );
   });
 
@@ -66,7 +66,7 @@ describe("StandInDecorationView", () => {
     viewModel.position = new Vector3(0, 0, 0);
     viewModel.slotNumber = 0;
     viewModel.spaceName = "TestSpace";
-    viewModel.theme = LearningSpaceThemeType.Campus;
+    viewModel.theme = ThemeType.Campus;
 
     await systemUnderTest.asyncSetup();
 

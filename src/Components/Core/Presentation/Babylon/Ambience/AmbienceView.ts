@@ -7,7 +7,7 @@ import SCENE_TYPES, {
 import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpaceSceneDefinition";
 import { Mesh, Vector3 } from "@babylonjs/core";
 import LearningSpaceThemeLookup from "src/Components/Core/Domain/LearningSpaceThemes/LearningSpaceThemeLookup";
-import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/LearningSpaceThemeTypes";
+import { ThemeType } from "src/Components/Core/Domain/Types/ThemeTypes";
 
 export default class AmbienceView {
   private scenePresenter: IScenePresenter;
@@ -27,12 +27,12 @@ export default class AmbienceView {
     this.viewModel.meshes.Value = results as Mesh[];
     this.viewModel.meshes.Value.forEach((mesh) => {
       if (
-        this.viewModel.theme === LearningSpaceThemeType.Campus ||
-        this.viewModel.theme === LearningSpaceThemeType.CampusAB ||
-        this.viewModel.theme === LearningSpaceThemeType.CampusKE ||
-        this.viewModel.theme === LearningSpaceThemeType.Arcade ||
-        this.viewModel.theme === LearningSpaceThemeType.Suburb ||
-        this.viewModel.theme === LearningSpaceThemeType.CampusStudentClub
+        this.viewModel.theme === ThemeType.Campus ||
+        this.viewModel.theme === ThemeType.CampusAB ||
+        this.viewModel.theme === ThemeType.CampusKE ||
+        this.viewModel.theme === ThemeType.Arcade ||
+        this.viewModel.theme === ThemeType.Suburb ||
+        this.viewModel.theme === ThemeType.CampusStudentClub
       ) {
         mesh.translate(new Vector3(0, -0.05, 0), 1);
       }

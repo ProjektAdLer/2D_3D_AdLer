@@ -1,6 +1,6 @@
 import { ComponentID } from "../../Domain/Types/EntityTypes";
 import { LearningSpaceTemplateType } from "../../Domain/Types/LearningSpaceTemplateType";
-import { LearningSpaceThemeType } from "../../Domain/Types/LearningSpaceThemeTypes";
+import { ThemeType } from "../../Domain/Types/ThemeTypes";
 import {
   BackendAdaptivityElementTO,
   BackendLearningElementTO,
@@ -29,7 +29,7 @@ export default class BackendSpaceTO {
   requirements: string;
   requiredScore: number;
   template: LearningSpaceTemplateType;
-  templateStyle: LearningSpaceThemeType;
+  templateStyle: ThemeType;
   introStory: BackendStoryTO | null;
   outroStory: BackendStoryTO | null;
 }

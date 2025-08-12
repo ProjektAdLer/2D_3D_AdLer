@@ -13,7 +13,7 @@ import LearningWorldEntity from "../../../../Core/Domain/Entities/LearningWorldE
 import { IInternalLoadLearningWorldUseCase } from "../../../../Core/Application/UseCases/LoadLearningWorld/ILoadLearningWorldUseCase";
 import LearningWorldTO from "../../../../Core/Application/DataTransferObjects/LearningWorldTO";
 import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/LearningSpaceTemplateType";
-import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
+import { ThemeType } from "../../../../Core/Domain/Types/ThemeTypes";
 import { IInternalCalculateLearningSpaceScoreUseCase } from "../../../../Core/Application/UseCases/CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
 import UserDataEntity from "../../../../Core/Domain/Entities/UserDataEntity";
 import ILoggerPort from "../../../../Core/Application/Ports/Interfaces/ILoggerPort";
@@ -42,7 +42,7 @@ const learningWorldEntity: Partial<LearningWorldEntity> = {
       requirements: "",
       requiredScore: 1,
       template: LearningSpaceTemplateType.None,
-      theme: LearningSpaceThemeType.Suburb,
+      theme: ThemeType.Suburb,
       parentWorldID: 1,
       storyElements: [],
     },
@@ -76,7 +76,7 @@ const setupMocks = () => {
         currentScore: 0,
         maxScore: 0,
         template: LearningSpaceTemplateType.None,
-        theme: LearningSpaceThemeType.Suburb,
+        theme: ThemeType.Suburb,
         storyElements: [],
       },
     ],

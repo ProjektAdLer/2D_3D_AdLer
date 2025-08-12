@@ -8,7 +8,7 @@ import DecorationView from "../../../../Core/Presentation/Babylon/Decoration/Dec
 import DecorationViewModel from "../../../../Core/Presentation/Babylon/Decoration/DecorationViewModel";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
 import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/LearningSpaceTemplateType";
-import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
+import { ThemeType } from "../../../../Core/Domain/Types/ThemeTypes";
 
 jest.mock("@babylonjs/core/Meshes");
 
@@ -38,7 +38,7 @@ describe("DecorationView", () => {
   //ANF-ID: [ELG0025]
   test("loads inside decoration models when theme and learning space template type are valid", async () => {
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
-    viewModel.theme = LearningSpaceThemeType.CampusAB;
+    viewModel.theme = ThemeType.CampusAB;
     viewModel.learningSpaceTemplateType = LearningSpaceTemplateType.L;
     const mockMesh = new Mesh("insideDeco", new Scene(new NullEngine()));
     scenePresenterMock.loadModel.mockResolvedValue([mockMesh]);
@@ -57,7 +57,7 @@ describe("DecorationView", () => {
   // ANF-ID: [ELG0025]
   test("loads outside decoration models when theme and learning space template type are valid", async () => {
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
-    viewModel.theme = LearningSpaceThemeType.Arcade;
+    viewModel.theme = ThemeType.Arcade;
     viewModel.learningSpaceTemplateType = LearningSpaceTemplateType.L;
     const mockMesh = new Mesh("outsideDeco", new Scene(new NullEngine()));
     scenePresenterMock.loadModel.mockResolvedValue([mockMesh]);
@@ -75,7 +75,7 @@ describe("DecorationView", () => {
   // ANF-ID: [ELG0025]
   test("loads no model when learning space template type is None", async () => {
     const [viewModel, systemUnderTest] = buildSystemUnderTest();
-    viewModel.theme = LearningSpaceThemeType.CampusAB;
+    viewModel.theme = ThemeType.CampusAB;
     viewModel.learningSpaceTemplateType = LearningSpaceTemplateType.None;
 
     await systemUnderTest.asyncSetup();

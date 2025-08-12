@@ -16,7 +16,7 @@ import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContaine
 import ILearningSpaceController from "../../../../Core/Presentation/Babylon/LearningSpaces/ILearningSpaceController";
 import IScenePresenter from "../../../../Core/Presentation/Babylon/SceneManagement/IScenePresenter";
 import SCENE_TYPES from "../../../../Core/DependencyInjection/Scenes/SCENE_TYPES";
-import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
+import { ThemeType } from "../../../../Core/Domain/Types/ThemeTypes";
 
 // mock necessary Babylon objects
 jest.mock("@babylonjs/core/Materials");
@@ -29,7 +29,7 @@ scenePresenterMock.Scene.lights = [];
 function createSystemUnderTest(): [
   LearningSpaceView,
   ILearningSpaceController,
-  LearningSpaceViewModel
+  LearningSpaceViewModel,
 ] {
   const viewModel = new LearningSpaceViewModel();
   const spaceControllerMock = mock<ILearningSpaceController>();
@@ -52,7 +52,7 @@ describe("LearningSpaceView", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind(SCENE_TYPES.ScenePresenterFactory).toConstantValue(
-      scenePresenterFactoryMock
+      scenePresenterFactoryMock,
     );
   });
 
@@ -70,7 +70,7 @@ describe("LearningSpaceView", () => {
     //ANF-ID: [ELG0017]
     test("createFloorMaterial creates a material", () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
-      viewModel.theme = LearningSpaceThemeType.Campus;
+      viewModel.theme = ThemeType.Campus;
 
       systemUnderTest["createFloorMaterial"]();
 
@@ -80,7 +80,7 @@ describe("LearningSpaceView", () => {
     //ANF-ID: [ELG0017]
     test("createFloorMaterial sets a texture for the floor material", () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
-      viewModel.theme = LearningSpaceThemeType.Campus;
+      viewModel.theme = ThemeType.Campus;
 
       systemUnderTest["createFloorMaterial"]();
 
@@ -90,7 +90,7 @@ describe("LearningSpaceView", () => {
     //ANF-ID: [ELG0017]
     test("createWallMaterial creates a material", () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
-      viewModel.theme = LearningSpaceThemeType.Campus;
+      viewModel.theme = ThemeType.Campus;
 
       systemUnderTest["createWallMaterial"]();
 
@@ -100,7 +100,7 @@ describe("LearningSpaceView", () => {
     //ANF-ID: [ELG0017]
     test("createWallMaterial sets a texture for the wall material", () => {
       const [systemUnderTest, , viewModel] = createSystemUnderTest();
-      viewModel.theme = LearningSpaceThemeType.Campus;
+      viewModel.theme = ThemeType.Campus;
 
       systemUnderTest["createWallMaterial"]();
 
@@ -121,8 +121,8 @@ describe("LearningSpaceView", () => {
       } catch (e) {
         expect(e).toEqual(
           new Error(
-            "Not enough corners found to generate space. Please review the Spacedata."
-          )
+            "Not enough corners found to generate space. Please review the Spacedata.",
+          ),
         );
       }
     });
@@ -234,7 +234,7 @@ describe("LearningSpaceView", () => {
 
       expect(scenePresenterMock.registerNavigationMesh).toBeCalledTimes(1);
       expect(scenePresenterMock.registerNavigationMesh).toBeCalledWith(
-        mockedMesh
+        mockedMesh,
       );
     });
 
@@ -254,7 +254,7 @@ describe("LearningSpaceView", () => {
       await systemUnderTest["createFloor"]();
 
       expect(viewModel.floorMesh.material).toStrictEqual(
-        viewModel.floorMaterial
+        viewModel.floorMaterial,
       );
     });
   });
@@ -497,7 +497,7 @@ describe("LearningSpaceView", () => {
 
       expect(scenePresenterMock.registerNavigationMesh).toBeCalledTimes(1);
       expect(scenePresenterMock.registerNavigationMesh).toBeCalledWith(
-        mockedMesh
+        mockedMesh,
       );
     });
 
@@ -510,7 +510,7 @@ describe("LearningSpaceView", () => {
       const result = systemUnderTest["createWallSegment"](
         new Vector3(0, 0, 0),
         new Vector3(1, 1, 1),
-        0
+        0,
       );
 
       expect(result).toBeInstanceOf(Mesh);
@@ -580,7 +580,7 @@ describe("LearningSpaceView", () => {
 
       const result = systemUnderTest["createDoorCutout"](
         [new Vector3(1, 1, 1), 0],
-        mockMesh
+        mockMesh,
       );
 
       expect(result).toBeInstanceOf(Mesh);
@@ -602,7 +602,7 @@ describe("LearningSpaceView", () => {
 
       const result = systemUnderTest["createWindowCutout"](
         [new Vector3(1, 1, 1), 0],
-        mockMesh
+        mockMesh,
       );
 
       expect(result).toBeInstanceOf(Mesh);

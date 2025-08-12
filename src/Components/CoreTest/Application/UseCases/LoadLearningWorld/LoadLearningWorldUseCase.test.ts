@@ -28,7 +28,7 @@ import INotificationPort from "../../../../Core/Application/Ports/Interfaces/INo
 import BackendWorldTO from "../../../../Core/Application/DataTransferObjects/BackendWorldTO";
 import { AdaptivityElementDataTO } from "../../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementDataTO";
 import { LearningSpaceTemplateType } from "../../../../Core/Domain/Types/LearningSpaceTemplateType";
-import { LearningSpaceThemeType } from "../../../../Core/Domain/Types/LearningSpaceThemeTypes";
+import { ThemeType } from "../../../../Core/Domain/Types/ThemeTypes";
 import AdaptivityElementEntity from "../../../../Core/Domain/Entities/Adaptivity/AdaptivityElementEntity";
 import {
   BackendAdaptivityElementTO,
@@ -92,7 +92,7 @@ const minimalAdaptivityBackendWorldTO: BackendWorldTO = {
       requiredScore: 0,
       elements: [backendAdaptivityElementTOMock],
       template: LearningSpaceTemplateType.L,
-      templateStyle: LearningSpaceThemeType.Arcade,
+      templateStyle: ThemeType.Arcade,
       introStory: null,
       outroStory: null,
     },
@@ -115,7 +115,7 @@ const minimalCombinedStoryElementBackendWorldTO: BackendWorldTO = {
       requiredScore: 0,
       elements: [backendAdaptivityElementTOMock],
       template: LearningSpaceTemplateType.L,
-      templateStyle: LearningSpaceThemeType.Arcade,
+      templateStyle: ThemeType.Arcade,
       introStory: {
         storyTexts: ["hello"],
         elementModel:
@@ -148,7 +148,7 @@ const minimalExternalElementBackendWorldTO: BackendWorldTO = {
       requiredScore: 0,
       elements: [backendAdaptivityElementTOMock],
       template: LearningSpaceTemplateType.L,
-      templateStyle: LearningSpaceThemeType.Arcade,
+      templateStyle: ThemeType.Arcade,
       introStory: null,
       outroStory: null,
     },
@@ -177,7 +177,7 @@ const minimalSeperateStoryElementBackendWorldTO: BackendWorldTO = {
       requiredScore: 0,
       elements: [backendAdaptivityElementTOMock],
       template: LearningSpaceTemplateType.L,
-      templateStyle: LearningSpaceThemeType.Arcade,
+      templateStyle: ThemeType.Arcade,
       introStory: {
         storyTexts: ["hello"],
         elementModel:
@@ -813,7 +813,7 @@ describe("LoadLearningWorldUseCase", () => {
       42,
       [null],
       mock<LearningWorldStatusTO>(),
-      LearningSpaceThemeType.Campus,
+      ThemeType.Campus,
     );
     expect(result[0]).toBeNull();
   });
@@ -845,7 +845,7 @@ describe("LoadLearningWorldUseCase", () => {
       42,
       [learningElementTO],
       worldStatusTO,
-      LearningSpaceThemeType.Campus,
+      ThemeType.Campus,
     );
 
     expect(result[0]!.id).toBe(42);
@@ -883,7 +883,7 @@ describe("LoadLearningWorldUseCase", () => {
       42,
       [learningElementTO],
       worldStatusTO,
-      LearningSpaceThemeType.Campus,
+      ThemeType.Campus,
     );
 
     expect(result[0]!.id).toBe(42);
@@ -917,7 +917,7 @@ describe("LoadLearningWorldUseCase", () => {
       1,
       [learningElementTO],
       worldStatusTO,
-      LearningSpaceThemeType.Campus,
+      ThemeType.Campus,
     );
     expect(entityContainerMock.createEntity).toHaveBeenCalledTimes(1);
   });
@@ -940,7 +940,7 @@ describe("LoadLearningWorldUseCase", () => {
       1,
       [backendAdaptivityElementTOMock],
       worldStatusTO,
-      LearningSpaceThemeType.Campus,
+      ThemeType.Campus,
     );
     expect(entityContainerMock.createEntity).toHaveBeenCalledTimes(2);
   });
