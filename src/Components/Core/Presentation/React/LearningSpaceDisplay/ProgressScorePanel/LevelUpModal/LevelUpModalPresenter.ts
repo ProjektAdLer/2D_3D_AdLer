@@ -8,6 +8,11 @@ export default class LevelUpModalPresenter implements ILevelUpModalPresenter {
   onExperiencePointsUpdated(experiencePointsTO: ExperiencePointsTO): void {
     if (experiencePointsTO.numberOfLevelUps) {
       this.viewModel.isOpen.Value = true;
+      if (experiencePointsTO.currentLevel < 0) {
+        this.viewModel.level = 0;
+      } else if (experiencePointsTO.currentLevel > 10) {
+        this.viewModel.level = 10;
+      } else this.viewModel.level = experiencePointsTO.currentLevel;
     }
   }
 }
