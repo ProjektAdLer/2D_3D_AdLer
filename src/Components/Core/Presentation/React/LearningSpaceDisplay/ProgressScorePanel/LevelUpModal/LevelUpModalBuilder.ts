@@ -10,6 +10,8 @@ import { HistoryWrapper } from "~ReactComponents/ReactRelated/ReactEntryPoint/Hi
 import LevelUpModalController from "./LevelUpModalController";
 import ILevelUpModalController from "./ILevelUpModalController";
 import { injectable } from "inversify";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+import IGetLearningWorldUseCase from "src/Components/Core/Application/UseCases/GetLearningWorld/IGetLearningWorldUseCase";
 
 @injectable()
 export default class LevelUpModalBuilder extends PresentationBuilder<
@@ -45,5 +47,9 @@ export default class LevelUpModalBuilder extends PresentationBuilder<
     CoreDIContainer.get<ILearningWorldPort>(
       PORT_TYPES.ILearningWorldPort,
     ).registerAdapter(this.presenter!, HistoryWrapper.currentLocationScope());
+
+    CoreDIContainer.get<IGetLearningWorldUseCase>(
+      USECASE_TYPES.IGetLearningWorldUseCase,
+    ).execute();
   }
 }
