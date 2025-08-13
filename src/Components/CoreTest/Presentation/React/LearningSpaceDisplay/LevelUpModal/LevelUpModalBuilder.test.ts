@@ -1,15 +1,15 @@
-import LevelUpModalBuilder from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LevelUpModal/LevelUpModalBuilder";
-import CoreDIContainer from "../../../../../../Core/DependencyInjection/CoreDIContainer";
-import PORT_TYPES from "../../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
-import ILearningWorldPort from "../../../../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
+import LevelUpModalBuilder from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LevelUpModal/LevelUpModalBuilder";
+import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
+import PORT_TYPES from "../../../../../Core/DependencyInjection/Ports/PORT_TYPES";
+import ILearningWorldPort from "../../../../../Core/Application/Ports/Interfaces/ILearningWorldPort";
 import {
   HistoryWrapper,
   LocationScope,
-} from "../../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/HistoryWrapper";
+} from "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/HistoryWrapper";
 import { mock } from "jest-mock-extended";
-import LevelUpModalPresenter from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LevelUpModal/LevelUpModalPresenter";
-import PRESENTATION_TYPES from "../../../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
-import { ILevelUpModalPresenter } from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LevelUpModal/ILevelUpModalPresenter";
+import LevelUpModalPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LevelUpModal/LevelUpModalPresenter";
+import PRESENTATION_TYPES from "../../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
+import { ILevelUpModalPresenter } from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LevelUpModal/ILevelUpModalPresenter";
 
 const worldPortMock = mock<ILearningWorldPort>();
 

@@ -1,8 +1,8 @@
 import { fireEvent, render } from "@testing-library/react";
-import LevelUpModalViewModel from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LevelUpModal/LevelUpModalViewModel";
-import useBuilderMock from "../../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
-import LevelUpModal from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LevelUpModal/LevelUpModal";
-import LevelUpModalController from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LevelUpModal/LevelUpModalController";
+import LevelUpModalViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LevelUpModal/LevelUpModalViewModel";
+import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
+import LevelUpModal from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LevelUpModal/LevelUpModal";
+import LevelUpModalController from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LevelUpModal/LevelUpModalController";
 import mock from "jest-mock-extended/lib/Mock";
 import React from "react";
 
