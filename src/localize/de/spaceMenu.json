@@ -17,6 +17,9 @@
   "list": "Liste",
   "nodeAND": "UND",
   "nodeOR": "ODER",
+  "zoomIn": "Vergrößert die Ansicht des Graphen",
+  "zoomOut": "Verkleinert die Ansicht des Graphen",
+  "fitView": "Passt Ansicht des Graphen an",
 
   "learningWorldCompleted": "Lernwelt abgeschlossen!",
   "congratulationStandardText": "Sie haben alle Lernräume erfolgreich abgeschlossen und somit die Lernwelt bestanden, herzlichen Glückwunsch!",

@@ -3,5 +3,9 @@
   "homepageToolTip": "Opens the AdLer website",
 
   "spaceButtonToolTip": "Opens the learning spaces metadata",
-  "spaceOpenButtonToolTip": "Opens the learning environment"
+  "spaceOpenButtonToolTip": "Opens the learning environment",
+
+  "zoomIn": "Zoom in to graph",
+  "zoomOut": "Zoom out of graph",
+  "fitView": "Fits graph to view"
 }

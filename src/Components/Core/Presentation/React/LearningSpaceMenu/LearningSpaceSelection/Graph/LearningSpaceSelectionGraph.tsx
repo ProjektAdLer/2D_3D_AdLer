@@ -34,6 +34,7 @@ import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILogge
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import * as dagre from "@dagrejs/dagre";
+import { useTranslation } from "react-i18next";
 
 export const SPACE_NODE_WIDTH = 200; // to be used in LearningSpaceSelectionSpaceNode.tsx
 export const REQ_NODE_WIDTH = 64; // to be used in LearningSpaceSelectionRequirementNode.tsx
@@ -58,6 +59,8 @@ export default function LearningSpaceSelectionGraph(props: {
   const [spaces] = useObservable(props.viewModel.spaces);
   const [lastSelectedSpaceID] = useObservable(props.viewModel.selectedSpaceID);
   const logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
+
+  const { t: translate } = useTranslation("spaceMenu");
 
   useEffect(() => {
     if (spaces === undefined || spaces.length === 0) return;
@@ -97,6 +100,36 @@ export default function LearningSpaceSelectionGraph(props: {
 
     setupGraph();
   }, [reactFlowInstance, spaces, lastSelectedSpaceID, logger]);
+
+  const setToolTips = useCallback(() => {
+    const zoomInButton = document.getElementsByClassName(
+      "react-flow__controls-button react-flow__controls-zoomin",
+    );
+    if (
+      zoomInButton.length === 1 &&
+      zoomInButton[0].getAttribute("title") !== translate("zoomIn")
+    ) {
+      zoomInButton[0].setAttribute("title", translate("zoomIn"));
+    }
+    const zoomOutButton = document.getElementsByClassName(
+      "react-flow__controls-button react-flow__controls-zoomout",
+    );
+    if (
+      zoomOutButton.length === 1 &&
+      zoomOutButton[0].getAttribute("title") !== translate("zoomOut")
+    ) {
+      zoomOutButton[0].setAttribute("title", translate("zoomOut"));
+    }
+    const fitViewButton = document.getElementsByClassName(
+      "react-flow__controls-button react-flow__controls-fitview",
+    );
+    if (
+      fitViewButton.length === 1 &&
+      fitViewButton[0].getAttribute("title") !== translate("fitView")
+    ) {
+      fitViewButton[0].setAttribute("title", translate("fitView"));
+    }
+  }, [translate]);
 
   const onNodeClickCallback = useCallback<NodeMouseHandler>(
     (event: React.MouseEvent, clickedNode: Node) => {
@@ -146,6 +179,7 @@ export default function LearningSpaceSelectionGraph(props: {
         defaultEdges={[]}
         fitView={true}
         fitViewOptions={{ padding: 0.2 }}
+        onInit={setToolTips}
       >
         <Background size={2} />
         <Controls showInteractive={false} />
