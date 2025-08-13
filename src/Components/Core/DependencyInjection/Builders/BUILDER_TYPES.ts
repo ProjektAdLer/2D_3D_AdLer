@@ -65,6 +65,7 @@ const BUILDER_TYPES = {
   ICinemaStripesBuilder: Symbol("ICinemaStripesBuilder"),
   IExperiencePointsPanelBuilder: Symbol("IExperiencePointsPanelBuilder"),
   ILevelUpModalBuilder: Symbol("ILevelUpModalBuilder"),
+  IBadgeOverviewModalBuilder: Symbol("IBadgeOverviewModalBuilder"),
 };
 
 export default BUILDER_TYPES;

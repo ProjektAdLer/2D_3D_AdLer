@@ -54,6 +54,7 @@ import ProgressScorePanelBuilder from "~ReactComponents/LearningSpaceDisplay/Pro
 import CinemaStripesBuilder from "~ReactComponents/LearningSpaceDisplay/CinemaStripes/CinemaStripesBuilder";
 import ExperiencePointsPanelBuilder from "~ReactComponents/LearningSpaceDisplay/ProgressScorePanel/ExperiencePointsPanel/ExperiencePointsPanelBuilder";
 import LevelUpModalBuilder from "~ReactComponents/LearningSpaceDisplay/LevelUpModal/LevelUpModalBuilder";
+import BadgeOverviewModalBuilder from "~ReactComponents/LearningSpaceDisplay/BadgeOverviewModal/BadgeOverviewModalBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -206,6 +207,9 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   ).to(ExperiencePointsPanelBuilder);
   bind<LevelUpModalBuilder>(BUILDER_TYPES.ILevelUpModalBuilder).to(
     LevelUpModalBuilder,
+  );
+  bind<IPresentationBuilder>(BUILDER_TYPES.IBadgeOverviewModalBuilder).to(
+    BadgeOverviewModalBuilder,
   );
 });
 

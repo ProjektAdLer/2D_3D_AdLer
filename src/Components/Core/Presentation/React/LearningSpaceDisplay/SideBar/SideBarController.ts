@@ -10,6 +10,7 @@ import IStoryElementPresenter from "../StoryElement/IStoryElementPresenter";
 import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 import IGetNarrativeFrameworkInfoUseCase from "src/Components/Core/Application/UseCases/GetNarrativeFrameworkInfo/IGetNarrativeFrameworkInfoUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+import IBadgeOverviewModalPresenter from "../BadgeOverviewModal/IBadgeOverviewModalPresenter";
 
 export default class SideBarController implements ISideBarController {
   onMainMenuButtonClicked(): void {
@@ -62,5 +63,10 @@ export default class SideBarController implements ISideBarController {
     CoreDIContainer.get<IGetNarrativeFrameworkInfoUseCase>(
       USECASE_TYPES.IGetNarrativeFrameworkInfoUseCase,
     ).execute();
+  }
+  onBadgeOverviewButtonClicked(): void {
+    CoreDIContainer.get<IBadgeOverviewModalPresenter>(
+      PRESENTATION_TYPES.IBadgeOverviewModalPresenter,
+    ).openModal();
   }
 }

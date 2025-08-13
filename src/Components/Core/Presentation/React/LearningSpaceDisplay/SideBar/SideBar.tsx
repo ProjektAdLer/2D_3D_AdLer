@@ -198,6 +198,18 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
               </p>
             </div>
           )}
+
+          <div className="flex max-h-[25%] flex-col items-center justify-start">
+            <StyledButton
+              onClick={controller.onBadgeOverviewButtonClicked}
+              title={translate("sidebar_badgeOverviewToolTip").toString()}
+            >
+              <img src={spaceStoryIcon} alt="Badge Overview" />
+            </StyledButton>
+            <p className="lg:text-md text-outline break-all text-center text-2xs font-bold text-adlerdarkblue">
+              {translate("sidebar_badgeOverview")}
+            </p>
+          </div>
         </div>
         <footer className="relative z-20 mt-1 flex w-full items-center justify-between">
           <span className="absolute left-[calc(41.6%-0.25rem)] h-2 w-1/6 rounded-full bg-adlerdarkblue mobile-landscape:hidden"></span>
