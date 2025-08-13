@@ -695,7 +695,7 @@ describe("LoadLearningWorldUseCase", () => {
           requiredScore: 0,
           elements: [backendAdaptivityElementTOMock],
           template: LearningSpaceTemplateType.L,
-          templateStyle: LearningSpaceThemeType.Arcade,
+          templateStyle: ThemeType.Arcade,
           introStory: {
             storyTexts: ["hello"],
             elementModel:

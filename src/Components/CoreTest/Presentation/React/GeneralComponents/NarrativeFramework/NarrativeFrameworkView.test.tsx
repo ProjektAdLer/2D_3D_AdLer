@@ -9,7 +9,7 @@ import { mock } from "jest-mock-extended";
 import INarrativeFrameworkController from "../../../../../Core/Presentation/React/GeneralComponents/NarrativeFramework/INarrativeFrameworkController";
 import IGetNarrativeFrameworkInfoUseCase from "../../../../../Core/Application/UseCases/GetNarrativeFrameworkInfo/IGetNarrativeFrameworkInfoUseCase";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
-import { LearningSpaceThemeType } from "../../../../../Core/Domain/Types/LearningSpaceThemeTypes";
+import { ThemeType } from "../../../../../Core/Domain/Types/ThemeTypes";
 
 let mockViewModel = new NarrativeFrameworkViewModel();
 let mockController = mock<INarrativeFrameworkController>();
@@ -100,7 +100,7 @@ describe("NarrativeFrameworkView", () => {
   // Tests for theme-based background images
   test("should render CampusAB background image when theme is CampusAB", () => {
     mockViewModel.introText = "test intro";
-    mockViewModel.theme = LearningSpaceThemeType.CampusAB;
+    mockViewModel.theme = ThemeType.CampusAB;
     useBuilderMock([mockViewModel, mockController]);
 
     const container = render(
@@ -119,7 +119,7 @@ describe("NarrativeFrameworkView", () => {
 
   test("should render CampusKE background image when theme is CampusKE", () => {
     mockViewModel.introText = "test intro";
-    mockViewModel.theme = LearningSpaceThemeType.CampusKE;
+    mockViewModel.theme = ThemeType.CampusKE;
     useBuilderMock([mockViewModel, mockController]);
 
     const container = render(
@@ -138,7 +138,7 @@ describe("NarrativeFrameworkView", () => {
 
   test("should render Suburb background image when theme is Suburb", () => {
     mockViewModel.introText = "test intro";
-    mockViewModel.theme = LearningSpaceThemeType.Suburb;
+    mockViewModel.theme = ThemeType.Suburb;
     useBuilderMock([mockViewModel, mockController]);
 
     const container = render(
@@ -157,7 +157,7 @@ describe("NarrativeFrameworkView", () => {
 
   test("should render Company background image when theme is Company", () => {
     mockViewModel.introText = "test intro";
-    mockViewModel.theme = LearningSpaceThemeType.Company;
+    mockViewModel.theme = ThemeType.Company;
     useBuilderMock([mockViewModel, mockController]);
 
     const container = render(
@@ -195,7 +195,7 @@ describe("NarrativeFrameworkView", () => {
 
   test("should render AdLer image regardless of theme", () => {
     mockViewModel.introText = "test intro";
-    mockViewModel.theme = LearningSpaceThemeType.CampusAB;
+    mockViewModel.theme = ThemeType.CampusAB;
     useBuilderMock([mockViewModel, mockController]);
 
     const container = render(

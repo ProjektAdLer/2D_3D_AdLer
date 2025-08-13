@@ -1,5 +1,5 @@
-import LevelUpModalPresenter from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/ProgressScorePanel/LevelUpModal/LevelUpModalPresenter";
-import LevelUpModalViewModel from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/ProgressScorePanel/LevelUpModal/LevelUpModalViewModel";
+import LevelUpModalPresenter from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LevelUpModal/LevelUpModalPresenter";
+import LevelUpModalViewModel from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LevelUpModal/LevelUpModalViewModel";
 
 describe("LevelUpModalPresenter", () => {
   let systemUnderTest: LevelUpModalPresenter;

@@ -16,7 +16,7 @@ import LearningWorldCompletionModal from "~ReactComponents/LearningSpaceMenu/Lea
 import NarrativeFrameworkLearningSpaceContainer from "~ReactComponents/GeneralComponents/NarrativeFrameworkLearningSpaceContainer/NarrativeFrameworkLearningSpaceContainer";
 import ProgressScorePanel from "~ReactComponents/LearningSpaceDisplay/ProgressScorePanel/ProgessScorePanel";
 import CinemaStripes from "~ReactComponents/LearningSpaceDisplay/CinemaStripes/CinemaStripes";
-import LevelUpModal from "~ReactComponents/LearningSpaceDisplay/ProgressScorePanel/LevelUpModal/LevelUpModal";
+import LevelUpModal from "~ReactComponents/LearningSpaceDisplay/LevelUpModal/LevelUpModal";
 
 export default function LearningSpace() {
   return (

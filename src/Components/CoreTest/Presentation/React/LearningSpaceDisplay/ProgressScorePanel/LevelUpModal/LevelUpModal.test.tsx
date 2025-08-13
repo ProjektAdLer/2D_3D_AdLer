@@ -1,9 +1,10 @@
 import { fireEvent, render } from "@testing-library/react";
-import LevelUpModalViewModel from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/ProgressScorePanel/LevelUpModal/LevelUpModalViewModel";
+import LevelUpModalViewModel from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LevelUpModal/LevelUpModalViewModel";
 import useBuilderMock from "../../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
-import LevelUpModal from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/ProgressScorePanel/LevelUpModal/LevelUpModal";
-import LevelUpModalController from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/ProgressScorePanel/LevelUpModal/LevelUpModalController";
+import LevelUpModal from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LevelUpModal/LevelUpModal";
+import LevelUpModalController from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LevelUpModal/LevelUpModalController";
 import mock from "jest-mock-extended/lib/Mock";
+import React from "react";
 
 describe("LevelUpModal", () => {
   let viewModelMock: LevelUpModalViewModel;

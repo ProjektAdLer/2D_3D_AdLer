@@ -2,7 +2,7 @@ import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import NarrativeFrameworkViewModel from "./NarrativeFrameworkViewModel";
 import INarrativeFrameworkController from "./INarrativeFrameworkController";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
-import { LearningSpaceThemeType } from "src/Components/Core/Domain/Types/LearningSpaceThemeTypes";
+import { ThemeType } from "src/Components/Core/Domain/Types/ThemeTypes";
 import explainAdler from "src/Assets/narrativeFramework/g-narrativeframe-explainadler-angled.png";
 
 // Import background images
@@ -15,33 +15,27 @@ type NarrativeFrameworkProps = {
   type: "intro" | "outro";
 };
 
-function getBackgroundImage(theme: LearningSpaceThemeType): string {
+function getBackgroundImage(theme: ThemeType): string {
   // Convert theme to string for comparison
   const themeString = theme?.toString();
 
   // Check for main world themes and their variations
   if (
-    themeString === LearningSpaceThemeType.CampusAB ||
+    themeString === ThemeType.CampusAB ||
     themeString?.startsWith("CAMPUSASCHAFFENBURG")
   ) {
     return campusABBackground;
   }
   if (
-    themeString === LearningSpaceThemeType.CampusKE ||
+    themeString === ThemeType.CampusKE ||
     themeString?.startsWith("CAMPUSKEMPTEN")
   ) {
     return campusKEBackground;
   }
-  if (
-    themeString === LearningSpaceThemeType.Suburb ||
-    themeString?.startsWith("SUBURB")
-  ) {
+  if (themeString === ThemeType.Suburb || themeString?.startsWith("SUBURB")) {
     return suburbBackground;
   }
-  if (
-    themeString === LearningSpaceThemeType.Company ||
-    themeString?.startsWith("COMPANY")
-  ) {
+  if (themeString === ThemeType.Company || themeString?.startsWith("COMPANY")) {
     return companyBackground;
   }
 
@@ -60,7 +54,7 @@ export default function NarrativeFramework(props: NarrativeFrameworkProps) {
   if (props.type === "outro" && !viewModel.outroText) return null;
 
   const backgroundImage = getBackgroundImage(
-    viewModel.theme || LearningSpaceThemeType.Suburb,
+    viewModel.theme || ThemeType.Suburb,
   );
 
   return (

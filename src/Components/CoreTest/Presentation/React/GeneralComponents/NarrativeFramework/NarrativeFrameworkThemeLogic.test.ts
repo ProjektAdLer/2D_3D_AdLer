@@ -1,32 +1,29 @@
-import { LearningSpaceThemeType } from "../../../../../Core/Domain/Types/LearningSpaceThemeTypes";
+import { ThemeType } from "../../../../../Core/Domain/Types/ThemeTypes";
 
 // Test the logic for background image selection
 // Since getBackgroundImage is not exported, we test the logic separately
 describe("NarrativeFramework Theme Logic", () => {
   // Simulate the getBackgroundImage function logic
-  function getBackgroundImage(theme: LearningSpaceThemeType): string {
+  function getBackgroundImage(theme: ThemeType): string {
     const themeString = theme?.toString();
 
     if (
-      themeString === LearningSpaceThemeType.CampusAB ||
+      themeString === ThemeType.CampusAB ||
       themeString?.startsWith("CAMPUSASCHAFFENBURG")
     ) {
       return "campusABBackground";
     }
     if (
-      themeString === LearningSpaceThemeType.CampusKE ||
+      themeString === ThemeType.CampusKE ||
       themeString?.startsWith("CAMPUSKEMPTEN")
     ) {
       return "campusKEBackground";
     }
-    if (
-      themeString === LearningSpaceThemeType.Suburb ||
-      themeString?.startsWith("SUBURB")
-    ) {
+    if (themeString === ThemeType.Suburb || themeString?.startsWith("SUBURB")) {
       return "suburbBackground";
     }
     if (
-      themeString === LearningSpaceThemeType.Company ||
+      themeString === ThemeType.Company ||
       themeString?.startsWith("COMPANY")
     ) {
       return "companyBackground";
@@ -36,22 +33,22 @@ describe("NarrativeFramework Theme Logic", () => {
   }
 
   test("should return CampusAB background for CampusAB theme", () => {
-    const result = getBackgroundImage(LearningSpaceThemeType.CampusAB);
+    const result = getBackgroundImage(ThemeType.CampusAB);
     expect(result).toBe("campusABBackground");
   });
 
   test("should return CampusKE background for CampusKE theme", () => {
-    const result = getBackgroundImage(LearningSpaceThemeType.CampusKE);
+    const result = getBackgroundImage(ThemeType.CampusKE);
     expect(result).toBe("campusKEBackground");
   });
 
   test("should return Suburb background for Suburb theme", () => {
-    const result = getBackgroundImage(LearningSpaceThemeType.Suburb);
+    const result = getBackgroundImage(ThemeType.Suburb);
     expect(result).toBe("suburbBackground");
   });
 
   test("should return Company background for Company theme", () => {
-    const result = getBackgroundImage(LearningSpaceThemeType.Company);
+    const result = getBackgroundImage(ThemeType.Company);
     expect(result).toBe("companyBackground");
   });
 
@@ -68,7 +65,7 @@ describe("NarrativeFramework Theme Logic", () => {
   });
 
   test("should handle Campus legacy theme (fallback)", () => {
-    const result = getBackgroundImage(LearningSpaceThemeType.Campus);
+    const result = getBackgroundImage(ThemeType.Campus);
     expect(result).toBe("suburbBackground");
   });
 });
