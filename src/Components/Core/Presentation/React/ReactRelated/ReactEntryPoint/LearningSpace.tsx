@@ -17,6 +17,7 @@ import NarrativeFrameworkLearningSpaceContainer from "~ReactComponents/GeneralCo
 import ProgressScorePanel from "~ReactComponents/LearningSpaceDisplay/ProgressScorePanel/ProgessScorePanel";
 import CinemaStripes from "~ReactComponents/LearningSpaceDisplay/CinemaStripes/CinemaStripes";
 import LevelUpModal from "~ReactComponents/LearningSpaceDisplay/LevelUpModal/LevelUpModal";
+import BadgeOverviewModal from "~ReactComponents/LearningSpaceDisplay/BadgeOverviewModal/BadgeOverviewModal";
 
 export default function LearningSpace() {
   return (
@@ -54,6 +55,7 @@ export default function LearningSpace() {
       <NarrativeFrameworkLearningSpaceContainer />
       <CinemaStripes />
       <LevelUpModal />
+      <BadgeOverviewModal />
     </div>
   );
 }

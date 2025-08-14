@@ -67,5 +67,6 @@
 
   "bottomToolTip": "Öffnet dieses Lernelement",
 
-  "hint_controlsExplanationModal": "Sie können die Steuerungs-Erklärung jederzeit über das Menü in der 3D-Ansicht erneut aufrufen."
+  "hint_controlsExplanationModal": "Sie können die Steuerungs-Erklärung jederzeit über das Menü in der 3D-Ansicht erneut aufrufen.",
+  "badgeOverviewTitle": "Abzeichenübersicht"
 }

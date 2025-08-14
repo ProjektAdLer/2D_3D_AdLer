@@ -21,7 +21,7 @@ export default function BadgeOverviewModal({ className }: AdLerUIComponent) {
         className,
         "flex flex-col items-center justify-center",
       )}
-      title={translate("learningWorldCompleted").toString()}
+      title={translate("badgeOverviewTitle").toString()}
       showModal={isOpen}
       onClose={() => {
         viewModel.isOpen.Value = false;
