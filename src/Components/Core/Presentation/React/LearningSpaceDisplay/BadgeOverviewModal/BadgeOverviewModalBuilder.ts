@@ -9,6 +9,10 @@ import IGetLearningWorldUseCase from "src/Components/Core/Application/UseCases/G
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import IBadgeOverviewModalController from "./IBadgeOverviewModalController";
 import BadgeOverviewModalController from "./BadgeOverviewModalController";
+import IGetExperiencePointsUseCase from "src/Components/Core/Application/UseCases/GetExperiencePoints/IGetExperiencePoints";
+import ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces/ILearningWorldPort";
+import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
+import { HistoryWrapper } from "~ReactComponents/ReactRelated/ReactEntryPoint/HistoryWrapper";
 
 @injectable()
 export default class BadgeOverviewModalBuilder extends PresentationBuilder<
@@ -37,8 +41,16 @@ export default class BadgeOverviewModalBuilder extends PresentationBuilder<
       PRESENTATION_TYPES.IBadgeOverviewModalPresenter,
     ).toConstantValue(this.presenter!);
 
+    CoreDIContainer.get<ILearningWorldPort>(
+      PORT_TYPES.ILearningWorldPort,
+    ).registerAdapter(this.presenter!, HistoryWrapper.currentLocationScope());
+
     CoreDIContainer.get<IGetLearningWorldUseCase>(
       USECASE_TYPES.IGetLearningWorldUseCase,
+    ).execute();
+
+    CoreDIContainer.get<IGetExperiencePointsUseCase>(
+      USECASE_TYPES.IGetExperiencePointsUseCase,
     ).execute();
   }
 }

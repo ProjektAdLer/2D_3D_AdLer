@@ -1,6 +1,7 @@
 import LearningWorldTO from "src/Components/Core/Application/DataTransferObjects/LearningWorldTO";
 import BadgeOverviewModalViewModel from "./BadgeOverviewModalViewModel";
 import IBadgeOverviewModalPresenter from "./IBadgeOverviewModalPresenter";
+import ExperiencePointsTO from "src/Components/Core/Application/DataTransferObjects/ExperiencePointsTO";
 
 export default class BadgeOverviewModalPresenter
   implements IBadgeOverviewModalPresenter
@@ -12,5 +13,8 @@ export default class BadgeOverviewModalPresenter
   }
   onLearningWorldEntityLoaded(world: LearningWorldTO): void {
     this.viewModel.worldTheme = world.theme;
+  }
+  onExperiencePointsUpdated(experiencePointsTO: ExperiencePointsTO): void {
+    this.viewModel.currentLevel.Value = experiencePointsTO.currentLevel;
   }
 }

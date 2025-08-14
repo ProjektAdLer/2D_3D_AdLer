@@ -45,13 +45,16 @@ export default function LevelUpModal() {
 }
 
 function getBadgePicture(level: number, worldTheme: ThemeType) {
-  if (worldTheme === ThemeType.CampusAB) return badgePicturesAB[level];
-
-  if (worldTheme === ThemeType.CampusKE) return badgePicturesKE[level];
-
-  if (worldTheme === ThemeType.Suburb) return badgePicturesSuburb[level];
-
-  if (worldTheme === ThemeType.Company) return badgePicturesCompany[level];
-
-  return badgePicturesKE[1];
+  switch (worldTheme) {
+    case ThemeType.CampusAB:
+      return badgePicturesAB[level];
+    case ThemeType.CampusKE:
+      return badgePicturesKE[level];
+    case ThemeType.Suburb:
+      return badgePicturesSuburb[level];
+    case ThemeType.Company:
+      return badgePicturesCompany[level];
+    default:
+      return badgePicturesKE[1];
+  }
 }
