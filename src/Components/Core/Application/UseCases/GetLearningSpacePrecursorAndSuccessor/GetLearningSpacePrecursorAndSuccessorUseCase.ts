@@ -123,19 +123,6 @@ export default class GetLearningSpacePrecursorAndSuccessorUseCase
     );
 
     let successerPrecoursors: number[] = [];
-    if (successorSpaces.every((space) => space.isAvailable === false)) {
-      console.log("every successor is not available");
-      // successorSpaces.forEach((space) => {
-      //   let ids = LearningSpaceAvailabilityStringParser.parseToIdArray(
-      //     space.requirementsString,
-      //   );
-      //   ids = ids.filter((id) => {
-      //     return id !== currentSpace.id;
-      //   });
-      //   console.log("filtered ids: ", ids);
-      //   successerPrecoursors = successerPrecoursors.concat(ids);
-      // });
-    }
 
     let availableSpaces: LearningSpaceTO[] = [];
     availableSpaces = spaces.filter((space) => {
@@ -146,11 +133,6 @@ export default class GetLearningSpacePrecursorAndSuccessorUseCase
         successorSpaces.some((s) => s.id === space.id) === false // removes successor spaces from available spaces (removes displaying duplicates)
       );
     });
-
-    console.log("Precursor Spaces: ", precursorSpaces);
-    console.log("Successor Spaces: ", successorSpaces);
-    console.log("available Spaces: ", availableSpaces);
-    console.log("SP Spaces: ", successerPrecoursors);
 
     const returnValue = {
       precursorSpaces: precursorSpaces,

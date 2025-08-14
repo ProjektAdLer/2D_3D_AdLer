@@ -14,8 +14,6 @@ export default class SideBarPresenter implements ISideBarPresenter {
     this.viewModel.allowWorldCompletionModalButtonClick = world.spaces.every(
       (space) => space.currentScore >= space.requiredScore,
     );
-
-    console.log("FrameStory: ", world.narrativeFramework);
   }
 
   onLearningWorldScored(learningWorldScoreTO: LearningWorldScoreTO): void {
