@@ -27,6 +27,7 @@ import SimpleWorldAWT from "./MockBackendData/SimpleWorldAWT";
 import SubthemeWorldAWT from "./MockBackendData/SubthemeWorldAWT";
 import RequirementsGradingAWT from "./MockBackendData/RequirementsGradingAWT";
 import NPCModelAWT from "./MockBackendData/NPCModelAWT";
+import ShowcaseWorldAWT from "./MockBackendData/ShowcaseWorldAWT";
 
 @injectable()
 export default class MockBackendAdapter implements IBackendPort {
@@ -134,6 +135,19 @@ export default class MockBackendAdapter implements IBackendPort {
   }
 
   getCoursesAvailableForUser(userToken: string): Promise<CourseListTO> {
+    // In Showcase-Modus nur die Showcase-Welt anzeigen
+    if (process.env.REACT_APP_IS_SHOWCASE === "true") {
+      return Promise.resolve({
+        courses: [
+          {
+            courseID: 999,
+            courseName: "AdLer Demo - Entdecke digitales Lernen",
+          },
+        ],
+      });
+    }
+
+    // Normale Entwicklungslogik - alle Welten inklusive Showcase für Development
     return Promise.resolve({
       courses: [
         {
@@ -153,6 +167,10 @@ export default class MockBackendAdapter implements IBackendPort {
           courseName: "New World",
         },
         { courseID: 5, courseName: "Requirements-Grading" },
+        {
+          courseID: 999,
+          courseName: "AdLer Demo (Development)",
+        },
       ],
     });
   }
@@ -174,12 +192,20 @@ export default class MockBackendAdapter implements IBackendPort {
     worldID,
   }: GetWorldDataParams): Promise<BackendWorldTO> {
     let worldToUse: AWT;
-    if (worldID === 1) worldToUse = SimpleWorldAWT;
-    else if (worldID === 2) worldToUse = StoryWorldAWT;
-    else if (worldID === 3) worldToUse = ThemeWorldAWT;
-    else if (worldID === 4) worldToUse = NPCModelAWT;
-    else if (worldID === 5) worldToUse = RequirementsGradingAWT;
-    else worldToUse = SubthemeWorldAWT;
+
+    // In Showcase-Modus verwenden wir standardmäßig die ShowcaseWorld
+    if (process.env.REACT_APP_IS_SHOWCASE === "true") {
+      worldToUse = ShowcaseWorldAWT;
+    } else {
+      // Normale Entwicklungslogik
+      if (worldID === 1) worldToUse = SimpleWorldAWT;
+      else if (worldID === 2) worldToUse = StoryWorldAWT;
+      else if (worldID === 3) worldToUse = ThemeWorldAWT;
+      else if (worldID === 4) worldToUse = NPCModelAWT;
+      else if (worldID === 5) worldToUse = RequirementsGradingAWT;
+      else if (worldID === 999) worldToUse = ShowcaseWorldAWT;
+      else worldToUse = SubthemeWorldAWT;
+    }
 
     return Promise.resolve(BackendAdapterUtils.parseAWT(worldToUse));
   }

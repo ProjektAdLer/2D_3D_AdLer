@@ -1,0 +1,14 @@
+# Showcase Deployment Workflow
+# TODO: Implementierung folgt
+
+name: showcase-deploy
+
+on:
+  workflow_dispatch:
+
+jobs:
+  placeholder:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Placeholder
+        run: echo "TODO - Showcase deployment implementation"

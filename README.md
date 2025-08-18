@@ -35,6 +35,7 @@ Diese Tabelle wird zu jedem neuen Release von oben aktualisiert.
 
 - `$ npm start` startet den Dev-Server
 - `$ npm run build` erstellt die HTML-Dateien
+- `$ npm run build-showcase` erstellt eine Demo-Version mit Mock-Daten
 - `$ npm run test` startet die Tests
 
 ## Debugging
