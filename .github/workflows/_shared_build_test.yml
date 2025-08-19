@@ -53,8 +53,3 @@ jobs:
           name: build
           path: build
           retention-days: 7
-
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v2.3.0
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
