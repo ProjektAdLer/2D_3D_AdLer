@@ -16,22 +16,13 @@ fi
 CURRENT_BRANCH=$(git branch --show-current)
 echo "📍 Current branch: $CURRENT_BRANCH"
 
-# Store node_modules state before switching branches
-echo "💾 Preserving node_modules and package-lock.json..."
-NODE_MODULES_BACKUP=false
-PACKAGE_LOCK_BACKUP=false
+# Create a temporary directory for build contents
+TEMP_BUILD_DIR=$(mktemp -d)
+echo "📦 Copying build to temporary directory: $TEMP_BUILD_DIR"
+cp -r build/* "$TEMP_BUILD_DIR/"
 
-if [ -d "node_modules" ]; then
-    echo "📦 Backing up node_modules..."
-    mv node_modules node_modules_backup
-    NODE_MODULES_BACKUP=true
-fi
-
-if [ -f "package-lock.json" ]; then
-    echo "📋 Backing up package-lock.json..."
-    cp package-lock.json package-lock.json.backup
-    PACKAGE_LOCK_BACKUP=true
-fi
+# Add .nojekyll file for GitHub Pages to temp directory
+touch "$TEMP_BUILD_DIR/.nojekyll"
 
 # Check if showcase-deployment branch exists locally
 if git show-ref --verify --quiet refs/heads/showcase-deployment; then
@@ -42,20 +33,17 @@ else
     git checkout -b showcase-deployment
 fi
 
-# Remove all files except .git, build directory and backup files
+# Remove all files except .git 
 echo "🧹 Cleaning up branch..."
-find . -maxdepth 1 -not -name '.git' -not -name 'build' -not -name 'node_modules_backup' -not -name 'package-lock.json.backup' -not -name '.' -not -name '..' -exec rm -rf {} \; 2>/dev/null || true
+find . -maxdepth 1 -not -name '.git' -not -name '.' -not -name '..' -exec rm -rf {} \; 2>/dev/null || true
 
-# Move build contents to root
+# Copy build contents from temp directory to root
 echo "📁 Moving build contents to root..."
-shopt -s dotglob  # Include hidden files in globbing
-mv build/* .
-shopt -u dotglob  # Disable dotglob again
-rmdir build
+cp -r "$TEMP_BUILD_DIR"/* .
+cp -r "$TEMP_BUILD_DIR"/.[!.]* . 2>/dev/null || true  # Copy hidden files if any exist
 
-# Create .nojekyll file for GitHub Pages
-echo "📄 Creating .nojekyll file for GitHub Pages..."
-touch .nojekyll
+# Clean up temp directory
+rm -rf "$TEMP_BUILD_DIR"
 
 # Add all files and commit
 echo "💾 Committing changes..."
@@ -70,7 +58,7 @@ if git diff --staged --quiet; then
     git log --oneline -1
 else
     echo "✅ Changes detected, committing..."
-    git commit -m "Deploy showcase build - $(date '+%Y-%m-%d %H:%M:%S')"
+    git commit -m "Deploy showcase build $(date '+%Y-%m-%d %H:%M:%S')"
 fi
 
 # Push to remote
@@ -80,18 +68,6 @@ git push origin showcase-deployment --force
 # Switch back to original branch
 echo "🔄 Switching back to $CURRENT_BRANCH"
 git checkout $CURRENT_BRANCH
-
-# Restore node_modules and package-lock.json
-echo "🔄 Restoring node_modules and package-lock.json..."
-if [ "$NODE_MODULES_BACKUP" = true ] && [ -d "node_modules_backup" ]; then
-    echo "📦 Restoring node_modules..."
-    mv node_modules_backup node_modules
-fi
-
-if [ "$PACKAGE_LOCK_BACKUP" = true ] && [ -f "package-lock.json.backup" ]; then
-    echo "📋 Restoring package-lock.json..."
-    mv package-lock.json.backup package-lock.json
-fi
 
 echo "✅ Showcase deployment completed successfully!"
 echo "🌍 The showcase should be available on the showcase-deployment branch"
