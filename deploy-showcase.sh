@@ -34,6 +34,10 @@ echo "📁 Moving build contents to root..."
 mv build/* .
 rmdir build
 
+# Create .nojekyll file for GitHub Pages
+echo "📄 Creating .nojekyll file for GitHub Pages..."
+touch .nojekyll
+
 # Add all files and commit
 echo "💾 Committing changes..."
 git add .

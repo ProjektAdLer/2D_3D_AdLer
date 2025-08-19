@@ -2,6 +2,7 @@
   "name": "adler-engine",
   "version": "0.2.0",
   "private": true,
+  "homepage": "https://projektadler.github.io/2D_3D_AdLer",
   "dependencies": {
     "@babylonjs/accessibility": "^7.45.0",
     "@babylonjs/core": "^7.24.0",
