@@ -143,7 +143,50 @@ export default class MockBackendAdapter implements IBackendPort {
   }
 
   scoreH5PElement(data: ScoreH5PElementParams): Promise<boolean> {
-    return Promise.resolve(true);
+    // Real xAPI evaluation logic implementation
+    const xapiEvent = data.rawH5PEvent;
+
+    // Check the verb - "completed" or "answered" with correct result
+    const isCompleted =
+      xapiEvent.verb?.id === "http://adlnet.gov/expapi/verbs/completed";
+    const isAnswered =
+      xapiEvent.verb?.id === "http://adlnet.gov/expapi/verbs/answered";
+
+    // For H5P Multiple Choice: Check the result
+    if (isAnswered || isCompleted) {
+      // Check if a result object exists and contains the success status
+      const result = xapiEvent.result;
+      if (result) {
+        // If success is explicitly defined, use this value
+        if (typeof result.success === "boolean") {
+          console.log(
+            "MockBackend H5P Scoring - success from xAPI:",
+            result.success,
+          );
+          return Promise.resolve(result.success);
+        }
+
+        // Fallback: Check score-based evaluation
+        if (result.score && typeof result.score.scaled === "number") {
+          const success = result.score.scaled >= 0.6; // 60% or higher = success
+          console.log(
+            "MockBackend H5P Scoring - success from score:",
+            success,
+            "scaled:",
+            result.score.scaled,
+          );
+          return Promise.resolve(success);
+        }
+      }
+    }
+
+    // Fallback for unknown event types or missing results
+    console.log(
+      "MockBackend H5P Scoring - no clear result, defaulting to false",
+    );
+    console.log("Event verb:", xapiEvent.verb?.id);
+    console.log("Event result:", xapiEvent.result);
+    return Promise.resolve(false);
   }
 
   getCoursesAvailableForUser(userToken: string): Promise<CourseListTO> {

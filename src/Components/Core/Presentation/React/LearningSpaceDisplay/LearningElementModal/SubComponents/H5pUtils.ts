@@ -4,33 +4,41 @@ import { RefObject } from "react";
 
 export function createH5POptions(viewModel: LearningElementModalViewModel) {
   let h5pJsonPath: string;
+  let frameJs: string;
+  let frameCss: string;
   const filePath = viewModel.filePath.Value;
 
   if (config.useFakeBackend) {
-    // Für das Mock-Backend: extrahiere nur den Pfad-Teil der URL
+    // For Mock-Backend: extract only the path part of the URL
     if (filePath.startsWith("http://") || filePath.startsWith("https://")) {
-      // Extrahiere den Pfad aus der vollständigen URL
+      // Extract the path from the full URL
       const url = new URL(filePath);
-      h5pJsonPath = url.pathname; // z.B. "/2D_3D_AdLer/SampleLearningElementData/MultipleChoiceDemo"
+      h5pJsonPath = url.pathname; // e.g. "/2D_3D_AdLer/SampleLearningElementData/MultipleChoiceDemo"
     } else {
-      // Fallback für relative Pfade
+      // Fallback for relative paths
       const currentPath = window.location.pathname;
       const publicUrl = currentPath.startsWith("/2D_3D_AdLer")
         ? "/2D_3D_AdLer"
         : "";
       h5pJsonPath = publicUrl + filePath.replaceAll("\\", "/");
     }
+    // Mock-Backend uses the 2D_3D_AdLer prefix paths
+    frameJs = "/2D_3D_AdLer/h5pBase/frame.bundle.js";
+    frameCss = "/2D_3D_AdLer/h5pBase/styles/h5p.css";
   } else {
-    // Für das echte Backend verwenden wir die Server-URL
+    // For the real backend we use the server URL (original logic)
     let baseURL = config.serverURL.replace(/api\/?$/, "");
     h5pJsonPath =
       baseURL + filePath.replaceAll("\\", "/").replaceAll("wwwroot/", "");
+    // Real backend uses the original paths without prefix
+    frameJs = "/h5pBase/frame.bundle.js";
+    frameCss = "/h5pBase/styles/h5p.css";
   }
 
   const options = {
     h5pJsonPath: h5pJsonPath,
-    frameJs: "/2D_3D_AdLer/h5pBase/frame.bundle.js",
-    frameCss: "/2D_3D_AdLer/h5pBase/styles/h5p.css",
+    frameJs: frameJs,
+    frameCss: frameCss,
   };
   return options;
 }

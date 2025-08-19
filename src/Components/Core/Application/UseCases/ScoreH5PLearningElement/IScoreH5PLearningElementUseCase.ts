@@ -45,4 +45,14 @@ export type XAPIEvent = {
       }>;
     };
   };
+  result?: {
+    success?: boolean;
+    completion?: boolean;
+    score?: {
+      scaled?: number;
+      raw?: number;
+      min?: number;
+      max?: number;
+    };
+  };
 };
