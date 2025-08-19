@@ -97,16 +97,16 @@ export default class MockBackendAdapter implements IBackendPort {
     switch (elementType) {
       case "h5p":
       case "primitiveH5P":
-        // Für H5P-Elemente geben wir die URL zum H5P-Ordner zurück
-        if (elementID === 5) {
-          // Multiple Choice Demo H5P-Element
+        // For H5P elements we return the URL to the H5P folder
+        if (elementID === 5 || elementID === 9) {
+          // Multiple Choice Demo H5P-Element (ID 5 and 9)
           return Promise.resolve(
             window.location.origin +
               (process.env.PUBLIC_URL || "") +
               "/SampleLearningElementData/MultipleChoiceDemo",
           );
         }
-        // Fallback für andere H5P-Elemente
+        // Fallback for other H5P elements
         return Promise.resolve(
           window.location.origin +
             (process.env.PUBLIC_URL || "") +
