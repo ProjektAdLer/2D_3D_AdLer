@@ -31,7 +31,9 @@ find . -maxdepth 1 -not -name '.git' -not -name 'build' -not -name '.' -not -nam
 
 # Move build contents to root
 echo "📁 Moving build contents to root..."
+shopt -s dotglob  # Include hidden files in globbing
 mv build/* .
+shopt -u dotglob  # Disable dotglob again
 rmdir build
 
 # Create .nojekyll file for GitHub Pages

@@ -40,7 +40,7 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "build-dev-do-not-use": "dotenv -e .env.development.local dotenv -e .env.development dotenv -e .env react-app-rewired build",
-    "build-showcase": "dotenv -e .env.showcase react-app-rewired build",
+    "build-showcase": "npx dotenv -e .env.showcase react-app-rewired build",
     "build-and-deploy-showcase": "npm run build-showcase && ./deploy-showcase.sh",
     "deploy-showcase": "./deploy-showcase.sh",
     "test": "react-app-rewired test --watchAll",
