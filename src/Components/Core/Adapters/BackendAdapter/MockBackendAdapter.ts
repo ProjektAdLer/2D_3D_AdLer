@@ -141,7 +141,7 @@ export default class MockBackendAdapter implements IBackendPort {
         courses: [
           {
             courseID: 999,
-            courseName: "AdLer Demo - Entdecke digitales Lernen",
+            courseName: "AdLer Demo - Entdecke digitales Lernen 🚀",
           },
         ],
       });
