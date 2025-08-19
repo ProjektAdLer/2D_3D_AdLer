@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`AdaptivityElementPresenter createFooterBreadcrumbs returns the correct string of names with a current question difficulty of 0 1`] = `"TestElement ➔ TestTask ➔ undefined"`;
-
-exports[`AdaptivityElementPresenter createFooterBreadcrumbs returns the correct string of names with a current question difficulty of 100 1`] = `"TestElement ➔ TestTask ➔ undefined"`;
-
-exports[`AdaptivityElementPresenter createFooterBreadcrumbs returns the correct string of names with a current question difficulty of 200 1`] = `"TestElement ➔ TestTask ➔ undefined"`;

@@ -1,4 +1,0 @@
-import INarrativeFrameworkLoadingScreenContainerController from "./INarrativeFrameworkLoadingScreenContainerController";
-
-export default class NarrativeFrameworkLoadingScreenContainerController
-  implements INarrativeFrameworkLoadingScreenContainerController {}
