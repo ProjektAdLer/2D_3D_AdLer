@@ -108,20 +108,20 @@ export default class MockBackendAdapter implements IBackendPort {
       // );
       case "image":
         return Promise.resolve(
-          "http://" +
-            window.location.host +
+          window.location.origin +
+            (process.env.PUBLIC_URL || "") +
             "/SampleLearningElementData/testBild.png",
         );
       case "text":
         return Promise.resolve(
-          "http://" +
-            window.location.host +
+          window.location.origin +
+            (process.env.PUBLIC_URL || "") +
             "/SampleLearningElementData/fktohneParamohneRueckgabeohneDeklaration.c",
         );
       case "pdf":
         return Promise.resolve(
-          "http://" +
-            window.location.host +
+          window.location.origin +
+            (process.env.PUBLIC_URL || "") +
             "/SampleLearningElementData/testPDF.pdf",
         );
       /* istanbul ignore next */
