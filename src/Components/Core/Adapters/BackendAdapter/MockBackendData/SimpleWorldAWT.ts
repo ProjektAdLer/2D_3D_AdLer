@@ -116,13 +116,18 @@ const SimpleWorldAWT: AWT = {
       {
         $type: "LearningElement",
         elementId: 5,
-        elementName: "Ein H5P-Lernelement",
-        elementCategory: "primitiveH5P",
-        elementDescription: "Beschreibung des H5P-Lernelements",
-        elementGoals: ["Elementziel 1/3", "Elementziel 2/3", "Elementziel 3/3"],
+        elementName: "Multiple Choice Demo",
+        elementCategory: "h5p",
+        elementDescription: "Ein Multiple Choice Quiz - klicke auf 'richtig'",
+        elementGoals: [
+          "Multiple Choice Funktionalität testen",
+          "Einfache Auswahl treffen",
+        ],
         elementFileType: "h5p",
         elementMaxScore: 1,
         elementModel: "l_h5p_blackboard_1",
+        elementDifficulty: 30,
+        elementEstimatedTimeInMinutes: 1,
       },
       {
         $type: "LearningElement",

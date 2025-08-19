@@ -25,6 +25,35 @@ module.exports = {
 
     return config;
   }),
+  devServer: (configFunction) => (proxy, allowedHost) => {
+    const config = configFunction(proxy, allowedHost);
+
+    // Fix für H5P: Verhindere, dass historyApiFallback H5P-JSON-Anfragen umleitet
+    config.historyApiFallback = {
+      ...config.historyApiFallback,
+      rewrites: [
+        // Lasse H5P-bezogene Anfragen durch, ohne sie zur index.html umzuleiten
+        {
+          from: /^\/.*\/SampleLearningElementData\/.*\.json$/,
+          to: (context) => context.parsedUrl.pathname,
+        },
+        // Lasse alle anderen statischen Dateien in SampleLearningElementData durch
+        {
+          from: /^\/.*\/SampleLearningElementData\/.*$/,
+          to: (context) => context.parsedUrl.pathname,
+        },
+        // Lasse H5P-Basis-Dateien durch
+        {
+          from: /^\/h5pBase\/.*$/,
+          to: (context) => context.parsedUrl.pathname,
+        },
+        // Standard historyApiFallback für alle anderen Anfragen
+        { from: /^\/.*$/, to: "/index.html" },
+      ],
+    };
+
+    return config;
+  },
   jest: (config) => {
     config.preset = "ts-jest";
     config.testEnvironment = "jsdom";

@@ -1,0 +1,26 @@
+{
+  "question": "Die Programmiersprache Python wurde nach der Schlange 'Python' benannt.",
+  "correct": "false",
+  "l10n": {
+    "trueText": "Richtig",
+    "falseText": "Falsch",
+    "score": "Sie haben @score von @total Punkten erreicht",
+    "checkAnswer": "Antwort überprüfen",
+    "showSolutionButton": "Lösung anzeigen",
+    "tryAgain": "Wiederholen",
+    "wrongAnswer": "Falsche Antwort",
+    "correctAnswer": "Richtige Antwort",
+    "scoreBarLabel": "Sie haben :num von :total Punkten erreicht",
+    "a11yCheck": "Antworten überprüfen. Die Antworten werden als richtig, falsch oder unbeantwortet markiert.",
+    "a11yShowSolution": "Lösung anzeigen. Die Aufgabe wird mit der korrekten Antwort markiert.",
+    "a11yRetry": "Aufgabe wiederholen. Alle Antworten werden zurückgesetzt und die Aufgabe wird erneut gestartet."
+  },
+  "behaviour": {
+    "enableRetry": true,
+    "enableSolutionsButton": true,
+    "enableCheckButton": true,
+    "confirmCheckDialog": false,
+    "confirmRetryDialog": false,
+    "autoCheck": false
+  }
+}

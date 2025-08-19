@@ -2,24 +2,35 @@ import LearningElementModalViewModel from "../LearningElementModalViewModel";
 import { config } from "../../../../../../../config";
 import { RefObject } from "react";
 
-function fixLocalhost(url: string) {
-  if (url.includes("localhost")) {
-    return url.replace("http:", "");
-  }
-  return url;
-}
-
 export function createH5POptions(viewModel: LearningElementModalViewModel) {
-  let baseURL = config.serverURL.replace(/api\/?$/, "");
+  let h5pJsonPath: string;
+  const filePath = viewModel.filePath.Value;
 
-  let h5pJsonURL =
-    baseURL +
-    viewModel.filePath.Value.replaceAll("\\", "/").replaceAll("wwwroot/", "");
+  if (config.useFakeBackend) {
+    // Für das Mock-Backend: extrahiere nur den Pfad-Teil der URL
+    if (filePath.startsWith("http://") || filePath.startsWith("https://")) {
+      // Extrahiere den Pfad aus der vollständigen URL
+      const url = new URL(filePath);
+      h5pJsonPath = url.pathname; // z.B. "/2D_3D_AdLer/SampleLearningElementData/MultipleChoiceDemo"
+    } else {
+      // Fallback für relative Pfade
+      const currentPath = window.location.pathname;
+      const publicUrl = currentPath.startsWith("/2D_3D_AdLer")
+        ? "/2D_3D_AdLer"
+        : "";
+      h5pJsonPath = publicUrl + filePath.replaceAll("\\", "/");
+    }
+  } else {
+    // Für das echte Backend verwenden wir die Server-URL
+    let baseURL = config.serverURL.replace(/api\/?$/, "");
+    h5pJsonPath =
+      baseURL + filePath.replaceAll("\\", "/").replaceAll("wwwroot/", "");
+  }
 
   const options = {
-    h5pJsonPath: fixLocalhost(h5pJsonURL),
-    frameJs: "/h5pBase/frame.bundle.js",
-    frameCss: "/h5pBase/styles/h5p.css",
+    h5pJsonPath: h5pJsonPath,
+    frameJs: "/2D_3D_AdLer/h5pBase/frame.bundle.js",
+    frameCss: "/2D_3D_AdLer/h5pBase/styles/h5p.css",
   };
   return options;
 }
