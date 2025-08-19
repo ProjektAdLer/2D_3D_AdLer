@@ -16,6 +16,23 @@ fi
 CURRENT_BRANCH=$(git branch --show-current)
 echo "📍 Current branch: $CURRENT_BRANCH"
 
+# Store node_modules state before switching branches
+echo "💾 Preserving node_modules and package-lock.json..."
+NODE_MODULES_BACKUP=false
+PACKAGE_LOCK_BACKUP=false
+
+if [ -d "node_modules" ]; then
+    echo "📦 Backing up node_modules..."
+    mv node_modules node_modules_backup
+    NODE_MODULES_BACKUP=true
+fi
+
+if [ -f "package-lock.json" ]; then
+    echo "📋 Backing up package-lock.json..."
+    cp package-lock.json package-lock.json.backup
+    PACKAGE_LOCK_BACKUP=true
+fi
+
 # Check if showcase-deployment branch exists locally
 if git show-ref --verify --quiet refs/heads/showcase-deployment; then
     echo "📦 Switching to existing showcase-deployment branch"
@@ -25,9 +42,9 @@ else
     git checkout -b showcase-deployment
 fi
 
-# Remove all files except .git, build directory and some essential files
+# Remove all files except .git, build directory and backup files
 echo "🧹 Cleaning up branch..."
-find . -maxdepth 1 -not -name '.git' -not -name 'build' -not -name '.' -not -name '..' -exec rm -rf {} \; 2>/dev/null || true
+find . -maxdepth 1 -not -name '.git' -not -name 'build' -not -name 'node_modules_backup' -not -name 'package-lock.json.backup' -not -name '.' -not -name '..' -exec rm -rf {} \; 2>/dev/null || true
 
 # Move build contents to root
 echo "📁 Moving build contents to root..."
@@ -63,6 +80,18 @@ git push origin showcase-deployment --force
 # Switch back to original branch
 echo "🔄 Switching back to $CURRENT_BRANCH"
 git checkout $CURRENT_BRANCH
+
+# Restore node_modules and package-lock.json
+echo "🔄 Restoring node_modules and package-lock.json..."
+if [ "$NODE_MODULES_BACKUP" = true ] && [ -d "node_modules_backup" ]; then
+    echo "📦 Restoring node_modules..."
+    mv node_modules_backup node_modules
+fi
+
+if [ "$PACKAGE_LOCK_BACKUP" = true ] && [ -f "package-lock.json.backup" ]; then
+    echo "📋 Restoring package-lock.json..."
+    mv package-lock.json.backup package-lock.json
+fi
 
 echo "✅ Showcase deployment completed successfully!"
 echo "🌍 The showcase should be available on the showcase-deployment branch"
