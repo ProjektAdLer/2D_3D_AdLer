@@ -43,7 +43,18 @@ touch .nojekyll
 # Add all files and commit
 echo "💾 Committing changes..."
 git add .
-git commit -m "Deploy showcase build - $(date '+%Y-%m-%d %H:%M:%S')" || echo "⚠️  No changes to commit"
+
+# Check if there are actually changes to commit
+if git diff --staged --quiet; then
+    echo "⚠️  No changes detected in build output"
+    echo "📊 Checking file timestamps..."
+    ls -la static/js/ | head -5
+    echo "🔍 Comparing with last commit..."
+    git log --oneline -1
+else
+    echo "✅ Changes detected, committing..."
+    git commit -m "Deploy showcase build - $(date '+%Y-%m-%d %H:%M:%S')"
+fi
 
 # Push to remote
 echo "🌐 Pushing to remote showcase-deployment branch..."
