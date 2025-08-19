@@ -1,5 +1,6 @@
 import { LogLevel } from "./Components/Core/Adapters/Logger/Logger";
 import { parseBool } from "./Lib/ParseBool";
+import "../public/draco/draco-fix";
 
 // We can not use the logger in here, its loglevel gets defined here.
 // So we have to use console.log and console.error here.
