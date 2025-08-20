@@ -133,12 +133,24 @@ describe("MockBackendAdapter", () => {
           courseID: 5,
           courseName: "Requirements-Grading",
         },
+        {
+          courseID: 999,
+          courseName: "AdLer Demo (Development)",
+        },
       ],
     });
   });
 
   test("should score H5P Element", async () => {
     const h5pMock = mock<XAPIEvent>();
+    h5pMock.verb = {
+      id: "http://adlnet.gov/expapi/verbs/answered",
+      display: { "en-US": "answered" },
+    };
+    h5pMock.result = {
+      success: true,
+    };
+
     await expect(
       systemUnderTest.scoreH5PElement({
         courseID: 1,

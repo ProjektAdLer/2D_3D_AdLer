@@ -28,6 +28,12 @@ export function createH5POptions(viewModel: LearningElementModalViewModel) {
   } else {
     // For the real backend we use the server URL (original logic)
     let baseURL = config.serverURL.replace(/api\/?$/, "");
+
+    // Remove protocol from localhost URLs
+    if (baseURL.includes("localhost")) {
+      baseURL = baseURL.replace(/^https?:/, "");
+    }
+
     h5pJsonPath =
       baseURL + filePath.replaceAll("\\", "/").replaceAll("wwwroot/", "");
     // Real backend uses the original paths without prefix

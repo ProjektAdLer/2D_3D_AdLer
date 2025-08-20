@@ -144,6 +144,6 @@ export default class ScoreH5PElementUseCase implements IScoreH5PElementUseCase {
       LogLevelTypes.WARN,
       "ScoreH5PLearningElementUseCase: " + message,
     );
-    return Promise.resolve(false);
+    return Promise.reject(message);
   }
 }
