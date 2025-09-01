@@ -78,6 +78,7 @@ export default function WelcomePage() {
           historyPath="/worldmenu"
           imageSrc={learningEngineIcon}
           toolTip={translate("LearningWorldsToolTip").toString()}
+          datatestid="worldmenu"
         />
         <WelcomePageButton
           backgroundVideo={avatarEditorButtonBackgroundVideo}
@@ -85,6 +86,7 @@ export default function WelcomePage() {
           historyPath="/avatarEditor"
           imageSrc={avatarEditorIcon}
           toolTip={translate("AvatarEditorToolTip").toString()}
+          datatestid="avatarEditor"
         />
       </section>
 

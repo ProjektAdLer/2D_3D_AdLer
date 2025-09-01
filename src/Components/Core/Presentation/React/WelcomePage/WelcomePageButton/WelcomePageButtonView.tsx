@@ -20,6 +20,7 @@ type WelcomePageButtonProps = {
   imageSrc: string;
   toolTip?: string;
   isPlaceholder?: boolean;
+  datatestid?: string;
 } & AdLerUIComponent;
 
 export default function WelcomePageButton(props: WelcomePageButtonProps) {
@@ -46,6 +47,7 @@ export default function WelcomePageButton(props: WelcomePageButtonProps) {
     <StyledButton
       shape="freeFloatCenterNoPadding"
       containerClassName="h-full portrait:w-1/2 mobile-landscape:w-1/3 aspect-square"
+      data-testid={props.datatestid}
       onClick={() => history.push(props.historyPath)}
       disabled={props.isPlaceholder ?? !userLoggedIn}
       feedback="nothing"

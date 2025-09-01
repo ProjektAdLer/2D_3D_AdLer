@@ -21,6 +21,7 @@ export default function LMSButton({ className }: AdLerUIComponent) {
       onClick={controller.openLMSPage}
       className={`relative m-2 flex gap-2` + tailwindMerge(className)}
       title={translate("lmsButtonToolTip").toString()}
+      datat-testid="LSMButton"
     >
       <img className="w-8 lg:w-12 onek:w-14" src={moodleIcon} alt="icon" />
       <p className="text-2xs font-bold xl:text-sm 2xl:pl-2 2xl:text-lg">
