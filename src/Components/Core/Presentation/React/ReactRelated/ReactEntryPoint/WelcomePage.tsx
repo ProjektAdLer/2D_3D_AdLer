@@ -59,13 +59,11 @@ export default function WelcomePage() {
             default
           />
         </video>
-        {!isShowcase && (
-          <img
-            className="mobile-landscape:w-88 w-64 lg:hidden mobile-landscape:block tablet-portrait:w-full"
-            src={welcomePicture}
-            alt="3D Welcome Text"
-          />
-        )}
+        <img
+          className="mobile-landscape:w-88 w-64 lg:hidden mobile-landscape:block tablet-portrait:w-full"
+          src={welcomePicture}
+          alt="3D Welcome Text"
+        />
         {!isShowcase && (
           <>
             <LoginComponent className="col-span-6 col-start-2 flex flex-col items-center justify-around lg:pt-8 xl:pt-3 mobile-landscape:pt-0 mobile-portrait:row-start-2 mobile-portrait:justify-start tablet-portrait:col-span-8 tablet-portrait:col-start-1" />

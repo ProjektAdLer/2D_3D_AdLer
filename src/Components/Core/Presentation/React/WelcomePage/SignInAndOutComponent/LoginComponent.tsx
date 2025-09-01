@@ -47,25 +47,19 @@ export default function LoginComponent({
   const [loginFailed] = useObservable<boolean>(viewModel?.loginFailed);
 
   useEffect(() => {
-    const isShowcase = process.env.REACT_APP_IS_SHOWCASE === "true";
-    if (isShowcase) {
-      controller.login("showcase", "showcase"); // Simulierter Login
-    } else {
-      const loginStatus = getLoginStatusUseCase.execute();
-      setUserLoggedIn(loginStatus.isLoggedIn);
-      if (loginStatus.isLoggedIn) {
-        const loadConfig = async () => {
-          await loadAvatarConfigUseCase.executeAsync();
-        };
-        loadConfig();
-      }
+    const loginStatus = getLoginStatusUseCase.execute();
+    setUserLoggedIn(loginStatus.isLoggedIn);
+    if (loginStatus.isLoggedIn) {
+      const loadConfig = async () => {
+        await loadAvatarConfigUseCase.executeAsync();
+      };
+      loadConfig();
     }
   }, [
     getLoginStatusUseCase,
     loadAvatarConfigUseCase,
     setUserLoggedIn,
     setModalVisible,
-    controller,
   ]);
 
   if (!controller || !viewModel) return null;
