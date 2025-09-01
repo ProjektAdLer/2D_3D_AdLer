@@ -122,8 +122,6 @@ export default class GetLearningSpacePrecursorAndSuccessorUseCase
       worldEntity.id,
     );
 
-    let successerPrecoursors: number[] = [];
-
     let availableSpaces: LearningSpaceTO[] = [];
     availableSpaces = spaces.filter((space) => {
       return (
