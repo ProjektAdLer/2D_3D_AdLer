@@ -9,13 +9,14 @@ exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = 
       class="w-full flex-shrink-0 self-center p-2 font-semibold flex place-content-stretch lg:p-2 tablet-portrait:p-2"
     >
       <div
-        class="flex w-1/2 place-content-stretch items-center justify-self-start"
+        class="flex items-center w-1/2 place-content-stretch justify-self-start"
       >
         <div
           class=""
         >
           <button
             class="mr-4 justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            data-testid="homebutton"
             title="Klicken Sie hier, um zur Willkommen-Seite zurückzukehren"
           >
             <img
@@ -30,6 +31,7 @@ exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = 
         >
           <button
             class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            data-testid="avatarEditorSave"
             title="Klicken Sie hier, um Ihren erstellten Avatar zu speichern"
           >
             <img
@@ -41,7 +43,7 @@ exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = 
         </div>
       </div>
       <div
-        class="flex w-full items-center justify-center"
+        class="flex items-center justify-center w-full"
       >
         <div
           class="truncate py-2 font-[roboto] text-xl lg:text-4xl mobile-landscape:text-2xl tablet-portrait:text-2xl flex gap-2 m-2 w-fit h-fit text-adlerdarkblue"
@@ -50,7 +52,7 @@ exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = 
         </div>
       </div>
       <div
-        class="flex w-1/2 items-center justify-end gap-4 lg:gap-8"
+        class="flex items-center justify-end w-1/2 gap-4 lg:gap-8"
       >
         <div
           class=""
@@ -60,6 +62,7 @@ exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = 
           >
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              data-testid="helpdesk"
               title="Öffnet das Hilfe-Fenster, um Hilfe und weitere Informationen zur 3D-Lernumgebung zu erhalten"
             >
               <img
@@ -175,6 +178,7 @@ exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = 
           >
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              data-testid="avatareditorrandomizer"
               title="Erstellt einen zufällig aussehenden Avatar"
             >
               <img
@@ -215,13 +219,14 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
       class="w-full flex-shrink-0 self-center p-2 font-semibold flex place-content-stretch lg:p-2 tablet-portrait:p-2"
     >
       <div
-        class="flex w-1/2 place-content-stretch items-center justify-self-start"
+        class="flex items-center w-1/2 place-content-stretch justify-self-start"
       >
         <div
           class=""
         >
           <button
             class="mr-4 justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            data-testid="homebutton"
             title="Klicken Sie hier, um zur Willkommen-Seite zurückzukehren"
           >
             <img
@@ -236,6 +241,7 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
         >
           <button
             class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            data-testid="avatarEditorSave"
             title="Klicken Sie hier, um Ihren erstellten Avatar zu speichern"
           >
             <img
@@ -247,7 +253,7 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
         </div>
       </div>
       <div
-        class="flex w-full items-center justify-center"
+        class="flex items-center justify-center w-full"
       >
         <div
           class="truncate py-2 font-[roboto] text-xl lg:text-4xl mobile-landscape:text-2xl tablet-portrait:text-2xl flex gap-2 m-2 w-fit h-fit text-adlerdarkblue"
@@ -256,7 +262,7 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
         </div>
       </div>
       <div
-        class="flex w-1/2 items-center justify-end gap-4 lg:gap-8"
+        class="flex items-center justify-end w-1/2 gap-4 lg:gap-8"
       >
         <div
           class=""
@@ -266,6 +272,7 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
           >
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              data-testid="helpdesk"
               title="Öffnet das Hilfe-Fenster, um Hilfe und weitere Informationen zur 3D-Lernumgebung zu erhalten"
             >
               <img
@@ -381,6 +388,7 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
           >
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              data-testid="avatareditorrandomizer"
               title="Erstellt einen zufällig aussehenden Avatar"
             >
               <img
@@ -421,13 +429,14 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
       class="w-full flex-shrink-0 self-center p-2 font-semibold flex place-content-stretch lg:p-2 tablet-portrait:p-2"
     >
       <div
-        class="flex w-1/2 place-content-stretch items-center justify-self-start"
+        class="flex items-center w-1/2 place-content-stretch justify-self-start"
       >
         <div
           class=""
         >
           <button
             class="mr-4 justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            data-testid="homebutton"
             title="Klicken Sie hier, um zur Willkommen-Seite zurückzukehren"
           >
             <img
@@ -442,6 +451,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
         >
           <button
             class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            data-testid="avatarEditorSave"
             title="Klicken Sie hier, um Ihren erstellten Avatar zu speichern"
           >
             <img
@@ -453,7 +463,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
         </div>
       </div>
       <div
-        class="flex w-full items-center justify-center"
+        class="flex items-center justify-center w-full"
       >
         <div
           class="truncate py-2 font-[roboto] text-xl lg:text-4xl mobile-landscape:text-2xl tablet-portrait:text-2xl flex gap-2 m-2 w-fit h-fit text-adlerdarkblue"
@@ -462,7 +472,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
         </div>
       </div>
       <div
-        class="flex w-1/2 items-center justify-end gap-4 lg:gap-8"
+        class="flex items-center justify-end w-1/2 gap-4 lg:gap-8"
       >
         <div
           class=""
@@ -472,6 +482,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
           >
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              data-testid="helpdesk"
               title="Öffnet das Hilfe-Fenster, um Hilfe und weitere Informationen zur 3D-Lernumgebung zu erhalten"
             >
               <img
@@ -587,6 +598,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
           >
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              data-testid="avatareditorrandomizer"
               title="Erstellt einen zufällig aussehenden Avatar"
             >
               <img
@@ -608,6 +620,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
             >
               <button
                 class="w-full content-start text-left"
+                data-testid="headgear_accordion"
                 title="Klappt die Kategorie Kopfbedeckung auf und zeigt alle Optionen"
               >
                 <h1
@@ -803,6 +816,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
             >
               <button
                 class="w-full content-start text-left"
+                data-testid="glasses_accordion"
                 title="Klappt die Kategorie Brille auf und zeigt alle Optionen"
               >
                 <h1
@@ -822,6 +836,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
             >
               <button
                 class="w-full content-start text-left"
+                data-testid="backpack_accordion"
                 title="Klappt die Kategorie Rucksack auf und zeigt alle Optionen"
               >
                 <h1
@@ -841,6 +856,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
             >
               <button
                 class="w-full content-start text-left"
+                data-testid="other_accordion"
                 title="Klappt die Kategorie Sonstiges auf und zeigt alle Optionen"
               >
                 <h1
@@ -879,13 +895,14 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
       class="w-full flex-shrink-0 self-center p-2 font-semibold flex place-content-stretch lg:p-2 tablet-portrait:p-2"
     >
       <div
-        class="flex w-1/2 place-content-stretch items-center justify-self-start"
+        class="flex items-center w-1/2 place-content-stretch justify-self-start"
       >
         <div
           class=""
         >
           <button
             class="mr-4 justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            data-testid="homebutton"
             title="Klicken Sie hier, um zur Willkommen-Seite zurückzukehren"
           >
             <img
@@ -900,6 +917,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
         >
           <button
             class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            data-testid="avatarEditorSave"
             title="Klicken Sie hier, um Ihren erstellten Avatar zu speichern"
           >
             <img
@@ -911,7 +929,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
         </div>
       </div>
       <div
-        class="flex w-full items-center justify-center"
+        class="flex items-center justify-center w-full"
       >
         <div
           class="truncate py-2 font-[roboto] text-xl lg:text-4xl mobile-landscape:text-2xl tablet-portrait:text-2xl flex gap-2 m-2 w-fit h-fit text-adlerdarkblue"
@@ -920,7 +938,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
         </div>
       </div>
       <div
-        class="flex w-1/2 items-center justify-end gap-4 lg:gap-8"
+        class="flex items-center justify-end w-1/2 gap-4 lg:gap-8"
       >
         <div
           class=""
@@ -930,6 +948,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
           >
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              data-testid="helpdesk"
               title="Öffnet das Hilfe-Fenster, um Hilfe und weitere Informationen zur 3D-Lernumgebung zu erhalten"
             >
               <img
@@ -1045,6 +1064,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
           >
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              data-testid="avatareditorrandomizer"
               title="Erstellt einen zufällig aussehenden Avatar"
             >
               <img
@@ -1066,6 +1086,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
             >
               <button
                 class="w-full content-start text-left"
+                data-testid="shirt_accordion"
                 title="Klappt die Kategorie Oberteil auf und zeigt alle Optionen"
               >
                 <h1
@@ -1236,7 +1257,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
                   </div>
                 </div>
                 <div
-                  class="m-2 w-full p-2"
+                  class="w-full p-2 m-2"
                 >
                   <div
                     class=""
@@ -1246,6 +1267,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
                     >
                       <button
                         class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+                        data-testid="colorpicker"
                         title="Öffnet ein Fenster zur Farbauswahl"
                       >
                         <div
@@ -1264,6 +1286,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
             >
               <button
                 class="w-full content-start text-left"
+                data-testid="pants_accordion"
                 title="Klappt die Kategorie Oberteil auf und zeigt alle Optionen"
               >
                 <h1
@@ -1283,6 +1306,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
             >
               <button
                 class="w-full content-start text-left"
+                data-testid="shoe_accordion"
                 title="Klappt die Kategorie Oberteil auf und zeigt alle Optionen"
               >
                 <h1
@@ -1321,13 +1345,14 @@ exports[`AvatarEditor should render 4 category when tab button is clicked 1`] = 
       class="w-full flex-shrink-0 self-center p-2 font-semibold flex place-content-stretch lg:p-2 tablet-portrait:p-2"
     >
       <div
-        class="flex w-1/2 place-content-stretch items-center justify-self-start"
+        class="flex items-center w-1/2 place-content-stretch justify-self-start"
       >
         <div
           class=""
         >
           <button
             class="mr-4 justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            data-testid="homebutton"
             title="Klicken Sie hier, um zur Willkommen-Seite zurückzukehren"
           >
             <img
@@ -1342,6 +1367,7 @@ exports[`AvatarEditor should render 4 category when tab button is clicked 1`] = 
         >
           <button
             class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            data-testid="avatarEditorSave"
             title="Klicken Sie hier, um Ihren erstellten Avatar zu speichern"
           >
             <img
@@ -1353,7 +1379,7 @@ exports[`AvatarEditor should render 4 category when tab button is clicked 1`] = 
         </div>
       </div>
       <div
-        class="flex w-full items-center justify-center"
+        class="flex items-center justify-center w-full"
       >
         <div
           class="truncate py-2 font-[roboto] text-xl lg:text-4xl mobile-landscape:text-2xl tablet-portrait:text-2xl flex gap-2 m-2 w-fit h-fit text-adlerdarkblue"
@@ -1362,7 +1388,7 @@ exports[`AvatarEditor should render 4 category when tab button is clicked 1`] = 
         </div>
       </div>
       <div
-        class="flex w-1/2 items-center justify-end gap-4 lg:gap-8"
+        class="flex items-center justify-end w-1/2 gap-4 lg:gap-8"
       >
         <div
           class=""
@@ -1372,6 +1398,7 @@ exports[`AvatarEditor should render 4 category when tab button is clicked 1`] = 
           >
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              data-testid="helpdesk"
               title="Öffnet das Hilfe-Fenster, um Hilfe und weitere Informationen zur 3D-Lernumgebung zu erhalten"
             >
               <img
@@ -1487,6 +1514,7 @@ exports[`AvatarEditor should render 4 category when tab button is clicked 1`] = 
           >
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              data-testid="avatareditorrandomizer"
               title="Erstellt einen zufällig aussehenden Avatar"
             >
               <img
@@ -1523,6 +1551,7 @@ exports[`AvatarEditor should render 4 category when tab button is clicked 1`] = 
                 >
                   <button
                     class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+                    data-testid="colorpicker"
                     title="Öffnet ein Fenster zur Farbauswahl"
                   >
                     <div
@@ -1558,13 +1587,14 @@ exports[`AvatarEditor should renders 1`] = `
       class="w-full flex-shrink-0 self-center p-2 font-semibold flex place-content-stretch lg:p-2 tablet-portrait:p-2"
     >
       <div
-        class="flex w-1/2 place-content-stretch items-center justify-self-start"
+        class="flex items-center w-1/2 place-content-stretch justify-self-start"
       >
         <div
           class=""
         >
           <button
             class="mr-4 justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            data-testid="homebutton"
             title="Klicken Sie hier, um zur Willkommen-Seite zurückzukehren"
           >
             <img
@@ -1579,6 +1609,7 @@ exports[`AvatarEditor should renders 1`] = `
         >
           <button
             class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            data-testid="avatarEditorSave"
             title="Klicken Sie hier, um Ihren erstellten Avatar zu speichern"
           >
             <img
@@ -1590,7 +1621,7 @@ exports[`AvatarEditor should renders 1`] = `
         </div>
       </div>
       <div
-        class="flex w-full items-center justify-center"
+        class="flex items-center justify-center w-full"
       >
         <div
           class="truncate py-2 font-[roboto] text-xl lg:text-4xl mobile-landscape:text-2xl tablet-portrait:text-2xl flex gap-2 m-2 w-fit h-fit text-adlerdarkblue"
@@ -1599,7 +1630,7 @@ exports[`AvatarEditor should renders 1`] = `
         </div>
       </div>
       <div
-        class="flex w-1/2 items-center justify-end gap-4 lg:gap-8"
+        class="flex items-center justify-end w-1/2 gap-4 lg:gap-8"
       >
         <div
           class=""
@@ -1609,6 +1640,7 @@ exports[`AvatarEditor should renders 1`] = `
           >
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              data-testid="helpdesk"
               title="Öffnet das Hilfe-Fenster, um Hilfe und weitere Informationen zur 3D-Lernumgebung zu erhalten"
             >
               <img
@@ -1724,6 +1756,7 @@ exports[`AvatarEditor should renders 1`] = `
           >
             <button
               class="justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+              data-testid="avatareditorrandomizer"
               title="Erstellt einen zufällig aussehenden Avatar"
             >
               <img

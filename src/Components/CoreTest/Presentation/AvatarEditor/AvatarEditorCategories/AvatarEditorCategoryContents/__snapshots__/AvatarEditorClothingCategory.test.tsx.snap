@@ -10,6 +10,7 @@ exports[`AvatarEditorClothingCategory should render 1`] = `
     >
       <button
         class="w-full content-start text-left"
+        data-testid="shirt_accordion"
         title="accordionCategoryToolTip"
       >
         <h1
@@ -180,7 +181,7 @@ exports[`AvatarEditorClothingCategory should render 1`] = `
           </div>
         </div>
         <div
-          class="m-2 w-full p-2"
+          class="w-full p-2 m-2"
         >
           <div
             class=""
@@ -190,6 +191,7 @@ exports[`AvatarEditorClothingCategory should render 1`] = `
             >
               <button
                 class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+                data-testid="colorpicker"
                 title="ColorButtonToolTip"
               >
                 <div
@@ -208,6 +210,7 @@ exports[`AvatarEditorClothingCategory should render 1`] = `
     >
       <button
         class="w-full content-start text-left"
+        data-testid="pants_accordion"
         title="accordionCategoryToolTip"
       >
         <h1
@@ -340,7 +343,7 @@ exports[`AvatarEditorClothingCategory should render 1`] = `
           </div>
         </div>
         <div
-          class="m-2 w-full p-2"
+          class="w-full p-2 m-2"
         >
           <div
             class=""
@@ -350,6 +353,7 @@ exports[`AvatarEditorClothingCategory should render 1`] = `
             >
               <button
                 class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+                data-testid="colorpicker"
                 title="ColorButtonToolTip"
               >
                 <div
@@ -368,6 +372,7 @@ exports[`AvatarEditorClothingCategory should render 1`] = `
     >
       <button
         class="w-full content-start text-left"
+        data-testid="shoe_accordion"
         title="accordionCategoryToolTip"
       >
         <h1
@@ -481,7 +486,7 @@ exports[`AvatarEditorClothingCategory should render 1`] = `
           </div>
         </div>
         <div
-          class="m-2 w-full p-2"
+          class="w-full p-2 m-2"
         >
           <div
             class=""
@@ -491,6 +496,7 @@ exports[`AvatarEditorClothingCategory should render 1`] = `
             >
               <button
                 class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+                data-testid="colorpicker"
                 title="ColorButtonToolTip"
               >
                 <div

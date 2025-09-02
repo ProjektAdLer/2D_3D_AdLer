@@ -198,6 +198,7 @@ export default function AvatarEditorClothingCategory(
         toolTip={translate("accordionCategoryToolTip", {
           subCategory: translate("shirtsTitle").toString(),
         }).toString()}
+        testid="shirt_accordion"
       />
       <AccordionElement
         header={translate("pantsTitle").toString()}
@@ -206,6 +207,7 @@ export default function AvatarEditorClothingCategory(
         toolTip={translate("accordionCategoryToolTip", {
           subCategory: translate("shirtsTitle").toString(),
         }).toString()}
+        testid="pants_accordion"
       />
       <AccordionElement
         header={translate("shoesTitle").toString()}
@@ -214,6 +216,7 @@ export default function AvatarEditorClothingCategory(
         toolTip={translate("accordionCategoryToolTip", {
           subCategory: translate("shirtsTitle").toString(),
         }).toString()}
+        testid="shoe_accordion"
       />
     </div>
   );

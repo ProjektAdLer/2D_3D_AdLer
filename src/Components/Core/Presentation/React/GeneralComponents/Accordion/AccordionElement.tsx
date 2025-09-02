@@ -11,6 +11,7 @@ export interface AccordionProps {
   buttonClassName?: string;
   headerClassName?: string;
   toolTip?: string;
+  testid?: string;
 }
 
 export default function AccordionElement(props: AccordionProps) {
@@ -53,6 +54,7 @@ export default function AccordionElement(props: AccordionProps) {
             setIsOpen(!isOpen);
           }}
           title={props.toolTip}
+          data-testid={props.testid}
         >
           <h1
             className={tailwindMerge(

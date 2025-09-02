@@ -20,9 +20,10 @@ export default function AvatarEditorRandomizerButton(
       title={i18next
         .t("randomizerButtonToolTip", { ns: "avatarEditor" })
         .toString()}
+      data-testid="avatareditorrandomizer"
     >
       <img
-        className="w-10 xl:w-12 "
+        className="w-10 xl:w-12"
         src={randomizerIcon}
         alt="Randomizer Icon"
       />

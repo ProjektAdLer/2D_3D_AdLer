@@ -101,6 +101,7 @@ export default function AvatarEditorHairCategory(
         toolTip={translate("accordionCategoryToolTip", {
           subCategory: translate("hairstylesTitle").toString(),
         }).toString()}
+        testid="hair_accordion"
       />
       <AccordionElement
         header={translate("beardsTitle").toString()}
@@ -109,8 +110,9 @@ export default function AvatarEditorHairCategory(
         toolTip={translate("accordionCategoryToolTip", {
           subCategory: translate("beardsTitle").toString(),
         }).toString()}
+        testid="beard_accordion"
       />
-      <div className="w-full p-2 m-2">
+      <div className="m-2 w-full p-2">
         <ColorPickerButton
           className=""
           currentColor={

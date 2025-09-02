@@ -166,6 +166,7 @@ export default function AvatarEditorFaceCategory(
         toolTip={translate("accordionCategoryToolTip", {
           subCategory: translate("eyebrowsTitle").toString(),
         }).toString()}
+        testid="eyebrows_accordion"
       />
       <AccordionElement
         header={translate("eyesTitle").toString()}
@@ -174,6 +175,7 @@ export default function AvatarEditorFaceCategory(
         toolTip={translate("accordionCategoryToolTip", {
           subCategory: translate("eyesTitle").toString(),
         }).toString()}
+        testid="eye_accordion"
       />
       <AccordionElement
         header={translate("noseTitle").toString()}
@@ -182,6 +184,7 @@ export default function AvatarEditorFaceCategory(
         toolTip={translate("accordionCategoryToolTip", {
           subCategory: translate("noseTitle").toString(),
         }).toString()}
+        testid="nose_accordion"
       />
       <AccordionElement
         header={translate("mouthTitle").toString()}
@@ -190,6 +193,7 @@ export default function AvatarEditorFaceCategory(
         toolTip={translate("accordionCategoryToolTip", {
           subCategory: translate("mouthTitle").toString(),
         }).toString()}
+        testid="mouth_accordion"
       />
     </div>
   );

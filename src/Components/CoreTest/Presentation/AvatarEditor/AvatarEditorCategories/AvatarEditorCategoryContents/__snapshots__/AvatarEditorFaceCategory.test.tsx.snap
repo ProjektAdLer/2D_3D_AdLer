@@ -10,6 +10,7 @@ exports[`AvatarEditorFaceCategory should render 1`] = `
     >
       <button
         class="w-full content-start text-left"
+        data-testid="eyebrows_accordion"
         title="accordionCategoryToolTip"
       >
         <h1
@@ -262,6 +263,7 @@ exports[`AvatarEditorFaceCategory should render 1`] = `
     >
       <button
         class="w-full content-start text-left"
+        data-testid="eye_accordion"
         title="accordionCategoryToolTip"
       >
         <h1
@@ -970,6 +972,7 @@ exports[`AvatarEditorFaceCategory should render 1`] = `
     >
       <button
         class="w-full content-start text-left"
+        data-testid="nose_accordion"
         title="accordionCategoryToolTip"
       >
         <h1
@@ -1336,6 +1339,7 @@ exports[`AvatarEditorFaceCategory should render 1`] = `
     >
       <button
         class="w-full content-start text-left"
+        data-testid="mouth_accordion"
         title="accordionCategoryToolTip"
       >
         <h1

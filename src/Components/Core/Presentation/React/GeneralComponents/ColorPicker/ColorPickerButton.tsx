@@ -20,10 +20,11 @@ export default function ColorPickerButton({
         onClick={onClick}
         shape="freeFloatCenter"
         title={translate("ColorButtonToolTip").toString()}
+        data-testid="colorpicker"
       >
         {/* <img className="w-10 xl:w-12" src={helpIcon} alt="Help Icon" /> */}
         <div
-          className={`border-2 border-black rounded m-2 h-5 w-5`}
+          className={`m-2 h-5 w-5 rounded border-2 border-black`}
           style={{ backgroundColor: currentColor.hexColor }}
         />
         {translate(currentColor.nameKey)}

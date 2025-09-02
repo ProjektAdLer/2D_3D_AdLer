@@ -24,13 +24,14 @@ export default function AvatarEditorSaveButton(
           props.controller.saveAvatarConfig();
         }}
         title={translate("saveButtonToolTip").toString()}
+        data-testid="avatarEditorSave"
       >
-        <img className="w-10 xl:w-12 " src={saveIcon} alt="Save Icon" />
+        <img className="w-10 xl:w-12" src={saveIcon} alt="Save Icon" />
       </StyledButton>
       {hasChanged && (
         <>
-          <span className="relative z-50 w-5 h-5 rounded-full pointer-events-none -top-6 right-3 bg-nodehandlecolor"></span>
-          <span className="relative z-50 w-5 h-5 rounded-full pointer-events-none animate-ping bg-nodehandlecolor -top-6 right-8"></span>
+          <span className="pointer-events-none relative -top-6 right-3 z-50 h-5 w-5 rounded-full bg-nodehandlecolor"></span>
+          <span className="pointer-events-none relative -top-6 right-8 z-50 h-5 w-5 animate-ping rounded-full bg-nodehandlecolor"></span>
         </>
       )}
     </>

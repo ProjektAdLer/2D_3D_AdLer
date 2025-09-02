@@ -163,6 +163,7 @@ export default function AvatarEditorAccessoireCategory(
         toolTip={translate("accordionCategoryToolTip", {
           subCategory: translate("headgearTitle").toString(),
         }).toString()}
+        testid="headgear_accordion"
       />
       <AccordionElement
         header={translate("glassesTitle").toString()}
@@ -171,6 +172,7 @@ export default function AvatarEditorAccessoireCategory(
         toolTip={translate("accordionCategoryToolTip", {
           subCategory: translate("glassesTitle").toString(),
         }).toString()}
+        testid="glasses_accordion"
       />
       <AccordionElement
         header={translate("backpackTitle").toString()}
@@ -179,6 +181,7 @@ export default function AvatarEditorAccessoireCategory(
         toolTip={translate("accordionCategoryToolTip", {
           subCategory: translate("backpackTitle").toString(),
         }).toString()}
+        testid="backpack_accordion"
       />
       <AccordionElement
         header={translate("otherTitle").toString()}
@@ -187,6 +190,7 @@ export default function AvatarEditorAccessoireCategory(
         toolTip={translate("accordionCategoryToolTip", {
           subCategory: translate("otherTitle").toString(),
         }).toString()}
+        testid="other_accordion"
       />
     </div>
   );
