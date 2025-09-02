@@ -4,12 +4,13 @@ exports[`Progressbar should render 1`] = `
 <div>
   <div
     class="flex items-center text-center"
+    data-testid="progressbar"
   >
     <div
       class="relative -z-20 rounded-full bg-adlerblue/80 align-middle dark:bg-gray-700"
     >
       <div
-        class="absolute -z-10 h-full rounded-full bg-adlerdarkblue"
+        class="absolute h-full rounded-full -z-10 bg-adlerdarkblue"
         style="width: 10%;"
       />
       1

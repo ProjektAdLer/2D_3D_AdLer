@@ -20,6 +20,7 @@ export default function TutorialButton({
       onClick={() => openInNewTab(url)}
       className={tailwindMerge(className)}
       title={translate("manualToolTip").toString()}
+      data-testid="tutorial"
     >
       <img className="w-10 xl:w-12" src={manualIcon} alt="Help Icon" />
     </StyledButton>

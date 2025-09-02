@@ -50,6 +50,7 @@ export default function MenuHeaderBar(props: Readonly<MenuHeaderBarProps>) {
           onClick={controller.onHomeButtonClicked}
           className="mr-4"
           title={translate("HomeButtonToolTip").toString()}
+          data-testid="homebutton"
         >
           <img className="w-10 xl:w-12" src={homeIcon} alt="Home Icon" />
         </StyledButton>
@@ -57,6 +58,7 @@ export default function MenuHeaderBar(props: Readonly<MenuHeaderBarProps>) {
           <StyledButton
             onClick={controller.onLearningWorldButtonClicked}
             title={translate("LearningWorldButtonToolTip").toString()}
+            data-testid="learningworldbutton"
           >
             <img className="w-10 xl:w-12" src={worldIcon} alt="World Icon" />
           </StyledButton>

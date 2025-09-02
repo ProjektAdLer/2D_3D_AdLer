@@ -18,7 +18,11 @@ type ProgressbarProps = {
 
 export default function Progressbar(props: Readonly<ProgressbarProps>) {
   return (
-    <div className="flex items-center text-center" title={props.tooltip}>
+    <div
+      className="flex items-center text-center"
+      title={props.tooltip}
+      data-testid="progressbar"
+    >
       {/* icon */}
       {props.icon && (
         <div className="relative items-center align-middle">

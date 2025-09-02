@@ -21,6 +21,7 @@ export default function HelpDeskButton({ className }: AdLerUIComponent<{}>) {
       <StyledButton
         onClick={() => controller.onHelpDeskButtonClicked()}
         title={translate("sidebar_helpToolTip").toString()}
+        data-testid="helpdesk"
       >
         {viewModel?.buttonTitle}
         <img
