@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import LoginComponent from "~ReactComponents/WelcomePage/SignInAndOutComponent/LoginComponent";
 import logo from "../../../../../../Assets/icons/adler-engine.svg";
 import welcomeVideo from "../../../../../../Assets/graphics/anim-adler-welcome.webm";
@@ -14,25 +15,38 @@ import WelcomePageButton from "~ReactComponents/WelcomePage/WelcomePageButton/We
 import LMSButton from "~ReactComponents/WelcomePage/LMSButton/LMSButtonView";
 import learningWorldButtonBackgroundVideo from "../../../../../../Assets/misc/WelcomeScreenButtonBackgrounds/BackgroundVideoLernweltButton.mp4";
 import avatarEditorButtonBackgroundVideo from "../../../../../../Assets/misc/WelcomeScreenButtonBackgrounds/BackgroundVideoAvatarEditorButton.mp4";
-import { useEffect } from "react";
 import { useInjection } from "inversify-react";
 import ILoginUseCase from "src/Components/Core/Application/UseCases/Login/ILoginUseCase";
+import ILoadAvatarConfigUseCase from "src/Components/Core/Application/UseCases/LoadAvatarConfig/ILoadAvatarConfigUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 
 export default function WelcomePage() {
   const { t: translate } = useTranslation("start");
   const isShowcase = process.env.REACT_APP_IS_SHOWCASE === "true";
   const loginUseCase = useInjection<ILoginUseCase>(USECASE_TYPES.ILoginUseCase);
+  const loadAvatarConfigUseCase = useInjection<ILoadAvatarConfigUseCase>(
+    USECASE_TYPES.ILoadAvatarConfigUseCase,
+  );
 
-  // Automatischer Login im Showcase-Modus
+  // Automatic login in showcase mode
   useEffect(() => {
     if (isShowcase) {
-      loginUseCase.executeAsync({
-        username: "showcase",
-        password: "showcase",
-      });
+      const performShowcaseLogin = async () => {
+        try {
+          await loginUseCase.executeAsync({
+            username: "showcase",
+            password: "showcase",
+          });
+          // Load avatar configuration after successful login
+          await loadAvatarConfigUseCase.executeAsync();
+        } catch (error) {
+          console.error("Showcase login failed:", error);
+        }
+      };
+
+      performShowcaseLogin();
     }
-  }, [isShowcase, loginUseCase]);
+  }, [isShowcase, loginUseCase, loadAvatarConfigUseCase]);
 
   return (
     <div className="relative grid h-[100svh] grid-cols-8 grid-rows-6 bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto p-2 mobile-landscape:h-[100dvh] mobile-landscape:w-[100dvw] mobile-landscape:pb-1">
