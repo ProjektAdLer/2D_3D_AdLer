@@ -930,7 +930,7 @@ exports[`AvatarEditorHairCategory should render 1`] = `
       </div>
     </div>
     <div
-      class="w-full p-2 m-2"
+      class="m-2 w-full p-2"
     >
       <div
         class=""
@@ -944,7 +944,7 @@ exports[`AvatarEditorHairCategory should render 1`] = `
             title="ColorButtonToolTip"
           >
             <div
-              class="border-2 border-black rounded m-2 h-5 w-5"
+              class="m-2 h-5 w-5 rounded border-2 border-black"
               style="background-color: rgb(75, 42, 26);"
             />
             Brown 2

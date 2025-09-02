@@ -10,7 +10,7 @@ exports[`Progressbar should render 1`] = `
       class="relative -z-20 rounded-full bg-adlerblue/80 align-middle dark:bg-gray-700"
     >
       <div
-        class="absolute h-full rounded-full -z-10 bg-adlerdarkblue"
+        class="absolute -z-10 h-full rounded-full bg-adlerdarkblue"
         style="width: 10%;"
       />
       1

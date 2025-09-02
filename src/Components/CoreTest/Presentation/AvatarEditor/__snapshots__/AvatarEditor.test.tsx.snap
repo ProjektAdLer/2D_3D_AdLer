@@ -9,7 +9,7 @@ exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = 
       class="w-full flex-shrink-0 self-center p-2 font-semibold flex place-content-stretch lg:p-2 tablet-portrait:p-2"
     >
       <div
-        class="flex items-center w-1/2 place-content-stretch justify-self-start"
+        class="flex w-1/2 place-content-stretch items-center justify-self-start"
       >
         <div
           class=""
@@ -36,14 +36,14 @@ exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = 
           >
             <img
               alt="Save Icon"
-              class="w-10 xl:w-12 "
+              class="w-10 xl:w-12"
               src="save.svg"
             />
           </button>
         </div>
       </div>
       <div
-        class="flex items-center justify-center w-full"
+        class="flex w-full items-center justify-center"
       >
         <div
           class="truncate py-2 font-[roboto] text-xl lg:text-4xl mobile-landscape:text-2xl tablet-portrait:text-2xl flex gap-2 m-2 w-fit h-fit text-adlerdarkblue"
@@ -52,7 +52,7 @@ exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = 
         </div>
       </div>
       <div
-        class="flex items-center justify-end w-1/2 gap-4 lg:gap-8"
+        class="flex w-1/2 items-center justify-end gap-4 lg:gap-8"
       >
         <div
           class=""
@@ -183,7 +183,7 @@ exports[`AvatarEditor should render 0 category when tab button is clicked 1`] = 
             >
               <img
                 alt="Randomizer Icon"
-                class="w-10 xl:w-12 "
+                class="w-10 xl:w-12"
                 src="random.svg"
               />
             </button>
@@ -219,7 +219,7 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
       class="w-full flex-shrink-0 self-center p-2 font-semibold flex place-content-stretch lg:p-2 tablet-portrait:p-2"
     >
       <div
-        class="flex items-center w-1/2 place-content-stretch justify-self-start"
+        class="flex w-1/2 place-content-stretch items-center justify-self-start"
       >
         <div
           class=""
@@ -246,14 +246,14 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
           >
             <img
               alt="Save Icon"
-              class="w-10 xl:w-12 "
+              class="w-10 xl:w-12"
               src="save.svg"
             />
           </button>
         </div>
       </div>
       <div
-        class="flex items-center justify-center w-full"
+        class="flex w-full items-center justify-center"
       >
         <div
           class="truncate py-2 font-[roboto] text-xl lg:text-4xl mobile-landscape:text-2xl tablet-portrait:text-2xl flex gap-2 m-2 w-fit h-fit text-adlerdarkblue"
@@ -262,7 +262,7 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
         </div>
       </div>
       <div
-        class="flex items-center justify-end w-1/2 gap-4 lg:gap-8"
+        class="flex w-1/2 items-center justify-end gap-4 lg:gap-8"
       >
         <div
           class=""
@@ -393,7 +393,7 @@ exports[`AvatarEditor should render 1 category when tab button is clicked 1`] = 
             >
               <img
                 alt="Randomizer Icon"
-                class="w-10 xl:w-12 "
+                class="w-10 xl:w-12"
                 src="random.svg"
               />
             </button>
@@ -429,7 +429,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
       class="w-full flex-shrink-0 self-center p-2 font-semibold flex place-content-stretch lg:p-2 tablet-portrait:p-2"
     >
       <div
-        class="flex items-center w-1/2 place-content-stretch justify-self-start"
+        class="flex w-1/2 place-content-stretch items-center justify-self-start"
       >
         <div
           class=""
@@ -456,14 +456,14 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
           >
             <img
               alt="Save Icon"
-              class="w-10 xl:w-12 "
+              class="w-10 xl:w-12"
               src="save.svg"
             />
           </button>
         </div>
       </div>
       <div
-        class="flex items-center justify-center w-full"
+        class="flex w-full items-center justify-center"
       >
         <div
           class="truncate py-2 font-[roboto] text-xl lg:text-4xl mobile-landscape:text-2xl tablet-portrait:text-2xl flex gap-2 m-2 w-fit h-fit text-adlerdarkblue"
@@ -472,7 +472,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
         </div>
       </div>
       <div
-        class="flex items-center justify-end w-1/2 gap-4 lg:gap-8"
+        class="flex w-1/2 items-center justify-end gap-4 lg:gap-8"
       >
         <div
           class=""
@@ -603,7 +603,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
             >
               <img
                 alt="Randomizer Icon"
-                class="w-10 xl:w-12 "
+                class="w-10 xl:w-12"
                 src="random.svg"
               />
             </button>
@@ -895,7 +895,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
       class="w-full flex-shrink-0 self-center p-2 font-semibold flex place-content-stretch lg:p-2 tablet-portrait:p-2"
     >
       <div
-        class="flex items-center w-1/2 place-content-stretch justify-self-start"
+        class="flex w-1/2 place-content-stretch items-center justify-self-start"
       >
         <div
           class=""
@@ -922,14 +922,14 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
           >
             <img
               alt="Save Icon"
-              class="w-10 xl:w-12 "
+              class="w-10 xl:w-12"
               src="save.svg"
             />
           </button>
         </div>
       </div>
       <div
-        class="flex items-center justify-center w-full"
+        class="flex w-full items-center justify-center"
       >
         <div
           class="truncate py-2 font-[roboto] text-xl lg:text-4xl mobile-landscape:text-2xl tablet-portrait:text-2xl flex gap-2 m-2 w-fit h-fit text-adlerdarkblue"
@@ -938,7 +938,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
         </div>
       </div>
       <div
-        class="flex items-center justify-end w-1/2 gap-4 lg:gap-8"
+        class="flex w-1/2 items-center justify-end gap-4 lg:gap-8"
       >
         <div
           class=""
@@ -1069,7 +1069,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
             >
               <img
                 alt="Randomizer Icon"
-                class="w-10 xl:w-12 "
+                class="w-10 xl:w-12"
                 src="random.svg"
               />
             </button>
@@ -1257,7 +1257,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
                   </div>
                 </div>
                 <div
-                  class="w-full p-2 m-2"
+                  class="m-2 w-full p-2"
                 >
                   <div
                     class=""
@@ -1271,7 +1271,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
                         title="Öffnet ein Fenster zur Farbauswahl"
                       >
                         <div
-                          class="border-2 border-black rounded m-2 h-5 w-5"
+                          class="m-2 h-5 w-5 rounded border-2 border-black"
                           style="background-color: rgb(0, 0, 0);"
                         />
                         Black 1
@@ -1345,7 +1345,7 @@ exports[`AvatarEditor should render 4 category when tab button is clicked 1`] = 
       class="w-full flex-shrink-0 self-center p-2 font-semibold flex place-content-stretch lg:p-2 tablet-portrait:p-2"
     >
       <div
-        class="flex items-center w-1/2 place-content-stretch justify-self-start"
+        class="flex w-1/2 place-content-stretch items-center justify-self-start"
       >
         <div
           class=""
@@ -1372,14 +1372,14 @@ exports[`AvatarEditor should render 4 category when tab button is clicked 1`] = 
           >
             <img
               alt="Save Icon"
-              class="w-10 xl:w-12 "
+              class="w-10 xl:w-12"
               src="save.svg"
             />
           </button>
         </div>
       </div>
       <div
-        class="flex items-center justify-center w-full"
+        class="flex w-full items-center justify-center"
       >
         <div
           class="truncate py-2 font-[roboto] text-xl lg:text-4xl mobile-landscape:text-2xl tablet-portrait:text-2xl flex gap-2 m-2 w-fit h-fit text-adlerdarkblue"
@@ -1388,7 +1388,7 @@ exports[`AvatarEditor should render 4 category when tab button is clicked 1`] = 
         </div>
       </div>
       <div
-        class="flex items-center justify-end w-1/2 gap-4 lg:gap-8"
+        class="flex w-1/2 items-center justify-end gap-4 lg:gap-8"
       >
         <div
           class=""
@@ -1519,7 +1519,7 @@ exports[`AvatarEditor should render 4 category when tab button is clicked 1`] = 
             >
               <img
                 alt="Randomizer Icon"
-                class="w-10 xl:w-12 "
+                class="w-10 xl:w-12"
                 src="random.svg"
               />
             </button>
@@ -1555,7 +1555,7 @@ exports[`AvatarEditor should render 4 category when tab button is clicked 1`] = 
                     title="Öffnet ein Fenster zur Farbauswahl"
                   >
                     <div
-                      class="border-2 border-black rounded m-2 h-5 w-5"
+                      class="m-2 h-5 w-5 rounded border-2 border-black"
                       style="background-color: rgb(192, 142, 108);"
                     />
                     Light 1
@@ -1587,7 +1587,7 @@ exports[`AvatarEditor should renders 1`] = `
       class="w-full flex-shrink-0 self-center p-2 font-semibold flex place-content-stretch lg:p-2 tablet-portrait:p-2"
     >
       <div
-        class="flex items-center w-1/2 place-content-stretch justify-self-start"
+        class="flex w-1/2 place-content-stretch items-center justify-self-start"
       >
         <div
           class=""
@@ -1614,14 +1614,14 @@ exports[`AvatarEditor should renders 1`] = `
           >
             <img
               alt="Save Icon"
-              class="w-10 xl:w-12 "
+              class="w-10 xl:w-12"
               src="save.svg"
             />
           </button>
         </div>
       </div>
       <div
-        class="flex items-center justify-center w-full"
+        class="flex w-full items-center justify-center"
       >
         <div
           class="truncate py-2 font-[roboto] text-xl lg:text-4xl mobile-landscape:text-2xl tablet-portrait:text-2xl flex gap-2 m-2 w-fit h-fit text-adlerdarkblue"
@@ -1630,7 +1630,7 @@ exports[`AvatarEditor should renders 1`] = `
         </div>
       </div>
       <div
-        class="flex items-center justify-end w-1/2 gap-4 lg:gap-8"
+        class="flex w-1/2 items-center justify-end gap-4 lg:gap-8"
       >
         <div
           class=""
@@ -1761,7 +1761,7 @@ exports[`AvatarEditor should renders 1`] = `
             >
               <img
                 alt="Randomizer Icon"
-                class="w-10 xl:w-12 "
+                class="w-10 xl:w-12"
                 src="random.svg"
               />
             </button>

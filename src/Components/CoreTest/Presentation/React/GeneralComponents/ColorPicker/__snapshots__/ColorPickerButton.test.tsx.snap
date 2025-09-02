@@ -17,7 +17,7 @@ Object {
             title="ColorButtonToolTip"
           >
             <div
-              class="border-2 border-black rounded m-2 h-5 w-5"
+              class="m-2 h-5 w-5 rounded border-2 border-black"
             />
           </button>
         </div>
@@ -37,7 +37,7 @@ Object {
           title="ColorButtonToolTip"
         >
           <div
-            class="border-2 border-black rounded m-2 h-5 w-5"
+            class="m-2 h-5 w-5 rounded border-2 border-black"
           />
         </button>
       </div>
