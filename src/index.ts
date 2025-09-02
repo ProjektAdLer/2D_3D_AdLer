@@ -3,7 +3,7 @@ import CoreDIContainer from "./Components/Core/DependencyInjection/CoreDIContain
 import CORE_TYPES from "./Components/Core/DependencyInjection/CoreTypes";
 import IReactEntry from "./Components/Core/Presentation/React/ReactRelated/ReactEntryPoint/IReactEntry";
 import { config } from "./config";
-import { configureDracoForOfflineUse } from "./Components/Core/Presentation/Babylon/SceneManagement/DracoConfiguration";
+import { configureDracoForOfflineUse } from "../public/draco/draco-configuration";
 
 console.log("Current Config:", config);
 
