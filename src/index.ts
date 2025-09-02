@@ -3,8 +3,12 @@ import CoreDIContainer from "./Components/Core/DependencyInjection/CoreDIContain
 import CORE_TYPES from "./Components/Core/DependencyInjection/CoreTypes";
 import IReactEntry from "./Components/Core/Presentation/React/ReactRelated/ReactEntryPoint/IReactEntry";
 import { config } from "./config";
+import { configureDracoForOfflineUse } from "./Components/Core/Presentation/Babylon/SceneManagement/DracoConfiguration";
 
 console.log("Current Config:", config);
+
+// Configure Draco for offline use before any 3D content is loaded
+configureDracoForOfflineUse();
 
 // Setup the Logger to be constructed.
 CoreDIContainer.get(CORE_TYPES.ILogger);
