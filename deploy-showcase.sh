@@ -69,5 +69,9 @@ git push origin showcase-deployment --force
 echo "🔄 Switching back to $CURRENT_BRANCH"
 git checkout $CURRENT_BRANCH
 
+# Reinstall dependencies to ensure clean state
+echo "📦 Reinstalling dependencies..."
+npm install
+
 echo "✅ Showcase deployment completed successfully!"
 echo "🌍 The showcase should be available on the showcase-deployment branch"
