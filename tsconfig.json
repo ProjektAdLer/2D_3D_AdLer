@@ -31,11 +31,7 @@
       "~DependencyInjection/*": ["src/Components/Core/DependencyInjection/*"]
     }
   },
-  "include": [
-    "src",
-    "public/ThirdParty",
-    "public/draco/draco-configuration.ts"
-  ],
+  "include": ["src", "public/ThirdParty", "src/draco-configuration.ts"],
   "exclude": [
     "public/ThirdParty/H5PResizer.js",
     "src/**/*.test.ts",
