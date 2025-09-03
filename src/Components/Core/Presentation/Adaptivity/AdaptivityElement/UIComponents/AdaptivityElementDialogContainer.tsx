@@ -119,13 +119,13 @@ export default function AdaptivityElementDialogContainer({
   return (
     <StyledContainer className={tailwindMerge(className, "")}>
       <div
-        className="fixed top-0 bottom-0 left-0 right-0 flex flex-col items-center justify-center w-screen h-full bg-black bg-opacity-30 lg:grid lg:grid-rows-3 lg:items-start"
+        className="fixed bottom-0 left-0 right-0 top-0 flex h-full w-screen flex-col items-center justify-center bg-black bg-opacity-30 lg:grid lg:grid-rows-3 lg:items-start"
         onClick={controller.closeModal}
       >
         {/* Background NPC */}
-        <div className="flex items-end justify-start invisible w-full row-start-2 pl-16 lg:visible lg:h-full">
+        <div className="invisible row-start-2 flex w-full items-end justify-start pl-16 lg:visible lg:h-full">
           <img
-            className="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
+            className="invisible z-20 h-0 -scale-x-100 object-contain brightness-125 lg:visible lg:h-full"
             alt="LearningImage!"
             data-testid="npcImage"
             src={getNPCImage(model, true, emotion)}
@@ -136,20 +136,20 @@ export default function AdaptivityElementDialogContainer({
         </div>
 
         {/* Modal */}
-        <div className="flex justify-center items-start pb-2 w-full lg:w-[95vw] max-w-7xl max-h-[100vh] lg:max-h-[32vh] pt-2 lg:pt-0 row-start-3 ">
+        <div className="row-start-3 flex max-h-[100vh] w-full max-w-7xl items-start justify-center pb-2 pt-2 lg:max-h-[32vh] lg:w-[95vw] lg:pt-0">
           <div
-            className="flex flex-col justify-between p-2 xl:px-8 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto h-full w-full max-w-[95%] max-h-[95%] lg:max-h-[100%] "
+            className="flex h-full max-h-[95%] w-full max-w-[95%] flex-col justify-between rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto p-2 lg:max-h-[100%] xl:px-8"
             onClick={(event) => {
               event.stopPropagation();
             }}
           >
             {/* Header */}
-            <div className="z-20 flex items-center justify-center w-full h-20 gap-2 p-2 pb-3 overflow-hidden text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl ">
+            <div className="lg:roboto-black z-20 flex h-20 w-full items-center justify-center gap-2 overflow-hidden p-2 pb-3 text-xl font-bold text-adlerdarkblue lg:text-2xl">
               {!(currentTask === null && currentQuestion === null) &&
                 !showAnswerFeedback && (
                   <StyledButton
                     onClick={controller.back}
-                    className="w-8 h-8 p-1 mr-2 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
+                    className="roboto-black mr-2 h-8 w-8 p-1 text-xs sm:h-10 sm:w-10 md:h-10 md:w-10 lg:h-10 lg:w-10 xl:h-10 xl:w-10"
                     title={translate("backToolTip").toString()}
                   >
                     {"\u25C0"}
@@ -158,7 +158,7 @@ export default function AdaptivityElementDialogContainer({
 
               {currentTask === null && currentQuestion === null && (
                 <div
-                  className="w-[50px] lg:w-[50px] bg-buttonbgblue rounded-full text-sm"
+                  className="w-[50px] rounded-full bg-buttonbgblue text-sm lg:w-[50px]"
                   title={translate("adaptivityProgressToolTip").toString()}
                 >
                   <CircularProgressbarWithChildren
@@ -193,7 +193,7 @@ export default function AdaptivityElementDialogContainer({
                     controller.reset();
                   }}
                   className={tailwindMerge(
-                    "justify-center p-1 xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10 w-8 h-8 mobile-portrait:rounded-md aspect-square flex items-center text-sm rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue",
+                    "font-regular box-border flex aspect-square h-8 w-8 cursor-pointer items-center justify-center overflow-hidden rounded-lg border-b-2 border-r-2 border-adlerdarkblue bg-buttonbgblue p-1 text-sm text-adlerdarkblue transition duration-75 ease-in-out hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent sm:h-10 sm:w-10 md:h-10 md:w-10 lg:h-10 lg:w-10 lg:text-xl xl:h-10 xl:w-10 mobile-portrait:rounded-md",
                     className ?? "",
                   )}
                 >
@@ -202,21 +202,21 @@ export default function AdaptivityElementDialogContainer({
               )}
               <CloseButton
                 onClick={controller.closeModal}
-                className="w-8 h-8 p-1 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
+                className="roboto-black h-8 w-8 p-1 text-xs sm:h-10 sm:w-10 md:h-10 md:w-10 lg:h-10 lg:w-10 xl:h-10 xl:w-10"
                 title={translate("closeToolTip").toString()}
               >
                 <img
                   src={closeIcon}
-                  className="lg:w-10 md:w-8 sm:w-6"
+                  className="sm:w-6 md:w-8 lg:w-10"
                   alt="CloseButton"
                 ></img>
               </CloseButton>
             </div>
 
             {/* Content */}
-            <div className="overflow-auto max-h-[80vh] lg:max-h-[16vh] xl:max-h-[20vh]">
+            <div className="max-h-[80vh] overflow-auto lg:max-h-[16vh] xl:max-h-[20vh]">
               {currentTask === null && currentQuestion === null && (
-                <div className=" flex items-center justify-center px-1 mb-4 h-fit rounded-lg font-regular !text-sm lg:mx-4">
+                <div className="font-regular mb-4 flex h-fit items-center justify-center rounded-lg px-1 !text-sm lg:mx-4">
                   <AdaptivityElementTaskSelection
                     tasks={contentData.tasks}
                     reset={viewmodel.hasResetted}
@@ -226,7 +226,7 @@ export default function AdaptivityElementDialogContainer({
                 </div>
               )}
               {currentTask !== null && currentQuestion === null && (
-                <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular lg:mx-4">
+                <div className="font-regular mb-4 flex items-center justify-center rounded-lg px-1 lg:mx-4">
                   <AdaptivityElementQuestionSelection
                     selectedTask={currentTask}
                     setHeaderText={setHeaderText}
@@ -240,7 +240,7 @@ export default function AdaptivityElementDialogContainer({
                 currentQuestion !== null &&
                 !showAnswerFeedback &&
                 selectedHint === null && (
-                  <div className="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:mx-4">
+                  <div className="font-regular mb-4 flex h-fit items-center justify-center rounded-lg px-1 lg:mx-4">
                     <AdaptivityElementAnswerSelection
                       question={currentQuestion}
                       setHeaderText={setHeaderText}
@@ -277,12 +277,12 @@ export default function AdaptivityElementDialogContainer({
             <div>
               {/* Footer */}
               {
-                <div className=" flex justify-between items-end pt-4 text-[0.5rem] lg:text-xs modal-footer ">
+                <div className="modal-footer flex items-end justify-between pt-4 text-[0.5rem] lg:text-xs">
                   <p>{footerText}</p>
                   {!(currentTask !== null && currentQuestion !== null) && (
-                    <div className="relative flex group">
+                    <div className="group relative flex">
                       <p
-                        className="cursor-pointer right-1 bottom-1"
+                        className="bottom-1 right-1 cursor-pointer"
                         onClick={() => {
                           controller.showFooterTooltip();
                         }}
@@ -294,8 +294,8 @@ export default function AdaptivityElementDialogContainer({
                       </p>
 
                       {showFooterTooltip && (
-                        <div className="fixed flex flex-col gap-2 p-4 right-2 top-2 bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto rounded-xl ">
-                          <div className="flex flex-row justify-between w-full gap-4">
+                        <div className="fixed right-2 top-2 z-20 flex flex-col gap-2 rounded-xl bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto p-4">
+                          <div className="flex w-full flex-row justify-between gap-4">
                             <h1 className="text-xs font-bold lg:text-xl">
                               {translate("headerLegend")}
                             </h1>
@@ -310,7 +310,7 @@ export default function AdaptivityElementDialogContainer({
                           <h3 className="text-sm font-bold">
                             {translate("headerLegendTask")}
                           </h3>
-                          <table className="text-left table-auto">
+                          <table className="table-auto text-left">
                             <tbody>
                               <tr>
                                 <td className="pr-2">
@@ -339,10 +339,10 @@ export default function AdaptivityElementDialogContainer({
                               </tr>
                             </tbody>
                           </table>
-                          <h3 className="pt-2 text-sm font-bold text-left ">
+                          <h3 className="pt-2 text-left text-sm font-bold">
                             {translate("legendHeaderDifficulties")}
                           </h3>
-                          <table className="text-left table-auto">
+                          <table className="table-auto text-left">
                             <tbody>
                               <tr>
                                 <td className="pr-2">
@@ -399,7 +399,7 @@ export default function AdaptivityElementDialogContainer({
                               </tr>
                             </tbody>
                           </table>
-                          <h3 className="pt-2 text-sm font-bold text-left ">
+                          <h3 className="pt-2 text-left text-sm font-bold">
                             {translate("legendHeaderStar")}
                           </h3>
                           <table>
@@ -489,7 +489,7 @@ export default function AdaptivityElementDialogContainer({
                               </tr>
                             </tbody>
                           </table>
-                          <h3 className="pt-2 text-sm font-bold text-left ">
+                          <h3 className="pt-2 text-left text-sm font-bold">
                             {translate("headerlegendInteraction")}
                           </h3>
                           <table>
