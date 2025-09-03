@@ -2,7 +2,6 @@
   "name": "adler-engine",
   "version": "0.2.0",
   "private": true,
-  "homepage": "https://projektadler.github.io/2D_3D_AdLer",
   "dependencies": {
     "@babylonjs/accessibility": "^7.45.0",
     "@babylonjs/core": "^7.24.0",
@@ -41,7 +40,7 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "build-dev-do-not-use": "dotenv -e .env.development.local dotenv -e .env.development dotenv -e .env react-app-rewired build",
-    "build-showcase": "npx dotenv-cli -e .env.showcase react-app-rewired build",
+    "build-showcase": "npm pkg set homepage=https://projektadler.github.io/2D_3D_AdLer && npx dotenv-cli -e .env.showcase react-app-rewired build && npm pkg delete homepage",
     "build-and-deploy-showcase": "npm run build-showcase && ./deploy-showcase.sh",
     "deploy-showcase": "./deploy-showcase.sh",
     "test": "react-app-rewired test --watchAll",
