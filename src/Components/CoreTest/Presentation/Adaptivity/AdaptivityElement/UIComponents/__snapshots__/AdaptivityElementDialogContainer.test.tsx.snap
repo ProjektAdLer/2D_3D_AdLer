@@ -3,7 +3,7 @@
 exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a-npc-alerobot" 1`] = `
 <img
   alt="LearningImage!"
-  class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
+  class="invisible z-20 h-0 -scale-x-100 object-contain brightness-125 lg:visible lg:h-full"
   data-testid="npcImage"
   src="a-npc-alerobot-welcome.png"
 />
@@ -21,7 +21,7 @@ exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for mod
 exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a-npc-defaultarcade" 1`] = `
 <img
   alt="LearningImage!"
-  class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
+  class="invisible z-20 h-0 -scale-x-100 object-contain brightness-125 lg:visible lg:h-full"
   data-testid="npcImage"
   src="a-npc-sheriffjustice-welcome.png"
 />
@@ -39,7 +39,7 @@ exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for mod
 exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a-npc-defaultcampus" 1`] = `
 <img
   alt="LearningImage!"
-  class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
+  class="invisible z-20 h-0 -scale-x-100 object-contain brightness-125 lg:visible lg:h-full"
   data-testid="npcImage"
   src="a-npc-teamb-male-welcome.png"
 />
@@ -57,7 +57,7 @@ exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for mod
 exports[`AdaptivityElementDialogContainer displays correct npc thumbnail for model "a-npc-defaultsuburb" 1`] = `
 <img
   alt="LearningImage!"
-  class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
+  class="invisible z-20 h-0 -scale-x-100 object-contain brightness-125 lg:visible lg:h-full"
   data-testid="npcImage"
   src="a-npc-teamd-male-welcome.png"
 />
@@ -78,32 +78,32 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
     class=" flex gap-2 m-2 w-fit h-fit text-adlertextgrey"
   >
     <div
-      class="fixed top-0 bottom-0 left-0 right-0 flex flex-col items-center justify-center w-screen h-full bg-black bg-opacity-30 lg:grid lg:grid-rows-3 lg:items-start"
+      class="fixed bottom-0 left-0 right-0 top-0 flex h-full w-screen flex-col items-center justify-center bg-black bg-opacity-30 lg:grid lg:grid-rows-3 lg:items-start"
     >
       <div
-        class="flex items-end justify-start invisible w-full row-start-2 pl-16 lg:visible lg:h-full"
+        class="invisible row-start-2 flex w-full items-end justify-start pl-16 lg:visible lg:h-full"
       >
         <img
           alt="LearningImage!"
-          class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
+          class="invisible z-20 h-0 -scale-x-100 object-contain brightness-125 lg:visible lg:h-full"
           data-testid="npcImage"
           src="a-npc-alerobot-welcome.png"
         />
       </div>
       <div
-        class="flex justify-center items-start pb-2 w-full lg:w-[95vw] max-w-7xl max-h-[100vh] lg:max-h-[32vh] pt-2 lg:pt-0 row-start-3 "
+        class="row-start-3 flex max-h-[100vh] w-full max-w-7xl items-start justify-center pb-2 pt-2 lg:max-h-[32vh] lg:w-[95vw] lg:pt-0"
       >
         <div
-          class="flex flex-col justify-between p-2 xl:px-8 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto h-full w-full max-w-[95%] max-h-[95%] lg:max-h-[100%] "
+          class="flex h-full max-h-[95%] w-full max-w-[95%] flex-col justify-between rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto p-2 lg:max-h-[100%] xl:px-8"
         >
           <div
-            class="z-20 flex items-center justify-center w-full h-20 gap-2 p-2 pb-3 overflow-hidden text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl "
+            class="lg:roboto-black z-20 flex h-20 w-full items-center justify-center gap-2 overflow-hidden p-2 pb-3 text-xl font-bold text-adlerdarkblue lg:text-2xl"
           >
             <div
               class=""
             >
               <button
-                class="mr-2 roboto-black xl:w-10 xl:h-10 justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+                class="roboto-black mr-2 xl:h-10 xl:w-10 justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
                 title="backToolTip"
               >
                 ◀
@@ -121,7 +121,7 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
               singleChoiceSelectedtestQuestionText
             </div>
             <button
-              class="justify-center mobile-portrait:rounded-md aspect-square flex items-center rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue w-8 h-8 p-1 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10"
+              class="justify-center mobile-portrait:rounded-md aspect-square flex items-center rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue roboto-black h-8 w-8 p-1 text-xs sm:h-10 sm:w-10 md:h-10 md:w-10 lg:h-10 lg:w-10 xl:h-10 xl:w-10"
               title="closeToolTip"
             >
               <img
@@ -132,10 +132,10 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
             </button>
           </div>
           <div
-            class="overflow-auto max-h-[80vh] lg:max-h-[16vh] xl:max-h-[20vh]"
+            class="max-h-[80vh] overflow-auto lg:max-h-[16vh] xl:max-h-[20vh]"
           >
             <div
-              class="flex items-center justify-center px-1 mb-4 rounded-lg font-regular h-fit lg:mx-4"
+              class="font-regular mb-4 flex h-fit items-center justify-center rounded-lg px-1 lg:mx-4"
             >
               <div
                 class="flex flex-col w-full p-2 m-auto lg:justify-between lg:flex-row"
@@ -186,7 +186,7 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
           </div>
           <div>
             <div
-              class=" flex justify-between items-end pt-4 text-[0.5rem] lg:text-xs modal-footer "
+              class="modal-footer flex items-end justify-between pt-4 text-[0.5rem] lg:text-xs"
             >
               <p />
             </div>
