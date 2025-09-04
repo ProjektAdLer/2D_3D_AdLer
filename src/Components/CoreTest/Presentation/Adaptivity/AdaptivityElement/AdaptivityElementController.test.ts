@@ -235,6 +235,14 @@ describe("AdaptivityElementController", () => {
     expect(viewModel.selectedHint.Value).toBe(null);
   });
 
+  test("showFooterTooltip sets showFooterTooltip to false, if it was true before", () => {
+    viewModel.showFooterTooltip.Value = true;
+
+    systemUnderTest.showFooterTooltip();
+
+    expect(viewModel.showFooterTooltip.Value).toBeFalsy();
+  });
+
   test("showFooterTooltip sets showFooterTooltip to true", () => {
     viewModel.showFooterTooltip.Value = false;
 
