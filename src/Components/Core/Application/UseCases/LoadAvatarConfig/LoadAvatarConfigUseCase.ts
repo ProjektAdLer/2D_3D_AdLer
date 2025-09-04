@@ -66,6 +66,5 @@ export default class LoadAvatarConfigUseCase
     if (!config.pants) config.pants = "pants-jeans";
     if (!config.shoes) config.shoes = "shoes-trainers";
     if (!config.roundness) config.roundness = 50;
-    if (!config.skinColor) config.skinColor = AvatarSkinColorPalette[4];
   }
 }
