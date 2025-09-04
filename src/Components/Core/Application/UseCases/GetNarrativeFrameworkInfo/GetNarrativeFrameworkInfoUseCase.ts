@@ -35,6 +35,10 @@ export default class GetNarrativeFrameworkInfoUseCase
     )[0];
 
     if (worldEntity === undefined) {
+      this.logger.log(
+        LogLevelTypes.WARN,
+        `GetNarrativeFrameworkInfoUseCase: There is no worldEntity.`,
+      );
       return;
     }
 

@@ -7,11 +7,12 @@ import GetNarrativeFrameworkInfoUseCase from "../../../../Core/Application/UseCa
 import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
-import LearningWorldEntity from "../../../../Core/Domain/Entities/LearningWorldEntity";
+import Logger from "../../../../Core/Adapters/Logger/Logger";
 
 const worldPortMock = mock<ILearningWorldPort>();
 const entityContainerMock = mock<IEntityContainer>();
 const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
+const loggerMock = mock<Logger>();
 
 describe("GetNarrativeFrameworkInfoUseCase", () => {
   let systemUnderTest: GetNarrativeFrameworkInfoUseCase;
@@ -28,28 +29,40 @@ describe("GetNarrativeFrameworkInfoUseCase", () => {
     CoreDIContainer.rebind(
       USECASE_TYPES.IGetUserLocationUseCase,
     ).toConstantValue(getUserLocationUseCaseMock);
+    CoreDIContainer.rebind(CORE_TYPES.ILogger).toConstantValue(loggerMock);
   });
 
   afterAll(() => {
     CoreDIContainer.restore();
   });
 
-  test("shouldn't call port if world entity has no narrative framework", () => {
-    const worldEntity = {
-      id: 1,
+  test("filterEntitiesOfType callback for learning world entity filtering should return true when element exists", async () => {
+    getUserLocationUseCaseMock.execute.mockReturnValue({ worldID: 42 } as any);
+
+    const learningWorldEntityMock = {
+      id: 42,
       spaces: [],
+      narrativeFramework: {
+        introText: "intro",
+        outroText: "outro",
+      },
     };
-    entityContainerMock.filterEntitiesOfType.mockReturnValue([worldEntity]);
-    getUserLocationUseCaseMock.execute.mockReturnValue({ worldID: 1 } as any);
+
+    let filterResult;
+
+    entityContainerMock.filterEntitiesOfType.mockImplementationOnce(
+      (mock, callback) => {
+        filterResult = callback(learningWorldEntityMock);
+        return [learningWorldEntityMock];
+      },
+    );
 
     systemUnderTest = CoreDIContainer.get(
       USECASE_TYPES.IGetNarrativeFrameworkInfoUseCase,
     );
     systemUnderTest.execute();
 
-    expect(
-      worldPortMock.onNarrativeFrameworkInfoLoadedOrUpdated,
-    ).not.toHaveBeenCalled();
+    expect(filterResult).toBe(true);
   });
 
   test("should call port with correct loaded narrative framework info (shownBefore false)", () => {
@@ -178,7 +191,7 @@ describe("GetNarrativeFrameworkInfoUseCase", () => {
   test("should call port with correct loaded narrative framework info (no elements in space)", () => {
     const worldEntity = {
       id: 1,
-      spaces: [{ elements: [] }],
+      spaces: [{ elements: undefined }],
       narrativeFramework: {
         introText: "intro",
         outroText: "outro",
@@ -202,32 +215,44 @@ describe("GetNarrativeFrameworkInfoUseCase", () => {
     });
   });
 
-  test("filterEntitiesOfType callback for learning world entity filtering should return true when element exists", async () => {
-    getUserLocationUseCaseMock.execute.mockReturnValue({ worldID: 42 } as any);
-
-    const learningWorldEntityMock = {
-      id: 42,
-      spaces: [],
-      narrativeFramework: {
-        introText: "intro",
-        outroText: "outro",
-      },
-    };
-
-    let filterResult;
-
-    entityContainerMock.filterEntitiesOfType.mockImplementationOnce(
-      (mock, callback) => {
-        filterResult = callback(learningWorldEntityMock);
-        return [learningWorldEntityMock];
-      },
-    );
+  test("calls logger and returns if there is no world entity", () => {
+    entityContainerMock.filterEntitiesOfType.mockReturnValue([]);
+    getUserLocationUseCaseMock.execute.mockReturnValue({ worldID: 1 } as any);
 
     systemUnderTest = CoreDIContainer.get(
       USECASE_TYPES.IGetNarrativeFrameworkInfoUseCase,
     );
     systemUnderTest.execute();
 
-    expect(filterResult).toBe(true);
+    expect(loggerMock.log).toHaveBeenCalledWith(
+      "WARN",
+      `GetNarrativeFrameworkInfoUseCase: There is no worldEntity.`,
+    );
+    expect(
+      worldPortMock.onNarrativeFrameworkInfoLoadedOrUpdated,
+    ).not.toHaveBeenCalled();
+  });
+
+  test("calls logger and returns if world entity has no narrative framework", () => {
+    const worldEntity = {
+      id: 1,
+      spaces: [],
+    };
+    entityContainerMock.filterEntitiesOfType.mockReturnValue([worldEntity]);
+    getUserLocationUseCaseMock.execute.mockReturnValue({ worldID: 1 } as any);
+
+    systemUnderTest = CoreDIContainer.get(
+      USECASE_TYPES.IGetNarrativeFrameworkInfoUseCase,
+    );
+    systemUnderTest.execute();
+
+    expect(loggerMock.log).toHaveBeenCalledWith(
+      "INFO",
+      `GetNarrativeFrameworkInfoUseCase: World 1 has no narrative framework.`,
+    );
+
+    expect(
+      worldPortMock.onNarrativeFrameworkInfoLoadedOrUpdated,
+    ).not.toHaveBeenCalled();
   });
 });
