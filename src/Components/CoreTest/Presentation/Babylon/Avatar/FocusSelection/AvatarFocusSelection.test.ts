@@ -204,6 +204,12 @@ describe("AvatarFocusSelection", () => {
     expect(focusable1.onFocused).toHaveBeenCalledTimes(1);
   });
 
+  test("updateFocus doesn't update focus if avatarpresenter is not present", () => {
+    systemUnderTest["updateFocus"]();
+
+    expect(systemUnderTest.CurrentFocus.Value).toBeNull();
+  });
+
   test("updateFocus doesn't update focus if avatar hasn't moved less than set threshold since the last update", () => {
     jest
       .spyOn(AvatarPresenter.prototype, "AvatarPosition", "get")
@@ -246,6 +252,35 @@ describe("AvatarFocusSelection", () => {
     );
 
     expect(freshInstance).not.toBe(systemUnderTest);
+  });
+
+  test("setStorySpecialFocus sets specialFocus to false if type is undefined", () => {
+    systemUnderTest["specialFocus"] = true;
+    const focusable = mock<IAvatarFocusable>();
+    jest.spyOn(focusable, "getID").mockReturnValue({
+      id: 42,
+      type: FocusableTypes.learningElement,
+    });
+
+    systemUnderTest.registerFocusable(focusable);
+
+    systemUnderTest["setStorySpecialFocus"](undefined);
+    expect(systemUnderTest["specialFocus"]).toBe(false);
+  });
+
+  test("setStorySpecialFocus sets specialFocus to false if type is undefined (Type of focusable = null)", () => {
+    systemUnderTest["specialFocus"] = false;
+    const focusable = mock<IAvatarFocusable>();
+    jest.spyOn(focusable, "getID").mockReturnValue({
+      id: 42,
+      type: null!,
+    });
+    jest.spyOn(focusable, "getType").mockReturnValue(null!);
+
+    systemUnderTest.registerFocusable(focusable);
+
+    systemUnderTest["setStorySpecialFocus"](undefined);
+    expect(systemUnderTest["specialFocus"]).toBe(false);
   });
 
   test("setSpecialFocus sets specialFocus to true if corresponding id exists", () => {
