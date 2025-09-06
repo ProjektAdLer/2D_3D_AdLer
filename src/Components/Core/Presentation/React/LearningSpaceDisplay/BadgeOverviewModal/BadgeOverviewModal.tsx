@@ -18,7 +18,7 @@ export default function BadgeOverviewModal({ className }: AdLerUIComponent) {
   const [viewModel] = useBuilder<BadgeOverviewModalViewModel, undefined>(
     BUILDER_TYPES.IBadgeOverviewModalBuilder,
   );
-  const [isOpen] = useObservable(viewModel.isOpen);
+  const [isOpen] = useObservable(viewModel?.isOpen);
 
   const { t: translate } = useTranslation("learningSpace");
   if (!viewModel) return null;
