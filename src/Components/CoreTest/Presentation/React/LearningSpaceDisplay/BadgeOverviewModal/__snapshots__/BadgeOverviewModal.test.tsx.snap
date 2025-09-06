@@ -36,14 +36,14 @@ Object {
               class="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter mobile-portrait:text-xs mobile-landscape:text-xs"
             >
               <div
-                class="grid grid-cols-2 gap-4 p-4 justify-items-stretch"
+                class="grid grid-cols-2 justify-items-stretch gap-4 p-4"
               >
                 <div
                   class="flex flex-col items-center justify-center"
                 >
                   <img
                     alt="0"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -52,7 +52,7 @@ Object {
                 >
                   <img
                     alt="1"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -61,7 +61,7 @@ Object {
                 >
                   <img
                     alt="2"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -70,7 +70,7 @@ Object {
                 >
                   <img
                     alt="3"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -79,7 +79,7 @@ Object {
                 >
                   <img
                     alt="4"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -88,7 +88,7 @@ Object {
                 >
                   <img
                     alt="5"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -97,7 +97,7 @@ Object {
                 >
                   <img
                     alt="6"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -106,7 +106,7 @@ Object {
                 >
                   <img
                     alt="7"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -115,7 +115,7 @@ Object {
                 >
                   <img
                     alt="8"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -124,7 +124,7 @@ Object {
                 >
                   <img
                     alt="9"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -167,14 +167,14 @@ Object {
             class="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter mobile-portrait:text-xs mobile-landscape:text-xs"
           >
             <div
-              class="grid grid-cols-2 gap-4 p-4 justify-items-stretch"
+              class="grid grid-cols-2 justify-items-stretch gap-4 p-4"
             >
               <div
                 class="flex flex-col items-center justify-center"
               >
                 <img
                   alt="0"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -183,7 +183,7 @@ Object {
               >
                 <img
                   alt="1"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -192,7 +192,7 @@ Object {
               >
                 <img
                   alt="2"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -201,7 +201,7 @@ Object {
               >
                 <img
                   alt="3"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -210,7 +210,7 @@ Object {
               >
                 <img
                   alt="4"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -219,7 +219,7 @@ Object {
               >
                 <img
                   alt="5"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -228,7 +228,7 @@ Object {
               >
                 <img
                   alt="6"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -237,7 +237,7 @@ Object {
               >
                 <img
                   alt="7"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -246,7 +246,7 @@ Object {
               >
                 <img
                   alt="8"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -255,7 +255,7 @@ Object {
               >
                 <img
                   alt="9"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -355,14 +355,14 @@ Object {
               class="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter mobile-portrait:text-xs mobile-landscape:text-xs"
             >
               <div
-                class="grid grid-cols-2 gap-4 p-4 justify-items-stretch"
+                class="grid grid-cols-2 justify-items-stretch gap-4 p-4"
               >
                 <div
                   class="flex flex-col items-center justify-center"
                 >
                   <img
                     alt="0"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -371,7 +371,7 @@ Object {
                 >
                   <img
                     alt="1"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -380,7 +380,7 @@ Object {
                 >
                   <img
                     alt="2"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -389,7 +389,7 @@ Object {
                 >
                   <img
                     alt="3"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -398,7 +398,7 @@ Object {
                 >
                   <img
                     alt="4"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -407,7 +407,7 @@ Object {
                 >
                   <img
                     alt="5"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -416,7 +416,7 @@ Object {
                 >
                   <img
                     alt="6"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -425,7 +425,7 @@ Object {
                 >
                   <img
                     alt="7"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -434,7 +434,7 @@ Object {
                 >
                   <img
                     alt="8"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -443,7 +443,7 @@ Object {
                 >
                   <img
                     alt="9"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -486,14 +486,14 @@ Object {
             class="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter mobile-portrait:text-xs mobile-landscape:text-xs"
           >
             <div
-              class="grid grid-cols-2 gap-4 p-4 justify-items-stretch"
+              class="grid grid-cols-2 justify-items-stretch gap-4 p-4"
             >
               <div
                 class="flex flex-col items-center justify-center"
               >
                 <img
                   alt="0"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -502,7 +502,7 @@ Object {
               >
                 <img
                   alt="1"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -511,7 +511,7 @@ Object {
               >
                 <img
                   alt="2"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -520,7 +520,7 @@ Object {
               >
                 <img
                   alt="3"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -529,7 +529,7 @@ Object {
               >
                 <img
                   alt="4"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -538,7 +538,7 @@ Object {
               >
                 <img
                   alt="5"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -547,7 +547,7 @@ Object {
               >
                 <img
                   alt="6"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -556,7 +556,7 @@ Object {
               >
                 <img
                   alt="7"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -565,7 +565,7 @@ Object {
               >
                 <img
                   alt="8"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -574,7 +574,7 @@ Object {
               >
                 <img
                   alt="9"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -674,14 +674,14 @@ Object {
               class="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter mobile-portrait:text-xs mobile-landscape:text-xs"
             >
               <div
-                class="grid grid-cols-2 gap-4 p-4 justify-items-stretch"
+                class="grid grid-cols-2 justify-items-stretch gap-4 p-4"
               >
                 <div
                   class="flex flex-col items-center justify-center"
                 >
                   <img
                     alt="0"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -690,7 +690,7 @@ Object {
                 >
                   <img
                     alt="1"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -699,7 +699,7 @@ Object {
                 >
                   <img
                     alt="2"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -708,7 +708,7 @@ Object {
                 >
                   <img
                     alt="3"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -717,7 +717,7 @@ Object {
                 >
                   <img
                     alt="4"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -726,7 +726,7 @@ Object {
                 >
                   <img
                     alt="5"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -735,7 +735,7 @@ Object {
                 >
                   <img
                     alt="6"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -744,7 +744,7 @@ Object {
                 >
                   <img
                     alt="7"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -753,7 +753,7 @@ Object {
                 >
                   <img
                     alt="8"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -762,7 +762,7 @@ Object {
                 >
                   <img
                     alt="9"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -805,14 +805,14 @@ Object {
             class="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter mobile-portrait:text-xs mobile-landscape:text-xs"
           >
             <div
-              class="grid grid-cols-2 gap-4 p-4 justify-items-stretch"
+              class="grid grid-cols-2 justify-items-stretch gap-4 p-4"
             >
               <div
                 class="flex flex-col items-center justify-center"
               >
                 <img
                   alt="0"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -821,7 +821,7 @@ Object {
               >
                 <img
                   alt="1"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -830,7 +830,7 @@ Object {
               >
                 <img
                   alt="2"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -839,7 +839,7 @@ Object {
               >
                 <img
                   alt="3"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -848,7 +848,7 @@ Object {
               >
                 <img
                   alt="4"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -857,7 +857,7 @@ Object {
               >
                 <img
                   alt="5"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -866,7 +866,7 @@ Object {
               >
                 <img
                   alt="6"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -875,7 +875,7 @@ Object {
               >
                 <img
                   alt="7"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -884,7 +884,7 @@ Object {
               >
                 <img
                   alt="8"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -893,7 +893,7 @@ Object {
               >
                 <img
                   alt="9"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -993,14 +993,14 @@ Object {
               class="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter mobile-portrait:text-xs mobile-landscape:text-xs"
             >
               <div
-                class="grid grid-cols-2 gap-4 p-4 justify-items-stretch"
+                class="grid grid-cols-2 justify-items-stretch gap-4 p-4"
               >
                 <div
                   class="flex flex-col items-center justify-center"
                 >
                   <img
                     alt="0"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -1009,7 +1009,7 @@ Object {
                 >
                   <img
                     alt="1"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -1018,7 +1018,7 @@ Object {
                 >
                   <img
                     alt="2"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -1027,7 +1027,7 @@ Object {
                 >
                   <img
                     alt="3"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -1036,7 +1036,7 @@ Object {
                 >
                   <img
                     alt="4"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -1045,7 +1045,7 @@ Object {
                 >
                   <img
                     alt="5"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -1054,7 +1054,7 @@ Object {
                 >
                   <img
                     alt="6"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -1063,7 +1063,7 @@ Object {
                 >
                   <img
                     alt="7"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -1072,7 +1072,7 @@ Object {
                 >
                   <img
                     alt="8"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -1081,7 +1081,7 @@ Object {
                 >
                   <img
                     alt="9"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -1124,14 +1124,14 @@ Object {
             class="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter mobile-portrait:text-xs mobile-landscape:text-xs"
           >
             <div
-              class="grid grid-cols-2 gap-4 p-4 justify-items-stretch"
+              class="grid grid-cols-2 justify-items-stretch gap-4 p-4"
             >
               <div
                 class="flex flex-col items-center justify-center"
               >
                 <img
                   alt="0"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -1140,7 +1140,7 @@ Object {
               >
                 <img
                   alt="1"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -1149,7 +1149,7 @@ Object {
               >
                 <img
                   alt="2"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -1158,7 +1158,7 @@ Object {
               >
                 <img
                   alt="3"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -1167,7 +1167,7 @@ Object {
               >
                 <img
                   alt="4"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -1176,7 +1176,7 @@ Object {
               >
                 <img
                   alt="5"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -1185,7 +1185,7 @@ Object {
               >
                 <img
                   alt="6"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -1194,7 +1194,7 @@ Object {
               >
                 <img
                   alt="7"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -1203,7 +1203,7 @@ Object {
               >
                 <img
                   alt="8"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -1212,7 +1212,7 @@ Object {
               >
                 <img
                   alt="9"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -1312,14 +1312,14 @@ Object {
               class="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter mobile-portrait:text-xs mobile-landscape:text-xs"
             >
               <div
-                class="grid grid-cols-2 gap-4 p-4 justify-items-stretch"
+                class="grid grid-cols-2 justify-items-stretch gap-4 p-4"
               >
                 <div
                   class="flex flex-col items-center justify-center"
                 >
                   <img
                     alt="0"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -1328,7 +1328,7 @@ Object {
                 >
                   <img
                     alt="1"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -1337,7 +1337,7 @@ Object {
                 >
                   <img
                     alt="2"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -1346,7 +1346,7 @@ Object {
                 >
                   <img
                     alt="3"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -1355,7 +1355,7 @@ Object {
                 >
                   <img
                     alt="4"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -1364,7 +1364,7 @@ Object {
                 >
                   <img
                     alt="5"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -1373,7 +1373,7 @@ Object {
                 >
                   <img
                     alt="6"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -1382,7 +1382,7 @@ Object {
                 >
                   <img
                     alt="7"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -1391,7 +1391,7 @@ Object {
                 >
                   <img
                     alt="8"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -1400,7 +1400,7 @@ Object {
                 >
                   <img
                     alt="9"
-                    class="object-contain w-16 h-16"
+                    class="h-16 w-16 object-contain"
                     src="badge-1.png"
                   />
                 </div>
@@ -1443,14 +1443,14 @@ Object {
             class="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter mobile-portrait:text-xs mobile-landscape:text-xs"
           >
             <div
-              class="grid grid-cols-2 gap-4 p-4 justify-items-stretch"
+              class="grid grid-cols-2 justify-items-stretch gap-4 p-4"
             >
               <div
                 class="flex flex-col items-center justify-center"
               >
                 <img
                   alt="0"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -1459,7 +1459,7 @@ Object {
               >
                 <img
                   alt="1"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -1468,7 +1468,7 @@ Object {
               >
                 <img
                   alt="2"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -1477,7 +1477,7 @@ Object {
               >
                 <img
                   alt="3"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -1486,7 +1486,7 @@ Object {
               >
                 <img
                   alt="4"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -1495,7 +1495,7 @@ Object {
               >
                 <img
                   alt="5"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -1504,7 +1504,7 @@ Object {
               >
                 <img
                   alt="6"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -1513,7 +1513,7 @@ Object {
               >
                 <img
                   alt="7"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -1522,7 +1522,7 @@ Object {
               >
                 <img
                   alt="8"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
@@ -1531,7 +1531,7 @@ Object {
               >
                 <img
                   alt="9"
-                  class="object-contain w-16 h-16"
+                  class="h-16 w-16 object-contain"
                   src="badge-1.png"
                 />
               </div>
