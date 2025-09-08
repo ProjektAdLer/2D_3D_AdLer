@@ -16,6 +16,7 @@ import LearningSpaceScoreTO from "../../../../Core/Application/DataTransferObjec
 import ILoadStoryElementUseCase from "../../../../Core/Application/UseCases/LoadStoryElement/ILoadStoryElementUseCase";
 import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
 import StoryElementEntity from "../../../../Core/Domain/Entities/StoryElementEntity";
+import { error } from "console";
 
 const loggerMock = mock<ILoggerPort>();
 const entityContainerMock = mock<IEntityContainer>();
@@ -33,25 +34,25 @@ describe("BeginStoryElementOutroCutSceneUseCase", () => {
 
     CoreDIContainer.rebind(CORE_TYPES.ILogger).toConstantValue(loggerMock);
     CoreDIContainer.rebind(CORE_TYPES.IEntityContainer).toConstantValue(
-      entityContainerMock
+      entityContainerMock,
     );
     CoreDIContainer.rebind(
-      USECASE_TYPES.IGetUserLocationUseCase
+      USECASE_TYPES.IGetUserLocationUseCase,
     ).toConstantValue(getUserLocationUseCaseMock);
     CoreDIContainer.rebind(
-      USECASE_TYPES.ICalculateLearningSpaceScoreUseCase
+      USECASE_TYPES.ICalculateLearningSpaceScoreUseCase,
     ).toConstantValue(calculateLearningSpaceScoreUseCaseMock);
     CoreDIContainer.rebind(PORT_TYPES.ILearningWorldPort).toConstantValue(
-      learningWorldPortMock
+      learningWorldPortMock,
     );
     CoreDIContainer.rebind(
-      USECASE_TYPES.ILoadStoryElementUseCase
+      USECASE_TYPES.ILoadStoryElementUseCase,
     ).toConstantValue(loadStoryElementUseCaseMock);
   });
 
   beforeEach(() => {
     systemUnderTest = CoreDIContainer.resolve(
-      BeginStoryElementOutroCutSceneUseCase
+      BeginStoryElementOutroCutSceneUseCase,
     );
   });
 
@@ -65,7 +66,7 @@ describe("BeginStoryElementOutroCutSceneUseCase", () => {
     systemUnderTest.execute({ scoredLearningElementID: 0 });
 
     expect(
-      learningWorldPortMock.onStoryElementCutSceneTriggered
+      learningWorldPortMock.onStoryElementCutSceneTriggered,
     ).not.toBeCalled();
   });
 
@@ -79,7 +80,7 @@ describe("BeginStoryElementOutroCutSceneUseCase", () => {
 
     expect(loggerMock.log).toBeCalledWith(
       LogLevelTypes.WARN,
-      expect.stringContaining("Could not find scored learning element")
+      expect.stringContaining("Could not find scored learning element"),
     );
   });
 
@@ -129,7 +130,7 @@ describe("BeginStoryElementOutroCutSceneUseCase", () => {
     systemUnderTest.execute({ scoredLearningElementID: 0 });
 
     expect(
-      calculateLearningSpaceScoreUseCaseMock.internalExecute
+      calculateLearningSpaceScoreUseCaseMock.internalExecute,
     ).not.toHaveBeenCalled();
   });
 
@@ -144,7 +145,7 @@ describe("BeginStoryElementOutroCutSceneUseCase", () => {
     systemUnderTest.execute({ scoredLearningElementID: 0 });
 
     expect(
-      calculateLearningSpaceScoreUseCaseMock.internalExecute
+      calculateLearningSpaceScoreUseCaseMock.internalExecute,
     ).not.toHaveBeenCalled();
   });
 
@@ -164,10 +165,10 @@ describe("BeginStoryElementOutroCutSceneUseCase", () => {
     systemUnderTest.execute({ scoredLearningElementID: 0 });
 
     expect(
-      learningWorldPortMock.onStoryElementCutSceneTriggered
+      learningWorldPortMock.onStoryElementCutSceneTriggered,
     ).toBeCalledTimes(1);
     expect(
-      learningWorldPortMock.onStoryElementCutSceneTriggered
+      learningWorldPortMock.onStoryElementCutSceneTriggered,
     ).toBeCalledWith(StoryElementType.Outro);
   });
 
@@ -187,7 +188,7 @@ describe("BeginStoryElementOutroCutSceneUseCase", () => {
       (entityType, callback) => {
         filterResult = callback(storyElementEntityMock as StoryElementEntity);
         return [storyElementEntityMock];
-      }
+      },
     );
 
     entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
@@ -222,10 +223,10 @@ describe("BeginStoryElementOutroCutSceneUseCase", () => {
     entityContainerMock.filterEntitiesOfType.mockImplementationOnce(
       (entityType, callback) => {
         filterResult = callback(
-          learningElementEntityMock as LearningElementEntity
+          learningElementEntityMock as LearningElementEntity,
         );
         return [learningElementEntityMock];
-      }
+      },
     );
 
     calculateLearningSpaceScoreUseCaseMock.internalExecute.mockReturnValueOnce({
@@ -236,5 +237,25 @@ describe("BeginStoryElementOutroCutSceneUseCase", () => {
     systemUnderTest.execute({ scoredLearningElementID: 1 });
 
     expect(filterResult).toBe(true);
+  });
+
+  test("throws error if internalexecute of calculate learning space score usecase", () => {
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
+      {} as StoryElementTO,
+    ]);
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
+      { value: 1, hasScored: true } as LearningElementEntity,
+    ]);
+    calculateLearningSpaceScoreUseCaseMock.internalExecute.mockImplementation(
+      () => {
+        throw new Error("Test error");
+      },
+    );
+    systemUnderTest.execute({ scoredLearningElementID: 0 });
+
+    expect(loggerMock.log).toBeCalledWith(
+      LogLevelTypes.ERROR,
+      expect.stringContaining("Couldn't trigger outro cutscene"),
+    );
   });
 });
