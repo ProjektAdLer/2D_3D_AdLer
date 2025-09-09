@@ -11,8 +11,11 @@ import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementT
 import IGetNarrativeFrameworkInfoUseCase from "src/Components/Core/Application/UseCases/GetNarrativeFrameworkInfo/IGetNarrativeFrameworkInfoUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import IBadgeOverviewModalPresenter from "../BadgeOverviewModal/IBadgeOverviewModalPresenter";
+import SideBarViewModel from "./SideBarViewModel";
 
 export default class SideBarController implements ISideBarController {
+  constructor(private viewModel: SideBarViewModel) {}
+
   onMainMenuButtonClicked(): void {
     history.push("/");
   }
@@ -36,11 +39,13 @@ export default class SideBarController implements ISideBarController {
       PRESENTATION_TYPES.IBreakTimeNotificationOverviewPresenter,
     ).openModal();
   }
+
   onWorldCompletionModalButtonClicked(): void {
     CoreDIContainer.get<ILearningWorldCompletionModalPresenter>(
       PRESENTATION_TYPES.ILearningWorldCompletionModalPresenter,
     ).openModal();
   }
+
   onNarrativeFrameworkIntroButtonClicked(): void {
     CoreDIContainer.get<INarrativeFrameworkLearningSpaceContainerPresenter>(
       PRESENTATION_TYPES.INarrativeFrameworkLearningSpaceContainerPresenter,
@@ -59,14 +64,28 @@ export default class SideBarController implements ISideBarController {
     ).open(StoryElementType.Outro);
   }
 
+  onBadgeOverviewButtonClicked(): void {
+    CoreDIContainer.get<IBadgeOverviewModalPresenter>(
+      PRESENTATION_TYPES.IBadgeOverviewModalPresenter,
+    ).openModal();
+  }
+
   checkNarrativeFramework(): void {
     CoreDIContainer.get<IGetNarrativeFrameworkInfoUseCase>(
       USECASE_TYPES.IGetNarrativeFrameworkInfoUseCase,
     ).execute();
   }
-  onBadgeOverviewButtonClicked(): void {
-    CoreDIContainer.get<IBadgeOverviewModalPresenter>(
-      PRESENTATION_TYPES.IBadgeOverviewModalPresenter,
-    ).openModal();
+
+  // Pagination methods
+  public nextPage(): void {
+    if (this.viewModel.currentPage.Value < this.viewModel.totalPages.Value) {
+      this.viewModel.currentPage.Value++;
+    }
+  }
+
+  public previousPage(): void {
+    if (this.viewModel.currentPage.Value > 1) {
+      this.viewModel.currentPage.Value--;
+    }
   }
 }

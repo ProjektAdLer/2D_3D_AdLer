@@ -458,15 +458,15 @@ describe("SideBar", () => {
       render(<SideBar />);
       openDropdown();
 
-      // Check that all buttons have proper titles
+      // Check that all buttons have proper titles - now all should be on first page
       expect(screen.getByTitle("Main Menu")).toBeInTheDocument();
       expect(screen.getByTitle("Learning World")).toBeInTheDocument();
       expect(screen.getByTitle("Learning Space")).toBeInTheDocument();
       expect(screen.getByTitle("Controls")).toBeInTheDocument();
-      expect(screen.getByTitle("World Complete")).toBeInTheDocument();
-      expect(screen.getByTitle("Narrative Framework")).toBeInTheDocument();
       expect(screen.getByTitle("Intro Story")).toBeInTheDocument();
       expect(screen.getByTitle("Outro Story")).toBeInTheDocument();
+      expect(screen.getByTitle("Narrative Framework")).toBeInTheDocument();
+      expect(screen.getByTitle("World Complete")).toBeInTheDocument();
     });
 
     test("all images have proper alt attributes", () => {

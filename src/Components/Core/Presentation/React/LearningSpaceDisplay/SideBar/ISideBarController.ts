@@ -8,4 +8,8 @@ export default interface ISideBarController {
   onNarrativeFrameworkIntroButtonClicked(): void;
   onIntroStoryButtonClicked(): void;
   onOutroStoryButtonClicked(): void;
+  onBadgeOverviewButtonClicked(): void;
+  checkNarrativeFramework(): void;
+  nextPage(): void;
+  previousPage(): void;
 }

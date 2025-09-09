@@ -59,8 +59,10 @@
   "sidebar_introStoryToolTip": "Öffnet die Intro-Story des aktuellen Lernraums",
   "sidebar_outroStoryToolTip": "Öffnet die Outro-Story des aktuellen Lernraums - wird erst nach Abschluss des Raums aktiv",
   "sidebar_badgeOverviewToolTip": "Öffnet die Übersicht der Abzeichen, die Sie erhalten haben",
+  "sidebar_previousPage": "Vorherige Seite",
+  "sidebar_nextPage": "Nächste Seite",
 
-  "requirementSpaceScoreToolTip": "Anzahl abgeschlossener, benötigter Lernelemente im Raum",
+  "requirementSpaceScoreToolTip": "Aktuell gelöste Lernelemente in diesem Lernraum",
   "pointSpaceScoreToolTip": "Anzahl erreichter, benötigter Punkte im Raum",
   "worldScoreToolTip": "Prozentual Anzeige abgeschlossener Lernelemente in der Lernwelt",
   "xpBarToolTip": "Erreichtes Level und erhaltene Erfahrungspunkte",

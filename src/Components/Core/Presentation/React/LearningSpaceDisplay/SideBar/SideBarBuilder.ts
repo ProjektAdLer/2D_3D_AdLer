@@ -22,6 +22,17 @@ export default class SideBarBuilder extends PresentationBuilder<
     super(SideBarViewModel, SideBarController, undefined, SideBarPresenter);
   }
 
+  buildViewModel(): void {
+    super.buildViewModel();
+  }
+
+  buildController(): void {
+    if (!this.viewModel) {
+      throw new Error("ViewModel must be built before Controller");
+    }
+    this.controller = new SideBarController(this.viewModel);
+  }
+
   buildPresenter(): void {
     super.buildPresenter();
 
