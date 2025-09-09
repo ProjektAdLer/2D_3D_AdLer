@@ -174,9 +174,9 @@ export default class CalculateInitialExperiencePointsUseCase
       // check if element is an adaptivity element
       const adaptivityElements = this.entityContainer.filterEntitiesOfType(
         AdaptivityElementEntity,
-        (WorldEntity) =>
-          WorldEntity.element.parentWorldID === element.parentWorldID &&
-          WorldEntity.element.id === element.id,
+        (AdaptivityEntity) =>
+          AdaptivityEntity.element.parentWorldID === element.parentWorldID &&
+          AdaptivityEntity.element.id === element.id,
       );
 
       if (adaptivityElements.length === 1) {
