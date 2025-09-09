@@ -17,6 +17,7 @@ import StoryElementTO from "../../../../Core/Application/DataTransferObjects/Sto
 import { StoryElementType } from "../../../../Core/Domain/Types/StoryElementType";
 import AdaptivityElementQuestionPresentationUpdateTO from "../../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionPresentationUpdateTO";
 import NarrativeFrameworkTO from "../../../../Core/Application/DataTransferObjects/NarrativeFrameworkTO";
+import ExperiencePointsTO from "../../../../Core/Application/DataTransferObjects/ExperiencePointsTO";
 
 describe("LearningWorldPort", () => {
   let systemUnderTest: LearningWorldPort;
@@ -128,6 +129,18 @@ describe("LearningWorldPort", () => {
     expect(
       worldAdapterMock.onLearningSpacePrecursorAndSuccessorLoaded,
     ).toBeCalledWith(mockedSpacePuSTO);
+  });
+
+  test("onExperiencePointsUpdated calls a registered adapter", () => {
+    const worldAdapterMock = mock<ILearningWorldAdapter>();
+    systemUnderTest.registerAdapter(worldAdapterMock);
+    const mockedExpTO = mock<ExperiencePointsTO>();
+
+    systemUnderTest.onExperiencePointsUpdated(mockedExpTO);
+
+    expect(worldAdapterMock.onExperiencePointsUpdated).toBeCalledWith(
+      mockedExpTO,
+    );
   });
 
   test("onLearningElementLoaded calls a registered adapter", () => {
