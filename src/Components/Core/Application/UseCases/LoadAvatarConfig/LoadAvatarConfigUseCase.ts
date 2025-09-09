@@ -10,7 +10,6 @@ import UserDataEntity from "../../../Domain/Entities/UserDataEntity";
 import type IBackendPort from "../../Ports/Interfaces/IBackendPort";
 import BackendAdapterUtils from "src/Components/Core/Adapters/BackendAdapter/BackendAdapterUtils";
 import AvatarConfigTO from "../../DataTransferObjects/AvatarConfigTO";
-import AvatarSkinColorPalette from "src/Components/Core/Domain/AvatarModels/AvatarSkinColorPalette";
 
 @injectable()
 export default class LoadAvatarConfigUseCase
