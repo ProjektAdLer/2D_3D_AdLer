@@ -236,7 +236,9 @@ describe("CalculateInitialExperiencePointsUseCase", () => {
           elements: [
             { id: 1, difficulty: { difficultyType: 100, multiplicator: 1.5 } },
             { id: 2, difficulty: { difficultyType: 200, multiplicator: 2 } },
+
             { id: 3, difficulty: { difficultyType: 0, multiplicator: 1 } },
+            { id: 4, difficulty: { difficultyType: 300, multiplicator: 1 } },
             null,
           ],
         },
