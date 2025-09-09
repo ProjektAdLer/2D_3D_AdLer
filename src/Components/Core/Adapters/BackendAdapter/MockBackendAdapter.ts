@@ -83,12 +83,20 @@ export default class MockBackendAdapter implements IBackendPort {
     worldID,
   }: ElementDataParams): Promise<string> {
     let worldToUse: AWT;
-    if (worldID === 1) worldToUse = ThemeWorldAWT;
-    else if (worldID === 2) worldToUse = StoryWorldAWT;
-    else if (worldID === 3) worldToUse = SubthemeWorldAWT;
-    else if (worldID === 4) worldToUse = NPCModelAWT;
-    else if (worldID === 5) worldToUse = RequirementsGradingAWT;
-    else worldToUse = SimpleWorldAWT;
+
+    // In Showcase-Modus verwenden wir standardmäßig die ShowcaseWorld
+    if (process.env.REACT_APP_IS_SHOWCASE === "true") {
+      worldToUse = ShowcaseWorldAWT;
+    } else {
+      // Normale Entwicklungslogik - identisch mit getWorldData
+      if (worldID === 1) worldToUse = SimpleWorldAWT;
+      else if (worldID === 2) worldToUse = StoryWorldAWT;
+      else if (worldID === 3) worldToUse = ThemeWorldAWT;
+      else if (worldID === 4) worldToUse = NPCModelAWT;
+      else if (worldID === 5) worldToUse = RequirementsGradingAWT;
+      else if (worldID === 999) worldToUse = ShowcaseWorldAWT;
+      else worldToUse = SubthemeWorldAWT;
+    }
 
     const elementType = worldToUse.world.elements.find(
       (element) => element.elementId === elementID,

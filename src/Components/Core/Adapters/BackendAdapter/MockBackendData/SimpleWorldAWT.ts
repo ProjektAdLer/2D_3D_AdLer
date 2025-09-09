@@ -11,7 +11,7 @@ const SimpleWorldAWT: AWT = {
     worldName: "Simple World",
     worldDescription: "",
     worldGoals: [""],
-    theme: "Suburb",
+    theme: "CampusAschaffenburg",
     evaluationLink: "https://www.th-ab.de",
     evaluationLinkName: "50 Zeichen: This is a test name. MMWWMWMWMMWMMWWMM",
     evaluationLinkText:

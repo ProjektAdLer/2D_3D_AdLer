@@ -22,9 +22,17 @@ export function createH5POptions(viewModel: LearningElementModalViewModel) {
         : "";
       h5pJsonPath = publicUrl + filePath.replaceAll("\\", "/");
     }
-    // Mock-Backend uses the 2D_3D_AdLer prefix paths
-    frameJs = "/2D_3D_AdLer/h5pBase/frame.bundle.js";
-    frameCss = "/2D_3D_AdLer/h5pBase/styles/h5p.css";
+
+    // H5P Base paths: unterschiedlich je nach Showcase-Modus
+    if (process.env.REACT_APP_IS_SHOWCASE === "true") {
+      // Showcase-Modus braucht den 2D_3D_AdLer Prefix
+      frameJs = "/2D_3D_AdLer/h5pBase/frame.bundle.js";
+      frameCss = "/2D_3D_AdLer/h5pBase/styles/h5p.css";
+    } else {
+      // Normale Entwicklung ohne Prefix
+      frameJs = "/h5pBase/frame.bundle.js";
+      frameCss = "/h5pBase/styles/h5p.css";
+    }
   } else {
     // For the real backend we use the server URL (original logic)
     let baseURL = config.serverURL.replace(/api\/?$/, "");
