@@ -1,6 +1,17 @@
 #!/bin/bash
 
-# Deploy showcase build to separate GitHub Pages repository
+# Deploy # Clone the GitHub Pages repository
+echo "🔄 Cloning GitHub Pages repository..."
+git clone "$PAGES_REPO_URL" "$TEMP_REPO_DIR"
+
+# Navigate to the cloned repository
+cd "$TEMP_REPO_DIR"
+
+# Configure git for large file handling
+echo "⚙️ Configuring git for deployment..."
+git config http.postBuffer 524288000  # 500MB buffer
+git config http.maxRequestBuffer 100M
+git config core.compression 0se build to separate GitHub Pages repository
 
 set -e  # Exit on any error
 
@@ -38,6 +49,12 @@ cp -r "$OLDPWD/build"/* .
 # Add .nojekyll file for GitHub Pages
 touch .nojekyll
 
+# Optimize for large repository
+echo "🔧 Optimizing repository for large files..."
+git config core.preloadindex true
+git config core.fscache true
+git config gc.auto 256
+
 # Add all files and commit
 echo "💾 Committing changes..."
 git add .
@@ -56,7 +73,27 @@ fi
 
 # Push to remote repository
 echo "🌐 Pushing to GitHub Pages repository..."
-git push origin "$PAGES_BRANCH"
+echo "📦 Push size optimization: using incremental push..."
+
+# Try to push with increased buffer and timeout
+git config http.postBuffer 1048576000  # 1GB buffer
+git config http.lowSpeedLimit 0
+git config http.lowSpeedTime 999999
+
+# Push with force to handle any conflicts
+if ! git push origin "$PAGES_BRANCH" --force; then
+    echo "⚠️ Standard push failed. Trying alternative approach..."
+    
+    # Alternative: Try pushing without force first
+    if ! git push origin "$PAGES_BRANCH"; then
+        echo "❌ Push failed. This might be due to large file sizes or network issues."
+        echo "💡 Suggestions:"
+        echo "   - Check your internet connection"
+        echo "   - Ensure you have push permissions to the repository"
+        echo "   - Consider reducing build size by optimizing assets"
+        exit 1
+    fi
+fi
 
 # Navigate back to original directory
 cd "$OLDPWD"
