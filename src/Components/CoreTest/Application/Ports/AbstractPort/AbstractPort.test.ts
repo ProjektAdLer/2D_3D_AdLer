@@ -56,10 +56,10 @@ describe("AbstractPort", () => {
     systemUnderTest.registerAdapter(testAdapter, LocationScope._global);
 
     expect(
-      systemUnderTest["mappedAdapters"].get(LocationScope._global)!.length
+      systemUnderTest["mappedAdapters"].get(LocationScope._global)!.length,
     ).toBe(1);
     expect(
-      systemUnderTest["mappedAdapters"].get(LocationScope._global)!
+      systemUnderTest["mappedAdapters"].get(LocationScope._global)!,
     ).toContain(testAdapter);
   });
 
@@ -69,7 +69,7 @@ describe("AbstractPort", () => {
 
     expect(loggerMock.log).toBeCalledTimes(1);
     expect(
-      systemUnderTest["mappedAdapters"].get(LocationScope._global)!.length
+      systemUnderTest["mappedAdapters"].get(LocationScope._global)!.length,
     ).toBe(1);
   });
 
@@ -78,10 +78,10 @@ describe("AbstractPort", () => {
     systemUnderTest.unregisterAdapter(testAdapter);
 
     expect(
-      systemUnderTest["mappedAdapters"].get(LocationScope._global)!.length
+      systemUnderTest["mappedAdapters"].get(LocationScope._global)!.length,
     ).toBe(0);
     expect(
-      systemUnderTest["mappedAdapters"].get(LocationScope._global)!
+      systemUnderTest["mappedAdapters"].get(LocationScope._global)!,
     ).not.toContain(testAdapter);
   });
 
@@ -89,7 +89,11 @@ describe("AbstractPort", () => {
     systemUnderTest.registerAdapter(testAdapter, LocationScope.spaceMenu);
     history.push(LocationScope.spaceDisplay);
     expect(
-      systemUnderTest["mappedAdapters"].get(LocationScope.spaceMenu)?.length
+      systemUnderTest["mappedAdapters"].get(LocationScope.spaceMenu)?.length,
     ).toEqual(0);
+  });
+
+  test("name should return correct string", () => {
+    expect(systemUnderTest.name()).toBe("Abstract-Port");
   });
 });
