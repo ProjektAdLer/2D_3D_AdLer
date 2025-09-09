@@ -3,261 +3,289 @@
 exports[`LoadingScreenControlsExplanation should render 1`] = `
 <div>
   <div
-    class="row-span-4 flex flex-col w-[90vw] max-w-[90vw] portrait:h-[50vh] lg:max-h-[60vh] xl:max-h-[50vh] max-h-[45vh] mobile-portrait:h-[60vh] mobile-portrait:max-h-[65vh] bg-buttonbgblue p-4 rounded-xl overflow-y-auto overflow-x-hidden"
+    class="row-span-4 flex max-h-[45vh] w-[90vw] max-w-[90vw] flex-col overflow-y-auto overflow-x-hidden rounded-xl bg-buttonbgblue p-4 lg:max-h-[60vh] xl:max-h-[50vh] mobile-portrait:h-[60vh] mobile-portrait:max-h-[65vh] portrait:h-[50vh]"
   >
     <h1
-      class="font-bold portrait:pb-6 text-adlerdarkblue"
+      class="flex-shrink-0 font-bold text-adlerdarkblue portrait:pb-6"
     >
       sidebar_controls
     </h1>
     <div
-      class="flex flex-col"
+      class="flex min-h-0 flex-1 flex-col"
     >
       <div
-        class="mobile-landscape:grid-rows-auto portrait:grid-rows-auto portrait-gap-y-1 grid max-w-[85vw] grid-flow-row grid-rows-6 gap-x-8 gap-y-3 pb-4 text-xs lg:text-sm xl:gap-2 mobile-landscape:grid-flow-row mobile-landscape:grid-cols-1 mobile-landscape:justify-center mobile-landscape:gap-x-1 mobile-landscape:gap-y-3 mobile-landscape:pb-0 mobile-landscape:text-2xs portrait:grid-flow-row portrait:grid-cols-1"
+        class="flex-1 overflow-y-auto pb-4"
       >
-        <h3
-          class="self-center font-bold text-adlerdarkblue"
-        >
-          controlAvatar
-        </h3>
         <div
-          class="flex flex-row items-start justify-start gap-2"
+          class="max-w-[85vw] pb-4 text-xs lg:text-sm mobile-landscape:text-2xs portrait:text-xs"
         >
-          <img
-            alt="Linksklick"
-            class="w-6"
-            src="left-click.svg"
-          />
-          <p>
-            controlAvatarMouse
-          </p>
-        </div>
-        <div
-          class="flex flex-row items-start justify-start gap-2"
-        >
-          <img
-            alt="Einfacher Touch"
-            class="w-6"
-            src="touch.svg"
-          />
-          <p>
-            controlAvatarTouch
-          </p>
-        </div>
-        <div
-          class="flex flex-row items-start justify-start gap-2 portrait:pb-3"
-        >
-          <img
-            alt="Icon"
-            class="w-6"
-            src="hint.svg"
-          />
-          <p>
-            controlAvatarHint
-          </p>
-        </div>
-        <h3
-          class="self-center font-bold text-adlerdarkblue"
-        >
-          openContent
-        </h3>
-        <div
-          class="flex flex-row items-start justify-start gap-2"
-        >
-          <img
-            alt="Icon"
-            class="w-6"
-            src="left-click.svg"
-          />
-          <p>
-            openContentMouse
-          </p>
-        </div>
-        <div
-          class="flex flex-row items-start justify-start gap-2"
-        >
-          <img
-            alt="Icon"
-            class="w-6"
-            src="left-click.svg"
-          />
-          <p>
-            openContentMouseDouble
-          </p>
-        </div>
-        <div
-          class="flex flex-row items-start justify-start gap-2"
-        >
-          <img
-            alt="Icon"
-            class="w-6"
-            src="touch.svg"
-          />
-          <p>
-            openContentTouch
-          </p>
-        </div>
-        <div
-          class="flex flex-row items-start justify-start gap-2 portrait:pb-3"
-        >
-          <img
-            alt="Icon"
-            class="w-6"
-            src="hint.svg"
-          />
           <div
-            class="flex flex-col gap-1"
+            class="space-y-6 mobile-landscape:space-y-4 portrait:space-y-4"
           >
-            <p>
-              openContentHint1
-            </p>
-            <p>
-              openContentHint2
-            </p>
+            <section
+              class="space-y-3 mobile-landscape:space-y-2 portrait:space-y-2"
+            >
+              <h3
+                class="font-bold text-adlerdarkblue"
+              >
+                controlAvatar
+              </h3>
+              <div
+                class="flex flex-row items-start justify-start gap-2"
+              >
+                <img
+                  alt="Linksklick"
+                  class="w-6 flex-shrink-0"
+                  src="left-click.svg"
+                />
+                <p>
+                  controlAvatarMouse
+                </p>
+              </div>
+              <div
+                class="flex flex-row items-start justify-start gap-2"
+              >
+                <img
+                  alt="Einfacher Touch"
+                  class="w-6 flex-shrink-0"
+                  src="touch.svg"
+                />
+                <p>
+                  controlAvatarTouch
+                </p>
+              </div>
+              <div
+                class="flex flex-row items-start justify-start gap-2"
+              >
+                <img
+                  alt="Icon"
+                  class="w-6 flex-shrink-0"
+                  src="hint.svg"
+                />
+                <p>
+                  controlAvatarHint
+                </p>
+              </div>
+            </section>
+            <section
+              class="space-y-3 mobile-landscape:space-y-2 portrait:space-y-2"
+            >
+              <h3
+                class="font-bold text-adlerdarkblue"
+              >
+                openContent
+              </h3>
+              <div
+                class="flex flex-row items-start justify-start gap-2"
+              >
+                <img
+                  alt="Icon"
+                  class="w-6 flex-shrink-0"
+                  src="left-click.svg"
+                />
+                <p>
+                  openContentMouse
+                </p>
+              </div>
+              <div
+                class="flex flex-row items-start justify-start gap-2"
+              >
+                <img
+                  alt="Icon"
+                  class="w-6 flex-shrink-0"
+                  src="left-click.svg"
+                />
+                <p>
+                  openContentMouseDouble
+                </p>
+              </div>
+              <div
+                class="flex flex-row items-start justify-start gap-2"
+              >
+                <img
+                  alt="Icon"
+                  class="w-6 flex-shrink-0"
+                  src="touch.svg"
+                />
+                <p>
+                  openContentTouch
+                </p>
+              </div>
+              <div
+                class="flex flex-row items-start justify-start gap-2"
+              >
+                <img
+                  alt="Icon"
+                  class="w-6 flex-shrink-0"
+                  src="hint.svg"
+                />
+                <div
+                  class="flex flex-col gap-1"
+                >
+                  <p>
+                    openContentHint1
+                  </p>
+                  <p>
+                    openContentHint2
+                  </p>
+                </div>
+              </div>
+            </section>
+            <section
+              class="space-y-3 mobile-landscape:space-y-2 portrait:space-y-2"
+            >
+              <h3
+                class="font-bold text-adlerdarkblue"
+              >
+                rotateCamera
+              </h3>
+              <div
+                class="flex flex-row items-start justify-start gap-2"
+              >
+                <img
+                  alt="Icon"
+                  class="w-6 flex-shrink-0"
+                  src="middle-mouse-click-and-drag.svg"
+                />
+                <p>
+                  rotateCameraMouse
+                </p>
+              </div>
+              <div
+                class="flex flex-row items-start justify-start gap-2"
+              >
+                <img
+                  alt="Icon"
+                  class="w-6 flex-shrink-0"
+                  src="touch-and-drag.svg"
+                />
+                <p>
+                  rotateCameraTouch
+                </p>
+              </div>
+              <div
+                class="flex flex-row items-start justify-start gap-2"
+              >
+                <img
+                  alt="Icon"
+                  class="w-6 flex-shrink-0"
+                  src="hint.svg"
+                />
+                <p>
+                  rotateCameraHint
+                </p>
+              </div>
+            </section>
+            <section
+              class="space-y-3 mobile-landscape:space-y-2 portrait:space-y-2"
+            >
+              <h3
+                class="font-bold text-adlerdarkblue"
+              >
+                zoomCamera
+              </h3>
+              <div
+                class="flex flex-row items-start justify-start gap-2"
+              >
+                <img
+                  alt="Icon"
+                  class="w-6 flex-shrink-0"
+                  src="middle-mouse-click.svg"
+                />
+                <p>
+                  zoomCameraMouse
+                </p>
+              </div>
+              <div
+                class="flex flex-row items-start justify-start gap-2"
+              >
+                <img
+                  alt="Icon"
+                  class="w-6 flex-shrink-0"
+                  src="touch-zoom.svg"
+                />
+                <p>
+                  zoomCameraTouch
+                </p>
+              </div>
+              <div
+                class="flex flex-row items-start justify-start gap-2"
+              >
+                <img
+                  alt="Icon"
+                  class="w-6 flex-shrink-0"
+                  src="hint.svg"
+                />
+                <p>
+                  zoomCameraHint
+                </p>
+              </div>
+            </section>
+            <section
+              class="space-y-3 mobile-landscape:space-y-2 portrait:space-y-2"
+            >
+              <h3
+                class="font-bold text-adlerdarkblue"
+              >
+                Highlight Farben
+              </h3>
+              <div
+                class="flex flex-row items-start justify-start gap-2"
+              >
+                <img
+                  alt="Icon"
+                  class="w-6 flex-shrink-0"
+                  src="LearningElementUnsolvedIcon.svg"
+                />
+                <p>
+                  LearningElementUnsolvedIcon
+                </p>
+              </div>
+              <div
+                class="flex flex-row items-start justify-start gap-2"
+              >
+                <img
+                  alt="Icon"
+                  class="w-6 flex-shrink-0"
+                  src="LearningElementSolvedIcon.svg"
+                />
+                <p>
+                  LearningElementSolvedIcon
+                </p>
+              </div>
+              <div
+                class="flex flex-row items-start justify-start gap-2"
+              >
+                <img
+                  alt="Icon"
+                  class="w-6 flex-shrink-0"
+                  src="NonLearningElementBaseIcon.svg"
+                />
+                <p>
+                  NonLearningElementBaseIcon
+                </p>
+              </div>
+              <div
+                class="flex flex-row items-start justify-start gap-2"
+              >
+                <img
+                  alt="Icon"
+                  class="w-6 flex-shrink-0"
+                  src="hint.svg"
+                />
+                <p>
+                  HighlightHint
+                </p>
+              </div>
+            </section>
           </div>
-        </div>
-        <h3
-          class="self-center font-bold text-adlerdarkblue"
-        >
-          rotateCamera
-        </h3>
-        <div
-          class="flex flex-row items-start justify-start gap-2"
-        >
-          <img
-            alt="Icon"
-            class="w-6"
-            src="middle-mouse-click-and-drag.svg"
-          />
-          <p>
-            rotateCameraMouse
-          </p>
-        </div>
-        <div
-          class="flex flex-row items-start justify-start gap-2"
-        >
-          <img
-            alt="Icon"
-            class="w-6"
-            src="touch-and-drag.svg"
-          />
-          <p>
-            rotateCameraTouch
-          </p>
-        </div>
-        <div
-          class="flex flex-row items-start justify-start gap-2 portrait:pb-3"
-        >
-          <img
-            alt="Icon"
-            class="w-6"
-            src="hint.svg"
-          />
-          <p>
-            rotateCameraHint
-          </p>
-        </div>
-        <h3
-          class="self-center font-bold text-adlerdarkblue"
-        >
-          zoomCamera
-        </h3>
-        <div
-          class="flex flex-row items-start justify-start gap-2"
-        >
-          <img
-            alt="Icon"
-            class="w-6"
-            src="middle-mouse-click.svg"
-          />
-          <p>
-            zoomCameraMouse
-          </p>
-        </div>
-        <div
-          class="flex flex-row items-start justify-start gap-2"
-        >
-          <img
-            alt="Icon"
-            class="w-6"
-            src="touch-zoom.svg"
-          />
-          <p>
-            zoomCameraTouch
-          </p>
-        </div>
-        <div
-          class="flex flex-row items-start justify-start gap-2 portrait:pb-3"
-        >
-          <img
-            alt="Icon"
-            class="w-6"
-            src="hint.svg"
-          />
-          <p>
-            zoomCameraHint
-          </p>
-        </div>
-        <h3
-          class="self-center font-bold text-adlerdarkblue"
-        >
-          Highlight Farben
-        </h3>
-        <div
-          class="flex flex-row items-start justify-start gap-2"
-        >
-          <img
-            alt="Icon"
-            class="w-6"
-            src="LearningElementUnsolvedIcon.svg"
-          />
-          <p>
-            LearningElementUnsolvedIcon
-          </p>
-        </div>
-        <div
-          class="flex flex-row items-start justify-start gap-2"
-        >
-          <img
-            alt="Icon"
-            class="w-6"
-            src="LearningElementSolvedIcon.svg"
-          />
-          <p>
-            LearningElementSolvedIcon
-          </p>
-        </div>
-        <div
-          class="flex flex-row items-start justify-start gap-2"
-        >
-          <img
-            alt="Icon"
-            class="w-6"
-            src="NonLearningElementBaseIcon.svg"
-          />
-          <p>
-            NonLearningElementBaseIcon
-          </p>
-        </div>
-        <div
-          class="flex flex-row items-start justify-start gap-2"
-        >
-          <img
-            alt="Icon"
-            class="w-6"
-            src="hint.svg"
-          />
-          <p>
-            HighlightHint
-          </p>
         </div>
       </div>
       <div
-        class="relative mobile-portrait:pt-12 mobile-landscape:pt-10"
+        class="flex-shrink-0 border-t border-adlerdarkblue/20 pt-4"
       >
         <p
-          class="w-full text-xs font-bold text-center absolute bottom-5 mobile-landscape:text-2xs mobile-landscape:bottom-1 portrait:bottom-1 text-adlerdarkblue"
+          class="w-full text-center text-xs font-bold text-adlerdarkblue mobile-landscape:text-2xs portrait:text-2xs"
         >
           hint_controlsExplanationModal
         </p>
