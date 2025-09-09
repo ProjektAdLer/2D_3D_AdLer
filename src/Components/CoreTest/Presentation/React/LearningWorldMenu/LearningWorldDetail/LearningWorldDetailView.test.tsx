@@ -44,6 +44,6 @@ describe("LearningWorldDetail in World Menu", () => {
     ]) as unknown as Observable<LearningSpaceTO[]>;
     const componentUnderTest = render(<LearningWorldDetail />);
 
-    expect(componentUnderTest.getByTestId("greenSwosh")).toBeInTheDocument();
+    expect(componentUnderTest.getByTestId("greenSwosh-1")).toBeInTheDocument();
   });
 });

@@ -28,7 +28,7 @@ export default function Progressbar(props: Readonly<ProgressbarProps>) {
         <div className="relative items-center align-middle">
           {/* button */}
           {props.button === true && (
-            <StyledButton>
+            <StyledButton data-testid="progressbarbutton">
               <img
                 className={tailwindMerge(
                   props.iconClassName,

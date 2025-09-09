@@ -52,6 +52,7 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
           className="animate-bounce-once m-2 block self-center justify-self-center bg-nodehandlecolor font-bold portrait:p-2"
           onClick={controller.onEnterLearningWorldButtonClicked}
           title={translate("worldOpenButtonToolTip").toString()}
+          data-testid="enter-learningworld"
         >
           {translate("openLearningWorldButton")}
         </StyledButton>
@@ -111,7 +112,7 @@ export default function LearningWorldDetail({ className }: AdLerUIComponent) {
                       {space.currentScore >= space.requiredScore && (
                         <img
                           src={greenSwosh}
-                          data-testid="greenSwosh"
+                          data-testid={`greenSwosh-${space.id}`}
                           alt=""
                           className="absolute bottom-3 left-4 w-6 xl:bottom-4 xl:left-6 xl:w-8"
                         />

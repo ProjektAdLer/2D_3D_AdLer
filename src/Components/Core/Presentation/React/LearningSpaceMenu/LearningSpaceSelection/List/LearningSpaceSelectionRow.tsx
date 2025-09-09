@@ -5,12 +5,14 @@ export default function LearningSpaceSelectionRow({
   spaceTitle,
   selected,
   icon,
+  spaceId,
   locked,
   onClickCallback,
   onDoubleClickCallback,
 }: {
   icon: string;
   spaceTitle: string;
+  spaceId: number;
   selected: boolean;
   locked: boolean;
   onClickCallback: () => void;
@@ -22,12 +24,13 @@ export default function LearningSpaceSelectionRow({
     <StyledButton
       icon={icon}
       containerClassName="w-full"
-      className="xl:pl-8 w-[100%]"
+      className="w-[100%] xl:pl-8"
       shape="freeFloatCenter"
       onClick={onClickCallback}
       onDoubleClick={onDoubleClickCallback}
       color={selected ? "pressed" : "default"}
       title={spaceTitle + ": " + translate("spaceButtonToolTip").toString()}
+      data-testid={`space-${spaceId}-${spaceTitle}`}
     >
       {spaceTitle}
     </StyledButton>

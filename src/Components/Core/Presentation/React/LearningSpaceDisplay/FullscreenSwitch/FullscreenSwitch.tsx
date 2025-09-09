@@ -21,6 +21,7 @@ export default function FullscreenSwitch() {
       className=""
       onClick={controller.toggleFullscreen}
       title={translate("sidebar_fullscreenToolTip").toString()}
+      data-testid="fullscreenswitch"
     >
       <img className="" src={fullscreenIcon} alt="Fullscreen-Icon"></img>
     </StyledButton>

@@ -61,6 +61,7 @@ export default function LearningSpaceSelectionList(props: {
               icon={spaceIcon}
               locked={!space.isAvailable}
               spaceTitle={space.name}
+              spaceId={space.id}
               selected={selectedRowID === space.id}
               onClickCallback={() => onRowClicked(space.id)}
               onDoubleClickCallback={() =>

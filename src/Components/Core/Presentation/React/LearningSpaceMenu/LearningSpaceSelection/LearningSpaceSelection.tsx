@@ -58,6 +58,7 @@ export default function LearningSpaceSelection({
             onChange={(e) => setShowGraph(e.target.checked)}
             value=""
             className="peer sr-only"
+            data-testid="spaceselection-toggle"
           ></input>
           <div className="peer-checked:adlerdarkblue h-6 w-11 rounded-full bg-adlerdarkblue after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:after:translate-x-full peer-checked:after:border-white dark:border-gray-600"></div>
           <span className="text-md ml-3 font-medium text-adlerdarkblue">

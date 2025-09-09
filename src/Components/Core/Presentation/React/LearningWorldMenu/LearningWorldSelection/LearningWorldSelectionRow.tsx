@@ -20,12 +20,13 @@ export default function LearningWorldSelectionRow({
     <StyledButton
       icon={icon}
       containerClassName="w-full"
-      className="w-full xl:pl-8 "
+      className="w-full xl:pl-8"
       shape="freeFloatCenter"
       onClick={onClickCallback}
       onDoubleClick={onDoubleClickCallback}
       color={selected ? "pressed" : "default"}
       title={title + ": " + translate("worldButtonToolTip").toString()}
+      data-testid={`learningworld-selection-${title}`}
     >
       {title}
     </StyledButton>

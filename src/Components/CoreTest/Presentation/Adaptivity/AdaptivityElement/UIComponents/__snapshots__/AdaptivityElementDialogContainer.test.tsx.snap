@@ -121,12 +121,13 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
               singleChoiceSelectedtestQuestionText
             </div>
             <button
-              class="justify-center mobile-portrait:rounded-md aspect-square flex items-center rounded-lg hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue roboto-black h-8 w-8 p-1 text-xs sm:h-10 sm:w-10 md:h-10 md:w-10 lg:h-10 lg:w-10 xl:h-10 xl:w-10"
+              class="font-regular box-border flex aspect-square cursor-pointer items-center justify-center overflow-hidden rounded-lg border-b-2 border-r-2 border-adlerdarkblue bg-buttonbgblue text-adlerdarkblue transition duration-75 ease-in-out hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent lg:text-xl mobile-portrait:rounded-md roboto-black h-8 w-8 p-1 text-xs sm:h-10 sm:w-10 md:h-10 md:w-10 lg:h-10 lg:w-10 xl:h-10 xl:w-10"
+              data-testid="closebutton"
               title="closeToolTip"
             >
               <img
                 alt="CloseButton"
-                class="w-6 h-6"
+                class="h-6 w-6"
                 src="close.svg"
               />
             </button>
