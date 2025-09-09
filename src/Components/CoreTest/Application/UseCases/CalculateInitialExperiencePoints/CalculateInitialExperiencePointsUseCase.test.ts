@@ -289,4 +289,49 @@ describe("CalculateInitialExperiencePointsUseCase", () => {
       ),
     ).toEqual(LearningElementDifficulty.easy);
   });
+
+  test("filterEntitiesOfType callback should return true if element is an adaptivity element", () => {
+    const worldEntityMock = {
+      id: 42,
+      name: "World 1",
+      spaces: [
+        {
+          id: 1,
+          elements: [
+            {
+              id: 1,
+              parentWorldID: 42,
+              difficulty: { difficultyType: 0, multiplicator: 1 },
+            },
+          ],
+        },
+      ],
+    };
+    const adaptivityElementMock = {
+      element: {
+        id: 1,
+        parentWorldID: 42,
+      },
+      tasks: [
+        {
+          questions: [
+            {
+              questionDifficulty: AdaptivityElementQuestionDifficultyTypes.hard,
+            },
+          ],
+        },
+      ],
+    };
+    let filterResult;
+    entityContainerMock.filterEntitiesOfType.mockImplementationOnce(
+      (entityType, callback) => {
+        filterResult = callback(adaptivityElementMock);
+        return [adaptivityElementMock];
+      },
+    );
+    systemUnderTest["calculateDifficultyMultiplier"](
+      worldEntityMock.spaces[0].elements as any,
+    );
+    expect(filterResult).toBe(true);
+  });
 });
