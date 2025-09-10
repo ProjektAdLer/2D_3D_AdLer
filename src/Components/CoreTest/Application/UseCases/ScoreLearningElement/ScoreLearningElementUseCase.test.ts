@@ -20,11 +20,14 @@ import { LearningElementModelTypeEnums } from "../../../../Core/Domain/LearningE
 import IBeginStoryElementOutroCutSceneUseCase from "../../../../Core/Application/UseCases/BeginStoryElementOutroCutScene/IBeginStoryElementOutroCutSceneUseCase";
 import { ThemeType } from "../../../../Core/Domain/Types/ThemeTypes";
 import UpdateExperiencePointsUseCase from "../../../../Core/Application/UseCases/UpdateExperiencePoints/UpdateExperiencePointsUseCase";
+import { IInternalCalculateLearningSpaceScoreUseCase } from "../../../../Core/Application/UseCases/CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
 
 const entityContainerMock = mock<IEntityContainer>();
 const backendAdapterMock = mock<IBackendPort>();
 const InternalCalculateWorldScoreMock =
   mock<IInternalCalculateLearningWorldScoreUseCase>();
+const InternalCalculateSpaceScoreMock =
+  mock<IInternalCalculateLearningSpaceScoreUseCase>();
 const worldPortMock = mock<ILearningWorldPort>();
 const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
 const beginStoryElementOutroCutSceneUseCaseMock =
@@ -49,7 +52,7 @@ const getNewTestEntities = () => {
     type: "h5p",
     parentWorldID: 0,
     model: LearningElementModelTypeEnums.H5pElementModelTypes.DeskPC1,
-  };
+  } as any as LearningElementEntity;
   const spaceEntity: LearningSpaceEntity = {
     id: 1,
     name: "",
@@ -62,7 +65,7 @@ const getNewTestEntities = () => {
     template: LearningSpaceTemplateType.None,
     theme: ThemeType.Suburb,
     storyElements: [],
-  };
+  } as any as LearningSpaceEntity;
 
   return {
     userEntity,
@@ -118,6 +121,9 @@ describe("ScoreLearningElementUseCase", () => {
     CoreDIContainer.rebind<IInternalCalculateLearningWorldScoreUseCase>(
       USECASE_TYPES.ICalculateLearningWorldScoreUseCase,
     ).toConstantValue(InternalCalculateWorldScoreMock);
+    CoreDIContainer.rebind<IInternalCalculateLearningSpaceScoreUseCase>(
+      USECASE_TYPES.ICalculateLearningSpaceScoreUseCase,
+    ).toConstantValue(InternalCalculateSpaceScoreMock);
     CoreDIContainer.rebind<ILearningWorldPort>(
       PORT_TYPES.ILearningWorldPort,
     ).toConstantValue(worldPortMock);
@@ -299,5 +305,69 @@ describe("ScoreLearningElementUseCase", () => {
     await expect(
       systemUnderTest["rejectWithWarning"](warningMessage),
     ).rejects.toContain(warningMessage);
+  });
+
+  test("executeAsync logs error and rejects if backend returns false and element was not scored before", async () => {
+    const loggerMock = jest.spyOn(Logger.prototype, "log");
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
+      spaceID: 1,
+      worldID: 1,
+    } as UserLocationTO);
+    const { userEntity, elementEntity, spaceEntity } = getNewTestEntities();
+    setupEntityContainerMock([userEntity], [elementEntity], [spaceEntity]);
+    backendAdapterMock.scoreElement.mockResolvedValue(false);
+
+    await expect(systemUnderTest.executeAsync(1)).rejects.toContain("error");
+    expect(loggerMock).toHaveBeenCalledWith(
+      LogLevelTypes.ERROR,
+      expect.stringContaining(
+        "ScoreElementUseCase: scoreElement from backend returned: false",
+      ),
+    );
+  });
+
+  test("executeAsync logs error if calculateWorldScoreUseCase returns error", async () => {
+    const loggerMock = jest.spyOn(Logger.prototype, "log");
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
+      spaceID: 1,
+      worldID: 1,
+    } as UserLocationTO);
+    const { userEntity, elementEntity, spaceEntity } = getNewTestEntities();
+    setupEntityContainerMock([userEntity], [elementEntity], [spaceEntity]);
+    backendAdapterMock.scoreElement.mockResolvedValue(true);
+    InternalCalculateWorldScoreMock.internalExecute.mockImplementation(() => {
+      throw new Error("error");
+    });
+
+    await systemUnderTest.executeAsync(1);
+
+    expect(loggerMock).toHaveBeenCalledWith(
+      LogLevelTypes.ERROR,
+      expect.stringContaining(
+        "ScoreLearningElementUseCase: Error calculating new world score: Error: error",
+      ),
+    );
+  });
+
+  test("executeAsync logs error if calculateSpaceScoreUseCase returns error", async () => {
+    const loggerMock = jest.spyOn(Logger.prototype, "log");
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
+      spaceID: 1,
+      worldID: 1,
+    } as UserLocationTO);
+    const { userEntity, elementEntity, spaceEntity } = getNewTestEntities();
+    setupEntityContainerMock([userEntity], [elementEntity], [spaceEntity]);
+    backendAdapterMock.scoreElement.mockResolvedValue(true);
+    InternalCalculateSpaceScoreMock.internalExecute.mockImplementation(() => {
+      throw new Error("error");
+    });
+    await systemUnderTest.executeAsync(1);
+
+    expect(loggerMock).toHaveBeenCalledWith(
+      LogLevelTypes.ERROR,
+      expect.stringContaining(
+        "ScoreLearningElementUseCase: Error calculating new space score: Error: error",
+      ),
+    );
   });
 });
