@@ -6,39 +6,43 @@ exports[`AdaptivityElementQuestionSelection should render (every required combin
     class="grid w-full gap-4 px-2 py-2"
   >
     <div
-      class="flex items-center w-full gap-4 "
+      class="flex w-full items-center gap-4"
     >
       <div
         class=""
       >
         <button
-          class="w-full col-span-2 md:col-span-1 px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+          class="col-span-2 w-full md:col-span-1 px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+          data-testid="adaptivity-question-0"
           title="questionToolTip"
         >
           <div
-            class="grid items-center w-full h-full grid-cols-5 "
+            class="grid h-full w-full grid-cols-5 items-center"
           >
             <div
-              class="flex items-center h-full"
+              class="flex h-full items-center"
             >
               <img
                 alt="Platzhalter-Icon"
                 class="w-4 h-4 md:w-6 md:h-6 opacity-60"
+                data-testid="adaptivity-star-empty"
                 src="diffculties-adaptivity-placeholder.svg"
               />
               <img
                 alt=""
                 class="w-4 h-4 md:w-6 md:h-6"
+                data-testid="adaptivity-star-medium"
                 src="diffculties-adaptivity-medium-required-solved.svg"
               />
               <img
                 alt="Platzhalter-Icon"
                 class="w-4 h-4 md:w-6 md:h-6 opacity-60"
+                data-testid="adaptivity-star-empty"
                 src="diffculties-adaptivity-placeholder.svg"
               />
             </div>
             <p
-              class="flex justify-center col-span-3 px-4 text-sm text-start"
+              class="col-span-3 flex justify-center px-4 text-start text-sm"
             >
               normal
                
@@ -49,6 +53,7 @@ exports[`AdaptivityElementQuestionSelection should render (every required combin
               <img
                 alt=""
                 class="h-5 md:h-7"
+                data-testid="adaptivity-star-required-completed-0"
                 src="check-solution.svg"
                 title="legendTaskRequiredSolved"
               />
@@ -57,43 +62,47 @@ exports[`AdaptivityElementQuestionSelection should render (every required combin
         </button>
       </div>
       <div
-        class="flex flex-row h-full md:gap-4 "
+        class="flex h-full flex-row md:gap-4"
       />
     </div>
     <div
-      class="flex items-center w-full gap-4 "
+      class="flex w-full items-center gap-4"
     >
       <div
         class=""
       >
         <button
-          class="w-full col-span-2 md:col-span-1 px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+          class="col-span-2 w-full md:col-span-1 px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+          data-testid="adaptivity-question-0"
           title="questionToolTip"
         >
           <div
-            class="grid items-center w-full h-full grid-cols-5 "
+            class="grid h-full w-full grid-cols-5 items-center"
           >
             <div
-              class="flex items-center h-full"
+              class="flex h-full items-center"
             >
               <img
                 alt="Platzhalter-Icon"
                 class="w-4 h-4 md:w-6 md:h-6 opacity-60"
+                data-testid="adaptivity-star-empty"
                 src="diffculties-adaptivity-placeholder.svg"
               />
               <img
                 alt="Platzhalter-Icon"
                 class="w-4 h-4 md:w-6 md:h-6 opacity-60"
+                data-testid="adaptivity-star-empty"
                 src="diffculties-adaptivity-placeholder.svg"
               />
               <img
                 alt=""
                 class="w-4 h-4 md:w-6 md:h-6"
+                data-testid="adaptivity-star-hard"
                 src="diffculties-adaptivity-hard-required-tried.svg"
               />
             </div>
             <p
-              class="flex justify-center col-span-3 px-4 text-sm text-start"
+              class="col-span-3 flex justify-center px-4 text-start text-sm"
             >
               hard
                
@@ -104,6 +113,7 @@ exports[`AdaptivityElementQuestionSelection should render (every required combin
               <img
                 alt=""
                 class="h-5 md:h-7"
+                data-testid="adaptivity-star-required-notcompleted-0"
                 src="required.svg"
                 title="legendTaskRequired"
               />
@@ -112,7 +122,7 @@ exports[`AdaptivityElementQuestionSelection should render (every required combin
         </button>
       </div>
       <div
-        class="flex flex-row h-full md:gap-4 "
+        class="flex h-full flex-row md:gap-4"
       />
     </div>
   </div>
@@ -125,39 +135,43 @@ exports[`AdaptivityElementQuestionSelection should render (with all difficulties
     class="grid w-full gap-4 px-2 py-2"
   >
     <div
-      class="flex items-center w-full gap-4 "
+      class="flex w-full items-center gap-4"
     >
       <div
         class=""
       >
         <button
-          class="w-full col-span-2 md:col-span-1 px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+          class="col-span-2 w-full md:col-span-1 px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+          data-testid="adaptivity-question-0"
           title="questionToolTip"
         >
           <div
-            class="grid items-center w-full h-full grid-cols-5 "
+            class="grid h-full w-full grid-cols-5 items-center"
           >
             <div
-              class="flex items-center h-full"
+              class="flex h-full items-center"
             >
               <img
                 alt=""
                 class="w-4 h-4 md:w-6 md:h-6"
+                data-testid="adaptivity-star-easy"
                 src="diffculties-adaptivity-easy-unsolved-icon.svg"
               />
               <img
                 alt="Platzhalter-Icon"
                 class="w-4 h-4 md:w-6 md:h-6 opacity-60"
+                data-testid="adaptivity-star-empty"
                 src="diffculties-adaptivity-placeholder.svg"
               />
               <img
                 alt="Platzhalter-Icon"
                 class="w-4 h-4 md:w-6 md:h-6 opacity-60"
+                data-testid="adaptivity-star-empty"
                 src="diffculties-adaptivity-placeholder.svg"
               />
             </div>
             <p
-              class="flex justify-center col-span-3 px-4 text-sm text-start"
+              class="col-span-3 flex justify-center px-4 text-start text-sm"
             >
               easy
                
@@ -173,43 +187,47 @@ exports[`AdaptivityElementQuestionSelection should render (with all difficulties
         </button>
       </div>
       <div
-        class="flex flex-row h-full md:gap-4 "
+        class="flex h-full flex-row md:gap-4"
       />
     </div>
     <div
-      class="flex items-center w-full gap-4 "
+      class="flex w-full items-center gap-4"
     >
       <div
         class=""
       >
         <button
-          class="w-full col-span-2 md:col-span-1 px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+          class="col-span-2 w-full md:col-span-1 px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+          data-testid="adaptivity-question-0"
           title="questionToolTip"
         >
           <div
-            class="grid items-center w-full h-full grid-cols-5 "
+            class="grid h-full w-full grid-cols-5 items-center"
           >
             <div
-              class="flex items-center h-full"
+              class="flex h-full items-center"
             >
               <img
                 alt="Platzhalter-Icon"
                 class="w-4 h-4 md:w-6 md:h-6 opacity-60"
+                data-testid="adaptivity-star-empty"
                 src="diffculties-adaptivity-placeholder.svg"
               />
               <img
                 alt=""
                 class="w-4 h-4 md:w-6 md:h-6"
+                data-testid="adaptivity-star-medium"
                 src="diffculties-adaptivity-medium-solved.svg"
               />
               <img
                 alt="Platzhalter-Icon"
                 class="w-4 h-4 md:w-6 md:h-6 opacity-60"
+                data-testid="adaptivity-star-empty"
                 src="diffculties-adaptivity-placeholder.svg"
               />
             </div>
             <p
-              class="flex justify-center col-span-3 px-4 text-sm text-start"
+              class="col-span-3 flex justify-center px-4 text-start text-sm"
             >
               normal
                
@@ -225,13 +243,14 @@ exports[`AdaptivityElementQuestionSelection should render (with all difficulties
         </button>
       </div>
       <div
-        class="flex flex-row h-full md:gap-4 "
+        class="flex h-full flex-row md:gap-4"
       >
         <div
           class=""
         >
           <button
-            class="w-full h-full px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            class="h-full w-full px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            data-testid="adaptivity-question-hint-0"
             title="hintToolTip"
           >
             <p
@@ -244,39 +263,43 @@ exports[`AdaptivityElementQuestionSelection should render (with all difficulties
       </div>
     </div>
     <div
-      class="flex items-center w-full gap-4 "
+      class="flex w-full items-center gap-4"
     >
       <div
         class=""
       >
         <button
-          class="w-full col-span-2 md:col-span-1 px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+          class="col-span-2 w-full md:col-span-1 px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+          data-testid="adaptivity-question-0"
           title="questionToolTip"
         >
           <div
-            class="grid items-center w-full h-full grid-cols-5 "
+            class="grid h-full w-full grid-cols-5 items-center"
           >
             <div
-              class="flex items-center h-full"
+              class="flex h-full items-center"
             >
               <img
                 alt="Platzhalter-Icon"
                 class="w-4 h-4 md:w-6 md:h-6 opacity-60"
+                data-testid="adaptivity-star-empty"
                 src="diffculties-adaptivity-placeholder.svg"
               />
               <img
                 alt="Platzhalter-Icon"
                 class="w-4 h-4 md:w-6 md:h-6 opacity-60"
+                data-testid="adaptivity-star-empty"
                 src="diffculties-adaptivity-placeholder.svg"
               />
               <img
                 alt=""
                 class="w-4 h-4 md:w-6 md:h-6"
+                data-testid="adaptivity-star-hard"
                 src="diffculties-adaptivity-hard-tried.svg"
               />
             </div>
             <p
-              class="flex justify-center col-span-3 px-4 text-sm text-start"
+              class="col-span-3 flex justify-center px-4 text-start text-sm"
             >
               hard
                
@@ -292,13 +315,14 @@ exports[`AdaptivityElementQuestionSelection should render (with all difficulties
         </button>
       </div>
       <div
-        class="flex flex-row h-full md:gap-4 "
+        class="flex h-full flex-row md:gap-4"
       >
         <div
           class=""
         >
           <button
-            class="w-full h-full px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            class="h-full w-full px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+            data-testid="adaptivity-question-hint-0"
             title="hintToolTip"
           >
             <p

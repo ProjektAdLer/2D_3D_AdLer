@@ -27,7 +27,7 @@ describe("SingleStoryLayout", () => {
         withBackButton={true}
       />,
     );
-    fireEvent.click(componentUnderTest.getByTestId("back"));
+    fireEvent.click(componentUnderTest.getByTestId("story-back"));
     expect(controllerMock.onBackToSelectionButtonClicked).toHaveBeenCalledTimes(
       1,
     );
@@ -71,7 +71,7 @@ describe("SingleStoryLayout", () => {
     expect(componentUnderTest.getByText('"text1"')).toBeInTheDocument();
 
     act(() => {
-      fireEvent.click(componentUnderTest.getByTestId("next"));
+      fireEvent.click(componentUnderTest.getByTestId("story-next"));
     });
 
     expect(componentUnderTest.getByText('"text2"')).toBeInTheDocument();
@@ -92,14 +92,14 @@ describe("SingleStoryLayout", () => {
     expect(componentUnderTest.getByText('"text1"')).toBeInTheDocument();
 
     act(() => {
-      fireEvent.click(componentUnderTest.getByTestId("next"));
+      fireEvent.click(componentUnderTest.getByTestId("story-next"));
     });
 
     // Suche nach Text mit Anführungszeichen (war hier schon korrekt)
     expect(componentUnderTest.getByText('"text2"')).toBeInTheDocument();
 
     act(() => {
-      fireEvent.click(componentUnderTest.getByTestId("prev-page"));
+      fireEvent.click(componentUnderTest.getByTestId("story-prev-page"));
     });
 
     // Suche nach Text mit Anführungszeichen (hier korrigiert)

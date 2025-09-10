@@ -3,21 +3,24 @@
 exports[`AdaptivityElementDifficultyStars should render with 0 for each difficulty 1`] = `
 <div>
   <div
-    class="flex items-center h-full"
+    class="flex h-full items-center"
   >
     <img
       alt="Platzhalter-Icon"
       class=" opacity-60"
+      data-testid="adaptivity-star-empty"
       src="diffculties-adaptivity-placeholder.svg"
     />
     <img
       alt="Platzhalter-Icon"
       class=" opacity-60"
+      data-testid="adaptivity-star-empty"
       src="diffculties-adaptivity-placeholder.svg"
     />
     <img
       alt="Platzhalter-Icon"
       class=" opacity-60"
+      data-testid="adaptivity-star-empty"
       src="diffculties-adaptivity-placeholder.svg"
     />
   </div>
@@ -27,21 +30,24 @@ exports[`AdaptivityElementDifficultyStars should render with 0 for each difficul
 exports[`AdaptivityElementDifficultyStars should render with 1 for each difficulty 1`] = `
 <div>
   <div
-    class="flex items-center h-full"
+    class="flex h-full items-center"
   >
     <img
       alt=""
       class=""
+      data-testid="adaptivity-star-easy"
       src="diffculties-adaptivity-easy-required-solved.svg"
     />
     <img
       alt=""
       class=""
+      data-testid="adaptivity-star-medium"
       src="diffculties-adaptivity-medium-required-solved.svg"
     />
     <img
       alt=""
       class=""
+      data-testid="adaptivity-star-hard"
       src="diffculties-adaptivity-hard-required-solved-icon.svg"
     />
   </div>
@@ -51,19 +57,22 @@ exports[`AdaptivityElementDifficultyStars should render with 1 for each difficul
 exports[`AdaptivityElementDifficultyStars should render with 1.7976931348623157e+308 for each difficulty 1`] = `
 <div>
   <div
-    class="flex items-center h-full"
+    class="flex h-full items-center"
   >
     <img
       alt=""
       class=""
+      data-testid="adaptivity-star-easy"
     />
     <img
       alt=""
       class=""
+      data-testid="adaptivity-star-medium"
     />
     <img
       alt=""
       class=""
+      data-testid="adaptivity-star-hard"
     />
   </div>
 </div>
@@ -72,21 +81,24 @@ exports[`AdaptivityElementDifficultyStars should render with 1.7976931348623157e
 exports[`AdaptivityElementDifficultyStars should render with 2 for each difficulty 1`] = `
 <div>
   <div
-    class="flex items-center h-full"
+    class="flex h-full items-center"
   >
     <img
       alt=""
       class=""
+      data-testid="adaptivity-star-easy"
       src="diffculties-adaptivity-easy-required-tried.svg"
     />
     <img
       alt=""
       class=""
+      data-testid="adaptivity-star-medium"
       src="diffculties-adaptivity-medium-required-tried.svg"
     />
     <img
       alt=""
       class=""
+      data-testid="adaptivity-star-hard"
       src="diffculties-adaptivity-hard-required-tried.svg"
     />
   </div>
@@ -96,21 +108,24 @@ exports[`AdaptivityElementDifficultyStars should render with 2 for each difficul
 exports[`AdaptivityElementDifficultyStars should render with 3 for each difficulty 1`] = `
 <div>
   <div
-    class="flex items-center h-full"
+    class="flex h-full items-center"
   >
     <img
       alt=""
       class=""
+      data-testid="adaptivity-star-easy"
       src="diffculties-adaptivity-easy-required-unsolved-icon.svg"
     />
     <img
       alt=""
       class=""
+      data-testid="adaptivity-star-medium"
       src="diffculties-adaptivity-medium-required-unsolved-icon.svg"
     />
     <img
       alt=""
       class=""
+      data-testid="adaptivity-star-hard"
       src="diffculties-adaptivity-hard-required-unsolved-icon.svg"
     />
   </div>
@@ -120,21 +135,24 @@ exports[`AdaptivityElementDifficultyStars should render with 3 for each difficul
 exports[`AdaptivityElementDifficultyStars should render with 4 for each difficulty 1`] = `
 <div>
   <div
-    class="flex items-center h-full"
+    class="flex h-full items-center"
   >
     <img
       alt=""
       class=""
+      data-testid="adaptivity-star-easy"
       src="diffculties-adaptivity-easy-solved.svg"
     />
     <img
       alt=""
       class=""
+      data-testid="adaptivity-star-medium"
       src="diffculties-adaptivity-medium-solved.svg"
     />
     <img
       alt=""
       class=""
+      data-testid="adaptivity-star-hard"
       src="diffculties-adaptivity-hard-solved-icon.svg"
     />
   </div>
@@ -144,21 +162,24 @@ exports[`AdaptivityElementDifficultyStars should render with 4 for each difficul
 exports[`AdaptivityElementDifficultyStars should render with 5 for each difficulty 1`] = `
 <div>
   <div
-    class="flex items-center h-full"
+    class="flex h-full items-center"
   >
     <img
       alt=""
       class=""
+      data-testid="adaptivity-star-easy"
       src="diffculties-adaptivity-easy-tried.svg"
     />
     <img
       alt=""
       class=""
+      data-testid="adaptivity-star-medium"
       src="diffculties-adaptivity-medium-tried.svg"
     />
     <img
       alt=""
       class=""
+      data-testid="adaptivity-star-hard"
       src="diffculties-adaptivity-hard-tried.svg"
     />
   </div>
@@ -168,21 +189,24 @@ exports[`AdaptivityElementDifficultyStars should render with 5 for each difficul
 exports[`AdaptivityElementDifficultyStars should render with 6 for each difficulty 1`] = `
 <div>
   <div
-    class="flex items-center h-full"
+    class="flex h-full items-center"
   >
     <img
       alt=""
       class=""
+      data-testid="adaptivity-star-easy"
       src="diffculties-adaptivity-easy-unsolved-icon.svg"
     />
     <img
       alt=""
       class=""
+      data-testid="adaptivity-star-medium"
       src="diffculties-adaptivity-medium-unsolved-icon.svg"
     />
     <img
       alt=""
       class=""
+      data-testid="adaptivity-star-hard"
       src="diffculties-adaptivity-hard-unsolved-icon.svg"
     />
   </div>

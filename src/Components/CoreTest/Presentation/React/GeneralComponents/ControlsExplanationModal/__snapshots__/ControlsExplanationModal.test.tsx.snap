@@ -4,6 +4,7 @@ exports[`ControlsExplanationModal should render 1`] = `
 <div>
   <div
     class="z-50 flex items-center justify-center flex gap-2 m-2 w-fit h-fit text-adlertextgrey"
+    data-testid="controls-close"
   >
     <div
       class="fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center h-full bg-blacktrans"

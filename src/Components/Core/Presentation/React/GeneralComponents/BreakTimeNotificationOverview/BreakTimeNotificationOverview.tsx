@@ -22,7 +22,7 @@ function BreakTimeNotificationThumbnail({
   return (
     <div className="flex flex-col">
       <StyledButton
-        className="line-clamp-2 portrait:h-[15vh] h-[20vh] lg:w-[15vw]"
+        className="line-clamp-2 h-[20vh] lg:w-[15vw] portrait:h-[15vh]"
         shape="freeFloatCenter"
         onClick={onClick}
         data-testid={notification.titleKey}
@@ -50,8 +50,8 @@ function BreakTimeNotificationThumbnailSection({
 }) {
   return (
     <div>
-      <h1 className="pt-2 pb-2 text-lg">{title}</h1>
-      <div className="grid portrait:grid-cols-2 grid-cols-5 gap-5 pt-4 bg-whitetrans rounded-lg p-4 max-h-[30vh] overflow-y-auto">
+      <h1 className="pb-2 pt-2 text-lg">{title}</h1>
+      <div className="grid max-h-[30vh] grid-cols-5 gap-5 overflow-y-auto rounded-lg bg-whitetrans p-4 pt-4 portrait:grid-cols-2">
         {notifications.map((notification) => (
           <BreakTimeNotificationThumbnail
             key={notification.titleKey}
@@ -89,7 +89,7 @@ export default function BreakTimeNotificationOverview() {
     >
       {/* Selection */}
       {!selectedNotification && (
-        <div className="text-md font-bold text-adlerdarkblue pl-1 overflow-y-auto max-h-[90vh] lg:max-h-[85vh]">
+        <div className="text-md max-h-[90vh] overflow-y-auto pl-1 font-bold text-adlerdarkblue lg:max-h-[85vh]">
           <BreakTimeNotificationThumbnailSection
             title={translate("30 Minuten Pausenhinweise")}
             notifications={viewModel.shortBreakTimeNotifications}
@@ -117,6 +117,7 @@ export default function BreakTimeNotificationOverview() {
           <StyledButton
             shape="freeFloatCenter"
             onClick={controller.returnToOverview}
+            data-testid="breaktime-return"
           >
             {"Zurück zur Übersicht"}
           </StyledButton>

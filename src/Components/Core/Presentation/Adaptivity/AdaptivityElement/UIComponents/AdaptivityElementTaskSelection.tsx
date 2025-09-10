@@ -92,8 +92,9 @@ export default function AdaptivityElementTaskSelection({
               className="w-full max-w-2xl"
               onClick={() => onSelectTask(task)}
               title={taskToolTip}
+              data-testid={`adaptivity-task-${task.taskID}`}
             >
-              <div className="grid items-center justify-between w-full h-full grid-cols-7 align-center">
+              <div className="align-center grid h-full w-full grid-cols-7 items-center justify-between">
                 <AdaptivityElementDifficultyStars
                   easyState={easyStatus}
                   mediumState={mediumStatus}
@@ -101,7 +102,7 @@ export default function AdaptivityElementTaskSelection({
                   starClassName="w-4 h-4 sm:w-6 sm:h-6 "
                 />
 
-                <p className="col-span-5 pl-4 text-sm text-start">
+                <p className="col-span-5 pl-4 text-start text-sm">
                   {task.taskTitle}
                 </p>
 
@@ -109,17 +110,19 @@ export default function AdaptivityElementTaskSelection({
                   {task.isRequired && !task.isCompleted && (
                     <img
                       alt=""
-                      className={"h-6 lg:h-8 pl-4 xl:pl-8"}
+                      className={"h-6 pl-4 lg:h-8 xl:pl-8"}
                       src={requiredTaskIcon}
                       title={taskRequiredToolTip}
+                      data-testid={`adaptivity-star-required-notcompleted-${task.taskID}`}
                     />
                   )}
                   {task.isRequired && task.isCompleted && (
                     <img
                       alt=""
-                      className={"h-6 lg:h-8 pl-4 xl:pl-8"}
+                      className={"h-6 pl-4 lg:h-8 xl:pl-8"}
                       src={solvedTaskIcon}
                       title={taskSolvedToolTip}
+                      data-testid={`adaptivity-star-required-completed-${task.taskID}`}
                     />
                   )}
                   {!task.isRequired && <div className="w-16"></div>}
@@ -140,7 +143,7 @@ export default function AdaptivityElementTaskSelection({
   ]);
 
   return (
-    <div className="grid justify-center gap-4 lg:grid-cols-2 gap-x-8">
+    <div className="grid justify-center gap-4 gap-x-8 lg:grid-cols-2">
       {taskButtons}
     </div>
   );

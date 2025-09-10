@@ -100,6 +100,7 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
               onClick={() => controller.closeLoadingScreen()}
               title={props.tooltip}
               className="relative z-20 font-bold"
+              data-testid="loadingscreen-close"
             >
               {translate(props.i18nKeys.button)}
             </StyledButton>

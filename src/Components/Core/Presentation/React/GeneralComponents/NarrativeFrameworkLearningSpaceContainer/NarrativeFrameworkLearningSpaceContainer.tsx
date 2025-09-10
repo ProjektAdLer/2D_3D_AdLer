@@ -26,6 +26,7 @@ export default function NarrativeFrameworkLearningSpaceContainer() {
         closeButtonToolTip={i18next
           .t("closeToolTip", { ns: "helpMenu" })
           .toString()}
+        data-testid="narrative-learningspace"
       >
         <div className="mt-10 w-[80vw] lg:h-[50vh] lg:w-[80vw] onek:h-[38vh] mobile-landscape:mt-1 mobile-landscape:h-32 mobile-landscape:w-full tablet-portrait:h-[60vh] tablet-portrait:w-[70vw]">
           <NarrativeFramework type="intro" />

@@ -29,22 +29,23 @@ export default function LearningSpaceGoalPanel() {
       <StyledButton
         onClick={controller.openOrCloseGoals}
         title={translate("learningGoalToolTip").toString()}
+        data-testid="learningspace-goal"
       >
         <img
-          className="w-[48px] lg:w-[69px] hover:cursor-pointer"
+          className="w-[48px] hover:cursor-pointer lg:w-[69px]"
           src={GoalIcon}
           alt="Lernziel Icon"
         ></img>
       </StyledButton>
 
       {isOpen && (
-        <StyledContainer className="fixed z-10 max-w-2xl max-h-[90vh] p-2 overflow-auto rounded-lg top-12 portrait:right-12 right-0 md:top-20 lg:right-40 bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto">
-          <div className="flex flex-col gap-4 m-2">
+        <StyledContainer className="fixed right-0 top-12 z-10 max-h-[90vh] max-w-2xl overflow-auto rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto p-2 md:top-20 lg:right-40 portrait:right-12">
+          <div className="m-2 flex flex-col gap-4">
             {goals && (
               <div className="flex flex-row">
                 <div>
                   {/* Header */}
-                  <div className="flex flex-row ">
+                  <div className="flex flex-row">
                     <img
                       src={GoalIcon}
                       alt="Lernziel Logo"
@@ -71,7 +72,7 @@ export default function LearningSpaceGoalPanel() {
                   )}
 
                   {goals.length > 1 && (
-                    <ul className="ml-4 text-xs list-disc lg:text-sm ">
+                    <ul className="ml-4 list-disc text-xs lg:text-sm">
                       {goals.map((goal, index) => {
                         return (
                           <li className="my-2" key={index}>

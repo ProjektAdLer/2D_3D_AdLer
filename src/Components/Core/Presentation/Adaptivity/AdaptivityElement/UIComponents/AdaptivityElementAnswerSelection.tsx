@@ -59,7 +59,7 @@ export default function AdaptivityElementAnswerSelection({
   );
 
   return (
-    <div className="flex flex-col w-full p-2 m-auto lg:justify-between lg:flex-row">
+    <div className="m-auto flex w-full flex-col p-2 lg:flex-row lg:justify-between">
       <div className="flex flex-wrap justify-start gap-4">
         {question.questionAnswers.map((answer, index) => (
           <StyledButton
@@ -74,22 +74,24 @@ export default function AdaptivityElementAnswerSelection({
                 : answerColors[index]
             }
             title={translate("answerToolTip").toString()}
+            data-testid={`adaptivity-answer-${answer.answerIndex}`}
           >
             <p className="text-sm">{answer.answerText}</p>
           </StyledButton>
         ))}
       </div>
 
-      <div className="flex items-end justify-end w-auto gap-2 pt-8 font-bold lg:w-1/6">
+      <div className="flex w-auto items-end justify-end gap-2 pt-8 font-bold lg:w-1/6">
         <div className="fixed">
           <StyledButton
-            className="box-border "
+            className="box-border"
             shape="freeFloatCenter"
             onClick={() => {
               submitSelection();
             }}
             disabled={!isAnyAnswerSelected || question.isCompleted === true}
             title={translate("submitTooltip").toString()}
+            data-testid="adaptivity-submit"
           >
             <p className="text-sm">
               {question.isCompleted

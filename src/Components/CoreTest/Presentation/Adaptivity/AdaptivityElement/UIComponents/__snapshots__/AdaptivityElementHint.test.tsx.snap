@@ -3,18 +3,19 @@
 exports[`AdaptivityElementHint should render CommentAction 1`] = `
 <div>
   <div
-    class="flex items-center justify-center p-2 pl-4 my-4 bg-buttonbgblue rounded-xl"
+    class="my-4 flex items-center justify-center rounded-xl bg-buttonbgblue p-2 pl-4"
   >
     test
   </div>
   <div
-    class="flex justify-end w-full"
+    class="flex w-full justify-end"
   >
     <div
       class=""
     >
       <button
         class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+        data-testid="adaptivity-closehint"
       >
         <p
           class="text-sm"
@@ -30,18 +31,19 @@ exports[`AdaptivityElementHint should render CommentAction 1`] = `
 exports[`AdaptivityElementHint should render ContentAction 1`] = `
 <div>
   <div
-    class="flex items-center justify-center p-2 pl-4 my-4 bg-buttonbgblue rounded-xl"
+    class="my-4 flex items-center justify-center rounded-xl bg-buttonbgblue p-2 pl-4"
   >
     test
   </div>
   <div
-    class="flex justify-end w-full"
+    class="flex w-full justify-end"
   >
     <div
       class=""
     >
       <button
         class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+        data-testid="adaptivity-closehint"
       >
         <p
           class="text-sm"
@@ -60,13 +62,14 @@ exports[`AdaptivityElementHint should render ReferenceAction 1`] = `
     test
   </div>
   <div
-    class="flex justify-end w-full"
+    class="flex w-full justify-end"
   >
     <div
       class=""
     >
       <button
         class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+        data-testid="adaptivity-closehint"
       >
         <p
           class="text-sm"

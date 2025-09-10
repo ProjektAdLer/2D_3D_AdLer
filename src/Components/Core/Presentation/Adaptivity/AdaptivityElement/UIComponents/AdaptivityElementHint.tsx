@@ -24,7 +24,7 @@ export default function AdaptivityElementHint({
       {hint.hintAction.hintActionType ===
         AdaptivityElementActionTypes.CommentAction &&
         hint.hintAction.textData !== undefined && (
-          <div className="flex items-center justify-center p-2 pl-4 my-4 bg-buttonbgblue rounded-xl">
+          <div className="my-4 flex items-center justify-center rounded-xl bg-buttonbgblue p-2 pl-4">
             {hint.hintAction.textData}
           </div>
         )}
@@ -32,7 +32,7 @@ export default function AdaptivityElementHint({
       {hint.hintAction.hintActionType ===
         AdaptivityElementActionTypes.ContentAction &&
         hint.hintAction.textData !== undefined && (
-          <div className="flex items-center justify-center p-2 pl-4 my-4 bg-buttonbgblue rounded-xl">
+          <div className="my-4 flex items-center justify-center rounded-xl bg-buttonbgblue p-2 pl-4">
             {hint.hintAction.textData}
           </div>
         )}
@@ -42,8 +42,12 @@ export default function AdaptivityElementHint({
         hint.hintAction.textData !== undefined && (
           <div>{hint.hintAction.textData}</div>
         )}
-      <div className="flex justify-end w-full">
-        <StyledButton shape="freeFloatCenter" onClick={closeHint}>
+      <div className="flex w-full justify-end">
+        <StyledButton
+          shape="freeFloatCenter"
+          onClick={closeHint}
+          data-testid="adaptivity-closehint"
+        >
           <p className="text-sm">{translate("nextButton")}</p>
         </StyledButton>
       </div>

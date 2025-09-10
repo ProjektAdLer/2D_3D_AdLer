@@ -29,27 +29,28 @@ export default function BreakTimeNotification({ className }: AdLerUIComponent) {
 
   if (showMinimizedModal)
     return (
-      <StyledContainer className="fixed z-10 flex justify-between items-start lg:x-2 p-1 rounded-lg bottom-2 left-2 bg-buttonbgblue lg:!w-96">
-        <div className="absolute z-50 w-5 h-5 rounded-full pointer-events-none -top-2 -right-2 animate-ping bg-nodehandlecolor"></div>
-        <div className="absolute z-50 w-5 h-5 rounded-full pointer-events-none -top-2 -right-2 bg-nodehandlecolor"></div>
+      <StyledContainer className="lg:x-2 fixed bottom-2 left-2 z-10 flex items-start justify-between rounded-lg bg-buttonbgblue p-1 lg:!w-96">
+        <div className="pointer-events-none absolute -right-2 -top-2 z-50 h-5 w-5 animate-ping rounded-full bg-nodehandlecolor"></div>
+        <div className="pointer-events-none absolute -right-2 -top-2 z-50 h-5 w-5 rounded-full bg-nodehandlecolor"></div>
         <StyledButton
           shape="square"
           onClick={() => controller.minimizeOrMaximizeBreakNotification()}
           title={translate("pauseNotificationToolTip").toString()}
+          data-testid="breaktime-minmax"
         >
           <img src={pauseIcon} className="h-fit" alt="Pause Icon" />
         </StyledButton>
-        <div className="hidden lg:visible lg:flex lg:flex-col items-start max-w-[60%] text-adlerdarkblue">
+        <div className="hidden max-w-[60%] items-start text-adlerdarkblue lg:visible lg:flex lg:flex-col">
           <h1 className="text-xl font-bold">{translate("pauseInfo")}</h1>
           <p className="text-sm">{translate("pauseExplanation")}</p>
         </div>
         <CloseButton
-          className="place-self-start flex items-center justify-center border-t-[1px] border-l-[1px] border-b-4 border-r-4 border-adlerdarkblue rounded-lg font-bold"
+          className="flex items-center justify-center place-self-start rounded-lg border-b-4 border-l-[1px] border-r-4 border-t-[1px] border-adlerdarkblue font-bold"
           onClick={() => controller.closeBreakNotification()}
         >
           <img
             src={closeIcon}
-            className="lg:w-10 md:w-8 sm:w-6"
+            className="sm:w-6 md:w-8 lg:w-10"
             alt="CloseIcon"
           ></img>
         </CloseButton>

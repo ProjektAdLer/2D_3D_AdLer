@@ -79,6 +79,7 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
   >
     <div
       class="fixed bottom-0 left-0 right-0 top-0 flex h-full w-screen flex-col items-center justify-center bg-black bg-opacity-30 lg:grid lg:grid-rows-3 lg:items-start"
+      data-testid="adaptivity-dialogcontainer"
     >
       <div
         class="invisible row-start-2 flex w-full items-end justify-start pl-16 lg:visible lg:h-full"
@@ -104,6 +105,7 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
             >
               <button
                 class="roboto-black mr-2 xl:h-10 xl:w-10 justify-center p-1 lg:w-16 lg:h-16 md:w-14 md:h-14 sm:w-10 sm:h-10 w-10 h-10 aspect-square mobile-landscape:w-9 mobile-landscape:h-9 flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+                data-testid="adaptivity-back"
                 title="backToolTip"
               >
                 ◀
@@ -139,7 +141,7 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
               class="font-regular mb-4 flex h-fit items-center justify-center rounded-lg px-1 lg:mx-4"
             >
               <div
-                class="flex flex-col w-full p-2 m-auto lg:justify-between lg:flex-row"
+                class="m-auto flex w-full flex-col p-2 lg:flex-row lg:justify-between"
               >
                 <div
                   class="flex flex-wrap justify-start gap-4"
@@ -149,6 +151,7 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
                   >
                     <button
                       class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+                      data-testid="adaptivity-answer-0"
                       title="answerToolTip"
                     >
                       <p
@@ -160,7 +163,7 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
                   </div>
                 </div>
                 <div
-                  class="flex items-end justify-end w-auto gap-2 pt-8 font-bold lg:w-1/6"
+                  class="flex w-auto items-end justify-end gap-2 pt-8 font-bold lg:w-1/6"
                 >
                   <div
                     class="fixed"
@@ -170,6 +173,7 @@ exports[`AdaptivityElementDialogContainer should render 1`] = `
                     >
                       <button
                         class="px-2 py-1 justify-center box-border text-adlerdeactivatedtext bg-adlerbuttonlocked flex items-center text-sm rounded-lg lg:text-xl font-regular overflow-hidden grayscale"
+                        data-testid="adaptivity-submit"
                         disabled=""
                         title="submitTooltip"
                       >

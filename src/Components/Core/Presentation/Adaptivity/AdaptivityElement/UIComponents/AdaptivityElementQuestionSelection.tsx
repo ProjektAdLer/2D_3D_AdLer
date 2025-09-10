@@ -68,15 +68,16 @@ export default function AdaptivityElementQuestionSelection({
         return (
           <div
             key={question.questionID}
-            className="flex items-center w-full gap-4 "
+            className="flex w-full items-center gap-4"
           >
             <StyledButton
               shape="freeFloatCenter"
-              className="w-full col-span-2 md:col-span-1"
+              className="col-span-2 w-full md:col-span-1"
               onClick={() => onSelectQuestion(question)}
               title={translate("questionToolTip").toString()}
+              data-testid={`adaptivity-question-${question.questionID}`}
             >
-              <div className="grid items-center w-full h-full grid-cols-5 ">
+              <div className="grid h-full w-full grid-cols-5 items-center">
                 {question.difficulty ===
                   AdaptivityElementQuestionDifficultyTypes.easy && (
                   <>
@@ -84,7 +85,7 @@ export default function AdaptivityElementQuestionSelection({
                       easyState={starState}
                       starClassName="w-4 h-4 md:w-6 md:h-6"
                     />
-                    <p className="flex justify-center col-span-3 px-4 text-sm text-start">
+                    <p className="col-span-3 flex justify-center px-4 text-start text-sm">
                       {translate("easy")}{" "}
                     </p>
                   </>
@@ -96,7 +97,7 @@ export default function AdaptivityElementQuestionSelection({
                       mediumState={starState}
                       starClassName="w-4 h-4 md:w-6 md:h-6"
                     />
-                    <p className="flex justify-center col-span-3 px-4 text-sm text-start">
+                    <p className="col-span-3 flex justify-center px-4 text-start text-sm">
                       {translate("normal")}{" "}
                     </p>
                   </>
@@ -108,7 +109,7 @@ export default function AdaptivityElementQuestionSelection({
                       hardState={starState}
                       starClassName="w-4 h-4 md:w-6 md:h-6"
                     />
-                    <p className="flex justify-center col-span-3 px-4 text-sm text-start">
+                    <p className="col-span-3 flex justify-center px-4 text-start text-sm">
                       {translate("hard")}{" "}
                     </p>
                   </>
@@ -120,6 +121,7 @@ export default function AdaptivityElementQuestionSelection({
                       className={"h-5 md:h-7"}
                       src={requiredTaskIcon}
                       title={translate("legendTaskRequired").toString()}
+                      data-testid={`adaptivity-star-required-notcompleted-${question.questionID}`}
                     />
                   )}
                   {question.isRequired && question.isCompleted && (
@@ -128,6 +130,7 @@ export default function AdaptivityElementQuestionSelection({
                       className={"h-5 md:h-7"}
                       src={solvedTaskIcon}
                       title={translate("legendTaskRequiredSolved").toString()}
+                      data-testid={`adaptivity-star-required-completed-${question.questionID}`}
                     />
                   )}
 
@@ -135,7 +138,7 @@ export default function AdaptivityElementQuestionSelection({
                 </div>
               </div>
             </StyledButton>
-            <div className="flex flex-row h-full md:gap-4 ">
+            <div className="flex h-full flex-row md:gap-4">
               {question.hints.length > 0 &&
                 question.hints.map((hint) => {
                   if (
@@ -145,10 +148,11 @@ export default function AdaptivityElementQuestionSelection({
                     return (
                       <StyledButton
                         shape="freeFloatCenter"
-                        className="w-full h-full "
+                        className="h-full w-full"
                         key={"hint-" + hint.hintID}
                         onClick={() => onSelectHint(hint, question)}
                         title={translate("hintToolTip").toString()}
+                        data-testid={`adaptivity-question-hint-${question.questionID}`}
                       >
                         <p className="text-sm">
                           {translate("hintButton").toString()}

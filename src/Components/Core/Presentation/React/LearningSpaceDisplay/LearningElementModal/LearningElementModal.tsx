@@ -75,7 +75,7 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
 
   const completionButton = () => {
     return (
-      <div className="sticky bottom-0 grid mt-3 mb-2 justify-items-end">
+      <div className="sticky bottom-0 mb-2 mt-3 grid justify-items-end">
         <StyledButton
           shape="freeFloatCenter"
           disabled={
@@ -98,6 +98,7 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
               controller.showBottomToolTip();
             }
           }}
+          data-testid="learningelement-submit"
         >
           {translate("submitElement")}
         </StyledButton>
@@ -119,11 +120,12 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
       showModal={isOpen}
       className={tailwindMerge(
         className,
-        "justify-center gap-2 p-2 m-3 rounded-lg",
+        "m-3 justify-center gap-2 rounded-lg p-2",
         modalStyleByTypeMap[elementType as keyof typeof modalStyleByTypeMap],
       )}
       style={{ visibility: isVisible ? "visible" : "hidden" }}
       closeButtonToolTip={translate("closeLearningElementToolTip").toString()}
+      data-testid="learningelement-modal"
     >
       {createModalContent(viewModel, controller)}
     </StyledModal>

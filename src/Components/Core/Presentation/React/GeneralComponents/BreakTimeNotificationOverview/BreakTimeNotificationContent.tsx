@@ -35,6 +35,7 @@ export default function BreakTimeNotificationContent({
                     setCurrentSlide(currentSlide - 1);
                   }}
                   title={translate("previousSlideToolTip").toString()}
+                  data-testid="breaktime-previousSlide"
                 >
                   <p className="rotate-180">&#10140;</p>
                 </StyledButton>
@@ -58,6 +59,7 @@ export default function BreakTimeNotificationContent({
                     setCurrentSlide(currentSlide + 1);
                   }}
                   title={translate("nextSlideToolTip").toString()}
+                  data-testid="breaktime-nextSlide"
                 >
                   <p className="">&#10140;</p>
                 </StyledButton>

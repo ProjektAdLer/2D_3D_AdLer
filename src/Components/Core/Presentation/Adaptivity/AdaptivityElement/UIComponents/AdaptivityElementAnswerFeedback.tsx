@@ -22,7 +22,7 @@ export default function AdaptivityElementAnswerFeedback({
   const { t: translate } = useTranslation("learningElement");
   useEffect(() => {
     setHeaderText(
-      isCorrect ? translate("rightAnswer") : translate("wrongAnswer")
+      isCorrect ? translate("rightAnswer") : translate("wrongAnswer"),
     );
   }, [isCorrect, setHeaderText, translate]);
   const difficultyHint = useRef(null as string | null);
@@ -34,7 +34,7 @@ export default function AdaptivityElementAnswerFeedback({
     }) &&
       isCorrect &&
       (difficultyHint.current = translate(
-        "questionSolvedWithHigherDifficultyQuestionAvailable"
+        "questionSolvedWithHigherDifficultyQuestionAvailable",
       ).toString());
 
     currentTask.questions.some((question) => {
@@ -44,7 +44,7 @@ export default function AdaptivityElementAnswerFeedback({
     }) &&
       !isCorrect &&
       (difficultyHint.current = translate(
-        "questionSolvedWithLowerDifficultyQuestionAvailable"
+        "questionSolvedWithLowerDifficultyQuestionAvailable",
       ));
   }, [currentQuestion, currentTask, isCorrect, translate]);
   const solvedHint = useRef(null as string | null);
@@ -71,15 +71,19 @@ export default function AdaptivityElementAnswerFeedback({
   ]);
 
   return (
-    <div className="flex flex-col gap-4 pl-4 pr-2 my-4 h-fit">
-      <div className="flex flex-col items-start justify-start bg-buttonbgblue rounded-xl">
+    <div className="my-4 flex h-fit flex-col gap-4 pl-4 pr-2">
+      <div className="flex flex-col items-start justify-start rounded-xl bg-buttonbgblue">
         {solvedHint.current && <div className="p-2">{solvedHint.current}</div>}
         {difficultyHint.current && (
           <div className="p-2">{difficultyHint.current}</div>
         )}
       </div>
-      <div className="flex justify-end w-full">
-        <StyledButton shape="freeFloatCenter" onClick={closeFeedback}>
+      <div className="flex w-full justify-end">
+        <StyledButton
+          shape="freeFloatCenter"
+          onClick={closeFeedback}
+          data-testid="adaptivity-closefeedback"
+        >
           <p className="text-sm">{translate("nextButton")}</p>
         </StyledButton>
       </div>

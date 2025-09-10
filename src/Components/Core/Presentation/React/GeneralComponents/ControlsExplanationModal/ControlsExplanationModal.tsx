@@ -33,6 +33,7 @@ export default function ControlsExplanationModal({
       closeButtonToolTip={i18next
         .t("closeToolTip", { ns: "helpMenu" })
         .toString()}
+      data-testid="controls-close"
     >
       <ControlsExplanationContent className={tailwindMerge(className, "")} />
     </StyledModal>

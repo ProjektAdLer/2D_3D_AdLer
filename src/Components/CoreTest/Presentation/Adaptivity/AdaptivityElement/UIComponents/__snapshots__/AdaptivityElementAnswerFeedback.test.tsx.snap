@@ -3,19 +3,20 @@
 exports[`AdaptivityElementAnswerFeedback should render 1`] = `
 <div>
   <div
-    class="flex flex-col gap-4 pl-4 pr-2 my-4 h-fit"
+    class="my-4 flex h-fit flex-col gap-4 pl-4 pr-2"
   >
     <div
-      class="flex flex-col items-start justify-start bg-buttonbgblue rounded-xl"
+      class="flex flex-col items-start justify-start rounded-xl bg-buttonbgblue"
     />
     <div
-      class="flex justify-end w-full"
+      class="flex w-full justify-end"
     >
       <div
         class=""
       >
         <button
           class="px-2 py-1 justify-center flex items-center text-sm rounded-lg hover:cursor-pointer lg:text-xl transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent text-adlerdarkblue font-regular border-b-2 border-r-2 border-adlerdarkblue overflow-hidden box-border cursor-pointer bg-buttonbgblue landscape:hover:bg-adleryellow active:bg-adleryellow"
+          data-testid="adaptivity-closefeedback"
         >
           <p
             class="text-sm"

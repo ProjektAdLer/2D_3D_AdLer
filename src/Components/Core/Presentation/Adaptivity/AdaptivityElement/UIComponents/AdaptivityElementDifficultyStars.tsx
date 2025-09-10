@@ -105,6 +105,7 @@ function EmptyStarSlot({ className }: { className: string }): JSX.Element {
       className={tailwindMerge(`${className}`) + " opacity-60"}
       alt="Platzhalter-Icon"
       src={placeholderIcon}
+      data-testid={`adaptivity-star-empty`}
     />
   );
 }
@@ -123,12 +124,13 @@ export default function AdaptivityElementDifficultyStars({
   withEmptySlots?: boolean;
 }) {
   return (
-    <div className="flex items-center h-full">
+    <div className="flex h-full items-center">
       {easyState !== AdaptivityElementDifficultyStarState.Empty ? (
         <img
           className={tailwindMerge(`${starClassName}`)}
           alt=""
           src={getIcon(AdaptivityElementQuestionDifficulty.Easy, easyState)}
+          data-testid={`adaptivity-star-easy`}
         />
       ) : (
         withEmptySlots && <EmptyStarSlot className={starClassName} />
@@ -138,6 +140,7 @@ export default function AdaptivityElementDifficultyStars({
           className={tailwindMerge(`${starClassName}`)}
           alt=""
           src={getIcon(AdaptivityElementQuestionDifficulty.Medium, mediumState)}
+          data-testid={`adaptivity-star-medium`}
         />
       ) : (
         withEmptySlots && <EmptyStarSlot className={starClassName} />
@@ -147,6 +150,7 @@ export default function AdaptivityElementDifficultyStars({
           className={tailwindMerge(`${starClassName}`)}
           alt=""
           src={getIcon(AdaptivityElementQuestionDifficulty.Hard, hardState)}
+          data-testid={`adaptivity-star-hard`}
         />
       ) : (
         withEmptySlots && <EmptyStarSlot className={starClassName} />

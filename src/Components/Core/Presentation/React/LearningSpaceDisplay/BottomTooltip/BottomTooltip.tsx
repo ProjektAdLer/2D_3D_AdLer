@@ -44,15 +44,16 @@ export default function BottomTooltip({
     <div
       className={tailwindMerge(
         className,
-        "flex justify-center w-full bottom-2 md:bottom-10 pointer-events-none ",
+        "pointer-events-none bottom-2 flex w-full justify-center md:bottom-10",
       )}
     >
       <StyledContainer
-        className="cursor-pointer pointer-events-auto"
+        className="pointer-events-auto cursor-pointer"
         onClick={viewModel.onClickCallback.Value} // didn't use useObservable because react has problems with functions in states
         tooltip={translate("bottomToolTip").toString()}
+        data-testid={`bottomtooltip-${viewModel.text}`}
       >
-        <div className="flex items-center gap-1 p-2 font-bold rounded-lg lg:p-4 text-adlerdarkblue text-md lg:text-2xl bg-buttonbgblue hover:bg-adleryellow hover:border-adlerdarkblue portrait:border-b-2 portrait:border-r-2 portrait:border-adlerdarkblue portrait:animate-wiggle transition ease-in-out duration-75 active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 hover:border-b-2 hover:border-r-2 active:border-transparent">
+        <div className="text-md flex items-center gap-1 rounded-lg bg-buttonbgblue p-2 font-bold text-adlerdarkblue transition duration-75 ease-in-out hover:border-b-2 hover:border-r-2 hover:border-adlerdarkblue hover:bg-adleryellow active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent lg:p-4 lg:text-2xl portrait:animate-wiggle portrait:border-b-2 portrait:border-r-2 portrait:border-adlerdarkblue">
           {iconType !== LearningElementTypes.notAnElement &&
             iconType !== DoorTypes.entryDoor &&
             iconType !== DoorTypes.exitDoor &&

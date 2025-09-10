@@ -165,7 +165,7 @@ describe("StoryElement", () => {
 
       const componentUnderTest = render(<StoryElement />);
       // Suche nach data-testid statt Text
-      const backButton = componentUnderTest.getByTestId("back");
+      const backButton = componentUnderTest.getByTestId("story-back");
 
       expect(backButton).toBeInTheDocument();
     },

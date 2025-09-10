@@ -40,12 +40,14 @@ export default function ExitModal({ className }: AdLerUIComponent<{}>) {
         "flex flex-col justify-center gap-2 rounded-lg p-5",
       )}
       closeButtonToolTip={translate("closeToolTip").toString()}
+      data-testid="exit-modal"
     >
       <StyledButton
         disabled={false}
         shape="freeFloatCenter"
         className="mb-2 flex w-[100%]"
         onClick={controller.onExitButtonClicked}
+        data-testid="exit-button"
       >
         {translate(viewModel.exitButtonTitle.Value).toString()}
       </StyledButton>
@@ -114,6 +116,7 @@ function createSpaceButton(
       onClick={() =>
         controller.onPrecursorOrSuccessorSpaceClicked(learningSpaceTO.id)
       }
+      data-testid={`exit-room-${learningSpaceTO.id}`}
     >
       {learningSpaceTO.name + " betreten"}
     </StyledButton>

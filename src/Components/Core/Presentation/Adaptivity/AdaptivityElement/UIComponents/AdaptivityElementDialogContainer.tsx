@@ -121,6 +121,7 @@ export default function AdaptivityElementDialogContainer({
       <div
         className="fixed bottom-0 left-0 right-0 top-0 flex h-full w-screen flex-col items-center justify-center bg-black bg-opacity-30 lg:grid lg:grid-rows-3 lg:items-start"
         onClick={controller.closeModal}
+        data-testid="adaptivity-dialogcontainer"
       >
         {/* Background NPC */}
         <div className="invisible row-start-2 flex w-full items-end justify-start pl-16 lg:visible lg:h-full">
@@ -151,6 +152,7 @@ export default function AdaptivityElementDialogContainer({
                     onClick={controller.back}
                     className="roboto-black mr-2 h-8 w-8 p-1 text-xs sm:h-10 sm:w-10 md:h-10 md:w-10 lg:h-10 lg:w-10 xl:h-10 xl:w-10"
                     title={translate("backToolTip").toString()}
+                    data-testid="adaptivity-back"
                   >
                     {"\u25C0"}
                   </StyledButton>
@@ -196,6 +198,7 @@ export default function AdaptivityElementDialogContainer({
                     "font-regular box-border flex aspect-square h-8 w-8 cursor-pointer items-center justify-center overflow-hidden rounded-lg border-b-2 border-r-2 border-adlerdarkblue bg-buttonbgblue p-1 text-sm text-adlerdarkblue transition duration-75 ease-in-out hover:cursor-pointer hover:border-adlerdarkblue hover:bg-adleryellow active:translate-x-[1px] active:translate-y-[1px] active:border-b-2 active:border-r-2 active:border-transparent sm:h-10 sm:w-10 md:h-10 md:w-10 lg:h-10 lg:w-10 lg:text-xl xl:h-10 xl:w-10 mobile-portrait:rounded-md",
                     className ?? "",
                   )}
+                  data-testid="adaptivity-reset"
                 >
                   {"\u21BA"}
                 </button>
@@ -287,6 +290,7 @@ export default function AdaptivityElementDialogContainer({
                           controller.showFooterTooltip();
                         }}
                         title={translate("legendToolTip").toString()}
+                        data-testid="adaptivity-showfootertooltip"
                       >
                         {showFooterTooltip
                           ? translate("legendClose")
@@ -329,6 +333,7 @@ export default function AdaptivityElementDialogContainer({
                                     className="w-4 lg:w-6"
                                     src={solvedTaskIcon}
                                     alt="required unsolved icon"
+                                    data-testid="solvedTaskIconImage"
                                   />
                                 </td>
                                 <td>{translate("legendTaskRequiredSolved")}</td>
@@ -410,6 +415,7 @@ export default function AdaptivityElementDialogContainer({
                                     className="w-4 lg:w-6"
                                     src={requiredUnsolvedIcon}
                                     alt="required unsolved icon"
+                                    data-testid="requiredunsolvedTaskIconImage"
                                   />
                                 </td>
                                 <td>
@@ -421,7 +427,8 @@ export default function AdaptivityElementDialogContainer({
                                   <img
                                     className="w-4 lg:w-6"
                                     src={requiredTriedIcon}
-                                    alt="required unsolved icon"
+                                    alt="required triedd icon"
+                                    data-testid="requiredtriedTaskIconImage"
                                   />
                                 </td>
                                 <td>{translate("legendStarRequiredTried")}</td>
