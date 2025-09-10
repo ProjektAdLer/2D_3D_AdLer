@@ -87,12 +87,12 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
     >
       <StyledContainer className="relative z-0 flex !h-[28rem] !max-h-[28rem] !min-h-[28rem] w-[11rem] flex-col overflow-hidden rounded-2xl border-8 border-adlerdarkblue bg-white md:w-[13rem] lg:w-60 mobile-landscape:ml-8 mobile-landscape:w-[65vw] mobile-portrait:w-48">
         {/* Header with time */}
-        <header className="relative z-20 flex items-center justify-between w-full mt-1">
-          <span className="ml-1 font-bold lg:text-md text-2xs text-adlerdarkblue">
+        <header className="relative z-20 mt-1 flex w-full items-center justify-between">
+          <span className="lg:text-md ml-1 text-2xs font-bold text-adlerdarkblue">
             {time.toLocaleDateString()}
           </span>
           <span className="absolute left-[calc(50%-0.25rem)] h-2 w-2 rounded-full bg-adlerdarkblue mobile-landscape:hidden"></span>
-          <span className="mr-1 font-bold text-right lg:text-md text-2xs text-adlerdarkblue">
+          <span className="lg:text-md mr-1 text-right text-2xs font-bold text-adlerdarkblue">
             {time.toLocaleTimeString()} Uhr
           </span>
         </header>
@@ -100,7 +100,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
         <span className="absolute left-[calc(50%-0.25rem)] hidden h-2 w-2 rounded-full bg-adlerdarkblue mobile-landscape:left-2 mobile-landscape:top-[calc(50%-0.25rem)] mobile-landscape:block"></span>
 
         {/* Button Grid */}
-        <div className="z-20 grid content-start flex-1 grid-flow-row grid-cols-3 p-1 pt-3 rounded-lg mobile-landscape:grid-cols-auto gap-x-1 gap-y-5 mobile-landscape:ml-8 mobile-landscape:auto-cols-max mobile-landscape:grid-flow-row mobile-landscape:grid-rows-2">
+        <div className="mobile-landscape:grid-cols-auto z-20 grid flex-1 grid-flow-row grid-cols-3 content-start gap-x-1 gap-y-5 rounded-lg p-1 pt-3 mobile-landscape:ml-8 mobile-landscape:auto-cols-max mobile-landscape:grid-flow-row mobile-landscape:grid-rows-2">
           {currentPageButtons.map((button: SideBarButtonConfig) => (
             <SideBarButton
               key={button.id}
@@ -113,16 +113,17 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
 
         {/* Pagination controls */}
         {totalPages > 1 && (
-          <div className="z-20 flex justify-center gap-2 pb-1 mt-1">
+          <div className="z-20 mt-1 flex justify-center gap-2 pb-1">
             <StyledButton
               onClick={() => controller.previousPage()}
               disabled={currentPage === 1}
               title={translate("sidebar_previousPage").toString()}
               shape="smallSquare"
+              data-testid="sidebar-page-previous"
             >
-              <img src={leftArrowIcon} alt="previous" className="w-3 h-3" />
+              <img src={leftArrowIcon} alt="previous" className="h-3 w-3" />
             </StyledButton>
-            <span className="flex items-center font-bold text-2xs text-adlerdarkblue">
+            <span className="flex items-center text-2xs font-bold text-adlerdarkblue">
               {`${currentPage} / ${totalPages}`}
             </span>
             <StyledButton
@@ -130,16 +131,17 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
               disabled={currentPage === totalPages}
               title={translate("sidebar_nextPage").toString()}
               shape="smallSquare"
+              data-testid="sidebar-page-next"
             >
-              <img src={rightArrowIcon} alt="next" className="w-3 h-3" />
+              <img src={rightArrowIcon} alt="next" className="h-3 w-3" />
             </StyledButton>
           </div>
         )}
 
         {/* Footer with version */}
-        <footer className="relative z-20 flex items-center justify-between w-full mt-1">
+        <footer className="relative z-20 mt-1 flex w-full items-center justify-between">
           <span className="absolute left-[calc(41.6%-0.25rem)] h-2 w-1/6 rounded-full bg-adlerdarkblue mobile-landscape:hidden"></span>
-          <span className="ml-1 font-bold lg:text-md text-2xs text-adlerdarkblue">
+          <span className="lg:text-md ml-1 text-2xs font-bold text-adlerdarkblue">
             {"Version: " + config.version}
           </span>
         </footer>
@@ -148,7 +150,7 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
         <img
           src={engineLogo}
           alt="inventory background"
-          className="absolute right-0 z-10 w-64 bottom-24 opacity-20 mobile-landscape:bottom-4 mobile-landscape:w-48"
+          className="absolute bottom-24 right-0 z-10 w-64 opacity-20 mobile-landscape:bottom-4 mobile-landscape:w-48"
         />
       </StyledContainer>
     </CustomDropdown>

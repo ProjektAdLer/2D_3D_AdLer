@@ -47,6 +47,7 @@ export default function SideBarButton({
         onClick={() => controller[button.onClick]()}
         title={translate(button.tooltip).toString()}
         disabled={isDisabled}
+        data-testid={`sidebar-${button.id}`}
       >
         <img src={button.icon} alt={button.id} />
       </StyledButton>
