@@ -50,7 +50,7 @@ describe("RequirementBasedDisplay", () => {
       points: 0,
       // isRequired can be true, false, or null.
       isRequired: false,
-    };
+    } as any;
 
     test("should render required icon when element has points and is not scored", () => {
       const element: LearningElementInfo = { ...baseElement, points: 10 };
