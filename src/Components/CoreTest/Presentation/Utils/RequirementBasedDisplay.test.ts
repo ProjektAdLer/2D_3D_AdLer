@@ -50,7 +50,7 @@ describe("RequirementBasedDisplay", () => {
       points: 0,
       // isRequired can be true, false, or null.
       isRequired: false,
-    };
+    } as any;
 
     test("should render required icon when element has points and is not scored", () => {
       const element: LearningElementInfo = { ...baseElement, points: 10 };
@@ -89,6 +89,13 @@ describe("RequirementBasedDisplay", () => {
       };
       const { container } = render(display.learningSpaceDetail(element));
       expect(container).toBeEmptyDOMElement();
+    });
+  });
+  describe("learningSpaceDetailSummary", () => {
+    test("should render current and max XP correctly", () => {
+      render(display.learningSpaceDetailSummary(50, "", 100, ""));
+      expect(screen.getByText("50")).toBeInTheDocument();
+      expect(screen.getByText("100")).toBeInTheDocument();
     });
   });
 });

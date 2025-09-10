@@ -99,7 +99,7 @@ describe("Calculate Learning World Score UseCase", () => {
         name: "TestWorld",
         description: "TestWorldDescription",
         goals: "Testgoal",
-      } as LearningWorldEntity,
+      } as any as LearningWorldEntity,
     ]);
 
     calculateSpaceScoreMock.internalExecute.mockReturnValueOnce({
@@ -144,7 +144,7 @@ describe("Calculate Learning World Score UseCase", () => {
         name: "TestWorld",
         description: "TestWorldDescription",
         goals: "Testgoal",
-      } as LearningWorldEntity,
+      } as any as LearningWorldEntity,
     ]);
 
     calculateSpaceScoreMock.internalExecute.mockReturnValueOnce({
@@ -207,5 +207,38 @@ describe("Calculate Learning World Score UseCase", () => {
       "CalculateLearningWorldScoreUseCase: User is not in a world!",
     );
     expect(worldPortMock.onLearningWorldScored).not.toHaveBeenCalled();
+  });
+
+  test("should throw error and log error if learningSpaceScoreUseCase returns an error", () => {
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce(userLocationTO);
+    entityContainerMock.filterEntitiesOfType.mockReturnValueOnce([
+      {
+        id: 1,
+        spaces: [
+          {
+            id: 1,
+          },
+          {
+            id: 2,
+          },
+        ],
+        name: "TestWorld",
+        description: "TestWorldDescription",
+        goals: "Testgoal",
+      } as any as LearningWorldEntity,
+    ]);
+
+    calculateSpaceScoreMock.internalExecute.mockImplementationOnce(() => {
+      throw new Error("Test error");
+    });
+
+    expect(() => {
+      systemUnderTest.execute();
+    }).toThrow("Test error");
+
+    expect(loggerMock.log).toHaveBeenCalledWith(
+      "ERROR",
+      expect.stringContaining("Test error"),
+    );
   });
 });

@@ -57,13 +57,13 @@ describe("AvatarEditorClothingCategory", () => {
   });
 
   // ANF-ID: [EZZ0042, EZZ0043, EZZ0044]
-  test.skip.each([
-    ["shirt", true, false, false],
-    ["pants", false, true, false],
-    ["shoes", false, false, true],
+  test.each([
+    ["shirt", true, false, false, "shirts-topcoatsantaThumbnail"],
+    ["pants", false, true, false, "pants-jeansThumbnail"],
+    ["shoes", false, false, true, "shoes-bootsThumbnail"],
   ])(
     "click on tile in category %s calls controller",
-    (category, shirtUI, pantsUI, shoesUi) => {
+    (category, shirtUI, pantsUI, shoesUi, thumbnailName) => {
       avatarEditorMock.uiVisiblity = {
         clothingMenu: {
           shirts: new Observable<boolean>(shirtUI),
@@ -98,7 +98,7 @@ describe("AvatarEditorClothingCategory", () => {
         />,
       );
 
-      const tile = container.getByAltText("noneThumbnail");
+      const tile = container.getByRole("button", { name: thumbnailName });
       fireEvent.click(tile);
 
       expect(
