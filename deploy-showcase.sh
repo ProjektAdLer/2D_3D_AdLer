@@ -1,6 +1,26 @@
 #!/bin/bash
 
-# Deploy # Clone the GitHub Pages repository
+# Deploy showcase build to separate GitHub Pages repository
+
+set -e  # Exit on any error
+
+echo "🚀 Starting showcase deployment to GitHub Pages repository..."
+
+# Check if we have a build directory
+if [ ! -d "build" ]; then
+    echo "❌ Error: build directory not found. Please run 'npm run build-showcase' first."
+    exit 1
+fi
+
+# Configuration - adjust these variables as needed
+PAGES_REPO_URL="https://github.com/ProjektAdLer/projektadler.github.io.git"
+PAGES_BRANCH="main"  # GitHub Pages typically uses main branch
+TEMP_REPO_DIR=$(mktemp -d)
+
+echo "📍 Current directory: $(pwd)"
+echo "📦 Temporary repository directory: $TEMP_REPO_DIR"
+
+# Clone the GitHub Pages repository
 echo "🔄 Cloning GitHub Pages repository..."
 git clone "$PAGES_REPO_URL" "$TEMP_REPO_DIR"
 
@@ -21,32 +41,7 @@ if [ "$(git config --get http.postBuffer)" != "1048576000" ]; then
     git config http.lowSpeedTime 999999
 else
     echo "✅ Git already optimally configured"
-fise build to separate GitHub Pages repository
-
-set -e  # Exit on any error
-
-echo "🚀 Starting showcase deployment to GitHub Pages repository..."
-
-# Check if we have a build directory
-if [ ! -d "build" ]; then
-    echo "❌ Error: build directory not found. Please run 'npm run build-showcase' first."
-    exit 1
 fi
-
-# Configuration - adjust these variables as needed
-PAGES_REPO_URL="https://github.com/ProjektAdLer/projektadler.github.io.git"
-PAGES_BRANCH="main"  # GitHub Pages typically uses main branch
-TEMP_REPO_DIR=$(mktemp -d)
-
-echo "� Current directory: $(pwd)"
-echo "📦 Temporary repository directory: $TEMP_REPO_DIR"
-
-# Clone the GitHub Pages repository
-echo "� Cloning GitHub Pages repository..."
-git clone "$PAGES_REPO_URL" "$TEMP_REPO_DIR"
-
-# Navigate to the cloned repository
-cd "$TEMP_REPO_DIR"
 
 # Remove all existing files (except .git)
 echo "🧹 Cleaning up existing files..."
