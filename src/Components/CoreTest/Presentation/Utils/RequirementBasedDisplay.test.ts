@@ -91,4 +91,11 @@ describe("RequirementBasedDisplay", () => {
       expect(container).toBeEmptyDOMElement();
     });
   });
+  describe("learningSpaceDetailSummary", () => {
+    test("should render current and max XP correctly", () => {
+      render(display.learningSpaceDetailSummary(50, "", 100, ""));
+      expect(screen.getByText("50")).toBeInTheDocument();
+      expect(screen.getByText("100")).toBeInTheDocument();
+    });
+  });
 });
