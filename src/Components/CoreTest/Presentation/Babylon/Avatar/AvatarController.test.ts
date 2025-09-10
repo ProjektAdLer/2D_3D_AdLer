@@ -96,12 +96,6 @@ describe("AvatarController", () => {
       ).toHaveBeenCalledWith(systemUnderTest["processPointerEvent"]);
     });
 
-    test.skip("observer callback is added to onKeyboardObservable in the constructor", () => {
-      expect(
-        scenePresenterMock.Scene.onKeyboardObservable.add,
-      ).toHaveBeenCalledWith(systemUnderTest["processKeyboardEvent"]);
-    });
-
     test("observer callback is added to onBeforeRenderObservable in the constructor", () => {
       expect(
         scenePresenterMock.Scene.onBeforeRenderObservable.add,
@@ -208,27 +202,6 @@ describe("AvatarController", () => {
       expect(systemUnderTest["keyMovementTarget"].x).toBe(0);
       expect(systemUnderTest["keyMovementTarget"].y).toBe(0);
       expect(systemUnderTest["keyMovementTarget"].z).toBe(0);
-    });
-
-    // TODO: fix test with correct camera setup on the parentNode
-    test.skip("processKeyboardEvent sets the keyMovementTarget in the viewModel", () => {
-      const keyboardInfoMock = mock<KeyboardInfo>();
-      keyboardInfoMock.type = KeyboardEventTypes.KEYDOWN;
-      keyboardInfoMock.event.key = "w";
-      const eventStateMock = mock<EventState>();
-      systemUnderTest["keyMovementTarget"] = Vector3.Zero();
-      viewModel.parentNode = new TransformNode("mockParentNode");
-      // viewModel.parentNode.Value
-
-      systemUnderTest["processKeyboardEvent"](keyboardInfoMock, eventStateMock);
-
-      expect(systemUnderTest["keyMovementTarget"].x).toBe(0);
-      expect(systemUnderTest["keyMovementTarget"].y).toBe(0);
-      expect(systemUnderTest["keyMovementTarget"].z).toBe(1);
-      expect(recastJSPluginMock.getClosestPoint).toHaveBeenCalledTimes(1);
-      expect(recastJSPluginMock.getClosestPoint).toHaveBeenCalledWith(
-        new Vector3(42, 42, 42),
-      );
     });
 
     test.each([
