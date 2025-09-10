@@ -156,20 +156,34 @@ describe("CalculateLearningSpaceAvailabilityUseCase", () => {
     });
   });
 
-  test("internalExecute returns false and calls logger.error if the requirements string is invalid", () => {
+  test("logs error if calculateLearningSpaceScoreUseCase returns an error", () => {
     entityContainerMock.filterEntitiesOfType.mockReturnValue([
       {
         id: 1,
-        requirements: "invalid",
+        requirements: "(2)^(3)",
       },
     ]);
 
-    expect(() =>
-      systemUnderTest.internalExecute({
-        spaceID: 1,
-        worldID: 1,
-      }),
-    ).toThrowError();
+    calculateLearningSpaceScoreUseCaseMock.internalExecute
+      .mockImplementationOnce(() => {
+        throw new Error("Test error");
+      })
+      .mockReturnValueOnce({
+        requiredScore: 2,
+        currentScore: 3,
+        maxScore: 4,
+        spaceID: 3,
+      });
+
+    systemUnderTest.internalExecute({
+      spaceID: 1,
+      worldID: 1,
+    });
+
+    expect(loggerMock.log).toHaveBeenCalledWith(
+      LogLevelTypes.ERROR,
+      expect.stringContaining("Test error"),
+    );
   });
 
   test("filterEntitiesOfType filter callback returns true if the space has the correct id and parentWorldID", () => {
