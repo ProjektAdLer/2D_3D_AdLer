@@ -12,14 +12,16 @@ const avatarEditorMock = mock<AvatarEditorViewModel>();
 const avatarEditorControllerMock = mock<IAvatarEditorController>();
 
 describe("AvatarEditorBodyCategory", () => {
-  // ANF-ID: [EZZ0050]
-  test("should render", () => {
+  beforeEach(() => {
     avatarEditorMock.skinColor = new Observable<AvatarColor>({
       id: 33,
       nameKey: "Brown 2",
       hexColor: "#4b2a1a",
     });
+  });
 
+  // ANF-ID: [EZZ0050]
+  test("should render", () => {
     const { container } = render(
       <AvatarEditorBodyCategory
         viewModel={avatarEditorMock}
@@ -45,9 +47,6 @@ describe("AvatarEditorBodyCategory", () => {
   });
 
   test("click on color in colorpicker calls controller", () => {
-    avatarEditorMock.skinColor = new Observable<AvatarColor>(
-      AvatarSkinColorPalette[4],
-    );
     const container = render(
       <AvatarEditorBodyCategory
         viewModel={avatarEditorMock}
@@ -55,12 +54,31 @@ describe("AvatarEditorBodyCategory", () => {
       />,
     );
 
-    const colorpickerButton = container.getByText("Light 1");
+    const colorpickerButton = container.getByText("Brown 2");
     fireEvent.click(colorpickerButton);
 
-    const color = container.getByTestId("Light 1");
+    const color = container.getByTestId("Dark 2");
     fireEvent.click(color);
 
     expect(avatarEditorControllerMock.onAvatarConfigChanged).toHaveBeenCalled();
+  });
+  test("click on close modal button closes the modal", () => {
+    const container = render(
+      <AvatarEditorBodyCategory
+        viewModel={avatarEditorMock}
+        controller={avatarEditorControllerMock}
+      />,
+    );
+
+    const colorpickerButton = container.getByText("Brown 2");
+    fireEvent.click(colorpickerButton);
+
+    expect(container.queryAllByText("bodyColorTitle").length).toBeGreaterThan(
+      1,
+    );
+
+    const closeButton = container.getByText("back");
+    fireEvent.click(closeButton);
+    expect(container.queryAllByText("bodyColorTitle").length).toBe(1);
   });
 });
