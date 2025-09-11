@@ -106,4 +106,77 @@ describe("AvatarEditorClothingCategory", () => {
       ).toHaveBeenCalled();
     },
   );
+
+  test.each([
+    ["shirt", true, false, false],
+    ["pants", false, true, false],
+    ["shoes", false, false, true],
+  ])(
+    "colorpickerModal for %s functions correctly",
+    (category, shirtUI, pantsUI, shoesUi) => {
+      avatarEditorMock.uiVisiblity = {
+        clothingMenu: {
+          shirts: new Observable<boolean>(shirtUI),
+          pants: new Observable<boolean>(pantsUI),
+          shoes: new Observable<boolean>(shoesUi),
+        },
+      } as AvatarEditorUI;
+
+      avatarEditorMock.shirt = new Observable<AvatarShirtModels>("none" as any);
+      avatarEditorMock.pants = new Observable<AvatarPantsModels>("none" as any);
+      avatarEditorMock.shoes = new Observable<AvatarShoesModels>("none" as any);
+      avatarEditorMock.shirtColor = new Observable<AvatarColor>({
+        id: 33,
+        nameKey: "Brown 2",
+        hexColor: "#4b2a1a",
+      });
+      avatarEditorMock.pantsColor = new Observable<AvatarColor>({
+        id: 33,
+        nameKey: "Brown 2",
+        hexColor: "#4b2a1a",
+      });
+      avatarEditorMock.shoesColor = new Observable<AvatarColor>({
+        id: 33,
+        nameKey: "Brown 2",
+        hexColor: "#4b2a1a",
+      });
+
+      const container = render(
+        <AvatarEditorClothingCategory
+          viewModel={avatarEditorMock}
+          controller={avatarEditorControllerMock}
+        />,
+      );
+
+      const colorpickerButton = container.getByText("Brown 2");
+      fireEvent.click(colorpickerButton);
+
+      //check if modal is open (multiple elements with brown)
+      let brownElements = container.getAllByTestId(/Brown/i);
+
+      expect(brownElements.length).toBeGreaterThan(1);
+
+      const color = container.getByTestId("Brown 1");
+      fireEvent.click(color);
+
+      expect(
+        avatarEditorControllerMock.onAvatarConfigChanged,
+      ).toHaveBeenCalled();
+
+      const closeButton = container.getByText("back");
+      fireEvent.click(closeButton);
+
+      let brownElementsAfterClose = container.queryAllByText(/Brown/i);
+      expect(brownElementsAfterClose.length).toBe(1);
+    },
+  );
+  test("doesn't render if controller is undefined", () => {
+    const { container } = render(
+      <AvatarEditorClothingCategory
+        viewModel={avatarEditorMock}
+        controller={undefined!}
+      />,
+    );
+    expect(container).toBeEmptyDOMElement();
+  });
 });
