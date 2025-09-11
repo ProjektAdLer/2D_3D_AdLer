@@ -126,4 +126,39 @@ describe("AvatarEditorHairCategory", () => {
 
     expect(avatarEditorControllerMock.onAvatarConfigChanged).toHaveBeenCalled();
   });
+
+  test("click on close modal button in color picker closes the modal", () => {
+    avatarEditorMock.uiVisiblity = {
+      hairMenu: {
+        hairstyles: new Observable<boolean>(false),
+        beards: new Observable<boolean>(false),
+      },
+    } as AvatarEditorUI;
+    avatarEditorMock.hairColor = new Observable<AvatarColor>({
+      id: 33,
+      nameKey: "Brown 2",
+      hexColor: "#4b2a1a",
+    });
+
+    const container = render(
+      <AvatarEditorHairCategory
+        viewModel={avatarEditorMock}
+        controller={avatarEditorControllerMock}
+      />,
+    );
+
+    const colorpickerButton = container.getByText("Brown 2");
+    fireEvent.click(colorpickerButton);
+
+    //check if modal is open (multiple elements with brown)
+    let brownElements = container.getAllByTestId(/Brown/i);
+
+    expect(brownElements.length).toBeGreaterThan(1);
+
+    const closeButton = container.getByText("back");
+    fireEvent.click(closeButton);
+
+    let brownElementsAfterClose = container.queryAllByText(/Brown/i);
+    expect(brownElementsAfterClose.length).toBe(1);
+  });
 });
