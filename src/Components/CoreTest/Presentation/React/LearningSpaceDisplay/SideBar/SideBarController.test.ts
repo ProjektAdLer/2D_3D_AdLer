@@ -9,10 +9,14 @@ import ILearningWorldCompletionModalPresenter from "../../../../../Core/Presenta
 import INarrativeFrameworkLearningSpaceContainerPresenter from "../../../../../Core/Presentation/React/GeneralComponents/NarrativeFrameworkLearningSpaceContainer/INarrativeFrameworkLearningSpaceContainerPresenter";
 import IStoryElementPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/StoryElement/IStoryElementPresenter";
 import { StoryElementType } from "../../../../../Core/Domain/Types/StoryElementType";
+import IBadgeOverviewModalPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/BadgeOverviewModal/IBadgeOverviewModalPresenter";
+import SideBarViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/SideBar/SideBarViewModel";
+
 const historyPushMock = jest.spyOn(history, "push");
 
 describe("SideBarController", () => {
   let systemUnderTest: SideBarController;
+  let viewModel: SideBarViewModel;
 
   beforeAll(() => {
     CoreDIContainer.snapshot();
@@ -23,7 +27,8 @@ describe("SideBarController", () => {
   });
 
   beforeEach(() => {
-    systemUnderTest = new SideBarController();
+    viewModel = new SideBarViewModel();
+    systemUnderTest = new SideBarController(viewModel);
   });
 
   afterEach(() => {
@@ -113,5 +118,52 @@ describe("SideBarController", () => {
 
     expect(presenterMock.open).toHaveBeenCalledTimes(1);
     expect(presenterMock.open).toHaveBeenCalledWith(StoryElementType.Outro);
+  });
+
+  test("onBadgeOverviewButtonClicked calls openModal on DI-bound IBadgeOverviewModalPresenter", () => {
+    const presenterMock = mock<IBadgeOverviewModalPresenter>();
+    CoreDIContainer.bind<IBadgeOverviewModalPresenter>(
+      PRESENTATION_TYPES.IBadgeOverviewModalPresenter,
+    ).toConstantValue(presenterMock);
+
+    systemUnderTest.onBadgeOverviewButtonClicked();
+
+    expect(presenterMock.openModal).toHaveBeenCalledTimes(1);
+  });
+
+  test("nextPage increments current page when not at maximum", () => {
+    viewModel.currentPage.Value = 1;
+    viewModel.totalPages.Value = 3;
+
+    systemUnderTest.nextPage();
+
+    expect(viewModel.currentPage.Value).toBe(2);
+  });
+
+  test("nextPage does not increment when at maximum page", () => {
+    viewModel.currentPage.Value = 3;
+    viewModel.totalPages.Value = 3;
+
+    systemUnderTest.nextPage();
+
+    expect(viewModel.currentPage.Value).toBe(3);
+  });
+
+  test("previousPage decrements current page when not at minimum", () => {
+    viewModel.currentPage.Value = 2;
+    viewModel.totalPages.Value = 3;
+
+    systemUnderTest.previousPage();
+
+    expect(viewModel.currentPage.Value).toBe(1);
+  });
+
+  test("previousPage does not decrement when at minimum page", () => {
+    viewModel.currentPage.Value = 1;
+    viewModel.totalPages.Value = 3;
+
+    systemUnderTest.previousPage();
+
+    expect(viewModel.currentPage.Value).toBe(1);
   });
 });

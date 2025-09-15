@@ -547,4 +547,170 @@ describe("SideBar", () => {
       expect(versionElement).toBeInTheDocument();
     });
   });
+
+  describe("Pagination Tests", () => {
+    beforeEach(() => {
+      // disable console.error
+      const originalError = console.error;
+      console.error = jest.fn();
+    });
+
+    test("hides pagination controls when totalPages = 1", () => {
+      viewModel.currentPage.Value = 1;
+      viewModel.totalPages.Value = 1;
+      useBuilderMock([viewModel, controllerMock]);
+
+      render(<SideBar />);
+      const menuButton = screen.getByTitle("Menu");
+      fireEvent.click(menuButton);
+
+      expect(
+        screen.queryByTestId("sidebar-page-previous"),
+      ).not.toBeInTheDocument();
+      expect(screen.queryByTestId("sidebar-page-next")).not.toBeInTheDocument();
+    });
+
+    test("shows pagination controls when totalPages > 1", () => {
+      // Mock mehr als 9 sichtbare Buttons um Pagination zu triggern
+      viewModel.allButtons = [...Array(12)].map((_, i) => ({
+        id: `button${i}`,
+        icon: "icon.svg",
+        tooltip: `tooltip${i}`,
+        label: `label${i}`,
+        onClick: "onMainMenuButtonClicked" as keyof ISideBarController,
+        visible: () => true,
+        disabled: () => false,
+      }));
+
+      viewModel.currentPage.Value = 2;
+      viewModel.totalPages.Value = 2; // wird automatisch berechnet basierend auf 12 buttons / 9 per page
+      useBuilderMock([viewModel, controllerMock]);
+
+      render(<SideBar />);
+      const menuButton = screen.getByTitle("Menu");
+      fireEvent.click(menuButton);
+
+      expect(screen.getByTestId("sidebar-page-previous")).toBeInTheDocument();
+      expect(screen.getByTestId("sidebar-page-next")).toBeInTheDocument();
+      expect(screen.getByText("2 / 2")).toBeInTheDocument();
+    });
+
+    test("calls controller.previousPage when previous button is clicked", () => {
+      // Mock mehr als 9 sichtbare Buttons um Pagination zu triggern
+      viewModel.allButtons = [...Array(12)].map((_, i) => ({
+        id: `button${i}`,
+        icon: "icon.svg",
+        tooltip: `tooltip${i}`,
+        label: `label${i}`,
+        onClick: "onMainMenuButtonClicked" as keyof ISideBarController,
+        visible: () => true,
+        disabled: () => false,
+      }));
+
+      viewModel.currentPage.Value = 2;
+      viewModel.totalPages.Value = 2;
+      useBuilderMock([viewModel, controllerMock]);
+
+      render(<SideBar />);
+      const menuButton = screen.getByTitle("Menu");
+      fireEvent.click(menuButton);
+
+      const previousButton = screen.getByTestId("sidebar-page-previous");
+      fireEvent.click(previousButton);
+
+      expect(controllerMock.previousPage).toHaveBeenCalledTimes(1);
+    });
+
+    test("calls controller.nextPage when next button is clicked", () => {
+      // Mock mehr als 9 sichtbare Buttons um Pagination zu triggern
+      viewModel.allButtons = [...Array(12)].map((_, i) => ({
+        id: `button${i}`,
+        icon: "icon.svg",
+        tooltip: `tooltip${i}`,
+        label: `label${i}`,
+        onClick: "onMainMenuButtonClicked" as keyof ISideBarController,
+        visible: () => true,
+        disabled: () => false,
+      }));
+
+      viewModel.currentPage.Value = 1;
+      viewModel.totalPages.Value = 2;
+      useBuilderMock([viewModel, controllerMock]);
+
+      render(<SideBar />);
+      const menuButton = screen.getByTitle("Menu");
+      fireEvent.click(menuButton);
+
+      const nextButton = screen.getByTestId("sidebar-page-next");
+      fireEvent.click(nextButton);
+
+      expect(controllerMock.nextPage).toHaveBeenCalledTimes(1);
+    });
+
+    test("disables previous button on first page", () => {
+      // Mock mehr als 9 sichtbare Buttons um Pagination zu triggern
+      viewModel.allButtons = [...Array(12)].map((_, i) => ({
+        id: `button${i}`,
+        icon: "icon.svg",
+        tooltip: `tooltip${i}`,
+        label: `label${i}`,
+        onClick: "onMainMenuButtonClicked" as keyof ISideBarController,
+        visible: () => true,
+        disabled: () => false,
+      }));
+
+      viewModel.currentPage.Value = 1;
+      viewModel.totalPages.Value = 2;
+      useBuilderMock([viewModel, controllerMock]);
+
+      render(<SideBar />);
+      const menuButton = screen.getByTitle("Menu");
+      fireEvent.click(menuButton);
+
+      const previousButton = screen.getByTestId("sidebar-page-previous");
+      expect(previousButton).toBeDisabled();
+    });
+
+    test("disables next button on last page", () => {
+      // Mock mehr als 9 sichtbare Buttons um Pagination zu triggern
+      viewModel.allButtons = [...Array(12)].map((_, i) => ({
+        id: `button${i}`,
+        icon: "icon.svg",
+        tooltip: `tooltip${i}`,
+        label: `label${i}`,
+        onClick: "onMainMenuButtonClicked" as keyof ISideBarController,
+        visible: () => true,
+        disabled: () => false,
+      }));
+
+      viewModel.currentPage.Value = 2;
+      viewModel.totalPages.Value = 2;
+      useBuilderMock([viewModel, controllerMock]);
+
+      render(<SideBar />);
+      const menuButton = screen.getByTitle("Menu");
+      fireEvent.click(menuButton);
+
+      const nextButton = screen.getByTestId("sidebar-page-next");
+      expect(nextButton).toBeDisabled();
+    });
+  });
+
+  describe("useEffect Tests", () => {
+    test("calls controller.checkNarrativeFramework on mount", () => {
+      useBuilderMock([viewModel, controllerMock]);
+
+      render(<SideBar />);
+
+      expect(controllerMock.checkNarrativeFramework).toHaveBeenCalledTimes(1);
+    });
+
+    test("does not call checkNarrativeFramework when controller is null", () => {
+      useBuilderMock([viewModel, null]);
+
+      render(<SideBar />);
+
+      expect(controllerMock.checkNarrativeFramework).not.toHaveBeenCalled();
+    });
+  });
 });
