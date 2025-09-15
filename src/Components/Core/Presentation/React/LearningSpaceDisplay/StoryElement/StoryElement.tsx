@@ -70,12 +70,12 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
 
   return (
     <StyledContainer className={tailwindMerge(className, "")}>
-      <div className="fixed top-0 bottom-0 left-0 right-0 z-50 flex flex-col items-center justify-center w-screen h-full bg-blacktrans lg:grid lg:grid-rows-3 lg:items-start">
+      <div className="fixed bottom-0 left-0 right-0 top-0 z-50 flex h-full w-screen flex-col items-center justify-center bg-blacktrans lg:grid lg:grid-rows-3 lg:items-start">
         {/* Desktop NPC Thumbnail */}
-        <div className="relative flex items-end justify-start invisible w-full row-start-2 pl-16 lg:visible lg:h-full">
-          <div className="absolute bottom-0 z-50 w-8 h-16 left-44 bg-buttonbgblue bubblecornertopleft"></div>
+        <div className="invisible relative row-start-2 flex w-full items-end justify-start pl-16 lg:visible lg:h-full">
+          <div className="bubblecornertopleft absolute bottom-0 left-44 z-50 h-16 w-8 bg-buttonbgblue"></div>
           <img
-            className="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
+            className="invisible z-20 h-0 -scale-x-100 object-contain brightness-125 lg:visible lg:h-full"
             alt="LearningImage!"
             data-testid="npcImage"
             src={getNPCImage(
@@ -93,10 +93,10 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
         </div>
 
         {/* Modal */}
-        <div className="z-50 flex items-start justify-center pb-2 w-full lg:w-[95vw] max-w-7xl h-[80vh] lg:h-[26vh] xl:h-[28vh] pt-2 lg:pt-0 row-start-3 overflow-auto">
-          <div className="flex flex-col p-2 xl:px-8 gap-2 justify-between rounded-lg bg-buttonbgblue h-full w-full max-w-[95%]">
+        <div className="z-50 row-start-3 flex h-[80vh] w-full max-w-7xl items-start justify-center overflow-auto pb-2 pt-2 lg:h-[26vh] lg:w-[95vw] lg:pt-0 xl:h-[28vh]">
+          <div className="flex h-full w-full max-w-[95%] flex-col justify-between gap-2 rounded-lg bg-buttonbgblue p-2 xl:px-8">
             {/* Header */}
-            <div className="z-20 flex items-start justify-center gap-2 pt-2 overflow-hidden text-xl font-bold lg:max-w-5xl xl:max-w-6xl text-adlerdarkblue lg:roboto-black lg:text-2xl ">
+            <div className="lg:roboto-black z-20 flex items-start justify-center gap-2 overflow-hidden pt-2 text-xl font-bold text-adlerdarkblue lg:max-w-5xl lg:text-2xl xl:max-w-6xl">
               {/* Mobile NPC Thumbnail */}
               <img
                 className="visible h-16 -scale-x-100 lg:invisible lg:h-0"
@@ -125,12 +125,12 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
               {/* Close Button */}
               <CloseButton
                 onClick={() => controller.closePanel()}
-                className="w-8 h-8 p-1 text-xs roboto-black xl:w-10 xl:h-10 lg:w-10 lg:h-10 md:w-10 md:h-10 sm:w-10 sm:h-10 lg:text-lg"
+                className="roboto-black h-8 w-8 p-1 text-xs sm:h-10 sm:w-10 md:h-10 md:w-10 lg:h-10 lg:w-10 lg:text-lg xl:h-6 xl:w-6 onek:h-10 onek:w-10"
                 title={translate("closeStoryToolTip").toString()}
               >
                 <img
                   src={closeIcon}
-                  className="lg:w-10 md:w-8 sm:w-6"
+                  className="sm:w-6 md:w-8 lg:w-10"
                   alt="CloseButton"
                 />
               </CloseButton>
