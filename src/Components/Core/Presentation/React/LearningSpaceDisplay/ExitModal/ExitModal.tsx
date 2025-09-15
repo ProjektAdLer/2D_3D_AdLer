@@ -53,7 +53,7 @@ export default function ExitModal({ className }: AdLerUIComponent<{}>) {
       </StyledButton>
 
       {viewModel.isExit.Value && viewModel.availableSpaces.Value.length > 0 && (
-        <h1 className="text-xl">
+        <h1 className="text-xl text-adlerdarkblue">
           <b>
             {translate("availableSpaces", {
               count: viewModel.availableSpaces.Value.length,
@@ -71,7 +71,7 @@ export default function ExitModal({ className }: AdLerUIComponent<{}>) {
       {viewModel.isExit.Value &&
         viewModel.successorSpaces.Value.length > 0 &&
         viewModel.availableSpaces.Value.length > 0 && (
-          <h1 className="text-xl">
+          <h1 className="text-xl text-adlerdarkblue">
             <b>
               {translate("nextLearningSpace", {
                 count: viewModel.successorSpaces.Value.length,
