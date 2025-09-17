@@ -21,6 +21,7 @@ export interface SideBarButtonConfig {
   visible?: (viewModel: SideBarViewModel) => boolean;
   isSpecialComponent?: boolean; // For FullscreenSwitch and HelpDeskButton
   component?: string; // Name of the special component
+  desktopOnly?: boolean; // If true, button is shown only on desktop
 }
 
 export const sideBarButtons: SideBarButtonConfig[] = [
@@ -95,6 +96,7 @@ export const sideBarButtons: SideBarButtonConfig[] = [
     onClick: "onMainMenuButtonClicked", // Dummy, not used
     isSpecialComponent: true,
     component: "FullscreenSwitch",
+    desktopOnly: true,
   },
   {
     id: "help",

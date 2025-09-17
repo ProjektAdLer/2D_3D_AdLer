@@ -9,6 +9,7 @@ import HelpDeskModal from "~ReactComponents/GeneralComponents/HelpDeskModal/Help
 import { SideBarButtonConfig } from "./SideBarButtons";
 import SideBarViewModel from "./SideBarViewModel";
 import ISideBarController from "./ISideBarController";
+import tailwindMerge from "../../../Utils/TailwindMerge";
 
 interface SideBarButtonProps {
   button: SideBarButtonConfig;
@@ -54,8 +55,15 @@ export default function SideBarButton({
     );
   };
 
+  const containerClasses = tailwindMerge(
+    "flex h-20 min-h-[5rem] flex-col items-center justify-start",
+    button.desktopOnly
+      ? "mobile-landscape:hidden mobile-portrait:hidden lg:flex"
+      : "",
+  );
+
   return (
-    <div className="flex h-20 min-h-[5rem] flex-col items-center justify-start">
+    <div className={containerClasses}>
       {renderButtonContent()}
       <div className="mt-1 flex w-full justify-center">
         <p className="text-outline min-h-[1.5rem] px-1 text-center text-2xs font-bold leading-tight text-adlerdarkblue">

@@ -18,7 +18,7 @@ export default function FullscreenSwitch() {
 
   return (
     <StyledButton
-      className=""
+      className="hidden"
       onClick={controller.toggleFullscreen}
       title={translate("sidebar_fullscreenToolTip").toString()}
       data-testid="fullscreenswitch"
