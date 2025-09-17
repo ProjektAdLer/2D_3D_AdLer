@@ -28,8 +28,8 @@ const SimpleWorldAWT: AWT = {
         spaceId: 1,
         spaceName: "Mensa Theme",
         spaceDescription: "Raumbeschreibung der kleinen Welt",
-        requiredPointsToComplete: 10,
-        spaceSlotContents: [1, 2, 3, 4, null, 5, null, 6, 7, 8, 9, null, null],
+        requiredPointsToComplete: 1,
+        spaceSlotContents: [null, null, null, 4],
         requiredSpacesToEnter: "",
         spaceGoals: [
           "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor ",
@@ -37,8 +37,20 @@ const SimpleWorldAWT: AWT = {
         spaceTemplate: "T_40X32_13L",
         spaceTemplateStyle: "CampusMensa",
         spaceStory: {
-          introStory: null,
-          outroStory: null,
+          introStory: {
+            storyTexts: ["Test1."],
+            elementModel: "a-npc-defaultlight-male",
+            modelFacialExpression: "happy",
+            storyNpcName: "Yoda",
+            exitAfterStorySequence: true,
+          },
+          outroStory: {
+            storyTexts: ["Test1."],
+            elementModel: "a-npc-defaultlight-male",
+            modelFacialExpression: "happy",
+            storyNpcName: "Yoda",
+            exitAfterStorySequence: true,
+          },
         },
       },
     ],

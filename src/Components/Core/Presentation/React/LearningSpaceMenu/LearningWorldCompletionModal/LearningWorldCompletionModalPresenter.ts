@@ -2,7 +2,10 @@ import LearningWorldTO from "src/Components/Core/Application/DataTransferObjects
 import ILearningWorldCompletionModalPresenter from "./ILearningWorldCompletionModalPresenter";
 import LearningWorldCompletionModalViewModel from "./LearningWorldCompletionModalViewModel";
 import LearningWorldScoreTO from "src/Components/Core/Application/DataTransferObjects/LearningWorldScoreTO";
+import { injectable } from "inversify";
+import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementType";
 
+@injectable()
 export default class LearningWorldCompletionModalPresenter
   implements ILearningWorldCompletionModalPresenter
 {
@@ -28,6 +31,18 @@ export default class LearningWorldCompletionModalPresenter
       this.viewModel.showModal.Value = true;
   }
 
+  onStoryElementCutSceneTriggered(storyType: StoryElementType): void {
+    if (storyType === StoryElementType.Outro) {
+      this.viewModel.isOtherModalOpen.Value = true;
+    }
+  }
+
+  onStoryElementCutSceneFinished(storyType: StoryElementType): void {
+    if (storyType === StoryElementType.Outro) {
+      this.viewModel.isOtherModalOpen.Value = false;
+    }
+  }
+
   onLearningWorldEntityLoaded(world: LearningWorldTO): void {
     this.viewModel.showModal.Value = false;
     if (!world.completionModalShown) {
@@ -45,5 +60,9 @@ export default class LearningWorldCompletionModalPresenter
 
   openModal(): void {
     this.viewModel.showModal.Value = true;
+  }
+
+  onModalVisibility(isOpen: boolean): void {
+    this.viewModel.isOtherModalOpen.Value = isOpen;
   }
 }

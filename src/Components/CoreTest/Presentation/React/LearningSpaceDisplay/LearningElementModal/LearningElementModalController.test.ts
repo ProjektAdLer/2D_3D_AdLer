@@ -1,3 +1,4 @@
+import ILearningWorldCompletionModalPresenter from "../../../../../Core/Presentation/React/LearningSpaceMenu/LearningWorldCompletionModal/ILearningWorldCompletionModalPresenter";
 import mock from "jest-mock-extended/lib/Mock";
 import LearningElementModalController from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/LearningElementModalController";
 import IScoreLearningElementUseCase from "../../../../../Core/Application/UseCases/ScoreLearningElement/IScoreLearningElementUseCase";
@@ -15,6 +16,8 @@ const scoreH5PUseCaseMock = mock<IScoreH5PLearningElementUseCase>();
 const bottomTooltipPresenterMock = mock<IBottomTooltipPresenter>();
 const beginStoryElementOutroCutSceneUseCaseMock =
   mock<IBeginStoryElementOutroCutSceneUseCase>();
+const learningworldcompletionModalMock =
+  mock<ILearningWorldCompletionModalPresenter>();
 
 describe("LearningElementModalController", () => {
   let systemUnderTest: LearningElementModalController;
@@ -34,6 +37,9 @@ describe("LearningElementModalController", () => {
     CoreDIContainer.rebind<IBeginStoryElementOutroCutSceneUseCase>(
       USECASE_TYPES.IBeginStoryElementOutroCutSceneUseCase,
     ).toConstantValue(beginStoryElementOutroCutSceneUseCaseMock);
+    CoreDIContainer.bind<ILearningWorldCompletionModalPresenter>(
+      PRESENTATION_TYPES.ILearningWorldCompletionModalPresenter,
+    ).toConstantValue(learningworldcompletionModalMock);
   });
 
   beforeEach(() => {
@@ -127,6 +133,14 @@ describe("LearningElementModalController", () => {
   test("showBbottomTooltip should call the presenter", () => {
     systemUnderTest.showBottomToolTip();
 
-    expect(bottomTooltipPresenterMock.show).toBeCalledTimes(1);
+    expect(bottomTooltipPresenterMock.show).toHaveBeenCalledTimes(1);
+  });
+
+  test("setModalVisibility should call learningworldcompletionmodal presenter", () => {
+    systemUnderTest.setModalVisibility(true);
+
+    expect(
+      learningworldcompletionModalMock.onModalVisibility,
+    ).toHaveBeenCalled();
   });
 });

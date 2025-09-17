@@ -15,6 +15,7 @@ import tailwindMerge from "../../../Utils/TailwindMerge";
 import PrimitiveH5PContent from "./SubComponents/PrimitiveH5PContent";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
 
 const createModalContent = (
   viewModel: LearningElementModalViewModel,
@@ -62,6 +63,12 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
   const { t: translate } = useTranslation("learningElement");
   const [isVisible] = useObservable<boolean>(viewModel?.isVisible);
   const [hasScored] = useObservable<boolean>(viewModel?.hasScored);
+
+  useEffect(() => {
+    if (isOpen) {
+      controller?.setModalVisibility(true);
+    }
+  });
 
   if (!viewModel || !controller) return null;
   if (!isOpen) return null;
@@ -111,6 +118,7 @@ export default function LearningElementModal({ className }: AdLerUIComponent) {
       title={viewModel.name.Value}
       onClose={() => {
         controller.closeModal();
+        controller.setModalVisibility(false);
         controller.triggerOutroCutscene();
         controller.showBottomToolTip();
       }}

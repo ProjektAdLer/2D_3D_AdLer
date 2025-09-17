@@ -1,7 +1,9 @@
+import { ComponentID } from "./../../../../../Core/Domain/Types/EntityTypes";
 import LearningElementModalPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/LearningElementModalPresenter";
 import LearningElementModalViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/LearningElementModalViewModel";
 import LearningElementTO from "../../../../../Core/Application/DataTransferObjects/LearningElementTO";
 import { LearningElementModelTypeEnums } from "../../../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
+import Observable from "../../../../../../Lib/Observable";
 
 describe("LearningElementModalPresenter", () => {
   let systemUnderTest: LearningElementModalPresenter;
@@ -76,13 +78,23 @@ describe("LearningElementModalPresenter", () => {
     };
 
     systemUnderTest.onLearningElementLoaded(elementTO);
-
     expect(systemUnderTest["viewModel"].isVisible.Value).toBe(false);
-
     jest.advanceTimersByTime(systemUnderTest["viewModel"].openDelay + 1);
-
     expect(systemUnderTest["viewModel"].isVisible.Value).toBe(true);
-
     jest.useRealTimers();
+  });
+
+  test("onLearningElementScored does not set hasScored to corresponding value if id is differenct", () => {
+    systemUnderTest["viewModel"].id.Value = 42;
+    systemUnderTest["viewModel"].hasScored.Value = false;
+    systemUnderTest.onLearningElementScored(true, 1);
+    expect(systemUnderTest["viewModel"].hasScored.Value).toEqual(false);
+  });
+
+  test("onLearningElementScored sets hasScored to corresponding value", () => {
+    systemUnderTest["viewModel"].id.Value = 1;
+    systemUnderTest["viewModel"].hasScored.Value = false;
+    systemUnderTest.onLearningElementScored(true, 1);
+    expect(systemUnderTest["viewModel"].hasScored.Value).toEqual(true);
   });
 });

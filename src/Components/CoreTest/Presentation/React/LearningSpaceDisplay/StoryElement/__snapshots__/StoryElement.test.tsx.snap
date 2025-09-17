@@ -3,7 +3,7 @@
 exports[`StoryElement displays correct npc thumbnail for model "a-npc-alerobot" 1`] = `
 <img
   alt="LearningImage!"
-  class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
+  class="invisible z-20 h-0 -scale-x-100 object-contain brightness-125 lg:visible lg:h-full"
   data-testid="npcImage"
   src="a-npc-alerobot-welcome.png"
 />
@@ -12,7 +12,7 @@ exports[`StoryElement displays correct npc thumbnail for model "a-npc-alerobot" 
 exports[`StoryElement displays correct npc thumbnail for model "a-npc-defaultarcade" 1`] = `
 <img
   alt="LearningImage!"
-  class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
+  class="invisible z-20 h-0 -scale-x-100 object-contain brightness-125 lg:visible lg:h-full"
   data-testid="npcImage"
   src="a-npc-sheriffjustice-welcome.png"
 />
@@ -21,7 +21,7 @@ exports[`StoryElement displays correct npc thumbnail for model "a-npc-defaultarc
 exports[`StoryElement displays correct npc thumbnail for model "a-npc-defaultcampus" 1`] = `
 <img
   alt="LearningImage!"
-  class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
+  class="invisible z-20 h-0 -scale-x-100 object-contain brightness-125 lg:visible lg:h-full"
   data-testid="npcImage"
   src="a-npc-teamb-male-welcome.png"
 />
@@ -30,7 +30,7 @@ exports[`StoryElement displays correct npc thumbnail for model "a-npc-defaultcam
 exports[`StoryElement displays correct npc thumbnail for model "a-npc-defaultsuburb" 1`] = `
 <img
   alt="LearningImage!"
-  class="z-20 invisible object-contain h-0 -scale-x-100 brightness-125 lg:visible lg:h-full "
+  class="invisible z-20 h-0 -scale-x-100 object-contain brightness-125 lg:visible lg:h-full"
   data-testid="npcImage"
   src="a-npc-teamd-male-welcome.png"
 />

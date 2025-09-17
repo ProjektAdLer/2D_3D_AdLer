@@ -25,4 +25,5 @@ export default interface IAdaptivityElementController {
     associatedQuestion: AdaptivityQuestion,
   ): void;
   reset(): void;
+  setModalVisibility(isOpen: boolean): void;
 }

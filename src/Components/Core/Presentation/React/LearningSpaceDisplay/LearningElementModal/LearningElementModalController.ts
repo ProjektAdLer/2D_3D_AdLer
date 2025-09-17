@@ -1,3 +1,4 @@
+import ILearningWorldCompletionModalPresenter from "~ReactComponents/LearningSpaceMenu/LearningWorldCompletionModal/ILearningWorldCompletionModalPresenter";
 import IScoreH5PElementUseCase from "src/Components/Core/Application/UseCases/ScoreH5PLearningElement/IScoreH5PLearningElementUseCase";
 import { LearningElementTypes } from "src/Components/Core/Domain/Types/LearningElementTypes";
 import IScoreLearningElementUseCase from "../../../../Application/UseCases/ScoreLearningElement/IScoreLearningElementUseCase";
@@ -121,6 +122,16 @@ export default class LearningElementModalController
 
   showBottomToolTip(): void {
     this.BottomTooltipPresenter.show();
+  }
+
+  @bind
+  setModalVisibility(isOpen: boolean): void {
+    // presenter must be set in method to avoid race condition of which component will be constructed first (learningelement or learningworldcompletionmodal)
+    const presenter =
+      CoreDIContainer.get<ILearningWorldCompletionModalPresenter>(
+        PRESENTATION_TYPES.ILearningWorldCompletionModalPresenter,
+      );
+    presenter.onModalVisibility(isOpen);
   }
 }
 

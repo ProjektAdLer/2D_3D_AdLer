@@ -94,6 +94,9 @@ describe("AdaptivityElementController", () => {
     CoreDIContainer.rebind(
       USECASE_TYPES.IBeginStoryElementOutroCutSceneUseCase,
     ).toConstantValue(beginStoryElementOutroCutSceneMock);
+    CoreDIContainer.bind(
+      PRESENTATION_TYPES.ILearningWorldCompletionModalPresenter,
+    ).toConstantValue(mock());
   });
 
   beforeEach(() => {

@@ -3,4 +3,5 @@ import ILearningWorldAdapter from "src/Components/Core/Application/Ports/Learnin
 export default interface ILearningWorldCompletionModalPresenter
   extends ILearningWorldAdapter {
   openModal(): void;
+  onModalVisibility(isOpen: boolean): void;
 }

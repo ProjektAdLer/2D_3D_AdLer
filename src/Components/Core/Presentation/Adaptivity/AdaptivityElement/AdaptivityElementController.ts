@@ -1,3 +1,4 @@
+import ILearningWorldCompletionModalPresenter from "~ReactComponents/LearningSpaceMenu/LearningWorldCompletionModal/ILearningWorldCompletionModalPresenter";
 import IAdaptivityElementController from "./IAdaptivityElementController";
 import AdaptivityElementViewModel from "./AdaptivityElementViewModel";
 import type {
@@ -43,7 +44,7 @@ export default class AdaptivityElementController
     this.viewModel.showFeedback.Value = false;
     this.viewModel.selectedHint.Value = null;
     this.showBottomToolTip();
-
+    this.setModalVisibility(false);
     // trigger cutscene
     this.beginStoryElementOutroCutSceneUseCase.execute({
       scoredLearningElementID: this.viewModel.elementID.Value,
@@ -209,6 +210,16 @@ export default class AdaptivityElementController
         }
       }
     }
+  }
+
+  @bind
+  setModalVisibility(isOpen: boolean): void {
+    // presenter must be set in method to avoid race condition of which component will be constructed first (adaptivitiyelement or learningworldcompletionmodal)
+    const presenter =
+      CoreDIContainer.get<ILearningWorldCompletionModalPresenter>(
+        PRESENTATION_TYPES.ILearningWorldCompletionModalPresenter,
+      );
+    presenter.onModalVisibility(isOpen);
   }
 
   private showBottomToolTip(): void {

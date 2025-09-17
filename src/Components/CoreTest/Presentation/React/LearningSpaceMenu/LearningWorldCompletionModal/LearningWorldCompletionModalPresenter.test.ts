@@ -1,3 +1,4 @@
+import { validateasuuidValidate } from "uuid";
 import LearningSpaceTO from "../../../../../Core/Application/DataTransferObjects/LearningSpaceTO";
 import { mock } from "jest-mock-extended";
 import LearningWorldTO from "../../../../../Core/Application/DataTransferObjects/LearningWorldTO";
@@ -6,6 +7,7 @@ import LearningWorldCompletionModalViewModel from "../../../../../Core/Presentat
 import ISetWorldCompletionModalToShownUseCase from "../../../../../Core/Application/UseCases/SetWorldCompletionModalToShown/ISetWorldCompletionModalToShownUseCase";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
+import { StoryElementType } from "../../../../../Core/Domain/Types/StoryElementType";
 
 const setWorldCompletionModalToShownMock =
   mock<ISetWorldCompletionModalToShownUseCase>();
@@ -196,5 +198,26 @@ describe("LearningWorldCompletionModalPresenter", () => {
     systemUnderTest.openModal();
 
     expect(vm.showModal.Value).toEqual(true);
+  });
+
+  test("onStoryElementCutSceneTriggered sets isOtherModalOpen to true, if storytype is outro", () => {
+    vm.isOtherModalOpen.Value = false;
+    systemUnderTest.onStoryElementCutSceneTriggered(StoryElementType.Outro);
+    expect(vm.isOtherModalOpen.Value).toEqual(true);
+  });
+
+  test("onStoryElementCutSceneFinished sets isOtherModalOpen to false, if storytype is outro", () => {
+    vm.isOtherModalOpen.Value = true;
+    systemUnderTest.onStoryElementCutSceneFinished(StoryElementType.Outro);
+    expect(vm.isOtherModalOpen.Value).toEqual(false);
+  });
+
+  test("onModalVisibility sets isOtherModalOpen to corresponding value", () => {
+    vm.isOtherModalOpen.Value = false;
+    systemUnderTest.onModalVisibility(true);
+    expect(vm.isOtherModalOpen.Value).toEqual(true);
+    vm.isOtherModalOpen.Value = true;
+    systemUnderTest.onModalVisibility(false);
+    expect(vm.isOtherModalOpen.Value).toEqual(false);
   });
 });

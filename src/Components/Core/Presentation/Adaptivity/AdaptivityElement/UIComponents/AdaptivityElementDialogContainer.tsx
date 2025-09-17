@@ -113,6 +113,10 @@ export default function AdaptivityElementDialogContainer({
     }
   }, [currentQuestion, showAnswerFeedback]);
 
+  useEffect(() => {
+    if (isOpen) controller?.setModalVisibility(true);
+  }, [isOpen, controller]);
+
   if (!viewmodel || !controller) return null;
   if (!isOpen || !contentData) return null;
 

@@ -3,7 +3,6 @@ import LearningWorldCompletionModalController from "../../../../../Core/Presenta
 import LearningWorldCompletionModal from "../../../../../Core/Presentation/React/LearningSpaceMenu/LearningWorldCompletionModal/LearningWorldCompletionModal";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 import { mock } from "jest-mock-extended";
-import React from "react";
 import { fireEvent, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
@@ -29,7 +28,7 @@ describe("LearningWorldCompletionModalView", () => {
     const container = render(<LearningWorldCompletionModal />);
 
     expect(
-      container.queryByText("Du hast alle Lernräume erfolgreich")
+      container.queryByText("Du hast alle Lernräume erfolgreich"),
     ).not.toBeInTheDocument();
   });
 

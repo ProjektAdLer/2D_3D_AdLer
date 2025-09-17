@@ -5,4 +5,5 @@ export default interface ILearningElementModalController {
   h5pEventCalled(event: any): Promise<void>;
   xAPICompletedListener(t: any): void;
   showBottomToolTip(): void;
+  setModalVisibility(isOpen: boolean): void;
 }
