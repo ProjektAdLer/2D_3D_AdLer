@@ -18,7 +18,7 @@ module.exports = {
         raw: `only screen and (max-height: 400px) and (orientation: landscape)`,
       },
       "mobile-portrait": {
-        raw: `only screen and (max-width: 400px) and (orientation: portrait)`,
+        raw: `only screen and (max-width: 431px) and (orientation: portrait)`,
       },
       "tablet-portrait": {
         raw: `only screen and (max-width: 850px) and (min-width: 500px) and (orientation: portrait)`,
