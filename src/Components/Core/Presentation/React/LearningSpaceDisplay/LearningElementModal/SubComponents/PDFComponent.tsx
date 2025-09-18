@@ -6,17 +6,14 @@ import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/Styl
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
-// set to true to always show the mobile version of the PDF component
-const debug_alwaysShowMobile = false;
-
 export default function PDFComponent({
   viewModel,
 }: {
   viewModel: LearningElementModalViewModel;
 }) {
   return (
-    <div className="w-[90vw] h-[80vh] sm:h-[70vh] lg:h-[75vh] xl:h-[80vh] text-black font-medium overflow-auto bg-adlerblue-100 p-3">
-      {PDFObject.supportsPDFs || debug_alwaysShowMobile ? (
+    <div className="bg-adlerblue-100 h-[80vh] w-[90vw] overflow-auto p-3 font-medium text-black sm:h-[70vh] lg:h-[75vh] xl:h-[80vh]">
+      {PDFObject.supportsPDFs ? (
         <DesktopPDFComponent viewModel={viewModel} />
       ) : (
         <MobilePDFComponent viewModel={viewModel} />
@@ -55,7 +52,7 @@ function MobilePDFComponent({
     ({ numPages }: { numPages: number }) => {
       setNumPages(numPages);
     },
-    [setNumPages]
+    [setNumPages],
   );
 
   const previousPage = useCallback(() => {
@@ -67,8 +64,8 @@ function MobilePDFComponent({
   }, [pageNumber, numPages, setPageNumber]);
 
   return (
-    <div className="flex-col h-full">
-      <div className="flex flex-row justify-center w-full h-6 mb-2">
+    <div className="h-full flex-col">
+      <div className="mb-2 flex h-6 w-full flex-row justify-center">
         <StyledButton
           shape="freeFloatCenter"
           className=""

@@ -5,6 +5,8 @@ import PDFComponent from "../../../../../../Core/Presentation/React/LearningSpac
 import { act } from "react-dom/test-utils";
 
 describe("PDFComponent", () => {
+  // The useCallbacks in MobilePDFComponent appear to be untestable.
+  // To test them one would have to mock the entire react-pdf library and the useCallback function, which appears to cause other issues.
   const viewModel = new LearningElementModalViewModel();
   viewModel.filePath.Value =
     "https://projekt-adler.eu/wp-content/uploads/Poster_DGWF-Jahrestagung.pdf";
@@ -40,10 +42,6 @@ describe("PDFComponent", () => {
     //TODO: add expect when loading the PDF is fixed
   });
 
-  test.todo(
-    "nextPage button in MobilePDFComponent shouldn't increase pageNumber by 1 when its at the last page"
-  );
-
   test("previousPage button in MobilePDFComponent shouldn't decrease pageNumber by 1 when its at 1", async () => {
     const pdfobject = require("pdfobject");
     pdfobject.supportsPDFs = false;
@@ -69,8 +67,4 @@ describe("PDFComponent", () => {
     //   expect(page).toHaveAttribute("data-page-number", "1");
     // });
   });
-
-  test.todo(
-    "previousPage button in MobilePDFComponent should decrease pageNumber by 1 when its not at 1"
-  );
 });
