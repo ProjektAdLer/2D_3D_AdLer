@@ -19,6 +19,8 @@ import { useInjection } from "inversify-react";
 import ILoginUseCase from "src/Components/Core/Application/UseCases/Login/ILoginUseCase";
 import ILoadAvatarConfigUseCase from "src/Components/Core/Application/UseCases/LoadAvatarConfig/ILoadAvatarConfigUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+import StyledButton from "../ReactBaseComponents/StyledButton";
+import history from "history/browser";
 
 export default function WelcomePage() {
   const { t: translate } = useTranslation("start");
@@ -119,6 +121,17 @@ export default function WelcomePage() {
       <p className="lg:text-md row-start-6 self-end justify-self-center rounded-lg p-2 text-center text-2xs text-adlerdarkblue md:text-xs lg:col-span-4 lg:col-start-3 lg:font-semibold mobile-landscape:col-span-6 mobile-landscape:col-start-2 mobile-portrait:col-start-1 portrait:col-span-6 portrait:col-start-2 portrait:row-start-6 portrait:text-2xs">
         {translate("copyright")}
       </p>
+      <StyledButton
+        className="absolute bottom-8 left-4 !px-2 !py-1 text-xs mobile-landscape:bottom-2 mobile-landscape:left-2"
+        onClick={() => {
+          history.push("/settings");
+        }}
+        data-testid="settingsButton"
+        title={translate("settingButtonToolTip").toString()}
+        shape="freeFloatLeft"
+      >
+        {translate("settingButton")}
+      </StyledButton>
     </div>
   );
 }

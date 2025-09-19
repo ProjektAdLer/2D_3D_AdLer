@@ -9,6 +9,7 @@
 
   "learningWorldMenuTitle": "Lernwelt-Menü",
   "avatarEditorTitle": "Avatar-Editor",
+  "settingButton": "Einstellungen",
 
   "userName": "Nutzername",
   "password": "Passwort",
@@ -37,6 +38,7 @@
   "AvatarEditorToolTip": "Klicken Sie hier, um zum AdLer Avatar Editor zu gelangen",
   "LogoutButtonToolTip": "Klicken Sie hier, um sich abzumelden",
   "HomeButtonToolTip": "Klicken Sie hier, um zur Willkommen-Seite zurückzukehren",
+  "settingButtonToolTip": "Klicken Sie hier, um die Einstellungen zu öffnen",
 
   "LearningWorldButtonToolTip": "Zurück zum Lernwelt Menü"
 }

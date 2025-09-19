@@ -16,6 +16,7 @@ import AvatarEditor from "src/Components/Core/Presentation/AvatarEditor/AvatarEd
 import LoadingScreenHomePageInformation from "~ReactComponents/GeneralComponents/LoadingScreen/LoadingScreenContent/LoadingScreenHomePageInformation";
 import i18next from "i18next";
 import NarrativeFrameworkLoadingScreenContainer from "~ReactComponents/GeneralComponents/NarrativeFrameworkLoadingScreenContainer/NarrativeFrameworkLoadingScreenContainer";
+import Settings from "./Settings";
 
 export interface IAppProps {}
 
@@ -92,6 +93,12 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
       <>
         <AvatarEditor />
         <InternetLossModal />
+      </>
+    );
+  } else if (location?.pathname.includes("/settings")) {
+    return (
+      <>
+        <Settings />
       </>
     );
   } else {
