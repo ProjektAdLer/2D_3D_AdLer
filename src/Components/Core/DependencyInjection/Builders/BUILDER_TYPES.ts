@@ -66,6 +66,7 @@ const BUILDER_TYPES = {
   IExperiencePointsPanelBuilder: Symbol("IExperiencePointsPanelBuilder"),
   ILevelUpModalBuilder: Symbol("ILevelUpModalBuilder"),
   IBadgeOverviewModalBuilder: Symbol("IBadgeOverviewModalBuilder"),
+  ISettingContentBuilder: Symbol("ISettingContentBuilder"),
 };
 
 export default BUILDER_TYPES;

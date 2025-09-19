@@ -130,7 +130,7 @@ export default function WelcomePage() {
         title={translate("settingButtonToolTip").toString()}
         shape="freeFloatLeft"
       >
-        {translate("settingButton")}
+        {translate("settingTitle")}
       </StyledButton>
     </div>
   );

@@ -16,7 +16,7 @@ import { GradingStyle } from "src/Components/Core/Domain/Types/GradingStyle";
 
 type MenuHeaderBarProps = {
   className: string;
-  location: "world" | "space" | "editor";
+  location: "world" | "space" | "editor" | "settings";
   externContent?: {
     contentLocation: "world" | "space" | "editor";
     content: JSX.Element;
@@ -78,6 +78,9 @@ export default function MenuHeaderBar(props: Readonly<MenuHeaderBarProps>) {
             : null}
           {props.location === "editor"
             ? translate("avatarEditorTitle").toString()
+            : null}
+          {props.location === "settings"
+            ? translate("settingTitle").toString()
             : null}
         </StyledContainer>
       </div>
