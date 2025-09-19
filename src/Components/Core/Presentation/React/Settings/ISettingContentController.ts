@@ -1,5 +1,6 @@
 export default interface ISettingContentController {
   onVolumeChange(newVolume: number): void;
-  onLanguageChange(newLanguage: string): void;
+  onGermanButtonClicked(): void;
+  onEnglishButtonClicked(): void;
   onGraphicsQualityChange(newQuality: string): void;
 }

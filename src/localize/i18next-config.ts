@@ -14,6 +14,7 @@ import de_controls from "./de/controls.json";
 import de_avatarEditor from "./de/avatarEditor.json";
 import de_loadingScreen from "./de/loadingScreen.json";
 import de_errorMessages from "./de/errorMessages.json";
+import de_settingsMenu from "./de/settingsMenu.json";
 
 const resources = {
   de: {
@@ -30,6 +31,7 @@ const resources = {
     avatarEditor: de_avatarEditor,
     loadingScreen: de_loadingScreen,
     errorMessages: de_errorMessages,
+    settingsMenu: de_settingsMenu,
   },
 };
 const defaultNS = "start";

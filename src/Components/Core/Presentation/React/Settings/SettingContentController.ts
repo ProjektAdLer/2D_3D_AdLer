@@ -10,9 +10,13 @@ export default class SettingContentController
     this.viewModel.changedSettings = true;
     this.viewModel.volume.Value = newVolume;
   }
-  onLanguageChange(newLanguage: string): void {
+  onGermanButtonClicked(): void {
     this.viewModel.changedSettings = true;
-    this.viewModel.language.Value = newLanguage;
+    this.viewModel.language.Value = "de";
+  }
+  onEnglishButtonClicked(): void {
+    this.viewModel.changedSettings = true;
+    this.viewModel.language.Value = "en";
   }
   onGraphicsQualityChange(newQuality: string): void {
     this.viewModel.changedSettings = true;

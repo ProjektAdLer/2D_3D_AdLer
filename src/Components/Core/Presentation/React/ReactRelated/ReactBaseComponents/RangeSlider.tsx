@@ -43,7 +43,7 @@ export default function RangeSlider(props: RangeSliderProps) {
     <div
       className={tailwindMerge(
         props.className,
-        "flex grow items-center gap-4 p-2 ",
+        "flex grow items-center gap-4 p-2",
       )}
     >
       {props.buttons && (
@@ -81,10 +81,10 @@ export default function RangeSlider(props: RangeSliderProps) {
           {!props.buttons.imageLeft && "-"}
         </StyledButton>
       )}
-      <div className="flex !flex-col justify-center items-center grow text-xl font-bold pb-8">
+      <div className="flex grow !flex-col items-center justify-center pb-8 text-xl font-bold">
         <input
           type="number"
-          className="mb-1.5 numberInputField"
+          className="numberInputField mb-1.5"
           min={props.min * displayFactor}
           max={props.max * displayFactor}
           value={(value * displayFactor).toFixed(fractionDigits)}
