@@ -21,6 +21,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - new opaque background behind the learningspace title to improve readability
 - Story NPCs exit space after story sequence if author configured it
 - added functionality to enter other available learning spaces on exiting learning space
+- expaned choice of learning spaces in exit modal
 
 ### Changed
 
@@ -35,6 +36,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 ### Fixed
 
 - fixed enabled button for narrative framework, if no narrative framework exists in learning world
+- fixed multiple open modals in learning space
 
 ### Deprecated
 
