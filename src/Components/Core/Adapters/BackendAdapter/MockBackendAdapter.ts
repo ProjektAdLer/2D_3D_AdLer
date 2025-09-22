@@ -85,16 +85,70 @@ export default class MockBackendAdapter implements IBackendPort {
     let worldToUse: AWT;
 
     // In Showcase-Modus verwenden wir standardmäßig die ShowcaseWorld
-    if (process.env.REACT_APP_IS_SHOWCASE === "true") {
+    if (process.env.REACT_APP_IS_SHOWCASE === "true" || worldID === 999) {
       worldToUse = ShowcaseWorldAWT;
+      const publicUrl = process.env.PUBLIC_URL || "";
+      const baseUrl =
+        window.location.origin + publicUrl + "/SampleLearningElementData/";
+
+      switch (elementID) {
+        case 1:
+          return Promise.resolve("https://youtu.be/0hfMiMUI_HE");
+        case 2:
+          return Promise.resolve(baseUrl + "Projektname.jpg");
+        case 3:
+          return Promise.resolve(baseUrl + "Thema-und-Ziele");
+        case 5:
+          return Promise.resolve(baseUrl + "Standorte.pdf");
+        case 6:
+          return Promise.resolve(baseUrl + "Team.jpg");
+        case 7:
+          return Promise.resolve(baseUrl + "Lernwelt-Allgemein.png");
+        case 8:
+          return Promise.resolve(baseUrl + "Lernwelt");
+        case 9:
+          return Promise.resolve("https://youtu.be/CsV6FdHyltg");
+        case 10:
+          return Promise.resolve(baseUrl + "Lernraum-Lernpfad.png");
+        case 11:
+          return Promise.resolve("https://youtu.be/9PPilIV71d8");
+        case 12:
+          return Promise.resolve("https://youtu.be/5AfULkLnROY");
+        case 13:
+          return Promise.resolve(baseUrl + "Storyelement.pdf");
+        case 14:
+          return Promise.resolve(baseUrl + "Lernelemente.pdf");
+        case 15:
+          return Promise.resolve(baseUrl + "Adaptivitaetselement.pdf");
+        case 16:
+          return Promise.resolve(baseUrl + "Lernpfade.jpg");
+        case 17:
+          return Promise.resolve(baseUrl + "Storyelemente.pdf");
+        case 18:
+          return Promise.resolve(baseUrl + "Moodle.txt");
+        case 19:
+          return Promise.resolve(baseUrl + "3D-Lernumgebung");
+        case 20:
+          return Promise.resolve(baseUrl + "Lernfortschritt.jpg");
+        case 21:
+          return Promise.resolve("https://youtu.be/8bcZdUicYeY");
+        case 22:
+          return Promise.resolve(baseUrl + "Lernelemente.pdf");
+        case 23:
+          return Promise.resolve(baseUrl + "3D_Adaptivitaetselement.pdf");
+        case 24:
+          return Promise.resolve("https://youtu.be/gG0RuXkE7ps");
+        default:
+          // Fallback für andere Elemente oder Fehler
+          return Promise.reject("Unknown element ID for Showcase world");
+      }
     } else {
-      // Normale Entwicklungslogik - identisch mit getWorldData
+      // Normale Entwicklungslogik
       if (worldID === 1) worldToUse = SimpleWorldAWT;
       else if (worldID === 2) worldToUse = StoryWorldAWT;
       else if (worldID === 3) worldToUse = ThemeWorldAWT;
       else if (worldID === 4) worldToUse = NPCModelAWT;
       else if (worldID === 5) worldToUse = RequirementsGradingAWT;
-      else if (worldID === 999) worldToUse = ShowcaseWorldAWT;
       else worldToUse = SubthemeWorldAWT;
     }
 
@@ -105,27 +159,20 @@ export default class MockBackendAdapter implements IBackendPort {
     switch (elementType) {
       case "h5p":
       case "primitiveH5P":
-        // For H5P elements we return the URL to the H5P folder
         if (elementID === 5 || elementID === 9) {
-          // Multiple Choice Demo H5P-Element (ID 5 and 9)
           return Promise.resolve(
             window.location.origin +
               (process.env.PUBLIC_URL || "") +
               "/SampleLearningElementData/MultipleChoiceDemo",
           );
         }
-        // Fallback for other H5P elements
         return Promise.resolve(
           window.location.origin +
             (process.env.PUBLIC_URL || "") +
             "/SampleLearningElementData/MultipleChoiceDemo",
         );
       case "video":
-        //return Promise.resolve("https://youtu.be/8X4cDoM3R7E?t=189");
         return Promise.resolve("https://vimeo.com/782061723");
-      // return Promise.resolve(
-      //   "https://video.th-ab.de/paella/ui/watch.html?id=ed6695a8-f7ac-47dc-bf6d-62460b94383f"
-      // );
       case "image":
         return Promise.resolve(
           window.location.origin +

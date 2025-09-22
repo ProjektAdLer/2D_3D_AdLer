@@ -57,7 +57,7 @@ const SimpleWorldAWT: AWT = {
     elements: [
       {
         $type: "LearningElement",
-        elementId: 1,
+        elementId: 18,
         elementName: "Das Text-Lernelement",
         elementCategory: "text",
         elementDescription: "Beschreibung des Text-Lernelements",
@@ -70,7 +70,7 @@ const SimpleWorldAWT: AWT = {
       },
       {
         $type: "LearningElement",
-        elementId: 2,
+        elementId: 1,
         elementName: "Ein Video-Lernelement",
         elementCategory: "video",
         elementDescription: "Beschreibung des Video-Lernelements",
@@ -83,7 +83,7 @@ const SimpleWorldAWT: AWT = {
       },
       {
         $type: "LearningElement",
-        elementId: 3,
+        elementId: 2,
         elementName: "Ein Bild-Lernelement",
         elementCategory: "image",
         elementDescription: "Beschreibung des Bild-Lernelements",
@@ -113,7 +113,7 @@ const SimpleWorldAWT: AWT = {
       },
       {
         $type: "LearningElement",
-        elementId: 5,
+        elementId: 3,
         elementName: "Multiple Choice Demo",
         elementCategory: "h5p",
         elementDescription: "Ein Multiple Choice Quiz - klicke auf 'richtig'",
@@ -129,7 +129,7 @@ const SimpleWorldAWT: AWT = {
       },
       {
         $type: "LearningElement",
-        elementId: 6,
+        elementId: 5,
         elementName: "Ein PDF-Lernelement",
         elementCategory: "pdf",
         elementDescription: "Beschreibung des PDF-Lernelements",
@@ -140,7 +140,7 @@ const SimpleWorldAWT: AWT = {
       },
       {
         $type: "LearningElement",
-        elementId: 7,
+        elementId: 13,
         elementName: "Ein zweites PDF-Lernelement",
         elementCategory: "pdf",
         elementDescription: "Beschreibung des PDF-Lernelements",
@@ -151,7 +151,7 @@ const SimpleWorldAWT: AWT = {
       },
       {
         $type: "LearningElement",
-        elementId: 8,
+        elementId: 12,
         elementName: "Ein zweites Video-Lernelement",
         elementCategory: "video",
         elementDescription: "Beschreibung des Video-Lernelements",
@@ -162,7 +162,7 @@ const SimpleWorldAWT: AWT = {
       },
       {
         $type: "LearningElement",
-        elementId: 9,
+        elementId: 19,
         elementName: "Primitives H5P Quiz",
         elementCategory: "primitiveH5P",
         elementDescription: "Ein einfaches H5P-Quiz für Tests",

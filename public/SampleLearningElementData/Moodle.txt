@@ -1,0 +1,3 @@
+Die mit dem Autorentool erstellten Lernwelten werden auch vollständig in Moodle dargestellt.
+Hierdurch wird gewährleistet, dass alle mit AdLer publizierten Inhalte von den Lernenden
+genutzt werden können, die die 3D-Lernumgebung nicht benutzen wollen oder können.

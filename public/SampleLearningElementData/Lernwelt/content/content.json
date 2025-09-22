@@ -1,0 +1,444 @@
+{
+  "presentation": {
+    "slides": [
+      {
+        "elements": [
+          {
+            "x": 5.446623093681917,
+            "y": 0.4303537077123688,
+            "width": 89.32568225690841,
+            "height": 99.25032384116506,
+            "action": {
+              "library": "H5P.Image 1.1",
+              "params": {
+                "decorative": false,
+                "contentName": "Bild",
+                "expandImage": "Bild vergrößern",
+                "minimizeImage": "Bild verkleinern",
+                "alt": "Autorentool_Startseite",
+                "file": {
+                  "path": "images/image-d8ZS5PD8.png",
+                  "mime": "image/png",
+                  "copyright": { "license": "U" },
+                  "width": 8000,
+                  "height": 4500
+                }
+              },
+              "subContentId": "a5a56b44-be4d-4970-aa26-2357e91f87c1",
+              "metadata": {
+                "contentType": "Bild",
+                "license": "U",
+                "title": "Unbenannt: Bild",
+                "authors": [],
+                "changes": []
+              }
+            },
+            "alwaysDisplayComments": false,
+            "backgroundOpacity": 0,
+            "displayAsButton": false,
+            "buttonSize": "big",
+            "goToSlideType": "specified",
+            "invisible": false,
+            "solution": ""
+          }
+        ],
+        "keywords": [{ "main": "Startseite des Autorentools" }],
+        "slideBackgroundSelector": {}
+      },
+      {
+        "elements": [
+          {
+            "x": 5.446623093681917,
+            "y": 0.4303537077123688,
+            "width": 89.32568225690841,
+            "height": 99.25032384116506,
+            "action": {
+              "library": "H5P.Image 1.1",
+              "params": {
+                "decorative": false,
+                "contentName": "Bild",
+                "expandImage": "Bild vergrößern",
+                "minimizeImage": "Bild verkleinern",
+                "alt": "Autorentool_Arbeitsfläche",
+                "file": {
+                  "path": "images/image-c37rUVwN.png",
+                  "mime": "image/png",
+                  "copyright": { "license": "U" },
+                  "width": 8000,
+                  "height": 4500
+                }
+              },
+              "subContentId": "9080d87d-3b4a-4594-a100-a9425ea30506",
+              "metadata": {
+                "contentType": "Bild",
+                "license": "U",
+                "title": "Unbenannt: Bild",
+                "authors": [],
+                "changes": []
+              }
+            },
+            "alwaysDisplayComments": false,
+            "backgroundOpacity": 0,
+            "displayAsButton": false,
+            "buttonSize": "big",
+            "goToSlideType": "specified",
+            "invisible": false,
+            "solution": ""
+          }
+        ],
+        "keywords": [
+          { "main": "Arbeitsfläche des Autorentools - Drei Bereiche" }
+        ],
+        "slideBackgroundSelector": {}
+      },
+      {
+        "elements": [
+          {
+            "x": 9.803921568627452,
+            "y": 15.06237976993291,
+            "width": 80.61002178649238,
+            "height": 68.85659323397901,
+            "action": {
+              "library": "H5P.DragText 1.10",
+              "params": {
+                "media": { "disableImageZooming": false },
+                "taskDescription": "<p>Ziehen Sie die Wörter in die richtigen Felder!</p>\n",
+                "overallFeedback": [
+                  {
+                    "from": 0,
+                    "to": 80,
+                    "feedback": "Probieren Sie es weiter!"
+                  },
+                  { "from": 81, "to": 100, "feedback": "Gut gemacht!" }
+                ],
+                "checkAnswer": "Überprüfen",
+                "submitAnswer": "Absenden",
+                "tryAgain": "Wiederholen",
+                "showSolution": "Lösung anzeigen",
+                "dropZoneIndex": "Ablagefeld @index.",
+                "empty": "Ablagefeld @index ist leer.",
+                "contains": "Ablagefeld @index enthält ziehbaren Text @draggable.",
+                "ariaDraggableIndex": "@index von @count ziehbaren Texten.",
+                "tipLabel": "Tipp anzeigen",
+                "correctText": "Richtig!",
+                "incorrectText": "Falsch!",
+                "resetDropTitle": "Ablagefelder zurücksetzen",
+                "resetDropDescription": "Bist du sicher, dass du dieses Ablagefeld zurücksetzen möchtest?",
+                "grabbed": "Ziehbarer Text wurde aufgenommen.",
+                "cancelledDragging": "Ziehen abgebrochen.",
+                "correctAnswer": "Korrekte Antwort:",
+                "feedbackHeader": "Rückmeldung",
+                "behaviour": {
+                  "enableRetry": true,
+                  "enableSolutionsButton": true,
+                  "enableCheckButton": true,
+                  "instantFeedback": false
+                },
+                "scoreBarLabel": "Du hast :num von :total Punkten erreicht.",
+                "a11yCheck": "Die Antworten überprüfen. Die Eingaben werden als richtig, falsch oder unbeantwortet markiert.",
+                "a11yShowSolution": "Die Lösung anzeigen. Die richtigen Lösungen werden in der Aufgabe angezeigt.",
+                "a11yRetry": "Die Aufgabe wiederholen. Alle Eingaben werden zurückgesetzt und die Aufgabe wird erneut gestartet.",
+                "textField": "Das AdLer-Autorentool weist zwei zentrale Haupt-Ansichten auf. \n\nAuf der *Startseite* werden alle angelegten Lernwelten aufgeführt.\n\nIn der *Arbeitsfläche* findet die eigentliche *Ausgestaltung einer Lernwelt* statt."
+              },
+              "subContentId": "8b377b4d-0539-446a-81e6-94cfaf33ddbf",
+              "metadata": {
+                "contentType": "Wörter einordnen (Drag the Words)",
+                "license": "U",
+                "title": "Autorentool_Lernwelt: Wörter einordnen (Drag the Words)",
+                "authors": [],
+                "changes": [],
+                "extraTitle": "Autorentool_Lernwelt: Wörter einordnen (Drag the Words)"
+              }
+            },
+            "alwaysDisplayComments": false,
+            "backgroundOpacity": 0,
+            "displayAsButton": false,
+            "buttonSize": "big",
+            "goToSlideType": "specified",
+            "invisible": false,
+            "solution": ""
+          }
+        ],
+        "keywords": [{ "main": "Abschlussquiz" }],
+        "slideBackgroundSelector": {}
+      },
+      {
+        "elements": [
+          {
+            "x": 6.535947712418301,
+            "y": 15.06237976993291,
+            "width": 86.05664488017429,
+            "height": 54.93400525892231,
+            "action": {
+              "library": "H5P.TrueFalse 1.8",
+              "params": {
+                "media": { "disableImageZooming": false },
+                "correct": "true",
+                "behaviour": {
+                  "enableRetry": true,
+                  "enableSolutionsButton": true,
+                  "enableCheckButton": true,
+                  "confirmCheckDialog": false,
+                  "confirmRetryDialog": false,
+                  "autoCheck": false
+                },
+                "l10n": {
+                  "trueText": "Wahr",
+                  "falseText": "Falsch",
+                  "score": "Du hast @score von @total Punkten erreicht.",
+                  "checkAnswer": "Überprüfen",
+                  "submitAnswer": "Absenden",
+                  "showSolutionButton": "Lösung anzeigen",
+                  "tryAgain": "Wiederholen",
+                  "wrongAnswerMessage": "Falsche Antwort",
+                  "correctAnswerMessage": "Richtige Antwort",
+                  "scoreBarLabel": "Du hast :num von :total Punkten erreicht.",
+                  "a11yCheck": "Die Antworten überprüfen. Die Antwort wird als richtig, falsch oder unbeantwortet markiert.",
+                  "a11yShowSolution": "Die Lösung anzeigen. Die richtige Lösung wird in der Aufgabe angezeigt.",
+                  "a11yRetry": "Die Aufgabe wiederholen. Alle Versuche werden zurückgesetzt, und die Aufgabe wird erneut gestartet."
+                },
+                "confirmCheck": {
+                  "header": "Beenden?",
+                  "body": "Ganz sicher beenden?",
+                  "cancelLabel": "Abbrechen",
+                  "confirmLabel": "Beenden"
+                },
+                "confirmRetry": {
+                  "header": "Wiederholen?",
+                  "body": "Ganz sicher wiederholen?",
+                  "cancelLabel": "Abbrechen",
+                  "confirmLabel": "Bestätigen"
+                },
+                "question": "<p>Innerhalb der Arbeitsfläche des AdLer-Autorentools befinden sich drei zentrale Bereiche, über die Anpassungen und Ergänzungen an einer Lernwelt vorgenommen werden können.</p>\n"
+              },
+              "subContentId": "9b93a79e-d860-49ba-82a0-d09440b128c7",
+              "metadata": {
+                "contentType": "Richtig/Falsch-Frage (True/False Question)",
+                "license": "U",
+                "title": "AdLer-Autorentool - Arbeitsfläche: Richtig/Falsch-Frage (True/False Question)",
+                "authors": [],
+                "changes": [],
+                "extraTitle": "AdLer-Autorentool - Arbeitsfläche: Richtig/Falsch-Frage (True/False Question)"
+              }
+            },
+            "alwaysDisplayComments": false,
+            "backgroundOpacity": 0,
+            "displayAsButton": false,
+            "buttonSize": "big",
+            "goToSlideType": "specified",
+            "invisible": false,
+            "solution": ""
+          }
+        ],
+        "keywords": [
+          { "main": "Arbeitsfläche des Autorentools - Rechte Sidebar" }
+        ],
+        "slideBackgroundSelector": {}
+      },
+      {
+        "elements": [
+          {
+            "x": 5.446623093681917,
+            "y": 8.607074154247377,
+            "width": 89.32461873638344,
+            "height": 86.07074154247377,
+            "action": {
+              "library": "H5P.MultiChoice 1.16",
+              "params": {
+                "media": { "disableImageZooming": false },
+                "answers": [
+                  {
+                    "correct": false,
+                    "tipsAndFeedback": {
+                      "tip": "",
+                      "chosenFeedback": "",
+                      "notChosenFeedback": ""
+                    },
+                    "text": "<div>Oberes Fenster</div>\n"
+                  },
+                  {
+                    "correct": true,
+                    "tipsAndFeedback": {
+                      "tip": "",
+                      "chosenFeedback": "",
+                      "notChosenFeedback": ""
+                    },
+                    "text": "<div>Rechte Sidebar</div>\n"
+                  },
+                  {
+                    "correct": true,
+                    "tipsAndFeedback": {
+                      "tip": "",
+                      "chosenFeedback": "",
+                      "notChosenFeedback": ""
+                    },
+                    "text": "<div>Mittleres Fenster</div>\n"
+                  },
+                  {
+                    "correct": false,
+                    "tipsAndFeedback": {
+                      "tip": "",
+                      "chosenFeedback": "",
+                      "notChosenFeedback": ""
+                    },
+                    "text": "<div>Unteres Fenster</div>\n\n<div> </div>\n"
+                  },
+                  {
+                    "correct": true,
+                    "tipsAndFeedback": {
+                      "tip": "",
+                      "chosenFeedback": "",
+                      "notChosenFeedback": ""
+                    },
+                    "text": "<div>Linke Sidebar</div>\n"
+                  }
+                ],
+                "overallFeedback": [{ "from": 0, "to": 100 }],
+                "behaviour": {
+                  "enableRetry": true,
+                  "enableSolutionsButton": true,
+                  "enableCheckButton": true,
+                  "type": "auto",
+                  "singlePoint": false,
+                  "randomAnswers": true,
+                  "showSolutionsRequiresInput": true,
+                  "confirmCheckDialog": false,
+                  "confirmRetryDialog": false,
+                  "autoCheck": false,
+                  "passPercentage": 100,
+                  "showScorePoints": true
+                },
+                "UI": {
+                  "checkAnswerButton": "Überprüfen",
+                  "submitAnswerButton": "Absenden",
+                  "showSolutionButton": "Lösung anzeigen",
+                  "tryAgainButton": "Wiederholen",
+                  "tipsLabel": "Hinweis anzeigen",
+                  "scoreBarLabel": "Du hast :num von :total Punkten erreicht.",
+                  "tipAvailable": "Hinweis verfügbar",
+                  "feedbackAvailable": "Rückmeldung verfügbar",
+                  "readFeedback": "Rückmeldung vorlesen",
+                  "wrongAnswer": "Falsche Antwort",
+                  "correctAnswer": "Richtige Antwort",
+                  "shouldCheck": "Hätte gewählt werden müssen",
+                  "shouldNotCheck": "Hätte nicht gewählt werden sollen",
+                  "noInput": "Bitte antworte, bevor du die Lösung ansiehst",
+                  "a11yCheck": "Die Antworten überprüfen. Die Auswahlen werden als richtig, falsch oder fehlend markiert.",
+                  "a11yShowSolution": "Die Lösung anzeigen. Die richtigen Lösungen werden in der Aufgabe angezeigt.",
+                  "a11yRetry": "Die Aufgabe wiederholen. Alle Versuche werden zurückgesetzt und die Aufgabe wird erneut gestartet."
+                },
+                "confirmCheck": {
+                  "header": "Beenden?",
+                  "body": "Ganz sicher beenden?",
+                  "cancelLabel": "Abbrechen",
+                  "confirmLabel": "Beenden"
+                },
+                "confirmRetry": {
+                  "header": "Wiederholen?",
+                  "body": "Ganz sicher wiederholen?",
+                  "cancelLabel": "Abbrechen",
+                  "confirmLabel": "Bestätigen"
+                },
+                "question": "<p>Um welche drei zentrale Bereiche handelt es sich innerhalb der Arbeitsfläche des AdLer-Autorentools? </p>\n"
+              },
+              "subContentId": "d07b9973-6ad9-4d27-a8ed-f09abd7d71fa",
+              "metadata": {
+                "contentType": "Multiple Choice",
+                "license": "U",
+                "title": "Unbenannt: Multiple Choice",
+                "authors": [],
+                "changes": [],
+                "extraTitle": "Unbenannt: Multiple Choice"
+              }
+            },
+            "alwaysDisplayComments": false,
+            "backgroundOpacity": 0,
+            "displayAsButton": false,
+            "buttonSize": "big",
+            "goToSlideType": "specified",
+            "invisible": false,
+            "solution": ""
+          }
+        ],
+        "keywords": [],
+        "slideBackgroundSelector": {}
+      }
+    ],
+    "keywordListEnabled": true,
+    "globalBackgroundSelector": { "fillGlobalBackground": "#e9f2fb" },
+    "keywordListAlwaysShow": false,
+    "keywordListAutoHide": false,
+    "keywordListOpacity": 90
+  },
+  "override": {
+    "activeSurface": false,
+    "hideSummarySlide": false,
+    "summarySlideSolutionButton": true,
+    "summarySlideRetryButton": true,
+    "enablePrintButton": false,
+    "social": {
+      "showFacebookShare": false,
+      "facebookShare": {
+        "url": "@currentpageurl",
+        "quote": "Ich habe @score von @maxScore Punkten bei der Aufgabe @currentpageurl erreicht."
+      },
+      "showTwitterShare": false,
+      "twitterShare": {
+        "statement": "Ich habe @score von @maxScore Punkten bei der Aufgabe @currentpageurl erreicht.",
+        "url": "@currentpageurl",
+        "hashtags": "h5p, Kurs"
+      },
+      "showGoogleShare": false,
+      "googleShareUrl": "@currentpageurl"
+    }
+  },
+  "l10n": {
+    "slide": "Folie",
+    "score": "Punktzahl",
+    "yourScore": "Deine Punktzahl",
+    "maxScore": "Maximale Punktzahl",
+    "total": "Summe",
+    "totalScore": "Gesamtpunktzahl",
+    "showSolutions": "Lösungen anzeigen",
+    "retry": "Wiederholen",
+    "exportAnswers": "Text exportieren",
+    "hideKeywords": "Stichwortliste verbergen",
+    "showKeywords": "Stichwortliste anzeigen",
+    "fullscreen": "Vollbild",
+    "exitFullscreen": "Vollbild beenden",
+    "prevSlide": "Vorherige Folie",
+    "nextSlide": "Nächste Folie",
+    "currentSlide": "Aktuelle Folie",
+    "lastSlide": "Letzte Folie",
+    "solutionModeTitle": "Lösungsmodus beenden",
+    "solutionModeText": "Lösungsmodus",
+    "summaryMultipleTaskText": "Mehrere Aufgaben",
+    "scoreMessage": "Du hast erreicht:",
+    "shareFacebook": "Auf Facebook teilen",
+    "shareTwitter": "Auf Twitter teilen",
+    "shareGoogle": "Auf Google+ teilen",
+    "summary": "Zusammenfassung",
+    "solutionsButtonTitle": "Kommentare anzeigen",
+    "printTitle": "Drucken",
+    "printIngress": "Wie möchtest du diese Präsentation drucken?",
+    "printAllSlides": "Alle Folien drucken",
+    "printCurrentSlide": "Aktuelle Folie drucken",
+    "noTitle": "Kein Titel",
+    "accessibilitySlideNavigationExplanation": "Verwende die linke oder rechte Cursortaste, um zur Folie in der jeweiligen Richtung zu blättern, wenn der Präsentationsbereich ausgewählt ist.",
+    "accessibilityCanvasLabel": "Präsentationsbereich. Verwende die linke oder rechte Cursortaste, um zwischen den Folien zu navigieren.",
+    "accessibilityProgressBarLabel": "Wähle das zu zeigende Schaubild",
+    "containsNotCompleted": "@slideName enthält eine nicht abgeschlossene Interaktion",
+    "containsCompleted": "@slideName wurde abgeschlossen",
+    "slideCount": "Folie @index von @total",
+    "containsOnlyCorrect": "@slideName enthält nur richtige Antworten",
+    "containsIncorrectAnswers": "@slideName enthält falsche Antworten",
+    "shareResult": "Ergebnis teilen",
+    "accessibilityTotalScore": "Du hast insgesamt @score von @maxScore Punkten erreicht.",
+    "accessibilityEnteredFullscreen": "Vollbild aktiviert",
+    "accessibilityExitedFullscreen": "Vollbild deaktiviert",
+    "confirmDialogHeader": "Antworten übermitteln",
+    "confirmDialogText": "Damit werden deine Ergebnisse übermittelt. Möchtest du fortfahren?",
+    "confirmDialogConfirmText": "Senden und Ergebnisse ansehen",
+    "slideshowNavigationLabel": "Schaubild-Navigation"
+  }
+}

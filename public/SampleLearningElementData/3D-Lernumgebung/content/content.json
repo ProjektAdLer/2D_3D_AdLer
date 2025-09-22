@@ -1,0 +1,305 @@
+{
+  "introPage": {
+    "showIntroPage": false,
+    "startButtonText": "Start Quiz",
+    "introduction": ""
+  },
+  "progressType": "dots",
+  "passPercentage": 80,
+  "questions": [
+    {
+      "params": {
+        "media": { "disableImageZooming": false },
+        "answers": [
+          {
+            "correct": true,
+            "tipsAndFeedback": {
+              "tip": "",
+              "chosenFeedback": "",
+              "notChosenFeedback": ""
+            },
+            "text": "<div>Als 3D-Modelle, die semantisch dem Lernelement-Typ zugeordnet werden können z.B. Fernseher für Video</div>\n"
+          },
+          {
+            "correct": false,
+            "tipsAndFeedback": {
+              "tip": "",
+              "chosenFeedback": "",
+              "notChosenFeedback": ""
+            },
+            "text": "<div>Als NPCs, die durch den Raum laufen und bei Berührung Fragen stellen </div>\n"
+          },
+          {
+            "correct": false,
+            "tipsAndFeedback": {
+              "tip": "",
+              "chosenFeedback": "",
+              "notChosenFeedback": ""
+            },
+            "text": "<div>Als einzelne Räume, die in ihrer Struktur ein Lernelement widerspiegeln</div>\n"
+          },
+          {
+            "correct": false,
+            "tipsAndFeedback": {
+              "tip": "",
+              "chosenFeedback": "",
+              "notChosenFeedback": ""
+            },
+            "text": "<div>Es gibt keine Lernelemente in 3D-Lernräumen. Lernelemente sind nur über Menüs erreichbar.</div>\n"
+          }
+        ],
+        "overallFeedback": [{ "from": 0, "to": 100 }],
+        "behaviour": {
+          "enableRetry": true,
+          "enableSolutionsButton": true,
+          "enableCheckButton": true,
+          "type": "auto",
+          "singlePoint": false,
+          "randomAnswers": true,
+          "showSolutionsRequiresInput": true,
+          "confirmCheckDialog": false,
+          "confirmRetryDialog": false,
+          "autoCheck": false,
+          "passPercentage": 100,
+          "showScorePoints": true
+        },
+        "UI": {
+          "checkAnswerButton": "Überprüfen",
+          "submitAnswerButton": "Absenden",
+          "showSolutionButton": "Lösung anzeigen",
+          "tryAgainButton": "Wiederholen",
+          "tipsLabel": "Hinweis anzeigen",
+          "scoreBarLabel": "Du hast :num von :total Punkten erreicht.",
+          "tipAvailable": "Hinweis verfügbar",
+          "feedbackAvailable": "Rückmeldung verfügbar",
+          "readFeedback": "Rückmeldung vorlesen",
+          "wrongAnswer": "Falsche Antwort",
+          "correctAnswer": "Richtige Antwort",
+          "shouldCheck": "Hätte gewählt werden müssen",
+          "shouldNotCheck": "Hätte nicht gewählt werden sollen",
+          "noInput": "Bitte antworte, bevor du die Lösung ansiehst",
+          "a11yCheck": "Die Antworten überprüfen. Die Auswahlen werden als richtig, falsch oder fehlend markiert.",
+          "a11yShowSolution": "Die Lösung anzeigen. Die richtigen Lösungen werden in der Aufgabe angezeigt.",
+          "a11yRetry": "Die Aufgabe wiederholen. Alle Versuche werden zurückgesetzt und die Aufgabe wird erneut gestartet."
+        },
+        "confirmCheck": {
+          "header": "Beenden?",
+          "body": "Ganz sicher beenden?",
+          "cancelLabel": "Abbrechen",
+          "confirmLabel": "Beenden"
+        },
+        "confirmRetry": {
+          "header": "Wiederholen?",
+          "body": "Ganz sicher wiederholen?",
+          "cancelLabel": "Abbrechen",
+          "confirmLabel": "Bestätigen"
+        },
+        "question": "<p>Wie werden Lernelemente im 3D-Lernraum repräsentiert?</p>\n"
+      },
+      "library": "H5P.MultiChoice 1.16",
+      "metadata": {
+        "contentType": "Multiple Choice",
+        "license": "U",
+        "title": "Untitled Multiple Choice",
+        "authors": [],
+        "changes": [],
+        "extraTitle": "Untitled Multiple Choice",
+        "defaultLanguage": "de"
+      },
+      "subContentId": "1cba24fd-e11c-4b5c-9fb7-c7cba52581ba"
+    },
+    {
+      "params": {
+        "media": { "disableImageZooming": false },
+        "correct": "true",
+        "behaviour": {
+          "enableRetry": true,
+          "enableSolutionsButton": true,
+          "enableCheckButton": true,
+          "confirmCheckDialog": false,
+          "confirmRetryDialog": false,
+          "autoCheck": false
+        },
+        "l10n": {
+          "trueText": "Wahr",
+          "falseText": "Falsch",
+          "score": "Du hast @score von @total Punkten erreicht.",
+          "checkAnswer": "Überprüfen",
+          "submitAnswer": "Absenden",
+          "showSolutionButton": "Lösung anzeigen",
+          "tryAgain": "Wiederholen",
+          "wrongAnswerMessage": "Falsche Antwort",
+          "correctAnswerMessage": "Richtige Antwort",
+          "scoreBarLabel": "Du hast :num von :total Punkten erreicht.",
+          "a11yCheck": "Die Antworten überprüfen. Die Antwort wird als richtig, falsch oder unbeantwortet markiert.",
+          "a11yShowSolution": "Die Lösung anzeigen. Die richtige Lösung wird in der Aufgabe angezeigt.",
+          "a11yRetry": "Die Aufgabe wiederholen. Alle Versuche werden zurückgesetzt, und die Aufgabe wird erneut gestartet."
+        },
+        "confirmCheck": {
+          "header": "Beenden?",
+          "body": "Ganz sicher beenden?",
+          "cancelLabel": "Abbrechen",
+          "confirmLabel": "Beenden"
+        },
+        "confirmRetry": {
+          "header": "Wiederholen?",
+          "body": "Ganz sicher wiederholen?",
+          "cancelLabel": "Abbrechen",
+          "confirmLabel": "Bestätigen"
+        },
+        "question": "<p>Lernende werden über einen Avatar in der Lernwelt repäsentiert.</p>\n"
+      },
+      "library": "H5P.TrueFalse 1.8",
+      "metadata": {
+        "contentType": "True/False Question",
+        "license": "U",
+        "title": "Avatar",
+        "authors": [],
+        "changes": [],
+        "extraTitle": "Avatar",
+        "defaultLanguage": "de"
+      },
+      "subContentId": "c4aa8282-d6fb-4493-8eb7-cf01176d95e9"
+    },
+    {
+      "params": {
+        "media": { "disableImageZooming": false },
+        "correct": "true",
+        "behaviour": {
+          "enableRetry": true,
+          "enableSolutionsButton": true,
+          "enableCheckButton": true,
+          "confirmCheckDialog": false,
+          "confirmRetryDialog": false,
+          "autoCheck": false
+        },
+        "l10n": {
+          "trueText": "Wahr",
+          "falseText": "Falsch",
+          "score": "Du hast @score von @total Punkten erreicht.",
+          "checkAnswer": "Überprüfen",
+          "submitAnswer": "Absenden",
+          "showSolutionButton": "Lösung anzeigen",
+          "tryAgain": "Wiederholen",
+          "wrongAnswerMessage": "Falsche Antwort",
+          "correctAnswerMessage": "Richtige Antwort",
+          "scoreBarLabel": "Du hast :num von :total Punkten erreicht.",
+          "a11yCheck": "Die Antworten überprüfen. Die Antwort wird als richtig, falsch oder unbeantwortet markiert.",
+          "a11yShowSolution": "Die Lösung anzeigen. Die richtige Lösung wird in der Aufgabe angezeigt.",
+          "a11yRetry": "Die Aufgabe wiederholen. Alle Versuche werden zurückgesetzt, und die Aufgabe wird erneut gestartet."
+        },
+        "confirmCheck": {
+          "header": "Beenden?",
+          "body": "Ganz sicher beenden?",
+          "cancelLabel": "Abbrechen",
+          "confirmLabel": "Beenden"
+        },
+        "confirmRetry": {
+          "header": "Wiederholen?",
+          "body": "Ganz sicher wiederholen?",
+          "cancelLabel": "Abbrechen",
+          "confirmLabel": "Bestätigen"
+        },
+        "question": "<p>Story-Elemente werden als NPCs in den 3D-Räumen dargestellt.</p>\n"
+      },
+      "library": "H5P.TrueFalse 1.8",
+      "metadata": {
+        "contentType": "True/False Question",
+        "license": "U",
+        "title": "Story Element",
+        "authors": [],
+        "changes": [],
+        "extraTitle": "Story Element",
+        "defaultLanguage": "de"
+      },
+      "subContentId": "fea04884-ea55-4f58-913b-826eb4dd8244"
+    },
+    {
+      "params": {
+        "media": { "disableImageZooming": false },
+        "correct": "false",
+        "behaviour": {
+          "enableRetry": true,
+          "enableSolutionsButton": true,
+          "enableCheckButton": true,
+          "confirmCheckDialog": false,
+          "confirmRetryDialog": false,
+          "autoCheck": false,
+          "feedbackOnWrong": "Story Elemente können im Moment nur als Intro oder Outro eingesetzt werden"
+        },
+        "l10n": {
+          "trueText": "Wahr",
+          "falseText": "Falsch",
+          "score": "Du hast @score von @total Punkten erreicht.",
+          "checkAnswer": "Überprüfen",
+          "submitAnswer": "Absenden",
+          "showSolutionButton": "Lösung anzeigen",
+          "tryAgain": "Wiederholen",
+          "wrongAnswerMessage": "Falsche Antwort",
+          "correctAnswerMessage": "Richtige Antwort",
+          "scoreBarLabel": "Du hast :num von :total Punkten erreicht.",
+          "a11yCheck": "Die Antworten überprüfen. Die Antwort wird als richtig, falsch oder unbeantwortet markiert.",
+          "a11yShowSolution": "Die Lösung anzeigen. Die richtige Lösung wird in der Aufgabe angezeigt.",
+          "a11yRetry": "Die Aufgabe wiederholen. Alle Versuche werden zurückgesetzt, und die Aufgabe wird erneut gestartet."
+        },
+        "confirmCheck": {
+          "header": "Beenden?",
+          "body": "Ganz sicher beenden?",
+          "cancelLabel": "Abbrechen",
+          "confirmLabel": "Beenden"
+        },
+        "confirmRetry": {
+          "header": "Wiederholen?",
+          "body": "Ganz sicher wiederholen?",
+          "cancelLabel": "Abbrechen",
+          "confirmLabel": "Bestätigen"
+        },
+        "question": "<p>Story-Elemente können an beliebigen Stellen im 3D-Lernraum platziert sein. </p>\n"
+      },
+      "library": "H5P.TrueFalse 1.8",
+      "metadata": {
+        "contentType": "True/False Question",
+        "license": "U",
+        "title": "Story Elemente 2",
+        "authors": [],
+        "changes": [],
+        "extraTitle": "Story Elemente 2",
+        "defaultLanguage": "de"
+      },
+      "subContentId": "5ce37b1e-ae18-4431-9b8c-167c53e5985c"
+    }
+  ],
+  "disableBackwardsNavigation": false,
+  "randomQuestions": false,
+  "endGame": {
+    "showResultPage": true,
+    "showSolutionButton": true,
+    "showRetryButton": true,
+    "noResultMessage": "Finished",
+    "message": "Your result:",
+    "scoreBarLabel": "You got @finals out of @totals points",
+    "overallFeedback": [{ "from": 0, "to": 100 }],
+    "solutionButtonText": "Show solution",
+    "retryButtonText": "Retry",
+    "finishButtonText": "Finish",
+    "submitButtonText": "Submit",
+    "showAnimations": false,
+    "skippable": false,
+    "skipButtonText": "Skip video"
+  },
+  "override": { "checkButton": true },
+  "texts": {
+    "prevButton": "Zurück",
+    "nextButton": "Weiter",
+    "finishButton": "Beenden",
+    "submitButton": "Absenden",
+    "textualProgress": "Aktuelle Frage: @current von @total Fragen",
+    "jumpToQuestion": "Frage %d von %total",
+    "questionLabel": "Frage",
+    "readSpeakerProgress": "Frage @current von @total",
+    "unansweredText": "Unbeantwortet",
+    "answeredText": "Beantwortet",
+    "currentQuestionText": "Aktuelle Frage",
+    "navigationLabel": "Fragen"
+  }
+}
