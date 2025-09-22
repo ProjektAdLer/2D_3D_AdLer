@@ -1,3 +1,5 @@
+// Core/Presentation/React/LearningSpaceDisplay/SideBar/SideBarViewModel.ts
+
 import Observable from "src/Lib/Observable";
 import { sideBarButtons, SideBarButtonConfig } from "./SideBarButtons";
 
@@ -12,6 +14,9 @@ export default class SideBarViewModel {
     false,
     false,
   );
+
+  // Add this new property
+  public isMobile: Observable<boolean> = new Observable(false);
 
   // Pagination properties
   public readonly buttonsPerPage = 9;

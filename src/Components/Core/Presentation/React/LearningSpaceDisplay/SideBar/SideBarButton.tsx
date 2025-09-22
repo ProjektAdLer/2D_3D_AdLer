@@ -57,9 +57,6 @@ export default function SideBarButton({
 
   const containerClasses = tailwindMerge(
     "flex h-20 min-h-[5rem] flex-col items-center justify-start",
-    button.desktopOnly
-      ? "mobile-landscape:hidden mobile-portrait:hidden lg:flex"
-      : "",
   );
 
   return (

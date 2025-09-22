@@ -32,6 +32,35 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
   const [enableNarrativeFrameWorkButton] = useObservable<boolean>(
     viewModel?.allowNarrativeFrameworkIntroButtonClick,
   );
+  const [isMobile] = useObservable(viewModel?.isMobile);
+
+  useEffect(() => {
+    if (!viewModel) return;
+
+    const mobileLandscape = window.matchMedia(
+      "only screen and (max-height: 400px) and (orientation: landscape)",
+    );
+    const mobilePortrait = window.matchMedia(
+      "only screen and (max-width: 431px) and (orientation: portrait)",
+    );
+
+    const checkIsMobile = () => {
+      viewModel.isMobile.Value =
+        mobileLandscape.matches || mobilePortrait.matches;
+    };
+
+    checkIsMobile();
+
+    const listener = () => checkIsMobile();
+
+    mobileLandscape.addEventListener("change", listener);
+    mobilePortrait.addEventListener("change", listener);
+
+    return () => {
+      mobileLandscape.removeEventListener("change", listener);
+      mobilePortrait.removeEventListener("change", listener);
+    };
+  }, [viewModel]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -57,6 +86,19 @@ export default function SideBar({ className }: Readonly<AdLerUIComponent>) {
     enableNarrativeFrameWorkButton,
     viewModel?.hasIntroStory,
     viewModel?.hasOutroStory,
+  ]);
+
+  // Update total pages when relevant observables change
+  useEffect(() => {
+    if (viewModel) {
+      viewModel.updateTotalPages();
+    }
+  }, [
+    viewModel,
+    enableNarrativeFrameWorkButton,
+    viewModel?.hasIntroStory,
+    viewModel?.hasOutroStory,
+    isMobile, // Add isMobile to dependency array
   ]);
 
   if (!viewModel || !controller) return null;
