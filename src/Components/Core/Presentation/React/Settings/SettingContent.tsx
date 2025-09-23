@@ -27,7 +27,7 @@ export default function SettingContent({ className }: AdLerUIComponent) {
   );
   return (
     <div
-      className={`flex h-full w-full flex-col items-center overflow-hidden px-4 pt-4 ${className}`}
+      className={`flex h-full w-full flex-col items-center overflow-hidden px-4 pt-4 text-adlerdarkblue ${className}`}
     >
       <div className={"border-b border-gray-500 pb-2 mobile-landscape:ml-6"}>
         <h1 className={tailwindMerge("text-lg font-bold xl:text-2xl")}>
