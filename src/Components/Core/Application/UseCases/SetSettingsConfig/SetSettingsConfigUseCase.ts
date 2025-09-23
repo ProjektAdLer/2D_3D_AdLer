@@ -26,7 +26,10 @@ export default class SetSettingsConfigUseCase
       settingsEntity = {
         volume: settings.volume ?? undefined,
         language: settings.language ?? undefined,
-        graphicsQuality: settings.graphicsQuality ?? undefined,
+        highGraphicsQualityEnabled:
+          settings.highGraphicsQualityEnabled ?? undefined,
+        breakTimeNotificationsEnabled:
+          settings.breakTimeNotificationsEnabled ?? undefined,
       };
       this.entityContainer.useSingletonEntity<SettingsEntity>(
         settingsEntity,
@@ -35,12 +38,16 @@ export default class SetSettingsConfigUseCase
     } else {
       settingsEntity.volume = settings.volume ?? settingsEntity.volume;
       settingsEntity.language = settings.language ?? settingsEntity.language;
-      settingsEntity.graphicsQuality =
-        settings.graphicsQuality ?? settingsEntity.graphicsQuality;
+      settingsEntity.highGraphicsQualityEnabled =
+        settings.highGraphicsQualityEnabled ??
+        settingsEntity.highGraphicsQualityEnabled;
+      settingsEntity.breakTimeNotificationsEnabled =
+        settings.breakTimeNotificationsEnabled ??
+        settingsEntity.breakTimeNotificationsEnabled;
     }
     this.logger.log(
       LogLevelTypes.TRACE,
-      `SetSettingsConfigUseCase: Settings set to: Volume:${settingsEntity.volume}, Language: ${settingsEntity.language}, GraphicsQuality: ${settingsEntity.graphicsQuality}`,
+      `SetSettingsConfigUseCase: Settings set to: Volume:${settingsEntity.volume}, Language: ${settingsEntity.language}, HighGraphicsQualityEnabled: ${settingsEntity.highGraphicsQualityEnabled}, BreakTimeNotificationsEnabled: ${settingsEntity.breakTimeNotificationsEnabled}`,
     );
   }
 }

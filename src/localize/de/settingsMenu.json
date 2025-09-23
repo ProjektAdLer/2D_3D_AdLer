@@ -4,5 +4,8 @@
   "language": "Sprache",
   "languageButtonGerman": "Deutsch",
   "languageButtonEnglish": "English",
-  "qualityLow": "Kompatibilitäts Modus"
+  "qualityLow": "Kompatibilitäts Modus",
+  "testSoundButton": "Lautstärke Testen",
+  "breakTimeNotifications": "Pausen Benachrichtigungen",
+  "breakTimeNotificationsButton": "Erinnere mich, regelmäßig eine Pause zu machen."
 }

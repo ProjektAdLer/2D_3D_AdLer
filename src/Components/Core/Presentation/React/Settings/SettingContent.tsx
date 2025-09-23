@@ -9,6 +9,9 @@ import { useTranslation } from "react-i18next";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import germanIcon from "../../../../../Assets/graphics/german-flag.png";
 import englishIcon from "../../../../../Assets/graphics/english-flag.png";
+import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
+import emptyCheckBox from "../../../../../Assets/icons/empty-box.svg";
+import greenSwosh from "../../../../../Assets/icons/check-solution.svg";
 
 export default function SettingContent({ className }: AdLerUIComponent) {
   const [viewModel, controller] = useBuilder<
@@ -16,6 +19,12 @@ export default function SettingContent({ className }: AdLerUIComponent) {
     SettingContentController
   >(BUILDER_TYPES.ISettingContentBuilder);
   const { t: translate } = useTranslation("settingsMenu");
+  const [highGraphicsQualityEnabled] = useObservable(
+    viewModel.highGraphicsQualityEnabled,
+  );
+  const [breakTimeNotificationsEnabled] = useObservable(
+    viewModel.breakTimeNotificationsEnabled,
+  );
   return (
     <div
       className={`flex h-full w-full flex-col items-center overflow-hidden px-4 pt-4 ${className}`}
@@ -56,7 +65,7 @@ export default function SettingContent({ className }: AdLerUIComponent) {
           {translate("volume")}
         </h1>
       </div>
-      <div className="h-32">
+      <div>
         <RangeSlider
           min={0}
           max={1}
@@ -66,6 +75,19 @@ export default function SettingContent({ className }: AdLerUIComponent) {
           }}
           displayFactor={100}
         />
+        <div className="flex flex-row items-center justify-center pb-8">
+          <StyledButton
+            className="pb-8 text-xs mobile-landscape:bottom-2 mobile-landscape:left-2"
+            onClick={() => {
+              controller.onTestSoundButtonClicked();
+            }}
+            data-testid="testSoundButton"
+            title={translate("testSoundButton").toString()}
+            shape="freeFloatLeft"
+          >
+            {translate("testSoundButton")}
+          </StyledButton>
+        </div>
       </div>
 
       <div className={"border-b border-gray-500 pb-2 mobile-landscape:ml-6"}>
@@ -73,11 +95,58 @@ export default function SettingContent({ className }: AdLerUIComponent) {
           {translate("quality")}
         </h1>
       </div>
-      <div className="h-32">
-        <label>
-          <input type="radio" name="myRadio" value="option1" />
-          {translate("qualityLow")}
-        </label>
+      <div className="w:-full relative flex-row py-4">
+        <img
+          className="absolute w-6 bg-adleryellow lg:w-8 portrait:mx-0.5 portrait:w-4"
+          alt="Empty Graphics Quality Checkbox"
+          data-testid="emptyBoxGraphicsQuality"
+          src={emptyCheckBox}
+          onClick={() => {
+            controller.onGraphicsQualityButtonClicked();
+          }}
+        ></img>
+        {highGraphicsQualityEnabled && (
+          <img
+            src={greenSwosh}
+            alt="Graphics Quality Swosh"
+            data-testid="checkMarkGraphicsQuality"
+            className="absolute w-6 lg:w-8 portrait:mx-0.5 portrait:w-4"
+            onClick={() => {
+              controller.onGraphicsQualityButtonClicked();
+            }}
+          />
+        )}
+        <div className="py-1 pl-10">{translate("qualityLow")}</div>
+      </div>
+      <div className={"border-b border-gray-500 pb-2 mobile-landscape:ml-6"}>
+        <h1 className={tailwindMerge("text-lg font-bold xl:text-2xl")}>
+          {translate("breakTimeNotifications")}
+        </h1>
+      </div>
+      <div className="w:-full relative flex-row py-4">
+        <img
+          className="absolute w-6 bg-adleryellow lg:w-8 portrait:mx-0.5 portrait:w-4"
+          alt="Empty Break Time Notifications Checkbox"
+          data-testid="emptyBoxBreakTimeNotifications"
+          src={emptyCheckBox}
+          onClick={() => {
+            controller.onBreakTimeNotificationsButtonClicked();
+          }}
+        ></img>
+        {breakTimeNotificationsEnabled && (
+          <img
+            src={greenSwosh}
+            alt="Break Time Notifications Swosh"
+            data-testid="checkMarkBreakTimeNotifications"
+            className="absolute w-6 lg:w-8 portrait:mx-0.5 portrait:w-4"
+            onClick={() => {
+              controller.onBreakTimeNotificationsButtonClicked();
+            }}
+          />
+        )}
+        <div className="py-1 pl-10">
+          {translate("breakTimeNotificationsButton")}
+        </div>
       </div>
     </div>
   );

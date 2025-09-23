@@ -1,5 +1,6 @@
 export default class SettingsTO {
   volume?: number;
   language?: string;
-  graphicsQuality?: string;
+  highGraphicsQualityEnabled?: boolean;
+  breakTimeNotificationsEnabled?: boolean;
 }

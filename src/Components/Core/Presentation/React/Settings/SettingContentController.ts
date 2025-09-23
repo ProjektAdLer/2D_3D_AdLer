@@ -35,11 +35,27 @@ export default class SettingContentController
       language: "en",
     });
   }
-  onGraphicsQualityChange(newQuality: string): void {
+  onGraphicsQualityButtonClicked(): void {
     this.viewModel.changedSettings = true;
-    this.viewModel.graphicsQuality.Value = newQuality;
+    this.viewModel.highGraphicsQualityEnabled.Value =
+      !this.viewModel.highGraphicsQualityEnabled.Value;
     this.setSettingsConfigUseCase.execute({
-      graphicsQuality: newQuality,
+      highGraphicsQualityEnabled:
+        this.viewModel.highGraphicsQualityEnabled.Value,
     });
+  }
+
+  onBreakTimeNotificationsButtonClicked(): void {
+    this.viewModel.changedSettings = true;
+    this.viewModel.breakTimeNotificationsEnabled.Value =
+      !this.viewModel.breakTimeNotificationsEnabled.Value;
+    this.setSettingsConfigUseCase.execute({
+      breakTimeNotificationsEnabled:
+        this.viewModel.breakTimeNotificationsEnabled.Value,
+    });
+  }
+
+  onTestSoundButtonClicked(): void {
+    console.log("Test sound button clicked");
   }
 }
