@@ -97,7 +97,7 @@ export default function SettingContent({ className }: AdLerUIComponent) {
       </div>
       <div className="w:-full relative flex-row py-4">
         <img
-          className="absolute w-6 bg-adleryellow lg:w-8 portrait:mx-0.5 portrait:w-4"
+          className="absolute w-6 lg:w-8 portrait:mx-0.5 portrait:w-4"
           alt="Empty Graphics Quality Checkbox"
           data-testid="emptyBoxGraphicsQuality"
           src={emptyCheckBox}
