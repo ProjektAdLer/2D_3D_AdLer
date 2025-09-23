@@ -123,7 +123,7 @@ export default function WelcomePage() {
         {translate("copyright")}
       </p>
       <StyledButton
-        className="mobile absolute bottom-8 left-4 !px-2 !py-1 text-xs mobile-landscape:bottom-2 mobile-landscape:left-2 mobile-portrait:bottom-2 mobile-portrait:left-2 mobile-portrait:!pr-0"
+        className="mobile absolute bottom-8 left-4 !px-2 !py-1 text-xs font-bold mobile-landscape:bottom-2 mobile-landscape:left-2 mobile-portrait:bottom-2 mobile-portrait:left-2 mobile-portrait:!pr-0"
         onClick={() => {
           history.push("/settings");
         }}
