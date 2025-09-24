@@ -26,6 +26,7 @@ import {
   AvatarNoseTexture,
 } from "../../../../../Core/Domain/AvatarModels/AvatarFaceUVTexture";
 import AvatarModelTransforms from "../../../../../Core/Domain/AvatarModels/AvatarModelTransforms";
+import { AvatarNoneModel } from "../../../../../Core/Domain/AvatarModels/AvatarModelTypes";
 
 const loadAvatarConfigMock = mock<ILoadAvatarConfigUseCase>();
 const scenePresenterMock = mockDeep<IScenePresenter>();
@@ -600,5 +601,34 @@ describe("AvatarEditorPreviewModelView", () => {
       viewModel.hairAnchorNode,
     );
     expect(viewModel.hairMeshes.get("hair-backhead")![0].isVisible).toBe(true);
+  });
+
+  test("updateModel resolves if model is undefined", async () => {
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    setupScenePresenterMockLoadingResults();
+    const result = systemUnderTest["updateModel"](
+      null,
+      "hair/hairstyle",
+      new Map([
+        ["hair-backhead", [new Mesh("TestMesh", new Scene(new NullEngine()))]],
+      ]),
+      viewModel.hairAnchorNode,
+    );
+    await expect(result).resolves.toBe(undefined);
+  });
+
+  test("updateModel sets visibility of models to false if model is of type none", async () => {
+    const [viewModel, systemUnderTest] = buildSystemUnderTest();
+    setupScenePresenterMockLoadingResults();
+    const mesh = new Mesh("TestMesh", new Scene(new NullEngine()));
+    mesh.isVisible = true;
+    const modelMap = new Map([["hair-backhead", [mesh]]]);
+    await systemUnderTest["updateModel"](
+      AvatarNoneModel.None,
+      "hair/hairstyle",
+      modelMap,
+      viewModel.hairAnchorNode,
+    );
+    expect(mesh.isVisible).toBe(false);
   });
 });

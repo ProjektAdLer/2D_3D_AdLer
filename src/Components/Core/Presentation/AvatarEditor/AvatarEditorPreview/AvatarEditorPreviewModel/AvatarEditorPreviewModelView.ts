@@ -386,6 +386,9 @@ export default class AvatarEditorPreviewModelView {
         ),
       );
       modelMap.set(newModel, result!.meshes as Mesh[]);
+      result!.meshes.forEach((mesh) => {
+        this.scenePresenter.ShadowGenerator.addShadowCaster(mesh);
+      });
     }
 
     // set all meshes to invisible except the new model

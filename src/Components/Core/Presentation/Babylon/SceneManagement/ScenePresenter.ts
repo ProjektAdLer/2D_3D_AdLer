@@ -10,6 +10,7 @@ import {
   HighlightLayer,
   IInspectorOptions,
   ISceneLoaderAsyncResult,
+  ShadowGenerator,
 } from "@babylonjs/core";
 import { injectable } from "inversify";
 import AbstractSceneDefinition from "./Scenes/AbstractSceneDefinition";
@@ -47,6 +48,10 @@ export default class ScenePresenter implements IScenePresenter {
 
   get NavigationMeshes(): Mesh[] {
     return this.navigationMeshes as Mesh[];
+  }
+
+  get ShadowGenerator(): ShadowGenerator {
+    return this.sceneDefinition.ShadowGenerator;
   }
 
   constructor(private sceneDefinition: AbstractSceneDefinition) {}

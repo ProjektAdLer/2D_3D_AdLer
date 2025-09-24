@@ -1,4 +1,10 @@
-import { Engine, HighlightLayer, Scene, SceneOptions } from "@babylonjs/core";
+import {
+  Engine,
+  HighlightLayer,
+  Scene,
+  SceneOptions,
+  ShadowGenerator,
+} from "@babylonjs/core";
 import { Inspector } from "@babylonjs/inspector";
 import { injectable } from "inversify";
 import { config } from "src/config";
@@ -36,6 +42,12 @@ export default abstract class AbstractSceneDefinition {
    **/
   get HighlightLayer(): HighlightLayer {
     return this.highlightLayer;
+  }
+
+  protected shadowGenerator: ShadowGenerator;
+
+  get ShadowGenerator(): ShadowGenerator {
+    return this.shadowGenerator;
   }
 
   /**

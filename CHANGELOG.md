@@ -38,6 +38,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 - fixed enabled button for narrative framework, if no narrative framework exists in learning world
 - fixed multiple open modals in learning space
+- fixed casting of shadows in avatar editor
 
 ### Deprecated
 

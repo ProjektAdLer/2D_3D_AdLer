@@ -9,6 +9,7 @@ import {
   HighlightLayer,
   IInspectorOptions,
   ISceneLoaderAsyncResult,
+  ShadowGenerator,
 } from "@babylonjs/core";
 
 export default interface IScenePresenter {
@@ -20,6 +21,8 @@ export default interface IScenePresenter {
    * @returns all registered meshes in the scene that are marked to influence the navigation.
    */
   get NavigationMeshes(): Mesh[];
+
+  get ShadowGenerator(): ShadowGenerator;
 
   /**
    * Creates a new scene with the given CreateSceneClass configuration.
@@ -46,7 +49,7 @@ export default interface IScenePresenter {
   loadModel(
     url: string,
     isRelevantForNavigation?: boolean,
-    onProgress?: Nullable<(event: ISceneLoaderProgressEvent) => void>
+    onProgress?: Nullable<(event: ISceneLoaderProgressEvent) => void>,
   ): Promise<AbstractMesh[]>;
 
   /**
@@ -59,7 +62,7 @@ export default interface IScenePresenter {
   loadGLTFModel(
     url: string,
     isRelevantForNavigation?: boolean,
-    onProgress?: Nullable<(event: ISceneLoaderProgressEvent) => void>
+    onProgress?: Nullable<(event: ISceneLoaderProgressEvent) => void>,
   ): Promise<ISceneLoaderAsyncResult>;
 
   /**
