@@ -1,0 +1,58 @@
+import { inject, injectable } from "inversify";
+import CORE_TYPES from "~DependencyInjection/CoreTypes";
+import IGetSettingsConfigUseCase from "./IGetSettingsConfigUseCase";
+import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
+import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
+import SettingsTO from "../../DataTransferObjects/SettingsTO";
+import SettingsEntity from "src/Components/Core/Domain/Entities/SettingsEntity";
+import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
+
+@injectable()
+export default class GetSettingsConfigUseCase
+  implements IGetSettingsConfigUseCase
+{
+  constructor(
+    @inject(CORE_TYPES.ILogger)
+    private logger: ILoggerPort,
+    @inject(CORE_TYPES.IEntityContainer)
+    private entityContainer: IEntityContainer,
+  ) {}
+
+  execute(): SettingsTO {
+    let settingsEntity =
+      this.entityContainer.getEntitiesOfType<SettingsEntity>(SettingsEntity)[0];
+
+    let settings = new SettingsTO();
+    if (settingsEntity.breakTimeNotificationsEnabled === undefined) {
+      settings.breakTimeNotificationsEnabled = true;
+    } else {
+      settings.breakTimeNotificationsEnabled =
+        settingsEntity.breakTimeNotificationsEnabled;
+    }
+
+    if (settingsEntity.highGraphicsQualityEnabled === undefined) {
+      settings.highGraphicsQualityEnabled = true;
+    } else {
+      settings.highGraphicsQualityEnabled =
+        settingsEntity.highGraphicsQualityEnabled;
+    }
+
+    if (settingsEntity.language === undefined) {
+      settings.language = "de";
+    } else {
+      settings.language = settingsEntity.language;
+    }
+
+    if (settingsEntity.volume === undefined) {
+      settings.volume = 50;
+    } else {
+      settings.volume = settingsEntity.volume;
+    }
+
+    this.logger.log(
+      LogLevelTypes.TRACE,
+      `GetSettingsConfigUseCase: User got settings: ${settings}.`,
+    );
+    return settings;
+  }
+}
