@@ -88,7 +88,6 @@ export default class AvatarEditorPreviewCameraPresenter
   @bind
   private zoomOut() {
     const camera = this.viewModel.camera.Value;
-    console.log(camera.radius, this.finalZoom);
     if (camera.radius < this.initialZoom) {
       camera.radius += this.zoomStep;
     } else {
