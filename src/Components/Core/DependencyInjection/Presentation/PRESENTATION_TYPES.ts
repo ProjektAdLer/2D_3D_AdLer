@@ -39,6 +39,9 @@ const PRESENTATION_TYPES = {
   IProgressScorePanelPresenter: Symbol("IProgressScorePanelPresenter"),
   ILevelUpModalPresenter: Symbol("LevelUpModalPresenter"),
   IBadgeOverviewModalPresenter: Symbol("IBadgeOverviewModalPresenter"),
+  IAvatarEditorPreviewCameraPresenter: Symbol(
+    "IAvatarEditorPreviewCameraPresenter",
+  ),
 };
 
 export default PRESENTATION_TYPES;

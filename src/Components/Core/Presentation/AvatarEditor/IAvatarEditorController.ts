@@ -5,4 +5,6 @@ export default interface IAvatarEditorController {
   saveAvatarConfig(): void;
   resetAvatarConfig(): void;
   randomizeAvatarConfig(): void;
+  zoomIn(): void;
+  zoomOut(): void;
 }

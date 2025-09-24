@@ -22,6 +22,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - Story NPCs exit space after story sequence if author configured it
 - added functionality to enter other available learning spaces on exiting learning space
 - expaned choice of learning spaces in exit modal
+- added automatic zoom in to avatar face in avatar editor if face is customized
 
 ### Changed
 

@@ -7,8 +7,13 @@ import ISaveAvatarConfigUseCase from "../../Application/UseCases/SaveAvatarConfi
 import ILoadAvatarConfigUseCase from "../../Application/UseCases/LoadAvatarConfig/ILoadAvatarConfigUseCase";
 import AvatarEditorViewModel from "./AvatarEditorViewModel";
 import IRandomizeAvatarConfigUseCase from "../../Application/UseCases/RandomizeAvatarConfig/IRandomizeAvatarConfigUseCase";
+import IAvatarEditorPreviewCameraPresenter from "./AvatarEditorPreview/AvatarEditorPreviewCamera/IAvatarEditorPreviewCameraPresenter";
+import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
 
 export default class AvatarEditorController implements IAvatarEditorController {
+  private avatarEditorPreviewCameraPresenter: IAvatarEditorPreviewCameraPresenter | null =
+    null;
+
   constructor(private viewModel: AvatarEditorViewModel) {}
 
   onAvatarConfigChanged(changes: Partial<AvatarConfigTO>): void {
@@ -42,5 +47,17 @@ export default class AvatarEditorController implements IAvatarEditorController {
     ).executeAsync(newConfig);
 
     this.viewModel.hasChanged.Value = true;
+  }
+
+  zoomIn(): void {
+    CoreDIContainer.get<IAvatarEditorPreviewCameraPresenter>(
+      PRESENTATION_TYPES.IAvatarEditorPreviewCameraPresenter,
+    ).zoomInOnFace();
+  }
+
+  zoomOut(): void {
+    CoreDIContainer.get<IAvatarEditorPreviewCameraPresenter>(
+      PRESENTATION_TYPES.IAvatarEditorPreviewCameraPresenter,
+    ).zoomOutOnFace();
   }
 }
