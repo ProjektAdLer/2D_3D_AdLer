@@ -8,6 +8,8 @@ import INotificationPort from "../../Application/Ports/Interfaces/INotificationP
 import NotificationPort from "../../Application/Ports/NotificationPort/NotificationPort";
 import PORT_TYPES from "./PORT_TYPES";
 import AvatarPort from "../../Application/Ports/AvatarPort/AvatarPort";
+import ISettingsPort from "../../Application/Ports/Interfaces/ISettingsPort";
+import SettingsPort from "../../Application/Ports/SettingsPort/SettingsPort";
 
 const PortsDIContainer = new ContainerModule((bind) => {
   bind<ILearningWorldPort>(PORT_TYPES.ILearningWorldPort)
@@ -20,6 +22,10 @@ const PortsDIContainer = new ContainerModule((bind) => {
 
   bind<INotificationPort>(PORT_TYPES.INotificationPort)
     .to(NotificationPort)
+    .inSingletonScope();
+
+  bind<ISettingsPort>(PORT_TYPES.ISettingsPort)
+    .to(SettingsPort)
     .inSingletonScope();
 });
 

@@ -6,6 +6,8 @@ import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IE
 import SettingsTO from "../../DataTransferObjects/SettingsTO";
 import SettingsEntity from "src/Components/Core/Domain/Entities/SettingsEntity";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
+import type ISettingsPort from "../../Ports/Interfaces/ISettingsPort";
+import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 
 @injectable()
 export default class GetSettingsConfigUseCase
@@ -16,13 +18,27 @@ export default class GetSettingsConfigUseCase
     private logger: ILoggerPort,
     @inject(CORE_TYPES.IEntityContainer)
     private entityContainer: IEntityContainer,
+    @inject(PORT_TYPES.ISettingsPort)
+    private settingsPort: ISettingsPort,
   ) {}
 
   execute(): SettingsTO {
     let settingsEntity =
       this.entityContainer.getEntitiesOfType<SettingsEntity>(SettingsEntity)[0];
-
     let settings = new SettingsTO();
+
+    if (!settingsEntity) {
+      settingsEntity = {
+        volume: undefined,
+        language: undefined,
+        highGraphicsQualityEnabled: undefined,
+        breakTimeNotificationsEnabled: undefined,
+      };
+      this.entityContainer.useSingletonEntity<SettingsEntity>(
+        settingsEntity,
+        SettingsEntity,
+      );
+    }
     if (settingsEntity.breakTimeNotificationsEnabled === undefined) {
       settings.breakTimeNotificationsEnabled = true;
     } else {
@@ -53,6 +69,7 @@ export default class GetSettingsConfigUseCase
       LogLevelTypes.TRACE,
       `GetSettingsConfigUseCase: User got settings: ${settings}.`,
     );
+    this.settingsPort.onSettingsUpdated(settings);
     return settings;
   }
 }

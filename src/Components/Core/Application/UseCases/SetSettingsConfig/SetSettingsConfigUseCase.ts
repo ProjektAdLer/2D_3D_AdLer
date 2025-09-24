@@ -6,6 +6,8 @@ import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import ISetSettingsConfigUseCase from "./ISetSettingsConfigUseCase";
 import SettingsTO from "../../DataTransferObjects/SettingsTO";
 import SettingsEntity from "src/Components/Core/Domain/Entities/SettingsEntity";
+import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
+import type ISettingsPort from "../../Ports/Interfaces/ISettingsPort";
 
 @injectable()
 export default class SetSettingsConfigUseCase
@@ -16,6 +18,8 @@ export default class SetSettingsConfigUseCase
     private logger: ILoggerPort,
     @inject(CORE_TYPES.IEntityContainer)
     private entityContainer: IEntityContainer,
+    @inject(PORT_TYPES.ISettingsPort)
+    private settingsPort: ISettingsPort,
   ) {}
 
   execute(settings: SettingsTO): void {
