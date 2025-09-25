@@ -9,6 +9,7 @@ import {
   AvatarMouthTexture,
   AvatarNoseTexture,
 } from "src/Components/Core/Domain/AvatarModels/AvatarFaceUVTexture";
+import { useEffect } from "react";
 
 const eyebrowsThumbnails = Object.values(AvatarEyeBrowTexture).map<{
   id: number;
@@ -66,6 +67,14 @@ export default function AvatarEditorFaceCategory(
   const [eyeType] = useObservable(props.viewModel.eyes);
   const [noseType] = useObservable(props.viewModel.nose);
   const [mouthType] = useObservable(props.viewModel.mouth);
+
+  useEffect(() => {
+    props.controller.zoomIn();
+    return () => {
+      props.controller.zoomOut();
+    };
+    // eslint-disable-next-line
+  }, []);
 
   const TileGridEyebrows = () => {
     return (

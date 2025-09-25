@@ -1,8 +1,11 @@
 {
   "volume": "Lautstärke",
-  "quality": "Graphik Qualität",
+  "quality": "Grafikqualität",
   "language": "Sprache",
   "languageButtonGerman": "Deutsch",
   "languageButtonEnglish": "English",
-  "qualityLow": "Kompatibilitäts Modus"
+  "qualityLow": "Kompatibilitätsmodus",
+  "testSoundButton": "Lautstärke Testen",
+  "breakTimeNotifications": "Pausenbenachrichtigungen",
+  "breakTimeNotificationsButton": "Erinnere mich, regelmäßig eine Pause zu machen."
 }

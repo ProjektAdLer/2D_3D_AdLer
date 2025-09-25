@@ -22,6 +22,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - Story NPCs exit space after story sequence if author configured it
 - added functionality to enter other available learning spaces on exiting learning space
 - expaned choice of learning spaces in exit modal
+- added automatic zoom in to avatar face in avatar editor if face is customized
 
 ### Changed
 
@@ -37,6 +38,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 - fixed enabled button for narrative framework, if no narrative framework exists in learning world
 - fixed multiple open modals in learning space
+- fixed casting of shadows in avatar editor
 
 ### Deprecated
 
@@ -349,7 +351,6 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 ### Added
 
 - Adaptivity Element:
-
   - specific icon for adaptivity element.
   - 3D representation of NPC.
   - 2D representation of NPC.

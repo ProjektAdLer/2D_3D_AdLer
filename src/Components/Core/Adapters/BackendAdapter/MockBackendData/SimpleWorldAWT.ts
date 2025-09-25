@@ -26,10 +26,11 @@ const SimpleWorldAWT: AWT = {
     spaces: [
       {
         spaceId: 1,
-        spaceName: "Mensa Theme",
-        spaceDescription: "Raumbeschreibung der kleinen Welt",
-        requiredPointsToComplete: 1,
-        spaceSlotContents: [null, null, null, 4],
+        spaceName: "Lernelemente Demo-Raum",
+        spaceDescription:
+          "Demonstrationsraum mit allen Standard-Lernelementtypen",
+        requiredPointsToComplete: 3,
+        spaceSlotContents: [1, 2, 3, 4, 5, 6, 7, 8, 9, null, null, null, null],
         requiredSpacesToEnter: "",
         spaceGoals: [
           "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor ",
@@ -140,7 +141,7 @@ const SimpleWorldAWT: AWT = {
       },
       {
         $type: "LearningElement",
-        elementId: 7,
+        elementId: 8,
         elementName: "Ein zweites PDF-Lernelement",
         elementCategory: "pdf",
         elementDescription: "Beschreibung des PDF-Lernelements",
@@ -151,7 +152,7 @@ const SimpleWorldAWT: AWT = {
       },
       {
         $type: "LearningElement",
-        elementId: 8,
+        elementId: 7,
         elementName: "Ein zweites Video-Lernelement",
         elementCategory: "video",
         elementDescription: "Beschreibung des Video-Lernelements",

@@ -5,7 +5,13 @@ export default class SettingContentViewModel {
 
   language: Observable<string> = new Observable<string>("de");
 
-  graphicsQuality: Observable<string> = new Observable<string>("high");
+  highGraphicsQualityEnabled: Observable<boolean> = new Observable<boolean>(
+    true,
+  );
+
+  breakTimeNotificationsEnabled: Observable<boolean> = new Observable<boolean>(
+    true,
+  );
 
   changedSettings: boolean = false;
 }

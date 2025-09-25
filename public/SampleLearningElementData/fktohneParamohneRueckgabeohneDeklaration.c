@@ -1,22 +1,23 @@
+/*
+ * Demo C-Datei für AdLer Learning Elements
+ * Diese Datei zeigt eine einfache C-Funktion ohne Parameter und Rückgabewert
+ */
+
 #include <stdio.h>
 
-/* Deklaration der Funktion ausgabe */
-void ausgabe();
-
-/* Definition der Funktion main*/
-int main()
-{
-	printf("Vor dem Aufruf der Funktion ausgabe()\n");
-	ausgabe( ); /* Aufruf der Funktion Ausgabe */
-	printf("Nach dem Aufruf der Funktion ausgabe()\n");
-	return(0); /* Wertrueckgabe aus einer Funktion */
+// Funktion ohne Parameter und ohne Rückgabewert (void)
+void sayHello() {
+    printf("Hallo aus dem AdLer Learning Element!\n");
+    printf("Dies ist eine einfache C-Funktion.\n");
+    printf("Sie hat keine Parameter und keinen Rückgabewert.\n");
 }
 
-/* Definition der Funktion ausgabe */
-void ausgabe()
-{
-	printf("Funktion ausgabe() wird aufgerufen\n");
+int main() {
+    printf("--- AdLer Demo Programm ---\n");
+    
+    // Aufruf der Funktion ohne Parameter
+    sayHello();
+    
+    printf("Programm beendet.\n");
+    return 0;
 }
-
-/* Definiton der Funktion eineEwigLangerNameFuerEineFunktionDieNichtAufgerufenWirdWeilSieNichtRelevantIst */
-void eineEwigLangerNameFuerEineFunktionDieNichtAufgerufenWirdWeilSieNichtRelevantIst() {};

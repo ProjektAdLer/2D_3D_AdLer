@@ -1,5 +1,13 @@
 import { mock } from "jest-mock-extended";
-import { HighlightLayer, NullEngine, Scene } from "@babylonjs/core";
+import {
+  DirectionalLight,
+  HighlightLayer,
+  Light,
+  NullEngine,
+  Scene,
+  ShadowGenerator,
+  Vector3,
+} from "@babylonjs/core";
 import { config } from "../../../../../../config";
 import AbstractSceneDefinition from "../../../../../Core/Presentation/Babylon/SceneManagement/Scenes/AbstractSceneDefinition";
 import { Inspector } from "@babylonjs/inspector";
@@ -50,6 +58,16 @@ describe("AbstractSceneDefinition", () => {
     systemUnderTest["highlightLayer"] = mockedHighlightLayer;
 
     expect(systemUnderTest.HighlightLayer).toBe(mockedHighlightLayer);
+  });
+
+  test("ShadowGenerator getter returns private shadowGenerator member", () => {
+    const mockedShadowGenerator = new ShadowGenerator(
+      1024,
+      new DirectionalLight("keyLight", new Vector3(0, 0, 0)),
+    );
+    systemUnderTest["shadowGenerator"] = mockedShadowGenerator;
+
+    expect(systemUnderTest.ShadowGenerator).toBe(mockedShadowGenerator);
   });
 
   test("createScene instantiates a scene object", async () => {

@@ -68,10 +68,20 @@ export default class AvatarEditorPreviewSceneDefinition extends AbstractSceneDef
     keyLight.parent = this.scene.activeCamera;
     fillLight.parent = this.scene.activeCamera;
 
+    // Shadow Generator needs to be defined before it is used in previewmodelBuilder
+    this.shadowGenerator = new ShadowGenerator(1024, keyLight);
+    this.shadowGenerator.useBlurExponentialShadowMap = true;
+    this.shadowGenerator.blurScale = 10;
+    this.shadowGenerator.darkness = 0.6;
+
     // Avatar Placeholder
     let avatarMeshes: Mesh[];
     await this.director.buildAsync(this.previewModelBuilder);
     avatarMeshes = this.previewModelBuilder.getViewModel()!.baseModelMeshes;
+
+    avatarMeshes!.forEach((mesh) => {
+      this.shadowGenerator.addShadowCaster(mesh);
+    });
 
     // Ground Plane
     const groundPlane = MeshBuilder.CreatePlane(
@@ -117,15 +127,6 @@ export default class AvatarEditorPreviewSceneDefinition extends AbstractSceneDef
       this.scene,
     );
     background.material = backgroundMat;
-
-    // Shadow Generator
-    const shadowGenerator = new ShadowGenerator(1024, keyLight);
-    avatarMeshes!.forEach((mesh) => {
-      shadowGenerator.addShadowCaster(mesh);
-    });
-    shadowGenerator.useBlurExponentialShadowMap = true;
-    shadowGenerator.blurScale = 10;
-    shadowGenerator.darkness = 0.6;
 
     // this.scene.debugLayer.show();
   }

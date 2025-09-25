@@ -5,6 +5,7 @@ import welcomeVideo from "../../../../../../Assets/graphics/anim-adler-welcome.w
 import welcomePicture from "../../../../../../Assets/graphics/welcome-screen-greeting.png";
 import learningEngineIcon from "../../../../../../Assets/graphics/learning-engine.png";
 import avatarEditorIcon from "../../../../../../Assets/graphics/avatar-editor.png";
+import settingsIcon from "../../../../../../Assets/icons/settings.svg";
 import avatarButtonBackground from "../../../../../../Assets/misc/WelcomeScreenButtonBackgrounds/AvatarEditorButtonBackground.jpg";
 import learningWorldMenuButtonBackground from "../../../../../../Assets/misc/WelcomeScreenButtonBackgrounds/LearningWorldButtonBackground.jpg";
 import HelpDeskButton from "~ReactComponents/GeneralComponents/HelpDeskButton/HelpDeskButton";
@@ -122,15 +123,16 @@ export default function WelcomePage() {
         {translate("copyright")}
       </p>
       <StyledButton
-        className="absolute bottom-8 left-4 !px-2 !py-1 text-xs mobile-landscape:bottom-2 mobile-landscape:left-2"
+        className="mobile absolute bottom-8 left-4 !px-2 !py-1 text-xs font-bold mobile-landscape:bottom-2 mobile-landscape:left-2 mobile-portrait:bottom-2 mobile-portrait:left-2 mobile-portrait:!pr-0"
         onClick={() => {
           history.push("/settings");
         }}
+        icon={settingsIcon}
         data-testid="settingsButton"
         title={translate("settingButtonToolTip").toString()}
-        shape="freeFloatLeft"
+        shape={"freeFloatCenter"}
       >
-        {translate("settingTitle")}
+        <p className="mobile-portrait:hidden">{translate("settingTitle")}</p>
       </StyledButton>
     </div>
   );

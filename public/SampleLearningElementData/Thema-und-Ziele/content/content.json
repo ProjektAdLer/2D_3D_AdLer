@@ -1,0 +1,280 @@
+{
+  "presentation": {
+    "slides": [
+      {
+        "elements": [
+          {
+            "x": 28.92179546506247,
+            "y": 4.570383912248628,
+            "width": 40.49051365108746,
+            "height": 15.9963436928702,
+            "action": {
+              "library": "H5P.AdvancedText 1.1",
+              "params": {
+                "text": "<h2 style=\"text-align:center\"><span style=\"color:#ecf0f1\">Thema von AdLer </span></h2>\n"
+              },
+              "subContentId": "cd4b9457-0761-4897-a878-df7aaa476260",
+              "metadata": {
+                "contentType": "Text",
+                "license": "U",
+                "title": "Untitled Text",
+                "authors": [],
+                "changes": []
+              }
+            },
+            "alwaysDisplayComments": false,
+            "backgroundOpacity": 0,
+            "displayAsButton": false,
+            "buttonSize": "big",
+            "goToSlideType": "specified",
+            "invisible": false,
+            "solution": ""
+          },
+          {
+            "x": 8.714596949891067,
+            "y": 32.27631972491968,
+            "width": 82.13789912077742,
+            "height": 34.27787934186471,
+            "action": {
+              "library": "H5P.AdvancedText 1.1",
+              "params": {
+                "text": "<p><span style=\"color:#ecf0f1\">Serious Games bieten als vielversprechendes Beispiel von Game-based Learning für die Lehre großes Potential hinsichtlich dem Thema Motivationsförderung. Um dieses Thema zu adressieren, bietet das AdLer-Autorentool Lehrenden die Möglichkeit, virtuelle 3D-Lernumgebungen zu entwerfen und zu generieren. In diesen können Lernende nach den Prinzipien des Game-based Learning mit Lerninhalten interagieren. </span></p>\n"
+              },
+              "subContentId": "1fbf49ea-7680-408a-84e2-887af745afc7",
+              "metadata": {
+                "contentType": "Text",
+                "license": "U",
+                "title": "Untitled Text",
+                "authors": [],
+                "changes": []
+              }
+            },
+            "alwaysDisplayComments": false,
+            "backgroundOpacity": 0,
+            "displayAsButton": false,
+            "buttonSize": "big",
+            "goToSlideType": "specified",
+            "invisible": false,
+            "solution": ""
+          }
+        ],
+        "keywords": [],
+        "slideBackgroundSelector": {}
+      },
+      {
+        "elements": [
+          {
+            "x": 28.92179546506247,
+            "y": 4.570383912248628,
+            "width": 40.49051365108746,
+            "height": 15.9963436928702,
+            "action": {
+              "library": "H5P.AdvancedText 1.1",
+              "params": {
+                "text": "<h2 style=\"text-align:center\"><span style=\"color:#ecf0f1\">Ziele von AdLer </span></h2>\n"
+              },
+              "subContentId": "5e4b5acb-1a1d-4b02-a34a-d5873818adbc",
+              "metadata": {
+                "contentType": "Text",
+                "license": "U",
+                "title": "Untitled Text",
+                "authors": [],
+                "changes": []
+              }
+            },
+            "alwaysDisplayComments": false,
+            "backgroundOpacity": 0,
+            "displayAsButton": false,
+            "buttonSize": "big",
+            "goToSlideType": "specified",
+            "invisible": false,
+            "solution": ""
+          },
+          {
+            "x": 9.254974548819991,
+            "y": 20.566727605118828,
+            "width": 82.13789912077742,
+            "height": 59.41499085923217,
+            "action": {
+              "library": "H5P.AdvancedText 1.1",
+              "params": {
+                "text": "<p><span style=\"color:#ecf0f1\">Für Lehrende:</span></p>\n\n<ul>\n\t<li><span style=\"color:#ecf0f1\">Lehrende erschaffen immersive, vernetzte virtuelle Lernräume </span></li>\n\t<li><span style=\"color:#ecf0f1\">Lehrende verwirklichen ihre eigenen didaktischen Lehransätze mit dem einfach zu erlernenden Autorentool </span><br />\n\t </li>\n</ul>\n\n<p><span style=\"color:#ecf0f1\">Für Studierende:</span></p>\n\n<ul>\n\t<li><span style=\"color:#ecf0f1\">Lernende werden durch immersive Lernwelten aktiviert, motiviert und erleben einen Flow </span></li>\n\t<li><span style=\"color:#ecf0f1\">Lernende lernen individuell und flexibel </span></li>\n</ul>\n"
+              },
+              "subContentId": "1d75a615-9add-4d1d-b799-eb64ea073620",
+              "metadata": {
+                "contentType": "Text",
+                "license": "U",
+                "title": "Untitled Text",
+                "authors": [],
+                "changes": []
+              }
+            },
+            "alwaysDisplayComments": false,
+            "backgroundOpacity": 0,
+            "displayAsButton": false,
+            "buttonSize": "big",
+            "goToSlideType": "specified",
+            "invisible": false,
+            "solution": ""
+          }
+        ],
+        "keywords": [],
+        "slideBackgroundSelector": {}
+      },
+      {
+        "elements": [
+          {
+            "x": 24.294308190652476,
+            "y": 27.42230347349177,
+            "width": 48.58861638130495,
+            "height": 43.41864716636197,
+            "action": {
+              "library": "H5P.SingleChoiceSet 1.11",
+              "params": {
+                "choices": [
+                  {
+                    "subContentId": "202f2ab2-023c-4ea4-846e-7a3a434bab93",
+                    "question": "<p>Waren die Informationen verständlich? </p>\n",
+                    "answers": ["<p>Ja</p>\n", "<p>Nein</p>\n"]
+                  }
+                ],
+                "overallFeedback": [
+                  { "from": 0, "to": 50 },
+                  { "from": 51, "to": 100 }
+                ],
+                "behaviour": {
+                  "autoContinue": true,
+                  "timeoutCorrect": 2000,
+                  "timeoutWrong": 3000,
+                  "soundEffectsEnabled": true,
+                  "enableRetry": true,
+                  "enableSolutionsButton": true,
+                  "passPercentage": 100
+                },
+                "l10n": {
+                  "nextButtonLabel": "Next question",
+                  "showSolutionButtonLabel": "Show solution",
+                  "retryButtonLabel": "Retry",
+                  "solutionViewTitle": "Solution list",
+                  "correctText": "Correct!",
+                  "incorrectText": "Incorrect!",
+                  "shouldSelect": "Should have been selected",
+                  "shouldNotSelect": "Should not have been selected",
+                  "muteButtonLabel": "Mute feedback sound",
+                  "closeButtonLabel": "Close",
+                  "slideOfTotal": "Slide :num of :total",
+                  "scoreBarLabel": "You got :num out of :total points",
+                  "solutionListQuestionNumber": "Question :num",
+                  "a11yShowSolution": "Show the solution. The task will be marked with its correct solution.",
+                  "a11yRetry": "Retry the task. Reset all responses and start the task over again."
+                }
+              },
+              "subContentId": "b5bbf1c3-fbb0-4dc2-b01d-4fee14008cb0",
+              "metadata": {
+                "contentType": "Single Choice Set",
+                "license": "U",
+                "title": "Waren die Informationen verständlich?",
+                "authors": [],
+                "changes": [],
+                "extraTitle": "Waren die Informationen verständlich?"
+              }
+            },
+            "alwaysDisplayComments": false,
+            "backgroundOpacity": 100,
+            "displayAsButton": false,
+            "buttonSize": "big",
+            "goToSlideType": "specified",
+            "invisible": false,
+            "solution": ""
+          }
+        ],
+        "keywords": [],
+        "slideBackgroundSelector": {}
+      }
+    ],
+    "keywordListEnabled": true,
+    "globalBackgroundSelector": {
+      "imageGlobalBackground": {
+        "path": "images/image-jWWs8wx9.jpg",
+        "mime": "image/jpeg",
+        "copyright": { "license": "U" },
+        "width": 2200,
+        "height": 1080
+      }
+    },
+    "keywordListAlwaysShow": false,
+    "keywordListAutoHide": false,
+    "keywordListOpacity": 90
+  },
+  "override": {
+    "activeSurface": false,
+    "hideSummarySlide": false,
+    "summarySlideSolutionButton": true,
+    "summarySlideRetryButton": true,
+    "enablePrintButton": false,
+    "social": {
+      "showFacebookShare": false,
+      "facebookShare": {
+        "url": "@currentpageurl",
+        "quote": "I scored @score out of @maxScore on a task at @currentpageurl."
+      },
+      "showTwitterShare": false,
+      "twitterShare": {
+        "statement": "I scored @score out of @maxScore on a task at @currentpageurl.",
+        "url": "@currentpageurl",
+        "hashtags": "h5p, course"
+      },
+      "showGoogleShare": false,
+      "googleShareUrl": "@currentpageurl"
+    }
+  },
+  "l10n": {
+    "slide": "Slide",
+    "score": "Score",
+    "yourScore": "Your Score",
+    "maxScore": "Max Score",
+    "total": "Total",
+    "totalScore": "Total Score",
+    "showSolutions": "Show solutions",
+    "retry": "Retry",
+    "exportAnswers": "Export text",
+    "hideKeywords": "Hide sidebar navigation menu",
+    "showKeywords": "Show sidebar navigation menu",
+    "fullscreen": "Fullscreen",
+    "exitFullscreen": "Exit fullscreen",
+    "prevSlide": "Previous slide",
+    "nextSlide": "Next slide",
+    "currentSlide": "Current slide",
+    "lastSlide": "Last slide",
+    "solutionModeTitle": "Exit solution mode",
+    "solutionModeText": "Solution Mode",
+    "summaryMultipleTaskText": "Multiple tasks",
+    "scoreMessage": "You achieved:",
+    "shareFacebook": "Share on Facebook",
+    "shareTwitter": "Share on Twitter",
+    "shareGoogle": "Share on Google+",
+    "summary": "Summary",
+    "solutionsButtonTitle": "Show comments",
+    "printTitle": "Print",
+    "printIngress": "How would you like to print this presentation?",
+    "printAllSlides": "Print all slides",
+    "printCurrentSlide": "Print current slide",
+    "noTitle": "No title",
+    "accessibilitySlideNavigationExplanation": "Use left and right arrow to change slide in that direction whenever canvas is selected.",
+    "accessibilityCanvasLabel": "Presentation canvas. Use left and right arrow to move between slides.",
+    "accessibilityProgressBarLabel": "Choose slide to display",
+    "containsNotCompleted": "@slideName contains not completed interaction",
+    "containsCompleted": "@slideName contains completed interaction",
+    "slideCount": "Slide @index of @total",
+    "containsOnlyCorrect": "@slideName only has correct answers",
+    "containsIncorrectAnswers": "@slideName has incorrect answers",
+    "shareResult": "Share Result",
+    "accessibilityTotalScore": "You got @score of @maxScore points in total",
+    "accessibilityEnteredFullscreen": "Entered fullscreen",
+    "accessibilityExitedFullscreen": "Exited fullscreen",
+    "confirmDialogHeader": "Submit your answers",
+    "confirmDialogText": "This will submit your results, do you want to continue?",
+    "confirmDialogConfirmText": "Submit and see results",
+    "slideshowNavigationLabel": "Slideshow navigation"
+  }
+}

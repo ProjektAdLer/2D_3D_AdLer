@@ -10,6 +10,7 @@ import IBackendPort, {
   ScoreH5PElementParams,
   UserCredentialParams,
 } from "../../Application/Ports/Interfaces/IBackendPort";
+import { config } from "../../../../config";
 import LearningWorldStatusTO from "../../Application/DataTransferObjects/LearningWorldStatusTO";
 import AdaptivityElementQuestionSubmissionTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionSubmissionTO";
 import AdaptivityElementQuestionResponse from "./Types/AdaptivityElementQuestionResponse";
@@ -77,76 +78,126 @@ export default class MockBackendAdapter implements IBackendPort {
     });
   }
 
-  getElementSource({
-    userToken,
-    elementID,
-    worldID,
-  }: ElementDataParams): Promise<string> {
-    let worldToUse: AWT;
+  /**
+   * Gets the appropriate world object based on worldID and showcase mode
+   */
+  private getWorld(worldID: number): AWT {
+    // Showcase build: Only curated worlds available
+    if (config.isShowcase) {
+      if (worldID === 999) return ShowcaseWorldAWT;
 
-    // In Showcase-Modus verwenden wir standardmäßig die ShowcaseWorld
-    if (process.env.REACT_APP_IS_SHOWCASE === "true") {
-      worldToUse = ShowcaseWorldAWT;
-    } else {
-      // Normale Entwicklungslogik - identisch mit getWorldData
-      if (worldID === 1) worldToUse = SimpleWorldAWT;
-      else if (worldID === 2) worldToUse = StoryWorldAWT;
-      else if (worldID === 3) worldToUse = ThemeWorldAWT;
-      else if (worldID === 4) worldToUse = NPCModelAWT;
-      else if (worldID === 5) worldToUse = RequirementsGradingAWT;
-      else if (worldID === 999) worldToUse = ShowcaseWorldAWT;
-      else worldToUse = SubthemeWorldAWT;
+      // All other worlds are not available in showcase mode
+      throw new Error(
+        `World ID ${worldID} is not available in showcase mode. Available: 999 (ShowcaseWorld only)`,
+      );
     }
+
+    // Development mode: All worlds available
+    if (worldID === 1) return SimpleWorldAWT;
+    else if (worldID === 2) return StoryWorldAWT;
+    else if (worldID === 3) return ThemeWorldAWT;
+    else if (worldID === 4) return NPCModelAWT;
+    else if (worldID === 5) return RequirementsGradingAWT;
+    else if (worldID === 999) return ShowcaseWorldAWT;
+    return SubthemeWorldAWT;
+  }
+
+  /**
+   * Get element source for Showcase world elements
+   */
+  private getShowcaseElementSource(elementID: number): Promise<string> {
+    const publicUrl = process.env.PUBLIC_URL || "";
+    const baseUrl =
+      window.location.origin + publicUrl + "/SampleLearningElementData/";
+
+    // Mapping for easier maintenance
+    const showcaseElements: Record<number, string> = {
+      1: "https://youtu.be/0hfMiMUI_HE",
+      2: baseUrl + "Projektname.jpg",
+      3: baseUrl + "Thema-und-Ziele",
+      5: baseUrl + "Standorte.pdf",
+      6: baseUrl + "Team.jpg",
+      7: baseUrl + "Lernwelt-Allgemein.png",
+      8: baseUrl + "Lernwelt",
+      9: "https://youtu.be/CsV6FdHyltg",
+      10: baseUrl + "Lernraum-Lernpfad.png",
+      11: "https://youtu.be/9PPilIV71d8",
+      12: "https://youtu.be/5AfULkLnROY",
+      13: baseUrl + "Storyelement.pdf",
+      14: baseUrl + "Lernelemente.pdf",
+      15: baseUrl + "Adaptivitaetselement.pdf",
+      16: baseUrl + "Lernpfade.jpg",
+      17: baseUrl + "Storyelemente.pdf",
+      18: baseUrl + "Moodle.txt",
+      19: baseUrl + "3D-Lernumgebung",
+      20: baseUrl + "Lernfortschritt.jpg",
+      21: "https://youtu.be/8bcZdUicYeY",
+      22: baseUrl + "Lernelemente.pdf",
+      23: baseUrl + "3D_Adaptivitaetselement.pdf",
+      24: "https://youtu.be/gG0RuXkE7ps",
+    };
+
+    if (elementID in showcaseElements) {
+      return Promise.resolve(showcaseElements[elementID]);
+    }
+
+    return Promise.reject("Unknown element ID for Showcase world");
+  }
+
+  /**
+   * Get element source for non-Showcase worlds
+   */
+  private getGenericElementSource(
+    worldToUse: AWT,
+    elementID: number,
+  ): Promise<string> {
+    const publicUrl = process.env.PUBLIC_URL || "";
+    const baseUrl =
+      window.location.origin + publicUrl + "/SampleLearningElementData/";
 
     const elementType = worldToUse.world.elements.find(
       (element) => element.elementId === elementID,
     )!.elementCategory;
 
-    switch (elementType) {
-      case "h5p":
-      case "primitiveH5P":
-        // For H5P elements we return the URL to the H5P folder
-        if (elementID === 5 || elementID === 9) {
-          // Multiple Choice Demo H5P-Element (ID 5 and 9)
-          return Promise.resolve(
-            window.location.origin +
-              (process.env.PUBLIC_URL || "") +
-              "/SampleLearningElementData/MultipleChoiceDemo",
-          );
-        }
-        // Fallback for other H5P elements
-        return Promise.resolve(
-          window.location.origin +
-            (process.env.PUBLIC_URL || "") +
-            "/SampleLearningElementData/MultipleChoiceDemo",
-        );
-      case "video":
-        //return Promise.resolve("https://youtu.be/8X4cDoM3R7E?t=189");
-        return Promise.resolve("https://vimeo.com/782061723");
-      // return Promise.resolve(
-      //   "https://video.th-ab.de/paella/ui/watch.html?id=ed6695a8-f7ac-47dc-bf6d-62460b94383f"
-      // );
-      case "image":
-        return Promise.resolve(
-          window.location.origin +
-            (process.env.PUBLIC_URL || "") +
-            "/SampleLearningElementData/testBild.png",
-        );
-      case "text":
-        return Promise.resolve(
-          window.location.origin +
-            (process.env.PUBLIC_URL || "") +
-            "/SampleLearningElementData/fktohneParamohneRueckgabeohneDeklaration.c",
-        );
-      case "pdf":
-        return Promise.resolve(
-          window.location.origin +
-            (process.env.PUBLIC_URL || "") +
-            "/SampleLearningElementData/testPDF.pdf",
-        );
-      /* istanbul ignore next */
-      default:
-        throw new Error("Unknown element type");
+    // Mapping for different element types
+    const elementSources: Record<string, string> = {
+      h5p:
+        elementID === 5 || elementID === 9
+          ? baseUrl + "Thema-und-Ziele"
+          : baseUrl + "Lernwelt",
+      primitiveH5P:
+        elementID === 5 || elementID === 9
+          ? baseUrl + "Thema-und-Ziele"
+          : baseUrl + "Lernwelt",
+      video: "https://vimeo.com/782061723",
+      image: baseUrl + "Lernwelt-Allgemein.png",
+      text: baseUrl + "Moodle.txt",
+      pdf: baseUrl + "Standorte.pdf",
+    };
+
+    if (elementType in elementSources) {
+      return Promise.resolve(elementSources[elementType]);
+    }
+
+    throw new Error("Unknown element type");
+  }
+
+  getElementSource({
+    userToken,
+    elementID,
+    worldID,
+  }: ElementDataParams): Promise<string> {
+    try {
+      const worldToUse = this.getWorld(worldID);
+
+      // Special handling for ShowcaseWorld element IDs
+      if (worldToUse === ShowcaseWorldAWT) {
+        return this.getShowcaseElementSource(elementID);
+      }
+
+      return this.getGenericElementSource(worldToUse, elementID);
+    } catch (error) {
+      return Promise.reject(error);
     }
   }
 
@@ -198,8 +249,8 @@ export default class MockBackendAdapter implements IBackendPort {
   }
 
   getCoursesAvailableForUser(userToken: string): Promise<CourseListTO> {
-    // In Showcase-Modus nur die Showcase-Welt anzeigen
-    if (process.env.REACT_APP_IS_SHOWCASE === "true") {
+    // In showcase mode, only show curated worlds
+    if (config.isShowcase) {
       return Promise.resolve({
         courses: [
           {
@@ -210,7 +261,7 @@ export default class MockBackendAdapter implements IBackendPort {
       });
     }
 
-    // Normale Entwicklungslogik - alle Welten inklusive Showcase für Development
+    // Development mode - all worlds including showcase for development
     return Promise.resolve({
       courses: [
         {
@@ -254,23 +305,12 @@ export default class MockBackendAdapter implements IBackendPort {
     userToken,
     worldID,
   }: GetWorldDataParams): Promise<BackendWorldTO> {
-    let worldToUse: AWT;
-
-    // In Showcase-Modus verwenden wir standardmäßig die ShowcaseWorld
-    if (process.env.REACT_APP_IS_SHOWCASE === "true") {
-      worldToUse = ShowcaseWorldAWT;
-    } else {
-      // Normale Entwicklungslogik
-      if (worldID === 1) worldToUse = SimpleWorldAWT;
-      else if (worldID === 2) worldToUse = StoryWorldAWT;
-      else if (worldID === 3) worldToUse = ThemeWorldAWT;
-      else if (worldID === 4) worldToUse = NPCModelAWT;
-      else if (worldID === 5) worldToUse = RequirementsGradingAWT;
-      else if (worldID === 999) worldToUse = ShowcaseWorldAWT;
-      else worldToUse = SubthemeWorldAWT;
+    try {
+      const worldToUse = this.getWorld(worldID);
+      return Promise.resolve(BackendAdapterUtils.parseAWT(worldToUse));
+    } catch (error) {
+      return Promise.reject(error);
     }
-
-    return Promise.resolve(BackendAdapterUtils.parseAWT(worldToUse));
   }
 
   getAdaptivityElementQuestionResponse(
@@ -366,91 +406,104 @@ export default class MockBackendAdapter implements IBackendPort {
   }
 
   private updateFakeBackEnd(response: AdaptivityElementQuestionResponse) {
-    const BackendTask = MockAdaptivityElementStatusResponse.tasks.find(
+    const backendTask = MockAdaptivityElementStatusResponse.tasks.find(
       (task) => task.taskId === response.gradedTask.taskId,
     );
 
-    const BackendQuestion = MockAdaptivityElementStatusResponse.questions.find(
+    const backendQuestion = MockAdaptivityElementStatusResponse.questions.find(
       (question) => question.id === response.gradedQuestion.id,
     );
 
-    BackendQuestion!.status = response.gradedQuestion.status;
+    if (!backendTask || !backendQuestion) return;
 
+    backendQuestion.status = response.gradedQuestion.status;
+
+    // If question is not correct, task is incorrect
     if (
       response.gradedQuestion.status !== AdaptivityElementStatusTypes.Correct
     ) {
-      BackendTask!.taskStatus = AdaptivityElementStatusTypes.Incorrect;
+      backendTask.taskStatus = AdaptivityElementStatusTypes.Incorrect;
       return;
     }
 
-    // check if task of AE is complete
-    const currentTask = MockAdaptivityData.adaptivityTasks.find(
-      (t) => t.taskId === BackendTask?.taskId,
+    // Check if task should be marked as complete
+    const isTaskComplete = this.isTaskComplete(backendTask.taskId);
+    const isRequiredQuestionCorrect = this.isRequiredQuestionCorrect(
+      backendTask.taskId,
+      backendQuestion.id,
     );
 
-    const isTaskComplete = currentTask!.adaptivityQuestions.every(
-      (question) => {
-        const q = MockAdaptivityElementStatusResponse.questions.find(
-          (q) => q.id === question.questionId,
-        );
-        return q!.status === AdaptivityElementStatusTypes.Correct;
-      },
-    );
-
-    if (isTaskComplete) {
-      BackendTask!.taskStatus = AdaptivityElementStatusTypes.Correct;
+    // Mark task as complete if all questions correct OR a required question is correct
+    if (isTaskComplete || isRequiredQuestionCorrect) {
+      backendTask.taskStatus = AdaptivityElementStatusTypes.Correct;
       response.gradedTask.taskStatus = AdaptivityElementStatusTypes.Correct;
-    } else {
-      BackendTask!.taskStatus = AdaptivityElementStatusTypes.Incorrect;
     }
 
-    if (!isTaskComplete) {
-      // check if required question answered correct
-      const currentQuestion = currentTask?.adaptivityQuestions.find(
-        (q) => q.questionId === BackendQuestion?.id,
-      );
-
-      const taskDifficulty = MockAdaptivityData.adaptivityTasks.find(
-        (t) => t.taskId === BackendTask?.taskId,
-      )!.requiredDifficulty;
-
-      const questionDifficulty = MockAdaptivityData.adaptivityTasks
-        .flatMap((task) => {
-          return task.adaptivityQuestions.find(
-            (question) => question.questionId === currentQuestion?.questionId,
-          )?.questionDifficulty;
-        })
-        .filter((e) => e !== undefined)[0];
-
-      if (
-        questionDifficulty &&
-        taskDifficulty &&
-        questionDifficulty >= taskDifficulty
-      ) {
-        BackendTask!.taskStatus = AdaptivityElementStatusTypes.Correct;
-        response.gradedTask.taskStatus = AdaptivityElementStatusTypes.Correct;
-      }
-    }
-
-    // check if every required task is complete
-    const RequiredTasks = MockAdaptivityElementStatusResponse.tasks.filter(
-      (task) => {
-        const rt = MockAdaptivityData.adaptivityTasks.filter(
-          (t) => t.optional === false,
-        );
-        const r = rt.find((t) => t.taskId === task.taskId);
-        return r;
-      },
-    );
-
-    const isEveryTaskComplete = RequiredTasks.every((task) => {
-      return task.taskStatus === "Correct";
-    });
-
-    if (isEveryTaskComplete) {
+    // Check if entire element is complete (all required tasks correct)
+    if (this.areAllRequiredTasksComplete()) {
       response.elementScore.success = true;
       MockAdaptivityElementStatusResponse.element.success = true;
     }
+  }
+
+  /**
+   * Checks if all questions in a task are correctly answered
+   */
+  private isTaskComplete(taskId: number): boolean {
+    const task = MockAdaptivityData.adaptivityTasks.find(
+      (t) => t.taskId === taskId,
+    );
+    if (!task) return false;
+
+    return task.adaptivityQuestions.every((question) => {
+      const q = MockAdaptivityElementStatusResponse.questions.find(
+        (q) => q.id === question.questionId,
+      );
+      return q?.status === AdaptivityElementStatusTypes.Correct;
+    });
+  }
+
+  /**
+   * Checks if a required question is correctly answered
+   */
+  private isRequiredQuestionCorrect(
+    taskId: number,
+    questionId: number,
+  ): boolean {
+    const task = MockAdaptivityData.adaptivityTasks.find(
+      (t) => t.taskId === taskId,
+    );
+    if (!task) return false;
+
+    const question = task.adaptivityQuestions.find(
+      (q) => q.questionId === questionId,
+    );
+    if (!question) return false;
+
+    const taskDifficulty = task.requiredDifficulty;
+    const questionDifficulty = question.questionDifficulty;
+
+    if (taskDifficulty === undefined || questionDifficulty === undefined) {
+      return false;
+    }
+
+    return questionDifficulty >= taskDifficulty;
+  }
+
+  /**
+   * Checks if all required tasks are complete
+   */
+  private areAllRequiredTasksComplete(): boolean {
+    const requiredTasks = MockAdaptivityElementStatusResponse.tasks.filter(
+      (task) => {
+        const rt = MockAdaptivityData.adaptivityTasks.find(
+          (t) => t.taskId === task.taskId && t.optional === false,
+        );
+        return rt !== undefined;
+      },
+    );
+
+    return requiredTasks.every((task) => task.taskStatus === "Correct");
   }
 
   // Avatar Config

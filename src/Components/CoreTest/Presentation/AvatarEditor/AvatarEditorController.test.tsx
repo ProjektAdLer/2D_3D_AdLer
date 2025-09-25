@@ -9,6 +9,8 @@ import ISaveAvatarConfigUseCase from "../../../Core/Application/UseCases/SaveAva
 import ILoadAvatarConfigUseCase from "../../../Core/Application/UseCases/LoadAvatarConfig/ILoadAvatarConfigUseCase";
 import IRandomizeAvatarConfigUseCase from "../../../Core/Application/UseCases/RandomizeAvatarConfig/IRandomizeAvatarConfigUseCase";
 import AvatarConfigTO from "../../../Core/Application/DataTransferObjects/AvatarConfigTO";
+import IAvatarEditorPreviewCameraPresenter from "../../../Core/Presentation/AvatarEditor/AvatarEditorPreview/AvatarEditorPreviewCamera/IAvatarEditorPreviewCameraPresenter";
+import PRESENTATION_TYPES from "../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 
 const updateAvatarConfigUseCaseMock = mock<IUpdateAvatarConfigUseCase>();
 const saveAvatarConfigUseCaseMock = mock<ISaveAvatarConfigUseCase>();
@@ -17,6 +19,8 @@ const randomizeAvatarConfigUseCaseMock = mock<IRandomizeAvatarConfigUseCase>();
 const avatarEditorViewModelMock = mock<AvatarEditorViewModel>({
   hasChanged: { Value: false }, // Initialwert für den Mock
 });
+const avatarEditorPreviewCameraPresenterMock =
+  mock<IAvatarEditorPreviewCameraPresenter>();
 
 describe("AvatarEditorController", () => {
   let systemUnderTest: AvatarEditorController;
@@ -45,6 +49,9 @@ describe("AvatarEditorController", () => {
     CoreDIContainer.bind<IRandomizeAvatarConfigUseCase>(
       USECASE_TYPES.IRandomizeAvatarConfigUseCase,
     ).toConstantValue(randomizeAvatarConfigUseCaseMock);
+    CoreDIContainer.bind<IAvatarEditorPreviewCameraPresenter>(
+      PRESENTATION_TYPES.IAvatarEditorPreviewCameraPresenter,
+    ).toConstantValue(avatarEditorPreviewCameraPresenterMock);
   });
 
   afterAll(() => {
@@ -91,5 +98,19 @@ describe("AvatarEditorController", () => {
       mockNewConfig,
     );
     expect(avatarEditorViewModelMock.hasChanged.Value).toBe(true);
+  });
+
+  test("zoomIn calls zoomInOnFace of avatareditorpreviewcamerapresenter", () => {
+    systemUnderTest.zoomIn();
+    expect(
+      avatarEditorPreviewCameraPresenterMock.zoomInOnFace,
+    ).toHaveBeenCalled();
+  });
+
+  test("zoomOut calls zoomOutOnFace of avatareditorpreviewcamerapresenter", () => {
+    systemUnderTest.zoomOut();
+    expect(
+      avatarEditorPreviewCameraPresenterMock.zoomOutOnFace,
+    ).toHaveBeenCalled();
   });
 });

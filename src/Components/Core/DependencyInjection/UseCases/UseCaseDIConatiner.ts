@@ -82,6 +82,10 @@ import IGetExperiencePointsUseCase from "../../Application/UseCases/GetExperienc
 import GetExperiencePointsUseCase from "../../Application/UseCases/GetExperiencePoints/GetExperiencePoints";
 import IRandomizeAvatarConfigUseCase from "../../Application/UseCases/RandomizeAvatarConfig/IRandomizeAvatarConfigUseCase"; // Neuer Import
 import RandomizeAvatarConfigUseCase from "../../Application/UseCases/RandomizeAvatarConfig/RandomizeAvatarConfigUseCase"; // Neuer Import
+import ISetSettingsConfigUseCase from "../../Application/UseCases/SetSettingsConfig/ISetSettingsConfigUseCase";
+import SetSettingsConfigUseCase from "../../Application/UseCases/SetSettingsConfig/SetSettingsConfigUseCase";
+import IGetSettingsConfigUseCase from "../../Application/UseCases/GetSettingsConfig/IGetSettingsConfigUseCase";
+import GetSettingsConfigUseCase from "../../Application/UseCases/GetSettingsConfig/GetSettingsConfigUseCase";
 
 const UseCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases
@@ -268,30 +272,41 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
   bind<IGetLearningWorldUseCase>(USECASE_TYPES.IGetLearningWorldUseCase)
     .to(GetLearningWorldUseCase)
     .inSingletonScope();
+
   bind<IGetNarrativeFrameworkInfoUseCase>(
     USECASE_TYPES.IGetNarrativeFrameworkInfoUseCase,
   )
     .to(GetNarrativeFrameworkInfoUseCase)
     .inSingletonScope();
+
   bind<ICalculateInitialExperiencePointsUseCase>(
     USECASE_TYPES.ICalculateInitialExperiencePointsUseCase,
   )
     .to(CalculateInitialExperiencePointsUseCase)
     .inSingletonScope();
+
   bind<IUpdateExperiencePointsUseCase>(
     USECASE_TYPES.IUpdateExperiencePointsUseCase,
   )
     .to(UpdateExperiencePointsUseCase)
     .inSingletonScope();
+
   bind<IGetExperiencePointsUseCase>(USECASE_TYPES.IGetExperiencePointsUseCase)
     .to(GetExperiencePointsUseCase)
     .inSingletonScope();
 
-  // Neuer Eintrag für RandomizeAvatarConfigUseCase
   bind<IRandomizeAvatarConfigUseCase>(
     USECASE_TYPES.IRandomizeAvatarConfigUseCase,
   )
     .to(RandomizeAvatarConfigUseCase)
+    .inSingletonScope();
+
+  bind<ISetSettingsConfigUseCase>(USECASE_TYPES.ISetSettingsConfigUseCase)
+    .to(SetSettingsConfigUseCase)
+    .inSingletonScope();
+
+  bind<IGetSettingsConfigUseCase>(USECASE_TYPES.IGetSettingsConfigUseCase)
+    .to(GetSettingsConfigUseCase)
     .inSingletonScope();
 });
 
