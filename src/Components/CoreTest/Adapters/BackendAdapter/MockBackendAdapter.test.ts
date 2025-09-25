@@ -826,4 +826,198 @@ describe("MockBackendAdapter", () => {
 
     expect(resultUnknown).toBeDefined();
   });
+
+  // Tests for ungetestete Bereiche - Error Handling
+  test("getElementSource should throw error for unknown element ID in showcase mode", async () => {
+    const originalShowcase = config.isShowcase;
+    config.isShowcase = true;
+
+    await expect(
+      systemUnderTest.getElementSource({
+        userToken: "token",
+        worldID: 999, // Showcase world
+        elementID: 9999, // Unknown element ID
+      }),
+    ).rejects.toBe("Unknown element ID for Showcase world");
+
+    config.isShowcase = originalShowcase;
+  });
+
+  test("getElementSource should throw error for unknown element type", async () => {
+    const originalShowcase = config.isShowcase;
+    config.isShowcase = false; // Ensure we're in development mode
+
+    // Element ID 4 is an AdaptivityElement with category "adaptivity"
+    // which is not in the elementSources mapping
+    await expect(
+      systemUnderTest.getElementSource({
+        userToken: "token",
+        worldID: 1,
+        elementID: 4, // AdaptivityElement - "adaptivity" category not in mapping
+      }),
+    ).rejects.toThrow("Unknown element type");
+
+    config.isShowcase = originalShowcase;
+  });
+
+  test("should handle adaptivity element with missing task or question", async () => {
+    const questionSubmissionTO: AdaptivityElementQuestionSubmissionTO = {
+      elementID: 101,
+      taskID: 999, // Non-existent task ID
+      questionID: 999, // Non-existent question ID
+      selectedAnswers: [true, false, false, false],
+    };
+
+    const response = await systemUnderTest.getAdaptivityElementQuestionResponse(
+      "",
+      0,
+      questionSubmissionTO,
+    );
+
+    // Should handle gracefully and return default response
+    expect(response.gradedQuestion.status).toBe("Incorrect");
+  });
+
+  test("should handle adaptivity with required question difficulty", async () => {
+    // Test question ID that triggers difficulty-based evaluation
+    const questionSubmissionTO: AdaptivityElementQuestionSubmissionTO = {
+      elementID: 101,
+      taskID: 1,
+      questionID: 4, // This should trigger the difficulty check
+      selectedAnswers: [true, true, false, false], // Multiple correct answers
+    };
+
+    const response = await systemUnderTest.getAdaptivityElementQuestionResponse(
+      "",
+      0,
+      questionSubmissionTO,
+    );
+
+    expect(response).toBeDefined();
+    expect(response.gradedQuestion.answers).toBeDefined();
+  });
+
+  test("should handle scoreH5PElement with different verb types", async () => {
+    const h5pMockExperienced = mock<XAPIEvent>();
+    h5pMockExperienced.verb = {
+      id: "http://adlnet.gov/expapi/verbs/experienced",
+      display: { "en-US": "experienced" },
+    };
+
+    const result = await systemUnderTest.scoreH5PElement({
+      userToken: "token",
+      h5pID: 5,
+      courseID: 1,
+      rawH5PEvent: h5pMockExperienced,
+    });
+
+    expect(result).toBe(false); // Should default to false for unknown verbs
+  });
+
+  test("should handle scoreH5PElement with result but no score", async () => {
+    const h5pMockWithResult = mock<XAPIEvent>();
+    h5pMockWithResult.verb = {
+      id: "http://adlnet.gov/expapi/verbs/answered",
+      display: { "en-US": "answered" },
+    };
+    h5pMockWithResult.result = {
+      completion: true,
+      // No success or score properties
+    };
+
+    const result = await systemUnderTest.scoreH5PElement({
+      userToken: "token",
+      h5pID: 5,
+      courseID: 1,
+      rawH5PEvent: h5pMockWithResult,
+    });
+
+    expect(result).toBe(false); // Should default to false
+  });
+
+  test("should handle getElementSource for all different world IDs", async () => {
+    const originalShowcase = config.isShowcase;
+    config.isShowcase = false; // Ensure we're in development mode
+
+    // Test that all world mappings work correctly using getWorldData first
+    const worldTests = [
+      { id: 1, expectedType: "Simple" },
+      { id: 2, expectedType: "Story" },
+      { id: 3, expectedType: "Theme" },
+      { id: 4, expectedType: "NPCModel" },
+      { id: 5, expectedType: "Requirements" },
+    ];
+
+    for (const worldTest of worldTests) {
+      // First verify the world data is available
+      const worldData = await systemUnderTest.getWorldData({
+        userToken: "token",
+        worldID: worldTest.id,
+      });
+
+      expect(worldData).toBeDefined();
+
+      // Test getElementSource with the first element from that world
+      if (
+        worldData.spaces &&
+        worldData.spaces.length > 0 &&
+        worldData.spaces[0].elements &&
+        worldData.spaces[0].elements.length > 0
+      ) {
+        const firstElement = worldData.spaces[0].elements[0];
+        if (firstElement && firstElement.id) {
+          const result = await systemUnderTest.getElementSource({
+            userToken: "token",
+            worldID: worldTest.id,
+            elementID: firstElement.id,
+          });
+
+          expect(result).toBeDefined();
+          expect(typeof result).toBe("string");
+        }
+      }
+    }
+
+    config.isShowcase = originalShowcase;
+  });
+
+  test("should handle getCoursesAvailableForUser in both modes", async () => {
+    // Test development mode
+    const originalShowcase = config.isShowcase;
+    config.isShowcase = false;
+
+    const devCourses =
+      await systemUnderTest.getCoursesAvailableForUser("token");
+    expect(devCourses.courses.length).toBeGreaterThan(1);
+
+    // Test showcase mode
+    config.isShowcase = true;
+    const showcaseCourses =
+      await systemUnderTest.getCoursesAvailableForUser("token");
+    expect(showcaseCourses.courses.length).toBe(1);
+    expect(showcaseCourses.courses[0].courseID).toBe(999);
+
+    config.isShowcase = originalShowcase;
+  });
+
+  test("should test all showcase element mappings", async () => {
+    const originalShowcase = config.isShowcase;
+    config.isShowcase = true;
+
+    // Test a few key showcase elements
+    const showcaseElements = [1, 2, 3, 5, 6, 7, 8, 18, 24];
+
+    for (const elementID of showcaseElements) {
+      const result = await systemUnderTest.getElementSource({
+        userToken: "token",
+        worldID: 999,
+        elementID: elementID,
+      });
+
+      expect(result).toBeDefined();
+      expect(typeof result).toBe("string");
+    }
+
+    config.isShowcase = originalShowcase;
+  });
 });
