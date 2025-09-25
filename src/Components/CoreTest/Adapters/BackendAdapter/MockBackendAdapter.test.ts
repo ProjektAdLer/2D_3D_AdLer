@@ -20,31 +20,15 @@ import { BackendAvatarConfigTO } from "../../../Core/Application/DataTransferObj
 
 const oldConfigValue = config.useFakeBackend;
 
-let mockGetQuestionResponseFromSubmission = (
-  submission: AdaptivityElementQuestionSubmissionTO,
-): AdaptivityElementQuestionResponse => {
-  return {
-    elementScore: {
-      elementId: submission.elementID,
-      success: false,
-    },
-    gradedTask: {
-      taskId: submission.taskID,
-      taskStatus: "Incorrect",
-    },
-    gradedQuestion: {
-      id: submission.questionID,
-      status: "Incorrect",
-      answers: undefined,
-    },
-  };
-};
+// Mock function for question response generation
 
 describe("MockBackendAdapter", () => {
   let systemUnderTest: MockBackendAdapter;
 
   beforeAll(() => {
     config.useFakeBackend = true;
+    // Ensure we start in development mode (not showcase mode) for most tests
+    config.isShowcase = false;
   });
 
   beforeEach(() => {
@@ -229,10 +213,21 @@ describe("MockBackendAdapter", () => {
     };
 
     // first single-choice question (in first task)
-    let response_1 =
-      mockGetQuestionResponseFromSubmission(questionSubmissionTO);
-    response_1.gradedQuestion.status = "Correct";
-    response_1.gradedTask.taskStatus = "Correct";
+    let response_1: AdaptivityElementQuestionResponse = {
+      elementScore: {
+        elementId: questionSubmissionTO.elementID,
+        success: false,
+      },
+      gradedTask: {
+        taskId: questionSubmissionTO.taskID,
+        taskStatus: "Correct",
+      },
+      gradedQuestion: {
+        id: questionSubmissionTO.questionID,
+        status: "Correct",
+        answers: undefined,
+      },
+    };
     response_1.gradedQuestion.answers = [
       {
         checked: false,
@@ -263,10 +258,21 @@ describe("MockBackendAdapter", () => {
     questionSubmissionTO.taskID = 2;
     questionSubmissionTO.questionID = 3;
     questionSubmissionTO.selectedAnswers = [true, false, false, false];
-    let response_2 =
-      mockGetQuestionResponseFromSubmission(questionSubmissionTO);
-    response_2.gradedQuestion.status = "Correct";
-    response_2.gradedTask.taskStatus = "Incorrect";
+    let response_2: AdaptivityElementQuestionResponse = {
+      elementScore: {
+        elementId: questionSubmissionTO.elementID,
+        success: false,
+      },
+      gradedTask: {
+        taskId: questionSubmissionTO.taskID,
+        taskStatus: "Incorrect",
+      },
+      gradedQuestion: {
+        id: questionSubmissionTO.questionID,
+        status: "Correct",
+        answers: undefined,
+      },
+    };
     response_2.gradedQuestion.answers = [
       {
         checked: true,
@@ -302,9 +308,21 @@ describe("MockBackendAdapter", () => {
       selectedAnswers: [true, true, false, false],
     };
 
-    let response = mockGetQuestionResponseFromSubmission(questionSubmissionTO);
-    response.gradedQuestion.status = "Correct";
-    response.gradedTask.taskStatus = "Incorrect";
+    let response: AdaptivityElementQuestionResponse = {
+      elementScore: {
+        elementId: questionSubmissionTO.elementID,
+        success: false,
+      },
+      gradedTask: {
+        taskId: questionSubmissionTO.taskID,
+        taskStatus: "Incorrect",
+      },
+      gradedQuestion: {
+        id: questionSubmissionTO.questionID,
+        status: "Correct",
+        answers: undefined,
+      },
+    };
     response.gradedQuestion.answers = [
       {
         checked: true,
@@ -385,28 +403,42 @@ describe("MockBackendAdapter", () => {
   });
 
   test("getWorldData should handle showcase mode", async () => {
-    const originalEnv = process.env.REACT_APP_IS_SHOWCASE;
-    process.env.REACT_APP_IS_SHOWCASE = "true";
+    const originalShowcase = config.isShowcase;
+    config.isShowcase = true;
 
     const result = await systemUnderTest.getWorldData({
       userToken: "token",
-      worldID: 1,
+      worldID: 999, // Only showcase world is available in showcase mode
     });
 
     expect(result).toBeDefined();
-    process.env.REACT_APP_IS_SHOWCASE = originalEnv;
+    config.isShowcase = originalShowcase;
+  });
+
+  test("getWorldData should throw error for non-showcase worlds in showcase mode", async () => {
+    const originalShowcase = config.isShowcase;
+    config.isShowcase = true;
+
+    await expect(
+      systemUnderTest.getWorldData({
+        userToken: "token",
+        worldID: 1,
+      }),
+    ).rejects.toThrow("World ID 1 is not available in showcase mode");
+
+    config.isShowcase = originalShowcase;
   });
 
   test("getCoursesAvailableForUser should return showcase course in showcase mode", async () => {
-    const originalEnv = process.env.REACT_APP_IS_SHOWCASE;
-    process.env.REACT_APP_IS_SHOWCASE = "true";
+    const originalShowcase = config.isShowcase;
+    config.isShowcase = true;
 
     const result = await systemUnderTest.getCoursesAvailableForUser("token");
 
     expect(result.courses).toHaveLength(1);
     expect(result.courses[0].courseID).toBe(999);
 
-    process.env.REACT_APP_IS_SHOWCASE = originalEnv;
+    config.isShowcase = originalShowcase;
   });
 
   test("scoreH5PElement should handle completed verb", async () => {
@@ -470,7 +502,7 @@ describe("MockBackendAdapter", () => {
       elementID: 5,
     });
 
-    expect(result).toContain("MultipleChoiceDemo");
+    expect(result).toContain("Thema-und-Ziele");
   });
 
   test("getElementSource should consider PUBLIC_URL", async () => {
@@ -556,7 +588,7 @@ describe("MockBackendAdapter", () => {
       worldID: 1,
       elementID: 6, // PDF element
     });
-    expect(result).toContain("testPDF.pdf");
+    expect(result).toContain("Standorte.pdf");
   });
 
   test("getElementSource should handle image elements", async () => {
@@ -565,7 +597,7 @@ describe("MockBackendAdapter", () => {
       worldID: 1,
       elementID: 3, // Image element
     });
-    expect(result).toContain("testBild.png");
+    expect(result).toContain("Lernwelt-Allgemein.png");
   });
 
   test("getElementSource should handle text elements", async () => {
@@ -574,7 +606,7 @@ describe("MockBackendAdapter", () => {
       worldID: 1,
       elementID: 1, // Text element
     });
-    expect(result).toContain("fktohneParamohneRueckgabeohneDeklaration.c");
+    expect(result).toContain("Moodle.txt");
   });
 
   test("getElementSource should handle unknown worldID", async () => {
@@ -737,9 +769,9 @@ describe("MockBackendAdapter", () => {
     const result = await systemUnderTest.getElementSource({
       userToken: "token",
       worldID: 1,
-      elementID: 5, // This should be h5p or primitiveH5P
+      elementID: 9, // This should be primitiveH5P
     });
-    expect(result).toContain("MultipleChoiceDemo");
+    expect(result).toContain("Thema-und-Ziele");
   });
 
   test("getElementSource should handle element from world 5", async () => {

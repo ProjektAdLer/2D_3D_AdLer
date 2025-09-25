@@ -10,6 +10,7 @@ import IBackendPort, {
   ScoreH5PElementParams,
   UserCredentialParams,
 } from "../../Application/Ports/Interfaces/IBackendPort";
+import { config } from "../../../../config";
 import LearningWorldStatusTO from "../../Application/DataTransferObjects/LearningWorldStatusTO";
 import AdaptivityElementQuestionSubmissionTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionSubmissionTO";
 import AdaptivityElementQuestionResponse from "./Types/AdaptivityElementQuestionResponse";
@@ -82,7 +83,7 @@ export default class MockBackendAdapter implements IBackendPort {
    */
   private getWorld(worldID: number): AWT {
     // Showcase build: Only curated worlds available
-    if (process.env.REACT_APP_IS_SHOWCASE === "true") {
+    if (config.isShowcase) {
       if (worldID === 999) return ShowcaseWorldAWT;
 
       // All other worlds are not available in showcase mode
@@ -186,14 +187,18 @@ export default class MockBackendAdapter implements IBackendPort {
     elementID,
     worldID,
   }: ElementDataParams): Promise<string> {
-    const worldToUse = this.getWorld(worldID);
+    try {
+      const worldToUse = this.getWorld(worldID);
 
-    // Special handling for ShowcaseWorld element IDs
-    if (worldToUse === ShowcaseWorldAWT) {
-      return this.getShowcaseElementSource(elementID);
+      // Special handling for ShowcaseWorld element IDs
+      if (worldToUse === ShowcaseWorldAWT) {
+        return this.getShowcaseElementSource(elementID);
+      }
+
+      return this.getGenericElementSource(worldToUse, elementID);
+    } catch (error) {
+      return Promise.reject(error);
     }
-
-    return this.getGenericElementSource(worldToUse, elementID);
   }
 
   scoreH5PElement(data: ScoreH5PElementParams): Promise<boolean> {
@@ -245,7 +250,7 @@ export default class MockBackendAdapter implements IBackendPort {
 
   getCoursesAvailableForUser(userToken: string): Promise<CourseListTO> {
     // In showcase mode, only show curated worlds
-    if (process.env.REACT_APP_IS_SHOWCASE === "true") {
+    if (config.isShowcase) {
       return Promise.resolve({
         courses: [
           {
@@ -300,8 +305,12 @@ export default class MockBackendAdapter implements IBackendPort {
     userToken,
     worldID,
   }: GetWorldDataParams): Promise<BackendWorldTO> {
-    const worldToUse = this.getWorld(worldID);
-    return Promise.resolve(BackendAdapterUtils.parseAWT(worldToUse));
+    try {
+      const worldToUse = this.getWorld(worldID);
+      return Promise.resolve(BackendAdapterUtils.parseAWT(worldToUse));
+    } catch (error) {
+      return Promise.reject(error);
+    }
   }
 
   getAdaptivityElementQuestionResponse(
