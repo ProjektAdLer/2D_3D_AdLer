@@ -53,11 +53,51 @@ jest.mock("react-i18next", () => ({
   }),
 }));
 
+// Mock window.matchMedia since it's not available in Jest
+Object.defineProperty(window, "matchMedia", {
+  writable: true,
+  value: jest.fn().mockImplementation((query) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: jest.fn(),
+    removeListener: jest.fn(),
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    dispatchEvent: jest.fn(),
+  })),
+});
+
+// Mock setInterval and clearInterval
+(global as any).setInterval = jest.fn(() => 123);
+(global as any).clearInterval = jest.fn();
+
 describe("SideBar", () => {
   let viewModel: SideBarViewModel;
   let controllerMock: ISideBarController;
+  let mockMatchMedia: jest.Mock;
 
   beforeEach(() => {
+    // Reset mocks for each test
+    mockMatchMedia = jest.fn().mockImplementation((query) => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: jest.fn(),
+      removeListener: jest.fn(),
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+      dispatchEvent: jest.fn(),
+    }));
+
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      value: mockMatchMedia,
+    });
+
+    // Ensure fresh mocks for each test
+    jest.clearAllMocks();
+
     viewModel = new SideBarViewModel();
     controllerMock = mock<ISideBarController>();
   });
