@@ -3,11 +3,14 @@ import ISettingContentController from "./ISettingContentController";
 import SettingContentViewModel from "./SettingContentViewModel";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+const soundLink = require("../../../../../Assets/Sounds/fanfare.mp3");
 
 export default class SettingContentController
   implements ISettingContentController
 {
   private setSettingsConfigUseCase: ISetSettingsConfigUseCase;
+
+  private audio = new Audio(soundLink);
   constructor(private viewModel: SettingContentViewModel) {
     this.setSettingsConfigUseCase = CoreDIContainer.get(
       USECASE_TYPES.ISetSettingsConfigUseCase,
@@ -56,6 +59,7 @@ export default class SettingContentController
   }
 
   onTestSoundButtonClicked(): void {
-    console.log("Test sound button clicked");
+    this.audio.volume = this.viewModel.volume.Value;
+    this.audio.play();
   }
 }
