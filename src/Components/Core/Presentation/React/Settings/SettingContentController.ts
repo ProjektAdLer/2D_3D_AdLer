@@ -59,7 +59,8 @@ export default class SettingContentController
   }
 
   onTestSoundButtonClicked(): void {
-    this.audio.volume = this.viewModel.volume.Value;
+    // audio is adjusted to 80%, because the sound file is very loud
+    this.audio.volume = this.viewModel.volume.Value * 0.8;
     this.audio.play();
   }
 }
