@@ -60,7 +60,7 @@ export default class GetSettingsConfigUseCase
     }
 
     if (settingsEntity.volume === undefined) {
-      settings.volume = 50;
+      settings.volume = 0.5;
     } else {
       settings.volume = settingsEntity.volume;
     }

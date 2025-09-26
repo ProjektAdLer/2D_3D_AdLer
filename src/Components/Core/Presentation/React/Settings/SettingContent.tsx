@@ -25,6 +25,8 @@ export default function SettingContent({ className }: AdLerUIComponent) {
   const [breakTimeNotificationsEnabled] = useObservable(
     viewModel.breakTimeNotificationsEnabled,
   );
+
+  console.log(viewModel);
   return (
     <div
       className={`flex h-full w-full flex-col items-center overflow-hidden px-4 pt-4 text-adlerdarkblue ${className}`}
@@ -69,6 +71,7 @@ export default function SettingContent({ className }: AdLerUIComponent) {
         <RangeSlider
           min={0}
           max={1}
+          initialValue={viewModel.volume.Value}
           step={0.01}
           callback={(value) => {
             controller.onVolumeChange(value);
