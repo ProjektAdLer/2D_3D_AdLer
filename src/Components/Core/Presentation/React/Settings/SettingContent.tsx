@@ -25,6 +25,7 @@ export default function SettingContent({ className }: AdLerUIComponent) {
   const [breakTimeNotificationsEnabled] = useObservable(
     viewModel.breakTimeNotificationsEnabled,
   );
+  const [language] = useObservable(viewModel.language);
 
   return (
     <div
@@ -38,6 +39,7 @@ export default function SettingContent({ className }: AdLerUIComponent) {
       <div className="flex h-32 flex-row items-center justify-center gap-4">
         <StyledButton
           className="!px-2 !py-1 text-xs mobile-landscape:bottom-2 mobile-landscape:left-2"
+          color={language === "de" ? "pressed" : "default"}
           onClick={() => {
             controller.onGermanButtonClicked();
           }}
@@ -50,6 +52,7 @@ export default function SettingContent({ className }: AdLerUIComponent) {
         </StyledButton>
         <StyledButton
           className="!px-2 !py-1 text-xs mobile-landscape:bottom-2 mobile-landscape:left-2"
+          color={language === "en" ? "pressed" : "default"}
           onClick={() => {
             controller.onEnglishButtonClicked();
           }}
