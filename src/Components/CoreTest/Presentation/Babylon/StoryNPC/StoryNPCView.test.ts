@@ -627,8 +627,8 @@ describe("StoryNPCView", () => {
 
       systemUnderTest["moveToIdlePosition"]();
 
-      expect(characterNavigatorMock.startMovement).toBeCalledTimes(1);
-      expect(characterNavigatorMock.startMovement).toBeCalledWith(
+      expect(characterNavigatorMock.startMovement).toHaveBeenCalledTimes(1);
+      expect(characterNavigatorMock.startMovement).toHaveBeenCalledWith(
         new Vector3(4, 2, 0),
         expect.any(Function),
       );
@@ -641,8 +641,8 @@ describe("StoryNPCView", () => {
 
       systemUnderTest["moveToIdlePosition"]();
 
-      expect(characterNavigatorMock.startMovement).toBeCalledTimes(1);
-      expect(characterNavigatorMock.startMovement).toBeCalledWith(
+      expect(characterNavigatorMock.startMovement).toHaveBeenCalledTimes(1);
+      expect(characterNavigatorMock.startMovement).toHaveBeenCalledWith(
         new Vector3(2, 1, 3),
         expect.any(Function),
       );
@@ -723,7 +723,7 @@ describe("StoryNPCView", () => {
       expect(characterNavigatorMock.startMovement).not.toBeCalled();
       jest.advanceTimersByTime(viewModel.cutSceneStartDelay);
 
-      expect(characterNavigatorMock.startMovement).toBeCalledTimes(1);
+      expect(characterNavigatorMock.startMovement).toHaveBeenCalledTimes(1);
     });
 
     // ANF-ID: [EZZ0026]
@@ -756,8 +756,8 @@ describe("StoryNPCView", () => {
       systemUnderTest["startCutSceneMovement"]();
       jest.advanceTimersByTime(viewModel.cutSceneStartDelay);
 
-      expect(storyElementPresenterMock.open).toBeCalledTimes(1);
-      expect(storyElementPresenterMock.open).toBeCalledWith(
+      expect(storyElementPresenterMock.open).toHaveBeenCalledTimes(1);
+      expect(storyElementPresenterMock.open).toHaveBeenCalledWith(
         StoryElementType.Intro,
       );
     });
@@ -792,8 +792,8 @@ describe("StoryNPCView", () => {
       systemUnderTest["startCutSceneMovement"]();
       jest.advanceTimersByTime(viewModel.cutSceneStartDelay);
 
-      expect(storyElementPresenterMock.open).toBeCalledTimes(1);
-      expect(storyElementPresenterMock.open).toBeCalledWith(
+      expect(storyElementPresenterMock.open).toHaveBeenCalledTimes(1);
+      expect(storyElementPresenterMock.open).toHaveBeenCalledWith(
         StoryElementType.Outro,
       );
     });
@@ -813,8 +813,8 @@ describe("StoryNPCView", () => {
 
       systemUnderTest["setRandomMovementTarget"]();
 
-      expect(characterNavigatorMock.startMovement).toBeCalledTimes(1);
-      expect(characterNavigatorMock.startMovement).toBeCalledWith(
+      expect(characterNavigatorMock.startMovement).toHaveBeenCalledTimes(1);
+      expect(characterNavigatorMock.startMovement).toHaveBeenCalledWith(
         expect.any(Vector3),
         systemUnderTest["startRandomMovementIdleTimeout"],
       );
@@ -847,7 +847,7 @@ describe("StoryNPCView", () => {
 
       jest.advanceTimersByTime(viewModel.idleTime);
 
-      expect(setRandomMovementTargetMock).toBeCalledTimes(1);
+      expect(setRandomMovementTargetMock).toHaveBeenCalledTimes(1);
     });
 
     // ANF-ID: [EZZ0025]
@@ -1024,20 +1024,24 @@ describe("StoryNPCView", () => {
 
       systemUnderTest["changeHighlightColor"](new Color3(1, 0, 0));
 
-      expect(scenePresenterMock.HighlightLayer.removeMesh).toBeCalledTimes(2);
-      expect(scenePresenterMock.HighlightLayer.removeMesh).toBeCalledWith(
+      expect(
+        scenePresenterMock.HighlightLayer.removeMesh,
+      ).toHaveBeenCalledTimes(2);
+      expect(scenePresenterMock.HighlightLayer.removeMesh).toHaveBeenCalledWith(
         viewModel.modelMeshes[0],
       );
-      expect(scenePresenterMock.HighlightLayer.removeMesh).toBeCalledWith(
+      expect(scenePresenterMock.HighlightLayer.removeMesh).toHaveBeenCalledWith(
         viewModel.iconMeshes[0],
       );
 
-      expect(scenePresenterMock.HighlightLayer.addMesh).toBeCalledTimes(2);
-      expect(scenePresenterMock.HighlightLayer.addMesh).toBeCalledWith(
+      expect(scenePresenterMock.HighlightLayer.addMesh).toHaveBeenCalledTimes(
+        2,
+      );
+      expect(scenePresenterMock.HighlightLayer.addMesh).toHaveBeenCalledWith(
         viewModel.modelMeshes[0],
         new Color3(1, 0, 0),
       );
-      expect(scenePresenterMock.HighlightLayer.addMesh).toBeCalledWith(
+      expect(scenePresenterMock.HighlightLayer.addMesh).toHaveBeenCalledWith(
         viewModel.iconMeshes[0],
         new Color3(1, 0, 0),
       );
@@ -1049,7 +1053,7 @@ describe("StoryNPCView", () => {
 
       viewModel.isInteractable.Value = false;
 
-      expect(systemUnderTest["changeHighlightColor"]).toBeCalledTimes(1);
+      expect(systemUnderTest["changeHighlightColor"]).toHaveBeenCalledTimes(1);
     });
 
     test("updateHighlight sets highlight color correctly when interactable", () => {
@@ -1058,8 +1062,8 @@ describe("StoryNPCView", () => {
 
       systemUnderTest["updateHighlight"]();
 
-      expect(systemUnderTest["changeHighlightColor"]).toBeCalledWith(
-        HighlightColors.NonLearningElementBase,
+      expect(systemUnderTest["changeHighlightColor"]).toHaveBeenCalledWith(
+        HighlightColors.StoryElementHighlighted,
       );
     });
 
@@ -1070,9 +1074,9 @@ describe("StoryNPCView", () => {
 
       systemUnderTest["updateHighlight"]();
 
-      expect(systemUnderTest["changeHighlightColor"]).toBeCalledWith(
+      expect(systemUnderTest["changeHighlightColor"]).toHaveBeenCalledWith(
         HighlightColors.getNonInteractableColor(
-          HighlightColors.NonLearningElementBase,
+          HighlightColors.StoryElementHighlighted,
         ),
       );
     });
@@ -1083,8 +1087,12 @@ describe("StoryNPCView", () => {
 
       viewModel.isInteractable.Value = false;
 
-      expect(systemUnderTest["toggleIconFloatAnimation"]).toBeCalledTimes(1);
-      expect(systemUnderTest["toggleIconFloatAnimation"]).toBeCalledWith(false);
+      expect(systemUnderTest["toggleIconFloatAnimation"]).toHaveBeenCalledTimes(
+        1,
+      );
+      expect(systemUnderTest["toggleIconFloatAnimation"]).toHaveBeenCalledWith(
+        false,
+      );
     });
   });
 

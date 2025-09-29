@@ -10,6 +10,7 @@ const HighlightColors = {
   LearningElementSolved: Color3.FromHexString("#00FF00"),
   NonLearningElementBase: Color3.FromHexString("#9232E6"),
   LearningElementHighlighted: Color3.FromHexString("#FF00FF"),
+  StoryElementHighlighted: Color3.FromHexString("#0088FF"),
   getNonInteractableColor: (baseColor: Color3) => {
     return baseColor.add(new Color3(0.45, 0.45, 0.45));
   },

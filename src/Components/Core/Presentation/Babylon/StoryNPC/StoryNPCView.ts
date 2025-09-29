@@ -474,11 +474,11 @@ export default class StoryNPCView {
   @bind
   private updateHighlight(): void {
     if (this.viewModel.isInteractable.Value)
-      this.changeHighlightColor(HighlightColors.NonLearningElementBase);
+      this.changeHighlightColor(HighlightColors.StoryElementHighlighted);
     else
       this.changeHighlightColor(
         HighlightColors.getNonInteractableColor(
-          HighlightColors.NonLearningElementBase,
+          HighlightColors.StoryElementHighlighted,
         ),
       );
   }

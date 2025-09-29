@@ -31,6 +31,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - changed text to match adler text guidelines
 - loadingscreen to learning space now once again shows control explanations if there is no narrative framework intro
 - Learningworldcompletion modals can now show more info, if available
+- changed highlight color of story npcs in learning space
 
 ### Removed
 
@@ -351,6 +352,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 ### Added
 
 - Adaptivity Element:
+
   - specific icon for adaptivity element.
   - 3D representation of NPC.
   - 2D representation of NPC.
