@@ -300,23 +300,6 @@ describe("AvatarView", () => {
       ).toHaveBeenCalledWith("AvatarParentNode");
     });
 
-    test.skip("loadAvatarAsync sets the parent node as parent of the first loaded mesh", async () => {
-      const parentNode = new TransformNode(
-        "AvatarParentNode",
-        new Scene(new NullEngine()),
-      );
-      scenePresenterMock.Scene.getTransformNodeByName.mockReturnValue(
-        parentNode,
-      );
-
-      const mockMesh = setupScenePresenterLoadGTLFModelMock();
-
-      await systemUnderTest["loadAvatarAsync"]();
-
-      expect(mockMesh.setParent).toHaveBeenCalledTimes(1);
-      expect(mockMesh.setParent).toHaveBeenCalledWith(parentNode);
-    });
-
     test("loadAvatarAsync gets idleAnimation from loading results", async () => {
       scenePresenterMock.Scene.getTransformNodeByName.mockReturnValue(
         new TransformNode("AvatarParentNode", new Scene(new NullEngine())),
