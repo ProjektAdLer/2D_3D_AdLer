@@ -9,7 +9,6 @@ import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import { useTranslation } from "react-i18next";
 import NarrativeFrameworkWorldCompletionModalContainer from "~ReactComponents/GeneralComponents/NarrativeFrameworkWorldCompletionModalContainer/NarrativeFrameworkWorldCompletionModalContainer";
-import { useEffect } from "react";
 
 export default function LearningWorldCompletionModal({
   className,
@@ -27,27 +26,7 @@ export default function LearningWorldCompletionModal({
 
   const { t: translate } = useTranslation(["spaceMenu", "helpmenu"]);
 
-  useEffect(() => {
-    console.log(
-      "useEffect status: ",
-      showModal,
-      " ",
-      isOtherModalOpen,
-      " ",
-      showModal && !isOtherModalOpen,
-    );
-  }, [showModal, isOtherModalOpen]);
-
   if (!viewModel || !controller) return null;
-
-  console.log(
-    "immediate status: ",
-    showModal,
-    " ",
-    viewModel.isOtherModalOpen.Value,
-    " ",
-    showModal && !viewModel.isOtherModalOpen.Value,
-  );
 
   return (
     <StyledModal
