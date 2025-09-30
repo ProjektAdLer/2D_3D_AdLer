@@ -67,7 +67,7 @@ export default class GetSettingsConfigUseCase
 
     this.logger.log(
       LogLevelTypes.TRACE,
-      `GetSettingsConfigUseCase: User got settings: ${settings}.`,
+      `GetSettingsConfigUseCase: User got settings: Volume:${settings.volume}, Language: ${settings.language}, HighGraphicsQualityEnabled: ${settings.highGraphicsQualityEnabled}, BreakTimeNotificationsEnabled: ${settings.breakTimeNotificationsEnabled}.`,
     );
     this.settingsPort.onSettingsUpdated(settings);
     return settings;
