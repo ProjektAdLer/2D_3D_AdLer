@@ -24,9 +24,6 @@ describe("LearningWorldPort", () => {
 
   beforeEach(() => {
     CoreDIContainer.snapshot();
-  });
-
-  beforeEach(() => {
     systemUnderTest = CoreDIContainer.resolve(LearningWorldPort);
   });
 
