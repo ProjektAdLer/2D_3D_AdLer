@@ -35,16 +35,16 @@ export default class SetSettingsConfigUseCase
         settingsEntity,
         SettingsEntity,
       );
-    } else {
-      settingsEntity.volume = settings.volume ?? settingsEntity.volume;
-      settingsEntity.language = settings.language ?? settingsEntity.language;
-      settingsEntity.highGraphicsQualityEnabled =
-        settings.highGraphicsQualityEnabled ??
-        settingsEntity.highGraphicsQualityEnabled;
-      settingsEntity.breakTimeNotificationsEnabled =
-        settings.breakTimeNotificationsEnabled ??
-        settingsEntity.breakTimeNotificationsEnabled;
     }
+    settingsEntity.volume = settings.volume ?? settingsEntity.volume;
+    settingsEntity.language = settings.language ?? settingsEntity.language;
+    settingsEntity.highGraphicsQualityEnabled =
+      settings.highGraphicsQualityEnabled ??
+      settingsEntity.highGraphicsQualityEnabled;
+    settingsEntity.breakTimeNotificationsEnabled =
+      settings.breakTimeNotificationsEnabled ??
+      settingsEntity.breakTimeNotificationsEnabled;
+
     this.logger.log(
       LogLevelTypes.TRACE,
       `SetSettingsConfigUseCase: Settings set to: Volume:${settingsEntity.volume}, Language: ${settingsEntity.language}, HighGraphicsQualityEnabled: ${settingsEntity.highGraphicsQualityEnabled}, BreakTimeNotificationsEnabled: ${settingsEntity.breakTimeNotificationsEnabled}`,
