@@ -52,22 +52,6 @@ export default function ExitModal({ className }: AdLerUIComponent<{}>) {
         {translate(viewModel.exitButtonTitle.Value).toString()}
       </StyledButton>
 
-      {viewModel.isExit.Value && viewModel.availableSpaces.Value.length > 0 && (
-        <h1 className="text-xl text-adlerdarkblue">
-          <b>
-            {translate("availableSpaces", {
-              count: viewModel.availableSpaces.Value.length,
-            })}
-          </b>
-        </h1>
-      )}
-
-      {viewModel.isExit.Value &&
-        viewModel.availableSpaces.Value.length > 0 &&
-        viewModel.availableSpaces.Value.map((availableSpace) => {
-          return createSpaceButton(availableSpace, controller);
-        })}
-
       {viewModel.isExit.Value &&
         viewModel.successorSpaces.Value.length > 0 &&
         viewModel.availableSpaces.Value.length > 0 && (
@@ -92,6 +76,22 @@ export default function ExitModal({ className }: AdLerUIComponent<{}>) {
             return createSpaceButton(precursorSpace, controller);
           },
         )}
+
+      {viewModel.isExit.Value && viewModel.availableSpaces.Value.length > 0 && (
+        <h1 className="text-xl text-adlerdarkblue">
+          <b>
+            {translate("availableSpaces", {
+              count: viewModel.availableSpaces.Value.length,
+            })}
+          </b>
+        </h1>
+      )}
+
+      {viewModel.isExit.Value &&
+        viewModel.availableSpaces.Value.length > 0 &&
+        viewModel.availableSpaces.Value.map((availableSpace) => {
+          return createSpaceButton(availableSpace, controller);
+        })}
     </StyledModal>
   );
 }
