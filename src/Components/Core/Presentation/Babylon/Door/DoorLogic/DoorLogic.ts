@@ -1,19 +1,21 @@
 import IDoorLogic from "./IDoorLogic";
 import DoorViewModel from "../DoorViewModel";
-import { AnimationGroup, Sound } from "@babylonjs/core";
-import IScenePresenter from "../../SceneManagement/IScenePresenter";
+import { AnimationGroup } from "@babylonjs/core";
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+import IGetSettingsConfigUseCase from "src/Components/Core/Application/UseCases/GetSettingsConfig/IGetSettingsConfigUseCase";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 
 const soundLink = require("../../../../../../Assets/Sounds/door_opening.mp3");
 
 export default class DoorLogic implements IDoorLogic {
   private openDoorAnimationGroup: AnimationGroup;
   private setDoorOpenAnimationGroup: AnimationGroup;
-  private openTheDoorSound: Sound;
-
-  constructor(
-    private viewModel: DoorViewModel,
-    private scenePresenter: IScenePresenter,
-  ) {
+  private openTheDoorAudio = new Audio(soundLink);
+  private settings;
+  constructor(private viewModel: DoorViewModel) {
+    this.settings = CoreDIContainer.get<IGetSettingsConfigUseCase>(
+      USECASE_TYPES.IGetSettingsConfigUseCase,
+    ).execute();
     this.setupDoorAnimation();
     this.setupDoorSound();
     if (this.viewModel.isOpen.Value) {
@@ -38,12 +40,7 @@ export default class DoorLogic implements IDoorLogic {
   }
 
   private setupDoorSound(): void {
-    this.openTheDoorSound = new Sound(
-      "openTheDoor",
-      soundLink,
-      this.scenePresenter.Scene,
-    );
-    this.openTheDoorSound.setVolume(0.5);
+    this.openTheDoorAudio.volume = this.settings.volume ?? 0.5;
   }
 
   setDoorOpen(): void {
@@ -73,9 +70,7 @@ export default class DoorLogic implements IDoorLogic {
       }, 100);
     }
 
-    if (this.openTheDoorSound && !this.openTheDoorSound.isPlaying) {
-      this.openTheDoorSound.play();
-    }
+    this.openTheDoorAudio.play();
   }
 
   close(): void {

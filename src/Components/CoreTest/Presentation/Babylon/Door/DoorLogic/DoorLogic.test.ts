@@ -8,20 +8,6 @@ jest.mock(
   () => "mock-sound-path",
 );
 
-// Use a class-based mock for Sound so that instances have the setVolume and play methods
-jest.mock("@babylonjs/core", () => {
-  return {
-    Sound: class {
-      setVolume = jest.fn();
-      play = jest.fn();
-      isPlaying = false;
-      constructor(name: string, url: any, scene: any) {
-        // You can add any initialization logic here if needed
-      }
-    },
-  };
-});
-
 describe("DoorLogic", () => {
   let mockOpenAnimationGroup: any;
   let mockIdleAnimationGroup: any;
@@ -61,15 +47,10 @@ describe("DoorLogic", () => {
       isOpen: { Value: false },
       doorAnimations: [mockOpenAnimationGroup, mockIdleAnimationGroup],
     };
-
-    // Create a mock for the IScenePresenter
-    mockScenePresenter = {
-      Scene: {},
-    };
   });
 
   test("should stop all animation groups upon initialization", () => {
-    new DoorLogic(mockViewModel, mockScenePresenter);
+    new DoorLogic(mockViewModel);
 
     expect(mockOpenAnimationGroup.stop).toHaveBeenCalled();
     expect(mockIdleAnimationGroup.stop).toHaveBeenCalled();
@@ -78,14 +59,14 @@ describe("DoorLogic", () => {
   test("should call setDoorOpen if viewModel.isOpen.Value is true", () => {
     // Simulate the door already being open
     mockViewModel.isOpen.Value = true;
-    new DoorLogic(mockViewModel, mockScenePresenter);
+    new DoorLogic(mockViewModel);
 
     // setDoorOpen calls play(false) on the "door_open_idle" animation group
     expect(mockIdleAnimationGroup.play).toHaveBeenCalledWith(false);
   });
 
   test('open() should play the "door_open" animation and the sound', () => {
-    const doorLogic = new DoorLogic(mockViewModel, mockScenePresenter);
+    const doorLogic = new DoorLogic(mockViewModel);
 
     // Clear previous calls to isolate the open() invocation
     jest.clearAllMocks();
@@ -98,7 +79,7 @@ describe("DoorLogic", () => {
   });
 
   test("open() should call onAnimationEnd callback when animation ends", () => {
-    const doorLogic = new DoorLogic(mockViewModel, mockScenePresenter);
+    const doorLogic = new DoorLogic(mockViewModel);
     const onAnimationEnd = jest.fn();
 
     doorLogic.open(onAnimationEnd);
@@ -118,7 +99,7 @@ describe("DoorLogic", () => {
   test("open() should call onAnimationEnd with timeout when animation is already playing", () => {
     jest.useFakeTimers();
     const setTimeoutSpy = jest.spyOn(global, "setTimeout");
-    const doorLogic = new DoorLogic(mockViewModel, mockScenePresenter);
+    const doorLogic = new DoorLogic(mockViewModel);
     const onAnimationEnd = jest.fn();
 
     mockOpenAnimationGroup.isPlaying = true;
@@ -138,7 +119,7 @@ describe("DoorLogic", () => {
     jest.useFakeTimers();
     const setTimeoutSpy = jest.spyOn(global, "setTimeout");
     mockViewModel.doorAnimations = [];
-    const doorLogic = new DoorLogic(mockViewModel, mockScenePresenter);
+    const doorLogic = new DoorLogic(mockViewModel);
     const onAnimationEnd = jest.fn();
 
     doorLogic.open(onAnimationEnd);
@@ -153,7 +134,7 @@ describe("DoorLogic", () => {
   });
 
   test("close() should reverse animation and stop it when done", () => {
-    const doorLogic = new DoorLogic(mockViewModel, mockScenePresenter);
+    const doorLogic = new DoorLogic(mockViewModel);
 
     doorLogic.close();
 
@@ -175,7 +156,7 @@ describe("DoorLogic", () => {
     // The Sound mock is already set up in the jest.mock at the top
     // We just need to verify that a DoorLogic instance can be created without throwing
     expect(() => {
-      new DoorLogic(mockViewModel, mockScenePresenter);
+      new DoorLogic(mockViewModel);
     }).not.toThrow();
   });
 
@@ -183,7 +164,7 @@ describe("DoorLogic", () => {
     mockViewModel.doorAnimations = undefined;
 
     expect(() => {
-      new DoorLogic(mockViewModel, mockScenePresenter);
+      new DoorLogic(mockViewModel);
     }).not.toThrow();
   });
 
@@ -191,7 +172,7 @@ describe("DoorLogic", () => {
     mockViewModel.doorAnimations = [];
 
     expect(() => {
-      new DoorLogic(mockViewModel, mockScenePresenter);
+      new DoorLogic(mockViewModel);
     }).not.toThrow();
   });
 
@@ -200,7 +181,7 @@ describe("DoorLogic", () => {
     mockIdleAnimationGroup.children = null;
 
     expect(() => {
-      new DoorLogic(mockViewModel, mockScenePresenter);
+      new DoorLogic(mockViewModel);
     }).not.toThrow();
 
     expect(mockOpenAnimationGroup.stop).not.toHaveBeenCalled();
@@ -208,7 +189,7 @@ describe("DoorLogic", () => {
   });
 
   test("setDoorOpen() should play idle animation", () => {
-    const doorLogic = new DoorLogic(mockViewModel, mockScenePresenter);
+    const doorLogic = new DoorLogic(mockViewModel);
 
     // Access private method through any
     (doorLogic as any).setDoorOpen();

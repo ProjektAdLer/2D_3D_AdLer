@@ -97,10 +97,7 @@ export default class DoorView extends Readyable {
         ? (elevatorMesh.name = FocusableTypes.exitDoor.toString())
         : (elevatorMesh.name = FocusableTypes.entryDoor.toString());
     } else if (doorMesh) {
-      this.viewModel.doorLogic = new DoorLogic(
-        this.viewModel,
-        this.scenePresenter,
-      );
+      this.viewModel.doorLogic = new DoorLogic(this.viewModel);
       this.viewModel.isExit
         ? (doorMesh.name = FocusableTypes.exitDoor.toString())
         : (doorMesh.name = FocusableTypes.entryDoor.toString());
