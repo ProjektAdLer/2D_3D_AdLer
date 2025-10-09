@@ -191,7 +191,7 @@ export default class AdaptivityElementController
             showOnIsWrong: true,
             hintAction: {
               hintActionType: AdaptivityElementActionTypes.CommentAction,
-              textData: i18next.t("noQuestion", { ns: "learningElement" }),
+              textData: i18next.t("noHint", { ns: "learningElement" }),
             },
           } as AdaptivityHint;
           this.viewModel.currentQuestion.Value = associatedQuestion;

@@ -21,6 +21,8 @@ import en_startPage from "./en/startPage.json";
 import en_breakTime from "./en/breakTime.json";
 import en_controls from "./en/controls.json";
 import en_helpMenu from "./en/helpMenu.json";
+import en_errorMessages from "./en/errorMessages.json";
+import en_learningElement from "./en/learningElement.json";
 
 const resources = {
   de: {
@@ -40,11 +42,13 @@ const resources = {
     settingsMenu: de_settingsMenu,
   },
   en: {
-    start: en_startPage,
     avatarEditor: en_avatarEditor,
     breakTime: en_breakTime,
     controls: en_controls,
+    errorMessages: en_errorMessages,
     helpMenu: en_helpMenu,
+    learningElement: en_learningElement,
+    start: en_startPage,
   },
 };
 const defaultNS = "start";
