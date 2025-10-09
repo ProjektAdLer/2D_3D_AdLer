@@ -13,7 +13,7 @@
   "openContentMouse": "Linksklick auf ein 3D Objekt",
   "openContentMouseDouble": "Doppelklick auf ein 3D Objekt - Inhalte werden automatisch bei Annährung geöffnet",
   "openContentTouch": "Einfacher Touch auf ein 3D Objekt",
-  "openContentHint1": "Nur farblich umrandete 3D-Modelle mit 3D-Icons und Türen sind mit Inhalten verknüpft ",
+  "openContentHint1": "Nur farblich umrandete 3D-Modelle mit 3D-Icons sind mit Inhalten verknüpft ",
   "openContentHint2": "Inhalte können nur geöffnet werden, wenn der Avatar sich in der Nähe des 3D-Objekts befindet   ",
 
   "rotateCamera": "Kamera drehen",

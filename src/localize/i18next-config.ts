@@ -18,6 +18,8 @@ import de_settingsMenu from "./de/settingsMenu.json";
 // Import language: en
 import en_avatarEditor from "./en/avatarEditor.json";
 import en_startPage from "./en/startPage.json";
+import en_breakTime from "./en/breakTime.json";
+import en_controls from "./en/controls.json";
 
 const resources = {
   de: {
@@ -39,6 +41,8 @@ const resources = {
   en: {
     start: en_startPage,
     avatarEditor: en_avatarEditor,
+    breakTime: en_breakTime,
+    controls: en_controls,
   },
 };
 const defaultNS = "start";

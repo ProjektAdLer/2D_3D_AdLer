@@ -1,0 +1,33 @@
+{
+  "title": "3D controls",
+
+  "confirmationHeading": "Hint",
+  "confirmation": "You can reopen the controls explanations any time via the menu in the 3D screen.",
+
+  "controlAvatar": "Moving the avatar",
+  "controlAvatarMouse": "Left click a position",
+  "controlAvatarTouch": "Singular tap onto a position",
+  "controlAvatarHint": "The avatar can only be moved within the floor area",
+
+  "openContent": "Open content",
+  "openContentMouse": "Left click onto a 3D object",
+  "openContentMouseDouble": "Double click onto a 3D object - content will open automatically when approaching",
+  "openContentTouch": "Singular tap onto a 3D object",
+  "openContentHint1": "Only 3D models with colored outlines and 3D icons are linked to content",
+  "openContentHint2": "Content can only be opened if the avatar is close enough to the 3D object",
+
+  "rotateCamera": "Adjust camera angle",
+  "rotateCameraMouse": "Pressing the mouse wheel and moving the mouse sideways",
+  "rotateCameraTouch": "Touching and sliding sideways",
+  "rotateCameraHint": "The camera is able to swivel 45° to the left and right",
+
+  "zoomCamera": "Zoom camera",
+  "zoomCameraMouse": "Mouse wheel up or down",
+  "zoomCameraTouch": "Use two fingers to zoom in or out",
+  "zoomCameraHint": "The camera is zoomable within a set distance",
+
+  "LearningElementUnsolvedIcon": "Orange outlines indicate learning elements that are not yet completed",
+  "LearningElementSolvedIcon": "Green outlines indicate learning elements that are completed",
+  "NonLearningElementBaseIcon": "Violet outlines indicate elements that can be interacted with in other ways",
+  "HighlightHint": "The colors deepen when the avatar is close enough to the elements to interact with them"
+}
