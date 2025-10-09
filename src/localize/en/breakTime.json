@@ -1,5 +1,35 @@
 {
+  "pauseTitle": "Break Time Notification",
+  "pauseInfo": "Time for a break!",
+  "pauseExplanation": "Click the cup to get information about recreational breaks, or close the message by clicking the 'X' button.",
+
   "pauseNotificationToolTip": "Opens the break time window with useful information for your learning breaks",
   "nextSlideToolTip": "Next slide",
-  "previousSlideToolTip": "Previous slide"
+  "previousSlideToolTip": "Previous slide",
+
+  "shortBreakBase": "You have learned for 30 minutes now. How about a 5 minute break?",
+  "infoMobilization": "On this picture you see a short exercise for mobilization.",
+  "infoNutrition": "Related, it might interest you to know that nutrition is also important for efficient learning.",
+  "infoSeatingPosition": "Related, it might interest you to know that a good posture or an optimal distance to the screen is also vital for efficient learning.",
+
+  "mediumBreakBase": "You have learned for 2 hours now. We recommend a break of at least 20 minutes before continuing.",
+  "infoMusic": "How about listening to some music?",
+  "infoWhy": "Why?",
+
+  "longBreakBase": "You have learned for 4 hours now. We recommend a longer break of around 90 minutes before continuing.",
+  "infoStroll": "How about a walk?",
+
+  "B3": "Stretching for the back",
+  "B7": "Activating chest muscles",
+  "B8": "Keeping a perspective",
+  "E2": "Water: Elixir of learning",
+  "E4": "Fresh air",
+  "E10": "Ideal brain food",
+  "L1": "Concentrate for how long?",
+  "L3": "Breaks, a waste of time?",
+  "L5": "What to do in a break?",
+  "U3": "Correct posture",
+  "S1": "Lead the way",
+  "S3": "Quizzing...",
+  "H1": "Go for a walk"
 }
