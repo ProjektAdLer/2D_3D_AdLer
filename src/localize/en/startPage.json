@@ -1,20 +1,43 @@
 {
   "welcome": "Welcome to AdLer!",
-
-  "learningWorldButton": "Go to Learning World menu",
-
+  "moodleLoginSubheading": "Please log in.",
+  "loginSuccessfullSubheading": "Login successful!",
+  "learningWorldButton": "Learning World Menu",
+  "avatarEditorButton": "Avatar Editor",
   "copyright": "© Project AdLer, University of Applied Sciences Aschaffenburg, University of Applied Sciences Kempten, ZFH - Zentrum für Fernstudien in university association",
 
-  "lmsButtonToolTip": "This button redirects you to the corresponding AdLerLMS",
-  "NameInputToolTip": "Type in your username",
-  "PasswordInputToolTip": "Type in your password",
-  "LoginButtonToolTip": "Click to log in",
-  "DisabledButtonTooltip": "This button is not active before being logged in",
-  "HelpButtonToolTip": "Opens the help window and gives further information about AdLer",
-  "LearningWorldsToolTip": "Click here to get to the AdLer 3D-Learningenvironment",
-  "AvatarEditorToolTip": "Click here to get to the AdLer Avatar Editor",
-  "LogoutButtonToolTip": "Click here to logout",
-  "HomeButtonToolTip": "Click here to get back to the Welcome Page",
+  "learningWorldMenuTitle": "Learning World Menu",
+  "avatarEditorTitle": "Avatar Editor",
+  "settingTitle": "Settings",
 
-  "LearningWorldButtonToolTip": "Click here to get back to the learning world menu"
+  "userName": "Username",
+  "password": "Password",
+  "loginFail": "Login failed.",
+  "serverTimeOut": "Server timeout.",
+  "loginRetry": "Please try to log in once more.",
+  "alreadyLoggedIn": "You're already logged in.",
+  "loginFailAdvise": "Please double check your inputs.",
+  "loginButton": "Log in",
+  "moodleButton": "AdLerLMS",
+  "loginName": "Logged in as {{userName}}",
+  "logout": "Log out",
+
+  "cookieTitle": "Compliance to Cookies & Data",
+  "cookieText": "This is a stolen standard text (which has then been manually translated)! We use cookies and similar technologies. We also process personalized data (such as your IP-Adress) to personalize content, show media from third party sites, or analyze our website traffic. The processing of data only works if cookies are allowed. We share the collected data with third parties, which we list in the privacy settings. The processing of data is allowed due to your compliance, or due to a justified interest. You can object to this in the privacy settings. You are allowed to object to any of this at any time. You'll find more info in our privacy policy.",
+  "cookieAcceptAll": "Accept all",
+  "cookieDecline": "Decline",
+
+  "lmsButtonToolTip": "Click here to be transfered to the connected AdLerLMS",
+  "NameInputToolTip": "Please enter your user name",
+  "PasswordInputToolTip": "Please enter your pass word",
+  "LoginButtonToolTip": "Click here to log in",
+  "DisabledButtonTooltip": "This button only works if logged in",
+  "HelpButtonToolTip": "Opens the help menu",
+  "LearningWorldsToolTip": "Click here to navigate to the AdLer 3D learning world",
+  "AvatarEditorToolTip": "Click here to navigate to the AdLer avatar editor",
+  "LogoutButtonToolTip": "Click here to log out",
+  "HomeButtonToolTip": "Click here to return to the welcome page",
+  "settingButtonToolTip": "Click here to navigate to the settings",
+
+  "LearningWorldButtonToolTip": "Click here to return to the learning world menu"
 }

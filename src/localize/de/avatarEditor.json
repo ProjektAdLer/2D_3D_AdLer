@@ -7,12 +7,7 @@
 
   "hairColorTitle": "Haarfarbe",
   "hairstylesTitle": "Frisur",
-  "hair-medium-ponytail": "Mittlerer Pferdeschwanz",
-  "hair-medium-straight": "Mittellang glatt",
-
   "beardsTitle": "Bart",
-  "beard-medium-anchor": "Mittellang",
-  "beard-mustache-hogan": "Hogan",
 
   "eyebrowsTitle": "Augenbrauen",
   "eyesTitle": "Augen",
@@ -32,9 +27,6 @@
   "shoesTitle": "Schuhe",
 
   "bodyColorTitle": "Hautfarbe",
-  "upperBodyTitle": "Oberkörper",
-  "lowerBodyTitle": "Unterkörper",
-  "bodyProportionsTitle": "Körperproportionen",
 
   "Grey 1": "Grau 1",
   "Grey 2": "Grau 2",
@@ -115,7 +107,7 @@
   "clothing": "Kleidung",
   "body": "Körper",
   "randomizerButtonToolTip": "Erstellt einen zufällig aussehenden Avatar",
-  "accordionCategoryToolTip": "Klappt die Kategorie {{subCategory}} auf und zeigt alle Optionen",
+  "accordionCategoryToolTip": "Klappt die Kategorie {{subCategory}} auf",
 
   "ColorButtonToolTip": "Öffnet ein Fenster zur Farbauswahl",
   "back": "Zurück",
