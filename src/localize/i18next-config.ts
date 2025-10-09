@@ -20,6 +20,7 @@ import en_avatarEditor from "./en/avatarEditor.json";
 import en_startPage from "./en/startPage.json";
 import en_breakTime from "./en/breakTime.json";
 import en_controls from "./en/controls.json";
+import en_helpMenu from "./en/helpMenu.json";
 
 const resources = {
   de: {
@@ -43,6 +44,7 @@ const resources = {
     avatarEditor: en_avatarEditor,
     breakTime: en_breakTime,
     controls: en_controls,
+    helpMenu: en_helpMenu,
   },
 };
 const defaultNS = "start";
