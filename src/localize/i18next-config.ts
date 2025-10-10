@@ -21,29 +21,32 @@ import en_startPage from "./en/startPage.json";
 import en_breakTime from "./en/breakTime.json";
 import en_controls from "./en/controls.json";
 import en_helpMenu from "./en/helpMenu.json";
+import en_internetLoss from "./en/internetLoss.json";
 import en_errorMessages from "./en/errorMessages.json";
 import en_learningElement from "./en/learningElement.json";
 import en_learningSpace from "./en/learningSpace.json";
+import en_loadingScreen from "./en/loadingScreen.json";
+import en_settingsMenu from "./en/settingsMenu.json";
 import en_spaceGoal from "./en/spaceGoal.json";
 import en_spaceMenu from "./en/spaceMenu.json";
 import en_worldMenu from "./en/worldMenu.json";
 
 const resources = {
   de: {
-    start: de_startPage,
-    internetLoss: de_internetLoss,
-    helpMenu: de_helpMenu,
-    worldMenu: de_worldMenu,
-    spaceMenu: de_spaceMenu,
-    learningSpace: de_learningSpace,
-    breakTime: de_breakTime,
-    learningElement: de_learningElement,
-    spaceGoal: de_spaceGoal,
-    controls: de_controls,
     avatarEditor: de_avatarEditor,
-    loadingScreen: de_loadingScreen,
+    breakTime: de_breakTime,
+    controls: de_controls,
     errorMessages: de_errorMessages,
+    helpMenu: de_helpMenu,
+    internetLoss: de_internetLoss,
+    learningElement: de_learningElement,
+    learningSpace: de_learningSpace,
+    loadingScreen: de_loadingScreen,
     settingsMenu: de_settingsMenu,
+    spaceGoal: de_spaceGoal,
+    spaceMenu: de_spaceMenu,
+    start: de_startPage,
+    worldMenu: de_worldMenu,
   },
   en: {
     avatarEditor: en_avatarEditor,
@@ -51,8 +54,11 @@ const resources = {
     controls: en_controls,
     errorMessages: en_errorMessages,
     helpMenu: en_helpMenu,
+    internetLoss: en_internetLoss,
     learningElement: en_learningElement,
     learningSpace: en_learningSpace,
+    loadingScreen: en_loadingScreen,
+    settingsMenu: en_settingsMenu,
     spaceGoal: en_spaceGoal,
     spaceMenu: en_spaceMenu,
     start: en_startPage,

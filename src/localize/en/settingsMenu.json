@@ -1,0 +1,11 @@
+{
+  "volume": "Audio Volume",
+  "quality": "Graphics Quality",
+  "language": "Language",
+  "languageButtonGerman": "German",
+  "languageButtonEnglish": "English",
+  "qualityLow": "Compatibility Mode",
+  "testSoundButton": "Test Volume",
+  "breakTimeNotifications": "Break Time Notifications",
+  "breakTimeNotificationsButton": "Remind me to take breaks."
+}
