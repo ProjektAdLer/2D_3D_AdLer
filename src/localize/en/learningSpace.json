@@ -1,10 +1,38 @@
 {
+  "loadLearningSpace": "Loading learning space...",
+  "finishedLoadingLearningSpace": "Learning space loaded successfully!",
+  "enterLearningSpace": "Continue to the learning space",
+  "projectInformation": "You'd like to learn more about Project AdLer? Check here: <0>{{homepageLink}}</0>.",
+  "homepage": "Project Homepage",
+  "linkInfo": "This link opens the project homepage (https://projekt-adler.eu) in a new tab.",
   "openLearningSpaceToolTip": "Opens the learning environment",
+
+  "enterDoor": "Entrance",
+  "exitDoor": "Exit",
+
+  "exitRoomTitle": "Leave space?",
+  "exitRoomButton": "Back to the Learning Space Menu",
+  "availableSpaces_one": "Additional available space",
+  "availableSpaces_other": "Additional available spaces",
+  "nextLearningSpace_one": "Subsequent space",
+  "nextLearningSpace_other": "Subsequent spaces",
+
+  "introNPC": "Intro-NPC",
+  "outroNPC": "Outro-NPC",
+  "introOutroNPC": "Intro/Outro-NPC",
+  "introStoryTitle": "Intro",
+  "outroStoryTitle": "Outro",
+  "introOutroStoryTitle": "Choose between Intro and Outro of this learning space story",
+  "outroLockedTitle": "Outro is locked",
+  "outroLockedText": "This element is not yet available. Complete the learning space first!",
+  "backButton": "Intro/Outro selection",
 
   "previousToolTip": "Previous",
   "nextToolTip": "Next",
   "storySelectionToolTip": "Go back to the selection",
   "closeStoryToolTip": "Close the story monologue and proceed in the learning space",
+
+  "spaceScore": "{{current}} of {{required}}",
 
   "sidebar_learningSpaceMenu": "Learning Space Menu",
   "sidebar_learningWorldMenu": "Learning World Menu",
@@ -12,7 +40,7 @@
   "sidebar_fullScreen": "Fullscreen",
   "sidebar_help": "Help Window",
   "sidebar_controls": "Controls",
-  "sidebar_breakTime": "Break Notifications",
+  "sidebar_breakTime": "Break Time Notifications",
   "sidebar_worldCompleted": "World Complete",
   "sidebar_narrativeFrameworkIntro": "Narrative Framework",
   "sidebar_introStory": "Intro Story",
@@ -30,6 +58,7 @@
   "sidebar_narrativeFrameworkToolTip": "Narrative Framework",
   "sidebar_introStoryToolTip": "Intro Story",
   "sidebar_outroStoryToolTip": "Outro Story",
+  "sidebar_badgeOverviewToolTip": "Opens the overview of badges you have earned",
   "sidebar_previousPage": "Previous page",
   "sidebar_nextPage": "Next page",
 
@@ -38,5 +67,8 @@
   "worldScoreToolTip": "Shows relative solved learning elements in this learning world",
   "xpBarToolTip": "Current level and earned experience points",
 
-  "bottomToolTip": "Opens this learning element"
+  "bottomToolTip": "Opens this learning element",
+
+  "hint_controlsExplanationModal": "You can open the controls explanation panel via the menu in the 3d display at any time.",
+  "badgeOverviewTitle": "badge overview"
 }

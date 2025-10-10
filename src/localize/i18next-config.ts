@@ -23,6 +23,7 @@ import en_controls from "./en/controls.json";
 import en_helpMenu from "./en/helpMenu.json";
 import en_errorMessages from "./en/errorMessages.json";
 import en_learningElement from "./en/learningElement.json";
+import en_learningSpace from "./en/learningSpace.json";
 
 const resources = {
   de: {
@@ -48,6 +49,7 @@ const resources = {
     errorMessages: en_errorMessages,
     helpMenu: en_helpMenu,
     learningElement: en_learningElement,
+    learningSpace: en_learningSpace,
     start: en_startPage,
   },
 };
