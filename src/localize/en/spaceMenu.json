@@ -1,11 +1,33 @@
 {
-  "linkToolTip": "Opens a link. The link was given from your teacher",
-  "homepageToolTip": "Opens the AdLer website",
+  "learningSpaceButton": "Enter the Learning Space!",
+  "description": "Description:",
+  "goal_one": "Learning Objective:",
+  "goal_other": "Learning Objectives:",
+  "learningElement_one": "Learning Element:",
+  "learningElement_other": "Learning Elements:",
+  "requiredPoints": "Required Points:",
+  "maximumPoints": "Maximum Points:",
+  "estimatedTime": "Estimated Time to Complete:",
+  "minutes": "Minutes",
+  "difficultyEasy": "Easy",
+  "difficultyMedium": "Medium",
+  "difficultyHard": "Hard",
 
-  "spaceButtonToolTip": "Opens the learning spaces metadata",
-  "spaceOpenButtonToolTip": "Opens the learning environment",
-
+  "graph": "Path View",
+  "list": "List View",
+  "nodeAND": "AND",
+  "nodeOR": "OR",
   "zoomIn": "Zoom in to graph",
   "zoomOut": "Zoom out of graph",
-  "fitView": "Fits graph to view"
+  "fitView": "Fits graph to view",
+
+  "learningWorldCompleted": "Learning World completed!",
+  "congratulationStandardText": "You have completed eavery learning space, therefore completing the learning world. Congratulations!",
+  "furtherLink": "Link",
+  "link_Homepage": "If you want to learn more about Project AdLer, feel free to visit our ",
+  "linkToolTip": "Opens a link. The link was provided by your teacher",
+  "homepageToolTip": "Opens the AdLer website",
+
+  "spaceButtonToolTip": "\nSingle click: Opens the learning space metadata\nDouble click: Enters the learning space",
+  "spaceOpenButtonToolTip": "Opens the learning space"
 }

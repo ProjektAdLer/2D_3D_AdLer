@@ -24,6 +24,9 @@ import en_helpMenu from "./en/helpMenu.json";
 import en_errorMessages from "./en/errorMessages.json";
 import en_learningElement from "./en/learningElement.json";
 import en_learningSpace from "./en/learningSpace.json";
+import en_spaceGoal from "./en/spaceGoal.json";
+import en_spaceMenu from "./en/spaceMenu.json";
+import en_worldMenu from "./en/worldMenu.json";
 
 const resources = {
   de: {
@@ -50,7 +53,10 @@ const resources = {
     helpMenu: en_helpMenu,
     learningElement: en_learningElement,
     learningSpace: en_learningSpace,
+    spaceGoal: en_spaceGoal,
+    spaceMenu: en_spaceMenu,
     start: en_startPage,
+    worldMenu: en_worldMenu,
   },
 };
 const defaultNS = "start";

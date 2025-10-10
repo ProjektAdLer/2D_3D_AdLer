@@ -1,4 +1,20 @@
 {
+  "loadLearningWorldOverview": "Loading Learning Worlds...",
+  "finishedLearningWorldOverview": "Learning worlds loaded!",
+  "openLearningWorldButton": "Open Learning World!",
+  "openLearningWorldToolTip": "Opens the Learning World",
+
+  "description": "Description:",
+  "goal_one": "Learning Objective:",
+  "goal_other": "Learning Objectives:",
+  "rooms_one": "Learning Space:",
+  "estimatedTime": "Estimated Time to Complete:",
+  "minutes": "Minutes",
+  "rooms_other": "Learning Spaces:",
+  "roomCount": "Number of Spaces:",
+  "NoAvailableCoursesReturnHomeTitle": "No Learning World found",
+  "NoAvailableCoursesReturnHomeText": "You're currently not enlisted to a course.<br/>Please return to the welcome screen.<br/>The go to the AdLer Moodle and<br/>enlist yourself in a course<br/>or ask your teacher for enlisting.",
+
   "worldButtonToolTip": "Opens the learning worlds metadata",
   "worldOpenButtonToolTip": "Opens the selected learning world"
 }
