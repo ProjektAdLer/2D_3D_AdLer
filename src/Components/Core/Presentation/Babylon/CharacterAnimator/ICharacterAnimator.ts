@@ -8,8 +8,10 @@ export default interface ICharacterAnimator {
     characterRotationNode: TransformNode,
     idleAnimation: AnimationGroup,
     walkAnimation: AnimationGroup,
-    interactionAnimation?: AnimationGroup
+    interactionAnimation?: AnimationGroup,
+    isNPC?: boolean,
   ): void;
   transition(action: CharacterAnimationActions): boolean;
+  cleanup(): void;
   readonly CurrentAnimationState: CharacterAnimationStates;
 }

@@ -223,6 +223,11 @@ export default class AvatarView {
     this.scenePresenter.addDisposeSceneCallback(() => {
       clearTimeout(this.viewModel.resetEyeTimer);
       clearTimeout(this.viewModel.setEyeTimer);
+
+      // Stop any playing sounds
+      if (this.viewModel.characterAnimator) {
+        this.viewModel.characterAnimator.cleanup();
+      }
     });
   }
 

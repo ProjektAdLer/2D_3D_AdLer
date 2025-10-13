@@ -18,10 +18,16 @@ import LearningSpaceSceneDefinition from "../SceneManagement/Scenes/LearningSpac
 import IScenePresenter from "../SceneManagement/IScenePresenter";
 import ICharacterAnimator from "./ICharacterAnimator";
 import { injectable } from "inversify";
+import type IGetSettingsConfigUseCase from "src/Components/Core/Application/UseCases/GetSettingsConfig/IGetSettingsConfigUseCase";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+
+const characterWalkingSoundLink = require("../../../../../Assets/Sounds/CharacterWalking.mp3");
 
 @injectable()
 export default class CharacterAnimator implements ICharacterAnimator {
   private readonly rotationVelocityThreshold: number = 0.5;
+  private characterWalkingAudio: HTMLAudioElement;
+  private baseVolume: number;
 
   private stateMachine = new StateMachine<
     CharacterAnimationStates,
@@ -48,7 +54,8 @@ export default class CharacterAnimator implements ICharacterAnimator {
     characterRotationNode: TransformNode,
     idleAnimation: AnimationGroup,
     walkAnimation: AnimationGroup,
-    interactionAnimation?: AnimationGroup
+    interactionAnimation?: AnimationGroup,
+    isNPC: boolean = false,
   ): void {
     this.getCharacterVelocity = getCharacterVelocity;
     this.characterRotationNode = characterRotationNode;
@@ -57,7 +64,7 @@ export default class CharacterAnimator implements ICharacterAnimator {
     this.interactionAnimation = interactionAnimation;
 
     let scenePresenterFactory = CoreDIContainer.get<ScenePresenterFactory>(
-      SCENE_TYPES.ScenePresenterFactory
+      SCENE_TYPES.ScenePresenterFactory,
     );
     this.scenePresenter = scenePresenterFactory(LearningSpaceSceneDefinition);
 
@@ -65,9 +72,22 @@ export default class CharacterAnimator implements ICharacterAnimator {
     if (!this.characterRotationNode.rotationQuaternion)
       this.characterRotationNode.rotationQuaternion = new Quaternion();
 
+    this.setupWalkingSound(isNPC);
     this.setupIdleAnimation();
     this.setupWalkAnimation();
     if (this.interactionAnimation) this.setupInteractionAnimation();
+  }
+
+  private setupWalkingSound(isNPC: boolean): void {
+    this.characterWalkingAudio = new Audio(characterWalkingSoundLink);
+    this.characterWalkingAudio.loop = true;
+    this.characterWalkingAudio.playbackRate = 1.5;
+
+    const settings = CoreDIContainer.get<IGetSettingsConfigUseCase>(
+      USECASE_TYPES.IGetSettingsConfigUseCase,
+    ).execute();
+    // NPCs get half the volume of the player avatar
+    this.baseVolume = (settings.volume ?? 0.5) * (isNPC ? 0.5 : 1.0);
   }
 
   public transition(action: CharacterAnimationActions): boolean {
@@ -99,7 +119,7 @@ export default class CharacterAnimator implements ICharacterAnimator {
     });
 
     this.scenePresenter.Scene.onBeforeRenderObservable.add(
-      this.walkingStateOnBeforeRenderCallback
+      this.walkingStateOnBeforeRenderCallback,
     );
   }
 
@@ -109,6 +129,7 @@ export default class CharacterAnimator implements ICharacterAnimator {
       const absoluteVelocity = this.getCharacterVelocity().length();
 
       this.setWalkingAnimationSpeed(absoluteVelocity * 0.6);
+      this.updateWalkingSoundSpeed(absoluteVelocity);
       this.rotateCharacter(absoluteVelocity);
     }
   }
@@ -117,17 +138,25 @@ export default class CharacterAnimator implements ICharacterAnimator {
     this.walkAnimation.speedRatio = Math.max(absoluteVelocity, 0.1);
   }
 
+  private updateWalkingSoundSpeed(absoluteVelocity: number): void {
+    if (!this.characterWalkingAudio) return;
+
+    // Adjust volume based on velocity (quieter when moving slow, louder when fast)
+    const normalizedVolume = Math.min(absoluteVelocity * 0.3, 1.0);
+    this.characterWalkingAudio.volume = this.baseVolume * normalizedVolume;
+  }
+
   private rotateCharacter(absoluteVelocity: number): void {
     if (absoluteVelocity > this.rotationVelocityThreshold) {
       const normalizedVelocity = this.getCharacterVelocity().normalize();
       const desiredRotation = Math.atan2(
         normalizedVelocity.x,
-        normalizedVelocity.z
+        normalizedVelocity.z,
       );
 
       this.characterRotationNode.rotationQuaternion = Quaternion.RotationAxis(
         Axis.Y,
-        desiredRotation
+        desiredRotation,
       );
     }
   }
@@ -179,7 +208,7 @@ export default class CharacterAnimator implements ICharacterAnimator {
   private createOnBeforeAnimationTransitionObserver(
     from: AnimationGroup,
     to: AnimationGroup,
-    blendValueIncrementFunction: () => number
+    blendValueIncrementFunction: () => number,
   ) {
     // reset animation weights from last transition if not part of new transition
     // this ensures a valid end state of the last transition
@@ -219,7 +248,7 @@ export default class CharacterAnimator implements ICharacterAnimator {
           from,
           to,
           animationBlendValueObject,
-          blendValueIncrementFunction
+          blendValueIncrementFunction,
         );
       });
   }
@@ -229,7 +258,7 @@ export default class CharacterAnimator implements ICharacterAnimator {
     fromAnimation: AnimationGroup,
     toAnimation: AnimationGroup,
     animationBlendValueObject: { value: number }, // wrapped in object to get passed by reference
-    blendValueIncrementFunction: () => number
+    blendValueIncrementFunction: () => number,
   ): void {
     animationBlendValueObject.value += blendValueIncrementFunction();
 
@@ -242,7 +271,7 @@ export default class CharacterAnimator implements ICharacterAnimator {
     } else {
       // transition still in progress - set new weights
       fromAnimation.setWeightForAllAnimatables(
-        1.0 - animationBlendValueObject.value
+        1.0 - animationBlendValueObject.value,
       );
       toAnimation.setWeightForAllAnimatables(animationBlendValueObject.value);
     }
@@ -252,7 +281,7 @@ export default class CharacterAnimator implements ICharacterAnimator {
     if (!this.transitionObserverRef) return;
 
     this.scenePresenter.Scene.onBeforeAnimationsObservable.remove(
-      this.transitionObserverRef
+      this.transitionObserverRef,
     );
     this.transitionObserverRef = null;
   }
@@ -264,8 +293,14 @@ export default class CharacterAnimator implements ICharacterAnimator {
     this.createOnBeforeAnimationTransitionObserver(
       this.idleAnimation,
       this.walkAnimation,
-      () => Math.max(this.getVelocityAnimationInterpolationIncrement(), 0.1)
+      () => Math.max(this.getVelocityAnimationInterpolationIncrement(), 0.1),
     );
+    // Start walking sound
+    if (this.characterWalkingAudio) {
+      this.characterWalkingAudio.play().catch(() => {
+        // Ignore play errors (e.g., if user hasn't interacted with page yet)
+      });
+    }
   }
 
   @bind
@@ -273,8 +308,22 @@ export default class CharacterAnimator implements ICharacterAnimator {
     this.createOnBeforeAnimationTransitionObserver(
       this.walkAnimation,
       this.idleAnimation,
-      () => this.getTimedAnimationInterpolationIncrement(100)
+      () => this.getTimedAnimationInterpolationIncrement(100),
     );
+    // Stop walking sound
+    this.stopWalkingSound();
+  }
+
+  private stopWalkingSound(): void {
+    if (this.characterWalkingAudio) {
+      this.characterWalkingAudio.pause();
+      this.characterWalkingAudio.currentTime = 0;
+    }
+  }
+
+  public cleanup(): void {
+    // Stop and cleanup walking sound
+    this.stopWalkingSound();
   }
 
   @bind
@@ -286,8 +335,13 @@ export default class CharacterAnimator implements ICharacterAnimator {
     this.createOnBeforeAnimationTransitionObserver(
       fromAnimation!,
       this.interactionAnimation!,
-      () => this.getTimedAnimationInterpolationIncrement(100)
+      () => this.getTimedAnimationInterpolationIncrement(100),
     );
+
+    // Stop walking sound if transitioning from walking
+    if (fromAnimation === this.walkAnimation) {
+      this.stopWalkingSound();
+    }
   }
 
   @bind
@@ -309,7 +363,7 @@ export default class CharacterAnimator implements ICharacterAnimator {
 
   @bind
   private getTimedAnimationInterpolationIncrement(
-    transitionTimeInMs: number
+    transitionTimeInMs: number,
   ): number {
     return this.scenePresenter.Scene.deltaTime / transitionTimeInMs;
   }

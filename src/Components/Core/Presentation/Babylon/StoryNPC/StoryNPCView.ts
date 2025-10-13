@@ -231,6 +231,8 @@ export default class StoryNPCView {
       this.viewModel.modelRootNode,
       this.idleAnimation,
       this.walkAnimation,
+      undefined,
+      true, // isNPC = true for NPCs
     );
   }
 
@@ -256,6 +258,11 @@ export default class StoryNPCView {
     clearTimeout(this.viewModel.idleTimer);
     clearTimeout(this.viewModel.cutSceneTimer);
     this.viewModel.state.Value = StoryNPCState.Idle; // prevent random movement calls after scene is disposed
+
+    // Stop any playing sounds
+    if (this.viewModel.characterAnimator) {
+      this.viewModel.characterAnimator.cleanup();
+    }
   }
 
   @bind
@@ -358,6 +365,16 @@ export default class StoryNPCView {
 
     // Re-register the focusable when showing NPC again
     this.controller.registerToFocusSelection();
+
+    // Re-setup character animator with NPC flag
+    this.viewModel.characterAnimator.setup(
+      () => this.viewModel.characterNavigator.CharacterVelocity,
+      this.viewModel.modelRootNode,
+      this.idleAnimation,
+      this.walkAnimation,
+      undefined,
+      true, // isNPC = true
+    );
 
     // Re-setup the character navigator since the agent was removed
     if (this.viewModel.characterNavigator) {
