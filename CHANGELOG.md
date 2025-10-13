@@ -35,6 +35,8 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+- removed unintended clickable area below ground of elevator 3d models
+
 ### Fixed
 
 - fixed enabled button for narrative framework, if no narrative framework exists in learning world
