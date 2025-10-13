@@ -621,7 +621,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
               <button
                 class="w-full content-start text-left"
                 data-testid="headgear_accordion"
-                title="Klappt die Kategorie Kopfbedeckung auf und zeigt alle Optionen"
+                title="Klappt die Kategorie Kopfbedeckung auf"
               >
                 <h1
                   class="text-lg font-bold xl:text-2xl"
@@ -817,7 +817,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
               <button
                 class="w-full content-start text-left"
                 data-testid="glasses_accordion"
-                title="Klappt die Kategorie Brille auf und zeigt alle Optionen"
+                title="Klappt die Kategorie Brille auf"
               >
                 <h1
                   class="text-lg font-bold xl:text-2xl"
@@ -837,7 +837,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
               <button
                 class="w-full content-start text-left"
                 data-testid="backpack_accordion"
-                title="Klappt die Kategorie Rucksack auf und zeigt alle Optionen"
+                title="Klappt die Kategorie Rucksack auf"
               >
                 <h1
                   class="text-lg font-bold xl:text-2xl"
@@ -857,7 +857,7 @@ exports[`AvatarEditor should render 2 category when tab button is clicked 1`] = 
               <button
                 class="w-full content-start text-left"
                 data-testid="other_accordion"
-                title="Klappt die Kategorie Sonstiges auf und zeigt alle Optionen"
+                title="Klappt die Kategorie Sonstiges auf"
               >
                 <h1
                   class="text-lg font-bold xl:text-2xl"
@@ -1087,7 +1087,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
               <button
                 class="w-full content-start text-left"
                 data-testid="shirt_accordion"
-                title="Klappt die Kategorie Oberteil auf und zeigt alle Optionen"
+                title="Klappt die Kategorie Oberteil auf"
               >
                 <h1
                   class="text-lg font-bold xl:text-2xl"
@@ -1287,7 +1287,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
               <button
                 class="w-full content-start text-left"
                 data-testid="pants_accordion"
-                title="Klappt die Kategorie Oberteil auf und zeigt alle Optionen"
+                title="Klappt die Kategorie Oberteil auf"
               >
                 <h1
                   class="text-lg font-bold xl:text-2xl"
@@ -1307,7 +1307,7 @@ exports[`AvatarEditor should render 3 category when tab button is clicked 1`] = 
               <button
                 class="w-full content-start text-left"
                 data-testid="shoe_accordion"
-                title="Klappt die Kategorie Oberteil auf und zeigt alle Optionen"
+                title="Klappt die Kategorie Oberteil auf"
               >
                 <h1
                   class="text-lg font-bold xl:text-2xl"
