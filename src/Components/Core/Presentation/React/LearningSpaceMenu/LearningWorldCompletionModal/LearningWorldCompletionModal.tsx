@@ -9,6 +9,9 @@ import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 import { useTranslation } from "react-i18next";
 import NarrativeFrameworkWorldCompletionModalContainer from "~ReactComponents/GeneralComponents/NarrativeFrameworkWorldCompletionModalContainer/NarrativeFrameworkWorldCompletionModalContainer";
+import { useEffect, useRef } from "react";
+
+const learningSpaceCompletionSoundLink = require("../../../../../../Assets/Sounds/LearningSpaceCompletion.mp3");
 
 export default function LearningWorldCompletionModal({
   className,
@@ -24,7 +27,22 @@ export default function LearningWorldCompletionModal({
   const [evaluationLinkName] = useObservable(viewModel.evaluationLinkName);
   const [evaluationLinkText] = useObservable(viewModel.evaluationLinkText);
 
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
   const { t: translate } = useTranslation(["spaceMenu", "helpmenu"]);
+
+  // Initialize audio
+  useEffect(() => {
+    audioRef.current = new Audio(learningSpaceCompletionSoundLink);
+    audioRef.current.volume = 0.5; // TODO: Get from settings
+  }, []);
+
+  // Play sound when modal is shown
+  useEffect(() => {
+    if (showModal && !isOtherModalOpen && audioRef.current) {
+      audioRef.current.play();
+    }
+  }, [showModal, isOtherModalOpen]);
 
   if (!viewModel || !controller) return null;
 
