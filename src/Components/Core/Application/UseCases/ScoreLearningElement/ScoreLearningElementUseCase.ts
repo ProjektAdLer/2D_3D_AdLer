@@ -17,11 +17,19 @@ import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import type INotificationPort from "../../Ports/Interfaces/INotificationPort";
 import i18next from "i18next";
 import type IUpdateExperiencePointsUseCase from "../UpdateExperiencePoints/IUpdateExperiencePointsUseCase";
+import type IGetSettingsConfigUseCase from "../GetSettingsConfig/IGetSettingsConfigUseCase";
+
+const learningElementCompletionSoundLink = require("../../../../../Assets/Sounds/LearningElementCompletion.mp3");
 
 @injectable()
 export default class ScoreLearningElementUseCase
   implements IScoreLearningElementUseCase
 {
+  private learningElementCompletionAudio = new Audio(
+    learningElementCompletionSoundLink,
+  );
+  private settings;
+
   constructor(
     @inject(CORE_TYPES.ILogger)
     private logger: ILoggerPort,
@@ -41,7 +49,16 @@ export default class ScoreLearningElementUseCase
     private notificationPort: INotificationPort,
     @inject(USECASE_TYPES.IUpdateExperiencePointsUseCase)
     private updateExperiencePointsUseCase: IUpdateExperiencePointsUseCase,
-  ) {}
+    @inject(USECASE_TYPES.IGetSettingsConfigUseCase)
+    getSettingsConfigUseCase: IGetSettingsConfigUseCase,
+  ) {
+    this.settings = getSettingsConfigUseCase.execute();
+    this.setupLearningElementCompletionSound();
+  }
+
+  private setupLearningElementCompletionSound(): void {
+    this.learningElementCompletionAudio.volume = this.settings.volume ?? 0.5;
+  }
 
   async executeAsync(elementID: ComponentID): Promise<void> {
     // get user token
@@ -98,6 +115,9 @@ export default class ScoreLearningElementUseCase
 
     if (!elements[0].hasScored) {
       elements[0].hasScored = true;
+
+      // Play learning element completion sound
+      this.learningElementCompletionAudio.play();
 
       try {
         const newWorldScore = this.calculateWorldScoreUseCase.internalExecute({
