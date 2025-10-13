@@ -78,9 +78,15 @@ describe("StoryNPCView", () => {
   });
 
   beforeEach(() => {
+    // Reset mocks before creating new instances
+    jest.clearAllMocks();
+    // Clear all timers to prevent interference from previous tests
+    jest.clearAllTimers();
+    // Use real timers by default (tests that need fake timers will enable them)
+    jest.useRealTimers();
+
     viewModel = new StoryNPCViewModel();
     controllerMock = mock<IStoryNPCController>();
-    systemUnderTest = new StoryNPCView(viewModel, controllerMock);
 
     // Setup navigation mock with default return values
     navigationMock.Plugin.getClosestPoint.mockImplementation(
@@ -89,6 +95,8 @@ describe("StoryNPCView", () => {
     navigationMock.Plugin.getRandomPointAround.mockReturnValue(
       new Vector3(2, 0, 2),
     );
+
+    systemUnderTest = new StoryNPCView(viewModel, controllerMock);
   });
 
   describe("setup", () => {
@@ -587,6 +595,20 @@ describe("StoryNPCView", () => {
       viewModel.outroIdlePosRotation = 0;
       viewModel.parentNode.setEnabled(false);
 
+      // Setup idle and walk animations required by showNPC
+      systemUnderTest["idleAnimation"] = new AnimationGroup(
+        AvatarAnimationNames.npc_idle,
+        new Scene(new NullEngine()),
+      );
+      systemUnderTest["walkAnimation"] = new AnimationGroup(
+        AvatarAnimationNames.npc_walk,
+        new Scene(new NullEngine()),
+      );
+
+      // Setup characterAnimator and characterNavigator
+      viewModel.characterAnimator = characterAnimatorMock;
+      viewModel.characterNavigator = characterNavigatorMock;
+
       // Mock avatar presenter to prevent error in startCutSceneMovement
       const vector = new Vector3(0, 0, 0);
       Object.defineProperty(avatarPresenterMock, "AvatarPosition", {
@@ -981,6 +1003,21 @@ describe("StoryNPCView", () => {
       viewModel.outroIdlePosition = new Vector3(3, 0, 3);
       viewModel.outroIdlePosRotation = 270;
       viewModel.parentNode.setEnabled = jest.fn();
+
+      // Setup idle and walk animations required by showNPC
+      systemUnderTest["idleAnimation"] = new AnimationGroup(
+        AvatarAnimationNames.npc_idle,
+        new Scene(new NullEngine()),
+      );
+      systemUnderTest["walkAnimation"] = new AnimationGroup(
+        AvatarAnimationNames.npc_walk,
+        new Scene(new NullEngine()),
+      );
+
+      // Setup characterAnimator and characterNavigator
+      viewModel.characterAnimator = characterAnimatorMock;
+      viewModel.characterNavigator = characterNavigatorMock;
+
       const setSpawnLocationSpy = jest.spyOn(
         systemUnderTest,
         "setSpawnLocationForOutro" as any,

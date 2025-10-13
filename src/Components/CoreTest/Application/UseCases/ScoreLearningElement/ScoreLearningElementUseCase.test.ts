@@ -21,6 +21,7 @@ import IBeginStoryElementOutroCutSceneUseCase from "../../../../Core/Application
 import { ThemeType } from "../../../../Core/Domain/Types/ThemeTypes";
 import UpdateExperiencePointsUseCase from "../../../../Core/Application/UseCases/UpdateExperiencePoints/UpdateExperiencePointsUseCase";
 import { IInternalCalculateLearningSpaceScoreUseCase } from "../../../../Core/Application/UseCases/CalculateLearningSpaceScore/ICalculateLearningSpaceScoreUseCase";
+import SettingsEntity from "../../../../Core/Domain/Entities/SettingsEntity";
 
 const entityContainerMock = mock<IEntityContainer>();
 const backendAdapterMock = mock<IBackendPort>();
@@ -66,11 +67,15 @@ const getNewTestEntities = () => {
     theme: ThemeType.Suburb,
     storyElements: [],
   } as any as LearningSpaceEntity;
+  const settingsEntity: SettingsEntity = {
+    volume: 0.5,
+  } as SettingsEntity;
 
   return {
     userEntity,
     elementEntity,
     spaceEntity,
+    settingsEntity,
   };
 };
 
@@ -78,6 +83,7 @@ const setupEntityContainerMock = (
   userEntityMock: UserDataEntity[],
   elementEntityMock: LearningElementEntity[],
   spaceEntityMock: LearningSpaceEntity[],
+  settingsEntityMock: SettingsEntity[] = [{ volume: 0.5 } as SettingsEntity],
 ) => {
   entityContainerMock.getEntitiesOfType.mockImplementation((entityType) => {
     if (entityType === UserDataEntity) {
@@ -86,6 +92,8 @@ const setupEntityContainerMock = (
       return elementEntityMock;
     } else if (entityType === LearningSpaceEntity) {
       return spaceEntityMock;
+    } else if (entityType === SettingsEntity) {
+      return settingsEntityMock;
     }
     return [];
   });
@@ -100,6 +108,8 @@ const setupEntityContainerMock = (
         return elementEntityMock;
       } else if (entityType === LearningSpaceEntity) {
         return spaceEntityMock;
+      } else if (entityType === SettingsEntity) {
+        return settingsEntityMock;
       }
       return [];
     },
@@ -136,6 +146,15 @@ describe("ScoreLearningElementUseCase", () => {
   });
 
   beforeEach(() => {
+    // Setup default settings entity mock before creating systemUnderTest
+    const { settingsEntity } = getNewTestEntities();
+    entityContainerMock.getEntitiesOfType.mockImplementation((entityType) => {
+      if (entityType === SettingsEntity) {
+        return [settingsEntity];
+      }
+      return [];
+    });
+
     systemUnderTest = CoreDIContainer.get(
       USECASE_TYPES.IScoreLearningElementUseCase,
     );
@@ -369,5 +388,46 @@ describe("ScoreLearningElementUseCase", () => {
         "ScoreLearningElementUseCase: Error calculating new space score: Error: error",
       ),
     );
+  });
+
+  test("setupLearningElementCompletionSound sets volume from settings", () => {
+    expect(systemUnderTest["learningElementCompletionAudio"].volume).toBe(0.5);
+  });
+
+  test("executeAsync plays learning element completion sound when element is scored successfully", async () => {
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
+      spaceID: 1,
+      worldID: 1,
+    } as UserLocationTO);
+    const { userEntity, elementEntity, spaceEntity } = getNewTestEntities();
+    setupEntityContainerMock([userEntity], [elementEntity], [spaceEntity]);
+    backendAdapterMock.scoreElement.mockResolvedValue(true);
+
+    const audioPlaySpy = jest
+      .spyOn(systemUnderTest["learningElementCompletionAudio"], "play")
+      .mockResolvedValue(undefined);
+
+    await systemUnderTest.executeAsync(1);
+
+    expect(audioPlaySpy).toHaveBeenCalledTimes(1);
+  });
+
+  test("executeAsync does not play sound if element was already scored", async () => {
+    getUserLocationUseCaseMock.execute.mockReturnValueOnce({
+      spaceID: 1,
+      worldID: 1,
+    } as UserLocationTO);
+    const { userEntity, elementEntity, spaceEntity } = getNewTestEntities();
+    elementEntity.hasScored = true; // Element already scored
+    setupEntityContainerMock([userEntity], [elementEntity], [spaceEntity]);
+    backendAdapterMock.scoreElement.mockResolvedValue(true);
+
+    const audioPlaySpy = jest
+      .spyOn(systemUnderTest["learningElementCompletionAudio"], "play")
+      .mockResolvedValue(undefined);
+
+    await systemUnderTest.executeAsync(1);
+
+    expect(audioPlaySpy).not.toHaveBeenCalled();
   });
 });

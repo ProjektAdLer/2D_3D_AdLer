@@ -142,7 +142,7 @@ exports[`ControlsExplanationModal should render 1`] = `
                     class="flex flex-col gap-1"
                   >
                     <p>
-                      Nur farblich umrandete 3D-Modelle mit 3D-Icons und Türen sind mit Inhalten verknüpft 
+                      Nur farblich umrandete 3D-Modelle mit 3D-Icons sind mit Inhalten verknüpft 
                     </p>
                     <p>
                       Inhalte können nur geöffnet werden, wenn der Avatar sich in der Nähe des 3D-Objekts befindet   

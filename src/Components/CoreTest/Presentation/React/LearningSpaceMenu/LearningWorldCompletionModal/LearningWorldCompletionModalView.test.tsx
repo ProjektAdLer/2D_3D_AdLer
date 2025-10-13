@@ -43,4 +43,65 @@ describe("LearningWorldCompletionModalView", () => {
 
     expect(controllerMock.CloseButtonClicked).toHaveBeenCalled();
   });
+
+  test("should play sound when modal is opened", () => {
+    const vm = new LearningWorldCompletionModalViewModel();
+    vm.showModal.Value = true;
+    vm.isOtherModalOpen.Value = false;
+    useBuilderMock([vm, controllerMock]);
+
+    // Mock Audio
+    const mockPlay = jest.fn().mockResolvedValue(undefined);
+    global.Audio = jest.fn().mockImplementation(() => ({
+      play: mockPlay,
+      volume: 0.5,
+    })) as any;
+
+    render(<LearningWorldCompletionModal />);
+
+    expect(mockPlay).toHaveBeenCalled();
+  });
+
+  test("should not play sound when other modal is open", () => {
+    const vm = new LearningWorldCompletionModalViewModel();
+    vm.showModal.Value = true;
+    vm.isOtherModalOpen.Value = true;
+    useBuilderMock([vm, controllerMock]);
+
+    // Mock Audio
+    const mockPlay = jest.fn().mockResolvedValue(undefined);
+    global.Audio = jest.fn().mockImplementation(() => ({
+      play: mockPlay,
+      volume: 0.5,
+    })) as any;
+
+    render(<LearningWorldCompletionModal />);
+
+    expect(mockPlay).not.toHaveBeenCalled();
+  });
+
+  test("should initialize audio with volume 0.5", () => {
+    const vm = new LearningWorldCompletionModalViewModel();
+    vm.showModal.Value = false;
+    useBuilderMock([vm, controllerMock]);
+
+    let capturedVolume: number | undefined;
+    global.Audio = jest.fn().mockImplementation(() => {
+      const audio = {
+        play: jest.fn().mockResolvedValue(undefined),
+        volume: 0,
+      };
+      Object.defineProperty(audio, "volume", {
+        get: () => capturedVolume,
+        set: (v) => {
+          capturedVolume = v;
+        },
+      });
+      return audio;
+    }) as any;
+
+    render(<LearningWorldCompletionModal />);
+
+    expect(capturedVolume).toBe(0.5);
+  });
 });
