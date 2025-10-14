@@ -3,7 +3,7 @@ import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservab
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import LevelUpModalViewModel from "./LevelUpModalViewModel";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import LevelUpModalController from "./LevelUpModalController";
 import {
   badgePicturesAB,
@@ -13,6 +13,8 @@ import {
 } from "./BadgePictureLookup";
 import { ThemeType } from "src/Components/Core/Domain/Types/ThemeTypes";
 
+const levelUpSoundLink = require("../../../../../../Assets/Sounds/LevelUp.mp3");
+
 export default function LevelUpModal() {
   const [viewModel, controller] = useBuilder<
     LevelUpModalViewModel,
@@ -20,6 +22,23 @@ export default function LevelUpModal() {
   >(BUILDER_TYPES.ILevelUpModalBuilder);
 
   const [isOpen] = useObservable<boolean>(viewModel?.isOpen);
+
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Initialize audio
+  useEffect(() => {
+    audioRef.current = new Audio(levelUpSoundLink);
+    audioRef.current.volume = 0.5; // TODO: Get from settings
+  }, []);
+
+  // Play sound when modal is shown with 1 second delay
+  useEffect(() => {
+    if (isOpen && audioRef.current) {
+      setTimeout(() => {
+        audioRef.current?.play();
+      }, 1000);
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     if (isOpen) {
