@@ -8,21 +8,27 @@ import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilder
 import { StoryElementType } from "../../../../../Core/Domain/Types/StoryElementType";
 import { LearningElementModelTypeEnums } from "../../../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
 
-// Mock HTMLAudioElement
-const mockPlay = jest.fn().mockResolvedValue(undefined);
-global.Audio = jest.fn().mockImplementation(() => ({
-  play: mockPlay,
-  pause: jest.fn(),
-  volume: 0.5,
-})) as any;
-
 let viewModel = new StoryElementViewModel();
 viewModel.isOpen.Value = true;
 const fakeController = mock<StoryElementController>();
 
 describe("StoryElement", () => {
+  beforeAll(() => {
+    jest.spyOn(console, "error").mockImplementation(() => {});
+  });
+
   beforeEach(() => {
-    mockPlay.mockClear();
+    // Mock HTMLAudioElement to avoid jsdom errors
+    Object.defineProperty(window.HTMLMediaElement.prototype, "pause", {
+      configurable: true,
+      value: jest.fn(),
+    });
+    Object.defineProperty(window.HTMLMediaElement.prototype, "play", {
+      configurable: true,
+      value: jest.fn().mockResolvedValue(undefined),
+    });
+
+    viewModel = new StoryElementViewModel();
     viewModel.introTexts.Value = ["Blabla Intro 1"];
     viewModel.outroTexts.Value = ["Blabla Outro 1"];
     viewModel.isOpen.Value = true;
@@ -102,7 +108,7 @@ describe("StoryElement", () => {
     useBuilderMock([viewModel, fakeController]);
 
     const componentUnderTest = render(<StoryElement />);
-    const title = componentUnderTest.getByText("introStoryTitle");
+    const title = componentUnderTest.getByText("Intro");
     // Suche nach Text mit Anführungszeichen
     const text = componentUnderTest.getByText('"Blabla Intro 1"');
 
@@ -117,7 +123,7 @@ describe("StoryElement", () => {
     useBuilderMock([viewModel, fakeController]);
 
     const componentUnderTest = render(<StoryElement />);
-    const title = componentUnderTest.getByText("outroStoryTitle");
+    const title = componentUnderTest.getByText("Outro");
     // Suche nach Text mit Anführungszeichen
     const text = componentUnderTest.getByText('"Blabla Outro 1"');
 
@@ -133,9 +139,11 @@ describe("StoryElement", () => {
     useBuilderMock([viewModel, fakeController]);
 
     const componentUnderTest = render(<StoryElement />);
-    const title = componentUnderTest.getByText("outroStoryTitle");
+    const title = componentUnderTest.getByText("Outro");
     // Suche nach Text mit Anführungszeichen (kommt aus translate, wird dann umrahmt)
-    const text = componentUnderTest.getByText('"outroLockedText"');
+    const text = componentUnderTest.getByText(
+      '"Dieses Element ist noch nicht verfügbar. Schließen Sie zuerst den Raum ab!"',
+    );
 
     expect(title).toBeInTheDocument();
     expect(text).toBeInTheDocument();
@@ -148,10 +156,10 @@ describe("StoryElement", () => {
 
     const componentUnderTest = render(<StoryElement />);
     const introButton = componentUnderTest.getByRole("button", {
-      name: "introStoryTitle",
+      name: "Intro",
     });
     const outroButton = componentUnderTest.getByRole("button", {
-      name: "outroStoryTitle",
+      name: "Outro",
     });
 
     expect(introButton).toBeInTheDocument();
@@ -217,6 +225,8 @@ describe("StoryElement", () => {
 
   test("plays sound with delay when modal opens", () => {
     jest.useFakeTimers();
+    const playSpy = jest.spyOn(window.HTMLMediaElement.prototype, "play");
+
     viewModel.isOpen.Value = true;
     viewModel.storyTypeToDisplay.Value = StoryElementType.Intro;
     useBuilderMock([viewModel, fakeController]);
@@ -224,13 +234,13 @@ describe("StoryElement", () => {
     render(<StoryElement />);
 
     // Sound should not play immediately
-    expect(mockPlay).not.toHaveBeenCalled();
+    expect(playSpy).not.toHaveBeenCalled();
 
     // Advance timer by 0.25 seconds (the delay)
     jest.advanceTimersByTime(250);
 
     // Now sound should have been played
-    expect(mockPlay).toHaveBeenCalled();
+    expect(playSpy).toHaveBeenCalled();
 
     jest.useRealTimers();
   });

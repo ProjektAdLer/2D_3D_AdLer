@@ -17,7 +17,7 @@ describe("LearningWorldCompletionModalView", () => {
 
     const container = render(<LearningWorldCompletionModal />);
 
-    expect(container.getByText("learningWorldCompleted")).toBeInTheDocument();
+    expect(container.getByText("Lernwelt abgeschlossen!")).toBeInTheDocument();
   });
 
   test("should not render when not openend", () => {

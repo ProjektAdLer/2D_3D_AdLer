@@ -8,20 +8,26 @@ import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilder
 import React from "react";
 import { LogLevelTypes } from "../../../../../Core/Domain/Types/LogLevelTypes";
 
-// Mock HTMLAudioElement
-const mockPlay = jest.fn().mockResolvedValue(undefined);
-global.Audio = jest.fn().mockImplementation(() => ({
-  play: mockPlay,
-  pause: jest.fn(),
-  volume: 0.5,
-})) as any;
-
 let fakeModel = new NotificationManagerViewModel();
 const fakeController = mock<INotificationManagerController>();
 
 describe("NotificationManager", () => {
+  beforeAll(() => {
+    jest.spyOn(console, "error").mockImplementation(() => {});
+  });
+
   beforeEach(() => {
-    mockPlay.mockClear();
+    // Mock HTMLAudioElement to avoid jsdom errors
+    Object.defineProperty(window.HTMLMediaElement.prototype, "pause", {
+      configurable: true,
+      value: jest.fn(),
+    });
+    Object.defineProperty(window.HTMLMediaElement.prototype, "play", {
+      configurable: true,
+      value: jest.fn().mockResolvedValue(undefined),
+    });
+
+    fakeModel = new NotificationManagerViewModel();
   });
   test("should render multiple modals", () => {
     fakeModel.messages.Value = [
@@ -49,6 +55,8 @@ describe("NotificationManager", () => {
   });
 
   test("plays sound when notification appears", () => {
+    const playSpy = jest.spyOn(window.HTMLMediaElement.prototype, "play");
+
     fakeModel.messages.Value = [
       {
         message: "test notification",
@@ -59,6 +67,6 @@ describe("NotificationManager", () => {
 
     render(<NotificationManager />);
 
-    expect(mockPlay).toHaveBeenCalled();
+    expect(playSpy).toHaveBeenCalled();
   });
 });

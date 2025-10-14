@@ -2,14 +2,6 @@ import { AnimationGroup } from "@babylonjs/core";
 import DoorViewModel from "../../../../../Core/Presentation/Babylon/Door/DoorViewModel";
 import ElevatorLogic from "../../../../../Core/Presentation/Babylon/Door/DoorLogic/ElevatorLogic";
 
-// Mock HTMLAudioElement
-const mockPlay = jest.fn().mockResolvedValue(undefined);
-global.Audio = jest.fn().mockImplementation(() => ({
-  play: mockPlay,
-  pause: jest.fn(),
-  volume: 0.5,
-})) as any;
-
 // Create a mock for BabylonJS AnimationGroup
 const createMockAnimationGroup = (name: string) => ({
   name,
@@ -31,9 +23,20 @@ describe("ElevatorLogic", () => {
   let elevatorOpenAnimation: any;
   let elevatorLiftUpAnimation: any;
 
+  beforeAll(() => {
+    jest.spyOn(console, "error").mockImplementation(() => {});
+  });
+
   beforeEach(() => {
-    // Clear mocks
-    mockPlay.mockClear();
+    // Mock HTMLAudioElement to avoid jsdom errors - needs to be in beforeEach to apply to each new Audio instance
+    Object.defineProperty(window.HTMLMediaElement.prototype, "pause", {
+      configurable: true,
+      value: jest.fn(),
+    });
+    Object.defineProperty(window.HTMLMediaElement.prototype, "play", {
+      configurable: true,
+      value: jest.fn().mockResolvedValue(undefined),
+    });
 
     // Create mocks for the two animations used in ElevatorLogic
     elevatorOpenAnimation = createMockAnimationGroup("elevator_open");
@@ -117,6 +120,7 @@ describe("ElevatorLogic", () => {
 
   test("open() should play sound when animation ends", () => {
     const elevatorLogic = new ElevatorLogic(viewModel);
+    const playSpy = jest.spyOn(elevatorLogic["elevatorUpSound"], "play");
 
     elevatorLogic.open();
 
@@ -125,7 +129,7 @@ describe("ElevatorLogic", () => {
       elevatorLiftUpAnimation.onAnimationEndObservable.addOnce.mock.calls[0][0];
     callback();
 
-    expect(mockPlay).toHaveBeenCalled();
+    expect(playSpy).toHaveBeenCalled();
   });
 
   test("open() should work without onAnimationEnd callback", () => {
