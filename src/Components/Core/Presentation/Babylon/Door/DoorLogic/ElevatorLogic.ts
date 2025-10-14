@@ -1,15 +1,30 @@
 import { AnimationGroup } from "@babylonjs/core";
 import IDoorLogic from "./IDoorLogic";
 import DoorViewModel from "../DoorViewModel";
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+import IGetSettingsConfigUseCase from "src/Components/Core/Application/UseCases/GetSettingsConfig/IGetSettingsConfigUseCase";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+
+const elevatorUpSoundLink = require("../../../../../../Assets/Sounds/ElevatorUp.mp3");
 
 export default class ElevatorLogic implements IDoorLogic {
   private elevatorAnimationOpen: AnimationGroup;
   private elevatorAnimationLiftUp: AnimationGroup;
   private enableProximityBehaviour = false;
   private elevatorIsLifted: boolean = false;
+  private elevatorUpSound = new Audio(elevatorUpSoundLink);
+  private settings;
 
   constructor(private viewModel: DoorViewModel) {
+    this.settings = CoreDIContainer.get<IGetSettingsConfigUseCase>(
+      USECASE_TYPES.IGetSettingsConfigUseCase,
+    ).execute();
     this.setupElevatorAnimation();
+    this.setupElevatorSound();
+  }
+
+  private setupElevatorSound(): void {
+    this.elevatorUpSound.volume = this.settings.volume ?? 0.5;
   }
 
   private setupElevatorAnimation(): void {
@@ -44,6 +59,7 @@ export default class ElevatorLogic implements IDoorLogic {
       this.elevatorAnimationLiftUp.play(false);
       this.elevatorAnimationLiftUp.onAnimationEndObservable.addOnce(() => {
         this.elevatorIsLifted = true;
+        this.elevatorUpSound.play();
         if (onAnimationEnd) {
           onAnimationEnd();
         }
