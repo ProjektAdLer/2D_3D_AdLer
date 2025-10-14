@@ -13,6 +13,9 @@ import NotificationManagerViewModel from "./NotificationManagerViewModel";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import { useTranslation } from "react-i18next";
 import { useEffect, useRef } from "react";
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+import IGetSettingsConfigUseCase from "src/Components/Core/Application/UseCases/GetSettingsConfig/IGetSettingsConfigUseCase";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 
 const breakNoticeSoundLink = require("../../../../../../Assets/Sounds/BreakNotice.mp3");
 
@@ -35,8 +38,11 @@ export default function NotificationManager({
 
   // Initialize audio
   useEffect(() => {
+    const settings = CoreDIContainer.get<IGetSettingsConfigUseCase>(
+      USECASE_TYPES.IGetSettingsConfigUseCase,
+    ).execute();
     audioRef.current = new Audio(breakNoticeSoundLink);
-    audioRef.current.volume = 0.5; // TODO: Get from settings
+    audioRef.current.volume = settings.volume ?? 0.5;
   }, []);
 
   // Play sound when notifications appear
@@ -44,7 +50,7 @@ export default function NotificationManager({
     if (notifications && notifications.length > 0 && audioRef.current) {
       audioRef.current.play();
     }
-  }, [notifications?.length]);
+  }, [notifications]);
 
   if (notifications == null || notifications.length === 0) return null;
 

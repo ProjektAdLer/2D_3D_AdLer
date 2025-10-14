@@ -12,6 +12,9 @@ import {
   badgePicturesSuburb,
 } from "./BadgePictureLookup";
 import { ThemeType } from "src/Components/Core/Domain/Types/ThemeTypes";
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+import IGetSettingsConfigUseCase from "src/Components/Core/Application/UseCases/GetSettingsConfig/IGetSettingsConfigUseCase";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 
 const levelUpSoundLink = require("../../../../../../Assets/Sounds/LevelUp.mp3");
 
@@ -27,8 +30,11 @@ export default function LevelUpModal() {
 
   // Initialize audio
   useEffect(() => {
+    const settings = CoreDIContainer.get<IGetSettingsConfigUseCase>(
+      USECASE_TYPES.IGetSettingsConfigUseCase,
+    ).execute();
     audioRef.current = new Audio(levelUpSoundLink);
-    audioRef.current.volume = 0.5; // TODO: Get from settings
+    audioRef.current.volume = settings.volume ?? 0.5;
   }, []);
 
   // Play sound when modal is shown with 1 second delay

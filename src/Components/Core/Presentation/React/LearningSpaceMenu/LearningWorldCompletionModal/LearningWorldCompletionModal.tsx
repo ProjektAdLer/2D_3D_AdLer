@@ -10,6 +10,9 @@ import tailwindMerge from "../../../Utils/TailwindMerge";
 import { useTranslation } from "react-i18next";
 import NarrativeFrameworkWorldCompletionModalContainer from "~ReactComponents/GeneralComponents/NarrativeFrameworkWorldCompletionModalContainer/NarrativeFrameworkWorldCompletionModalContainer";
 import { useEffect, useRef } from "react";
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+import IGetSettingsConfigUseCase from "src/Components/Core/Application/UseCases/GetSettingsConfig/IGetSettingsConfigUseCase";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 
 const learningSpaceCompletionSoundLink = require("../../../../../../Assets/Sounds/LearningSpaceCompletion.mp3");
 
@@ -33,8 +36,11 @@ export default function LearningWorldCompletionModal({
 
   // Initialize audio
   useEffect(() => {
+    const settings = CoreDIContainer.get<IGetSettingsConfigUseCase>(
+      USECASE_TYPES.IGetSettingsConfigUseCase,
+    ).execute();
     audioRef.current = new Audio(learningSpaceCompletionSoundLink);
-    audioRef.current.volume = 0.5; // TODO: Get from settings
+    audioRef.current.volume = settings.volume ?? 0.5;
   }, []);
 
   // Play sound when modal is shown

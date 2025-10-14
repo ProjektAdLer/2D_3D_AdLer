@@ -14,6 +14,9 @@ import SingleStoryLayout from "./SingleStoryLayout";
 import { useCallback, useEffect, useRef } from "react";
 import CloseButton from "~ReactComponents/ReactRelated/ReactBaseComponents/CloseButton";
 import { getNPCImage } from "../../../Utils/GetNPCImage";
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+import IGetSettingsConfigUseCase from "src/Components/Core/Application/UseCases/GetSettingsConfig/IGetSettingsConfigUseCase";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 
 const npcTalkingSoundLink = require("../../../../../../Assets/Sounds/NPCTalking.mp3");
 
@@ -45,8 +48,11 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
 
   // Initialize audio
   useEffect(() => {
+    const settings = CoreDIContainer.get<IGetSettingsConfigUseCase>(
+      USECASE_TYPES.IGetSettingsConfigUseCase,
+    ).execute();
     audioRef.current = new Audio(npcTalkingSoundLink);
-    audioRef.current.volume = 0.5; // TODO: Get from settings
+    audioRef.current.volume = settings.volume ?? 0.5;
   }, []);
 
   // Play sound when modal is shown with 0.25 second delay
