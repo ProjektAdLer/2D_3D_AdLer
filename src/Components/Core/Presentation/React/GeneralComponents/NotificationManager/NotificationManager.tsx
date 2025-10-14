@@ -12,6 +12,9 @@ import NotificationManagerController from "./NotificationManagerController";
 import NotificationManagerViewModel from "./NotificationManagerViewModel";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import { useTranslation } from "react-i18next";
+import { useEffect, useRef } from "react";
+
+const breakNoticeSoundLink = require("../../../../../../Assets/Sounds/BreakNotice.mp3");
 
 export default function NotificationManager({
   className,
@@ -27,6 +30,21 @@ export default function NotificationManager({
   );
 
   const { t: translate } = useTranslation("helpMenu");
+
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Initialize audio
+  useEffect(() => {
+    audioRef.current = new Audio(breakNoticeSoundLink);
+    audioRef.current.volume = 0.5; // TODO: Get from settings
+  }, []);
+
+  // Play sound when notifications appear
+  useEffect(() => {
+    if (notifications && notifications.length > 0 && audioRef.current) {
+      audioRef.current.play();
+    }
+  }, [notifications?.length]);
 
   if (notifications == null || notifications.length === 0) return null;
 
