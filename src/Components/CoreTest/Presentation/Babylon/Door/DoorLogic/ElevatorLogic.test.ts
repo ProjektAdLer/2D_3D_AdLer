@@ -2,6 +2,14 @@ import { AnimationGroup } from "@babylonjs/core";
 import DoorViewModel from "../../../../../Core/Presentation/Babylon/Door/DoorViewModel";
 import ElevatorLogic from "../../../../../Core/Presentation/Babylon/Door/DoorLogic/ElevatorLogic";
 
+// Mock HTMLAudioElement
+const mockPlay = jest.fn().mockResolvedValue(undefined);
+global.Audio = jest.fn().mockImplementation(() => ({
+  play: mockPlay,
+  pause: jest.fn(),
+  volume: 0.5,
+})) as any;
+
 // Create a mock for BabylonJS AnimationGroup
 const createMockAnimationGroup = (name: string) => ({
   name,
@@ -24,6 +32,9 @@ describe("ElevatorLogic", () => {
   let elevatorLiftUpAnimation: any;
 
   beforeEach(() => {
+    // Clear mocks
+    mockPlay.mockClear();
+
     // Create mocks for the two animations used in ElevatorLogic
     elevatorOpenAnimation = createMockAnimationGroup("elevator_open");
     elevatorLiftUpAnimation = createMockAnimationGroup(
@@ -102,6 +113,19 @@ describe("ElevatorLogic", () => {
     callback();
 
     expect(onAnimationEnd).toHaveBeenCalled();
+  });
+
+  test("open() should play sound when animation ends", () => {
+    const elevatorLogic = new ElevatorLogic(viewModel);
+
+    elevatorLogic.open();
+
+    // Simulate the end of the animation by manually calling the registered callback
+    const callback =
+      elevatorLiftUpAnimation.onAnimationEndObservable.addOnce.mock.calls[0][0];
+    callback();
+
+    expect(mockPlay).toHaveBeenCalled();
   });
 
   test("open() should work without onAnimationEnd callback", () => {

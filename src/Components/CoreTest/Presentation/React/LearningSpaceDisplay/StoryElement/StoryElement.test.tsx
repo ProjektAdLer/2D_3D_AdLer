@@ -8,12 +8,21 @@ import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilder
 import { StoryElementType } from "../../../../../Core/Domain/Types/StoryElementType";
 import { LearningElementModelTypeEnums } from "../../../../../Core/Domain/LearningElementModels/LearningElementModelTypes";
 
+// Mock HTMLAudioElement
+const mockPlay = jest.fn().mockResolvedValue(undefined);
+global.Audio = jest.fn().mockImplementation(() => ({
+  play: mockPlay,
+  pause: jest.fn(),
+  volume: 0.5,
+})) as any;
+
 let viewModel = new StoryElementViewModel();
 viewModel.isOpen.Value = true;
 const fakeController = mock<StoryElementController>();
 
 describe("StoryElement", () => {
   beforeEach(() => {
+    mockPlay.mockClear();
     viewModel.introTexts.Value = ["Blabla Intro 1"];
     viewModel.outroTexts.Value = ["Blabla Outro 1"];
     viewModel.isOpen.Value = true;
@@ -205,4 +214,24 @@ describe("StoryElement", () => {
       });
     },
   );
+
+  test("plays sound with delay when modal opens", () => {
+    jest.useFakeTimers();
+    viewModel.isOpen.Value = true;
+    viewModel.storyTypeToDisplay.Value = StoryElementType.Intro;
+    useBuilderMock([viewModel, fakeController]);
+
+    render(<StoryElement />);
+
+    // Sound should not play immediately
+    expect(mockPlay).not.toHaveBeenCalled();
+
+    // Advance timer by 0.25 seconds (the delay)
+    jest.advanceTimersByTime(250);
+
+    // Now sound should have been played
+    expect(mockPlay).toHaveBeenCalled();
+
+    jest.useRealTimers();
+  });
 });

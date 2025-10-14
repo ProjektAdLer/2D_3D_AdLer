@@ -6,12 +6,21 @@ import LevelUpModalController from "../../../../../Core/Presentation/React/Learn
 import mock from "jest-mock-extended/lib/Mock";
 import React from "react";
 
+// Mock HTMLAudioElement
+const mockPlay = jest.fn().mockResolvedValue(undefined);
+global.Audio = jest.fn().mockImplementation(() => ({
+  play: mockPlay,
+  pause: jest.fn(),
+  volume: 0.5,
+})) as any;
+
 describe("LevelUpModal", () => {
   let viewModelMock: LevelUpModalViewModel;
   const controllerMock = mock<LevelUpModalController>();
 
   beforeEach(() => {
     viewModelMock = new LevelUpModalViewModel();
+    mockPlay.mockClear();
   });
 
   afterEach(() => {
@@ -51,5 +60,22 @@ describe("LevelUpModal", () => {
     const button = comp.getByRole("button");
     fireEvent.click(button);
     expect(controllerMock.close).toHaveBeenCalled();
+  });
+
+  test("plays sound with delay when modal opens", () => {
+    jest.useFakeTimers();
+    viewModelMock.isOpen.Value = true;
+    useBuilderMock([viewModelMock, controllerMock]);
+
+    render(<LevelUpModal></LevelUpModal>);
+
+    // Sound should not play immediately
+    expect(mockPlay).not.toHaveBeenCalled();
+
+    // Advance timer by 1 second (the delay)
+    jest.advanceTimersByTime(1000);
+
+    // Now sound should have been played
+    expect(mockPlay).toHaveBeenCalled();
   });
 });
