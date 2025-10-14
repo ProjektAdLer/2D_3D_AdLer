@@ -3,6 +3,7 @@ import ISettingContentController from "./ISettingContentController";
 import SettingContentViewModel from "./SettingContentViewModel";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+import i18next from "i18next";
 const soundLink = require("../../../../../Assets/Sounds/fanfare.mp3");
 
 export default class SettingContentController
@@ -30,6 +31,7 @@ export default class SettingContentController
     this.setSettingsConfigUseCase.execute({
       language: "de",
     });
+    i18next.changeLanguage("de");
   }
   onEnglishButtonClicked(): void {
     this.viewModel.changedSettings = true;
@@ -37,6 +39,7 @@ export default class SettingContentController
     this.setSettingsConfigUseCase.execute({
       language: "en",
     });
+    i18next.changeLanguage("en");
   }
   onGraphicsQualityButtonClicked(): void {
     this.viewModel.changedSettings = true;
