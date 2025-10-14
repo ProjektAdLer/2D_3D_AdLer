@@ -11,9 +11,11 @@ import { StoryElementType } from "src/Components/Core/Domain/Types/StoryElementT
 import StyledContainer from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledContainer";
 import StorySelection from "./StorySelection";
 import SingleStoryLayout from "./SingleStoryLayout";
-import { useCallback } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import CloseButton from "~ReactComponents/ReactRelated/ReactBaseComponents/CloseButton";
 import { getNPCImage } from "../../../Utils/GetNPCImage";
+
+const npcTalkingSoundLink = require("../../../../../../Assets/Sounds/NPCTalking.mp3");
 
 export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   const [viewModel, controller] = useBuilder<
@@ -38,6 +40,27 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
   const [outroEmotion] = useObservable(viewModel?.outroEmotion);
 
   const { t: translate } = useTranslation("learningSpace");
+
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Initialize audio
+  useEffect(() => {
+    audioRef.current = new Audio(npcTalkingSoundLink);
+    audioRef.current.volume = 0.5; // TODO: Get from settings
+  }, []);
+
+  // Play sound when modal is shown with 0.25 second delay
+  useEffect(() => {
+    if (
+      isOpen &&
+      storyTypeToDisplay !== StoryElementType.None &&
+      audioRef.current
+    ) {
+      setTimeout(() => {
+        audioRef.current?.play();
+      }, 250);
+    }
+  }, [isOpen, storyTypeToDisplay]);
 
   const getTitleText = useCallback(() => {
     switch (storyTypeToDisplay) {
