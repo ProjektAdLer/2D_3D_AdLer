@@ -75,9 +75,7 @@ export default function WelcomePageButton(props: WelcomePageButtonProps) {
             className="absolute inset-0 hidden h-full w-full bg-black object-cover lg:block"
             title={props.toolTip}
             style={{ backgroundColor: "black" }}
-          >
-            <track kind="captions"></track>
-          </video>
+          ></video>
           <img
             src={props.imageSrc}
             className="absolute bottom-32 z-10 mx-auto rounded-lg p-4 lg:bottom-[42%] mobile-landscape:bottom-6 portrait:bottom-[20%]"
@@ -103,9 +101,7 @@ export default function WelcomePageButton(props: WelcomePageButtonProps) {
             title={translate("DisabledButtonTooltip").toString()}
             muted={true}
             playsInline={true}
-          >
-            <track kind="captions"></track>
-          </video>
+          ></video>
         </div>
       )}
     </StyledButton>
