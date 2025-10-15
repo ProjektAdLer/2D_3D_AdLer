@@ -3,8 +3,8 @@ import LoginComponent from "~ReactComponents/WelcomePage/SignInAndOutComponent/L
 import logo from "../../../../../../Assets/icons/adler-engine.svg";
 import welcomeVideo from "../../../../../../Assets/graphics/anim-adler-welcome.webm";
 import welcomePicture from "../../../../../../Assets/graphics/welcome-screen-greeting.png";
-import learningEngineIcon from "../../../../../../Assets/graphics/learning-engine.png";
-import avatarEditorIcon from "../../../../../../Assets/graphics/avatar-editor.png";
+import learningEngineStringImage from "../../../../../../Assets/graphics/learning-engine.png";
+import avatarEditorStringImage from "../../../../../../Assets/graphics/avatar-editor.png";
 import settingsIcon from "../../../../../../Assets/icons/settings.svg";
 import avatarButtonBackground from "../../../../../../Assets/misc/WelcomeScreenButtonBackgrounds/AvatarEditorButtonBackground.jpg";
 import learningWorldMenuButtonBackground from "../../../../../../Assets/misc/WelcomeScreenButtonBackgrounds/LearningWorldButtonBackground.jpg";
@@ -96,7 +96,7 @@ export default function WelcomePage() {
           backgroundVideo={learningWorldButtonBackgroundVideo}
           backgroundPicture={learningWorldMenuButtonBackground}
           historyPath="/worldmenu"
-          imageSrc={learningEngineIcon}
+          imageSrc={learningEngineStringImage}
           toolTip={translate("LearningWorldsToolTip").toString()}
           datatestid="worldmenu"
         />
@@ -104,7 +104,7 @@ export default function WelcomePage() {
           backgroundVideo={avatarEditorButtonBackgroundVideo}
           backgroundPicture={avatarButtonBackground}
           historyPath="/avatarEditor"
-          imageSrc={avatarEditorIcon}
+          imageSrc={avatarEditorStringImage}
           toolTip={translate("AvatarEditorToolTip").toString()}
           datatestid="avatarEditor"
         />
