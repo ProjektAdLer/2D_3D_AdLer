@@ -12,12 +12,14 @@ import IPauseOverallTimeSpentTimerUseCase from "../../../../../../Core/Applicati
 import StartOverallTimeSpentTimerUseCase from "../../../../../../Core/Application/UseCases/Adaptivity/OverallTimeSpent/StartOverallTimeSpentTimer/StartOverallTimeSpentTimerUseCase";
 import GetUnseenBreakTimeNotificationUseCase from "../../../../../../Core/Application/UseCases/Adaptivity/OverallTimeSpent/GetUnseenBreakTimeNotification/GetUnseenBreakTimeNotificationUseCase";
 import IGetUnseenBreakTimeNotificationUseCase from "../../../../../../Core/Application/UseCases/Adaptivity/OverallTimeSpent/GetUnseenBreakTimeNotification/IGetUnseenBreakTimeNotificationUseCase";
+import IGetSettingsConfigUseCase from "../../../../../../Core/Application/UseCases/GetSettingsConfig/IGetSettingsConfigUseCase";
 
 const notificationPortMock = mock<INotificationPort>();
 const entityContainerMock = mock<IEntityContainer>();
 const pauseUseCaseMock = mock<IPauseOverallTimeSpentTimerUseCase>();
 const getUnseenBreakTimeNotificationsUseCaseMock =
   mockDeep<GetUnseenBreakTimeNotificationUseCase>();
+const getSettingsConfigUseCaseMock = mock<IGetSettingsConfigUseCase>();
 
 describe("StartOverallTimeSpentNotificationTimerUseCase", () => {
   let systemUnderTest: StartOverallTimeSpentTimerUseCase;
@@ -39,6 +41,10 @@ describe("StartOverallTimeSpentNotificationTimerUseCase", () => {
     CoreDIContainer.rebind<IGetUnseenBreakTimeNotificationUseCase>(
       USECASE_TYPES.IGetUnseenBreakTimeNotificationUseCase,
     ).toConstantValue(getUnseenBreakTimeNotificationsUseCaseMock);
+
+    CoreDIContainer.rebind<IGetSettingsConfigUseCase>(
+      USECASE_TYPES.IGetSettingsConfigUseCase,
+    ).toConstantValue(getSettingsConfigUseCaseMock);
   });
 
   afterAll(() => {
@@ -68,6 +74,10 @@ describe("StartOverallTimeSpentNotificationTimerUseCase", () => {
       mockNotification,
     );
 
+    getSettingsConfigUseCaseMock.execute.mockReturnValue({
+      breakTimeNotificationsEnabled: true,
+    });
+
     entityContainerMock.getEntitiesOfType.mockReturnValue([entity]);
 
     systemUnderTest.execute();
@@ -96,6 +106,10 @@ describe("StartOverallTimeSpentNotificationTimerUseCase", () => {
       mockNotification,
     );
 
+    getSettingsConfigUseCaseMock.execute.mockReturnValue({
+      breakTimeNotificationsEnabled: true,
+    });
+
     entityContainerMock.getEntitiesOfType.mockReturnValue([entity]);
 
     systemUnderTest.execute();
@@ -123,6 +137,9 @@ describe("StartOverallTimeSpentNotificationTimerUseCase", () => {
     getUnseenBreakTimeNotificationsUseCaseMock.internalExecute.mockReturnValue(
       mockNotification,
     );
+    getSettingsConfigUseCaseMock.execute.mockReturnValue({
+      breakTimeNotificationsEnabled: true,
+    });
 
     entityContainerMock.getEntitiesOfType.mockReturnValue([entity]);
 
@@ -137,5 +154,16 @@ describe("StartOverallTimeSpentNotificationTimerUseCase", () => {
     ).toHaveBeenCalledWith(mockNotification);
 
     jest.useRealTimers();
+  });
+  test("execute doesn't do anything if break time notifications are disabled", () => {
+    getSettingsConfigUseCaseMock.execute.mockReturnValue({
+      breakTimeNotificationsEnabled: false,
+    });
+
+    systemUnderTest.execute();
+
+    expect(
+      notificationPortMock.displayBreakTimeNotification,
+    ).not.toHaveBeenCalled();
   });
 });

@@ -31,13 +31,13 @@ export default class StartOverallTimeSpentTimerUseCase
   ) {}
 
   execute() {
-    const timer = this.container.getEntitiesOfType(BreakTimeNotificationEntity);
-
     const settings = this.getSettingsConfigUseCase.execute();
 
     if (settings.breakTimeNotificationsEnabled === false) {
       return;
     }
+
+    const timer = this.container.getEntitiesOfType(BreakTimeNotificationEntity);
 
     setTimeout(
       () => {
