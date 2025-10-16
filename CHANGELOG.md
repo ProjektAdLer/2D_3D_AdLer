@@ -23,6 +23,9 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - added functionality to enter other available learning spaces on exiting learning space
 - expaned choice of learning spaces in exit modal
 - added automatic zoom in to avatar face in avatar editor if face is customized
+- added settings menu with sound, language, graphics and breaktime notification entries
+- added new sounds
+- added english as available language
 
 ### Changed
 
@@ -354,7 +357,6 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 ### Added
 
 - Adaptivity Element:
-
   - specific icon for adaptivity element.
   - 3D representation of NPC.
   - 2D representation of NPC.
