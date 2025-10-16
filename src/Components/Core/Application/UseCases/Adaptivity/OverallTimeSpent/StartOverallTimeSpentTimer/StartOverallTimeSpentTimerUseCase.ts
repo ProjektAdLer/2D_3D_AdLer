@@ -10,6 +10,8 @@ import type INotificationPort from "../../../../Ports/Interfaces/INotificationPo
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type IPauseOverallTimeSpentTimerUseCase from "../PauseOverallTimeSpentTimer/IPauseOverallTimeSpentTimerUseCase";
 import type IGetUnseenBreakTimeNotificationUseCase from "../GetUnseenBreakTimeNotification/IGetUnseenBreakTimeNotificationUseCase";
+import type IGetSettingsConfigUsecase from "../../../GetSettingsConfig/IGetSettingsConfigUseCase";
+import { get } from "http";
 
 @injectable()
 export default class StartOverallTimeSpentTimerUseCase
@@ -24,10 +26,18 @@ export default class StartOverallTimeSpentTimerUseCase
     private pauseOverallTimeSpentTimerUseCase: IPauseOverallTimeSpentTimerUseCase,
     @inject(USECASE_TYPES.IGetUnseenBreakTimeNotificationUseCase)
     private getUnseenStoryElementsUseCase: IGetUnseenBreakTimeNotificationUseCase,
+    @inject(USECASE_TYPES.IGetSettingsConfigUseCase)
+    private getSettingsConfigUseCase: IGetSettingsConfigUsecase,
   ) {}
 
   execute() {
     const timer = this.container.getEntitiesOfType(BreakTimeNotificationEntity);
+
+    const settings = this.getSettingsConfigUseCase.execute();
+
+    if (settings.breakTimeNotificationsEnabled === false) {
+      return;
+    }
 
     setTimeout(
       () => {
