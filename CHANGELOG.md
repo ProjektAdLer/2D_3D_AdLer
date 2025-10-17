@@ -33,8 +33,9 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - Spacetitle now has an opaque background to improve readability
 - changed text to match adler text guidelines
 - loadingscreen to learning space now once again shows control explanations if there is no narrative framework intro
-- Learningworldcompletion modals can now show more info, if available
+- learningworldcompletion modals can now show more info, if available
 - changed highlight color of story npcs in learning space
+- various small styling adjustments
 
 ### Removed
 
@@ -45,6 +46,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - fixed enabled button for narrative framework, if no narrative framework exists in learning world
 - fixed multiple open modals in learning space
 - fixed casting of shadows in avatar editor
+- fixed elevator animations and interactions
 
 ### Deprecated
 
