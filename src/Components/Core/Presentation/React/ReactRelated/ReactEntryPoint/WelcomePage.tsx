@@ -6,6 +6,7 @@ import welcomePicture from "../../../../../../Assets/graphics/welcome-screen-gre
 import learningEngineStringImage from "../../../../../../Assets/graphics/learning-engine.png";
 import avatarEditorStringImage from "../../../../../../Assets/graphics/avatar-editor.png";
 import settingsIcon from "../../../../../../Assets/icons/settings.svg";
+import privacyIcon from "../../../../../../Assets/icons/locked.svg";
 import avatarButtonBackground from "../../../../../../Assets/misc/WelcomeScreenButtonBackgrounds/AvatarEditorButtonBackground.jpg";
 import learningWorldMenuButtonBackground from "../../../../../../Assets/misc/WelcomeScreenButtonBackgrounds/LearningWorldButtonBackground.jpg";
 import HelpDeskButton from "~ReactComponents/GeneralComponents/HelpDeskButton/HelpDeskButton";
@@ -114,7 +115,6 @@ export default function WelcomePage() {
         <LogoutComponent className="relative z-0 col-span-2 col-start-7 row-start-6 flex flex-col gap-2 self-end justify-self-end mobile-landscape:mb-10 mobile-portrait:mb-10" />
       )}
 
-      {/* <CookieModal /> */}
       {!isShowcase && (
         <LMSButton className="col-span-1 col-start-1 row-span-1 row-start-1 w-32 2xl:w-44 mobile-portrait:w-24" />
       )}
@@ -122,18 +122,33 @@ export default function WelcomePage() {
       <p className="lg:text-md row-start-6 self-end justify-self-center rounded-lg p-2 text-center text-2xs text-adlerdarkblue md:text-xs lg:col-span-4 lg:col-start-3 lg:font-semibold mobile-landscape:col-span-6 mobile-landscape:col-start-2 mobile-portrait:col-start-1 portrait:col-span-6 portrait:col-start-2 portrait:row-start-6 portrait:text-2xs">
         {translate("copyright")}
       </p>
-      <StyledButton
-        className="mobile absolute bottom-8 left-4 !px-2 !py-1 text-xs font-bold mobile-landscape:bottom-2 mobile-landscape:left-2 mobile-portrait:bottom-2 mobile-portrait:left-2 mobile-portrait:!pr-0"
-        onClick={() => {
-          history.push("/settings");
-        }}
-        icon={settingsIcon}
-        data-testid="settingsButton"
-        title={translate("settingButtonToolTip").toString()}
-        shape={"freeFloatCenter"}
-      >
-        <p className="mobile-portrait:hidden">{translate("settingTitle")}</p>
-      </StyledButton>
+
+      <div className="absolute bottom-8 left-4 flex gap-2 mobile-landscape:bottom-2 mobile-landscape:left-2 mobile-portrait:bottom-2 mobile-portrait:left-2 mobile-portrait:flex-col">
+        <StyledButton
+          className="!px-2 !py-1 text-xs font-bold mobile-portrait:!pr-0"
+          onClick={() => {
+            history.push("/settings");
+          }}
+          icon={settingsIcon}
+          data-testid="settingsButton"
+          title={translate("settingButtonToolTip").toString()}
+          shape={"freeFloatCenter"}
+        >
+          <p className="mobile-portrait:hidden">{translate("settingTitle")}</p>
+        </StyledButton>
+        <StyledButton
+          className="!px-2 !py-1 text-xs font-bold mobile-portrait:!pr-0"
+          onClick={() => {
+            history.push("/privacy");
+          }}
+          icon={privacyIcon}
+          data-testid="privacyButton"
+          title="Datenschutzerklärung öffnen"
+          shape={"freeFloatCenter"}
+        >
+          <p className="mobile-portrait:hidden">Datenschutz</p>
+        </StyledButton>
+      </div>
     </div>
   );
 }

@@ -17,6 +17,7 @@ import LoadingScreenHomePageInformation from "~ReactComponents/GeneralComponents
 import i18next from "i18next";
 import NarrativeFrameworkLoadingScreenContainer from "~ReactComponents/GeneralComponents/NarrativeFrameworkLoadingScreenContainer/NarrativeFrameworkLoadingScreenContainer";
 import Settings from "./Settings";
+import Privacy from "./Privacy";
 
 export interface IAppProps {}
 
@@ -99,6 +100,12 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
     return (
       <>
         <Settings />
+      </>
+    );
+  } else if (location?.pathname.includes("/privacy")) {
+    return (
+      <>
+        <Privacy />
       </>
     );
   } else {
