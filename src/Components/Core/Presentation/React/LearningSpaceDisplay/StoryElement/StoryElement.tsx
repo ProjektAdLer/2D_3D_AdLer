@@ -68,6 +68,14 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
     }
   }, [isOpen, storyTypeToDisplay]);
 
+  // Play sound when slide changes
+  const handleSlideChange = useCallback(() => {
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0;
+      audioRef.current.play();
+    }
+  }, []);
+
   const getTitleText = useCallback(() => {
     switch (storyTypeToDisplay) {
       case StoryElementType.Intro:
@@ -183,6 +191,7 @@ export default function StoryElement({ className }: AdLerUIComponent<{}>) {
                   outroModelType !== undefined &&
                   introModelType === outroModelType
                 }
+                onSlideChange={handleSlideChange}
               />
             )}
           </div>

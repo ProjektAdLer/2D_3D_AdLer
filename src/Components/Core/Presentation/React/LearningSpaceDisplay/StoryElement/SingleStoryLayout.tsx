@@ -8,16 +8,25 @@ export default function SingleStoryLayout({
   contentTexts,
   controller,
   withBackButton = false,
+  onSlideChange,
 }: {
   contentTexts: string[];
   controller: IStoryElementController;
   withBackButton: boolean;
+  onSlideChange?: () => void;
 }) {
   const [pageId, setPageId] = useState(0);
 
   useEffect(() => {
     setPageId(0);
   }, [contentTexts]);
+
+  const handlePageChange = (newPageId: number) => {
+    if (newPageId !== pageId) {
+      setPageId(newPageId);
+      onSlideChange?.();
+    }
+  };
 
   const { t: translate } = useTranslation("learningSpace");
 
@@ -51,7 +60,7 @@ export default function SingleStoryLayout({
               <StyledButton
                 className="text-xl"
                 shape="smallSquare"
-                onClick={() => setPageId(Math.max(0, pageId - 1))}
+                onClick={() => handlePageChange(Math.max(0, pageId - 1))}
                 disabled={pageId <= 0}
                 data-testid="story-prev-page"
                 title={translate("previousToolTip").toString()}
@@ -65,7 +74,7 @@ export default function SingleStoryLayout({
                 className="text-xl"
                 shape="smallSquare"
                 onClick={() =>
-                  setPageId(Math.min(contentTexts.length, pageId + 1))
+                  handlePageChange(Math.min(contentTexts.length, pageId + 1))
                 }
                 disabled={pageId >= contentTexts.length - 1}
                 data-testid="story-next"
