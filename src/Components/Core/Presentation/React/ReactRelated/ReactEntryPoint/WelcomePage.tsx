@@ -143,10 +143,10 @@ export default function WelcomePage() {
           }}
           icon={privacyIcon}
           data-testid="privacyButton"
-          title="Datenschutzerklärung öffnen"
+          title={translate("privacyButtonToolTip").toString()}
           shape={"freeFloatCenter"}
         >
-          <p className="mobile-portrait:hidden">Datenschutz</p>
+          <p className="mobile-portrait:hidden">{translate("privacyTitle")}</p>
         </StyledButton>
       </div>
     </div>

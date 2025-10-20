@@ -9,6 +9,7 @@
   "learningWorldMenuTitle": "Lernwelt-Menü",
   "avatarEditorTitle": "Avatar-Editor",
   "settingTitle": "Einstellungen",
+  "privacyTitle": "Datenschutzerklärung",
 
   "userName": "Nutzername",
   "password": "Passwort",
@@ -38,6 +39,7 @@
   "LogoutButtonToolTip": "Klicken Sie hier, um sich abzumelden",
   "HomeButtonToolTip": "Klicken Sie hier, um zur Willkommen-Seite zurückzukehren",
   "settingButtonToolTip": "Klicken Sie hier, um die Einstellungen zu öffnen",
+  "privacyButtonToolTip": "Klicken Sie hier, um die Datenschutzerklärung zu öffnen",
 
   "LearningWorldButtonToolTip": "Zurück zum Lernwelt Menü"
 }

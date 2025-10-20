@@ -9,6 +9,7 @@
   "learningWorldMenuTitle": "Learning World Menu",
   "avatarEditorTitle": "Avatar Editor",
   "settingTitle": "Settings",
+  "privacyTitle": "Privacy Policy",
 
   "userName": "Username",
   "password": "Password",
@@ -38,6 +39,7 @@
   "LogoutButtonToolTip": "Click here to log out",
   "HomeButtonToolTip": "Click here to return to the welcome page",
   "settingButtonToolTip": "Click here to navigate to the settings",
+  "privacyButtonToolTip": "Click here to open the privacy policy",
 
   "LearningWorldButtonToolTip": "Click here to return to the learning world menu"
 }

@@ -9,7 +9,7 @@ export default function Privacy() {
     <React.Fragment>
       <div className="flex h-[100dvh] flex-col overflow-hidden bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto mobile-landscape:h-[100dvh] mobile-landscape:w-[100dvw] portrait:h-[100dvh]">
         <MenuHeaderBar
-          location="settings"
+          location="privacy"
           className="w-full flex-shrink-0 self-center px-2 font-semibold"
         />
 

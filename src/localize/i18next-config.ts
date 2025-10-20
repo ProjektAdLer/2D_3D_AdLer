@@ -15,6 +15,7 @@ import de_avatarEditor from "./de/avatarEditor.json";
 import de_loadingScreen from "./de/loadingScreen.json";
 import de_errorMessages from "./de/errorMessages.json";
 import de_settingsMenu from "./de/settingsMenu.json";
+import de_privacy from "./de/privacy.json";
 // Import language: en
 import en_avatarEditor from "./en/avatarEditor.json";
 import en_startPage from "./en/startPage.json";
@@ -30,6 +31,7 @@ import en_settingsMenu from "./en/settingsMenu.json";
 import en_spaceGoal from "./en/spaceGoal.json";
 import en_spaceMenu from "./en/spaceMenu.json";
 import en_worldMenu from "./en/worldMenu.json";
+import en_privacy from "./en/privacy.json";
 
 const resources = {
   de: {
@@ -47,6 +49,7 @@ const resources = {
     spaceMenu: de_spaceMenu,
     start: de_startPage,
     worldMenu: de_worldMenu,
+    privacy: de_privacy,
   },
   en: {
     avatarEditor: en_avatarEditor,
@@ -63,6 +66,7 @@ const resources = {
     spaceMenu: en_spaceMenu,
     start: en_startPage,
     worldMenu: en_worldMenu,
+    privacy: en_privacy,
   },
 };
 const defaultNS = "start";
@@ -83,6 +87,7 @@ i18next.use(initReactI18next).init({
     "controls",
     "avatarEditor",
     "errorMessages",
+    "privacy",
   ],
   resources: resources,
   defaultNS: defaultNS,
