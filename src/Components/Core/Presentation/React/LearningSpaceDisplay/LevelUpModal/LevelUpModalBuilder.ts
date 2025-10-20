@@ -12,6 +12,8 @@ import ILevelUpModalController from "./ILevelUpModalController";
 import { injectable } from "inversify";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import IGetLearningWorldUseCase from "src/Components/Core/Application/UseCases/GetLearningWorld/IGetLearningWorldUseCase";
+import IGetSettingsConfigUseCase from "src/Components/Core/Application/UseCases/GetSettingsConfig/IGetSettingsConfigUseCase";
+import ISettingsPort from "src/Components/Core/Application/Ports/Interfaces/ISettingsPort";
 
 @injectable()
 export default class LevelUpModalBuilder extends PresentationBuilder<
@@ -48,8 +50,16 @@ export default class LevelUpModalBuilder extends PresentationBuilder<
       PORT_TYPES.ILearningWorldPort,
     ).registerAdapter(this.presenter!, HistoryWrapper.currentLocationScope());
 
+    CoreDIContainer.get<ISettingsPort>(
+      PORT_TYPES.ISettingsPort,
+    ).registerAdapter(this.presenter!, HistoryWrapper.currentLocationScope());
+
     CoreDIContainer.get<IGetLearningWorldUseCase>(
       USECASE_TYPES.IGetLearningWorldUseCase,
+    ).execute();
+
+    CoreDIContainer.get<IGetSettingsConfigUseCase>(
+      USECASE_TYPES.IGetSettingsConfigUseCase,
     ).execute();
   }
 }

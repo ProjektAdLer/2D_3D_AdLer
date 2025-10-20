@@ -7,4 +7,5 @@ export default class BadgeOverviewModalViewModel {
   currentLevel: Observable<number> = new Observable<number>();
 
   worldTheme: ThemeType = ThemeType.CampusKE;
+  language: string = "de";
 }

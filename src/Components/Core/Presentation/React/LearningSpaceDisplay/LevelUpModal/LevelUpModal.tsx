@@ -6,9 +6,8 @@ import LevelUpModalViewModel from "./LevelUpModalViewModel";
 import { useEffect, useRef } from "react";
 import LevelUpModalController from "./LevelUpModalController";
 import {
-  badgePicturesAB,
+  badgePicturesCampus,
   badgePicturesCompany,
-  badgePicturesKE,
   badgePicturesSuburb,
 } from "./BadgePictureLookup";
 import { ThemeType } from "src/Components/Core/Domain/Types/ThemeTypes";
@@ -62,24 +61,28 @@ export default function LevelUpModal() {
         <img
           className="max-h-[75vh] max-w-[90vw] object-scale-down"
           alt="LearningImage!"
-          src={getBadgePicture(viewModel.level, viewModel.worldTheme)}
+          src={getBadgePicture(viewModel.level, viewModel)}
         />
       </div>
     </StyledModal>
   );
 }
 
-function getBadgePicture(level: number, worldTheme: ThemeType) {
-  switch (worldTheme) {
+function getBadgePicture(
+  level: number,
+  viewModel: LevelUpModalViewModel,
+): string {
+  switch (viewModel.worldTheme) {
     case ThemeType.CampusAB:
-      return badgePicturesAB[level];
+      return badgePicturesCampus[level][viewModel.language];
     case ThemeType.CampusKE:
-      return badgePicturesKE[level];
+      console.log(badgePicturesCampus[level][viewModel.language]);
+      return badgePicturesCampus[level][viewModel.language];
     case ThemeType.Suburb:
-      return badgePicturesSuburb[level];
+      return badgePicturesSuburb[level][viewModel.language];
     case ThemeType.Company:
-      return badgePicturesCompany[level];
+      return badgePicturesCompany[level][viewModel.language];
     default:
-      return badgePicturesKE[1];
+      return badgePicturesCampus[1][viewModel.language];
   }
 }

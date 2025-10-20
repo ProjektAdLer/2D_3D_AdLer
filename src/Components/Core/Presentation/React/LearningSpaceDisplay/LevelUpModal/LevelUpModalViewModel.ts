@@ -6,4 +6,5 @@ export default class LevelUpModalViewModel {
   level: number = 0;
   timeToClose: number = 2500;
   worldTheme: ThemeType = ThemeType.CampusKE;
+  language: string = "de";
 }

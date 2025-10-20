@@ -2,6 +2,7 @@ import ExperiencePointsTO from "src/Components/Core/Application/DataTransferObje
 import { ILevelUpModalPresenter } from "./ILevelUpModalPresenter";
 import LevelUpModalViewModel from "./LevelUpModalViewModel";
 import LearningWorldTO from "src/Components/Core/Application/DataTransferObjects/LearningWorldTO";
+import SettingsTO from "src/Components/Core/Application/DataTransferObjects/SettingsTO";
 
 export default class LevelUpModalPresenter implements ILevelUpModalPresenter {
   constructor(private viewModel: LevelUpModalViewModel) {}
@@ -18,5 +19,9 @@ export default class LevelUpModalPresenter implements ILevelUpModalPresenter {
   }
   onLearningWorldEntityLoaded(learningWorldTO: LearningWorldTO): void {
     this.viewModel.worldTheme = learningWorldTO.theme;
+  }
+
+  onSettingsUpdated(settings: SettingsTO): void {
+    this.viewModel.language = settings.language ?? "de";
   }
 }

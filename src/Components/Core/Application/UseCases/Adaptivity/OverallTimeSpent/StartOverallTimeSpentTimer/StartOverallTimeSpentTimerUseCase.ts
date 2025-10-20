@@ -11,7 +11,6 @@ import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type IPauseOverallTimeSpentTimerUseCase from "../PauseOverallTimeSpentTimer/IPauseOverallTimeSpentTimerUseCase";
 import type IGetUnseenBreakTimeNotificationUseCase from "../GetUnseenBreakTimeNotification/IGetUnseenBreakTimeNotificationUseCase";
 import type IGetSettingsConfigUsecase from "../../../GetSettingsConfig/IGetSettingsConfigUseCase";
-import { get } from "http";
 
 @injectable()
 export default class StartOverallTimeSpentTimerUseCase

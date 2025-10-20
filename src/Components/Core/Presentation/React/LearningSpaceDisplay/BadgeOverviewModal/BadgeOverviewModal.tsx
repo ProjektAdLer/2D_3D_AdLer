@@ -8,9 +8,8 @@ import { useTranslation } from "react-i18next";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import { ThemeType } from "src/Components/Core/Domain/Types/ThemeTypes";
 import {
-  badgePicturesAB,
+  badgePicturesCampus,
   badgePicturesCompany,
-  badgePicturesKE,
   badgePicturesSuburb,
 } from ".././LevelUpModal/BadgePictureLookup";
 
@@ -23,29 +22,35 @@ export default function BadgeOverviewModal({ className }: AdLerUIComponent) {
   const { t: translate } = useTranslation("learningSpace");
   if (!viewModel) return null;
 
-  let badgePictures: string[] = [];
-  let badgePictureArray = [];
+  let badgePictureArray: string[] = [];
   switch (viewModel.worldTheme) {
     case ThemeType.CampusAB:
-      badgePictureArray = Object.values(badgePicturesAB);
-      badgePictures = badgePictureArray.slice(0, viewModel.currentLevel.Value);
+      for (let i = 1; i <= viewModel.currentLevel.Value; i++) {
+        badgePictureArray.push(badgePicturesCampus[i][viewModel.language]);
+      }
       break;
     case ThemeType.CampusKE:
-      badgePictureArray = Object.values(badgePicturesKE);
-      badgePictures = badgePictureArray.slice(0, viewModel.currentLevel.Value);
+      for (let i = 1; i <= viewModel.currentLevel.Value; i++) {
+        badgePictureArray.push(badgePicturesCampus[i][viewModel.language]);
+      }
       break;
     case ThemeType.Suburb:
-      badgePictureArray = Object.values(badgePicturesSuburb);
-      badgePictures = badgePictureArray.slice(0, viewModel.currentLevel.Value);
+      for (let i = 1; i <= viewModel.currentLevel.Value; i++) {
+        badgePictureArray.push(badgePicturesSuburb[i][viewModel.language]);
+      }
       break;
     case ThemeType.Company:
-      badgePictureArray = Object.values(badgePicturesCompany);
-      badgePictures = badgePictureArray.slice(0, viewModel.currentLevel.Value);
+      for (let i = 1; i <= viewModel.currentLevel.Value; i++) {
+        badgePictureArray.push(badgePicturesCompany[i][viewModel.language]);
+      }
       break;
     default:
-      badgePictureArray = Object.values(badgePicturesKE);
-      badgePictures = badgePictureArray.slice(0, viewModel.currentLevel.Value);
+      for (let i = 1; i <= viewModel.currentLevel.Value; i++) {
+        badgePictureArray.push(badgePicturesCampus[i][viewModel.language]);
+      }
   }
+
+  console.log("badges", badgePictureArray);
   return (
     <StyledModal
       className={tailwindMerge(
@@ -59,7 +64,7 @@ export default function BadgeOverviewModal({ className }: AdLerUIComponent) {
       }}
     >
       <div className="grid grid-cols-2 justify-items-stretch gap-4 p-4">
-        {badgePictures.map((badge, index) => (
+        {badgePictureArray.map((badge, index) => (
           <div
             key={index}
             className="flex flex-col items-center justify-center"

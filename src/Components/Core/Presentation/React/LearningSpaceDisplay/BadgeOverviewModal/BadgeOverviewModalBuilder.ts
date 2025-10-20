@@ -13,6 +13,8 @@ import IGetExperiencePointsUseCase from "src/Components/Core/Application/UseCase
 import ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces/ILearningWorldPort";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import { HistoryWrapper } from "~ReactComponents/ReactRelated/ReactEntryPoint/HistoryWrapper";
+import IGetSettingsConfigUseCase from "src/Components/Core/Application/UseCases/GetSettingsConfig/IGetSettingsConfigUseCase";
+import ISettingsPort from "src/Components/Core/Application/Ports/Interfaces/ISettingsPort";
 
 @injectable()
 export default class BadgeOverviewModalBuilder extends PresentationBuilder<
@@ -45,12 +47,20 @@ export default class BadgeOverviewModalBuilder extends PresentationBuilder<
       PORT_TYPES.ILearningWorldPort,
     ).registerAdapter(this.presenter!, HistoryWrapper.currentLocationScope());
 
+    CoreDIContainer.get<ISettingsPort>(
+      PORT_TYPES.ISettingsPort,
+    ).registerAdapter(this.presenter!, HistoryWrapper.currentLocationScope());
+
     CoreDIContainer.get<IGetLearningWorldUseCase>(
       USECASE_TYPES.IGetLearningWorldUseCase,
     ).execute();
 
     CoreDIContainer.get<IGetExperiencePointsUseCase>(
       USECASE_TYPES.IGetExperiencePointsUseCase,
+    ).execute();
+
+    CoreDIContainer.get<IGetSettingsConfigUseCase>(
+      USECASE_TYPES.IGetSettingsConfigUseCase,
     ).execute();
   }
 }

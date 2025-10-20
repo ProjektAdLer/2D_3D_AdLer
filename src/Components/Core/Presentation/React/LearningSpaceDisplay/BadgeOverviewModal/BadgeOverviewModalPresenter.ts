@@ -2,6 +2,7 @@ import LearningWorldTO from "src/Components/Core/Application/DataTransferObjects
 import BadgeOverviewModalViewModel from "./BadgeOverviewModalViewModel";
 import IBadgeOverviewModalPresenter from "./IBadgeOverviewModalPresenter";
 import ExperiencePointsTO from "src/Components/Core/Application/DataTransferObjects/ExperiencePointsTO";
+import SettingsTO from "src/Components/Core/Application/DataTransferObjects/SettingsTO";
 
 export default class BadgeOverviewModalPresenter
   implements IBadgeOverviewModalPresenter
@@ -16,5 +17,8 @@ export default class BadgeOverviewModalPresenter
   }
   onExperiencePointsUpdated(experiencePointsTO: ExperiencePointsTO): void {
     this.viewModel.currentLevel.Value = experiencePointsTO.currentLevel;
+  }
+  onSettingsUpdated(settings: SettingsTO): void {
+    this.viewModel.language = settings.language ?? "de";
   }
 }
