@@ -16,6 +16,8 @@ type RangeSliderProps = {
   displayFactor?: number;
   fractionDigits?: number;
   buttons?: buttonsProps; // if buttons are definded without images then - / + buttons will be displayed ~ sb
+  enableInputField?: boolean;
+  display?: (value: number) => string;
   callback: (value: number) => void;
 } & AdLerUIComponent;
 
@@ -23,20 +25,21 @@ export default function RangeSlider(props: RangeSliderProps) {
   const [value, setValue] = useState<number>(
     props.initialValue ? props.initialValue : props.min,
   );
-  const [step] = useState<number>(props.step ? props.step : 0);
-  const [displayFactor] = useState<number>(
-    props.displayFactor ? props.displayFactor : 1,
-  );
-  const [fractionDigits] = useState<number>(
-    props.fractionDigits ? props.fractionDigits : 0,
-  );
+  const [step] = useState<number>(props.step ?? 0);
+  const [displayFactor] = useState<number>(props.displayFactor ?? 1);
+  const [fractionDigits] = useState<number>(props.fractionDigits ?? 0);
   const [intervalID, setIntervalID] = useState<NodeJS.Timeout>();
   const [intervalActive, setIntervalActive] = useState<boolean>(false);
+  const [enableInputField] = useState<boolean>(props.enableInputField ?? true);
+  const [displayText, setDisplayText] = useState<string>("");
 
   const intervalDelay = 300; // delay between value in-/decrements in ms
 
   useEffect(() => {
     props.callback(value);
+    if (props.display) {
+      setDisplayText(props.display(value));
+    }
   }, [props, value]);
 
   return (
@@ -82,25 +85,30 @@ export default function RangeSlider(props: RangeSliderProps) {
         </StyledButton>
       )}
       <div className="flex grow !flex-col items-center justify-center pb-8 text-xl font-bold">
-        <input
-          type="number"
-          className="numberInputField mb-1.5"
-          min={props.min * displayFactor}
-          max={props.max * displayFactor}
-          value={(value * displayFactor).toFixed(fractionDigits)}
-          onChange={(e) => {
-            let inputValue = parseFloat(e.target.value);
-            if (Number.isNaN(inputValue)) {
-              return;
-            }
-            if (inputValue > props.max * displayFactor) {
-              inputValue = props.max * displayFactor;
-            } else if (inputValue < props.min * displayFactor) {
-              inputValue = props.min * displayFactor;
-            }
-            setValue(inputValue / displayFactor);
-          }}
-        ></input>
+        {enableInputField && (
+          <input
+            type="number"
+            className="numberInputField mb-1.5"
+            data-testid="rangeInputField_number"
+            min={props.min * displayFactor}
+            max={props.max * displayFactor}
+            value={(value * displayFactor).toFixed(fractionDigits)}
+            onChange={(e) => {
+              let inputValue = parseFloat(e.target.value);
+              if (Number.isNaN(inputValue)) {
+                return;
+              }
+              if (inputValue > props.max * displayFactor) {
+                inputValue = props.max * displayFactor;
+              } else if (inputValue < props.min * displayFactor) {
+                inputValue = props.min * displayFactor;
+              }
+              setValue(inputValue / displayFactor);
+            }}
+          ></input>
+        )}
+        {!enableInputField && !props.display && <>{value}</>}
+        {!enableInputField && props.display && <>{displayText}</>}
         <input
           className="rangeSlider"
           type="range"

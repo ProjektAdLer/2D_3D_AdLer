@@ -25,6 +25,7 @@ export default class SetSettingsConfigUseCase
     if (!settingsEntity) {
       settingsEntity = {
         volume: settings.volume ?? undefined,
+        graphicsQuality: settings.graphicsQuality ?? undefined,
         language: settings.language ?? undefined,
         highGraphicsQualityEnabled:
           settings.highGraphicsQualityEnabled ?? undefined,
@@ -37,6 +38,8 @@ export default class SetSettingsConfigUseCase
       );
     }
     settingsEntity.volume = settings.volume ?? settingsEntity.volume;
+    settingsEntity.graphicsQuality =
+      settings.graphicsQuality ?? settingsEntity.graphicsQuality;
     settingsEntity.language = settings.language ?? settingsEntity.language;
     settingsEntity.highGraphicsQualityEnabled =
       settings.highGraphicsQualityEnabled ??
