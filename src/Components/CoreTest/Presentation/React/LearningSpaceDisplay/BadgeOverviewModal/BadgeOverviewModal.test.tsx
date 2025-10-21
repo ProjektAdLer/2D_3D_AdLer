@@ -16,6 +16,7 @@ describe("BadgeOverviewModal", () => {
   test("should render when open", () => {
     fakeModel.isOpen.Value = true;
     fakeModel.currentLevel.Value = 20;
+    fakeModel.language = "de";
 
     useBuilderMock([fakeModel, undefined]);
 

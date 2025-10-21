@@ -26,26 +26,31 @@ export default function BadgeOverviewModal({ className }: AdLerUIComponent) {
   switch (viewModel.worldTheme) {
     case ThemeType.CampusAB:
       for (let i = 1; i <= viewModel.currentLevel.Value; i++) {
+        if (i > 10) break;
         badgePictureArray.push(badgePicturesCampus[i][viewModel.language]);
       }
       break;
     case ThemeType.CampusKE:
       for (let i = 1; i <= viewModel.currentLevel.Value; i++) {
+        if (i > 10) break;
         badgePictureArray.push(badgePicturesCampus[i][viewModel.language]);
       }
       break;
     case ThemeType.Suburb:
       for (let i = 1; i <= viewModel.currentLevel.Value; i++) {
+        if (i > 10) break;
         badgePictureArray.push(badgePicturesSuburb[i][viewModel.language]);
       }
       break;
     case ThemeType.Company:
       for (let i = 1; i <= viewModel.currentLevel.Value; i++) {
+        if (i > 10) break;
         badgePictureArray.push(badgePicturesCompany[i][viewModel.language]);
       }
       break;
     default:
       for (let i = 1; i <= viewModel.currentLevel.Value; i++) {
+        if (i > 10) break;
         badgePictureArray.push(badgePicturesCampus[i][viewModel.language]);
       }
   }
