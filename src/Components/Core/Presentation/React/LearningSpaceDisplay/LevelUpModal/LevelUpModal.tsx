@@ -76,7 +76,6 @@ function getBadgePicture(
     case ThemeType.CampusAB:
       return badgePicturesCampus[level][viewModel.language];
     case ThemeType.CampusKE:
-      console.log(badgePicturesCampus[level][viewModel.language]);
       return badgePicturesCampus[level][viewModel.language];
     case ThemeType.Suburb:
       return badgePicturesSuburb[level][viewModel.language];

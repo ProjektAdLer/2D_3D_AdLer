@@ -45,9 +45,10 @@ describe("LevelUpModal", () => {
     expect(comp.container).toBeEmptyDOMElement();
   });
 
-  test("closes window automatically when model is set to isOpen", () => {
+  test("closes window automatically after timer expires when model is set to isOpen", () => {
     jest.useFakeTimers();
     viewModelMock.isOpen.Value = true;
+    viewModelMock.level = 2;
     useBuilderMock([viewModelMock, controllerMock]);
 
     const comp = render(<LevelUpModal></LevelUpModal>);
@@ -59,6 +60,7 @@ describe("LevelUpModal", () => {
   test("closes window if close button is clicked", () => {
     jest.useFakeTimers();
     viewModelMock.isOpen.Value = true;
+    viewModelMock.level = 4;
     useBuilderMock([viewModelMock, controllerMock]);
 
     const comp = render(<LevelUpModal></LevelUpModal>);
@@ -72,6 +74,7 @@ describe("LevelUpModal", () => {
     const playSpy = jest.spyOn(window.HTMLMediaElement.prototype, "play");
 
     viewModelMock.isOpen.Value = true;
+    viewModelMock.level = 6;
     useBuilderMock([viewModelMock, controllerMock]);
 
     render(<LevelUpModal></LevelUpModal>);
