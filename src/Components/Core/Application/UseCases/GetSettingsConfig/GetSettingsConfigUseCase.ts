@@ -30,6 +30,7 @@ export default class GetSettingsConfigUseCase
     if (!settingsEntity) {
       settingsEntity = {
         volume: undefined,
+        graphicsQuality: undefined,
         language: undefined,
         highGraphicsQualityEnabled: undefined,
         breakTimeNotificationsEnabled: undefined,
@@ -63,6 +64,12 @@ export default class GetSettingsConfigUseCase
       settings.volume = 0.5;
     } else {
       settings.volume = settingsEntity.volume;
+    }
+
+    if (settingsEntity.graphicsQuality === undefined) {
+      settings.graphicsQuality = 1;
+    } else {
+      settings.graphicsQuality = settingsEntity.graphicsQuality;
     }
 
     this.logger.log(
