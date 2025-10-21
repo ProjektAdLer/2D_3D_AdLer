@@ -1,4 +1,130 @@
 {
   "pageTitle": "Privacy Policy",
-  "contentPlaceholder": "Privacy content will go here..."
+  "sections": [
+    {
+      "title": "1. Privacy at a Glance",
+      "subsections": [
+        {
+          "title": "General Information",
+          "content": "The following information provides a simple overview of what happens to your personal data when you visit this website. Personal data is any data that can be used to personally identify you. For detailed information on data protection, please refer to our data protection declaration listed below this text."
+        },
+        {
+          "title": "Data Collection on this Website"
+        },
+        {
+          "title": "Who is responsible for data collection on this website?",
+          "content": "Data processing on this website is carried out by the website operator. You can find their contact details in the section \"Note on the Responsible Entity\" in this privacy policy."
+        },
+        {
+          "title": "How do we collect your data?",
+          "content": "Your data is collected in part by you providing it to us. This may include data that you enter into a contact form.\n\nOther data is collected automatically or with your consent when you visit the website through our IT systems. This is primarily technical data (e.g., internet browser, operating system, or time of page view). The collection of this data occurs automatically as soon as you enter this website."
+        },
+        {
+          "title": "What do we use your data for?",
+          "content": "Part of the data is collected to ensure error-free provision of the website. Other data may be used to analyze your user behavior. If contracts can be concluded or initiated through the website, the transmitted data will also be processed for contract offers, orders, or other service requests."
+        },
+        {
+          "title": "What rights do you have regarding your data?",
+          "content": "You have the right at any time to receive free information about the origin, recipient, and purpose of your stored personal data. You also have the right to request correction or deletion of this data. If you have given your consent to data processing, you can revoke this consent at any time for the future. You also have the right, under certain circumstances, to request restriction of the processing of your personal data. Furthermore, you have the right to lodge a complaint with the competent supervisory authority.\n\nYou can contact us at any time if you have further questions about data protection."
+        }
+      ]
+    },
+    {
+      "title": "2. Hosting",
+      "subsections": [
+        {
+          "title": "General",
+          "content": "We host the contents of our website with the following provider:"
+        },
+        {
+          "title": "Hetzner",
+          "content": "The provider is Hetzner Online GmbH, Industriestr. 25, 91710 Gunzenhausen (hereinafter Hetzner).\n\nYou can find details in Hetzner's privacy policy: https://www.hetzner.com/en/legal/privacy-policy/.\n\nThe use of Hetzner is based on Art. 6 (1) (f) GDPR. We have a legitimate interest in the most reliable presentation of our website. If corresponding consent has been requested, the processing is carried out exclusively on the basis of Art. 6 (1) (a) GDPR and § 25 (1) TDDDG, insofar as the consent includes the storage of cookies or access to information on the user's device (e.g. device fingerprinting) within the meaning of the TDDDG. Consent can be revoked at any time."
+        },
+        {
+          "title": "Contract Processing",
+          "content": "We have concluded a contract for order processing (DPA) for the use of the above-mentioned service. This is a data protection legally required contract that ensures that this service processes the personal data of our website visitors only according to our instructions and in compliance with the GDPR."
+        }
+      ]
+    },
+    {
+      "title": "3. General Information and Mandatory Information",
+      "subsections": [
+        {
+          "title": "Data Protection",
+          "content": "The operators of this website take the protection of your personal data very seriously. We treat your personal data confidentially and in accordance with applicable data protection laws and this privacy policy.\n\nWhen you use this website, various personal data will be collected. Personal data is data that can be used to personally identify you. This privacy policy explains what data we collect and what we use it for. It also explains how and for what purpose this is done.\n\nWe would like to point out that data transmission on the Internet (e.g., communication by e-mail) can have security vulnerabilities. Complete protection of data from access by third parties is not possible."
+        },
+        {
+          "title": "Note on the Responsible Entity",
+          "content": "The responsible entity for data processing on this website is:\n\nProf. Dr.-Ing. Jörg Abke\nWürzburger Straße 45\nRoom C1/04/104\n63743 Aschaffenburg\n\nPhone: 06021 / 4206 - 883\nE-mail: joerg.abke@th-ab.de\n\nThe responsible entity is the natural or legal person that decides, alone or jointly with others, on the purposes and means of processing personal data (e.g., names, e-mail addresses, etc.)."
+        },
+        {
+          "title": "Storage Duration",
+          "content": "Unless a more specific storage period is stated within this privacy policy, your personal data will remain with us until the purpose for data processing no longer exists. If you assert a legitimate deletion request or revoke your consent to data processing, your data will be deleted unless we have other legally permissible reasons for storing your personal data (e.g., tax or commercial law retention periods); in the latter case, deletion occurs after these reasons cease to apply."
+        },
+        {
+          "title": "General Information on the Legal Bases for Data Processing on this Website",
+          "content": "If you have consented to data processing, we process your personal data on the basis of Art. 6 (1) (a) GDPR or Art. 9 (2) (a) GDPR, if special categories of data are processed according to Art. 9 (1) GDPR. In case of explicit consent to the transfer of personal data to third countries, data processing also takes place on the basis of Art. 49 (1) (a) GDPR. If you have consented to the storage of cookies or access to information on your device (e.g., via device fingerprinting), data processing also takes place on the basis of § 25 (1) TDDDG. Consent can be revoked at any time. If your data is required for contract fulfillment or for the performance of pre-contractual measures, we process your data on the basis of Art. 6 (1) (b) GDPR. Furthermore, we process your data if it is required to fulfill a legal obligation on the basis of Art. 6 (1) (c) GDPR. Data processing may also be carried out on the basis of our legitimate interest pursuant to Art. 6 (1) (f) GDPR. The legal bases applicable in each individual case are communicated in the following sections of this privacy policy."
+        },
+        {
+          "title": "Recipients of Personal Data",
+          "content": "In the course of our business activities, we work with various external parties. In some cases, this also requires the transmission of personal data to these external parties. We only pass on personal data to external parties if this is necessary for the fulfillment of a contract, if we are legally required to do so (e.g., passing data to tax authorities), if we have a legitimate interest pursuant to Art. 6 (1) (f) GDPR in passing it on, or if another legal basis permits the passing on of data. When using order processors, we only pass on our customers' personal data on the basis of a valid contract for order processing. In the case of joint processing, a joint processing contract is concluded."
+        },
+        {
+          "title": "Revocation of Your Consent to Data Processing",
+          "content": "Many data processing operations are only possible with your express consent. You can revoke any consent you have already given at any time. The legality of data processing carried out prior to revocation remains unaffected by the revocation."
+        },
+        {
+          "title": "Right to Object to Data Collection in Special Cases and to Direct Marketing (Art. 21 GDPR)",
+          "content": "IF DATA PROCESSING IS BASED ON ART. 6 (1) (E) OR (F) GDPR, YOU HAVE THE RIGHT TO OBJECT AT ANY TIME, ON GROUNDS RELATING TO YOUR PARTICULAR SITUATION, TO THE PROCESSING OF YOUR PERSONAL DATA; THIS ALSO APPLIES TO PROFILING BASED ON THESE PROVISIONS. THE RESPECTIVE LEGAL BASIS ON WHICH PROCESSING IS BASED CAN BE FOUND IN THIS PRIVACY POLICY. IF YOU OBJECT, WE WILL NO LONGER PROCESS YOUR AFFECTED PERSONAL DATA UNLESS WE CAN DEMONSTRATE COMPELLING LEGITIMATE GROUNDS FOR PROCESSING THAT OVERRIDE YOUR INTERESTS, RIGHTS AND FREEDOMS OR THE PROCESSING SERVES THE ESTABLISHMENT, EXERCISE OR DEFENSE OF LEGAL CLAIMS (OBJECTION PURSUANT TO ART. 21 (1) GDPR).\n\nIF YOUR PERSONAL DATA IS PROCESSED FOR THE PURPOSE OF DIRECT MARKETING, YOU HAVE THE RIGHT TO OBJECT AT ANY TIME TO THE PROCESSING OF YOUR PERSONAL DATA FOR SUCH MARKETING; THIS ALSO APPLIES TO PROFILING INSOFAR AS IT IS CONNECTED WITH SUCH DIRECT MARKETING. IF YOU OBJECT, YOUR PERSONAL DATA WILL NO LONGER BE USED FOR THE PURPOSE OF DIRECT MARKETING (OBJECTION PURSUANT TO ART. 21 (2) GDPR)."
+        },
+        {
+          "title": "Right to Lodge a Complaint with the Competent Supervisory Authority",
+          "content": "In the event of violations of the GDPR, data subjects have the right to lodge a complaint with a supervisory authority, in particular in the Member State of their habitual residence, their place of work, or the place of the alleged violation. This right exists without prejudice to any other administrative or judicial remedy."
+        },
+        {
+          "title": "Right to Data Portability",
+          "content": "You have the right to have data that we process on the basis of your consent or in fulfillment of a contract handed over to you or to a third party in a common, machine-readable format. If you request direct transfer of the data to another controller, this will only be done insofar as it is technically feasible."
+        },
+        {
+          "title": "Information, Correction, and Deletion",
+          "content": "Within the scope of applicable legal provisions, you have the right at any time to free information about your stored personal data, its origin and recipients, and the purpose of data processing, and if applicable, a right to correction or deletion of this data. You can contact us at any time if you have further questions about your personal data."
+        },
+        {
+          "title": "Right to Restrict Processing",
+          "content": "You have the right to request restriction of the processing of your personal data. You can contact us at any time to assert this right. The right to restrict processing exists in the following cases:\n\n• If you dispute the accuracy of your personal data stored by us, we generally need time to verify this. During the period of verification, you have the right to request restriction of the processing of your personal data.\n\n• If the processing of your personal data was/is unlawful, you can request restriction of data processing instead of deletion.\n\n• If we no longer need your personal data, but you need it to exercise, defend, or assert legal claims, you have the right to request restriction of processing of your personal data instead of deletion.\n\n• If you have lodged an objection pursuant to Art. 21 (1) GDPR, a balance must be struck between your interests and ours. As long as it has not yet been determined whose interests prevail, you have the right to request restriction of the processing of your personal data.\n\nIf you have restricted the processing of your personal data, this data may – apart from its storage – only be processed with your consent or for the establishment, exercise, or defense of legal claims or for the protection of the rights of another natural or legal person or for reasons of important public interest of the European Union or a Member State."
+        },
+        {
+          "title": "SSL or TLS Encryption",
+          "content": "This site uses SSL or TLS encryption for security reasons and to protect the transmission of confidential content, such as orders or inquiries you send to us as the site operator. You can recognize an encrypted connection by the fact that the address bar of the browser changes from \"http://\" to \"https://\" and by the lock icon in your browser bar.\n\nWhen SSL or TLS encryption is activated, the data you transmit to us cannot be read by third parties."
+        }
+      ]
+    },
+    {
+      "title": "4. Data Collection on this Website",
+      "subsections": [
+        {
+          "title": "Cookies",
+          "content": "Our websites use so-called \"cookies\". Cookies are small data packets that do not cause any damage to your device. They are stored either temporarily for the duration of a session (session cookies) or permanently (permanent cookies) on your device. Session cookies are automatically deleted at the end of your visit. Permanent cookies remain stored on your device until you delete them yourself or automatic deletion occurs through your web browser.\n\nCookies can originate from us (first-party cookies) or from third-party companies (so-called third-party cookies). Third-party cookies enable the integration of certain services from third-party companies within web pages (e.g., cookies for the processing of payment services).\n\nCookies have various functions. Many cookies are technically necessary because certain website functions would not work without them (e.g., the shopping cart function or the display of videos). Other cookies can be used to evaluate user behavior or for advertising purposes.\n\nCookies that are required for the execution of electronic communication transactions, the provision of certain functions desired by you (e.g., for the shopping cart function), or the optimization of the website (e.g., cookies to measure web audiences) (necessary cookies) are stored on the basis of Art. 6 (1) (f) GDPR, unless another legal basis is specified. The website operator has a legitimate interest in storing necessary cookies for technically error-free and optimized provision of its services. If consent for the storage of cookies and similar recognition technologies has been requested, processing takes place exclusively on the basis of this consent (Art. 6 (1) (a) GDPR and § 25 (1) TDDDG); consent can be revoked at any time.\n\nYou can set your browser so that you are informed about the setting of cookies and allow cookies only in individual cases, exclude acceptance of cookies for specific cases or in general, as well as activate automatic deletion of cookies when you close your browser. If you disable cookies, the functionality of this website may be limited.\n\nYou can find out which cookies and services are used on this website from this privacy policy."
+        }
+      ]
+    },
+    {
+      "title": "5. Plugins and Tools",
+      "subsections": [
+        {
+          "title": "YouTube with Extended Data Protection",
+          "content": "This website embeds videos from YouTube. The operator of the website is Google Ireland Limited (\"Google\"), Gordon House, Barrow Street, Dublin 4, Ireland.\n\nWhen you visit a website where YouTube is embedded, a connection to YouTube's servers is established. This informs the YouTube server which of our pages you have visited. If you are logged into your YouTube account, you allow YouTube to associate your browsing behavior directly with your personal profile. You can prevent this by logging out of your YouTube account.\n\nWe use YouTube in extended data protection mode. Videos played in extended data protection mode are not used by YouTube for personalizing your YouTube browsing according to YouTube's statement. Ads served in extended data protection mode are also not personalized. In extended data protection mode, no cookies are set. Instead, so-called local storage elements are stored in the user's browser, which contain personal data similar to cookies and can be used for recognition. Details on extended data protection mode can be found here: https://support.google.com/youtube/answer/171780.\n\nAfter activating a YouTube video, further data processing operations may be triggered, over which we have no control.\n\nThe use of YouTube is in the interest of appealing presentation of our online offerings. This constitutes a legitimate interest within the meaning of Art. 6 (1) (f) GDPR. If corresponding consent has been requested, processing takes place exclusively on the basis of Art. 6 (1) (a) GDPR and § 25 (1) TDDDG, insofar as the consent includes the storage of cookies or access to information on the user's device (e.g., device fingerprinting) within the meaning of the TDDDG. Consent can be revoked at any time.\n\nYou can find more information about data protection at YouTube in their privacy policy at: https://policies.google.com/privacy?hl=en.\n\nThe company is certified under the \"EU-US Data Privacy Framework\" (DPF). The DPF is an agreement between the European Union and the United States that is intended to ensure compliance with European data protection standards in data processing in the United States. Each company certified under the DPF commits to maintaining these data protection standards. You can obtain further information from the provider via the following link: https://www.dataprivacyframework.gov/participant/5780."
+        }
+      ]
+    },
+    {
+      "title": "Source",
+      "subsections": [
+        {
+          "title": "Privacy Policy Generator",
+          "content": "This privacy policy was created with the assistance of eRecht24."
+        }
+      ]
+    }
+  ]
 }
