@@ -27,6 +27,7 @@ import type ILearningSpaceBuilder from "../../LearningSpaces/ILearningSpaceBuild
 import type IAvatarBuilder from "../../Avatar/IAvatarBuilder";
 import type { IAmbienceBuilder } from "../../Ambience/IAmbienceBuilder";
 import { LocationScope } from "~ReactComponents/ReactRelated/ReactEntryPoint/HistoryWrapper";
+import type IGetSettingsConfigUseCase from "src/Components/Core/Application/UseCases/GetSettingsConfig/IGetSettingsConfigUseCase";
 
 @injectable()
 export default class LearningSpaceSceneDefinition
@@ -55,6 +56,8 @@ export default class LearningSpaceSceneDefinition
     private ambienceBuilder: IAmbienceBuilder,
     @inject(PORT_TYPES.ILearningWorldPort)
     private learningWorldPort: ILearningWorldPort,
+    @inject(USECASE_TYPES.IGetSettingsConfigUseCase)
+    private getSettingsUseCase: IGetSettingsConfigUseCase,
   ) {
     super();
     this.learningWorldPort.registerAdapter(this, LocationScope._global);
@@ -97,6 +100,13 @@ export default class LearningSpaceSceneDefinition
 
     // initialize navigation for the room
     this.navigation.setupNavigation();
+
+    // set hardware scaling from user settings
+    this.scene
+      .getEngine()
+      .setHardwareScalingLevel(
+        this.getSettingsUseCase.execute().graphicsQuality!,
+      );
 
     // create avatar
     this.avatarBuilder.learningSpaceTemplateType = this.spaceData?.template;

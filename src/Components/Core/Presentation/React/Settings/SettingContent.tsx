@@ -27,10 +27,13 @@ export default function SettingContent({ className }: AdLerUIComponent) {
   );
   const [language] = useObservable(viewModel.language);
 
+  if (!viewModel || !controller) return null;
+
   return (
     <div
       className={`flex h-full w-full flex-col items-center overflow-hidden px-4 pt-4 text-adlerdarkblue ${className}`}
     >
+      {/* language */}
       <div className={"border-b border-gray-500 pb-2 mobile-landscape:ml-6"}>
         <h1 className={tailwindMerge("text-lg font-bold xl:text-2xl")}>
           {translate("language")}
@@ -64,6 +67,8 @@ export default function SettingContent({ className }: AdLerUIComponent) {
           {translate("languageButtonEnglish")}
         </StyledButton>
       </div>
+
+      {/* volume */}
       <div className={"border-b border-gray-500 pb-2 mobile-landscape:ml-6"}>
         <h1 className={tailwindMerge("text-lg font-bold xl:text-2xl")}>
           {translate("volume")}
@@ -95,12 +100,43 @@ export default function SettingContent({ className }: AdLerUIComponent) {
         </div>
       </div>
 
+      {/* Graphics */}
       <div className={"border-b border-gray-500 pb-2 mobile-landscape:ml-6"}>
         <h1 className={tailwindMerge("text-lg font-bold xl:text-2xl")}>
           {translate("quality")}
         </h1>
       </div>
-      <div className="w:-full relative flex-row py-4">
+      <div>
+        <RangeSlider
+          min={viewModel.minimumGraphicsQuality}
+          max={viewModel.maximumGraphicsQuality}
+          step={0.5}
+          initialValue={
+            viewModel.minMaxGraphicsQuality - viewModel.graphicsQuality.Value
+          }
+          enableInputField={false}
+          callback={(value) => {
+            controller.onGraphicsQualityChange(
+              viewModel.minMaxGraphicsQuality - value,
+            );
+          }}
+          display={(value) => {
+            switch (value) {
+              case 2:
+                return translate("resolution_best");
+              case 1.5:
+                return translate("resolution_acceptable");
+              case 1:
+                return translate("resolution_restricted");
+              default:
+                return translate("resolution_restricted");
+            }
+          }}
+        />
+      </div>
+
+      {/* Graphics compability mode */}
+      {/* <div className="relative flex-row py-4 w:-full">
         <img
           className="absolute w-6 lg:w-8 portrait:mx-0.5 portrait:w-4"
           alt="Empty Graphics Quality Checkbox"
@@ -122,7 +158,9 @@ export default function SettingContent({ className }: AdLerUIComponent) {
           />
         )}
         <div className="py-1 pl-10">{translate("qualityLow")}</div>
-      </div>
+      </div> */}
+
+      {/* break notifications */}
       <div className={"border-b border-gray-500 pb-2 mobile-landscape:ml-6"}>
         <h1 className={tailwindMerge("text-lg font-bold xl:text-2xl")}>
           {translate("breakTimeNotifications")}

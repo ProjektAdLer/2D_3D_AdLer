@@ -14,5 +14,6 @@ export default class SettingContentPresenter
       newSettings.highGraphicsQualityEnabled!;
     this.viewModel.language.Value = newSettings.language!;
     this.viewModel.volume.Value = newSettings.volume!;
+    this.viewModel.graphicsQuality.Value = newSettings.graphicsQuality!;
   }
 }

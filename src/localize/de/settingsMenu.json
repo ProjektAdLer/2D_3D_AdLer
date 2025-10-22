@@ -1,6 +1,9 @@
 {
   "volume": "Lautstärke",
   "quality": "Grafikqualität",
+  "resolution_best": "Beste Auflösung",
+  "resolution_acceptable": "Akzeptable Auflösung",
+  "resolution_restricted": "Eingeschränkte Auflösung",
   "language": "Sprache",
   "languageButtonGerman": "Deutsch",
   "languageButtonEnglish": "English",

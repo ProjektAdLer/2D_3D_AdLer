@@ -25,6 +25,15 @@ export default class SettingContentController
       volume: newVolume,
     });
   }
+
+  onGraphicsQualityChange(newGraphicQuality: number): void {
+    this.viewModel.changedSettings = true;
+    this.viewModel.graphicsQuality.Value = newGraphicQuality;
+    this.setSettingsConfigUseCase.execute({
+      graphicsQuality: newGraphicQuality,
+    });
+  }
+
   onGermanButtonClicked(): void {
     this.viewModel.changedSettings = true;
     this.viewModel.language.Value = "de";
