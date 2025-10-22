@@ -74,6 +74,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - fixed crashing of story NPC view on space transition
 - fixed exit elevator animations
 - fixed story NPC movement and focus handling during cutscenes
+- fixed character jittering/shaking when approaching navigation target by implementing smooth rotation interpolation
 
 ### Deprecated
 

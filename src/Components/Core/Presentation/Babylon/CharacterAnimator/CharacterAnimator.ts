@@ -26,6 +26,9 @@ const characterWalkingSoundLink = require("../../../../../Assets/Sounds/Characte
 @injectable()
 export default class CharacterAnimator implements ICharacterAnimator {
   private readonly rotationVelocityThreshold: number = 0.5;
+  private readonly rotationVelocityLowThreshold: number = 1.0;
+  private readonly rotationSmoothingFactor: number = 0.15;
+  private readonly minRotationChange: number = 0.01;
   private characterWalkingAudio: HTMLAudioElement;
   private baseVolume: number;
 
@@ -44,6 +47,7 @@ export default class CharacterAnimator implements ICharacterAnimator {
 
   private getCharacterVelocity: () => Vector3;
   private characterRotationNode: TransformNode;
+  private lastDesiredRotation: number = 0;
 
   public get CurrentAnimationState(): CharacterAnimationStates {
     return this.stateMachine.CurrentState;
@@ -154,10 +158,31 @@ export default class CharacterAnimator implements ICharacterAnimator {
         normalizedVelocity.z,
       );
 
-      this.characterRotationNode.rotationQuaternion = Quaternion.RotationAxis(
-        Axis.Y,
-        desiredRotation,
-      );
+      let rotationDiff = desiredRotation - this.lastDesiredRotation;
+      while (rotationDiff > Math.PI) rotationDiff -= 2 * Math.PI;
+      while (rotationDiff < -Math.PI) rotationDiff += 2 * Math.PI;
+
+      if (
+        Math.abs(rotationDiff) > this.minRotationChange ||
+        absoluteVelocity > this.rotationVelocityLowThreshold
+      ) {
+        const targetQuaternion = Quaternion.RotationAxis(
+          Axis.Y,
+          desiredRotation,
+        );
+        const smoothingFactor =
+          absoluteVelocity > this.rotationVelocityLowThreshold
+            ? this.rotationSmoothingFactor * 2
+            : this.rotationSmoothingFactor * 0.5;
+
+        this.characterRotationNode.rotationQuaternion = Quaternion.Slerp(
+          this.characterRotationNode.rotationQuaternion!,
+          targetQuaternion,
+          smoothingFactor,
+        );
+
+        this.lastDesiredRotation = desiredRotation;
+      }
     }
   }
 
@@ -295,11 +320,13 @@ export default class CharacterAnimator implements ICharacterAnimator {
       this.walkAnimation,
       () => Math.max(this.getVelocityAnimationInterpolationIncrement(), 0.1),
     );
-    // Start walking sound
+
+    const currentRotation =
+      this.characterRotationNode.rotationQuaternion!.toEulerAngles();
+    this.lastDesiredRotation = currentRotation.y;
+
     if (this.characterWalkingAudio) {
-      this.characterWalkingAudio.play().catch(() => {
-        // Ignore play errors (e.g., if user hasn't interacted with page yet)
-      });
+      this.characterWalkingAudio.play().catch(() => {});
     }
   }
 
@@ -310,7 +337,6 @@ export default class CharacterAnimator implements ICharacterAnimator {
       this.idleAnimation,
       () => this.getTimedAnimationInterpolationIncrement(100),
     );
-    // Stop walking sound
     this.stopWalkingSound();
   }
 
@@ -322,7 +348,6 @@ export default class CharacterAnimator implements ICharacterAnimator {
   }
 
   public cleanup(): void {
-    // Stop and cleanup walking sound
     this.stopWalkingSound();
   }
 
@@ -338,7 +363,6 @@ export default class CharacterAnimator implements ICharacterAnimator {
       () => this.getTimedAnimationInterpolationIncrement(100),
     );
 
-    // Stop walking sound if transitioning from walking
     if (fromAnimation === this.walkAnimation) {
       this.stopWalkingSound();
     }
