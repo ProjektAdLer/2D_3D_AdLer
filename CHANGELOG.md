@@ -26,6 +26,16 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - added settings menu with sound, language, graphics and breaktime notification entries
 - added new sounds
 - added english as available language
+- added badge system with badge overview modal to display acquired achievements
+- added campus and corporate badges in English and German
+- added privacy policy page with localization
+- added showcase mode with auto-login for public demos
+- added sound volume controls for all game sounds (walking, elevator, notifications, story NPCs, level-up, space/element completion, doors)
+- added graphics quality settings to improve performance on lower-end devices
+- added functionality to disable break time notifications in settings
+- added tooltips for react flow graph in space menu
+- added world theme selection display in level-up modal
+- added test IDs for UI elements to improve automated testing capabilities
 
 ### Changed
 
@@ -36,6 +46,16 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - learningworldcompletion modals can now show more info, if available
 - changed highlight color of story npcs in learning space
 - various small styling adjustments
+- improved sound implementation with individual volume controls through settings menu
+- enhanced door logic with integrated sound settings
+- improved readability in welcome page
+- optimized responsive styling of loading screens
+- narrative framework background now displays based on world theme
+- story NPCs handling improved: only one NPC spawns for intro/outro with same model and name
+- fullscreen button now hidden on mobile devices
+- changed entrance and exit door naming in UI
+- improved story NPC exit behavior and navmesh handling
+- sound to slide changes in story elements
 
 ### Removed
 
@@ -47,6 +67,13 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - fixed multiple open modals in learning space
 - fixed casting of shadows in avatar editor
 - fixed elevator animations and interactions
+- fixed overlapping world completion modal with story/learning/adaptivity element modals
+- fixed adaptivity hint z-index issues preventing proper interaction
+- fixed H5P scoring and URL issues in mock backend
+- fixed range slider initial value in settings
+- fixed crashing of story NPC view on space transition
+- fixed exit elevator animations
+- fixed story NPC movement and focus handling during cutscenes
 
 ### Deprecated
 
