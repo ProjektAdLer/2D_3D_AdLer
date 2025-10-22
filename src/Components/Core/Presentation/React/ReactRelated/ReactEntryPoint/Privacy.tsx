@@ -12,8 +12,9 @@ export default function Privacy() {
           location="privacy"
           className="w-full flex-shrink-0 self-center px-2 font-semibold"
         />
-
-        <PrivacyContent />
+        <div className="align-center flex justify-center overflow-auto">
+          <PrivacyContent />
+        </div>
 
         <img
           className="absolute -bottom-3 -right-3 m-4 w-32 opacity-20"

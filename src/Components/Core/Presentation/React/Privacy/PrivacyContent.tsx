@@ -18,14 +18,8 @@ export default function PrivacyContent({ className }: AdLerUIComponent) {
 
   return (
     <div
-      className={`flex h-full w-full flex-col items-start overflow-y-auto px-8 pt-4 text-adlerdarkblue ${className}`}
+      className={`flex h-full w-full max-w-4xl flex-col items-start px-8 pt-4 text-adlerdarkblue ${className}`}
     >
-      <div className={"mb-4 border-b border-gray-500 pb-2"}>
-        <h1 className={tailwindMerge("text-2xl font-bold xl:text-3xl")}>
-          {translate("pageTitle")}
-        </h1>
-      </div>
-
       <div className="w-full space-y-6 pb-8">
         {sections &&
           Array.isArray(sections) &&
