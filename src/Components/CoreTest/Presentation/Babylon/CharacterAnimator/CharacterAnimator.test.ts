@@ -123,9 +123,9 @@ describe("CharacterAnimator", () => {
         .toMatchInlineSnapshot(`
       Quaternion {
         "_isDirty": true,
-        "_w": 0.7071067811865476,
+        "_w": 0.9982656101847159,
         "_x": 0,
-        "_y": 0.7071067811865475,
+        "_y": 0.058870803651189026,
         "_z": 0,
       }
     `);
