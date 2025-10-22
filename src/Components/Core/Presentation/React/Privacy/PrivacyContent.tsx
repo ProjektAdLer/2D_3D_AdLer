@@ -1,5 +1,4 @@
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
-import tailwindMerge from "../../Utils/TailwindMerge";
 import { useTranslation } from "react-i18next";
 
 interface Subsection {

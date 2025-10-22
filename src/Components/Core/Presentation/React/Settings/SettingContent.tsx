@@ -19,9 +19,9 @@ export default function SettingContent({ className }: AdLerUIComponent) {
     SettingContentController
   >(BUILDER_TYPES.ISettingContentBuilder);
   const { t: translate } = useTranslation("settingsMenu");
-  const [highGraphicsQualityEnabled] = useObservable(
-    viewModel.highGraphicsQualityEnabled,
-  );
+  // const [highGraphicsQualityEnabled] = useObservable(
+  //   viewModel.highGraphicsQualityEnabled,
+  // );
   const [breakTimeNotificationsEnabled] = useObservable(
     viewModel.breakTimeNotificationsEnabled,
   );
