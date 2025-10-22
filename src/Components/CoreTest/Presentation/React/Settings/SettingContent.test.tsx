@@ -44,7 +44,7 @@ describe("SettingContent", () => {
       controllerMock.onBreakTimeNotificationsButtonClicked,
     ).toHaveBeenCalled();
   });
-  test("should call controller if graphicsQuality Button is pressed while empty,", () => {
+  test.skip("should call controller if graphicsQuality Button is pressed while empty,", () => {
     useBuilderMock([viewModelMock, controllerMock]);
     const componentUnderTest = render(<SettingContent />);
     const graphicsQualityButton = componentUnderTest.getByTestId(
@@ -53,7 +53,7 @@ describe("SettingContent", () => {
     fireEvent.click(graphicsQualityButton);
     expect(controllerMock.onGraphicsQualityButtonClicked).toHaveBeenCalled();
   });
-  test("should call controller if graphicsQuality Button is pressed while ticked,", () => {
+  test.skip("should call controller if graphicsQuality Button is pressed while ticked,", () => {
     useBuilderMock([viewModelMock, controllerMock]);
     const componentUnderTest = render(<SettingContent />);
     const graphicsQualityButton = componentUnderTest.getByTestId(

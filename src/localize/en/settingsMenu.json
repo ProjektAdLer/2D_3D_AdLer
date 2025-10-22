@@ -1,6 +1,9 @@
 {
   "volume": "Audio Volume",
   "quality": "Graphics Quality",
+  "resolution_best": "Best Resolution",
+  "resolution_acceptable": "Acceptable Resolution",
+  "resolution_restricted": "Restricted Resolution",
   "language": "Language",
   "languageButtonGerman": "German",
   "languageButtonEnglish": "English",
