@@ -12,6 +12,22 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+### Changed
+
+### Removed
+
+### Fixed
+
+### Deprecated
+
+### Security
+
+</details>
+
+## Version 2.10.0 - 23.10.2025
+
+### Added
+
 - added double click functionality to learning elements to open them automatically
 - added difficulty and estimated time for learning elements to show in world and space menus
 - added doubleclick functionality in world and space menus
@@ -64,12 +80,6 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - fixed exit elevator animations
 - fixed story NPC movement and their focus handling during cutscenes
 - fixed character jittering/shaking when approaching navigation target by implementing smooth rotation interpolation
-
-### Deprecated
-
-### Security
-
-</details>
 
 ## Version 2.9.0 - 26.06.2025
 
