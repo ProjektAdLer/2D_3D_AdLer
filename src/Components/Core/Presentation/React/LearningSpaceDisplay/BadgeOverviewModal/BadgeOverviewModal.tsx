@@ -55,7 +55,6 @@ export default function BadgeOverviewModal({ className }: AdLerUIComponent) {
       }
   }
 
-  console.log("badges", badgePictureArray);
   return (
     <StyledModal
       className={tailwindMerge(

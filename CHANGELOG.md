@@ -12,51 +12,41 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- added automatic opening of learning elements if double-clicked
+- added double click functionality to learning elements to open them automatically
 - added difficulty and estimated time for learning elements to show in world and space menus
-- new doubleclick functionality in world and space menus
-- new doublecklick functionality in learning spaces
+- added doubleclick functionality in world and space menus
+- added doublecklick functionality in learning spaces
 - added several new tooltips in menus
-- new 'cloud'-like clothers for avatars who have no clothing selected
-- new opaque background behind the learningspace title to improve readability
-- Story NPCs exit space after story sequence if author configured it
+- added 'cloud'-like clothes for avatars who have no clothing selected
 - added functionality to enter other available learning spaces on exiting learning space
 - expaned choice of learning spaces in exit modal
 - added automatic zoom in to avatar face in avatar editor if face is customized
-- added settings menu with sound, language, graphics and breaktime notification entries
-- added new sounds
+- added settings menu with sound, language, graphics and breaktime notification setting options
+- added several new sounds
 - added english as available language
 - added badge system with badge overview modal to display acquired achievements
 - added campus and corporate badges in English and German
-- added privacy policy page with localization
+- added privacy policy page
 - added showcase mode with auto-login for public demos
-- added sound volume controls for all game sounds (walking, elevator, notifications, story NPCs, level-up, space/element completion, doors)
-- added graphics quality settings to improve performance on lower-end devices
-- added functionality to disable break time notifications in settings
 - added tooltips for react flow graph in space menu
 - added world theme selection display in level-up modal
-- added test IDs for UI elements to improve automated testing capabilities
-- added graphics setting for resolution
 
 ### Changed
 
-- new icons for "world-story" and "space-story"
-- Spacetitle now has an opaque background to improve readability
-- changed text to match adler text guidelines
-- loadingscreen to learning space now once again shows control explanations if there is no narrative framework intro
-- learningworldcompletion modals can now show more info, if available
-- changed highlight color of story npcs in learning space
-- various small styling adjustments
-- improved sound implementation with individual volume controls through settings menu
-- enhanced door logic with integrated sound settings
+- "world-story" and "space-story" now have new icons
+- space titles now have an opaque background to improve readability
+- changed text formatting to match adler text guidelines
+- loading screens leading to learning spaces now once again show control explanations if there is no narrative framework intro
+- learning world completion modals can now show more info, if available
+- adjusted highlight color of story npcs in learning space
 - improved readability in welcome page
 - optimized responsive styling of loading screens
 - narrative framework background now displays based on world theme
-- story NPCs handling improved: only one NPC spawns for intro/outro with same model and name
-- fullscreen button now hidden on mobile devices
+- intro story NPC and outro story NPC can now both spawn with the same character model, as long as their name is distinct
+- fullscreen button is now hidden on mobile devices
 - changed entrance and exit door naming in UI
-- improved story NPC exit behavior and navmesh handling
-- sound to slide changes in story elements
+- story NPCs now exit the learning spaces after their story sequence if the author configured it
+- various small styling adjustments
 
 ### Removed
 
@@ -67,14 +57,12 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - fixed enabled button for narrative framework, if no narrative framework exists in learning world
 - fixed multiple open modals in learning space
 - fixed casting of shadows in avatar editor
-- fixed elevator animations and interactions
 - fixed overlapping world completion modal with story/learning/adaptivity element modals
 - fixed adaptivity hint z-index issues preventing proper interaction
 - fixed H5P scoring and URL issues in mock backend
-- fixed range slider initial value in settings
 - fixed crashing of story NPC view on space transition
 - fixed exit elevator animations
-- fixed story NPC movement and focus handling during cutscenes
+- fixed story NPC movement and their focus handling during cutscenes
 - fixed character jittering/shaking when approaching navigation target by implementing smooth rotation interpolation
 
 ### Deprecated
@@ -388,7 +376,6 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 ### Added
 
 - Adaptivity Element:
-
   - specific icon for adaptivity element.
   - 3D representation of NPC.
   - 2D representation of NPC.

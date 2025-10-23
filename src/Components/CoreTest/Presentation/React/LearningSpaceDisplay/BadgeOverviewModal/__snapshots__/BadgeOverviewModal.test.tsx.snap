@@ -37,14 +37,14 @@ Object {
               class="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter mobile-portrait:text-xs mobile-landscape:text-xs"
             >
               <div
-                class="grid grid-cols-2 justify-items-stretch gap-4 p-4"
+                class="grid grid-cols-2 gap-4 p-4 justify-items-stretch"
               >
                 <div
                   class="flex flex-col items-center justify-center"
                 >
                   <img
                     alt="0"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                     src="b-campus-de-lvl01-prakti.png"
                   />
                 </div>
@@ -53,7 +53,7 @@ Object {
                 >
                   <img
                     alt="1"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                     src="b-campus-de-lvl02-mission-seminar.png"
                   />
                 </div>
@@ -62,7 +62,7 @@ Object {
                 >
                   <img
                     alt="2"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                     src="b-campus-de-lvl03-creditpoint-hai.png"
                   />
                 </div>
@@ -71,7 +71,7 @@ Object {
                 >
                   <img
                     alt="3"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                     src="b-campus-de-lvl04-campusnavi.png"
                   />
                 </div>
@@ -80,7 +80,7 @@ Object {
                 >
                   <img
                     alt="4"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                     src="b-campus-de-lvl05-high-class-mentoring.png"
                   />
                 </div>
@@ -89,7 +89,7 @@ Object {
                 >
                   <img
                     alt="5"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                     src="b-campus-de-lvl06-pruefungsass.png"
                   />
                 </div>
@@ -98,7 +98,7 @@ Object {
                 >
                   <img
                     alt="6"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                     src="b-campus-de-lvl07-erfindergeist.png"
                   />
                 </div>
@@ -107,7 +107,7 @@ Object {
                 >
                   <img
                     alt="7"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                     src="b-campus-de-lvl08-big-brain.png"
                   />
                 </div>
@@ -116,7 +116,7 @@ Object {
                 >
                   <img
                     alt="8"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                     src="b-campus-de-lvl09-campusliebling.png"
                   />
                 </div>
@@ -125,7 +125,7 @@ Object {
                 >
                   <img
                     alt="9"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                     src="b-campus-de-lvl10-lehrlegende.png"
                   />
                 </div>
@@ -169,14 +169,14 @@ Object {
             class="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter mobile-portrait:text-xs mobile-landscape:text-xs"
           >
             <div
-              class="grid grid-cols-2 justify-items-stretch gap-4 p-4"
+              class="grid grid-cols-2 gap-4 p-4 justify-items-stretch"
             >
               <div
                 class="flex flex-col items-center justify-center"
               >
                 <img
                   alt="0"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                   src="b-campus-de-lvl01-prakti.png"
                 />
               </div>
@@ -185,7 +185,7 @@ Object {
               >
                 <img
                   alt="1"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                   src="b-campus-de-lvl02-mission-seminar.png"
                 />
               </div>
@@ -194,7 +194,7 @@ Object {
               >
                 <img
                   alt="2"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                   src="b-campus-de-lvl03-creditpoint-hai.png"
                 />
               </div>
@@ -203,7 +203,7 @@ Object {
               >
                 <img
                   alt="3"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                   src="b-campus-de-lvl04-campusnavi.png"
                 />
               </div>
@@ -212,7 +212,7 @@ Object {
               >
                 <img
                   alt="4"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                   src="b-campus-de-lvl05-high-class-mentoring.png"
                 />
               </div>
@@ -221,7 +221,7 @@ Object {
               >
                 <img
                   alt="5"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                   src="b-campus-de-lvl06-pruefungsass.png"
                 />
               </div>
@@ -230,7 +230,7 @@ Object {
               >
                 <img
                   alt="6"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                   src="b-campus-de-lvl07-erfindergeist.png"
                 />
               </div>
@@ -239,7 +239,7 @@ Object {
               >
                 <img
                   alt="7"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                   src="b-campus-de-lvl08-big-brain.png"
                 />
               </div>
@@ -248,7 +248,7 @@ Object {
               >
                 <img
                   alt="8"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                   src="b-campus-de-lvl09-campusliebling.png"
                 />
               </div>
@@ -257,7 +257,7 @@ Object {
               >
                 <img
                   alt="9"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                   src="b-campus-de-lvl10-lehrlegende.png"
                 />
               </div>
@@ -358,14 +358,14 @@ Object {
               class="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter mobile-portrait:text-xs mobile-landscape:text-xs"
             >
               <div
-                class="grid grid-cols-2 justify-items-stretch gap-4 p-4"
+                class="grid grid-cols-2 gap-4 p-4 justify-items-stretch"
               >
                 <div
                   class="flex flex-col items-center justify-center"
                 >
                   <img
                     alt="0"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                   />
                 </div>
                 <div
@@ -373,7 +373,7 @@ Object {
                 >
                   <img
                     alt="1"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                   />
                 </div>
                 <div
@@ -381,7 +381,7 @@ Object {
                 >
                   <img
                     alt="2"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                   />
                 </div>
                 <div
@@ -389,7 +389,7 @@ Object {
                 >
                   <img
                     alt="3"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                   />
                 </div>
                 <div
@@ -397,7 +397,7 @@ Object {
                 >
                   <img
                     alt="4"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                   />
                 </div>
                 <div
@@ -405,7 +405,7 @@ Object {
                 >
                   <img
                     alt="5"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                   />
                 </div>
                 <div
@@ -413,7 +413,7 @@ Object {
                 >
                   <img
                     alt="6"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                   />
                 </div>
                 <div
@@ -421,7 +421,7 @@ Object {
                 >
                   <img
                     alt="7"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                   />
                 </div>
                 <div
@@ -429,7 +429,7 @@ Object {
                 >
                   <img
                     alt="8"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                   />
                 </div>
                 <div
@@ -437,7 +437,7 @@ Object {
                 >
                   <img
                     alt="9"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                   />
                 </div>
               </div>
@@ -480,14 +480,14 @@ Object {
             class="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter mobile-portrait:text-xs mobile-landscape:text-xs"
           >
             <div
-              class="grid grid-cols-2 justify-items-stretch gap-4 p-4"
+              class="grid grid-cols-2 gap-4 p-4 justify-items-stretch"
             >
               <div
                 class="flex flex-col items-center justify-center"
               >
                 <img
                   alt="0"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                 />
               </div>
               <div
@@ -495,7 +495,7 @@ Object {
               >
                 <img
                   alt="1"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                 />
               </div>
               <div
@@ -503,7 +503,7 @@ Object {
               >
                 <img
                   alt="2"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                 />
               </div>
               <div
@@ -511,7 +511,7 @@ Object {
               >
                 <img
                   alt="3"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                 />
               </div>
               <div
@@ -519,7 +519,7 @@ Object {
               >
                 <img
                   alt="4"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                 />
               </div>
               <div
@@ -527,7 +527,7 @@ Object {
               >
                 <img
                   alt="5"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                 />
               </div>
               <div
@@ -535,7 +535,7 @@ Object {
               >
                 <img
                   alt="6"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                 />
               </div>
               <div
@@ -543,7 +543,7 @@ Object {
               >
                 <img
                   alt="7"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                 />
               </div>
               <div
@@ -551,7 +551,7 @@ Object {
               >
                 <img
                   alt="8"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                 />
               </div>
               <div
@@ -559,7 +559,7 @@ Object {
               >
                 <img
                   alt="9"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                 />
               </div>
             </div>
@@ -659,14 +659,14 @@ Object {
               class="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter mobile-portrait:text-xs mobile-landscape:text-xs"
             >
               <div
-                class="grid grid-cols-2 justify-items-stretch gap-4 p-4"
+                class="grid grid-cols-2 gap-4 p-4 justify-items-stretch"
               >
                 <div
                   class="flex flex-col items-center justify-center"
                 >
                   <img
                     alt="0"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                   />
                 </div>
                 <div
@@ -674,7 +674,7 @@ Object {
                 >
                   <img
                     alt="1"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                   />
                 </div>
                 <div
@@ -682,7 +682,7 @@ Object {
                 >
                   <img
                     alt="2"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                   />
                 </div>
                 <div
@@ -690,7 +690,7 @@ Object {
                 >
                   <img
                     alt="3"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                   />
                 </div>
                 <div
@@ -698,7 +698,7 @@ Object {
                 >
                   <img
                     alt="4"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                   />
                 </div>
                 <div
@@ -706,7 +706,7 @@ Object {
                 >
                   <img
                     alt="5"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                   />
                 </div>
                 <div
@@ -714,7 +714,7 @@ Object {
                 >
                   <img
                     alt="6"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                   />
                 </div>
                 <div
@@ -722,7 +722,7 @@ Object {
                 >
                   <img
                     alt="7"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                   />
                 </div>
                 <div
@@ -730,7 +730,7 @@ Object {
                 >
                   <img
                     alt="8"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                   />
                 </div>
                 <div
@@ -738,7 +738,7 @@ Object {
                 >
                   <img
                     alt="9"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                   />
                 </div>
               </div>
@@ -781,14 +781,14 @@ Object {
             class="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter mobile-portrait:text-xs mobile-landscape:text-xs"
           >
             <div
-              class="grid grid-cols-2 justify-items-stretch gap-4 p-4"
+              class="grid grid-cols-2 gap-4 p-4 justify-items-stretch"
             >
               <div
                 class="flex flex-col items-center justify-center"
               >
                 <img
                   alt="0"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                 />
               </div>
               <div
@@ -796,7 +796,7 @@ Object {
               >
                 <img
                   alt="1"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                 />
               </div>
               <div
@@ -804,7 +804,7 @@ Object {
               >
                 <img
                   alt="2"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                 />
               </div>
               <div
@@ -812,7 +812,7 @@ Object {
               >
                 <img
                   alt="3"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                 />
               </div>
               <div
@@ -820,7 +820,7 @@ Object {
               >
                 <img
                   alt="4"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                 />
               </div>
               <div
@@ -828,7 +828,7 @@ Object {
               >
                 <img
                   alt="5"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                 />
               </div>
               <div
@@ -836,7 +836,7 @@ Object {
               >
                 <img
                   alt="6"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                 />
               </div>
               <div
@@ -844,7 +844,7 @@ Object {
               >
                 <img
                   alt="7"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                 />
               </div>
               <div
@@ -852,7 +852,7 @@ Object {
               >
                 <img
                   alt="8"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                 />
               </div>
               <div
@@ -860,7 +860,7 @@ Object {
               >
                 <img
                   alt="9"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                 />
               </div>
             </div>
@@ -960,14 +960,14 @@ Object {
               class="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter mobile-portrait:text-xs mobile-landscape:text-xs"
             >
               <div
-                class="grid grid-cols-2 justify-items-stretch gap-4 p-4"
+                class="grid grid-cols-2 gap-4 p-4 justify-items-stretch"
               >
                 <div
                   class="flex flex-col items-center justify-center"
                 >
                   <img
                     alt="0"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                     src="b-campus-de-lvl01-prakti.png"
                   />
                 </div>
@@ -976,7 +976,7 @@ Object {
                 >
                   <img
                     alt="1"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                     src="b-campus-de-lvl02-mission-seminar.png"
                   />
                 </div>
@@ -985,7 +985,7 @@ Object {
                 >
                   <img
                     alt="2"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                     src="b-campus-de-lvl03-creditpoint-hai.png"
                   />
                 </div>
@@ -994,7 +994,7 @@ Object {
                 >
                   <img
                     alt="3"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                     src="b-campus-de-lvl04-campusnavi.png"
                   />
                 </div>
@@ -1003,7 +1003,7 @@ Object {
                 >
                   <img
                     alt="4"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                     src="b-campus-de-lvl05-high-class-mentoring.png"
                   />
                 </div>
@@ -1012,7 +1012,7 @@ Object {
                 >
                   <img
                     alt="5"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                     src="b-campus-de-lvl06-pruefungsass.png"
                   />
                 </div>
@@ -1021,7 +1021,7 @@ Object {
                 >
                   <img
                     alt="6"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                     src="b-campus-de-lvl07-erfindergeist.png"
                   />
                 </div>
@@ -1030,7 +1030,7 @@ Object {
                 >
                   <img
                     alt="7"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                     src="b-campus-de-lvl08-big-brain.png"
                   />
                 </div>
@@ -1039,7 +1039,7 @@ Object {
                 >
                   <img
                     alt="8"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                     src="b-campus-de-lvl09-campusliebling.png"
                   />
                 </div>
@@ -1048,7 +1048,7 @@ Object {
                 >
                   <img
                     alt="9"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                     src="b-campus-de-lvl10-lehrlegende.png"
                   />
                 </div>
@@ -1092,14 +1092,14 @@ Object {
             class="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter mobile-portrait:text-xs mobile-landscape:text-xs"
           >
             <div
-              class="grid grid-cols-2 justify-items-stretch gap-4 p-4"
+              class="grid grid-cols-2 gap-4 p-4 justify-items-stretch"
             >
               <div
                 class="flex flex-col items-center justify-center"
               >
                 <img
                   alt="0"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                   src="b-campus-de-lvl01-prakti.png"
                 />
               </div>
@@ -1108,7 +1108,7 @@ Object {
               >
                 <img
                   alt="1"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                   src="b-campus-de-lvl02-mission-seminar.png"
                 />
               </div>
@@ -1117,7 +1117,7 @@ Object {
               >
                 <img
                   alt="2"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                   src="b-campus-de-lvl03-creditpoint-hai.png"
                 />
               </div>
@@ -1126,7 +1126,7 @@ Object {
               >
                 <img
                   alt="3"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                   src="b-campus-de-lvl04-campusnavi.png"
                 />
               </div>
@@ -1135,7 +1135,7 @@ Object {
               >
                 <img
                   alt="4"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                   src="b-campus-de-lvl05-high-class-mentoring.png"
                 />
               </div>
@@ -1144,7 +1144,7 @@ Object {
               >
                 <img
                   alt="5"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                   src="b-campus-de-lvl06-pruefungsass.png"
                 />
               </div>
@@ -1153,7 +1153,7 @@ Object {
               >
                 <img
                   alt="6"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                   src="b-campus-de-lvl07-erfindergeist.png"
                 />
               </div>
@@ -1162,7 +1162,7 @@ Object {
               >
                 <img
                   alt="7"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                   src="b-campus-de-lvl08-big-brain.png"
                 />
               </div>
@@ -1171,7 +1171,7 @@ Object {
               >
                 <img
                   alt="8"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                   src="b-campus-de-lvl09-campusliebling.png"
                 />
               </div>
@@ -1180,7 +1180,7 @@ Object {
               >
                 <img
                   alt="9"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                   src="b-campus-de-lvl10-lehrlegende.png"
                 />
               </div>
@@ -1281,14 +1281,14 @@ Object {
               class="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter mobile-portrait:text-xs mobile-landscape:text-xs"
             >
               <div
-                class="grid grid-cols-2 justify-items-stretch gap-4 p-4"
+                class="grid grid-cols-2 gap-4 p-4 justify-items-stretch"
               >
                 <div
                   class="flex flex-col items-center justify-center"
                 >
                   <img
                     alt="0"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                     src="b-campus-de-lvl01-prakti.png"
                   />
                 </div>
@@ -1297,7 +1297,7 @@ Object {
                 >
                   <img
                     alt="1"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                     src="b-campus-de-lvl02-mission-seminar.png"
                   />
                 </div>
@@ -1306,7 +1306,7 @@ Object {
                 >
                   <img
                     alt="2"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                     src="b-campus-de-lvl03-creditpoint-hai.png"
                   />
                 </div>
@@ -1315,7 +1315,7 @@ Object {
                 >
                   <img
                     alt="3"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                     src="b-campus-de-lvl04-campusnavi.png"
                   />
                 </div>
@@ -1324,7 +1324,7 @@ Object {
                 >
                   <img
                     alt="4"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                     src="b-campus-de-lvl05-high-class-mentoring.png"
                   />
                 </div>
@@ -1333,7 +1333,7 @@ Object {
                 >
                   <img
                     alt="5"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                     src="b-campus-de-lvl06-pruefungsass.png"
                   />
                 </div>
@@ -1342,7 +1342,7 @@ Object {
                 >
                   <img
                     alt="6"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                     src="b-campus-de-lvl07-erfindergeist.png"
                   />
                 </div>
@@ -1351,7 +1351,7 @@ Object {
                 >
                   <img
                     alt="7"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                     src="b-campus-de-lvl08-big-brain.png"
                   />
                 </div>
@@ -1360,7 +1360,7 @@ Object {
                 >
                   <img
                     alt="8"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                     src="b-campus-de-lvl09-campusliebling.png"
                   />
                 </div>
@@ -1369,7 +1369,7 @@ Object {
                 >
                   <img
                     alt="9"
-                    class="h-16 w-16 object-contain"
+                    class="object-contain w-16 h-16"
                     src="b-campus-de-lvl10-lehrlegende.png"
                   />
                 </div>
@@ -1413,14 +1413,14 @@ Object {
             class="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter mobile-portrait:text-xs mobile-landscape:text-xs"
           >
             <div
-              class="grid grid-cols-2 justify-items-stretch gap-4 p-4"
+              class="grid grid-cols-2 gap-4 p-4 justify-items-stretch"
             >
               <div
                 class="flex flex-col items-center justify-center"
               >
                 <img
                   alt="0"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                   src="b-campus-de-lvl01-prakti.png"
                 />
               </div>
@@ -1429,7 +1429,7 @@ Object {
               >
                 <img
                   alt="1"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                   src="b-campus-de-lvl02-mission-seminar.png"
                 />
               </div>
@@ -1438,7 +1438,7 @@ Object {
               >
                 <img
                   alt="2"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                   src="b-campus-de-lvl03-creditpoint-hai.png"
                 />
               </div>
@@ -1447,7 +1447,7 @@ Object {
               >
                 <img
                   alt="3"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                   src="b-campus-de-lvl04-campusnavi.png"
                 />
               </div>
@@ -1456,7 +1456,7 @@ Object {
               >
                 <img
                   alt="4"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                   src="b-campus-de-lvl05-high-class-mentoring.png"
                 />
               </div>
@@ -1465,7 +1465,7 @@ Object {
               >
                 <img
                   alt="5"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                   src="b-campus-de-lvl06-pruefungsass.png"
                 />
               </div>
@@ -1474,7 +1474,7 @@ Object {
               >
                 <img
                   alt="6"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                   src="b-campus-de-lvl07-erfindergeist.png"
                 />
               </div>
@@ -1483,7 +1483,7 @@ Object {
               >
                 <img
                   alt="7"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                   src="b-campus-de-lvl08-big-brain.png"
                 />
               </div>
@@ -1492,7 +1492,7 @@ Object {
               >
                 <img
                   alt="8"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                   src="b-campus-de-lvl09-campusliebling.png"
                 />
               </div>
@@ -1501,7 +1501,7 @@ Object {
               >
                 <img
                   alt="9"
-                  class="h-16 w-16 object-contain"
+                  class="object-contain w-16 h-16"
                   src="b-campus-de-lvl10-lehrlegende.png"
                 />
               </div>
