@@ -13,7 +13,7 @@ if [ ! -d "build" ]; then
 fi
 
 # Configuration - adjust these variables as needed
-PAGES_REPO_URL="https://github.com/ProjektAdLer/projektadler.github.io.git"
+PAGES_REPO_URL="git@github.com:ProjektAdLer/projektadler.github.io.git"
 PAGES_BRANCH="main"  # GitHub Pages typically uses main branch
 TEMP_REPO_DIR=$(mktemp -d)
 
@@ -53,6 +53,10 @@ cp -r "$OLDPWD/build"/* .
 
 # Add .nojekyll file for GitHub Pages
 touch .nojekyll
+
+# Add CNAME file for custom domain
+echo "📝 Creating CNAME file for custom domain..."
+echo "hello.projekt-adler.eu" > CNAME
 
 # Add all files and commit
 echo "💾 Committing changes..."
