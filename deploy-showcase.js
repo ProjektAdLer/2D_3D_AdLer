@@ -11,7 +11,9 @@ const path = require("path");
 const os = require("os");
 
 // Configuration
-const PAGES_REPO_URL = "git@github.com:ProjektAdLer/projektadler.github.io.git";
+const PAGES_REPO_SSH = "git@github.com:ProjektAdLer/projektadler.github.io.git";
+const PAGES_REPO_HTTPS =
+  "https://github.com/ProjektAdLer/projektadler.github.io.git";
 const PAGES_BRANCH = "main";
 const CUSTOM_DOMAIN = "hello.projekt-adler.eu";
 
@@ -68,7 +70,38 @@ async function main() {
   try {
     // Clone the GitHub Pages repository
     log("🔄", "Cloning GitHub Pages repository...", colors.cyan);
-    exec(`git clone "${PAGES_REPO_URL}" "${tempDir}"`);
+
+    // Try SSH first, fallback to HTTPS if SSH fails
+    let cloneSuccess = false;
+    try {
+      log("🔑", "Trying SSH authentication...", colors.cyan);
+      exec(`git clone "${PAGES_REPO_SSH}" "${tempDir}"`);
+      cloneSuccess = true;
+      log("✅", "SSH authentication successful", colors.green);
+    } catch (sshError) {
+      log("⚠️", "SSH authentication failed, trying HTTPS...", colors.yellow);
+      try {
+        exec(`git clone "${PAGES_REPO_HTTPS}" "${tempDir}"`);
+        cloneSuccess = true;
+        log("✅", "HTTPS authentication successful", colors.green);
+      } catch (httpsError) {
+        log("❌", "Both SSH and HTTPS authentication failed", colors.red);
+        log(
+          "💡",
+          "Please ensure you have access to the repository:",
+          colors.cyan,
+        );
+        log(
+          "",
+          "   - For SSH: Set up SSH keys (https://docs.github.com/en/authentication/connecting-to-github-with-ssh)",
+        );
+        log(
+          "",
+          "   - For HTTPS: Git credential manager should prompt for authentication",
+        );
+        throw httpsError;
+      }
+    }
 
     // Navigate to temp directory
     process.chdir(tempDir);
