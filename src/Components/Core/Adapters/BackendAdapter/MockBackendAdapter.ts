@@ -45,7 +45,6 @@ import CampusKE_StudentClub from "./MockBackendData/ThemeTestWorlds/CampusKE_Stu
 import CampusKE_ServerRoom from "./MockBackendData/ThemeTestWorlds/CampusKE_ServerRoom";
 import CampusKE_Labor from "./MockBackendData/ThemeTestWorlds/CampusKE_Labor";
 import CampusKE_Auditorium from "./MockBackendData/ThemeTestWorlds/CampusKE_Auditorium";
-import Company_Main from "./MockBackendData/ThemeTestWorlds/Company_Main";
 import Company_LearningArea from "./MockBackendData/ThemeTestWorlds/Company_LearningArea";
 import Company_EatingArea from "./MockBackendData/ThemeTestWorlds/Company_EatingArea";
 import Company_Presentation from "./MockBackendData/ThemeTestWorlds/Company_Presentation";
@@ -140,7 +139,6 @@ export default class MockBackendAdapter implements IBackendPort {
     else if (worldID === 25) return CampusKE_Labor;
     else if (worldID === 26) return CampusKE_Auditorium;
     // Company
-    else if (worldID === 30) return Company_Main;
     else if (worldID === 31) return Company_LearningArea;
     else if (worldID === 32) return Company_EatingArea;
     else if (worldID === 33) return Company_Presentation;
