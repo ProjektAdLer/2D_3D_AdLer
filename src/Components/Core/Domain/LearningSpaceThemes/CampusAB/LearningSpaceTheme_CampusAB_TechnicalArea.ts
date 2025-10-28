@@ -1,7 +1,25 @@
+import { LearningSpaceTemplateType } from "../../Types/LearningSpaceTemplateType";
 import ILearningSpaceTheme from "../ILearningSpaceTheme";
-import { LearningSpaceTheme_CampusAB } from "./LearningSpaceTheme_CampusAB";
+import {
+  SharedCampusLearningElements,
+  SharedCampusStoryElement,
+  SharedCampusStandinDecorations,
+  SharedCampusElevatorDoors,
+} from "../SharedThemeElements";
 
-// TODO: Add specific sub-theme implementation for CampusAB TechnicalArea when assets are available
 export const LearningSpaceTheme_CampusAB_TechnicalArea: ILearningSpaceTheme = {
-  ...LearningSpaceTheme_CampusAB,
+  learningElementModels: SharedCampusLearningElements,
+  entryDoorModel: SharedCampusElevatorDoors.entry,
+  exitDoorModel: SharedCampusElevatorDoors.exit,
+  ambienceModel: require("../../../../../Assets/3dModels/CampusAB/TechnicalArea/env-campus-ab-serverroom.glb"),
+  storyElementModel: SharedCampusStoryElement,
+  standinDecorationModels: SharedCampusStandinDecorations,
+  insideDecorationModels: {
+    [LearningSpaceTemplateType.L]: "",
+    [LearningSpaceTemplateType.R6]: "",
+    [LearningSpaceTemplateType.R8]: "",
+    [LearningSpaceTemplateType.D]: "",
+    [LearningSpaceTemplateType.T]: "",
+    [LearningSpaceTemplateType.None]: "",
+  },
 };

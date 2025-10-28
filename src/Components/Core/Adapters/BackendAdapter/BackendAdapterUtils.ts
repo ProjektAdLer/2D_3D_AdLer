@@ -75,9 +75,11 @@ export default class BackendAdapterUtils {
 
     switch (awtTheme) {
       case "CAMPUSASCHAFFENBURG":
+      case "CAMPUSAB":
         theme = ThemeType.CampusAB;
         break;
       case "CAMPUSKEMPTEN":
+      case "CAMPUSKE":
         theme = ThemeType.CampusKE;
         break;
       case "SUBURB":

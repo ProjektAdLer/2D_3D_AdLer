@@ -8,12 +8,13 @@ const CampusKE_ServerRoom: AWT = {
   world: {
     worldName: "Campus KE - Server Room",
     worldDescription:
-      "Test world for CAMPUSSERVERROOM theme with all floor plans",
+      "Test world for CAMPUSKE_TECHNICALAREA theme with all floor plans",
     worldGoals: [
-      "Test CAMPUSSERVERROOM theme",
+      "Test CAMPUSKE_TECHNICALAREA theme",
       "Verify all floor plans",
       "Check rendering",
     ],
+    theme: "CampusKE",
     evaluationLink: "https://www.th-ab.de",
     topics: [
       {
@@ -32,7 +33,7 @@ const CampusKE_ServerRoom: AWT = {
         requiredSpacesToEnter: "",
         spaceGoals: ["Test R6 floor plan"],
         spaceTemplate: "R_20X20_6L",
-        spaceTemplateStyle: "CAMPUSSERVERROOM",
+        spaceTemplateStyle: "TECHNICALAREA",
         spaceStory: {
           introStory: {
             storyTexts: [
@@ -55,7 +56,7 @@ const CampusKE_ServerRoom: AWT = {
         requiredSpacesToEnter: "1",
         spaceGoals: ["Test R8 floor plan"],
         spaceTemplate: "R_20X30_8L",
-        spaceTemplateStyle: "CAMPUSSERVERROOM",
+        spaceTemplateStyle: "TECHNICALAREA",
         spaceStory: {
           introStory: {
             storyTexts: [
@@ -78,7 +79,7 @@ const CampusKE_ServerRoom: AWT = {
         requiredSpacesToEnter: "2",
         spaceGoals: ["Test L10 floor plan"],
         spaceTemplate: "L_32X31_10L",
-        spaceTemplateStyle: "CAMPUSSERVERROOM",
+        spaceTemplateStyle: "TECHNICALAREA",
         spaceStory: {
           introStory: {
             storyTexts: [
@@ -115,7 +116,7 @@ const CampusKE_ServerRoom: AWT = {
         requiredSpacesToEnter: "3",
         spaceGoals: ["Test T13 floor plan"],
         spaceTemplate: "T_40X32_13L",
-        spaceTemplateStyle: "CAMPUSSERVERROOM",
+        spaceTemplateStyle: "TECHNICALAREA",
         spaceStory: {
           introStory: {
             storyTexts: [
@@ -154,7 +155,7 @@ const CampusKE_ServerRoom: AWT = {
         requiredSpacesToEnter: "4",
         spaceGoals: ["Test D15 floor plan"],
         spaceTemplate: "D_40X37_15L",
-        spaceTemplateStyle: "CAMPUSSERVERROOM",
+        spaceTemplateStyle: "TECHNICALAREA",
         spaceStory: {
           introStory: {
             storyTexts: [

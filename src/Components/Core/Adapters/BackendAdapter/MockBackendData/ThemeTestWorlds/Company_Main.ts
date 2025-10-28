@@ -13,6 +13,7 @@ const Company_Main: AWT = {
       "Verify all floor plans",
       "Check rendering",
     ],
+    theme: "Company",
     evaluationLink: "https://www.th-ab.de",
     topics: [
       {

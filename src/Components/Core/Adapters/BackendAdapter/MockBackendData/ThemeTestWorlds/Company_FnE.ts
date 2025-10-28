@@ -13,6 +13,7 @@ const Company_FnE: AWT = {
       "Verify all floor plans",
       "Check rendering",
     ],
+    theme: "Company",
     evaluationLink: "https://www.th-ab.de",
     topics: [
       {
@@ -31,7 +32,7 @@ const Company_FnE: AWT = {
         requiredSpacesToEnter: "",
         spaceGoals: ["Test R6 floor plan"],
         spaceTemplate: "R_20X20_6L",
-        spaceTemplateStyle: "COMPANY_FNE",
+        spaceTemplateStyle: "FNE",
         spaceStory: {
           introStory: {
             storyTexts: ["Welcome to the R6 floor plan test for Company - FnE"],
@@ -52,7 +53,7 @@ const Company_FnE: AWT = {
         requiredSpacesToEnter: "1",
         spaceGoals: ["Test R8 floor plan"],
         spaceTemplate: "R_20X30_8L",
-        spaceTemplateStyle: "COMPANY_FNE",
+        spaceTemplateStyle: "FNE",
         spaceStory: {
           introStory: {
             storyTexts: ["Welcome to the R8 floor plan test for Company - FnE"],
@@ -73,7 +74,7 @@ const Company_FnE: AWT = {
         requiredSpacesToEnter: "2",
         spaceGoals: ["Test L10 floor plan"],
         spaceTemplate: "L_32X31_10L",
-        spaceTemplateStyle: "COMPANY_FNE",
+        spaceTemplateStyle: "FNE",
         spaceStory: {
           introStory: {
             storyTexts: [
@@ -110,7 +111,7 @@ const Company_FnE: AWT = {
         requiredSpacesToEnter: "3",
         spaceGoals: ["Test T13 floor plan"],
         spaceTemplate: "T_40X32_13L",
-        spaceTemplateStyle: "COMPANY_FNE",
+        spaceTemplateStyle: "FNE",
         spaceStory: {
           introStory: {
             storyTexts: [
@@ -149,7 +150,7 @@ const Company_FnE: AWT = {
         requiredSpacesToEnter: "4",
         spaceGoals: ["Test D15 floor plan"],
         spaceTemplate: "D_40X37_15L",
-        spaceTemplateStyle: "COMPANY_FNE",
+        spaceTemplateStyle: "FNE",
         spaceStory: {
           introStory: {
             storyTexts: [

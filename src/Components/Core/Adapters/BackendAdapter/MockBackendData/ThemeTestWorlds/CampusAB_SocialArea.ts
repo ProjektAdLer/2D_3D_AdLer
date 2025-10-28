@@ -14,6 +14,7 @@ const CampusAB_SocialArea: AWT = {
       "Verify all floor plans",
       "Check rendering",
     ],
+    theme: "CampusAB",
     evaluationLink: "https://www.th-ab.de",
     topics: [
       {
@@ -32,7 +33,7 @@ const CampusAB_SocialArea: AWT = {
         requiredSpacesToEnter: "",
         spaceGoals: ["Test R6 floor plan"],
         spaceTemplate: "R_20X20_6L",
-        spaceTemplateStyle: "CAMPUSASCHAFFENBURG_SOCIALAREA",
+        spaceTemplateStyle: "SOCIALAREA",
         spaceStory: {
           introStory: {
             storyTexts: [
@@ -55,7 +56,7 @@ const CampusAB_SocialArea: AWT = {
         requiredSpacesToEnter: "1",
         spaceGoals: ["Test R8 floor plan"],
         spaceTemplate: "R_20X30_8L",
-        spaceTemplateStyle: "CAMPUSASCHAFFENBURG_SOCIALAREA",
+        spaceTemplateStyle: "SOCIALAREA",
         spaceStory: {
           introStory: {
             storyTexts: [
@@ -78,7 +79,7 @@ const CampusAB_SocialArea: AWT = {
         requiredSpacesToEnter: "2",
         spaceGoals: ["Test L10 floor plan"],
         spaceTemplate: "L_32X31_10L",
-        spaceTemplateStyle: "CAMPUSASCHAFFENBURG_SOCIALAREA",
+        spaceTemplateStyle: "SOCIALAREA",
         spaceStory: {
           introStory: {
             storyTexts: [
@@ -115,7 +116,7 @@ const CampusAB_SocialArea: AWT = {
         requiredSpacesToEnter: "3",
         spaceGoals: ["Test T13 floor plan"],
         spaceTemplate: "T_40X32_13L",
-        spaceTemplateStyle: "CAMPUSASCHAFFENBURG_SOCIALAREA",
+        spaceTemplateStyle: "SOCIALAREA",
         spaceStory: {
           introStory: {
             storyTexts: [
@@ -154,7 +155,7 @@ const CampusAB_SocialArea: AWT = {
         requiredSpacesToEnter: "4",
         spaceGoals: ["Test D15 floor plan"],
         spaceTemplate: "D_40X37_15L",
-        spaceTemplateStyle: "CAMPUSASCHAFFENBURG_SOCIALAREA",
+        spaceTemplateStyle: "SOCIALAREA",
         spaceStory: {
           introStory: {
             storyTexts: [

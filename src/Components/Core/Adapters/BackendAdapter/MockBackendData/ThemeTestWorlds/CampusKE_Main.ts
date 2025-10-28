@@ -13,6 +13,7 @@ const CampusKE_Main: AWT = {
       "Verify all floor plans",
       "Check rendering",
     ],
+    theme: "CampusKE",
     evaluationLink: "https://www.th-ab.de",
     topics: [
       {

@@ -1,13 +1,25 @@
+import { LearningSpaceTemplateType } from "../../Types/LearningSpaceTemplateType";
 import ILearningSpaceTheme from "../ILearningSpaceTheme";
-import LearningSpaceTheme_Suburb from "../Legacy/LearningSpaceTheme_Suburb";
 import {
   SharedCampusLearningElements,
   SharedCampusStoryElement,
+  SharedCampusStandinDecorations,
+  SharedCampusElevatorDoors,
 } from "../SharedThemeElements";
 
-// TODO: Replace placeholder implementation with actual Company theme assets
 export const LearningSpaceTheme_Company: ILearningSpaceTheme = {
-  ...LearningSpaceTheme_Suburb, // PLACEHOLDER: Using Suburb theme until Company theme is implemented
   learningElementModels: SharedCampusLearningElements,
+  entryDoorModel: SharedCampusElevatorDoors.entry,
+  exitDoorModel: SharedCampusElevatorDoors.exit,
+  ambienceModel: "", // TODO: Add Company main environment
   storyElementModel: SharedCampusStoryElement,
+  standinDecorationModels: SharedCampusStandinDecorations,
+  insideDecorationModels: {
+    [LearningSpaceTemplateType.L]: "",
+    [LearningSpaceTemplateType.R6]: "",
+    [LearningSpaceTemplateType.R8]: "",
+    [LearningSpaceTemplateType.D]: "",
+    [LearningSpaceTemplateType.T]: "",
+    [LearningSpaceTemplateType.None]: "",
+  },
 };

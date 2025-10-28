@@ -7,12 +7,14 @@ const CampusKE_Library: AWT = {
   language: "de",
   world: {
     worldName: "Campus KE - Library",
-    worldDescription: "Test world for CAMPUSLIBRARY theme with all floor plans",
+    worldDescription:
+      "Test world for CAMPUSKE_LEARNINGAREA theme with all floor plans",
     worldGoals: [
-      "Test CAMPUSLIBRARY theme",
+      "Test CAMPUSKE_LEARNINGAREA theme",
       "Verify all floor plans",
       "Check rendering",
     ],
+    theme: "CampusKE",
     evaluationLink: "https://www.th-ab.de",
     topics: [
       {
@@ -31,7 +33,7 @@ const CampusKE_Library: AWT = {
         requiredSpacesToEnter: "",
         spaceGoals: ["Test R6 floor plan"],
         spaceTemplate: "R_20X20_6L",
-        spaceTemplateStyle: "CAMPUSLIBRARY",
+        spaceTemplateStyle: "LEARNINGAREA",
         spaceStory: {
           introStory: {
             storyTexts: [
@@ -54,7 +56,7 @@ const CampusKE_Library: AWT = {
         requiredSpacesToEnter: "1",
         spaceGoals: ["Test R8 floor plan"],
         spaceTemplate: "R_20X30_8L",
-        spaceTemplateStyle: "CAMPUSLIBRARY",
+        spaceTemplateStyle: "LEARNINGAREA",
         spaceStory: {
           introStory: {
             storyTexts: [
@@ -77,7 +79,7 @@ const CampusKE_Library: AWT = {
         requiredSpacesToEnter: "2",
         spaceGoals: ["Test L10 floor plan"],
         spaceTemplate: "L_32X31_10L",
-        spaceTemplateStyle: "CAMPUSLIBRARY",
+        spaceTemplateStyle: "LEARNINGAREA",
         spaceStory: {
           introStory: {
             storyTexts: [
@@ -114,7 +116,7 @@ const CampusKE_Library: AWT = {
         requiredSpacesToEnter: "3",
         spaceGoals: ["Test T13 floor plan"],
         spaceTemplate: "T_40X32_13L",
-        spaceTemplateStyle: "CAMPUSLIBRARY",
+        spaceTemplateStyle: "LEARNINGAREA",
         spaceStory: {
           introStory: {
             storyTexts: [
@@ -153,7 +155,7 @@ const CampusKE_Library: AWT = {
         requiredSpacesToEnter: "4",
         spaceGoals: ["Test D15 floor plan"],
         spaceTemplate: "D_40X37_15L",
-        spaceTemplateStyle: "CAMPUSLIBRARY",
+        spaceTemplateStyle: "LEARNINGAREA",
         spaceStory: {
           introStory: {
             storyTexts: [
