@@ -30,6 +30,29 @@ import RequirementsGradingAWT from "./MockBackendData/RequirementsGradingAWT";
 import NPCModelAWT from "./MockBackendData/NPCModelAWT";
 import ShowcaseWorldAWT from "./MockBackendData/ShowcaseWorldAWT";
 
+// Theme Test Worlds - CampusAB, CampusKE, Company
+import CampusAB_Main from "./MockBackendData/ThemeTestWorlds/CampusAB_Main";
+import CampusAB_LearningArea from "./MockBackendData/ThemeTestWorlds/CampusAB_LearningArea";
+import CampusAB_EatingArea from "./MockBackendData/ThemeTestWorlds/CampusAB_EatingArea";
+import CampusAB_Presentation from "./MockBackendData/ThemeTestWorlds/CampusAB_Presentation";
+import CampusAB_FnE from "./MockBackendData/ThemeTestWorlds/CampusAB_FnE";
+import CampusAB_SocialArea from "./MockBackendData/ThemeTestWorlds/CampusAB_SocialArea";
+import CampusAB_TechnicalArea from "./MockBackendData/ThemeTestWorlds/CampusAB_TechnicalArea";
+import CampusKE_Main from "./MockBackendData/ThemeTestWorlds/CampusKE_Main";
+import CampusKE_Mensa from "./MockBackendData/ThemeTestWorlds/CampusKE_Mensa";
+import CampusKE_Library from "./MockBackendData/ThemeTestWorlds/CampusKE_Library";
+import CampusKE_StudentClub from "./MockBackendData/ThemeTestWorlds/CampusKE_StudentClub";
+import CampusKE_ServerRoom from "./MockBackendData/ThemeTestWorlds/CampusKE_ServerRoom";
+import CampusKE_Labor from "./MockBackendData/ThemeTestWorlds/CampusKE_Labor";
+import CampusKE_Auditorium from "./MockBackendData/ThemeTestWorlds/CampusKE_Auditorium";
+import Company_Main from "./MockBackendData/ThemeTestWorlds/Company_Main";
+import Company_LearningArea from "./MockBackendData/ThemeTestWorlds/Company_LearningArea";
+import Company_EatingArea from "./MockBackendData/ThemeTestWorlds/Company_EatingArea";
+import Company_Presentation from "./MockBackendData/ThemeTestWorlds/Company_Presentation";
+import Company_FnE from "./MockBackendData/ThemeTestWorlds/Company_FnE";
+import Company_SocialArea from "./MockBackendData/ThemeTestWorlds/Company_SocialArea";
+import Company_TechnicalArea from "./MockBackendData/ThemeTestWorlds/Company_TechnicalArea";
+
 @injectable()
 export default class MockBackendAdapter implements IBackendPort {
   getElementScore({
@@ -99,6 +122,32 @@ export default class MockBackendAdapter implements IBackendPort {
     else if (worldID === 4) return NPCModelAWT;
     else if (worldID === 5) return RequirementsGradingAWT;
     else if (worldID === 999) return ShowcaseWorldAWT;
+    // Theme Test Worlds (World IDs 10-49)
+    // CampusAB
+    else if (worldID === 10) return CampusAB_Main;
+    else if (worldID === 11) return CampusAB_LearningArea;
+    else if (worldID === 12) return CampusAB_EatingArea;
+    else if (worldID === 13) return CampusAB_Presentation;
+    else if (worldID === 14) return CampusAB_FnE;
+    else if (worldID === 15) return CampusAB_SocialArea;
+    else if (worldID === 16) return CampusAB_TechnicalArea;
+    // CampusKE
+    else if (worldID === 20) return CampusKE_Main;
+    else if (worldID === 21) return CampusKE_Mensa;
+    else if (worldID === 22) return CampusKE_Library;
+    else if (worldID === 23) return CampusKE_StudentClub;
+    else if (worldID === 24) return CampusKE_ServerRoom;
+    else if (worldID === 25) return CampusKE_Labor;
+    else if (worldID === 26) return CampusKE_Auditorium;
+    // Company
+    else if (worldID === 30) return Company_Main;
+    else if (worldID === 31) return Company_LearningArea;
+    else if (worldID === 32) return Company_EatingArea;
+    else if (worldID === 33) return Company_Presentation;
+    else if (worldID === 34) return Company_FnE;
+    else if (worldID === 35) return Company_SocialArea;
+    else if (worldID === 36) return Company_TechnicalArea;
+
     return SubthemeWorldAWT;
   }
 
@@ -285,6 +334,30 @@ export default class MockBackendAdapter implements IBackendPort {
           courseID: 999,
           courseName: "AdLer Demo (Development)",
         },
+        // Theme Test Worlds - CampusAB
+        { courseID: 10, courseName: "🎨 Campus AB - Main" },
+        { courseID: 11, courseName: "🎨 Campus AB - Learning Area" },
+        { courseID: 12, courseName: "🎨 Campus AB - Eating Area" },
+        { courseID: 13, courseName: "🎨 Campus AB - Presentation" },
+        { courseID: 14, courseName: "🎨 Campus AB - FnE" },
+        { courseID: 15, courseName: "🎨 Campus AB - Social Area" },
+        { courseID: 16, courseName: "🎨 Campus AB - Technical Area" },
+        // Theme Test Worlds - CampusKE
+        { courseID: 20, courseName: "🎨 Campus KE - Main" },
+        { courseID: 21, courseName: "🎨 Campus KE - Mensa" },
+        { courseID: 22, courseName: "🎨 Campus KE - Library" },
+        { courseID: 23, courseName: "🎨 Campus KE - Student Club" },
+        { courseID: 24, courseName: "🎨 Campus KE - Server Room" },
+        { courseID: 25, courseName: "🎨 Campus KE - Labor" },
+        { courseID: 26, courseName: "🎨 Campus KE - Auditorium" },
+        // Theme Test Worlds - Company
+        { courseID: 30, courseName: "🎨 Company - Main" },
+        { courseID: 31, courseName: "🎨 Company - Learning Area" },
+        { courseID: 32, courseName: "🎨 Company - Eating Area" },
+        { courseID: 33, courseName: "🎨 Company - Presentation" },
+        { courseID: 34, courseName: "🎨 Company - FnE" },
+        { courseID: 35, courseName: "🎨 Company - Social Area" },
+        { courseID: 36, courseName: "🎨 Company - Technical Area" },
       ],
     });
   }
