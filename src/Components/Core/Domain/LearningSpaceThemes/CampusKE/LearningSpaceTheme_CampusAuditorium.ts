@@ -11,7 +11,7 @@ export const LearningSpaceTheme_CampusAuditorium: ILearningSpaceTheme = {
   learningElementModels: SharedCampusLearningElements,
   entryDoorModel: SharedCampusElevatorDoors.entry,
   exitDoorModel: SharedCampusElevatorDoors.exit,
-  ambienceModel: require("../../../../../Assets/3dModels/campusTheme/auditorium/env-campus-auditorium.glb"),
+  ambienceModel: require("../../../../../Assets/3dModels/CampusKE/Auditorium/env-campus-auditorium.glb"),
   storyElementModel: SharedCampusStoryElement,
   standinDecorationModels: SharedCampusStandinDecorations,
   insideDecorationModels: {

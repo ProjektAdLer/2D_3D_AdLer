@@ -11,73 +11,73 @@ const LearningElementModelLookup: {
 } = {
   //suburbTheme
   [LearningElementModelTypeEnums.H5pElementModelTypes
-    .Blackboard]: require("../../../../Assets/3dModels/suburbTheme/l-h5p-blackboard-1.glb"),
+    .Blackboard]: require("../../../../Assets/3dModels/Legacy/Suburb/l-h5p-blackboard-1.glb"),
   [LearningElementModelTypeEnums.H5pElementModelTypes
-    .DeskPC1]: require("../../../../Assets/3dModels/suburbTheme/l-h5p-deskpc-1.glb"),
+    .DeskPC1]: require("../../../../Assets/3dModels/Legacy/Suburb/l-h5p-deskpc-1.glb"),
   [LearningElementModelTypeEnums.H5pElementModelTypes
-    .DrawingTable]: require("../../../../Assets/3dModels/suburbTheme/l-h5p-drawingtable-1.glb"),
+    .DrawingTable]: require("../../../../Assets/3dModels/Legacy/Suburb/l-h5p-drawingtable-1.glb"),
   [LearningElementModelTypeEnums.H5pElementModelTypes
-    .SlotMachine]: require("../../../../Assets/3dModels/suburbTheme/l-h5p-slotmachine-1.glb"),
+    .SlotMachine]: require("../../../../Assets/3dModels/Legacy/Suburb/l-h5p-slotmachine-1.glb"),
   [LearningElementModelTypeEnums.TextElementModelTypes
-    .Bookshelf1]: require("../../../../Assets/3dModels/suburbTheme/l-text-bookshelf-1.glb"),
+    .Bookshelf1]: require("../../../../Assets/3dModels/Legacy/Suburb/l-text-bookshelf-1.glb"),
   [LearningElementModelTypeEnums.TextElementModelTypes
-    .Bookshelf2]: require("../../../../Assets/3dModels/suburbTheme/l-text-bookshelf-2.glb"),
+    .Bookshelf2]: require("../../../../Assets/3dModels/Legacy/Suburb/l-text-bookshelf-2.glb"),
   [LearningElementModelTypeEnums.ImageElementModelTypes
-    .Painting1]: require("../../../../Assets/3dModels/suburbTheme/l-image-painting-1.glb"),
+    .Painting1]: require("../../../../Assets/3dModels/Legacy/Suburb/l-image-painting-1.glb"),
   [LearningElementModelTypeEnums.ImageElementModelTypes
-    .Painting2]: require("../../../../Assets/3dModels/suburbTheme/l-image-painting-2.glb"),
+    .Painting2]: require("../../../../Assets/3dModels/Legacy/Suburb/l-image-painting-2.glb"),
   [LearningElementModelTypeEnums.ImageElementModelTypes
-    .PaintingEasel]: require("../../../../Assets/3dModels/suburbTheme/l-image-paintingeasel-1.glb"),
+    .PaintingEasel]: require("../../../../Assets/3dModels/Legacy/Suburb/l-image-paintingeasel-1.glb"),
   [LearningElementModelTypeEnums.VideoElementModelTypes
-    .Television]: require("../../../../Assets/3dModels/suburbTheme/l-video-television-1.glb"),
+    .Television]: require("../../../../Assets/3dModels/Legacy/Suburb/l-video-television-1.glb"),
   [LearningElementModelTypeEnums.QuizElementModelTypes
     .DefaultSuburbNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-teamd-male.glb"),
 
   //ArcadeTheme
   [LearningElementModelTypeEnums.H5pElementModelTypes
-    .GreySlotmachine]: require("../../../../Assets/3dModels/arcadeTheme/l-h5p-greyslotmachine-1.glb"),
+    .GreySlotmachine]: require("../../../../Assets/3dModels/Legacy/Arcade/l-h5p-greyslotmachine-1.glb"),
   [LearningElementModelTypeEnums.H5pElementModelTypes
-    .RedSlotmachine]: require("../../../../Assets/3dModels/arcadeTheme/l-h5p-redslotmachine-1.glb"),
+    .RedSlotmachine]: require("../../../../Assets/3dModels/Legacy/Arcade/l-h5p-redslotmachine-1.glb"),
   [LearningElementModelTypeEnums.H5pElementModelTypes
-    .PurpleSlotmachine]: require("../../../../Assets/3dModels/arcadeTheme/l-h5p-purpleslotmachine-1.glb"),
+    .PurpleSlotmachine]: require("../../../../Assets/3dModels/Legacy/Arcade/l-h5p-purpleslotmachine-1.glb"),
   [LearningElementModelTypeEnums.H5pElementModelTypes
-    .BlackSlotmachine]: require("../../../../Assets/3dModels/arcadeTheme/l-h5p-blackslotmachine-1.glb"),
+    .BlackSlotmachine]: require("../../../../Assets/3dModels/Legacy/Arcade/l-h5p-blackslotmachine-1.glb"),
   [LearningElementModelTypeEnums.H5pElementModelTypes
-    .DeskPC2]: require("../../../../Assets/3dModels/arcadeTheme/l-h5p-deskpc-2.glb"),
+    .DeskPC2]: require("../../../../Assets/3dModels/Legacy/Arcade/l-h5p-deskpc-2.glb"),
   [LearningElementModelTypeEnums.TextElementModelTypes
-    .ComicShelfbig]: require("../../../../Assets/3dModels/arcadeTheme/l-text-comicshelfbig-1.glb"),
+    .ComicShelfbig]: require("../../../../Assets/3dModels/Legacy/Arcade/l-text-comicshelfbig-1.glb"),
   [LearningElementModelTypeEnums.TextElementModelTypes
-    .ComicShelfsmall]: require("../../../../Assets/3dModels/arcadeTheme/l-text-comicshelfsmall-1.glb"),
+    .ComicShelfsmall]: require("../../../../Assets/3dModels/Legacy/Arcade/l-text-comicshelfsmall-1.glb"),
   [LearningElementModelTypeEnums.ImageElementModelTypes
-    .Gameposter1]: require("../../../../Assets/3dModels/arcadeTheme/l-image-gameposter-1.glb"),
+    .Gameposter1]: require("../../../../Assets/3dModels/Legacy/Arcade/l-image-gameposter-1.glb"),
   [LearningElementModelTypeEnums.ImageElementModelTypes
-    .Gameposter2]: require("../../../../Assets/3dModels/arcadeTheme/l-image-gameposter-2.glb"),
+    .Gameposter2]: require("../../../../Assets/3dModels/Legacy/Arcade/l-image-gameposter-2.glb"),
   [LearningElementModelTypeEnums.ImageElementModelTypes
-    .CardboardCutout]: require("../../../../Assets/3dModels/arcadeTheme/l-image-cardboardcutout-1.glb"),
+    .CardboardCutout]: require("../../../../Assets/3dModels/Legacy/Arcade/l-image-cardboardcutout-1.glb"),
   [LearningElementModelTypeEnums.VideoElementModelTypes
-    .VrDesk]: require("../../../../Assets/3dModels/arcadeTheme/l-video-vrdesk-1.glb"),
+    .VrDesk]: require("../../../../Assets/3dModels/Legacy/Arcade/l-video-vrdesk-1.glb"),
   [LearningElementModelTypeEnums.QuizElementModelTypes
     .DefaultArcadeNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-sheriffjustice.glb"),
 
   //CampusTheme
   [LearningElementModelTypeEnums.H5pElementModelTypes
-    .Blackboard2]: require("../../../../Assets/3dModels/campusTheme/l-h5p-blackboard-2.glb"),
+    .Blackboard2]: require("../../../../Assets/3dModels/CampusAB/Shared/l-h5p-blackboard-2.glb"),
   [LearningElementModelTypeEnums.H5pElementModelTypes
-    .DeskPC3]: require("../../../../Assets/3dModels/campusTheme/l-h5p-deskpc-3.glb"),
+    .DeskPC3]: require("../../../../Assets/3dModels/CampusAB/Shared/l-h5p-deskpc-3.glb"),
   [LearningElementModelTypeEnums.H5pElementModelTypes
-    .DrawingTable2]: require("../../../../Assets/3dModels/campusTheme/l-h5p-drawingtable-2.glb"),
+    .DrawingTable2]: require("../../../../Assets/3dModels/CampusAB/Shared/l-h5p-drawingtable-2.glb"),
   [LearningElementModelTypeEnums.H5pElementModelTypes
-    .DaylightProjector]: require("../../../../Assets/3dModels/campusTheme/l-h5p-daylightprojector-1.glb"),
+    .DaylightProjector]: require("../../../../Assets/3dModels/CampusAB/Shared/l-h5p-daylightprojector-1.glb"),
   [LearningElementModelTypeEnums.TextElementModelTypes
-    .LibraryShelf]: require("../../../../Assets/3dModels/campusTheme/l-text-libraryshelf-1.glb"),
+    .LibraryShelf]: require("../../../../Assets/3dModels/CampusAB/Shared/l-text-libraryshelf-1.glb"),
   [LearningElementModelTypeEnums.ImageElementModelTypes
-    .ScienceGeo1]: require("../../../../Assets/3dModels/campusTheme/l-image-sciencegeo-1.glb"),
+    .ScienceGeo1]: require("../../../../Assets/3dModels/CampusAB/Shared/l-image-sciencegeo-1.glb"),
   [LearningElementModelTypeEnums.ImageElementModelTypes
-    .ScienceBio1]: require("../../../../Assets/3dModels/campusTheme/l-image-sciencebio-1.glb"),
+    .ScienceBio1]: require("../../../../Assets/3dModels/CampusAB/Shared/l-image-sciencebio-1.glb"),
   [LearningElementModelTypeEnums.ImageElementModelTypes
-    .ScienceWhiteboard]: require("../../../../Assets/3dModels/campusTheme/l-image-sciencewhiteboard-1.glb"),
+    .ScienceWhiteboard]: require("../../../../Assets/3dModels/CampusAB/Shared/l-image-sciencewhiteboard-1.glb"),
   [LearningElementModelTypeEnums.VideoElementModelTypes
-    .MovieProjector]: require("../../../../Assets/3dModels/campusTheme/l-video-movieprojector-1.glb"),
+    .MovieProjector]: require("../../../../Assets/3dModels/CampusAB/Shared/l-video-movieprojector-1.glb"),
   [LearningElementModelTypeEnums.QuizElementModelTypes
     .DefaultCampusNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-teamb-male.glb"),
 

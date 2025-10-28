@@ -13,7 +13,7 @@ export const LearningSpaceTheme_CampusKE: ILearningSpaceTheme = {
   entryDoorModel: LearningSpaceTheme_CampusAB.entryDoorModel,
   exitDoorModel: LearningSpaceTheme_CampusAB.exitDoorModel,
   windowModel: LearningSpaceTheme_CampusAB.windowModel,
-  ambienceModel: require("../../../../../Assets/3dModels/campusTheme/env-campus-ke.glb"),
+  ambienceModel: require("../../../../../Assets/3dModels/CampusKE/Main/env-campus-ke.glb"),
   storyElementModel: SharedCampusStoryElement,
   insideDecorationModels: LearningSpaceTheme_CampusAB.insideDecorationModels,
   outsideDecorationModels: LearningSpaceTheme_CampusAB.outsideDecorationModels,
