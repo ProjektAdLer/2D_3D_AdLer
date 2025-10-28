@@ -16,10 +16,10 @@ export const LearningSpaceTheme_Company_EatingArea: ILearningSpaceTheme = {
   standinDecorationModels: SharedCampusStandinDecorations,
   insideDecorationModels: {
     [LearningSpaceTemplateType.L]: "",
-    [LearningSpaceTemplateType.R6]: "",
-    [LearningSpaceTemplateType.R8]: "",
-    [LearningSpaceTemplateType.D]: "",
-    [LearningSpaceTemplateType.T]: "",
+    [LearningSpaceTemplateType.R6]: require("../../../../../Assets/3dModels/Company/EatingArea/d-roomcomp-r6-cafeteria-in.glb"),
+    [LearningSpaceTemplateType.R8]: require("../../../../../Assets/3dModels/Company/EatingArea/d-roomcomp-r8-cafeteria-in.glb"),
+    [LearningSpaceTemplateType.D]: require("../../../../../Assets/3dModels/Company/EatingArea/d-roomcomp-d-cafeteria-in.glb"),
+    [LearningSpaceTemplateType.T]: require("../../../../../Assets/3dModels/Company/EatingArea/d-roomcomp-t-cafeteria-in.glb"),
     [LearningSpaceTemplateType.None]: "",
   },
 };
