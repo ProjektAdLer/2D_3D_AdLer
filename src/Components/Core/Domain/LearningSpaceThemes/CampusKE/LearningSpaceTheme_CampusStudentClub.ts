@@ -1,0 +1,25 @@
+import { LearningSpaceTemplateType } from "../../Types/LearningSpaceTemplateType";
+import ILearningSpaceTheme from "../ILearningSpaceTheme";
+import {
+  SharedCampusLearningElements,
+  SharedCampusStoryElement,
+  SharedCampusStandinDecorations,
+  SharedCampusElevatorDoors,
+} from "../SharedThemeElements";
+
+export const LearningSpaceTheme_CampusStudentClub: ILearningSpaceTheme = {
+  learningElementModels: SharedCampusLearningElements,
+  entryDoorModel: SharedCampusElevatorDoors.entry,
+  exitDoorModel: SharedCampusElevatorDoors.exit,
+  ambienceModel: require("../../../../../Assets/3dModels/campusTheme/studentClub/env-campus-studentClub.glb"),
+  storyElementModel: SharedCampusStoryElement,
+  standinDecorationModels: SharedCampusStandinDecorations,
+  insideDecorationModels: {
+    [LearningSpaceTemplateType.L]: "",
+    [LearningSpaceTemplateType.R6]: "",
+    [LearningSpaceTemplateType.R8]: "",
+    [LearningSpaceTemplateType.D]: "",
+    [LearningSpaceTemplateType.T]: "",
+    [LearningSpaceTemplateType.None]: "",
+  },
+};
