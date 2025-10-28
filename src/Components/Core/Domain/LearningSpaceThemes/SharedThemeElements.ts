@@ -43,8 +43,8 @@ export const SharedCampusStoryElement =
   LearningElementModelTypeEnums.QuizElementModelTypes.DefaultCampusNPC;
 
 export const SharedCampusStandinDecorations = [
-  require("../../../../Assets/3dModels/CampusAB/Shared/d-dcomp-schooldesk-1.glb"),
-  require("../../../../Assets/3dModels/CampusAB/Shared/d-dcomp-watertower-1.glb"),
+  require("../../../../Assets/3dModels/sharedModels/campusTheme/d-dcomp-schooldesk-1.glb"),
+  require("../../../../Assets/3dModels/sharedModels/campusTheme/d-dcomp-watertower-1.glb"),
 ];
 
 export const SharedCampusElevatorDoors = {

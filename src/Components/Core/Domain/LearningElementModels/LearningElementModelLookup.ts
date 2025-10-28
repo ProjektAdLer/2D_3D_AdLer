@@ -61,23 +61,23 @@ const LearningElementModelLookup: {
 
   //CampusTheme
   [LearningElementModelTypeEnums.H5pElementModelTypes
-    .Blackboard2]: require("../../../../Assets/3dModels/CampusAB/Shared/l-h5p-blackboard-2.glb"),
+    .Blackboard2]: require("../../../../Assets/3dModels/sharedModels/campusTheme/l-h5p-blackboard-2.glb"),
   [LearningElementModelTypeEnums.H5pElementModelTypes
-    .DeskPC3]: require("../../../../Assets/3dModels/CampusAB/Shared/l-h5p-deskpc-3.glb"),
+    .DeskPC3]: require("../../../../Assets/3dModels/sharedModels/campusTheme/l-h5p-deskpc-3.glb"),
   [LearningElementModelTypeEnums.H5pElementModelTypes
-    .DrawingTable2]: require("../../../../Assets/3dModels/CampusAB/Shared/l-h5p-drawingtable-2.glb"),
+    .DrawingTable2]: require("../../../../Assets/3dModels/sharedModels/campusTheme/l-h5p-drawingtable-2.glb"),
   [LearningElementModelTypeEnums.H5pElementModelTypes
-    .DaylightProjector]: require("../../../../Assets/3dModels/CampusAB/Shared/l-h5p-daylightprojector-1.glb"),
+    .DaylightProjector]: require("../../../../Assets/3dModels/sharedModels/campusTheme/l-h5p-daylightprojector-1.glb"),
   [LearningElementModelTypeEnums.TextElementModelTypes
-    .LibraryShelf]: require("../../../../Assets/3dModels/CampusAB/Shared/l-text-libraryshelf-1.glb"),
+    .LibraryShelf]: require("../../../../Assets/3dModels/sharedModels/campusTheme/l-text-libraryshelf-1.glb"),
   [LearningElementModelTypeEnums.ImageElementModelTypes
-    .ScienceGeo1]: require("../../../../Assets/3dModels/CampusAB/Shared/l-image-sciencegeo-1.glb"),
+    .ScienceGeo1]: require("../../../../Assets/3dModels/sharedModels/campusTheme/l-image-sciencegeo-1.glb"),
   [LearningElementModelTypeEnums.ImageElementModelTypes
-    .ScienceBio1]: require("../../../../Assets/3dModels/CampusAB/Shared/l-image-sciencebio-1.glb"),
+    .ScienceBio1]: require("../../../../Assets/3dModels/sharedModels/campusTheme/l-image-sciencebio-1.glb"),
   [LearningElementModelTypeEnums.ImageElementModelTypes
-    .ScienceWhiteboard]: require("../../../../Assets/3dModels/CampusAB/Shared/l-image-sciencewhiteboard-1.glb"),
+    .ScienceWhiteboard]: require("../../../../Assets/3dModels/sharedModels/campusTheme/l-image-sciencewhiteboard-1.glb"),
   [LearningElementModelTypeEnums.VideoElementModelTypes
-    .MovieProjector]: require("../../../../Assets/3dModels/CampusAB/Shared/l-video-movieprojector-1.glb"),
+    .MovieProjector]: require("../../../../Assets/3dModels/sharedModels/campusTheme/l-video-movieprojector-1.glb"),
   [LearningElementModelTypeEnums.QuizElementModelTypes
     .DefaultCampusNPC]: require("../../../../Assets/3dModels/sharedModels/npcs/a-npc-teamb-male.glb"),
 
