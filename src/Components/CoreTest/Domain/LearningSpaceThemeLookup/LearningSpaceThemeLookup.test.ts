@@ -1,16 +1,14 @@
 import LearningSpaceThemeLookup from "../../../Core/Domain/LearningSpaceThemes/LearningSpaceThemeLookup";
-import LearningSpaceTheme_Arcade from "../../../Core/Domain/LearningSpaceThemes/LearningSpaceTheme_Arcade";
-import {
-  LearningSpaceTheme_CampusAB,
-  LearningSpaceTheme_CampusKE,
-  LearningSpaceTheme_CampusLibrary,
-  LearningSpaceTheme_CampusMensa,
-  LearningSpaceTheme_CampusStudentClub,
-  LearningSpaceTheme_CampusServerRoom,
-  LearningSpaceTheme_CampusLabor,
-  LearningSpaceTheme_CampusAuditorium,
-} from "../../../Core/Domain/LearningSpaceThemes/LearningSpaceTheme_Campus";
-import LearningSpaceTheme_Suburb from "../../../Core/Domain/LearningSpaceThemes/LearningSpaceTheme_Suburb";
+import LearningSpaceTheme_Arcade from "../../../Core/Domain/LearningSpaceThemes/Legacy/LearningSpaceTheme_Arcade";
+import { LearningSpaceTheme_CampusAB } from "../../../Core/Domain/LearningSpaceThemes/CampusAB/LearningSpaceTheme_CampusAB";
+import { LearningSpaceTheme_CampusKE } from "../../../Core/Domain/LearningSpaceThemes/CampusKE/LearningSpaceTheme_CampusKE";
+import { LearningSpaceTheme_CampusLibrary } from "../../../Core/Domain/LearningSpaceThemes/CampusKE/LearningSpaceTheme_CampusLibrary";
+import { LearningSpaceTheme_CampusMensa } from "../../../Core/Domain/LearningSpaceThemes/CampusKE/LearningSpaceTheme_CampusMensa";
+import { LearningSpaceTheme_CampusStudentClub } from "../../../Core/Domain/LearningSpaceThemes/CampusKE/LearningSpaceTheme_CampusStudentClub";
+import { LearningSpaceTheme_CampusServerRoom } from "../../../Core/Domain/LearningSpaceThemes/CampusKE/LearningSpaceTheme_CampusServerRoom";
+import { LearningSpaceTheme_CampusLabor } from "../../../Core/Domain/LearningSpaceThemes/CampusKE/LearningSpaceTheme_CampusLabor";
+import { LearningSpaceTheme_CampusAuditorium } from "../../../Core/Domain/LearningSpaceThemes/CampusKE/LearningSpaceTheme_CampusAuditorium";
+import LearningSpaceTheme_Suburb from "../../../Core/Domain/LearningSpaceThemes/Legacy/LearningSpaceTheme_Suburb";
 import { ThemeType } from "../../../Core/Domain/Types/ThemeTypes";
 
 describe("LearningSpaceThemeLookup", () => {

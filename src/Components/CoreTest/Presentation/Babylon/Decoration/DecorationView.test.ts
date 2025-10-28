@@ -1,5 +1,5 @@
-import { LearningSpaceTheme_CampusAB } from "../../../../Core/Domain/LearningSpaceThemes/LearningSpaceTheme_Campus";
-import LearningSpaceTheme_Arcade from "../../../../Core/Domain/LearningSpaceThemes/LearningSpaceTheme_Arcade";
+import { LearningSpaceTheme_CampusAB } from "../../../../Core/Domain/LearningSpaceThemes/CampusAB/LearningSpaceTheme_CampusAB";
+import LearningSpaceTheme_Arcade from "../../../../Core/Domain/LearningSpaceThemes/Legacy/LearningSpaceTheme_Arcade";
 import { Mesh, NullEngine, Scene } from "@babylonjs/core";
 import { mockDeep } from "jest-mock-extended";
 import CoreDIContainer from "../../../../Core/DependencyInjection/CoreDIContainer";

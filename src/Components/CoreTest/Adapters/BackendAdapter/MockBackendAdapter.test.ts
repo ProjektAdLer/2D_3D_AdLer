@@ -122,6 +122,90 @@ describe("MockBackendAdapter", () => {
           courseID: 999,
           courseName: "AdLer Demo (Development)",
         },
+        {
+          courseID: 10,
+          courseName: "Campus AB - Main",
+        },
+        {
+          courseID: 11,
+          courseName: "Campus AB - Learning Area",
+        },
+        {
+          courseID: 12,
+          courseName: "Campus AB - Eating Area",
+        },
+        {
+          courseID: 13,
+          courseName: "Campus AB - Presentation",
+        },
+        {
+          courseID: 14,
+          courseName: "Campus AB - FnE",
+        },
+        {
+          courseID: 15,
+          courseName: "Campus AB - Social Area",
+        },
+        {
+          courseID: 16,
+          courseName: "Campus AB - Technical Area",
+        },
+        {
+          courseID: 20,
+          courseName: "Campus KE - Main",
+        },
+        {
+          courseID: 21,
+          courseName: "Campus KE - Mensa",
+        },
+        {
+          courseID: 22,
+          courseName: "Campus KE - Library",
+        },
+        {
+          courseID: 23,
+          courseName: "Campus KE - Student Club",
+        },
+        {
+          courseID: 24,
+          courseName: "Campus KE - Server Room",
+        },
+        {
+          courseID: 25,
+          courseName: "Campus KE - Labor",
+        },
+        {
+          courseID: 26,
+          courseName: "Campus KE - Auditorium",
+        },
+        {
+          courseID: 30,
+          courseName: "Company - Main",
+        },
+        {
+          courseID: 31,
+          courseName: "Company - Learning Area",
+        },
+        {
+          courseID: 32,
+          courseName: "Company - Eating Area",
+        },
+        {
+          courseID: 33,
+          courseName: "Company - Presentation",
+        },
+        {
+          courseID: 34,
+          courseName: "Company - FnE",
+        },
+        {
+          courseID: 35,
+          courseName: "Company - Social Area",
+        },
+        {
+          courseID: 36,
+          courseName: "Company - Technical Area",
+        },
       ],
     });
   });
