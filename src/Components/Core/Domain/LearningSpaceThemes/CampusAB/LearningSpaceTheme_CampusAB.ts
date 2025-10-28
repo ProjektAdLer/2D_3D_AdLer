@@ -20,11 +20,11 @@ export const LearningSpaceTheme_CampusAB: ILearningSpaceTheme = {
   ambienceModel: require("../../../../../Assets/3dModels/CampusAB/Main/env-campus-ab.glb"),
   storyElementModel: SharedCampusStoryElement,
   insideDecorationModels: {
-    [LearningSpaceTemplateType.L]: require("../../../../../Assets/3dModels/CampusAB/Main/d-roomcomp-l-campus-in.glb"),
-    [LearningSpaceTemplateType.R6]: require("../../../../../Assets/3dModels/CampusAB/Main/d-roomcomp-r6-campus-in.glb"),
-    [LearningSpaceTemplateType.R8]: require("../../../../../Assets/3dModels/CampusAB/Main/d-roomcomp-r8-campus-in.glb"),
-    [LearningSpaceTemplateType.D]: require("../../../../../Assets/3dModels/CampusAB/Main/d-roomcomp-d-campus-in.glb"),
-    [LearningSpaceTemplateType.T]: require("../../../../../Assets/3dModels/CampusAB/Main/d-roomcomp-t-campus-in.glb"),
+    [LearningSpaceTemplateType.L]: require("../../../../../Assets/3dModels/sharedModels/campusTheme/d-roomcomp-l-campus-in.glb"),
+    [LearningSpaceTemplateType.R6]: require("../../../../../Assets/3dModels/sharedModels/campusTheme/d-roomcomp-r6-campus-in.glb"),
+    [LearningSpaceTemplateType.R8]: require("../../../../../Assets/3dModels/sharedModels/campusTheme/d-roomcomp-r8-campus-in.glb"),
+    [LearningSpaceTemplateType.D]: require("../../../../../Assets/3dModels/sharedModels/campusTheme/d-roomcomp-d-campus-in.glb"),
+    [LearningSpaceTemplateType.T]: require("../../../../../Assets/3dModels/sharedModels/campusTheme/d-roomcomp-t-campus-in.glb"),
     [LearningSpaceTemplateType.None]: "",
   },
   outsideDecorationModels: {
