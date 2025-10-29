@@ -123,7 +123,7 @@ export default function WelcomePage() {
         {translate("copyright")}
       </p>
 
-      <div className="absolute bottom-8 left-4 flex gap-2 mobile-landscape:bottom-2 mobile-landscape:left-2 mobile-portrait:bottom-2 mobile-portrait:left-2 mobile-portrait:flex-col">
+      <div className="absolute bottom-8 left-4 flex flex-col gap-2 mobile-landscape:bottom-2 mobile-landscape:left-2 mobile-portrait:bottom-2 mobile-portrait:left-2 mobile-portrait:flex-col">
         <StyledButton
           className="!px-2 !py-1 text-xs font-bold mobile-portrait:!pr-0"
           onClick={() => {
