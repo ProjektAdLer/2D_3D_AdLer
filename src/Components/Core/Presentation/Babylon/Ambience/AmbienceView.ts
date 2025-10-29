@@ -32,7 +32,11 @@ export default class AmbienceView {
         this.viewModel.theme === ThemeType.CampusKE ||
         this.viewModel.theme === ThemeType.Arcade ||
         this.viewModel.theme === ThemeType.Suburb ||
-        this.viewModel.theme === ThemeType.CampusStudentClub
+        this.viewModel.theme === ThemeType.CampusStudentClub ||
+        this.viewModel.theme === ThemeType.CampusAB_Presentation ||
+        this.viewModel.theme === ThemeType.CampusAB_SocialArea ||
+        this.viewModel.theme === ThemeType.CampusAB_FnE ||
+        this.viewModel.theme === ThemeType.CampusAB_TechnicalArea
       ) {
         mesh.translate(new Vector3(0, -0.05, 0), 1);
       }
