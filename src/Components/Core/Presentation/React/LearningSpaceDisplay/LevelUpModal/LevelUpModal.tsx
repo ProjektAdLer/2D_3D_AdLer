@@ -45,13 +45,13 @@ export default function LevelUpModal() {
     }
   }, [isOpen]);
 
-  useEffect(() => {
-    if (isOpen) {
-      setTimeout(() => {
-        controller?.close();
-      }, viewModel?.timeToClose);
-    }
-  }, [isOpen, controller, viewModel?.timeToClose]);
+  // useEffect(() => {
+  //   if (isOpen) {
+  //     setTimeout(() => {
+  //       controller?.close();
+  //     }, viewModel?.timeToClose);
+  //   }
+  // }, [isOpen, controller, viewModel?.timeToClose]);
 
   if (!viewModel || !controller || !isOpen) return null;
 

@@ -45,17 +45,17 @@ describe("LevelUpModal", () => {
     expect(comp.container).toBeEmptyDOMElement();
   });
 
-  test("closes window automatically after timer expires when model is set to isOpen", () => {
-    jest.useFakeTimers();
-    viewModelMock.isOpen.Value = true;
-    viewModelMock.level = 2;
-    useBuilderMock([viewModelMock, controllerMock]);
+  // test("closes window automatically after timer expires when model is set to isOpen", () => {
+  //   jest.useFakeTimers();
+  //   viewModelMock.isOpen.Value = true;
+  //   viewModelMock.level = 2;
+  //   useBuilderMock([viewModelMock, controllerMock]);
 
-    const comp = render(<LevelUpModal></LevelUpModal>);
+  //   const comp = render(<LevelUpModal></LevelUpModal>);
 
-    jest.advanceTimersByTime(viewModelMock.timeToClose + 1);
-    expect(controllerMock.close).toHaveBeenCalled();
-  });
+  //   jest.advanceTimersByTime(viewModelMock.timeToClose + 1);
+  //   expect(controllerMock.close).toHaveBeenCalled();
+  // });
 
   test("closes window if close button is clicked", () => {
     jest.useFakeTimers();
