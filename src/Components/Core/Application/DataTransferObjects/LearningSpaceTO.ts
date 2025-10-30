@@ -23,4 +23,5 @@ export default class LearningSpaceTO {
   storyElements: StoryElementTO[];
   gradingStyle: IElementCompletionDisplay;
   difficulty: number;
+  parentWorldID: ComponentID;
 }

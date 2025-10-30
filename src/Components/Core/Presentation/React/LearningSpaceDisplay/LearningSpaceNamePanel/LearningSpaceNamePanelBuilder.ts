@@ -9,6 +9,8 @@ import ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces
 import ILearningSpaceNamePanelController from "./ILearningSpaceNamePanelController";
 import ILearningSpaceNamePanelPresenter from "./ILearningSpaceNamePanelPresenter";
 import { HistoryWrapper } from "~ReactComponents/ReactRelated/ReactEntryPoint/HistoryWrapper";
+import IGetLearningWorldUseCase from "src/Components/Core/Application/UseCases/GetLearningWorld/IGetLearningWorldUseCase";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 
 @injectable()
 export default class LearningSpaceNamePanelBuilder extends PresentationBuilder<
@@ -22,14 +24,17 @@ export default class LearningSpaceNamePanelBuilder extends PresentationBuilder<
       LearningSpaceNamePanelViewModel,
       LearningSpaceNamePanelController,
       undefined,
-      LearningSpaceNamePanelPresenter
+      LearningSpaceNamePanelPresenter,
     );
   }
 
   override buildPresenter(): void {
     super.buildPresenter();
     CoreDIContainer.get<ILearningWorldPort>(
-      PORT_TYPES.ILearningWorldPort
+      PORT_TYPES.ILearningWorldPort,
     ).registerAdapter(this.presenter!, HistoryWrapper.currentLocationScope());
+    CoreDIContainer.get<IGetLearningWorldUseCase>(
+      USECASE_TYPES.IGetLearningWorldUseCase,
+    ).execute();
   }
 }
