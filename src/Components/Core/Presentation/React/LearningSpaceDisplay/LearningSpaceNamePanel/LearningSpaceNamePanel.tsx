@@ -24,7 +24,7 @@ export default function LearningSpaceNamePanel({
     <StyledContainer className={tailwindMerge(className)}>
       <div className="max-w-1/4 flex flex-col items-center justify-between rounded-full bg-white bg-opacity-45 p-1 px-6 xl:scale-75 onek:scale-100">
         <div className="mb-[-15px] mt-[-5px]">
-          <h2 className="text-md text-outline text-adlerdarkblue lg:text-lg lg:font-semibold">
+          <h2 className="text-outline mb-1.5 mt-1 text-xs text-adlerdarkblue lg:text-lg lg:font-semibold">
             {viewModel.parentWorldName}
           </h2>
         </div>
@@ -34,7 +34,7 @@ export default function LearningSpaceNamePanel({
             src={spaceIcon}
             alt="Learning-Space-Icon"
           ></img>
-          <h1 className="text-md text-outline truncate font-black text-adlerdarkblue lg:text-4xl">
+          <h1 className="text-outline truncate font-black text-adlerdarkblue lg:text-4xl">
             {name}
           </h1>
         </div>
