@@ -26,9 +26,11 @@ export default class AmbienceView {
 
     this.viewModel.meshes.Value = results as Mesh[];
     this.viewModel.meshes.Value.forEach((mesh) => {
-      if (
+      // Lower CampusAB main theme more to prevent Z-fighting with floor texture
+      if (this.viewModel.theme === ThemeType.CampusAB) {
+        mesh.translate(new Vector3(0, -0.1, 0), 1);
+      } else if (
         this.viewModel.theme === ThemeType.Campus ||
-        this.viewModel.theme === ThemeType.CampusAB ||
         this.viewModel.theme === ThemeType.CampusKE ||
         this.viewModel.theme === ThemeType.Arcade ||
         this.viewModel.theme === ThemeType.Suburb ||
