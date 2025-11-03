@@ -36,6 +36,9 @@ export default class LearningElementPresenter
   onLearningElementScored(hasScored: boolean, elementID: number): void {
     if (this.viewModel.id === elementID) {
       this.viewModel.hasScored.Value = hasScored;
+      setTimeout(() => {
+        this.viewModel.jumpAnimation.play();
+      }, 1000);
     }
   }
 

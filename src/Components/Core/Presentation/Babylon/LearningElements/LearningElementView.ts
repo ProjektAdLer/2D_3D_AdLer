@@ -5,6 +5,8 @@ import {
   Mesh,
   Tools,
   Vector3,
+  Animation,
+  AnimationGroup,
 } from "@babylonjs/core";
 import CoreDIContainer from "../../../DependencyInjection/CoreDIContainer";
 import type IScenePresenter from "../SceneManagement/IScenePresenter";
@@ -133,6 +135,126 @@ export default class LearningElementView {
       Vector3.Up(),
       Tools.ToRadians(this.viewModel.rotation),
     );
+
+    // jump animation
+    const modelPosition = this.viewModel.modelMeshes[0].position;
+    const modelScale = this.viewModel.modelMeshes[0].scaling;
+
+    const keysPosition = [
+      {
+        frame: 0,
+        value: new Vector3(modelPosition.x, modelPosition.y, modelPosition.z),
+      },
+      {
+        frame: 10,
+        value: new Vector3(modelPosition.x, modelPosition.y, modelPosition.z),
+      },
+      {
+        frame: 20,
+        value: new Vector3(
+          modelPosition.x,
+          modelPosition.y + 0.3,
+          modelPosition.z,
+        ),
+      },
+      {
+        frame: 30,
+        value: new Vector3(
+          modelPosition.x,
+          modelPosition.y + 0.4,
+          modelPosition.z,
+        ),
+      },
+      {
+        frame: 38,
+        value: new Vector3(
+          modelPosition.x,
+          modelPosition.y + 0.3,
+          modelPosition.z,
+        ),
+      },
+      {
+        frame: 42,
+        value: new Vector3(modelPosition.x, modelPosition.y, modelPosition.z),
+      },
+    ];
+
+    const keysScale = [
+      {
+        frame: 0,
+        value: new Vector3(modelScale.x, modelScale.y, modelScale.z),
+      },
+      {
+        // squash
+        frame: 10,
+        value: new Vector3(
+          modelScale.x * 1.1,
+          modelScale.y * 0.9,
+          modelScale.z * 1.1,
+        ),
+      },
+      {
+        // stretch
+        frame: 20,
+        value: new Vector3(
+          modelScale.x * 0.9,
+          modelScale.y * 1.1,
+          modelScale.z * 0.9,
+        ),
+      },
+      {
+        frame: 30,
+        value: new Vector3(modelScale.x, modelScale.y, modelScale.z),
+      },
+      {
+        // fade out
+        frame: 38,
+        value: new Vector3(
+          modelScale.x * 1.025,
+          modelScale.y * 0.975,
+          modelScale.z * 1.025,
+        ),
+      },
+      {
+        frame: 42,
+        value: new Vector3(modelScale.x, modelScale.y, modelScale.z),
+      },
+    ];
+
+    const animPosition = new Animation(
+      "animPos",
+      "position",
+      60,
+      Animation.ANIMATIONTYPE_VECTOR3,
+      Animation.ANIMATIONLOOPMODE_CONSTANT,
+    );
+    animPosition.setKeys(keysPosition);
+
+    const animScale = new Animation(
+      "animScale",
+      "scaling",
+      60,
+      Animation.ANIMATIONTYPE_VECTOR3,
+      Animation.ANIMATIONLOOPMODE_CONSTANT,
+    );
+    animScale.setKeys(keysScale);
+
+    this.viewModel.jumpAnimation = new AnimationGroup(
+      "jumpingAnimation",
+      this.scenePresenter.Scene,
+    );
+    this.viewModel.jumpAnimation.addTargetedAnimation(
+      animPosition,
+      this.viewModel.modelMeshes[0],
+    );
+    this.viewModel.jumpAnimation.addTargetedAnimation(
+      animScale,
+      this.viewModel.modelMeshes[0],
+    );
+
+    this.viewModel.jumpAnimation.onAnimationEndObservable.add(() => {
+      this.viewModel.jumpAnimation.reset();
+    });
   }
 
   @bind private async loadIconModel(): Promise<void> {

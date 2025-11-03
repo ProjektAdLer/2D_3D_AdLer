@@ -12,6 +12,8 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+- added animation for learning elements for successfully completing them
+
 ### Changed
 
 ### Removed
@@ -46,6 +48,8 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 - added showcase mode with auto-login for public demos
 - added tooltips for react flow graph in space menu
 - added world theme selection display in level-up modal
+- added test IDs for UI elements to improve automated testing capabilities
+- added graphics setting for resolution
 
 ### Changed
 
@@ -386,6 +390,7 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 ### Added
 
 - Adaptivity Element:
+
   - specific icon for adaptivity element.
   - 3D representation of NPC.
   - 2D representation of NPC.

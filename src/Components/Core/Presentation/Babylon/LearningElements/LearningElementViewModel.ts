@@ -18,6 +18,7 @@ export default class LearningElementViewModel {
 
   // animations
   public iconFloatingAnimation: AnimationGroup;
+  public jumpAnimation: AnimationGroup;
 
   // element properties
   public id: ComponentID;
