@@ -59,5 +59,14 @@
   "legendReset": "Fragen werden kurzfristig zurückgesetzt zum erneut beantworten",
 
   "learningElementSubmitToolTip": "Schließt das Element ab. So wird es den abgeschlossenen Lernelementen gutgeschrieben",
-  "closeLearningElementToolTip": "Schließt dieses Fenster. Das Lernelement wird nicht abgeschlossen. Das Lernelement wird nicht zu den abgeschlossenen gutgeschrieben."
+  "closeLearningElementToolTip": "Schließt dieses Fenster. Das Lernelement wird nicht abgeschlossen. Das Lernelement wird nicht zu den abgeschlossenen gutgeschrieben.",
+
+  "externalContentConsentRequired": "Cookie-Einwilligung erforderlich",
+  "externalContentConsentDescription": "Um diesen Inhalt anzuzeigen, benötigen wir Ihre Einwilligung für Cookies und externe Inhalte.",
+  "externalContentConsentDetailsTitle": "Warum ist das erforderlich?",
+  "externalContentConsentDetail1": "Externe Inhalte können Ihren Lernfortschritt im Local Storage speichern",
+  "externalContentConsentDetail2": "Eingebettete Videos (z.B. YouTube) können Cookies von Drittanbietern setzen",
+  "externalContentConsentAccept": "Cookies akzeptieren und Inhalt laden",
+  "externalContentConsentShowDetails": "Mehr Informationen anzeigen",
+  "externalContentConsentHideDetails": "Details ausblenden"
 }

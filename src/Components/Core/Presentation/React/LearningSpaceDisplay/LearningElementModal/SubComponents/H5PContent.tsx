@@ -9,6 +9,8 @@ import {
   shrinkH5PElement,
 } from "./H5pUtils";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
+import CookieModalController from "../../../WelcomePage/CookieModal/CookieModalController";
+import ExternalContentConsentBlocker from "./ExternalContentConsentBlocker";
 
 // variable cannot be react state because state update is asynchronious and wont trigger with resizeObserver ~ sb
 let lastRenderedWidth: number = 0;
@@ -22,6 +24,9 @@ export default function H5PContent({
 }) {
   const h5pContainerRef = useRef<HTMLDivElement>(null);
   const [isVisible] = useObservable<boolean>(viewModel.isVisible);
+  const [hasConsent, setHasConsent] = useState(
+    CookieModalController.hasConsent(),
+  );
   const [dimensions, setDimensions] = useState({
     contentWidth: 0,
     contentHeight: 0,
@@ -29,16 +34,25 @@ export default function H5PContent({
     refHeight: 0,
   });
 
+  const handleConsent = () => {
+    setHasConsent(true);
+  };
+
   // sets modal visible after timeout
   useEffect(() => {
-    if (isVisible && h5pContainerRef.current) {
+    if (isVisible && h5pContainerRef.current && hasConsent) {
       h5pContainerRef.current.style.visibility = "visible";
     }
-  }, [isVisible]);
+  }, [isVisible, hasConsent]);
 
   useEffect(() => {
+    if (!hasConsent) return;
+
     const debug = async () => {
       if (h5pContainerRef.current) {
+        // Clear any existing H5P content first
+        h5pContainerRef.current.innerHTML = "";
+
         const el = h5pContainerRef.current;
         await new H5PPlayer(el, createH5POptions(viewModel));
         //@ts-ignore
@@ -56,7 +70,7 @@ export default function H5PContent({
       //@ts-ignore
       H5PIntegration.contents = {};
     };
-  }, [controller, viewModel]);
+  }, [controller, viewModel, hasConsent]);
 
   useEffect(() => {
     const observer = new ResizeObserver((entries) => {
@@ -103,6 +117,10 @@ export default function H5PContent({
   useEffect(() => {
     shrinkH5PElement(h5pContainerRef, dimensions);
   }, [dimensions]);
+
+  if (!hasConsent) {
+    return <ExternalContentConsentBlocker onConsent={handleConsent} />;
+  }
 
   return (
     <div

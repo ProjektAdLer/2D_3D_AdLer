@@ -59,5 +59,14 @@
   "legendReset": "Questions will be reset temporarily to allow re-answering",
 
   "learningElementSubmitToolTip": "Submits the results.",
-  "closeLearningElementToolTip": "Closes the window. The results will not be submitted."
+  "closeLearningElementToolTip": "Closes the window. The results will not be submitted.",
+
+  "externalContentConsentRequired": "Cookie Consent Required",
+  "externalContentConsentDescription": "To display this content, we need your consent for cookies and external content.",
+  "externalContentConsentDetailsTitle": "Why is this required?",
+  "externalContentConsentDetail1": "External content may store your learning progress in Local Storage",
+  "externalContentConsentDetail2": "Embedded videos (e.g. YouTube) may set third-party cookies",
+  "externalContentConsentAccept": "Accept cookies and load content",
+  "externalContentConsentShowDetails": "Show more information",
+  "externalContentConsentHideDetails": "Hide details"
 }
