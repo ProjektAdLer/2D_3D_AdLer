@@ -13,6 +13,30 @@ viewModel.parentWorldID.Value = 1;
 
 jest.mock("h5p-standalone");
 
+// Mock localStorage before anything else
+const localStorageMock = (() => {
+  let store: Record<string, string> = {
+    adler_cookie_consent: "accepted",
+  };
+
+  return {
+    getItem: (key: string) => store[key] || null,
+    setItem: (key: string, value: string) => {
+      store[key] = value.toString();
+    },
+    removeItem: (key: string) => {
+      delete store[key];
+    },
+    clear: () => {
+      store = { adler_cookie_consent: "accepted" };
+    },
+  };
+})();
+
+Object.defineProperty(window, "localStorage", {
+  value: localStorageMock,
+});
+
 describe("PrimitiveH5PContent", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();

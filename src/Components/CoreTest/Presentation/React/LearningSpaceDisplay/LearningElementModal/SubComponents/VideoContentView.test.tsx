@@ -6,23 +6,51 @@ import { act } from "@testing-library/react";
 import CoreDIContainer from "../../../../../../Core/DependencyInjection/CoreDIContainer";
 import VideoComponent from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/VideoComponent";
 import LearningElementModalViewModel from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/LearningElementModalViewModel";
+import CookieModalController from "../../../../../../Core/Presentation/React/WelcomePage/CookieModal/CookieModalController";
 
 jest.mock(
   "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/VideoHosters/YoutubeVideoHost.tsx",
-  () => "mocked"
+  () => "mocked",
 );
 jest.mock(
   "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/VideoHosters/VimeoVideoHost.tsx",
-  () => "mocked"
+  () => "mocked",
 );
 jest.mock(
   "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/VideoHosters/OpencastVideoHost.tsx",
-  () => "mocked"
+  () => "mocked",
 );
 
 jest.mock("axios");
 
+// Mock localStorage before anything else
+const localStorageMock = (() => {
+  let store: Record<string, string> = {
+    adler_cookie_consent: "accepted",
+  };
+
+  return {
+    getItem: (key: string) => store[key] || null,
+    setItem: (key: string, value: string) => {
+      store[key] = value.toString();
+    },
+    removeItem: (key: string) => {
+      delete store[key];
+    },
+    clear: () => {
+      store = { adler_cookie_consent: "accepted" };
+    },
+  };
+})();
+
+Object.defineProperty(window, "localStorage", {
+  value: localStorageMock,
+});
+
 describe("VideoComponent", () => {
+  afterAll(() => {
+    jest.restoreAllMocks();
+  });
   test("should render when a valid Link Youtube is Provided", async () => {
     let component: RenderResult;
     const vm = new LearningElementModalViewModel();
@@ -34,7 +62,7 @@ describe("VideoComponent", () => {
       component = render(
         <Provider container={CoreDIContainer}>
           <VideoComponent viewModel={vm} />
-        </Provider>
+        </Provider>,
       );
     });
 
@@ -52,7 +80,7 @@ describe("VideoComponent", () => {
       component = render(
         <Provider container={CoreDIContainer}>
           <VideoComponent viewModel={vm} />
-        </Provider>
+        </Provider>,
       );
     });
 
@@ -70,7 +98,7 @@ describe("VideoComponent", () => {
       component = render(
         <Provider container={CoreDIContainer}>
           <VideoComponent viewModel={vm} />
-        </Provider>
+        </Provider>,
       );
     });
 
@@ -89,13 +117,13 @@ describe("VideoComponent", () => {
       component = render(
         <Provider container={CoreDIContainer}>
           <VideoComponent viewModel={vm} />
-        </Provider>
+        </Provider>,
       );
     });
 
     expect(component!).toBeDefined();
     expect(
-      component!.getByText("No Video Component found for given URLXXXX")
+      component!.getByText("No Video Component found for given URLXXXX"),
     ).toBeDefined();
   });
 
@@ -111,7 +139,7 @@ describe("VideoComponent", () => {
       component = render(
         <Provider container={CoreDIContainer}>
           <VideoComponent viewModel={vm} />
-        </Provider>
+        </Provider>,
       );
     });
 

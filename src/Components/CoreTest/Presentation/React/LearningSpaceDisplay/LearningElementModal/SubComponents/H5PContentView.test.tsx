@@ -8,8 +8,33 @@ import mock from "jest-mock-extended/lib/Mock";
 import { Provider } from "inversify-react";
 import ILearningElementModalController from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/ILearningElementModalController";
 import * as H5PUtils from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/H5pUtils";
+import CookieModalController from "../../../../../../Core/Presentation/React/WelcomePage/CookieModal/CookieModalController";
 
 jest.mock("h5p-standalone");
+
+// Mock localStorage before anything else
+const localStorageMock = (() => {
+  let store: Record<string, string> = {
+    adler_cookie_consent: "accepted",
+  };
+
+  return {
+    getItem: (key: string) => store[key] || null,
+    setItem: (key: string, value: string) => {
+      store[key] = value.toString();
+    },
+    removeItem: (key: string) => {
+      delete store[key];
+    },
+    clear: () => {
+      store = { adler_cookie_consent: "accepted" };
+    },
+  };
+})();
+
+Object.defineProperty(window, "localStorage", {
+  value: localStorageMock,
+});
 
 const ResizeObserverMock = mock<ResizeObserver>();
 const elementModalControllerMock = mock<ILearningElementModalController>();
