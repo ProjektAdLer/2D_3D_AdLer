@@ -1,5 +1,7 @@
 {
   "pageTitle": "Privacy Policy",
+  "cookieSettings": "Cookie Settings",
+  "cookieSettingsButton": "I accept cookies and external content (H5P with YouTube).",
   "sections": [
     {
       "title": "1. Privacy at a Glance",

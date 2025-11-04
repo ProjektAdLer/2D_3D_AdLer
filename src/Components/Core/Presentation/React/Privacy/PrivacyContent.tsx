@@ -1,5 +1,9 @@
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import { useTranslation } from "react-i18next";
+import { useState, useEffect } from "react";
+import CookieModalController from "../WelcomePage/CookieModal/CookieModalController";
+import emptyCheckBox from "../../../../../Assets/icons/empty-box.svg";
+import greenSwosh from "../../../../../Assets/icons/check-solution.svg";
 
 interface Subsection {
   title: string;
@@ -14,11 +18,57 @@ interface Section {
 export default function PrivacyContent({ className }: AdLerUIComponent) {
   const { t: translate } = useTranslation("privacy");
   const sections: Section[] = translate("sections", { returnObjects: true });
+  const [cookiesAccepted, setCookiesAccepted] = useState(false);
+
+  // Load cookie consent status on mount
+  useEffect(() => {
+    setCookiesAccepted(CookieModalController.hasConsent());
+  }, []);
+
+  const handleCookieToggle = () => {
+    const newValue = !cookiesAccepted;
+    setCookiesAccepted(newValue);
+
+    const controller = new CookieModalController();
+    if (newValue) {
+      controller.accept();
+    } else {
+      controller.decline();
+    }
+  };
 
   return (
     <div
       className={`flex h-full w-full max-w-4xl flex-col items-start px-8 pt-4 text-adlerdarkblue ${className}`}
     >
+      {/* Cookie Settings at the top */}
+      <div className="bg-adlerblue-100 mb-6 w-full rounded-lg border-2 border-adlerdarkblue p-4">
+        <h2 className="mb-3 text-xl font-bold">
+          {translate("cookieSettings")}
+        </h2>
+        <div className="relative flex flex-row items-center py-2">
+          <img
+            className="w-6 cursor-pointer bg-adleryellow lg:w-8"
+            alt="Empty Cookies Checkbox"
+            data-testid="emptyBoxCookies"
+            src={emptyCheckBox}
+            onClick={handleCookieToggle}
+          />
+          {cookiesAccepted && (
+            <img
+              src={greenSwosh}
+              alt="Cookies Accepted"
+              data-testid="checkMarkCookies"
+              className="absolute w-6 cursor-pointer lg:w-8"
+              onClick={handleCookieToggle}
+            />
+          )}
+          <div className="ml-10 cursor-pointer" onClick={handleCookieToggle}>
+            {translate("cookieSettingsButton")}
+          </div>
+        </div>
+      </div>
+
       <div className="w-full space-y-6 pb-8">
         {sections &&
           Array.isArray(sections) &&
