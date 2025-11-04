@@ -23,6 +23,7 @@ import ILoadAvatarConfigUseCase from "src/Components/Core/Application/UseCases/L
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import StyledButton from "../ReactBaseComponents/StyledButton";
 import history from "history/browser";
+import CookieModal from "~ReactComponents/WelcomePage/CookieModal/CookieModal";
 
 export default function WelcomePage() {
   const { t: translate } = useTranslation("start");
@@ -65,6 +66,7 @@ export default function WelcomePage() {
 
       <HelpDeskButton className="col-start-8 row-start-1 justify-self-end" />
       <HelpDeskModal />
+      <CookieModal />
 
       <section className="flex flex-col items-center text-adlerdarkblue tablet-portrait:col-span-8 tablet-portrait:col-start-1 portrait:col-span-6 portrait:col-start-2 portrait:row-span-2 portrait:row-start-1 portrait:mt-32 portrait:self-center landscape:col-span-6 landscape:col-start-2 landscape:row-start-1 lg:landscape:col-span-6 lg:landscape:col-start-2 lg:landscape:row-start-1 xl:landscape:col-span-6 xl:landscape:col-start-2">
         <video

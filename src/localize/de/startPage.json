@@ -24,7 +24,7 @@
   "logout": "Ausloggen",
 
   "cookieTitle": "Einwilligung zu Cookies & Daten",
-  "cookieText": "Dies ist ein geklauter Standardtext! Wir verwenden Cookies und ähnliche Technologien auf unserer Website und verarbeiten personenbezogene Daten von dir (z.B. IP-Adresse), um z.B. Inhalte und Anzeigen zu personalisieren, Medien von Drittanbietern einzubinden oder Zugriffe auf unsere Website zu analysieren. Die Datenverarbeitung kann auch erst in Folge gesetzter Cookies stattfinden. Wir teilen diese Daten mit Dritten, die wir in den Privatsphäre-Einstellungen benennen. Die Datenverarbeitung kann mit deiner Einwilligung oder auf Basis eines berechtigten Interesses erfolgen, dem du in den Privatsphäre-Einstellungen widersprechen kannst. Du hast das Recht, nicht einzuwilligen und deine Einwilligung zu einem späteren Zeitpunkt zu ändern oder zu widerrufen. Weitere Informationen zur Verwendung deiner Daten findest du in unserer Datenschutzerklärung.",
+  "cookieText": "Diese Lernumgebung nutzt H5P-Inhalte, die YouTube-Videos über iFrames einbetten können. Dabei können Cookies von Drittanbietern (insbesondere YouTube/Google) gesetzt werden, auch wenn wir grundsätzlich den datenschutzfreundlichen Modus verwenden. Da die in H5P eingebetteten Inhalte von externen Quellen stammen, können wir nicht vollständig ausschließen, dass personenbezogene Daten (z.B. IP-Adresse) an Drittanbieter übermittelt werden. Mit Ihrer Einwilligung erlauben Sie die Nutzung dieser externen Inhalte und die damit verbundene Datenverarbeitung. Sie können Ihre Einwilligung jederzeit widerrufen. Weitere Informationen finden Sie in unserer Datenschutzerklärung.",
   "cookieAcceptAll": "Alle akzeptieren",
   "cookieDecline": "Ablehnen",
 

@@ -23,8 +23,8 @@
   "loginName": "Logged in as {{userName}}",
   "logout": "Log out",
 
-  "cookieTitle": "Compliance to Cookies & Data",
-  "cookieText": "This is a stolen standard text (which has then been manually translated)! We use cookies and similar technologies. We also process personalized data (such as your IP-Adress) to personalize content, show media from third party sites, or analyze our website traffic. The processing of data only works if cookies are allowed. We share the collected data with third parties, which we list in the privacy settings. The processing of data is allowed due to your compliance, or due to a justified interest. You can object to this in the privacy settings. You are allowed to object to any of this at any time. You'll find more info in our privacy policy.",
+  "cookieTitle": "Consent for Cookies & Data",
+  "cookieText": "This learning environment uses H5P content that may embed YouTube videos via iFrames. Third-party cookies (especially from YouTube/Google) may be set, even though we generally use privacy-enhanced mode. Since the content embedded in H5P comes from external sources, we cannot completely rule out that personal data (e.g., IP address) may be transmitted to third-party providers. By giving your consent, you allow the use of this external content and the associated data processing. You can withdraw your consent at any time. For more information, please see our privacy policy.",
   "cookieAcceptAll": "Accept all",
   "cookieDecline": "Decline",
 

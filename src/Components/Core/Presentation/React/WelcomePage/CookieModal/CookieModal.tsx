@@ -25,7 +25,7 @@ export default function CookieModal() {
       title={translate("cookieTitle").toString()}
       data-testid="cookieModal"
     >
-      <div>
+      <div className="max-w-6xl">
         <p>{<Trans i18nKey="cookieText" ns="start" />}</p>
 
         <div className="flex justify-end gap-2">
