@@ -89,4 +89,10 @@ export const LearningSpaceTemplate_R8: ILearningSpaceTemplate = {
     position: { x: 0.8, y: 6 },
     orientation: { rotation: 180 },
   },
+  lights: [
+    {
+      position: { x: 0, y: 0 },
+      intensity: 10.1,
+    },
+  ],
 };

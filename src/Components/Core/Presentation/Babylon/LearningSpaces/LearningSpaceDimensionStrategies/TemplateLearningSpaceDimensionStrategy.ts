@@ -44,7 +44,7 @@ export default class TemplateLearningSpaceDimensionStrategy extends AbstractLear
       new Vector3(
         template.entryDoor.position.x,
         this.baseHeight,
-        template.entryDoor.position.y
+        template.entryDoor.position.y,
       ),
       template.entryDoor.orientation.rotation,
     ];
@@ -58,7 +58,7 @@ export default class TemplateLearningSpaceDimensionStrategy extends AbstractLear
       new Vector3(
         template.exitDoor.position.x,
         this.baseHeight,
-        template.exitDoor.position.y
+        template.exitDoor.position.y,
       ),
       template.exitDoor.orientation.rotation,
     ];
@@ -77,8 +77,20 @@ export default class TemplateLearningSpaceDimensionStrategy extends AbstractLear
     return positions as [Vector3, number][];
   }
 
+  getLightPositions(spaceTO: LearningSpaceTO): [Vector3, number][] {
+    const template = this.getTemplateByType(spaceTO.template);
+
+    const positions = template.lights.map((light) => {
+      return [
+        new Vector3(light.position.x, this.baseHeight + 3, light.position.y),
+        light.intensity,
+      ];
+    });
+    return positions as [Vector3, number][];
+  }
+
   private getTemplateByType(
-    type: LearningSpaceTemplateType
+    type: LearningSpaceTemplateType,
   ): ILearningSpaceTemplate {
     return LearningSpaceTemplateLookup.getLearningSpaceTemplate(type);
   }

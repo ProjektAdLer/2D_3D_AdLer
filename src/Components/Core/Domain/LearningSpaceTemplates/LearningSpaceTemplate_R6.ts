@@ -79,4 +79,10 @@ export const LearningSpaceTemplate_R6: ILearningSpaceTemplate = {
     position: { x: 1.4, y: 3.4 },
     orientation: { rotation: 180 },
   },
+  lights: [
+    {
+      position: { x: 0, y: 0 },
+      intensity: 10.1,
+    },
+  ],
 };

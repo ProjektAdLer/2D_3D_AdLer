@@ -6,6 +6,7 @@ import {
   HighlightLayer,
   TransformNode,
   Color3,
+  DirectionalLight,
 } from "@babylonjs/core";
 import "@babylonjs/inspector";
 import { inject, injectable } from "inversify";
@@ -72,8 +73,15 @@ export default class LearningSpaceSceneDefinition
       new Vector3(0, 1, 0),
       this.scene,
     );
-    light.intensity = 1;
+    light.intensity = 0.2;
     light.diffuse = new Color3(1, 1, 1);
+
+    const fillLight = new DirectionalLight(
+      "fillLight",
+      new Vector3(-1, -1, -1),
+      this.scene,
+    );
+    fillLight.intensity = 0.6;
 
     // setup highlight layer
     this.highlightLayer = new HighlightLayer("highlightLayer", this.scene);

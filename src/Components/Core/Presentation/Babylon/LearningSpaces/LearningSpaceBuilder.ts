@@ -68,6 +68,9 @@ export default class LearningSpaceBuilder extends AsyncPresentationBuilder<
     this.viewModel!.windowPositions = this.dimensionStrategy.getWindowPositions(
       this.spaceData,
     );
+    this.viewModel!.lightPositions = this.dimensionStrategy.getLightPositions(
+      this.spaceData,
+    );
     this.viewModel!.wallSegments = this.dimensionStrategy.getWallSegmentIndices(
       this.spaceData,
     );
