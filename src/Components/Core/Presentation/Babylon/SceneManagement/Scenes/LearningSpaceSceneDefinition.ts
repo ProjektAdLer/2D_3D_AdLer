@@ -73,7 +73,7 @@ export default class LearningSpaceSceneDefinition
       new Vector3(0, 1, 0),
       this.scene,
     );
-    light.intensity = 0.2;
+    light.intensity = 0.3;
     light.diffuse = new Color3(1, 1, 1);
 
     const fillLight = new DirectionalLight(
@@ -81,7 +81,9 @@ export default class LearningSpaceSceneDefinition
       new Vector3(-1, -1, -1),
       this.scene,
     );
-    fillLight.intensity = 0.6;
+    fillLight.intensity = 3;
+    fillLight.specular = new Color3(0.66, 0.83, 0.98);
+    fillLight.diffuse = new Color3(0.66, 0.83, 0.98);
 
     // setup highlight layer
     this.highlightLayer = new HighlightLayer("highlightLayer", this.scene);
