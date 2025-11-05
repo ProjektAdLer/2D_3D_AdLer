@@ -127,4 +127,10 @@ export const LearningSpaceTemplate_D: ILearningSpaceTemplate = {
     position: { x: 2.4, y: 1.6 },
     orientation: { rotation: -135 },
   },
+  lights: [
+    {
+      position: { x: 0, y: 0 },
+      intensity: 10.1,
+    },
+  ],
 };

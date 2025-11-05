@@ -47,6 +47,7 @@ export default class LearningSpaceViewModel {
   public exitDoorPosition: [Vector3, number];
   public entryDoorPosition: [Vector3, number];
   public windowPositions: [Vector3, number][] = [];
+  public lightPositions: [Vector3, number][] = [];
   public wallSegmentLocations: LearningSpaceWallSegmentLocationData[] = [];
   public cornerPoleLocations: LearningSpaceCornerPoleLocationData[] = [];
 }
