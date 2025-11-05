@@ -13,6 +13,8 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 ### Added
 
 - added animation for learning elements for successfully completing them
+- added cookie banner
+- added content blocking for h5ps and videos based on users cookie decision
 
 ### Changed
 
@@ -25,6 +27,20 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 ### Security
 
 </details>
+
+## Version 2.11.0 - 05.11.2025
+
+### Added
+
+- added new ambiance 3d models for subthemes
+
+### Fixed
+
+- z-conflict in CampusAB Subtheme with floor mesh
+
+### Changed
+
+- changed showcase deployment script to javascript
 
 ## Version 2.10.0 - 23.10.2025
 
