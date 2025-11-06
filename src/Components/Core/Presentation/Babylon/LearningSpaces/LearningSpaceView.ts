@@ -355,29 +355,29 @@ export default class LearningSpaceView implements ILearningSpaceView {
   private async createLights(): Promise<void> {
     this.viewModel.lightPositions.forEach((lightPosition) => {
       console.log("Creating light at position: ", lightPosition[0]);
-      let light = new PointLight(
-        "pointLight",
-        lightPosition[0],
-        this.scenePresenter.Scene,
-      );
-      light.diffuse = new Color3(1, 1, 1);
-      light.intensity = 100;
+      // let light = new PointLight(
+      //   "pointLight",
+      //   lightPosition[0],
+      //   this.scenePresenter.Scene,
+      // );
+      // light.diffuse = new Color3(1, 1, 1);
+      // light.intensity = 100;
 
-      let light2 = new PointLight(
-        "pointLight",
-        new Vector3(-4, 3, -4),
-        this.scenePresenter.Scene,
-      );
-      light2.diffuse = new Color3(1, 1, 1);
-      light2.intensity = 100;
+      // let light2 = new PointLight(
+      //   "pointLight",
+      //   new Vector3(-4, 3, -4),
+      //   this.scenePresenter.Scene,
+      // );
+      // light2.diffuse = new Color3(1, 1, 1);
+      // light2.intensity = 100;
 
-      let light3 = new PointLight(
-        "pointLight",
-        new Vector3(-4, 3, 4),
-        this.scenePresenter.Scene,
-      );
-      light3.diffuse = new Color3(1, 1, 1);
-      light3.intensity = 100;
+      // let light3 = new PointLight(
+      //   "pointLight",
+      //   new Vector3(-4, 3, 4),
+      //   this.scenePresenter.Scene,
+      // );
+      // light3.diffuse = new Color3(1, 1, 1);
+      // light3.intensity = 100;
 
       // let light2 = new PointLight("pointLight", lightPosition[0], this.scenePresenter.Scene);
       // light.specular = new Color3(1, 0, 0);

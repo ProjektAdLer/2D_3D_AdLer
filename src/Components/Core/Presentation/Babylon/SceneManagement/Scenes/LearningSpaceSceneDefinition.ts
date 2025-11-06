@@ -7,6 +7,7 @@ import {
   TransformNode,
   Color3,
   DirectionalLight,
+  ShadowGenerator,
 } from "@babylonjs/core";
 import "@babylonjs/inspector";
 import { inject, injectable } from "inversify";
@@ -68,22 +69,33 @@ export default class LearningSpaceSceneDefinition
 
   protected override async initializeScene(): Promise<void> {
     this.scene.clearColor = new Color4(0.66, 0.83, 0.98, 1);
+
+    // setup lights
     const light = new HemisphericLight(
       "light",
       new Vector3(0, 1, 0),
       this.scene,
     );
-    light.intensity = 0.3;
+    light.intensity = 0.1;
     light.diffuse = new Color3(1, 1, 1);
 
     const fillLight = new DirectionalLight(
       "fillLight",
-      new Vector3(-1, -1, -1),
+      new Vector3(1, -1, 1),
       this.scene,
     );
     fillLight.intensity = 3;
     fillLight.specular = new Color3(0.66, 0.83, 0.98);
     fillLight.diffuse = new Color3(0.66, 0.83, 0.98);
+
+    const contraLight = new DirectionalLight(
+      "fillLight",
+      new Vector3(-1, -0.5, -1),
+      this.scene,
+    );
+    contraLight.intensity = 0.5;
+    contraLight.specular = new Color3(0.66, 0.83, 0.98);
+    contraLight.diffuse = new Color3(0.66, 0.83, 0.98);
 
     // setup highlight layer
     this.highlightLayer = new HighlightLayer("highlightLayer", this.scene);
@@ -123,6 +135,14 @@ export default class LearningSpaceSceneDefinition
     this.avatarBuilder.learningSpacePresenter =
       this.spaceBuilder.getPresenter();
     await this.director.buildAsync(this.avatarBuilder);
+
+    // create shadows
+
+    const shadow = new ShadowGenerator(8192, fillLight);
+    this.scene.meshes.forEach((mesh) => {
+      mesh.receiveShadows = true;
+      shadow.addShadowCaster(mesh);
+    });
   }
 
   override disposeScene(): void {
