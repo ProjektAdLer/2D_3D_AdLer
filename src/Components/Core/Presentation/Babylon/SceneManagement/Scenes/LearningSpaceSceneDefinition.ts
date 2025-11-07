@@ -89,7 +89,7 @@ export default class LearningSpaceSceneDefinition
     fillLight.diffuse = new Color3(0.66, 0.83, 0.98);
 
     const contraLight = new DirectionalLight(
-      "fillLight",
+      "contraLight",
       new Vector3(-1, -0.5, -1),
       this.scene,
     );
@@ -138,12 +138,21 @@ export default class LearningSpaceSceneDefinition
 
     // create shadows
 
+    // const shadow = new ShadowGenerator(8192, fillLight);
+    // this.scene.meshes.forEach((mesh) => {
+    //   mesh.receiveShadows = true;
+    //   shadow.addShadowCaster(mesh);
+    // });
+    // shadow.usePoissonSampling = true;
+
     const shadow = new ShadowGenerator(8192, fillLight);
+    fillLight.shadowMinZ = 0;
+    fillLight.shadowMaxZ = 10;
     this.scene.meshes.forEach((mesh) => {
+      shadow.getShadowMap()?.renderList?.push(mesh);
+      shadow.useCloseExponentialShadowMap = true;
       mesh.receiveShadows = true;
-      shadow.addShadowCaster(mesh);
     });
-    shadow.usePoissonSampling = true;
 
     // this.scene.meshes.forEach((mesh) => {
     //   let shadow = new ShadowGenerator(8192, fillLight);
