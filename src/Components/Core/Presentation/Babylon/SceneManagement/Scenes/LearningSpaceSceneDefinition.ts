@@ -143,6 +143,13 @@ export default class LearningSpaceSceneDefinition
       mesh.receiveShadows = true;
       shadow.addShadowCaster(mesh);
     });
+    shadow.usePoissonSampling = true;
+
+    // this.scene.meshes.forEach((mesh) => {
+    //   let shadow = new ShadowGenerator(8192, fillLight);
+    //   mesh.receiveShadows = true;
+    //   shadow.addShadowCaster(mesh);
+    // });
   }
 
   override disposeScene(): void {
