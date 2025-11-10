@@ -56,4 +56,72 @@ describe("SetSettingsConfigUseCase", () => {
     expect(settingsEntity.highGraphicsQualityEnabled).toBe(true);
     expect(settingsEntity.breakTimeNotificationsEnabled).toBe(true);
   });
+
+  test("cookieConsent is set correctly in entity", () => {
+    const settingsEntity = {
+      volume: 0.5,
+      language: "de",
+      highGraphicsQualityEnabled: true,
+      breakTimeNotificationsEnabled: true,
+      cookieConsent: undefined as undefined | "accepted" | "declined",
+    };
+    entityContainerMock.getEntitiesOfType.mockReturnValue([settingsEntity]);
+    systemUnderTest.execute({
+      cookieConsent: "accepted",
+    });
+    expect(settingsEntity.cookieConsent).toBe("accepted");
+  });
+
+  test("cookieConsent is saved to localStorage when set to accepted", () => {
+    localStorage.clear();
+    const settingsEntity = {
+      volume: 0.5,
+      language: "de",
+      highGraphicsQualityEnabled: true,
+      breakTimeNotificationsEnabled: true,
+      cookieConsent: undefined as undefined | "accepted" | "declined",
+    };
+    entityContainerMock.getEntitiesOfType.mockReturnValue([settingsEntity]);
+    systemUnderTest.execute({
+      cookieConsent: "accepted",
+    });
+    expect(localStorage.getItem("adler_cookie_consent")).toBe("accepted");
+    expect(localStorage.getItem("adler_cookie_consent_timestamp")).toBeTruthy();
+  });
+
+  test("cookieConsent is saved to localStorage when set to declined", () => {
+    localStorage.clear();
+    const settingsEntity = {
+      volume: 0.5,
+      language: "de",
+      highGraphicsQualityEnabled: true,
+      breakTimeNotificationsEnabled: true,
+      cookieConsent: undefined as undefined | "accepted" | "declined",
+    };
+    entityContainerMock.getEntitiesOfType.mockReturnValue([settingsEntity]);
+    systemUnderTest.execute({
+      cookieConsent: "declined",
+    });
+    expect(localStorage.getItem("adler_cookie_consent")).toBe("declined");
+    expect(localStorage.getItem("adler_cookie_consent_timestamp")).toBeTruthy();
+  });
+
+  test("partial settings update preserves existing values", () => {
+    const settingsEntity = {
+      volume: 0.42,
+      language: "en",
+      highGraphicsQualityEnabled: false,
+      breakTimeNotificationsEnabled: false,
+      cookieConsent: "accepted" as const,
+    };
+    entityContainerMock.getEntitiesOfType.mockReturnValue([settingsEntity]);
+    systemUnderTest.execute({
+      volume: 0.84,
+    });
+    expect(settingsEntity.volume).toBe(0.84);
+    expect(settingsEntity.language).toBe("en");
+    expect(settingsEntity.highGraphicsQualityEnabled).toBe(false);
+    expect(settingsEntity.breakTimeNotificationsEnabled).toBe(false);
+    expect(settingsEntity.cookieConsent).toBe("accepted");
+  });
 });

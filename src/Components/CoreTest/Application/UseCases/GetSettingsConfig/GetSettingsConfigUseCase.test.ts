@@ -47,7 +47,7 @@ describe("GetSettingsConfigUseCase", () => {
     expect(loggerMock.log).toHaveBeenCalledTimes(1);
     expect(loggerMock.log).toHaveBeenCalledWith(
       "TRACE",
-      "GetSettingsConfigUseCase: User got settings: Volume:0.5, Language: de, HighGraphicsQualityEnabled: true, BreakTimeNotificationsEnabled: true.",
+      "GetSettingsConfigUseCase: User got settings: Volume:0.5, Language: de, HighGraphicsQualityEnabled: true, BreakTimeNotificationsEnabled: true, CookieConsent: undefined.",
     );
   });
 
@@ -63,7 +63,40 @@ describe("GetSettingsConfigUseCase", () => {
     expect(loggerMock.log).toHaveBeenCalledTimes(1);
     expect(loggerMock.log).toHaveBeenCalledWith(
       "TRACE",
-      "GetSettingsConfigUseCase: User got settings: Volume:0.42, Language: en, HighGraphicsQualityEnabled: false, BreakTimeNotificationsEnabled: false.",
+      "GetSettingsConfigUseCase: User got settings: Volume:0.42, Language: en, HighGraphicsQualityEnabled: false, BreakTimeNotificationsEnabled: false, CookieConsent: undefined.",
     );
+  });
+
+  test("if entityContainer returns no SettingsEntity and localStorage has cookieConsent, it is loaded", () => {
+    localStorage.setItem("adler_cookie_consent", "accepted");
+    entityContainerMock.getEntitiesOfType.mockReturnValue([undefined!]);
+    const result = systemUnderTest.execute();
+    expect(result.cookieConsent).toBe("accepted");
+  });
+
+  test("if entityContainer returns no SettingsEntity and localStorage has declined cookieConsent, it is loaded", () => {
+    localStorage.setItem("adler_cookie_consent", "declined");
+    entityContainerMock.getEntitiesOfType.mockReturnValue([undefined!]);
+    const result = systemUnderTest.execute();
+    expect(result.cookieConsent).toBe("declined");
+  });
+
+  test("cookieConsent is returned in settings when entity has it set", () => {
+    const settingsEntity = {
+      volume: 0.5,
+      language: "de",
+      highGraphicsQualityEnabled: true,
+      breakTimeNotificationsEnabled: true,
+      cookieConsent: "accepted" as const,
+    };
+    entityContainerMock.getEntitiesOfType.mockReturnValue([settingsEntity]);
+    const result = systemUnderTest.execute();
+    expect(result.cookieConsent).toBe("accepted");
+  });
+
+  test("settings port is called when settings are retrieved", () => {
+    entityContainerMock.getEntitiesOfType.mockReturnValue([undefined!]);
+    systemUnderTest.execute();
+    expect(settingsPortMock.onSettingsUpdated).toHaveBeenCalledTimes(1);
   });
 });
