@@ -25,21 +25,30 @@ export default class GetSettingsConfigUseCase
   execute(): SettingsTO {
     let settingsEntity =
       this.entityContainer.getEntitiesOfType<SettingsEntity>(SettingsEntity)[0];
-    let settings = new SettingsTO();
 
     if (!settingsEntity) {
+      // Lade cookieConsent aus localStorage beim initialen Start
+      let initialCookieConsent: "accepted" | "declined" | undefined = undefined;
+      const storedConsent = localStorage.getItem("adler_cookie_consent");
+      if (storedConsent === "accepted" || storedConsent === "declined") {
+        initialCookieConsent = storedConsent;
+      }
+
       settingsEntity = {
         volume: undefined,
         graphicsQuality: undefined,
         language: undefined,
         highGraphicsQualityEnabled: undefined,
         breakTimeNotificationsEnabled: undefined,
+        cookieConsent: initialCookieConsent,
       };
       this.entityContainer.useSingletonEntity<SettingsEntity>(
         settingsEntity,
         SettingsEntity,
       );
     }
+    let settings = new SettingsTO();
+
     if (settingsEntity.breakTimeNotificationsEnabled === undefined) {
       settings.breakTimeNotificationsEnabled = true;
     } else {
@@ -72,9 +81,13 @@ export default class GetSettingsConfigUseCase
       settings.graphicsQuality = settingsEntity.graphicsQuality;
     }
 
+    if (settingsEntity.cookieConsent !== undefined) {
+      settings.cookieConsent = settingsEntity.cookieConsent;
+    }
+
     this.logger.log(
       LogLevelTypes.TRACE,
-      `GetSettingsConfigUseCase: User got settings: Volume:${settings.volume}, Language: ${settings.language}, HighGraphicsQualityEnabled: ${settings.highGraphicsQualityEnabled}, BreakTimeNotificationsEnabled: ${settings.breakTimeNotificationsEnabled}.`,
+      `GetSettingsConfigUseCase: User got settings: Volume:${settings.volume}, Language: ${settings.language}, HighGraphicsQualityEnabled: ${settings.highGraphicsQualityEnabled}, BreakTimeNotificationsEnabled: ${settings.breakTimeNotificationsEnabled}, CookieConsent: ${settings.cookieConsent}.`,
     );
     this.settingsPort.onSettingsUpdated(settings);
     return settings;

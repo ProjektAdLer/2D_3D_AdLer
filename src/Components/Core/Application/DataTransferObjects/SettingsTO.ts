@@ -4,4 +4,5 @@ export default class SettingsTO {
   language?: string;
   highGraphicsQualityEnabled?: boolean;
   breakTimeNotificationsEnabled?: boolean;
+  cookieConsent?: "accepted" | "declined";
 }

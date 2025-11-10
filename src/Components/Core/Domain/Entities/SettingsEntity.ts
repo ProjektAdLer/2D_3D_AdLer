@@ -4,4 +4,5 @@ export default class SettingsEntity {
   language: string | undefined;
   highGraphicsQualityEnabled: boolean | undefined;
   breakTimeNotificationsEnabled: boolean | undefined;
+  cookieConsent: "accepted" | "declined" | undefined;
 }

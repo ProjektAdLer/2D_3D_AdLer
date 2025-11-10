@@ -31,6 +31,7 @@ export default class SetSettingsConfigUseCase
           settings.highGraphicsQualityEnabled ?? undefined,
         breakTimeNotificationsEnabled:
           settings.breakTimeNotificationsEnabled ?? undefined,
+        cookieConsent: settings.cookieConsent ?? undefined,
       };
       this.entityContainer.useSingletonEntity<SettingsEntity>(
         settingsEntity,
@@ -47,10 +48,24 @@ export default class SetSettingsConfigUseCase
     settingsEntity.breakTimeNotificationsEnabled =
       settings.breakTimeNotificationsEnabled ??
       settingsEntity.breakTimeNotificationsEnabled;
+    settingsEntity.cookieConsent =
+      settings.cookieConsent ?? settingsEntity.cookieConsent;
+
+    // Speichere cookieConsent auch in localStorage für Persistierung beim App-Start
+    if (settingsEntity.cookieConsent) {
+      localStorage.setItem(
+        "adler_cookie_consent",
+        settingsEntity.cookieConsent,
+      );
+      localStorage.setItem(
+        "adler_cookie_consent_timestamp",
+        Date.now().toString(),
+      );
+    }
 
     this.logger.log(
       LogLevelTypes.TRACE,
-      `SetSettingsConfigUseCase: Settings set to: Volume:${settingsEntity.volume}, Language: ${settingsEntity.language}, HighGraphicsQualityEnabled: ${settingsEntity.highGraphicsQualityEnabled}, BreakTimeNotificationsEnabled: ${settingsEntity.breakTimeNotificationsEnabled}`,
+      `SetSettingsConfigUseCase: Settings set to: Volume:${settingsEntity.volume}, Language: ${settingsEntity.language}, HighGraphicsQualityEnabled: ${settingsEntity.highGraphicsQualityEnabled}, BreakTimeNotificationsEnabled: ${settingsEntity.breakTimeNotificationsEnabled}, CookieConsent: ${settingsEntity.cookieConsent}`,
     );
   }
 }
