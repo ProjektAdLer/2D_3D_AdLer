@@ -158,4 +158,87 @@ describe("VideoComponent", () => {
     expect(component!).toBeDefined();
     expect(component!.container).toBeEmptyDOMElement();
   });
+
+  test("should show cookie consent blocker when user has not consented", async () => {
+    let component: RenderResult;
+    const vm = new LearningElementModalViewModel();
+    vm.id.Value = 1;
+    vm.filePath.Value = "https://www.youtube.com/watch?v=123";
+
+    const settings = new SettingsTO();
+    settings.cookieConsent = "declined";
+    mockController.getUserSettings.mockReturnValue(settings);
+
+    await act(async () => {
+      component = render(
+        <Provider container={CoreDIContainer}>
+          <VideoComponent viewModel={vm} controller={mockController} />
+        </Provider>,
+      );
+    });
+
+    expect(component!).toBeDefined();
+    expect(
+      component!.getByTestId("cookie-consent-blocker"),
+    ).toBeInTheDocument();
+  });
+
+  test("should show video when user has consented", async () => {
+    let component: RenderResult;
+    const vm = new LearningElementModalViewModel();
+    vm.id.Value = 1;
+    vm.filePath.Value = "https://www.youtube.com/watch?v=123";
+
+    const settings = new SettingsTO();
+    settings.cookieConsent = "accepted";
+    mockController.getUserSettings.mockReturnValue(settings);
+
+    await act(async () => {
+      component = render(
+        <Provider container={CoreDIContainer}>
+          <VideoComponent viewModel={vm} controller={mockController} />
+        </Provider>,
+      );
+    });
+
+    expect(component!).toBeDefined();
+    expect(
+      component!.queryByTestId("cookie-consent-blocker"),
+    ).not.toBeInTheDocument();
+  });
+
+  test("should show video after user accepts consent", async () => {
+    let component: RenderResult;
+    const vm = new LearningElementModalViewModel();
+    vm.id.Value = 1;
+    vm.filePath.Value = "https://www.youtube.com/watch?v=123";
+
+    const settings = new SettingsTO();
+    settings.cookieConsent = "declined";
+    mockController.getUserSettings.mockReturnValue(settings);
+
+    await act(async () => {
+      component = render(
+        <Provider container={CoreDIContainer}>
+          <VideoComponent viewModel={vm} controller={mockController} />
+        </Provider>,
+      );
+    });
+
+    expect(
+      component!.getByTestId("cookie-consent-blocker"),
+    ).toBeInTheDocument();
+
+    // Simulate accepting consent
+    const acceptButton = component!.getByTestId(
+      "external-content-consent-accept",
+    );
+    await act(async () => {
+      acceptButton.click();
+    });
+
+    expect(
+      component!.queryByTestId("cookie-consent-blocker"),
+    ).not.toBeInTheDocument();
+  });
 });

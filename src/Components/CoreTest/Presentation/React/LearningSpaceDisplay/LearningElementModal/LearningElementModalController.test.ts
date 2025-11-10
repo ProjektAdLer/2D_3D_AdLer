@@ -10,6 +10,7 @@ import LearningElementModalViewModel from "../../../../../Core/Presentation/Reac
 import IBottomTooltipPresenter from "../../../../../Core/Presentation/React/LearningSpaceDisplay/BottomTooltip/IBottomTooltipPresenter";
 import PRESENTATION_TYPES from "../../../../../Core/DependencyInjection/Presentation/PRESENTATION_TYPES";
 import IBeginStoryElementOutroCutSceneUseCase from "../../../../../Core/Application/UseCases/BeginStoryElementOutroCutScene/IBeginStoryElementOutroCutSceneUseCase";
+import SettingsTO from "../../../../../Core/Application/DataTransferObjects/SettingsTO";
 
 const scoreElementUseCaseMock = mock<IScoreLearningElementUseCase>();
 const scoreH5PUseCaseMock = mock<IScoreH5PLearningElementUseCase>();
@@ -144,18 +145,38 @@ describe("LearningElementModalController", () => {
     ).toHaveBeenCalled();
   });
 
-  test("getUserSettings should call getSettingsConfigUseCase", () => {
-    systemUnderTest.getUserSettings();
+  test("getUserSettings should return settings with cookieConsent", () => {
+    const result = systemUnderTest.getUserSettings();
 
-    // Check that getSettingsConfigUseCase.execute was called (which is called inside getUserSettings)
-    // The actual return value is tested in the GetSettingsConfigUseCase tests
+    expect(result).toBeDefined();
+    expect(result).toHaveProperty("cookieConsent");
   });
 
-  test("setUserSettings should call setSettingsConfigUseCase", () => {
-    const settings = { cookieConsent: "accepted" };
-    systemUnderTest.setUserSettings(settings as any);
+  test("setUserSettings should accept settings with cookieConsent accepted", () => {
+    const settings = new SettingsTO();
+    settings.cookieConsent = "accepted";
 
-    // Check that setSettingsConfigUseCase.execute was called (which is called inside setUserSettings)
-    // The actual behavior is tested in the SetSettingsConfigUseCase tests
+    expect(() => {
+      systemUnderTest.setUserSettings(settings);
+    }).not.toThrow();
+  });
+
+  test("setUserSettings should accept settings with cookieConsent declined", () => {
+    const settings = new SettingsTO();
+    settings.cookieConsent = "declined";
+
+    expect(() => {
+      systemUnderTest.setUserSettings(settings);
+    }).not.toThrow();
+  });
+
+  test("getUserSettings returns current cookieConsent state", () => {
+    const settings = new SettingsTO();
+    settings.cookieConsent = "accepted";
+
+    systemUnderTest.setUserSettings(settings);
+    const result = systemUnderTest.getUserSettings();
+
+    expect(result.cookieConsent).toBeDefined();
   });
 });

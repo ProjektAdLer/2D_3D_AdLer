@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { render, waitFor } from "@testing-library/react";
+import { render, waitFor, act } from "@testing-library/react";
 import LearningElementModalViewModel from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/LearningElementModalViewModel";
 import PrimitiveH5PContent from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/PrimitiveH5PContent";
 import React, { RefObject } from "react";
@@ -115,5 +115,117 @@ describe("PrimitiveH5PContent", () => {
     waitFor(() => {
       expect(H5PUtils.getH5PContentSizeDecision).toHaveBeenCalled();
     });
+  });
+
+  test("should show cookie consent blocker when user has not consented", () => {
+    viewModel.filePath.Value =
+      "wwwroot\\courses\\2\\World_For_Evaluation\\h5p\\H5P-Test";
+
+    const settings = new SettingsTO();
+    settings.cookieConsent = "declined";
+    mockController.getUserSettings.mockReturnValue(settings);
+
+    const { getByTestId } = render(
+      <Provider container={CoreDIContainer}>
+        <PrimitiveH5PContent
+          viewModel={viewModel}
+          controller={mockController}
+        />
+      </Provider>,
+    );
+
+    expect(getByTestId("cookie-consent-blocker")).toBeInTheDocument();
+  });
+
+  test("should show primitive H5P content when user has consented", () => {
+    viewModel.filePath.Value =
+      "wwwroot\\courses\\2\\World_For_Evaluation\\h5p\\H5P-Test";
+
+    const settings = new SettingsTO();
+    settings.cookieConsent = "accepted";
+    mockController.getUserSettings.mockReturnValue(settings);
+
+    // Mock H5P utils to prevent errors
+    const element = document.createElement("div");
+    const reference = { current: element } as RefObject<HTMLDivElement>;
+    jest
+      .spyOn(H5PUtils, "getH5PDivs")
+      .mockReturnValue({ ref: reference.current!, div: element });
+    jest
+      .spyOn(H5PUtils, "getH5PContentSizeDecision")
+      .mockReturnValue({ resetContent: false, shrinkContent: false });
+
+    const { queryByTestId, getByTestId } = render(
+      <Provider container={CoreDIContainer}>
+        <PrimitiveH5PContent
+          viewModel={viewModel}
+          controller={mockController}
+        />
+      </Provider>,
+    );
+
+    expect(queryByTestId("cookie-consent-blocker")).not.toBeInTheDocument();
+    expect(getByTestId("primitiveH5pContent-testid")).toBeInTheDocument();
+  });
+
+  test("should show primitive H5P content after user accepts consent", async () => {
+    viewModel.filePath.Value =
+      "wwwroot\\courses\\2\\World_For_Evaluation\\h5p\\H5P-Test";
+
+    const settings = new SettingsTO();
+    settings.cookieConsent = "declined";
+    mockController.getUserSettings.mockReturnValue(settings);
+
+    // Mock H5P utils to prevent errors
+    const element = document.createElement("div");
+    const reference = { current: element } as RefObject<HTMLDivElement>;
+    jest
+      .spyOn(H5PUtils, "getH5PDivs")
+      .mockReturnValue({ ref: reference.current!, div: element });
+    jest
+      .spyOn(H5PUtils, "getH5PContentSizeDecision")
+      .mockReturnValue({ resetContent: false, shrinkContent: false });
+
+    const { getByTestId, queryByTestId } = render(
+      <Provider container={CoreDIContainer}>
+        <PrimitiveH5PContent
+          viewModel={viewModel}
+          controller={mockController}
+        />
+      </Provider>,
+    );
+
+    expect(getByTestId("cookie-consent-blocker")).toBeInTheDocument();
+
+    // Simulate accepting consent
+    const acceptButton = getByTestId("external-content-consent-accept");
+    await act(async () => {
+      acceptButton.click();
+    });
+
+    await waitFor(() => {
+      expect(queryByTestId("cookie-consent-blocker")).not.toBeInTheDocument();
+      expect(getByTestId("primitiveH5pContent-testid")).toBeInTheDocument();
+    });
+  });
+
+  test("should not render primitive H5P player when consent is not given", () => {
+    viewModel.filePath.Value =
+      "wwwroot\\courses\\2\\World_For_Evaluation\\h5p\\H5P-Test";
+
+    const settings = new SettingsTO();
+    settings.cookieConsent = "declined";
+    mockController.getUserSettings.mockReturnValue(settings);
+
+    const { queryByTestId } = render(
+      <Provider container={CoreDIContainer}>
+        <PrimitiveH5PContent
+          viewModel={viewModel}
+          controller={mockController}
+        />
+      </Provider>,
+    );
+
+    expect(queryByTestId("primitiveH5pContent-testid")).not.toBeInTheDocument();
   });
 });
