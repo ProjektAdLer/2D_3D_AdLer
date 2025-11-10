@@ -129,18 +129,6 @@ export default function WelcomePage() {
         <StyledButton
           className="!px-2 !py-1 text-xs font-bold mobile-portrait:!pr-0"
           onClick={() => {
-            history.push("/settings");
-          }}
-          icon={settingsIcon}
-          data-testid="settingsButton"
-          title={translate("settingButtonToolTip").toString()}
-          shape={"freeFloatCenter"}
-        >
-          <p className="mobile-portrait:hidden">{translate("settingTitle")}</p>
-        </StyledButton>
-        <StyledButton
-          className="!px-2 !py-1 text-xs font-bold mobile-portrait:!pr-0"
-          onClick={() => {
             history.push("/privacy");
           }}
           icon={privacyIcon}
@@ -149,6 +137,18 @@ export default function WelcomePage() {
           shape={"freeFloatCenter"}
         >
           <p className="mobile-portrait:hidden">{translate("privacyTitle")}</p>
+        </StyledButton>
+        <StyledButton
+          className="!px-2 !py-1 text-xs font-bold mobile-portrait:!pr-0"
+          onClick={() => {
+            history.push("/settings");
+          }}
+          icon={settingsIcon}
+          data-testid="settingsButton"
+          title={translate("settingButtonToolTip").toString()}
+          shape={"freeFloatCenter"}
+        >
+          <p className="mobile-portrait:hidden">{translate("settingTitle")}</p>
         </StyledButton>
       </div>
     </div>
