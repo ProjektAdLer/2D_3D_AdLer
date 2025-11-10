@@ -1104,4 +1104,211 @@ describe("MockBackendAdapter", () => {
 
     config.isShowcase = originalShowcase;
   });
+
+  // Tests for Theme Test Worlds (worldID 10-49) - Lines 126-147 in MockBackendAdapter
+  describe("Theme Test Worlds - CampusAB (worldID 10-16)", () => {
+    test("should load CampusAB_Main world (worldID 10)", async () => {
+      const result = await systemUnderTest.getWorldData({
+        userToken: "token",
+        worldID: 10,
+      });
+
+      expect(result).toBeDefined();
+      expect(result.worldName).toBeDefined();
+    });
+
+    test("should load CampusAB_LearningArea world (worldID 11)", async () => {
+      const result = await systemUnderTest.getWorldData({
+        userToken: "token",
+        worldID: 11,
+      });
+
+      expect(result).toBeDefined();
+      expect(result.worldName).toBeDefined();
+    });
+
+    test("should load CampusAB_EatingArea world (worldID 12)", async () => {
+      const result = await systemUnderTest.getWorldData({
+        userToken: "token",
+        worldID: 12,
+      });
+
+      expect(result).toBeDefined();
+      expect(result.worldName).toBeDefined();
+    });
+
+    test("should load CampusAB_Presentation world (worldID 13)", async () => {
+      const result = await systemUnderTest.getWorldData({
+        userToken: "token",
+        worldID: 13,
+      });
+
+      expect(result).toBeDefined();
+      expect(result.worldName).toBeDefined();
+    });
+
+    test("should load CampusAB_FnE world (worldID 14)", async () => {
+      const result = await systemUnderTest.getWorldData({
+        userToken: "token",
+        worldID: 14,
+      });
+
+      expect(result).toBeDefined();
+      expect(result.worldName).toBeDefined();
+    });
+
+    test("should load CampusAB_SocialArea world (worldID 15)", async () => {
+      const result = await systemUnderTest.getWorldData({
+        userToken: "token",
+        worldID: 15,
+      });
+
+      expect(result).toBeDefined();
+      expect(result.worldName).toBeDefined();
+    });
+
+    test("should load CampusAB_TechnicalArea world (worldID 16)", async () => {
+      const result = await systemUnderTest.getWorldData({
+        userToken: "token",
+        worldID: 16,
+      });
+
+      expect(result).toBeDefined();
+      expect(result.worldName).toBeDefined();
+    });
+  });
+
+  describe("Theme Test Worlds - CampusKE (worldID 20-26)", () => {
+    test("should load CampusKE_Main world (worldID 20)", async () => {
+      const result = await systemUnderTest.getWorldData({
+        userToken: "token",
+        worldID: 20,
+      });
+
+      expect(result).toBeDefined();
+      expect(result.worldName).toBeDefined();
+    });
+
+    test("should load CampusKE_Mensa world (worldID 21)", async () => {
+      const result = await systemUnderTest.getWorldData({
+        userToken: "token",
+        worldID: 21,
+      });
+
+      expect(result).toBeDefined();
+      expect(result.worldName).toBeDefined();
+    });
+
+    test("should load CampusKE_Library world (worldID 22)", async () => {
+      const result = await systemUnderTest.getWorldData({
+        userToken: "token",
+        worldID: 22,
+      });
+
+      expect(result).toBeDefined();
+      expect(result.worldName).toBeDefined();
+    });
+
+    test("should load CampusKE_StudentClub world (worldID 23)", async () => {
+      const result = await systemUnderTest.getWorldData({
+        userToken: "token",
+        worldID: 23,
+      });
+
+      expect(result).toBeDefined();
+      expect(result.worldName).toBeDefined();
+    });
+
+    test("should load CampusKE_ServerRoom world (worldID 24)", async () => {
+      const result = await systemUnderTest.getWorldData({
+        userToken: "token",
+        worldID: 24,
+      });
+
+      expect(result).toBeDefined();
+      expect(result.worldName).toBeDefined();
+    });
+
+    test("should load CampusKE_Labor world (worldID 25)", async () => {
+      const result = await systemUnderTest.getWorldData({
+        userToken: "token",
+        worldID: 25,
+      });
+
+      expect(result).toBeDefined();
+      expect(result.worldName).toBeDefined();
+    });
+
+    test("should load CampusKE_Auditorium world (worldID 26)", async () => {
+      const result = await systemUnderTest.getWorldData({
+        userToken: "token",
+        worldID: 26,
+      });
+
+      expect(result).toBeDefined();
+      expect(result.worldName).toBeDefined();
+    });
+  });
+
+  describe("Theme Test Worlds - Company (worldID 31-36)", () => {
+    test("should load Company_LearningArea world (worldID 31)", async () => {
+      const result = await systemUnderTest.getWorldData({
+        userToken: "token",
+        worldID: 31,
+      });
+
+      expect(result).toBeDefined();
+      expect(result.worldName).toBeDefined();
+    });
+
+    test("should load Company_EatingArea world (worldID 32)", async () => {
+      const result = await systemUnderTest.getWorldData({
+        userToken: "token",
+        worldID: 32,
+      });
+
+      expect(result).toBeDefined();
+      expect(result.worldName).toBeDefined();
+    });
+
+    test("should load Company_Presentation world (worldID 33)", async () => {
+      const result = await systemUnderTest.getWorldData({
+        userToken: "token",
+        worldID: 33,
+      });
+
+      expect(result).toBeDefined();
+      expect(result.worldName).toBeDefined();
+    });
+
+    test("should load Company_FnE world (worldID 34)", async () => {
+      const result = await systemUnderTest.getWorldData({
+        userToken: "token",
+        worldID: 34,
+      });
+
+      expect(result).toBeDefined();
+      expect(result.worldName).toBeDefined();
+    });
+
+    test("should load Company_SocialArea world (worldID 35)", async () => {
+      const result = await systemUnderTest.getWorldData({
+        userToken: "token",
+        worldID: 35,
+      });
+
+      expect(result).toBeDefined();
+      expect(result.worldName).toBeDefined();
+    });
+
+    test("should load Company_TechnicalArea world (worldID 36)", async () => {
+      const result = await systemUnderTest.getWorldData({
+        userToken: "token",
+        worldID: 36,
+      });
+
+      expect(result).toBeDefined();
+      expect(result.worldName).toBeDefined();
+    });
+  });
 });

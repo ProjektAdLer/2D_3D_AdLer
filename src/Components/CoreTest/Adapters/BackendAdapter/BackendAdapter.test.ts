@@ -6,6 +6,10 @@ import {
   expectedSpaceTO,
   expectedWorldTO,
   mockAWT,
+  mockAWTWithCampusABTheme,
+  mockAWTWithCompanyTheme,
+  mockAWTWithCampusKETheme,
+  mockAWTWithSuburbTheme,
 } from "./BackendResponses";
 import { config } from "../../../../config";
 import BackendAdapter from "../../../Core/Adapters/BackendAdapter/BackendAdapter";
@@ -22,6 +26,7 @@ import {
 import AdaptivityElementQuestionSubmissionTO from "../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionSubmissionTO";
 import { ElementDataParams } from "../../../Core/Application/Ports/Interfaces/IBackendPort";
 import AdaptivityElementstatusResponse from "../../../Core/Adapters/BackendAdapter/Types/AdaptivityElementStatusResponse";
+import { ThemeType } from "../../../Core/Domain/Types/ThemeTypes";
 
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
@@ -106,8 +111,37 @@ describe("BackendAdapter", () => {
 
     // check that the result matches the expected structure of LearningWorldTO
     expect(result).toEqual(expect.objectContaining(expectedWorldTO));
+
+    // Validate top-level world properties
+    expect(result.worldName).toBe(mockAWT.world.worldName);
+    expect(result.description).toBe(mockAWT.world.worldDescription);
+    expect(result.goals).toEqual(mockAWT.world.worldGoals);
+    expect(result.theme).toBeDefined();
+    expect(result.externalElements).toEqual(expect.any(Array));
+
+    // Validate optional fields
+    if (mockAWT.world.evaluationLink) {
+      expect(result.evaluationLink).toBe(mockAWT.world.evaluationLink);
+    }
+    if (mockAWT.world.evaluationLinkName) {
+      expect(result.evaluationLinkName).toBe(mockAWT.world.evaluationLinkName);
+    }
+    if (mockAWT.world.evaluationLinkText) {
+      expect(result.evaluationLinkText).toBe(mockAWT.world.evaluationLinkText);
+    }
+    if (mockAWT.world.frameStory) {
+      expect(result.narrativeFramework).toBe(mockAWT.world.frameStory);
+    }
+    if (mockAWT.world.worldGradingStyle) {
+      expect(result.gradingStyle).toBe(mockAWT.world.worldGradingStyle);
+    }
+
     result.spaces?.forEach((space) => {
       expect(space).toEqual(expectedSpaceTO);
+
+      // Validate space-specific properties
+      expect(space.templateStyle).toBeDefined();
+      expect(space.template).toBeDefined();
 
       space.elements?.forEach((element) => {
         if (element instanceof BackendAdaptivityElementTO) {
@@ -131,9 +165,84 @@ describe("BackendAdapter", () => {
       // 4: Are the 4 Basic learning elements in the AWT
       expect(space.elements).toHaveLength(1);
     });
+  });
 
-    // TODO: add further comparisons between mockAWT and created TOs
-    // eg. check that the learning elements have the correct type/metadata
+  describe("getWorldData - Theme Validation", () => {
+    test("getWorldData correctly assigns CampusAB theme from AWT", async () => {
+      mockedAxios.get.mockResolvedValue({ data: mockAWTWithCampusABTheme });
+
+      const result = await systemUnderTest.getWorldData({
+        userToken: "",
+        worldID: 1337,
+      });
+
+      expect(result.theme).toBe(ThemeType.CampusAB);
+    });
+
+    test("getWorldData correctly assigns CampusKE theme from AWT", async () => {
+      mockedAxios.get.mockResolvedValue({ data: mockAWTWithCampusKETheme });
+
+      const result = await systemUnderTest.getWorldData({
+        userToken: "",
+        worldID: 1337,
+      });
+
+      expect(result.theme).toBe(ThemeType.CampusKE);
+    });
+
+    test("getWorldData correctly assigns Company theme from AWT", async () => {
+      mockedAxios.get.mockResolvedValue({ data: mockAWTWithCompanyTheme });
+
+      const result = await systemUnderTest.getWorldData({
+        userToken: "",
+        worldID: 1337,
+      });
+
+      expect(result.theme).toBe(ThemeType.Company);
+    });
+
+    test("getWorldData correctly assigns Suburb theme from AWT", async () => {
+      mockedAxios.get.mockResolvedValue({ data: mockAWTWithSuburbTheme });
+
+      const result = await systemUnderTest.getWorldData({
+        userToken: "",
+        worldID: 1337,
+      });
+
+      expect(result.theme).toBe(ThemeType.Suburb);
+    });
+
+    test("getWorldData applies space-specific themes for CampusAB spaces", async () => {
+      mockedAxios.get.mockResolvedValue({
+        data: mockAWTWithCampusABTheme,
+      });
+
+      const result = await systemUnderTest.getWorldData({
+        userToken: "",
+        worldID: 1337,
+      });
+
+      // Verify that the first space (with LEARNINGAREA style) gets the combined theme
+      if (result.spaces && result.spaces.length > 0) {
+        expect(result.spaces[0].templateStyle).toBe(
+          ThemeType.CampusAB_LearningArea,
+        );
+      }
+    });
+
+    test("getWorldData applies world theme when space has no specific style", async () => {
+      mockedAxios.get.mockResolvedValue({
+        data: mockAWTWithCampusABTheme,
+      });
+
+      const result = await systemUnderTest.getWorldData({
+        userToken: "",
+        worldID: 1337,
+      });
+
+      // Verify world theme is set correctly
+      expect(result.theme).toBe(ThemeType.CampusAB);
+    });
   });
 
   test("logInUser calls backend and returns a token", async () => {

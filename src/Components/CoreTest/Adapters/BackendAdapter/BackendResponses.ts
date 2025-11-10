@@ -280,3 +280,116 @@ export const mockAWT: AWT = {
     ],
   },
 };
+
+// Mock AWTs with different themes for testing theme mapping
+export const mockAWTWithCampusABTheme: AWT = {
+  ...mockAWT,
+  world: {
+    ...mockAWT.world,
+    theme: "CAMPUSASCHAFFENBURG",
+    spaces: [
+      {
+        spaceId: 1,
+        spaceName: "Learning Area",
+        spaceDescription: "rdescription1",
+        spaceGoals: ["rgoals1"],
+        spaceSlotContents: [1],
+        requiredPointsToComplete: 1,
+        requiredSpacesToEnter: "",
+        spaceTemplate: "",
+        spaceTemplateStyle: "LEARNINGAREA",
+        spaceStory: {
+          introStory: null,
+          outroStory: null,
+        },
+      },
+      {
+        spaceId: 2,
+        spaceName: "Eating Area",
+        spaceDescription: "rdescription2",
+        spaceGoals: ["rgoals2"],
+        spaceSlotContents: [2],
+        requiredPointsToComplete: 1,
+        requiredSpacesToEnter: "",
+        spaceTemplate: "",
+        spaceTemplateStyle: "EATINGAREA",
+        spaceStory: {
+          introStory: null,
+          outroStory: null,
+        },
+      },
+      {
+        spaceId: 3,
+        spaceName: "Presentation",
+        spaceDescription: "rdescription3",
+        spaceGoals: ["rgoals3"],
+        spaceSlotContents: [3],
+        requiredPointsToComplete: 1,
+        requiredSpacesToEnter: "",
+        spaceTemplate: "",
+        spaceTemplateStyle: "PRESENTATION",
+        spaceStory: {
+          introStory: null,
+          outroStory: null,
+        },
+      },
+      {
+        spaceId: 4,
+        spaceName: "FnE",
+        spaceDescription: "rdescription4",
+        spaceGoals: ["rgoals4"],
+        spaceSlotContents: [4],
+        requiredPointsToComplete: 3,
+        requiredSpacesToEnter: "(3)v((2)^(1))",
+        spaceTemplate: "",
+        spaceTemplateStyle: "FNE",
+        spaceStory: {
+          introStory: null,
+          outroStory: null,
+        },
+      },
+      {
+        spaceId: 5,
+        spaceName: "Social Area",
+        spaceDescription: "rdescription5",
+        spaceGoals: ["rgoals5"],
+        spaceSlotContents: [5],
+        requiredPointsToComplete: 1,
+        requiredSpacesToEnter: "4",
+        spaceTemplate: "",
+        spaceTemplateStyle: "SOCIALAREA",
+        spaceStory: {
+          introStory: null,
+          outroStory: null,
+        },
+      },
+    ],
+  },
+};
+
+export const mockAWTWithCampusKETheme: AWT = {
+  ...mockAWT,
+  world: {
+    ...mockAWT.world,
+    theme: "CAMPUSKEMPTEN",
+    spaces: mockAWT.world.spaces,
+  },
+};
+
+export const mockAWTWithCompanyTheme: AWT = {
+  ...mockAWT,
+  world: {
+    ...mockAWT.world,
+    theme: "COMPANY",
+    spaces: mockAWT.world.spaces,
+  },
+};
+
+export const mockAWTWithSuburbTheme: AWT = {
+  ...mockAWT,
+  world: {
+    ...mockAWT.world,
+    theme: "SUBURB",
+    spaces: mockAWT.world.spaces,
+  },
+};
