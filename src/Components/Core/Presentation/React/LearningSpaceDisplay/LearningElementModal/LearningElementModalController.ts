@@ -10,12 +10,17 @@ import IBottomTooltipPresenter from "../BottomTooltip/IBottomTooltipPresenter";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";
 import bind from "bind-decorator";
 import IBeginStoryElementOutroCutSceneUseCase from "src/Components/Core/Application/UseCases/BeginStoryElementOutroCutScene/IBeginStoryElementOutroCutSceneUseCase";
+import IGetSettingsConfigUseCase from "src/Components/Core/Application/UseCases/GetSettingsConfig/IGetSettingsConfigUseCase";
+import ISetSettingsConfigUseCase from "src/Components/Core/Application/UseCases/SetSettingsConfig/ISetSettingsConfigUseCase";
+import SettingsTO from "src/Components/Core/Application/DataTransferObjects/SettingsTO";
 
 export default class LearningElementModalController
   implements ILearningElementModalController
 {
   private BottomTooltipPresenter: IBottomTooltipPresenter;
   private beginStoryElementOutroCutSceneUseCase: IBeginStoryElementOutroCutSceneUseCase;
+  private getSettingsConfigUseCase: IGetSettingsConfigUseCase;
+  private setSettingsConfigUseCase: ISetSettingsConfigUseCase;
 
   constructor(private viewModel: LearningElementModalViewModel) {
     this.BottomTooltipPresenter = CoreDIContainer.get<IBottomTooltipPresenter>(
@@ -24,6 +29,14 @@ export default class LearningElementModalController
     this.beginStoryElementOutroCutSceneUseCase =
       CoreDIContainer.get<IBeginStoryElementOutroCutSceneUseCase>(
         USECASE_TYPES.IBeginStoryElementOutroCutSceneUseCase,
+      );
+    this.getSettingsConfigUseCase =
+      CoreDIContainer.get<IGetSettingsConfigUseCase>(
+        USECASE_TYPES.IGetSettingsConfigUseCase,
+      );
+    this.setSettingsConfigUseCase =
+      CoreDIContainer.get<ISetSettingsConfigUseCase>(
+        USECASE_TYPES.ISetSettingsConfigUseCase,
       );
   }
 
@@ -132,6 +145,14 @@ export default class LearningElementModalController
         PRESENTATION_TYPES.ILearningWorldCompletionModalPresenter,
       );
     presenter.onModalVisibility(isOpen);
+  }
+
+  getUserSettings(): SettingsTO {
+    return this.getSettingsConfigUseCase.execute();
+  }
+
+  setUserSettings(settings: SettingsTO): void {
+    this.setSettingsConfigUseCase.execute(settings);
   }
 }
 

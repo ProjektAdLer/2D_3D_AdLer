@@ -4,18 +4,21 @@ import LearningElementModalViewModel from "../LearningElementModalViewModel";
 import YoutubeVideoHost from "./VideoHosters/YoutubeVideoHost";
 import OpencastVideoHost from "./VideoHosters/OpencastVideoHost";
 import VimeoVideoHost from "./VideoHosters/VimeoVideoHost";
-import CookieModalController from "../../../WelcomePage/CookieModal/CookieModalController";
-import ExternalContentConsentBlocker from "./ExternalContentConsentBlocker";
+import CookieConsentBlocker from "./CookieConsentBlocker";
+import ILearningElementModalController from "../ILearningElementModalController";
 
 export default function VideoComponent({
   viewModel,
+  controller,
 }: {
   viewModel: LearningElementModalViewModel;
+  controller: ILearningElementModalController;
 }) {
   const [filepath] = useObservable(viewModel.filePath);
-  const [hasConsent, setHasConsent] = useState(
-    CookieModalController.hasConsent(),
-  );
+  const [hasConsent, setHasConsent] = useState(() => {
+    const settings = controller.getUserSettings();
+    return settings.cookieConsent === "accepted";
+  });
 
   const handleConsent = () => {
     setHasConsent(true);
@@ -24,7 +27,9 @@ export default function VideoComponent({
   if (!filepath) return null;
 
   if (!hasConsent) {
-    return <ExternalContentConsentBlocker onConsent={handleConsent} />;
+    return (
+      <CookieConsentBlocker onConsent={handleConsent} controller={controller} />
+    );
   }
 
   const videoComponent = getVideoComponent(filepath); // Set the video component using regex

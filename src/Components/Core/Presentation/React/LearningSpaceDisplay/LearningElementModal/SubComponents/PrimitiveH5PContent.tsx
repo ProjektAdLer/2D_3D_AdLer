@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { H5P as H5PPlayer } from "h5p-standalone";
 import LearningElementModalViewModel from "../LearningElementModalViewModel";
+import ILearningElementModalController from "../ILearningElementModalController";
 import {
   createH5POptions,
   getH5PContentSizeDecision,
@@ -8,22 +9,24 @@ import {
   shrinkH5PElement,
 } from "./H5pUtils";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
-import CookieModalController from "../../../WelcomePage/CookieModal/CookieModalController";
-import ExternalContentConsentBlocker from "./ExternalContentConsentBlocker";
+import CookieConsentBlocker from "./CookieConsentBlocker";
 
 // variable cannot be react state because state update is asynchronious and wont trigger with resizeObserver ~ sb
 let lastRenderedWidth: number = 0;
 
 export default function H5PContent({
   viewModel,
+  controller,
 }: {
   readonly viewModel: LearningElementModalViewModel;
+  controller: ILearningElementModalController;
 }) {
   const h5pContainerRef = useRef<HTMLDivElement>(null);
   const [isVisible] = useObservable<boolean>(viewModel.isVisible);
-  const [hasConsent, setHasConsent] = useState(
-    CookieModalController.hasConsent(),
-  );
+  const [hasConsent, setHasConsent] = useState(() => {
+    const settings = controller.getUserSettings();
+    return settings.cookieConsent === "accepted";
+  });
   const [dimensions, setDimensions] = useState({
     contentWidth: 0,
     contentHeight: 0,
@@ -105,7 +108,9 @@ export default function H5PContent({
   }, [dimensions]);
 
   if (!hasConsent) {
-    return <ExternalContentConsentBlocker onConsent={handleConsent} />;
+    return (
+      <CookieConsentBlocker onConsent={handleConsent} controller={controller} />
+    );
   }
 
   return (

@@ -1,3 +1,5 @@
+import SettingsTO from "src/Components/Core/Application/DataTransferObjects/SettingsTO";
+
 export default interface ILearningElementModalController {
   closeModal(): void;
   triggerOutroCutscene(): void;
@@ -6,4 +8,6 @@ export default interface ILearningElementModalController {
   xAPICompletedListener(t: any): void;
   showBottomToolTip(): void;
   setModalVisibility(isOpen: boolean): void;
+  getUserSettings(): SettingsTO;
+  setUserSettings(settings: SettingsTO): void;
 }

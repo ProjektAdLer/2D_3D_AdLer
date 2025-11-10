@@ -25,11 +25,13 @@ const createModalContent = (
     case LearningElementTypes.h5p:
       return <H5PContent viewModel={viewModel} controller={controller} />;
     case LearningElementTypes.primitiveH5P:
-      return <PrimitiveH5PContent viewModel={viewModel} />;
+      return (
+        <PrimitiveH5PContent viewModel={viewModel} controller={controller} />
+      );
     case LearningElementTypes.text:
       return <TextComponent viewModel={viewModel} />;
     case LearningElementTypes.video:
-      return <VideoComponent viewModel={viewModel} />;
+      return <VideoComponent viewModel={viewModel} controller={controller} />;
     case LearningElementTypes.image:
       return (
         // max-h-[90vh] falls mehrere ImageComponents benutzt werden, sonst schiebts über die Fensterhöhe hinaus [DG]

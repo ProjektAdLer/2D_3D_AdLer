@@ -1,26 +1,30 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import CookieModalController from "../../../WelcomePage/CookieModal/CookieModalController";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
+import ILearningElementModalController from "../ILearningElementModalController";
+import SettingsTO from "src/Components/Core/Application/DataTransferObjects/SettingsTO";
 
-export default function ExternalContentConsentBlocker({
+export default function CookieConsentBlocker({
   onConsent,
+  controller,
 }: {
   onConsent: () => void;
+  controller: ILearningElementModalController;
 }) {
   const { t: translate } = useTranslation("learningElement");
   const [showDetails, setShowDetails] = useState(false);
 
   const handleAccept = () => {
-    const controller = new CookieModalController();
-    controller.accept();
+    const settings = new SettingsTO();
+    settings.cookieConsent = "accepted";
+    controller.setUserSettings(settings);
     onConsent();
   };
 
   return (
     <div
       className="flex h-full w-full items-center justify-center p-4 md:p-8"
-      data-testid="external-content-consent-blocker"
+      data-testid="cookie-consent-blocker"
     >
       <div className="max-w-2xl space-y-3 md:space-y-4">
         <h2 className="text-lg font-bold text-adlerdarkblue md:text-xl lg:text-2xl mobile-landscape:text-base mobile-portrait:text-base">
