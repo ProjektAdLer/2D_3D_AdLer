@@ -9,6 +9,7 @@ import { Provider } from "inversify-react";
 import ILearningElementModalController from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/ILearningElementModalController";
 import * as H5PUtils from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/H5pUtils";
 import CookieModalController from "../../../../../../Core/Presentation/React/WelcomePage/CookieModal/CookieModalController";
+import SettingsTO from "../../../../../../Core/Application/DataTransferObjects/SettingsTO";
 
 jest.mock("h5p-standalone");
 
@@ -58,6 +59,11 @@ describe("H5PContentView", () => {
     viewModel.parentWorldID.Value = 1;
     viewModel.filePath.Value =
       "wwwroot\\courses\\2\\World_For_Evaluation\\h5p\\H5P-SchiebeSpiel";
+
+    // Mock controller to return accepted consent
+    const settings = new SettingsTO();
+    settings.cookieConsent = "accepted";
+    elementModalControllerMock.getUserSettings.mockReturnValue(settings);
   });
 
   afterAll(() => {

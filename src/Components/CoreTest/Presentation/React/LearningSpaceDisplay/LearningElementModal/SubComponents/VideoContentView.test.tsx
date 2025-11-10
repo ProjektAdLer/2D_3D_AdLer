@@ -7,6 +7,9 @@ import CoreDIContainer from "../../../../../../Core/DependencyInjection/CoreDICo
 import VideoComponent from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/VideoComponent";
 import LearningElementModalViewModel from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/LearningElementModalViewModel";
 import CookieModalController from "../../../../../../Core/Presentation/React/WelcomePage/CookieModal/CookieModalController";
+import { mock } from "jest-mock-extended";
+import type ILearningElementModalController from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/ILearningElementModalController";
+import SettingsTO from "../../../../../../Core/Application/DataTransferObjects/SettingsTO";
 
 jest.mock(
   "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/VideoHosters/YoutubeVideoHost.tsx",
@@ -48,6 +51,15 @@ Object.defineProperty(window, "localStorage", {
 });
 
 describe("VideoComponent", () => {
+  let mockController: jest.Mocked<ILearningElementModalController>;
+
+  beforeEach(() => {
+    mockController = mock<ILearningElementModalController>();
+    const settings = new SettingsTO();
+    settings.cookieConsent = "accepted";
+    mockController.getUserSettings.mockReturnValue(settings);
+  });
+
   afterAll(() => {
     jest.restoreAllMocks();
   });
@@ -61,7 +73,7 @@ describe("VideoComponent", () => {
     await act(async () => {
       component = render(
         <Provider container={CoreDIContainer}>
-          <VideoComponent viewModel={vm} />
+          <VideoComponent viewModel={vm} controller={mockController} />
         </Provider>,
       );
     });
@@ -79,7 +91,7 @@ describe("VideoComponent", () => {
     await act(async () => {
       component = render(
         <Provider container={CoreDIContainer}>
-          <VideoComponent viewModel={vm} />
+          <VideoComponent viewModel={vm} controller={mockController} />
         </Provider>,
       );
     });
@@ -97,7 +109,7 @@ describe("VideoComponent", () => {
     await act(async () => {
       component = render(
         <Provider container={CoreDIContainer}>
-          <VideoComponent viewModel={vm} />
+          <VideoComponent viewModel={vm} controller={mockController} />
         </Provider>,
       );
     });
@@ -116,7 +128,7 @@ describe("VideoComponent", () => {
     await act(async () => {
       component = render(
         <Provider container={CoreDIContainer}>
-          <VideoComponent viewModel={vm} />
+          <VideoComponent viewModel={vm} controller={mockController} />
         </Provider>,
       );
     });
@@ -138,7 +150,7 @@ describe("VideoComponent", () => {
     await act(async () => {
       component = render(
         <Provider container={CoreDIContainer}>
-          <VideoComponent viewModel={vm} />
+          <VideoComponent viewModel={vm} controller={mockController} />
         </Provider>,
       );
     });

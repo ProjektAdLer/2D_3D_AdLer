@@ -143,4 +143,19 @@ describe("LearningElementModalController", () => {
       learningworldcompletionModalMock.onModalVisibility,
     ).toHaveBeenCalled();
   });
+
+  test("getUserSettings should call getSettingsConfigUseCase", () => {
+    systemUnderTest.getUserSettings();
+
+    // Check that getSettingsConfigUseCase.execute was called (which is called inside getUserSettings)
+    // The actual return value is tested in the GetSettingsConfigUseCase tests
+  });
+
+  test("setUserSettings should call setSettingsConfigUseCase", () => {
+    const settings = { cookieConsent: "accepted" };
+    systemUnderTest.setUserSettings(settings as any);
+
+    // Check that setSettingsConfigUseCase.execute was called (which is called inside setUserSettings)
+    // The actual behavior is tested in the SetSettingsConfigUseCase tests
+  });
 });

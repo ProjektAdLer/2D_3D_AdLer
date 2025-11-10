@@ -6,6 +6,9 @@ import React, { RefObject } from "react";
 import CoreDIContainer from "../../../../../../Core/DependencyInjection/CoreDIContainer";
 import { Provider } from "inversify-react";
 import * as H5PUtils from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/H5pUtils";
+import { mock } from "jest-mock-extended";
+import type ILearningElementModalController from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/ILearningElementModalController";
+import SettingsTO from "../../../../../../Core/Application/DataTransferObjects/SettingsTO";
 
 const viewModel = new LearningElementModalViewModel();
 viewModel.id.Value = 1;
@@ -38,8 +41,17 @@ Object.defineProperty(window, "localStorage", {
 });
 
 describe("PrimitiveH5PContent", () => {
+  let mockController: jest.Mocked<ILearningElementModalController>;
+
   beforeAll(() => {
     CoreDIContainer.snapshot();
+  });
+
+  beforeEach(() => {
+    mockController = mock<ILearningElementModalController>();
+    const settings = new SettingsTO();
+    settings.cookieConsent = "accepted";
+    mockController.getUserSettings.mockReturnValue(settings);
   });
 
   afterAll(() => {
@@ -52,7 +64,9 @@ describe("PrimitiveH5PContent", () => {
     viewModel.filePath.Value =
       "wwwroot\\courses\\2\\World_For_Evaluation\\h5p\\H5P-SchiebeSpiel";
 
-    const { container } = render(<PrimitiveH5PContent viewModel={viewModel} />);
+    const { container } = render(
+      <PrimitiveH5PContent viewModel={viewModel} controller={mockController} />,
+    );
 
     expect(container).not.toBeEmptyDOMElement();
   });
@@ -62,7 +76,10 @@ describe("PrimitiveH5PContent", () => {
 
     const container = render(
       <Provider container={CoreDIContainer}>
-        <PrimitiveH5PContent viewModel={viewModel} />
+        <PrimitiveH5PContent
+          viewModel={viewModel}
+          controller={mockController}
+        />
       </Provider>,
     );
 
@@ -88,7 +105,10 @@ describe("PrimitiveH5PContent", () => {
 
     const { container } = render(
       <Provider container={CoreDIContainer}>
-        <PrimitiveH5PContent viewModel={viewModel} />
+        <PrimitiveH5PContent
+          viewModel={viewModel}
+          controller={mockController}
+        />
       </Provider>,
     );
 
