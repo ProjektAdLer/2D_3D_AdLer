@@ -1,9 +1,12 @@
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import { useTranslation } from "react-i18next";
-import { useState, useEffect } from "react";
-import CookieModalController from "../WelcomePage/CookieModal/CookieModalController";
 import emptyCheckBox from "../../../../../Assets/icons/empty-box.svg";
 import greenSwosh from "../../../../../Assets/icons/check-solution.svg";
+import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
+import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
+import PrivacyViewModel from "./PrivacyViewModel";
+import IPrivacyController from "./IPrivacyController";
+import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 
 interface Subsection {
   title: string;
@@ -18,23 +21,18 @@ interface Section {
 export default function PrivacyContent({ className }: AdLerUIComponent) {
   const { t: translate } = useTranslation("privacy");
   const sections: Section[] = translate("sections", { returnObjects: true });
-  const [cookiesAccepted, setCookiesAccepted] = useState(false);
 
-  // Load cookie consent status on mount
-  useEffect(() => {
-    setCookiesAccepted(CookieModalController.hasConsent());
-  }, []);
+  const [viewModel, controller] = useBuilder<
+    PrivacyViewModel,
+    IPrivacyController
+  >(BUILDER_TYPES.IPrivacyBuilder);
+
+  const [cookiesAccepted] = useObservable<boolean>(viewModel?.cookiesAccepted);
+
+  if (!viewModel || !controller) return null;
 
   const handleCookieToggle = () => {
-    const newValue = !cookiesAccepted;
-    setCookiesAccepted(newValue);
-
-    const controller = new CookieModalController();
-    if (newValue) {
-      controller.accept();
-    } else {
-      controller.decline();
-    }
+    controller.setCookieConsent(!cookiesAccepted);
   };
 
   return (

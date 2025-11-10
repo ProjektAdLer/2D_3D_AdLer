@@ -56,6 +56,7 @@ import ExperiencePointsPanelBuilder from "~ReactComponents/LearningSpaceDisplay/
 import LevelUpModalBuilder from "~ReactComponents/LearningSpaceDisplay/LevelUpModal/LevelUpModalBuilder";
 import BadgeOverviewModalBuilder from "~ReactComponents/LearningSpaceDisplay/BadgeOverviewModal/BadgeOverviewModalBuilder";
 import SettingContentBuilder from "~ReactComponents/Settings/SettingContentBuilder";
+import PrivacyBuilder from "~ReactComponents/Privacy/PrivacyBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -215,6 +216,7 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationBuilder>(BUILDER_TYPES.ISettingContentBuilder).to(
     SettingContentBuilder,
   );
+  bind<IPresentationBuilder>(BUILDER_TYPES.IPrivacyBuilder).to(PrivacyBuilder);
 });
 
 export default BuilderDIContainer;
