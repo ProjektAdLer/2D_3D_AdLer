@@ -1,12 +1,27 @@
 import CookieModalController from "../../../../../Core/Presentation/React/WelcomePage/CookieModal/CookieModalController";
+import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+import type ISetSettingsConfigUseCase from "../../../../../Core/Application/UseCases/SetSettingsConfig/ISetSettingsConfigUseCase";
+import type IGetSettingsConfigUseCase from "../../../../../Core/Application/UseCases/GetSettingsConfig/IGetSettingsConfigUseCase";
 
 describe("CookieModalController", () => {
   let systemUnderTest: CookieModalController;
+  let setSettingsConfigUseCase: ISetSettingsConfigUseCase;
+  let getSettingsConfigUseCase: IGetSettingsConfigUseCase;
 
   beforeEach(() => {
-    systemUnderTest = new CookieModalController();
     // Clear localStorage before each test
     localStorage.clear();
+    setSettingsConfigUseCase = CoreDIContainer.get<ISetSettingsConfigUseCase>(
+      USECASE_TYPES.ISetSettingsConfigUseCase,
+    );
+    getSettingsConfigUseCase = CoreDIContainer.get<IGetSettingsConfigUseCase>(
+      USECASE_TYPES.IGetSettingsConfigUseCase,
+    );
+    systemUnderTest = new CookieModalController(
+      setSettingsConfigUseCase,
+      getSettingsConfigUseCase,
+    );
   });
 
   afterEach(() => {
