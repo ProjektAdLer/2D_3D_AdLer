@@ -5,8 +5,7 @@ import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
 import { Trans, useTranslation } from "react-i18next";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
-import { useState, useEffect } from "react";
-import CookieModalController from "./CookieModalController";
+import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 
 export default function CookieModal() {
   const [viewModel, controller] = useBuilder<
@@ -15,18 +14,14 @@ export default function CookieModal() {
   >(BUILDER_TYPES.ICookieModalBuilder);
   const { t: translate } = useTranslation("start");
 
-  const [showModal, setShowModal] = useState(false);
-
-  // Check if consent has already been given or declined
-  useEffect(() => {
-    const consent = CookieModalController.getConsent();
-    if (!consent) {
-      // No consent decision yet, show modal
-      setShowModal(true);
-    }
-  }, []);
+  const [cookieConsent] = useObservable<"accepted" | "declined" | null>(
+    viewModel?.cookieConsent,
+  );
 
   if (!viewModel || !controller) return null;
+
+  // Show modal only if no consent decision has been made
+  const showModal = cookieConsent === null;
 
   return (
     <StyledModal
@@ -44,7 +39,6 @@ export default function CookieModal() {
             data-testid="cookieDecline"
             title={translate("cookieTitle").toString()}
             onClick={() => {
-              setShowModal(false);
               controller.decline();
             }}
           >
@@ -55,7 +49,6 @@ export default function CookieModal() {
             data-testid="cookieAcceptAll"
             title={translate("cookieTitle").toString()}
             onClick={() => {
-              setShowModal(false);
               controller.accept();
             }}
           >

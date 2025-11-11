@@ -5,10 +5,6 @@ import type IGetSettingsConfigUseCase from "src/Components/Core/Application/UseC
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 
 export default class CookieModalController implements ICookieModalController {
-  private static readonly CONSENT_KEY = "adler_cookie_consent";
-  private static readonly CONSENT_TIMESTAMP_KEY =
-    "adler_cookie_consent_timestamp";
-
   private setSettingsConfigUseCase: ISetSettingsConfigUseCase;
   private getSettingsConfigUseCase: IGetSettingsConfigUseCase;
 
@@ -28,24 +24,5 @@ export default class CookieModalController implements ICookieModalController {
 
   decline(): void {
     this.setSettingsConfigUseCase.execute({ cookieConsent: "declined" });
-  }
-
-  public static getConsent(): string | null {
-    return localStorage.getItem(CookieModalController.CONSENT_KEY);
-  }
-
-  public static hasConsent(): boolean {
-    const consent = this.getConsent();
-    return consent === "accepted";
-  }
-
-  public static hasDeclined(): boolean {
-    const consent = this.getConsent();
-    return consent === "declined";
-  }
-
-  public static resetConsent(): void {
-    localStorage.removeItem(CookieModalController.CONSENT_KEY);
-    localStorage.removeItem(CookieModalController.CONSENT_TIMESTAMP_KEY);
   }
 }
