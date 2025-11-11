@@ -77,18 +77,6 @@ export default class TemplateLearningSpaceDimensionStrategy extends AbstractLear
     return positions as [Vector3, number][];
   }
 
-  getLightPositions(spaceTO: LearningSpaceTO): [Vector3, number][] {
-    const template = this.getTemplateByType(spaceTO.template);
-
-    const positions = template.lights.map((light) => {
-      return [
-        new Vector3(light.position.x, this.baseHeight + 3, light.position.y),
-        light.intensity,
-      ];
-    });
-    return positions as [Vector3, number][];
-  }
-
   private getTemplateByType(
     type: LearningSpaceTemplateType,
   ): ILearningSpaceTemplate {

@@ -13,9 +13,6 @@ import {
   CSG,
   Vector2,
   Color3,
-  PointLight,
-  DirectionalLight,
-  ShadowGenerator,
 } from "@babylonjs/core";
 import LearningSpaceViewModel from "./LearningSpaceViewModel";
 import ILearningSpaceController from "./ILearningSpaceController";

@@ -7,7 +7,6 @@ import {
   TransformNode,
   Color3,
   DirectionalLight,
-  ShadowGenerator,
 } from "@babylonjs/core";
 import "@babylonjs/inspector";
 import { inject, injectable } from "inversify";

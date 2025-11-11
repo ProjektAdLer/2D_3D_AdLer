@@ -117,10 +117,6 @@ export default class GenericLearningSpaceDimensionStrategy extends AbstractLearn
     return [windowPosition as [Vector3, number]];
   }
 
-  getLightPositions(spaceTO: LearningSpaceTO): [Vector3, number][] {
-    return [];
-  }
-
   private calculateLengthWidth(spaceTO: LearningSpaceTO): {
     spaceLength: number;
     spaceWidth: number;

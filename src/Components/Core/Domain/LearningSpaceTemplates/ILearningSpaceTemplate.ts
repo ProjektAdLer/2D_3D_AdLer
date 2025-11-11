@@ -19,11 +19,6 @@ export interface WallSegment {
   end: number;
 }
 
-export interface Light {
-  position: Point;
-  intensity: number;
-}
-
 export default interface ILearningSpaceTemplate {
   name: LearningSpaceTemplateType;
   cornerPoints: Point[];
@@ -36,5 +31,4 @@ export default interface ILearningSpaceTemplate {
   introStoryElementIdlePoint: Transform;
   introCutsceneSpawnPoint: Transform;
   outroStoryElementIdlePoint: Transform;
-  lights: Light[];
 }
