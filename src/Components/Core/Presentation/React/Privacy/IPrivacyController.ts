@@ -1,6 +1,6 @@
 import SettingsTO from "src/Components/Core/Application/DataTransferObjects/SettingsTO";
 
 export default interface IPrivacyController {
-  getUserSettings(): SettingsTO;
+  getUserSettings(): void;
   setCookieConsent(accepted: boolean): void;
 }
