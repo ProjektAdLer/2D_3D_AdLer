@@ -1,4 +1,4 @@
-import { fireEvent, render, waitFor } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 import React from "react";
 import CookieModal from "../../../../../Core/Presentation/React/WelcomePage/CookieModal/CookieModal";
 import ICookieModalController from "../../../../../Core/Presentation/React/WelcomePage/CookieModal/ICookieModalController";
@@ -7,28 +7,11 @@ import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIConta
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 import { mock } from "jest-mock-extended";
 import CookieModalViewModel from "../../../../../Core/Presentation/React/WelcomePage/CookieModal/CookieModalViewModel";
-import CookieModalController from "../../../../../Core/Presentation/React/WelcomePage/CookieModal/CookieModalController";
 
 describe("CookieModal", () => {
-  let getConsentSpy: jest.SpyInstance;
-
-  beforeEach(() => {
-    getConsentSpy = jest.spyOn(CookieModalController, "getConsent");
-  });
-
   afterEach(() => {
     jest.clearAllMocks();
     jest.restoreAllMocks();
-  });
-
-  test("should render", () => {
-    const result = render(
-      <Provider container={CoreDIContainer}>
-        <CookieModal />
-      </Provider>,
-    );
-
-    expect(result.getByTestId("cookieModal")).not.toBeEmptyDOMElement();
   });
 
   test("doesn't render without controller", () => {
@@ -43,9 +26,12 @@ describe("CookieModal", () => {
     expect(result.container.firstChild).toBeNull();
   });
 
-  test("click on decline button calls controller", () => {
+  // Test 1: No LocalStorage entry -> Modal is shown
+  test("modal is shown when no cookie consent is stored (cookieConsent is null)", () => {
+    const viewModel = new CookieModalViewModel();
+    // Keep initial value as null (default)
     const mockedController = mock<ICookieModalController>();
-    useBuilderMock([new CookieModalViewModel(), mockedController]);
+    useBuilderMock([viewModel, mockedController]);
 
     const result = render(
       <Provider container={CoreDIContainer}>
@@ -53,14 +39,21 @@ describe("CookieModal", () => {
       </Provider>,
     );
 
-    fireEvent.click(result.getByTestId("cookieDecline"));
+    // Modal should be visible - check that container has modal content
+    const modal = result.queryByTestId("cookieModal");
+    expect(modal).toBeInTheDocument();
 
-    expect(mockedController.decline).toBeCalledTimes(1);
+    // Also check that buttons are present
+    expect(result.getByTestId("cookieAcceptAll")).toBeInTheDocument();
+    expect(result.getByTestId("cookieDecline")).toBeInTheDocument();
   });
 
-  test("click on accept button calls controller", () => {
+  // Test 2a: LocalStorage entry exists (accepted) -> Modal is NOT shown
+  test("modal is NOT shown when cookie consent is 'accepted'", () => {
+    const viewModel = new CookieModalViewModel();
+    viewModel.cookieConsent.Value = "accepted";
     const mockedController = mock<ICookieModalController>();
-    useBuilderMock([new CookieModalViewModel(), mockedController]);
+    useBuilderMock([viewModel, mockedController]);
 
     const result = render(
       <Provider container={CoreDIContainer}>
@@ -68,14 +61,41 @@ describe("CookieModal", () => {
       </Provider>,
     );
 
-    fireEvent.click(result.getByTestId("cookieAcceptAll"));
+    // Modal should not be visible - component returns null
+    const modal = result.queryByTestId("cookieModal");
+    expect(modal).not.toBeInTheDocument();
 
-    expect(mockedController.accept).toBeCalledTimes(1);
+    // Container should be empty when modal is not shown
+    expect(result.container.firstChild).toBeNull();
   });
 
-  test("setShowModal to false after accept button click", async () => {
+  // Test 2b: LocalStorage entry exists (declined) -> Modal is NOT shown
+  test("modal is NOT shown when cookie consent is 'declined'", () => {
+    const viewModel = new CookieModalViewModel();
+    viewModel.cookieConsent.Value = "declined";
     const mockedController = mock<ICookieModalController>();
-    useBuilderMock([new CookieModalViewModel(), mockedController]);
+    useBuilderMock([viewModel, mockedController]);
+
+    const result = render(
+      <Provider container={CoreDIContainer}>
+        <CookieModal />
+      </Provider>,
+    );
+
+    // Modal should not be visible - component returns null
+    const modal = result.queryByTestId("cookieModal");
+    expect(modal).not.toBeInTheDocument();
+
+    // Container should be empty when modal is not shown
+    expect(result.container.firstChild).toBeNull();
+  });
+
+  // Test 3: Accept button -> controller.accept() is called
+  test("clicking accept button calls controller.accept()", () => {
+    const viewModel = new CookieModalViewModel();
+    // Keep initial value as null (default)
+    const mockedController = mock<ICookieModalController>();
+    useBuilderMock([viewModel, mockedController]);
 
     const result = render(
       <Provider container={CoreDIContainer}>
@@ -86,13 +106,15 @@ describe("CookieModal", () => {
     const acceptButton = result.getByTestId("cookieAcceptAll");
     fireEvent.click(acceptButton);
 
-    // Controller should be called
     expect(mockedController.accept).toBeCalledTimes(1);
   });
 
-  test("setShowModal to false after decline button click", async () => {
+  // Test 4: Decline button -> controller.decline() is called
+  test("clicking decline button calls controller.decline()", () => {
+    const viewModel = new CookieModalViewModel();
+    // Keep initial value as null (default)
     const mockedController = mock<ICookieModalController>();
-    useBuilderMock([new CookieModalViewModel(), mockedController]);
+    useBuilderMock([viewModel, mockedController]);
 
     const result = render(
       <Provider container={CoreDIContainer}>
@@ -103,15 +125,20 @@ describe("CookieModal", () => {
     const declineButton = result.getByTestId("cookieDecline");
     fireEvent.click(declineButton);
 
-    // Controller should be called
     expect(mockedController.decline).toBeCalledTimes(1);
   });
 
-  test("modal doesn't show when consent already given (accepted)", async () => {
-    getConsentSpy.mockReturnValue("accepted");
-
+  // Integration Test: Modal closes after accept button click
+  test("modal closes after clicking accept button (integration)", async () => {
+    const viewModel = new CookieModalViewModel();
     const mockedController = mock<ICookieModalController>();
-    useBuilderMock([new CookieModalViewModel(), mockedController]);
+
+    // Mock controller to update viewModel like the real flow would do
+    mockedController.accept.mockImplementation(() => {
+      viewModel.cookieConsent.Value = "accepted";
+    });
+
+    useBuilderMock([viewModel, mockedController]);
 
     const result = render(
       <Provider container={CoreDIContainer}>
@@ -119,20 +146,27 @@ describe("CookieModal", () => {
       </Provider>,
     );
 
-    await waitFor(() => {
-      expect(getConsentSpy).toHaveBeenCalled();
-    });
+    // Modal should be visible initially
+    expect(result.getByTestId("cookieModal")).toBeInTheDocument();
 
-    // Modal should not be visible when consent already given
-    const modal = result.queryByTestId("cookieModal");
-    expect(modal).not.toBeInTheDocument();
+    const acceptButton = result.getByTestId("cookieAcceptAll");
+    fireEvent.click(acceptButton);
+
+    // Modal should close (not be in document anymore)
+    expect(result.queryByTestId("cookieModal")).not.toBeInTheDocument();
   });
 
-  test("modal doesn't show when consent already declined", async () => {
-    getConsentSpy.mockReturnValue("declined");
-
+  // Integration Test: Modal closes after decline button click
+  test("modal closes after clicking decline button (integration)", async () => {
+    const viewModel = new CookieModalViewModel();
     const mockedController = mock<ICookieModalController>();
-    useBuilderMock([new CookieModalViewModel(), mockedController]);
+
+    // Mock controller to update viewModel like the real flow would do
+    mockedController.decline.mockImplementation(() => {
+      viewModel.cookieConsent.Value = "declined";
+    });
+
+    useBuilderMock([viewModel, mockedController]);
 
     const result = render(
       <Provider container={CoreDIContainer}>
@@ -140,33 +174,13 @@ describe("CookieModal", () => {
       </Provider>,
     );
 
-    await waitFor(() => {
-      expect(getConsentSpy).toHaveBeenCalled();
-    });
+    // Modal should be visible initially
+    expect(result.getByTestId("cookieModal")).toBeInTheDocument();
 
-    // Modal should not be visible when consent already declined
-    const modal = result.queryByTestId("cookieModal");
-    expect(modal).not.toBeInTheDocument();
-  });
+    const declineButton = result.getByTestId("cookieDecline");
+    fireEvent.click(declineButton);
 
-  test("modal shows when no consent is stored", async () => {
-    getConsentSpy.mockReturnValue(null);
-
-    const mockedController = mock<ICookieModalController>();
-    useBuilderMock([new CookieModalViewModel(), mockedController]);
-
-    const result = render(
-      <Provider container={CoreDIContainer}>
-        <CookieModal />
-      </Provider>,
-    );
-
-    await waitFor(() => {
-      expect(getConsentSpy).toHaveBeenCalled();
-    });
-
-    // Modal should be rendered when no consent is stored
-    const modal = result.getByTestId("cookieModal");
-    expect(modal).toBeInTheDocument();
+    // Modal should close (not be in document anymore)
+    expect(result.queryByTestId("cookieModal")).not.toBeInTheDocument();
   });
 });
