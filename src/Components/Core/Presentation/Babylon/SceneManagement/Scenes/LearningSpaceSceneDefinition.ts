@@ -76,7 +76,7 @@ export default class LearningSpaceSceneDefinition
       new Vector3(0, 1, 0),
       this.scene,
     );
-    light.intensity = 0.1;
+    light.intensity = 0.15;
     light.diffuse = new Color3(1, 1, 1);
 
     const fillLight = new DirectionalLight(
@@ -84,7 +84,7 @@ export default class LearningSpaceSceneDefinition
       new Vector3(1, -1, 1),
       this.scene,
     );
-    fillLight.intensity = 3;
+    fillLight.intensity = 4;
     fillLight.specular = new Color3(0.66, 0.83, 0.98);
     fillLight.diffuse = new Color3(0.66, 0.83, 0.98);
 
@@ -135,30 +135,6 @@ export default class LearningSpaceSceneDefinition
     this.avatarBuilder.learningSpacePresenter =
       this.spaceBuilder.getPresenter();
     await this.director.buildAsync(this.avatarBuilder);
-
-    // create shadows
-
-    // const shadow = new ShadowGenerator(8192, fillLight);
-    // this.scene.meshes.forEach((mesh) => {
-    //   mesh.receiveShadows = true;
-    //   shadow.addShadowCaster(mesh);
-    // });
-    // shadow.usePoissonSampling = true;
-
-    const shadow = new ShadowGenerator(8192, fillLight);
-    fillLight.shadowMinZ = 0;
-    fillLight.shadowMaxZ = 10;
-    this.scene.meshes.forEach((mesh) => {
-      shadow.getShadowMap()?.renderList?.push(mesh);
-      shadow.useCloseExponentialShadowMap = true;
-      mesh.receiveShadows = true;
-    });
-
-    // this.scene.meshes.forEach((mesh) => {
-    //   let shadow = new ShadowGenerator(8192, fillLight);
-    //   mesh.receiveShadows = true;
-    //   shadow.addShadowCaster(mesh);
-    // });
   }
 
   override disposeScene(): void {
