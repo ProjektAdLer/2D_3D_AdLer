@@ -1,7 +1,9 @@
 import { inject, injectable } from "inversify";
 import type IEntityContainer from "src/Components/Core/Domain/EntityContainer/IEntityContainer";
 import CORE_TYPES from "~DependencyInjection/CoreTypes";
+import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import type ILoggerPort from "../../Ports/Interfaces/ILoggerPort";
+import type ISettingsPort from "../../Ports/Interfaces/ISettingsPort";
 import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import ISetSettingsConfigUseCase from "./ISetSettingsConfigUseCase";
 import SettingsTO from "../../DataTransferObjects/SettingsTO";
@@ -16,6 +18,8 @@ export default class SetSettingsConfigUseCase
     private logger: ILoggerPort,
     @inject(CORE_TYPES.IEntityContainer)
     private entityContainer: IEntityContainer,
+    @inject(PORT_TYPES.ISettingsPort)
+    private settingsPort: ISettingsPort,
   ) {}
 
   execute(settings: SettingsTO): void {
@@ -67,5 +71,18 @@ export default class SetSettingsConfigUseCase
       LogLevelTypes.TRACE,
       `SetSettingsConfigUseCase: Settings set to: Volume:${settingsEntity.volume}, Language: ${settingsEntity.language}, HighGraphicsQualityEnabled: ${settingsEntity.highGraphicsQualityEnabled}, BreakTimeNotificationsEnabled: ${settingsEntity.breakTimeNotificationsEnabled}, CookieConsent: ${settingsEntity.cookieConsent}`,
     );
+
+    // Notify all registered adapters (Presenters) about the settings update
+    const settingsTO = new SettingsTO();
+    settingsTO.volume = settingsEntity.volume;
+    settingsTO.graphicsQuality = settingsEntity.graphicsQuality;
+    settingsTO.language = settingsEntity.language;
+    settingsTO.highGraphicsQualityEnabled =
+      settingsEntity.highGraphicsQualityEnabled;
+    settingsTO.breakTimeNotificationsEnabled =
+      settingsEntity.breakTimeNotificationsEnabled;
+    settingsTO.cookieConsent = settingsEntity.cookieConsent;
+
+    this.settingsPort.onSettingsUpdated(settingsTO);
   }
 }
