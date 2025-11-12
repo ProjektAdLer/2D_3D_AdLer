@@ -20,5 +20,7 @@ export default class SettingContentViewModel {
     true,
   );
 
+  lightsEnabled: Observable<boolean> = new Observable<boolean>(true);
+
   changedSettings: boolean = false;
 }

@@ -41,6 +41,7 @@ export default class GetSettingsConfigUseCase
         highGraphicsQualityEnabled: undefined,
         breakTimeNotificationsEnabled: undefined,
         cookieConsent: initialCookieConsent,
+        lightsEnabled: undefined,
       };
       this.entityContainer.useSingletonEntity<SettingsEntity>(
         settingsEntity,
@@ -85,9 +86,15 @@ export default class GetSettingsConfigUseCase
       settings.cookieConsent = settingsEntity.cookieConsent;
     }
 
+    if (settingsEntity.lightsEnabled === undefined) {
+      settings.lightsEnabled = true;
+    } else {
+      settings.lightsEnabled = settingsEntity.lightsEnabled;
+    }
+
     this.logger.log(
       LogLevelTypes.TRACE,
-      `GetSettingsConfigUseCase: User got settings: Volume:${settings.volume}, Language: ${settings.language}, HighGraphicsQualityEnabled: ${settings.highGraphicsQualityEnabled}, BreakTimeNotificationsEnabled: ${settings.breakTimeNotificationsEnabled}, CookieConsent: ${settings.cookieConsent}.`,
+      `GetSettingsConfigUseCase: User got settings: Volume:${settings.volume}, Language: ${settings.language}, HighGraphicsQualityEnabled: ${settings.highGraphicsQualityEnabled}, BreakTimeNotificationsEnabled: ${settings.breakTimeNotificationsEnabled}, CookieConsent: ${settings.cookieConsent}, Lights: ${settings.lightsEnabled}.`,
     );
     this.settingsPort.onSettingsUpdated(settings);
     return settings;

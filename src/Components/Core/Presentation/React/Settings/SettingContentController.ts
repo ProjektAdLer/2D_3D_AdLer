@@ -70,6 +70,14 @@ export default class SettingContentController
     });
   }
 
+  onLightsButtonClicked(): void {
+    this.viewModel.changedSettings = true;
+    this.viewModel.lightsEnabled.Value = !this.viewModel.lightsEnabled.Value;
+    this.setSettingsConfigUseCase.execute({
+      lightsEnabled: this.viewModel.lightsEnabled.Value,
+    });
+  }
+
   onTestSoundButtonClicked(): void {
     this.audio.volume = this.viewModel.volume.Value;
     this.audio.play();

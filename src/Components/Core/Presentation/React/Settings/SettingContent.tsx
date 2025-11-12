@@ -25,6 +25,7 @@ export default function SettingContent({ className }: AdLerUIComponent) {
   const [breakTimeNotificationsEnabled] = useObservable(
     viewModel.breakTimeNotificationsEnabled,
   );
+  const [lightsEnabled] = useObservable(viewModel.lightsEnabled);
   const [language] = useObservable(viewModel.language);
 
   if (!viewModel || !controller) return null;
@@ -190,6 +191,35 @@ export default function SettingContent({ className }: AdLerUIComponent) {
         <div className="py-1 pl-10">
           {translate("breakTimeNotificationsButton")}
         </div>
+      </div>
+      {/* lights */}
+      <div className={"border-b border-gray-500 pb-2 mobile-landscape:ml-6"}>
+        <h1 className={tailwindMerge("text-lg font-bold xl:text-2xl")}>
+          {translate("lights")}
+        </h1>
+      </div>
+      <div className="w:-full relative flex-row py-4">
+        <img
+          className="absolute w-6 bg-adleryellow lg:w-8 portrait:mx-0.5 portrait:w-4"
+          alt="Empty Lights Checkbox"
+          data-testid="emptyLights"
+          src={emptyCheckBox}
+          onClick={() => {
+            controller.onLightsButtonClicked();
+          }}
+        ></img>
+        {lightsEnabled && (
+          <img
+            src={greenSwosh}
+            alt="Lights Swosh"
+            data-testid="checkLights"
+            className="absolute w-6 lg:w-8 portrait:mx-0.5 portrait:w-4"
+            onClick={() => {
+              controller.onLightsButtonClicked();
+            }}
+          />
+        )}
+        <div className="py-1 pl-10">{translate("lightsButton")}</div>
       </div>
     </div>
   );

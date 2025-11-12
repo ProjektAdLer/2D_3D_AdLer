@@ -10,5 +10,7 @@
   "qualityLow": "Kompatibilitätsmodus",
   "testSoundButton": "Lautstärke Testen",
   "breakTimeNotifications": "Pausenbenachrichtigungen",
-  "breakTimeNotificationsButton": "Erinnere mich, regelmäßig eine Pause zu machen."
+  "breakTimeNotificationsButton": "Erinnere mich, regelmäßig eine Pause zu machen.",
+  "lights": "Verbesserte Lichteinstellungen im 3D Raum",
+  "lightsButton": "Zeige bessere Lichteinstellungen."
 }
