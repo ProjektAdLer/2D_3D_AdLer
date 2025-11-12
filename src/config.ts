@@ -4,7 +4,7 @@ import { parseBool } from "./Lib/ParseBool";
 // We can not use the logger as its loglevel gets defined here.
 // We have to use console.log and console.error here.
 
-const version = "2.10.0";
+const version = "2.11.0";
 
 // Get the Server URL from config file in Public folder if we are in Production.
 export const getMoodleURL = () => {
