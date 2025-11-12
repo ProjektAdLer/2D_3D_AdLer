@@ -87,7 +87,7 @@ export default class LearningSpaceSceneDefinition
         new Vector3(0, 1, 0),
         this.scene,
       );
-      light.intensity = 0.15;
+      light.intensity = 0.32;
       light.diffuse = new Color3(1, 1, 1);
 
       const fillLight = new DirectionalLight(
@@ -95,7 +95,7 @@ export default class LearningSpaceSceneDefinition
         new Vector3(1, -1, 1),
         this.scene,
       );
-      fillLight.intensity = 4;
+      fillLight.intensity = 5;
       fillLight.specular = new Color3(0.66, 0.83, 0.98);
       fillLight.diffuse = new Color3(0.66, 0.83, 0.98);
 
@@ -104,7 +104,7 @@ export default class LearningSpaceSceneDefinition
         new Vector3(-1, -0.5, -1),
         this.scene,
       );
-      contraLight.intensity = 0.5;
+      contraLight.intensity = 0.7;
       contraLight.specular = new Color3(0.66, 0.83, 0.98);
       contraLight.diffuse = new Color3(0.66, 0.83, 0.98);
     }
