@@ -5,7 +5,7 @@ import { parseBool } from "./Lib/ParseBool";
 // We have to use console.log and console.error here.
 
 const version = "2.11.0";
-//testing git commit
+
 // Get the Server URL from config file in Public folder if we are in Production.
 export const getMoodleURL = () => {
   if (process.env.NODE_ENV === "production") {
