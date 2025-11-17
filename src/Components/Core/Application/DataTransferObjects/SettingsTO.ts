@@ -5,4 +5,5 @@ export default class SettingsTO {
   highGraphicsQualityEnabled?: boolean;
   breakTimeNotificationsEnabled?: boolean;
   cookieConsent?: "accepted" | "declined";
+  lightsEnabled?: boolean;
 }

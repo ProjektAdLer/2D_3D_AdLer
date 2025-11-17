@@ -5,4 +5,5 @@ export default class SettingsEntity {
   highGraphicsQualityEnabled: boolean | undefined;
   breakTimeNotificationsEnabled: boolean | undefined;
   cookieConsent: "accepted" | "declined" | undefined;
+  lightsEnabled: boolean | undefined;
 }

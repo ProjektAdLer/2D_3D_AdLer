@@ -44,7 +44,7 @@ export default class TemplateLearningSpaceDimensionStrategy extends AbstractLear
       new Vector3(
         template.entryDoor.position.x,
         this.baseHeight,
-        template.entryDoor.position.y
+        template.entryDoor.position.y,
       ),
       template.entryDoor.orientation.rotation,
     ];
@@ -58,7 +58,7 @@ export default class TemplateLearningSpaceDimensionStrategy extends AbstractLear
       new Vector3(
         template.exitDoor.position.x,
         this.baseHeight,
-        template.exitDoor.position.y
+        template.exitDoor.position.y,
       ),
       template.exitDoor.orientation.rotation,
     ];
@@ -78,7 +78,7 @@ export default class TemplateLearningSpaceDimensionStrategy extends AbstractLear
   }
 
   private getTemplateByType(
-    type: LearningSpaceTemplateType
+    type: LearningSpaceTemplateType,
   ): ILearningSpaceTemplate {
     return LearningSpaceTemplateLookup.getLearningSpaceTemplate(type);
   }

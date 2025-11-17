@@ -15,5 +15,6 @@ export default class SettingContentPresenter
     this.viewModel.language.Value = newSettings.language!;
     this.viewModel.volume.Value = newSettings.volume!;
     this.viewModel.graphicsQuality.Value = newSettings.graphicsQuality!;
+    this.viewModel.lightsEnabled.Value = newSettings.lightsEnabled!;
   }
 }

@@ -36,6 +36,7 @@ export default class SetSettingsConfigUseCase
         breakTimeNotificationsEnabled:
           settings.breakTimeNotificationsEnabled ?? undefined,
         cookieConsent: settings.cookieConsent ?? undefined,
+        lightsEnabled: settings.lightsEnabled ?? undefined,
       };
       this.entityContainer.useSingletonEntity<SettingsEntity>(
         settingsEntity,
@@ -54,6 +55,8 @@ export default class SetSettingsConfigUseCase
       settingsEntity.breakTimeNotificationsEnabled;
     settingsEntity.cookieConsent =
       settings.cookieConsent ?? settingsEntity.cookieConsent;
+    settingsEntity.lightsEnabled =
+      settings.lightsEnabled ?? settingsEntity.lightsEnabled;
 
     // Speichere cookieConsent auch in localStorage für Persistierung beim App-Start
     if (settingsEntity.cookieConsent) {
@@ -69,7 +72,7 @@ export default class SetSettingsConfigUseCase
 
     this.logger.log(
       LogLevelTypes.TRACE,
-      `SetSettingsConfigUseCase: Settings set to: Volume:${settingsEntity.volume}, Language: ${settingsEntity.language}, HighGraphicsQualityEnabled: ${settingsEntity.highGraphicsQualityEnabled}, BreakTimeNotificationsEnabled: ${settingsEntity.breakTimeNotificationsEnabled}, CookieConsent: ${settingsEntity.cookieConsent}`,
+      `SetSettingsConfigUseCase: Settings set to: Volume:${settingsEntity.volume}, Language: ${settingsEntity.language}, HighGraphicsQualityEnabled: ${settingsEntity.highGraphicsQualityEnabled}, BreakTimeNotificationsEnabled: ${settingsEntity.breakTimeNotificationsEnabled}, CookieConsent: ${settingsEntity.cookieConsent}, Lights: ${settingsEntity.lightsEnabled}`,
     );
 
     // Notify all registered adapters (Presenters) about the settings update

@@ -26,7 +26,7 @@ describe("Navigation", () => {
     CoreDIContainer.snapshot();
 
     CoreDIContainer.rebind(SCENE_TYPES.ScenePresenterFactory).toConstantValue(
-      scenePresenterFactoryMock
+      scenePresenterFactoryMock,
     );
   });
 
@@ -60,6 +60,10 @@ describe("Navigation", () => {
     // ensure that debug code isn't executed
     config.isDebug = false;
 
+    RecastJSPlugin.prototype.createDebugNavMesh = jest
+      .fn()
+      .mockReturnValue(mock<Mesh>());
+
     await systemUnderTest.setupNavigation();
 
     try {
@@ -72,6 +76,9 @@ describe("Navigation", () => {
   test("setupNavigation creates a NavMesh and Crowd with the Recast plugin", async () => {
     // ensure that debug code isn't executed
     config.isDebug = false;
+    RecastJSPlugin.prototype.createDebugNavMesh = jest
+      .fn()
+      .mockReturnValue(mock<Mesh>());
 
     await systemUnderTest.setupNavigation();
 
@@ -82,6 +89,9 @@ describe("Navigation", () => {
   test("setupNavigation resolves isReady promise", async () => {
     // ensure that debug code isn't executed
     config.isDebug = false;
+    RecastJSPlugin.prototype.createDebugNavMesh = jest
+      .fn()
+      .mockReturnValue(mock<Mesh>());
 
     await systemUnderTest.setupNavigation();
 
@@ -99,7 +109,7 @@ describe("Navigation", () => {
     await systemUnderTest.setupNavigation();
 
     expect(RecastJSPlugin.prototype.createDebugNavMesh).toHaveBeenCalledTimes(
-      1
+      1,
     );
   });
 
@@ -114,6 +124,6 @@ describe("Navigation", () => {
       systemUnderTest.reset();
 
       expect(systemUnderTest[attribute].dispose).toHaveBeenCalled();
-    }
+    },
   );
 });

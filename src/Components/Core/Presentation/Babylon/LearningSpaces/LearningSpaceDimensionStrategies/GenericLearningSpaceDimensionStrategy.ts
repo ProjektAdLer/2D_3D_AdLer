@@ -12,22 +12,22 @@ export default class GenericLearningSpaceDimensionStrategy extends AbstractLearn
       new Vector3(
         spaceWidth + this.wallThickness,
         0,
-        spaceLength + this.wallThickness
+        spaceLength + this.wallThickness,
       ),
       new Vector3(
         -spaceWidth - this.wallThickness,
         0,
-        spaceLength + this.wallThickness
+        spaceLength + this.wallThickness,
       ),
       new Vector3(
         -spaceWidth - this.wallThickness,
         0,
-        -spaceLength - this.wallThickness
+        -spaceLength - this.wallThickness,
       ),
       new Vector3(
         spaceWidth + this.wallThickness,
         0,
-        -spaceLength - this.wallThickness
+        -spaceLength - this.wallThickness,
       ),
     ];
   }
@@ -66,7 +66,7 @@ export default class GenericLearningSpaceDimensionStrategy extends AbstractLearn
         new Vector3(
           spaceWidth * sideOffset * sideAlternation,
           this.baseHeight,
-          (spaceLength / (elementCount + 1)) * (i + 1) - spaceLength / 2
+          (spaceLength / (elementCount + 1)) * (i + 1) - spaceLength / 2,
         ),
         sideAlternation >= 0 ? 0 : 180,
       ]);
@@ -83,7 +83,7 @@ export default class GenericLearningSpaceDimensionStrategy extends AbstractLearn
       new Vector3(
         this.doorWidth / 2,
         this.baseHeight,
-        -spaceLength - this.wallThickness
+        -spaceLength - this.wallThickness,
       ),
       -90,
     ];
@@ -96,7 +96,7 @@ export default class GenericLearningSpaceDimensionStrategy extends AbstractLearn
       new Vector3(
         this.doorWidth / 2,
         this.baseHeight,
-        spaceLength + this.wallThickness
+        spaceLength + this.wallThickness,
       ),
       -90,
     ];
@@ -110,7 +110,7 @@ export default class GenericLearningSpaceDimensionStrategy extends AbstractLearn
       new Vector3(
         this.windowWidth + 3,
         this.baseHeight,
-        -spaceLength - this.wallThickness
+        -spaceLength - this.wallThickness,
       ),
       -90,
     ];

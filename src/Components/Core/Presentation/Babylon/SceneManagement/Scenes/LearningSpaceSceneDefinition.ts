@@ -6,6 +6,7 @@ import {
   HighlightLayer,
   TransformNode,
   Color3,
+  DirectionalLight,
 } from "@babylonjs/core";
 import "@babylonjs/inspector";
 import { inject, injectable } from "inversify";
@@ -28,6 +29,7 @@ import type IAvatarBuilder from "../../Avatar/IAvatarBuilder";
 import type { IAmbienceBuilder } from "../../Ambience/IAmbienceBuilder";
 import { LocationScope } from "~ReactComponents/ReactRelated/ReactEntryPoint/HistoryWrapper";
 import type IGetSettingsConfigUseCase from "src/Components/Core/Application/UseCases/GetSettingsConfig/IGetSettingsConfigUseCase";
+import SettingsTO from "src/Components/Core/Application/DataTransferObjects/SettingsTO";
 
 @injectable()
 export default class LearningSpaceSceneDefinition
@@ -36,6 +38,7 @@ export default class LearningSpaceSceneDefinition
 {
   private avatarParentNode: TransformNode;
   private spaceData: LearningSpaceTO;
+  private settings: SettingsTO;
 
   constructor(
     @inject(BUILDER_TYPES.IPresentationDirector)
@@ -66,15 +69,45 @@ export default class LearningSpaceSceneDefinition
   protected override preTasks = [this.loadSpacePreTask];
 
   protected override async initializeScene(): Promise<void> {
+    this.settings = this.getSettingsUseCase.execute();
     this.scene.clearColor = new Color4(0.66, 0.83, 0.98, 1);
-    const light = new HemisphericLight(
-      "light",
-      new Vector3(0, 1, 0),
-      this.scene,
-    );
-    light.intensity = 1;
-    light.diffuse = new Color3(1, 1, 1);
+    console.log(this.settings);
+    // setup lights (one light for mobile performance, three lights for better quality)
+    if (this.settings.lightsEnabled === false) {
+      const ambientLight = new HemisphericLight(
+        "soleAmbientLight",
+        new Vector3(0, 1, 0),
+        this.scene,
+      );
+      ambientLight.intensity = 1;
+      ambientLight.diffuse = new Color3(1, 1, 1);
+    } else {
+      const light = new HemisphericLight(
+        "ambientLight",
+        new Vector3(0, 1, 0),
+        this.scene,
+      );
+      light.intensity = 0.32;
+      light.diffuse = new Color3(1, 1, 1);
 
+      const fillLight = new DirectionalLight(
+        "fillLight",
+        new Vector3(1, -1, 1),
+        this.scene,
+      );
+      fillLight.intensity = 5;
+      fillLight.specular = new Color3(0.66, 0.83, 0.98);
+      fillLight.diffuse = new Color3(0.66, 0.83, 0.98);
+
+      const contraLight = new DirectionalLight(
+        "contraLight",
+        new Vector3(-1, -0.5, -1),
+        this.scene,
+      );
+      contraLight.intensity = 0.7;
+      contraLight.specular = new Color3(0.66, 0.83, 0.98);
+      contraLight.diffuse = new Color3(0.66, 0.83, 0.98);
+    }
     // setup highlight layer
     this.highlightLayer = new HighlightLayer("highlightLayer", this.scene);
     this.highlightLayer.innerGlow = false;
@@ -104,9 +137,7 @@ export default class LearningSpaceSceneDefinition
     // set hardware scaling from user settings
     this.scene
       .getEngine()
-      .setHardwareScalingLevel(
-        this.getSettingsUseCase.execute().graphicsQuality!,
-      );
+      .setHardwareScalingLevel(this.settings.graphicsQuality!);
 
     // create avatar
     this.avatarBuilder.learningSpaceTemplateType = this.spaceData?.template;

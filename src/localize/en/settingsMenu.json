@@ -10,5 +10,7 @@
   "qualityLow": "Compatibility Mode",
   "testSoundButton": "Test Volume",
   "breakTimeNotifications": "Break Time Notifications",
-  "breakTimeNotificationsButton": "Remind me to take breaks."
+  "breakTimeNotificationsButton": "Remind me to take breaks.",
+  "lights": "Enhanced Lighting within the 3D Environment",
+  "lightsButton": "Enable Enhanced Lighting."
 }
