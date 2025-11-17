@@ -8,8 +8,8 @@ export function createH5POptions(viewModel: LearningElementModalViewModel) {
   let frameCss: string;
   const filePath = viewModel.filePath.Value;
 
-  if (config.useFakeBackend) {
-    // For Mock-Backend: extract only the path part of the URL
+  if (config.useFakeBackend || config.useFileBasedBackend) {
+    // For Mock-Backend and File-Based Backend: extract only the path part of the URL
     if (filePath.startsWith("http://") || filePath.startsWith("https://")) {
       // Extract the path from the full URL
       const url = new URL(filePath);
