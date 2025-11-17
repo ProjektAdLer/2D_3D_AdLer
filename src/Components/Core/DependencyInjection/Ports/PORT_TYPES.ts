@@ -4,6 +4,7 @@ const PORT_TYPES = {
   IAvatarPort: Symbol("IAvatarPort"),
   INotificationPort: Symbol("INotificationPort"),
   ISettingsPort: Symbol("ISettingsPort"),
+  ILocalStoragePort: Symbol("ILocalStoragePort"),
 };
 
 export default PORT_TYPES;
