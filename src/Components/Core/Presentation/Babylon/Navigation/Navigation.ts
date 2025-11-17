@@ -5,6 +5,8 @@ import {
   Vector3,
   Color3,
   RecastJSCrowd,
+  ActionManager,
+  ExecuteCodeAction,
 } from "@babylonjs/core";
 import INavigation from "./INavigation";
 import * as Recast from "recast-detour";
@@ -70,21 +72,27 @@ export default class Navigation extends Readyable implements INavigation {
     );
     this.plugin.setDefaultQueryExtent(new Vector3(2, 1, 2)); // supports querys on objects slightly outside navmesh
 
+    this.navMeshDebug?.dispose();
+    this.navMeshDebug = this.plugin.createDebugNavMesh(
+      this.scenePresenter.Scene,
+    );
+    this.navMeshDebug.position = new Vector3(0, 0.05, 0);
+    this.matDebug?.dispose();
+    this.matDebug = new StandardMaterial("matdebug", this.scenePresenter.Scene);
+    this.matDebug.diffuseColor = new Color3(0.1, 0.2, 1);
+    this.matDebug.alpha = 0;
+    this.navMeshDebug.material = this.matDebug;
+    this.navMeshDebug.actionManager = new ActionManager(
+      this.scenePresenter.Scene,
+    );
+    // changes cursor to pointer icon
+    this.navMeshDebug.actionManager.registerAction(
+      new ExecuteCodeAction(ActionManager.OnPointerOverTrigger, () => {}),
+    );
+
     // debug: colored navmesh representation
     if (config.isDebug === true) {
-      this.navMeshDebug?.dispose();
-      this.navMeshDebug = this.plugin.createDebugNavMesh(
-        this.scenePresenter.Scene,
-      );
-      this.navMeshDebug.position = new Vector3(0, 0.01, 0);
-      this.matDebug?.dispose();
-      this.matDebug = new StandardMaterial(
-        "matdebug",
-        this.scenePresenter.Scene,
-      );
-      this.matDebug.diffuseColor = new Color3(0.1, 0.2, 1);
       this.matDebug.alpha = 0.2;
-      this.navMeshDebug.material = this.matDebug;
     }
 
     // -- Navigation Crowd --

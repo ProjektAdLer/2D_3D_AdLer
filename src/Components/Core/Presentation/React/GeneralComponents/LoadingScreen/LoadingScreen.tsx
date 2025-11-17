@@ -56,7 +56,12 @@ export default function LoadingScreen(props: Readonly<LoadinScreenProps>) {
   if (!viewModel || !controller || !isOpen) return null;
 
   return (
-    <div className="fixed left-0 top-0 z-[20000] flex h-screen w-screen items-center justify-center bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto">
+    <div
+      className={
+        "fixed left-0 top-0 z-[20000] flex h-screen w-screen items-center justify-center bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto " +
+        viewModel.cursorState.Value
+      }
+    >
       <div className="flex h-full w-full max-w-full flex-col justify-between overflow-hidden p-4 mobile-landscape:p-2 mobile-portrait:p-2 tablet-portrait:p-3">
         {/* Header Section - Logo und Loading Text */}
         <section className="flex flex-shrink-0 items-center justify-center gap-4 pt-8 xl:gap-8 onek:gap-10 twok:gap-12 fourk:gap-16 mobile-landscape:gap-2 mobile-landscape:pt-2 mobile-portrait:gap-2 mobile-portrait:pt-4 tablet-portrait:gap-3 tablet-portrait:pt-6">
