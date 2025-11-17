@@ -28,30 +28,33 @@ import CookieModal from "~ReactComponents/WelcomePage/CookieModal/CookieModal";
 export default function WelcomePage() {
   const { t: translate } = useTranslation("start");
   const isShowcase = process.env.REACT_APP_IS_SHOWCASE === "true";
+  const isFileBasedBackend =
+    process.env.REACT_APP_USE_FILEBASED_BACKEND === "true";
+  const skipLogin = isShowcase || isFileBasedBackend;
   const loginUseCase = useInjection<ILoginUseCase>(USECASE_TYPES.ILoginUseCase);
   const loadAvatarConfigUseCase = useInjection<ILoadAvatarConfigUseCase>(
     USECASE_TYPES.ILoadAvatarConfigUseCase,
   );
 
-  // Automatic login in showcase mode
+  // Automatic login in showcase mode or file-based backend mode
   useEffect(() => {
-    if (isShowcase) {
-      const performShowcaseLogin = async () => {
+    if (skipLogin) {
+      const performAutoLogin = async () => {
         try {
           await loginUseCase.executeAsync({
-            username: "showcase",
-            password: "showcase",
+            username: isShowcase ? "showcase" : "filebased",
+            password: isShowcase ? "showcase" : "filebased",
           });
           // Load avatar configuration after successful login
           await loadAvatarConfigUseCase.executeAsync();
         } catch (error) {
-          console.error("Showcase login failed:", error);
+          console.error("Auto-login failed:", error);
         }
       };
 
-      performShowcaseLogin();
+      performAutoLogin();
     }
-  }, [isShowcase, loginUseCase, loadAvatarConfigUseCase]);
+  }, [skipLogin, isShowcase, loginUseCase, loadAvatarConfigUseCase]);
 
   return (
     <div
@@ -87,7 +90,7 @@ export default function WelcomePage() {
           src={welcomePicture}
           alt="3D Welcome Text"
         />
-        {!isShowcase && (
+        {!skipLogin && (
           <>
             <LoginComponent className="col-span-6 col-start-2 flex flex-col items-center justify-around lg:pt-8 xl:pt-3 mobile-landscape:pt-0 mobile-portrait:row-start-2 mobile-portrait:justify-start tablet-portrait:col-span-8 tablet-portrait:col-start-1" />
           </>
@@ -113,11 +116,11 @@ export default function WelcomePage() {
         />
       </section>
 
-      {!isShowcase && (
+      {!skipLogin && (
         <LogoutComponent className="relative z-0 col-span-2 col-start-7 row-start-6 flex flex-col gap-2 self-end justify-self-end mobile-landscape:mb-10 mobile-portrait:mb-10" />
       )}
 
-      {!isShowcase && (
+      {!skipLogin && (
         <LMSButton className="col-span-1 col-start-1 row-span-1 row-start-1 w-32 2xl:w-44 mobile-portrait:w-24" />
       )}
 
