@@ -1,5 +1,7 @@
 import { injectable } from "inversify";
 import ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces/ILearningWorldPort";
+import AbstractPort from "src/Components/Core/Application/Ports/AbstractPort/AbstractPort";
+import ISettingsAdapter from "src/Components/Core/Application/Ports/SettingsPort/ISettingsAdapter";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
@@ -22,7 +24,7 @@ export default class LearningElementModalBuilder extends PresentationBuilder<
       LearningElementModalViewModel,
       LearningElementModalController,
       undefined,
-      LearningElementModalPresenter
+      LearningElementModalPresenter,
     );
   }
 
@@ -30,7 +32,11 @@ export default class LearningElementModalBuilder extends PresentationBuilder<
     super.buildPresenter();
 
     CoreDIContainer.get<ILearningWorldPort>(
-      PORT_TYPES.ILearningWorldPort
+      PORT_TYPES.ILearningWorldPort,
+    ).registerAdapter(this.presenter!, HistoryWrapper.currentLocationScope());
+
+    CoreDIContainer.get<AbstractPort<ISettingsAdapter>>(
+      PORT_TYPES.ISettingsPort,
     ).registerAdapter(this.presenter!, HistoryWrapper.currentLocationScope());
   }
 }

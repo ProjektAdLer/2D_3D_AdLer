@@ -2,23 +2,17 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import ILearningElementModalController from "../ILearningElementModalController";
-import SettingsTO from "src/Components/Core/Application/DataTransferObjects/SettingsTO";
 
 export default function CookieConsentBlocker({
-  onConsent,
   controller,
 }: {
-  onConsent: () => void;
   controller: ILearningElementModalController;
 }) {
   const { t: translate } = useTranslation("learningElement");
   const [showDetails, setShowDetails] = useState(false);
 
   const handleAccept = () => {
-    const settings = new SettingsTO();
-    settings.cookieConsent = "accepted";
-    controller.setUserSettings(settings);
-    onConsent();
+    controller.setCookieConsent(true);
   };
 
   return (

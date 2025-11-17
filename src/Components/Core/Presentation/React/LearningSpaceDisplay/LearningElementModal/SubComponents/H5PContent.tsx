@@ -23,10 +23,7 @@ export default function H5PContent({
 }) {
   const h5pContainerRef = useRef<HTMLDivElement>(null);
   const [isVisible] = useObservable<boolean>(viewModel.isVisible);
-  const [hasConsent, setHasConsent] = useState(() => {
-    const result = controller.getUserSettings();
-    return result.cookieConsent === "accepted";
-  });
+  const [cookieConsent] = useObservable(viewModel.cookieConsent);
   const [dimensions, setDimensions] = useState({
     contentWidth: 0,
     contentHeight: 0,
@@ -34,9 +31,7 @@ export default function H5PContent({
     refHeight: 0,
   });
 
-  const handleConsent = () => {
-    setHasConsent(true);
-  };
+  const hasConsent = cookieConsent === "accepted";
 
   // sets modal visible after timeout
   useEffect(() => {
@@ -119,9 +114,7 @@ export default function H5PContent({
   }, [dimensions]);
 
   if (!hasConsent) {
-    return (
-      <CookieConsentBlocker onConsent={handleConsent} controller={controller} />
-    );
+    return <CookieConsentBlocker controller={controller} />;
   }
 
   return (

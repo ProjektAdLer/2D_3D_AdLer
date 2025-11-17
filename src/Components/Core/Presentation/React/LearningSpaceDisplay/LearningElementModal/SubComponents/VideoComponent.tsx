@@ -1,4 +1,3 @@
-import { useState } from "react";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import LearningElementModalViewModel from "../LearningElementModalViewModel";
 import YoutubeVideoHost from "./VideoHosters/YoutubeVideoHost";
@@ -15,21 +14,14 @@ export default function VideoComponent({
   controller: ILearningElementModalController;
 }) {
   const [filepath] = useObservable(viewModel.filePath);
-  const [hasConsent, setHasConsent] = useState(() => {
-    const settings = controller.getUserSettings();
-    return settings.cookieConsent === "accepted";
-  });
-
-  const handleConsent = () => {
-    setHasConsent(true);
-  };
+  const [cookieConsent] = useObservable(viewModel.cookieConsent);
 
   if (!filepath) return null;
 
+  const hasConsent = cookieConsent === "accepted";
+
   if (!hasConsent) {
-    return (
-      <CookieConsentBlocker onConsent={handleConsent} controller={controller} />
-    );
+    return <CookieConsentBlocker controller={controller} />;
   }
 
   const videoComponent = getVideoComponent(filepath); // Set the video component using regex
