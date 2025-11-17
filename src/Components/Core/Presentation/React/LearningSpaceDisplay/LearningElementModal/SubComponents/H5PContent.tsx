@@ -55,6 +55,25 @@ export default function H5PContent({
 
         const el = h5pContainerRef.current;
         await new H5PPlayer(el, createH5POptions(viewModel));
+
+        // Load H5P polyfill for missing utility functions
+        //@ts-ignore
+        if (typeof H5P !== "undefined" && !H5P.isEmpty) {
+          //@ts-ignore
+          H5P.isEmpty = function (value) {
+            if (value === null || value === undefined) return true;
+            if (typeof value === "string") return value.trim() === "";
+            if (Array.isArray(value)) return value.length === 0;
+            if (typeof value === "object")
+              return Object.keys(value).length === 0;
+            return false;
+          };
+          //@ts-ignore
+          H5P.trim = function (str) {
+            return (str || "").trim();
+          };
+        }
+
         //@ts-ignore
         H5P.externalDispatcher.on("xAPI", controller.h5pEventCalled);
         // @ts-ignore
