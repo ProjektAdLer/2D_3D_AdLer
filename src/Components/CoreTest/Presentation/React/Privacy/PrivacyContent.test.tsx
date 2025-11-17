@@ -2,8 +2,8 @@ import "@testing-library/jest-dom";
 import { render, fireEvent } from "@testing-library/react";
 import React from "react";
 import PrivacyContent from "../../../../Core/Presentation/React/Privacy/PrivacyContent";
-import PrivacyViewModel from "../../../../Core/Presentation/React/Privacy/PrivacyViewModel";
-import IPrivacyController from "../../../../Core/Presentation/React/Privacy/IPrivacyController";
+import PrivacyContentViewModel from "../../../../Core/Presentation/React/Privacy/PrivacyContentViewModel";
+import IPrivacyContentController from "../../../../Core/Presentation/React/Privacy/IPrivacyContentController";
 import useBuilderMock from "../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 import { mock } from "jest-mock-extended";
 
@@ -42,13 +42,13 @@ jest.mock("react-i18next", () => ({
 }));
 
 describe("PrivacyContent", () => {
-  let mockViewModel: PrivacyViewModel;
-  let mockController: jest.Mocked<IPrivacyController>;
+  let mockViewModel: PrivacyContentViewModel;
+  let mockController: jest.Mocked<IPrivacyContentController>;
 
   beforeEach(() => {
-    mockViewModel = new PrivacyViewModel();
+    mockViewModel = new PrivacyContentViewModel();
     mockViewModel.cookiesAccepted.Value = false;
-    mockController = mock<IPrivacyController>();
+    mockController = mock<IPrivacyContentController>();
   });
 
   test("should render without controller", () => {

@@ -1,36 +1,36 @@
-import PrivacyBuilder from "../../../../Core/Presentation/React/Privacy/PrivacyBuilder";
-import PrivacyViewModel from "../../../../Core/Presentation/React/Privacy/PrivacyViewModel";
-import PrivacyController from "../../../../Core/Presentation/React/Privacy/PrivacyController";
-import PrivacyPresenter from "../../../../Core/Presentation/React/Privacy/PrivacyPresenter";
+import PrivacyContentBuilder from "../../../../Core/Presentation/React/Privacy/PrivacyContentBuilder";
+import PrivacyContentViewModel from "../../../../Core/Presentation/React/Privacy/PrivacyContentViewModel";
+import PrivacyContentController from "../../../../Core/Presentation/React/Privacy/PrivacyContentController";
+import PrivacyContentPresenter from "../../../../Core/Presentation/React/Privacy/PrivacyContentPresenter";
 
-describe("PrivacyBuilder", () => {
-  let systemUnderTest: PrivacyBuilder;
+describe("PrivacyContentBuilder", () => {
+  let systemUnderTest: PrivacyContentBuilder;
 
   beforeEach(() => {
-    systemUnderTest = new PrivacyBuilder();
+    systemUnderTest = new PrivacyContentBuilder();
   });
 
-  test("should build a PrivacyViewModel", () => {
+  test("should build a PrivacyContentViewModel", () => {
     systemUnderTest.buildViewModel();
     const viewModel = systemUnderTest.getViewModel();
 
-    expect(viewModel).toBeInstanceOf(PrivacyViewModel);
+    expect(viewModel).toBeInstanceOf(PrivacyContentViewModel);
   });
 
-  test("should build a PrivacyController", () => {
+  test("should build a PrivacyContentController", () => {
     systemUnderTest.buildViewModel();
     systemUnderTest.buildController();
     const controller = systemUnderTest.getController();
 
-    expect(controller).toBeInstanceOf(PrivacyController);
+    expect(controller).toBeInstanceOf(PrivacyContentController);
   });
 
-  test("should build a PrivacyPresenter", () => {
+  test("should build a PrivacyContentPresenter", () => {
     systemUnderTest.buildViewModel();
     systemUnderTest.buildPresenter();
     const presenter = systemUnderTest.getPresenter();
 
-    expect(presenter).toBeInstanceOf(PrivacyPresenter);
+    expect(presenter).toBeInstanceOf(PrivacyContentPresenter);
   });
 
   test("should build complete presentation with viewModel, controller, and presenter", () => {
@@ -42,9 +42,9 @@ describe("PrivacyBuilder", () => {
     const controller = systemUnderTest.getController();
     const presenter = systemUnderTest.getPresenter();
 
-    expect(viewModel).toBeInstanceOf(PrivacyViewModel);
-    expect(controller).toBeInstanceOf(PrivacyController);
-    expect(presenter).toBeInstanceOf(PrivacyPresenter);
+    expect(viewModel).toBeInstanceOf(PrivacyContentViewModel);
+    expect(controller).toBeInstanceOf(PrivacyContentController);
+    expect(presenter).toBeInstanceOf(PrivacyContentPresenter);
   });
 
   test("controller and presenter should be initialized with same viewModel", () => {
