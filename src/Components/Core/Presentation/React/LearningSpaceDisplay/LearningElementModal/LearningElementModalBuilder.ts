@@ -3,6 +3,8 @@ import ILearningWorldPort from "src/Components/Core/Application/Ports/Interfaces
 import AbstractPort from "src/Components/Core/Application/Ports/AbstractPort/AbstractPort";
 import ISettingsAdapter from "src/Components/Core/Application/Ports/SettingsPort/ISettingsAdapter";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+import type IGetSettingsConfigUseCase from "src/Components/Core/Application/UseCases/GetSettingsConfig/IGetSettingsConfigUseCase";
 import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
 import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
 import LearningElementModalController from "./LearningElementModalController";
@@ -38,5 +40,10 @@ export default class LearningElementModalBuilder extends PresentationBuilder<
     CoreDIContainer.get<AbstractPort<ISettingsAdapter>>(
       PORT_TYPES.ISettingsPort,
     ).registerAdapter(this.presenter!, HistoryWrapper.currentLocationScope());
+
+    // Load initial settings to populate the ViewModel
+    CoreDIContainer.get<IGetSettingsConfigUseCase>(
+      USECASE_TYPES.IGetSettingsConfigUseCase,
+    ).execute();
   }
 }

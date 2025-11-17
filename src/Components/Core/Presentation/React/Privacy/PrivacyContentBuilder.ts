@@ -9,6 +9,8 @@ import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import AbstractPort from "src/Components/Core/Application/Ports/AbstractPort/AbstractPort";
 import ISettingsAdapter from "src/Components/Core/Application/Ports/SettingsPort/ISettingsAdapter";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
+import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+import type IGetSettingsConfigUseCase from "src/Components/Core/Application/UseCases/GetSettingsConfig/IGetSettingsConfigUseCase";
 import { HistoryWrapper } from "~ReactComponents/ReactRelated/ReactEntryPoint/HistoryWrapper";
 
 @injectable()
@@ -33,5 +35,10 @@ export default class PrivacyContentBuilder extends PresentationBuilder<
     CoreDIContainer.get<AbstractPort<ISettingsAdapter>>(
       PORT_TYPES.ISettingsPort,
     ).registerAdapter(this.presenter!, HistoryWrapper.currentLocationScope());
+
+    // Load initial settings to populate the ViewModel
+    CoreDIContainer.get<IGetSettingsConfigUseCase>(
+      USECASE_TYPES.IGetSettingsConfigUseCase,
+    ).execute();
   }
 }
