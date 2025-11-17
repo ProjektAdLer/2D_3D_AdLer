@@ -10,6 +10,7 @@ import IBackendPort from "../Application/Ports/Interfaces/IBackendPort";
 import BackendAdapter from "../Adapters/BackendAdapter/BackendAdapter";
 import { config } from "src/config";
 import MockBackendAdapter from "../Adapters/BackendAdapter/MockBackendAdapter";
+import FileBasedBackendAdapter from "../Adapters/BackendAdapter/FileBasedBackendAdapter";
 
 const infrastructureDIContainer = new ContainerModule((bind) => {
   bind<IEntityContainer>(CORE_TYPES.IEntityContainer)
@@ -25,7 +26,11 @@ const infrastructureDIContainer = new ContainerModule((bind) => {
   bind<IReactEntry>(CORE_TYPES.ICoreRenderer).to(ReactEntry).inSingletonScope();
 
   // Backend Adapter
-  if (config.useFakeBackend) {
+  if (config.useFileBasedBackend) {
+    bind<IBackendPort>(CORE_TYPES.IBackendAdapter)
+      .to(FileBasedBackendAdapter)
+      .inSingletonScope();
+  } else if (config.useFakeBackend) {
     bind<IBackendPort>(CORE_TYPES.IBackendAdapter)
       .to(MockBackendAdapter)
       .inSingletonScope();
