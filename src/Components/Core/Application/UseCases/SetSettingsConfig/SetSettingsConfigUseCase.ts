@@ -109,6 +109,7 @@ export default class SetSettingsConfigUseCase
     settingsTO.breakTimeNotificationsEnabled =
       settingsEntity.breakTimeNotificationsEnabled;
     settingsTO.cookieConsent = settingsEntity.cookieConsent;
+    settingsTO.lightsEnabled = settingsEntity.lightsEnabled;
 
     this.settingsPort.onSettingsUpdated(settingsTO);
   }

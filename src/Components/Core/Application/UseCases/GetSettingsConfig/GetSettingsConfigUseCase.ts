@@ -53,7 +53,7 @@ export default class GetSettingsConfigUseCase
         storedGraphicsQuality !== null
           ? parseInt(storedGraphicsQuality, 10)
           : undefined,
-      language: storedLanguage ?? undefined,
+      language: storedLanguage !== null ? storedLanguage : undefined,
       highGraphicsQualityEnabled:
         storedHighGraphicsQualityEnabled !== null
           ? storedHighGraphicsQualityEnabled === "true"
