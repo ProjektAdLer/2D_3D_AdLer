@@ -2,6 +2,7 @@
 *.mbz
 */
 .temp/
+worlds.json
 
-# Behalte nur worlds.json im Repo (als Beispiel-Template)
+# Behalte nur .gitignore im Repo
 !.gitignore
