@@ -4,8 +4,8 @@ import emptyCheckBox from "../../../../../Assets/icons/empty-box.svg";
 import greenSwosh from "../../../../../Assets/icons/check-solution.svg";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
-import PrivacyViewModel from "./PrivacyViewModel";
-import IPrivacyController from "./IPrivacyController";
+import PrivacyContentViewModel from "./PrivacyContentViewModel";
+import IPrivacyContentController from "./IPrivacyContentController";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 
 interface Subsection {
@@ -23,9 +23,9 @@ export default function PrivacyContent({ className }: AdLerUIComponent) {
   const sections: Section[] = translate("sections", { returnObjects: true });
 
   const [viewModel, controller] = useBuilder<
-    PrivacyViewModel,
-    IPrivacyController
-  >(BUILDER_TYPES.IPrivacyBuilder);
+    PrivacyContentViewModel,
+    IPrivacyContentController
+  >(BUILDER_TYPES.IPrivacyContentBuilder);
 
   const [cookiesAccepted] = useObservable<boolean>(viewModel?.cookiesAccepted);
 

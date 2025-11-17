@@ -1,10 +1,12 @@
 import SettingsTO from "src/Components/Core/Application/DataTransferObjects/SettingsTO";
-import IPrivacyPresenter from "./IPrivacyPresenter";
-import PrivacyViewModel from "./PrivacyViewModel";
+import IPrivacyContentPresenter from "./IPrivacyContentPresenter";
+import PrivacyContentViewModel from "./PrivacyContentViewModel";
 import bind from "bind-decorator";
 
-export default class PrivacyPresenter implements IPrivacyPresenter {
-  constructor(private viewModel: PrivacyViewModel) {}
+export default class PrivacyContentPresenter
+  implements IPrivacyContentPresenter
+{
+  constructor(private viewModel: PrivacyContentViewModel) {}
 
   @bind
   onSettingsUpdated(newSettings: SettingsTO): void {
