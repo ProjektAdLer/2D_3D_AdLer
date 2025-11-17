@@ -14,3 +14,6 @@ scripts/*/*.js
 # Environment variables for configuration at container runtime
 /public/env-config.js
 env-config.js
+
+# Claude Code project instructions
+claude.md
