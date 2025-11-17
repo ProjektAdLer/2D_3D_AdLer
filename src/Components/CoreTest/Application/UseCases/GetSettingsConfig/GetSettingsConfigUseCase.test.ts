@@ -47,7 +47,7 @@ describe("GetSettingsConfigUseCase", () => {
     expect(loggerMock.log).toHaveBeenCalledTimes(1);
     expect(loggerMock.log).toHaveBeenCalledWith(
       "TRACE",
-      "GetSettingsConfigUseCase: User got settings: Volume:0.5, Language: de, HighGraphicsQualityEnabled: true, BreakTimeNotificationsEnabled: true, CookieConsent: undefined.",
+      "GetSettingsConfigUseCase: User got settings: Volume:0.5, Language: de, HighGraphicsQualityEnabled: true, BreakTimeNotificationsEnabled: true, CookieConsent: undefined, Lights: true.",
     );
   });
 
@@ -63,7 +63,7 @@ describe("GetSettingsConfigUseCase", () => {
     expect(loggerMock.log).toHaveBeenCalledTimes(1);
     expect(loggerMock.log).toHaveBeenCalledWith(
       "TRACE",
-      "GetSettingsConfigUseCase: User got settings: Volume:0.42, Language: en, HighGraphicsQualityEnabled: false, BreakTimeNotificationsEnabled: false, CookieConsent: undefined.",
+      "GetSettingsConfigUseCase: User got settings: Volume:0.42, Language: en, HighGraphicsQualityEnabled: false, BreakTimeNotificationsEnabled: false, CookieConsent: undefined, Lights: true.",
     );
   });
 
