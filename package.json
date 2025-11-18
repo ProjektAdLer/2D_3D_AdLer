@@ -2,6 +2,9 @@
   "name": "adler-engine",
   "version": "0.2.0",
   "private": true,
+  "main": "electron/main.js",
+  "author": "AdLer Team",
+  "description": "AdLer Learning Engine - Interactive 3D Learning Experience",
   "dependencies": {
     "@babylonjs/accessibility": "^7.45.0",
     "@babylonjs/core": "^7.24.0",
@@ -15,6 +18,7 @@
     "bind-decorator": "^1.0.11",
     "clsx": "^2.1.1",
     "earcut": "^3.0.0",
+    "express": "^5.1.0",
     "h5p-standalone": "^3.7.0",
     "history": "^5.3.0",
     "i18next": "^22.5.1",
@@ -44,6 +48,12 @@
     "build-showcase": "npm pkg set homepage=https://projektadler.github.io && npx dotenv-cli -e .env.filebased react-app-rewired build && node -e \"require('fs').writeFileSync('build/env-config.js', 'window._env_ = { API_URL: \\'\\', MOODLE_URL: \\'\\'};')\" && node -e \"require('fs').copyFileSync('build/index.html', 'build/404.html')\" && npm pkg delete homepage",
     "build-and-deploy-showcase": "npm run build-showcase && node deploy-showcase.js",
     "deploy-showcase": "node deploy-showcase.js",
+    "electron:dev": "concurrently \"cross-env BROWSER=none npm start\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron:start": "electron .",
+    "build-electron": "npm run build-filebased && electron-builder",
+    "build-electron:win": "npm run build-filebased && electron-builder --win",
+    "build-electron:mac": "npm run build-filebased && electron-builder --mac",
+    "build-electron:linux": "npm run build-filebased && electron-builder --linux",
     "test": "react-app-rewired test --watchAll",
     "test-ci": "cross-env CI=true react-app-rewired test --coverage",
     "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls",
@@ -72,11 +82,8 @@
     "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/react": "16.0",
     "@testing-library/user-event": "^14.5.2",
-    "@types/dagre": "^0.7.52",
     "@types/adm-zip": "^0.5.5",
-    "@types/xml2js": "^0.4.14",
-    "adm-zip": "^0.5.16",
-    "xml2js": "^0.6.2",
+    "@types/dagre": "^0.7.52",
     "@types/earcut": "^2.1.4",
     "@types/glob": "^8.1.0",
     "@types/inversify": "^2.0.33",
@@ -88,12 +95,17 @@
     "@types/react-router-dom": "^5.3.3",
     "@types/uuid": "^10.0.0",
     "@types/webpack-env": "^1.18.5",
+    "@types/xml2js": "^0.4.14",
+    "adm-zip": "^0.5.16",
     "babel-plugin-transform-require-context": "^0.1.1",
     "babel-plugin-transform-typescript-metadata": "^0.3.2",
+    "concurrently": "^9.2.1",
     "coveralls": "^3.1.1",
     "cross-env": "^7.0.3",
     "customize-cra": "^1.0.0",
     "dotenv-cli": "^7.4.4",
+    "electron": "^39.2.1",
+    "electron-builder": "^26.0.12",
     "generate-license-file": "^3.7.0",
     "husky": "^9.1.7",
     "identity-obj-proxy": "^3.0.0",
@@ -112,9 +124,68 @@
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "tsconfig-paths-webpack-plugin": "^4.1.0",
-    "typescript": "^4.9.3"
+    "typescript": "^4.9.3",
+    "wait-on": "^9.0.3",
+    "xml2js": "^0.6.2"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
+  },
+  "build": {
+    "appId": "com.adler.engine",
+    "productName": "AdLer Engine",
+    "extends": null,
+    "directories": {
+      "buildResources": "build",
+      "output": "dist"
+    },
+    "extraMetadata": {
+      "main": "electron/main.js"
+    },
+    "files": [
+      "build/**/*",
+      "electron/**/*",
+      "package.json",
+      "node_modules/express/**/*"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "category": "public.app-category.education"
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "deb",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "category": "Education"
+    }
   }
 }
