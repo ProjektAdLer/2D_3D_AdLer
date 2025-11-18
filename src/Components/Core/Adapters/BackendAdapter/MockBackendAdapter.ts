@@ -10,7 +10,6 @@ import IBackendPort, {
   ScoreH5PElementParams,
   UserCredentialParams,
 } from "../../Application/Ports/Interfaces/IBackendPort";
-import { config } from "../../../../config";
 import LearningWorldStatusTO from "../../Application/DataTransferObjects/LearningWorldStatusTO";
 import AdaptivityElementQuestionSubmissionTO from "../../Application/DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionSubmissionTO";
 import AdaptivityElementQuestionResponse from "./Types/AdaptivityElementQuestionResponse";
@@ -101,20 +100,10 @@ export default class MockBackendAdapter implements IBackendPort {
   }
 
   /**
-   * Gets the appropriate world object based on worldID and showcase mode
+   * Gets the appropriate world object based on worldID
    */
   private getWorld(worldID: number): AWT {
-    // Showcase build: Only curated worlds available
-    if (config.isShowcase) {
-      if (worldID === 999) return ShowcaseWorldAWT;
-
-      // All other worlds are not available in showcase mode
-      throw new Error(
-        `World ID ${worldID} is not available in showcase mode. Available: 999 (ShowcaseWorld only)`,
-      );
-    }
-
-    // Development mode: All worlds available
+    // All worlds available in mock backend
     if (worldID === 1) return SimpleWorldAWT;
     else if (worldID === 2) return StoryWorldAWT;
     else if (worldID === 3) return ThemeWorldAWT;
@@ -296,19 +285,7 @@ export default class MockBackendAdapter implements IBackendPort {
   }
 
   getCoursesAvailableForUser(userToken: string): Promise<CourseListTO> {
-    // In showcase mode, only show curated worlds
-    if (config.isShowcase) {
-      return Promise.resolve({
-        courses: [
-          {
-            courseID: 999,
-            courseName: "AdLer Demo - Entdecke digitales Lernen 🚀",
-          },
-        ],
-      });
-    }
-
-    // Development mode - all worlds including showcase for development
+    // All worlds available in mock backend
     return Promise.resolve({
       courses: [
         {

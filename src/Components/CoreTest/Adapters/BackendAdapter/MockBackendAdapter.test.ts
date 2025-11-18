@@ -27,8 +27,6 @@ describe("MockBackendAdapter", () => {
 
   beforeAll(() => {
     config.useFakeBackend = true;
-    // Ensure we start in development mode (not showcase mode) for most tests
-    config.isShowcase = false;
   });
 
   beforeEach(() => {
@@ -486,43 +484,14 @@ describe("MockBackendAdapter", () => {
     expect(resultWorld3).toBeDefined();
   });
 
-  test("getWorldData should handle showcase mode", async () => {
-    const originalShowcase = config.isShowcase;
-    config.isShowcase = true;
-
+  test("getWorldData should load showcase world (ID 999)", async () => {
     const result = await systemUnderTest.getWorldData({
       userToken: "token",
-      worldID: 999, // Only showcase world is available in showcase mode
+      worldID: 999,
     });
 
     expect(result).toBeDefined();
-    config.isShowcase = originalShowcase;
-  });
-
-  test("getWorldData should throw error for non-showcase worlds in showcase mode", async () => {
-    const originalShowcase = config.isShowcase;
-    config.isShowcase = true;
-
-    await expect(
-      systemUnderTest.getWorldData({
-        userToken: "token",
-        worldID: 1,
-      }),
-    ).rejects.toThrow("World ID 1 is not available in showcase mode");
-
-    config.isShowcase = originalShowcase;
-  });
-
-  test("getCoursesAvailableForUser should return showcase course in showcase mode", async () => {
-    const originalShowcase = config.isShowcase;
-    config.isShowcase = true;
-
-    const result = await systemUnderTest.getCoursesAvailableForUser("token");
-
-    expect(result.courses).toHaveLength(1);
-    expect(result.courses[0].courseID).toBe(999);
-
-    config.isShowcase = originalShowcase;
+    expect(result.worldName).toBeDefined();
   });
 
   test("scoreH5PElement should handle completed verb", async () => {
@@ -912,10 +881,7 @@ describe("MockBackendAdapter", () => {
   });
 
   // Tests for ungetestete Bereiche - Error Handling
-  test("getElementSource should throw error for unknown element ID in showcase mode", async () => {
-    const originalShowcase = config.isShowcase;
-    config.isShowcase = true;
-
+  test("getElementSource should throw error for unknown element ID in showcase world", async () => {
     await expect(
       systemUnderTest.getElementSource({
         userToken: "token",
@@ -923,14 +889,9 @@ describe("MockBackendAdapter", () => {
         elementID: 9999, // Unknown element ID
       }),
     ).rejects.toBe("Unknown element ID for Showcase world");
-
-    config.isShowcase = originalShowcase;
   });
 
   test("getElementSource should throw error for unknown element type", async () => {
-    const originalShowcase = config.isShowcase;
-    config.isShowcase = false; // Ensure we're in development mode
-
     // Element ID 4 is an AdaptivityElement with category "adaptivity"
     // which is not in the elementSources mapping
     await expect(
@@ -940,8 +901,6 @@ describe("MockBackendAdapter", () => {
         elementID: 4, // AdaptivityElement - "adaptivity" category not in mapping
       }),
     ).rejects.toThrow("Unknown element type");
-
-    config.isShowcase = originalShowcase;
   });
 
   test("should handle adaptivity element with missing task or question", async () => {
@@ -1020,9 +979,6 @@ describe("MockBackendAdapter", () => {
   });
 
   test("should handle getElementSource for all different world IDs", async () => {
-    const originalShowcase = config.isShowcase;
-    config.isShowcase = false; // Ensure we're in development mode
-
     // Test that all world mappings work correctly using getWorldData first
     const worldTests = [
       { id: 1, expectedType: "Simple" },
@@ -1061,33 +1017,17 @@ describe("MockBackendAdapter", () => {
         }
       }
     }
-
-    config.isShowcase = originalShowcase;
   });
 
-  test("should handle getCoursesAvailableForUser in both modes", async () => {
-    // Test development mode
-    const originalShowcase = config.isShowcase;
-    config.isShowcase = false;
-
-    const devCourses =
-      await systemUnderTest.getCoursesAvailableForUser("token");
-    expect(devCourses.courses.length).toBeGreaterThan(1);
-
-    // Test showcase mode
-    config.isShowcase = true;
-    const showcaseCourses =
-      await systemUnderTest.getCoursesAvailableForUser("token");
-    expect(showcaseCourses.courses.length).toBe(1);
-    expect(showcaseCourses.courses[0].courseID).toBe(999);
-
-    config.isShowcase = originalShowcase;
+  test("should handle getCoursesAvailableForUser", async () => {
+    const courses = await systemUnderTest.getCoursesAvailableForUser("token");
+    expect(courses.courses.length).toBeGreaterThan(1);
+    // Verify showcase world (ID 999) is included
+    const showcaseWorld = courses.courses.find((c) => c.courseID === 999);
+    expect(showcaseWorld).toBeDefined();
   });
 
-  test("should test all showcase element mappings", async () => {
-    const originalShowcase = config.isShowcase;
-    config.isShowcase = true;
-
+  test("should test showcase world element mappings", async () => {
     // Test a few key showcase elements
     const showcaseElements = [1, 2, 3, 5, 6, 7, 8, 18, 24];
 
@@ -1101,8 +1041,6 @@ describe("MockBackendAdapter", () => {
       expect(result).toBeDefined();
       expect(typeof result).toBe("string");
     }
-
-    config.isShowcase = originalShowcase;
   });
 
   // Tests for Theme Test Worlds (worldID 10-49) - Lines 126-147 in MockBackendAdapter
