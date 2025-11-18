@@ -69,8 +69,8 @@ describe("Welcome Page", () => {
     expect(mockLoginUseCase.executeAsync).not.toHaveBeenCalled();
   });
 
-  test("should render in showcase mode and trigger auto-login", () => {
-    process.env.REACT_APP_IS_SHOWCASE = "true";
+  test("should render in file-based backend mode and trigger auto-login", () => {
+    process.env.REACT_APP_USE_FILEBASED_BACKEND = "true";
 
     render(
       <Provider container={CoreDIContainer}>
@@ -78,20 +78,20 @@ describe("Welcome Page", () => {
       </Provider>,
     );
 
-    // In showcase mode, login and logout components should be hidden
+    // In file-based backend mode, login and logout components should be hidden
     expect(screen.queryByTestId("login-component")).not.toBeInTheDocument();
     expect(screen.queryByTestId("logout-component")).not.toBeInTheDocument();
 
     // Auto-login should be triggered
     expect(mockLoginUseCase.executeAsync).toHaveBeenCalledWith({
-      username: "showcase",
-      password: "showcase",
+      username: "filebased",
+      password: "filebased",
     });
     expect(mockLoginUseCase.executeAsync).toHaveBeenCalledTimes(1);
   });
 
-  test("should not trigger auto-login when REACT_APP_IS_SHOWCASE is not 'true'", () => {
-    process.env.REACT_APP_IS_SHOWCASE = "false";
+  test("should not trigger auto-login when REACT_APP_USE_FILEBASED_BACKEND is not 'true'", () => {
+    process.env.REACT_APP_USE_FILEBASED_BACKEND = "false";
 
     render(
       <Provider container={CoreDIContainer}>
