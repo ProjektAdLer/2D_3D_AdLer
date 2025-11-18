@@ -60,27 +60,33 @@ function extractMBZ(mbzPath, targetDir) {
 
   try {
     // Ignoriere tar Warnungen über leere Dateinamen (kommt bei manchen MBZ vor)
-    execSync(
-      `tar -xzf "${mbzPath}" -C "${targetDir}" 2>&1 | grep -v "empty or unreadable filename" || true`,
-      {
-        stdio: "inherit",
-        shell: "/bin/bash",
-      },
-    );
-
-    // Prüfe ob ATF_Document.json vorhanden ist
-    const atfPath = path.join(targetDir, "ATF_Document.json");
-    if (fs.existsSync(atfPath)) {
-      return true;
-    } else {
-      log(`✗ ATF_Document.json nicht im Archiv gefunden`, "red");
+    // Auf Windows wird tar.exe (ab Windows 10 1803+) verwendet
+    execSync(`tar -xzf "${mbzPath}" -C "${targetDir}"`, {
+      stdio: "pipe", // Unterdrücke Warnungen
+    });
+  } catch (error) {
+    // tar gibt oft einen Fehlercode zurück wegen leerer Dateinamen im MBZ,
+    // aber die wichtigen Dateien werden trotzdem extrahiert.
+    // Prüfe daher, ob ATF_Document.json vorhanden ist, bevor wir aufgeben.
+    if (
+      !error.message.includes("empty or unreadable filename") &&
+      !error.message.includes("Error exit delayed")
+    ) {
+      log(
+        `✗ Fehler beim Entpacken von ${path.basename(mbzPath)}: ${error.message}`,
+        "red",
+      );
       return false;
     }
-  } catch (error) {
-    log(
-      `✗ Fehler beim Entpacken von ${path.basename(mbzPath)}: ${error.message}`,
-      "red",
-    );
+    // Ignoriere den Fehler und prüfe stattdessen, ob die Datei da ist
+  }
+
+  // Prüfe ob ATF_Document.json vorhanden ist
+  const atfPath = path.join(targetDir, "ATF_Document.json");
+  if (fs.existsSync(atfPath)) {
+    return true;
+  } else {
+    log(`✗ ATF_Document.json nicht im Archiv gefunden`, "red");
     return false;
   }
 }
@@ -114,13 +120,20 @@ function copyFile(source, target) {
 }
 
 /**
- * Sucht eine Datei im Verzeichnis (case-insensitive)
+ * Sucht eine Datei im Verzeichnis (case-insensitive, mit Unicode-Normalisierung)
  */
 function findFile(dir, fileName) {
   if (!fs.existsSync(dir)) return null;
 
   const files = fs.readdirSync(dir);
-  const found = files.find((f) => f.toLowerCase() === fileName.toLowerCase());
+
+  // Normalisiere den Suchbegriff (NFC für Windows-Kompatibilität)
+  const normalizedSearch = fileName.normalize("NFC").toLowerCase();
+
+  const found = files.find((f) => {
+    const normalizedFile = f.normalize("NFC").toLowerCase();
+    return normalizedFile === normalizedSearch;
+  });
 
   return found ? path.join(dir, found) : null;
 }
@@ -155,6 +168,23 @@ function processElement(element, tempDir, elementsDir) {
 
   if (!sourceFile) {
     log(`  ⚠ Warnung: Datei nicht gefunden: ${sourceFileName}`, "yellow");
+
+    // Debug: Zeige ähnliche Dateien zur Fehlersuche
+    if (fs.existsSync(tempDir)) {
+      const files = fs.readdirSync(tempDir);
+      const similarFiles = files.filter(
+        (f) =>
+          f.includes(
+            elementName.substring(0, Math.min(5, elementName.length)),
+          ) || f.endsWith(`.${elementType}`),
+      );
+      if (similarFiles.length > 0) {
+        log(
+          `    Ähnliche Dateien gefunden: ${similarFiles.slice(0, 3).join(", ")}`,
+          "yellow",
+        );
+      }
+    }
     return false;
   }
 
