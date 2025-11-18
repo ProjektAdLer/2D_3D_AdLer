@@ -13,6 +13,7 @@
 const fs = require("fs");
 const path = require("path");
 const { execSync } = require("child_process");
+const AdmZip = require("adm-zip");
 
 // Konfiguration
 const PUBLIC_DIR = path.join(__dirname, "..", "public");
@@ -93,14 +94,14 @@ function extractMBZ(mbzPath, targetDir) {
 
 /**
  * Entpackt eine H5P-Datei (ist auch ein ZIP)
+ * Verwendet adm-zip für plattformunabhängiges Entpacken
  */
 function extractH5P(h5pPath, targetDir) {
   ensureDir(targetDir);
 
   try {
-    execSync(`unzip -q -o "${h5pPath}" -d "${targetDir}"`, {
-      stdio: "pipe",
-    });
+    const zip = new AdmZip(h5pPath);
+    zip.extractAllTo(targetDir, /* overwrite */ true);
     return true;
   } catch (error) {
     log(
