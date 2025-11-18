@@ -497,9 +497,14 @@ describe("FileBasedBackendAdapter", () => {
   });
 
   describe("getAvatarConfig", () => {
-    test("should return default avatar configuration", async () => {
+    test("should return default avatar configuration when localStorage is empty", async () => {
+      localStoragePortMock.getItem.mockReturnValue(null);
+
       const result = await systemUnderTest.getAvatarConfig("token");
 
+      expect(localStoragePortMock.getItem).toHaveBeenCalledWith(
+        "adler_avatar_config",
+      );
       expect(result).toBeInstanceOf(BackendAvatarConfigTO);
       expect(result.eyes).toBe("Neural_Eyes_1");
       expect(result.nose).toBe("Nose_1");
@@ -511,10 +516,59 @@ describe("FileBasedBackendAdapter", () => {
       expect(result.skinColor).toBe(24);
       expect(result.roundness).toBe(0.5);
     });
+
+    test("should load avatar configuration from localStorage", async () => {
+      const savedConfig = {
+        eyes: "Neural_Eyes_3",
+        nose: "Nose_3",
+        mouth: "Mouth_3",
+        eyebrows: "Brows_3",
+        hair: "hair-long-wavy",
+        beard: "beard-full",
+        hairColor: 12,
+        headgear: "none",
+        glasses: "glasses-round",
+        backpack: "none",
+        other: "none",
+        shirt: "shirts-tshirt",
+        shirtColor: 5,
+        pants: "pants-shorts",
+        pantsColor: 8,
+        shoes: "shoes-boots",
+        shoesColor: 2,
+        skinColor: 16,
+        roundness: 0.8,
+      };
+
+      localStoragePortMock.getItem.mockReturnValue(JSON.stringify(savedConfig));
+
+      const result = await systemUnderTest.getAvatarConfig("token");
+
+      expect(localStoragePortMock.getItem).toHaveBeenCalledWith(
+        "adler_avatar_config",
+      );
+      expect(result.eyes).toBe("Neural_Eyes_3");
+      expect(result.nose).toBe("Nose_3");
+      expect(result.mouth).toBe("Mouth_3");
+      expect(result.hair).toBe("hair-long-wavy");
+      expect(result.hairColor).toBe(12);
+      expect(result.skinColor).toBe(16);
+      expect(result.roundness).toBe(0.8);
+    });
+
+    test("should return default avatar when localStorage contains invalid JSON", async () => {
+      localStoragePortMock.getItem.mockReturnValue("invalid-json{");
+
+      const result = await systemUnderTest.getAvatarConfig("token");
+
+      expect(result).toBeInstanceOf(BackendAvatarConfigTO);
+      expect(result.eyes).toBe("Neural_Eyes_1");
+      expect(result.skinColor).toBe(24);
+    });
   });
 
   describe("updateAvatarConfig", () => {
-    test("should return true", async () => {
+    test("should save avatar config to localStorage and return true", async () => {
       const avatarConfig: BackendAvatarConfigTO = {
         eyes: "Neural_Eyes_2",
         nose: "Nose_2",
@@ -543,6 +597,45 @@ describe("FileBasedBackendAdapter", () => {
       );
 
       expect(result).toBe(true);
+      expect(localStoragePortMock.setItem).toHaveBeenCalledWith(
+        "adler_avatar_config",
+        JSON.stringify(avatarConfig),
+      );
+    });
+
+    test("should return false when localStorage throws error", async () => {
+      const avatarConfig: BackendAvatarConfigTO = {
+        eyes: "Neural_Eyes_2",
+        nose: "Nose_2",
+        mouth: "Mouth_2",
+        eyebrows: "Brows_2",
+        hair: "hair-short-curly" as any,
+        beard: "none" as any,
+        hairColor: 5,
+        headgear: "none" as any,
+        glasses: "none" as any,
+        backpack: "none" as any,
+        other: "none" as any,
+        shirt: "shirts-hoodie" as any,
+        shirtColor: 1,
+        pants: "pants-jeans" as any,
+        pantsColor: 2,
+        shoes: "shoes-trainers" as any,
+        shoesColor: 3,
+        skinColor: 16,
+        roundness: 0.7,
+      };
+
+      localStoragePortMock.setItem.mockImplementation(() => {
+        throw new Error("Storage quota exceeded");
+      });
+
+      const result = await systemUnderTest.updateAvatarConfig(
+        "token",
+        avatarConfig,
+      );
+
+      expect(result).toBe(false);
     });
   });
 

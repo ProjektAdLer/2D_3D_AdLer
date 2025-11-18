@@ -535,9 +535,27 @@ export default class FileBasedBackendAdapter implements IBackendPort {
 
   /**
    * Get avatar configuration
-   * For file-based backend, return default avatar
+   * For file-based backend, load from localStorage or return default
    */
   async getAvatarConfig(userToken: string): Promise<BackendAvatarConfigTO> {
+    const key = "adler_avatar_config";
+    const stored = this.localStoragePort.getItem(key);
+
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        console.log(
+          "FileBasedBackendAdapter: getAvatarConfig - loaded from localStorage",
+        );
+        return Object.assign(new BackendAvatarConfigTO(), parsed);
+      } catch (error) {
+        console.error(
+          "Failed to parse avatar config from localStorage:",
+          error,
+        );
+      }
+    }
+
     console.log(
       "FileBasedBackendAdapter: getAvatarConfig - returning default avatar",
     );
@@ -579,15 +597,22 @@ export default class FileBasedBackendAdapter implements IBackendPort {
 
   /**
    * Update avatar configuration
-   * For file-based backend, avatar changes are not persisted
+   * For file-based backend, save to localStorage
    */
   async updateAvatarConfig(
     userToken: string,
     avatarConfig: BackendAvatarConfigTO,
   ): Promise<boolean> {
-    console.log(
-      "FileBasedBackendAdapter: updateAvatarConfig called (not persisted)",
-    );
-    return true;
+    const key = "adler_avatar_config";
+    try {
+      this.localStoragePort.setItem(key, JSON.stringify(avatarConfig));
+      console.log(
+        "FileBasedBackendAdapter: updateAvatarConfig - saved to localStorage",
+      );
+      return true;
+    } catch (error) {
+      console.error("Failed to save avatar config to localStorage:", error);
+      return false;
+    }
   }
 }
