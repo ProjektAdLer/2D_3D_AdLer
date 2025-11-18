@@ -4,9 +4,12 @@ import FileBasedBackendAdapter from "../../../Core/Adapters/BackendAdapter/FileB
 import { XAPIEvent } from "../../../Core/Application/UseCases/ScoreH5PLearningElement/IScoreH5PLearningElementUseCase";
 import AdaptivityElementQuestionSubmissionTO from "../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionSubmissionTO";
 import { BackendAvatarConfigTO } from "../../../Core/Application/DataTransferObjects/BackendAvatarConfigTO";
+import ILocalStoragePort from "../../../Core/Application/Ports/Interfaces/ILocalStoragePort";
 
 // Mock fetch globally
 global.fetch = jest.fn();
+
+const localStoragePortMock = mock<ILocalStoragePort>();
 
 const mockWorldsJson = {
   worlds: [
@@ -97,8 +100,9 @@ describe("FileBasedBackendAdapter", () => {
   const fetchMock = global.fetch as jest.MockedFunction<typeof fetch>;
 
   beforeEach(() => {
-    systemUnderTest = new FileBasedBackendAdapter();
+    systemUnderTest = new FileBasedBackendAdapter(localStoragePortMock);
     fetchMock.mockClear();
+    localStoragePortMock.getItem.mockReturnValue(null);
   });
 
   afterEach(() => {
