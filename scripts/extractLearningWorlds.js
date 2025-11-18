@@ -16,6 +16,7 @@ const { execSync } = require("child_process");
 
 // Konfiguration
 const PUBLIC_DIR = path.join(__dirname, "..", "public");
+const MBZ_INPUT_DIR = path.join(PUBLIC_DIR, "MBZ");
 const LEARNING_WORLDS_DIR = path.join(PUBLIC_DIR, "LearningWorlds");
 const TEMP_DIR = path.join(LEARNING_WORLDS_DIR, ".temp");
 
@@ -191,9 +192,18 @@ function processElement(element, tempDir, elementsDir) {
 }
 
 /**
+ * Prüft ob eine Welt bereits entpackt wurde
+ */
+function isWorldAlreadyExtracted(worldName) {
+  const worldDir = path.join(LEARNING_WORLDS_DIR, worldName);
+  const worldJsonPath = path.join(worldDir, "world.json");
+  return fs.existsSync(worldJsonPath);
+}
+
+/**
  * Verarbeitet eine MBZ-Datei
  */
-function processMBZ(mbzPath) {
+function processMBZ(mbzPath, skipExisting = true) {
   const mbzFileName = path.basename(mbzPath, ".mbz");
   log(`\n${"=".repeat(60)}`, "cyan");
   log(`Verarbeite: ${mbzFileName}.mbz`, "cyan");
@@ -223,6 +233,16 @@ function processMBZ(mbzPath) {
   const atf = JSON.parse(fs.readFileSync(atfPath, "utf-8"));
   const worldName = atf.world.worldName;
   log(`✓ Lernwelt: ${worldName}`, "green");
+
+  // Duplikats-Prüfung
+  if (skipExisting && isWorldAlreadyExtracted(worldName)) {
+    log(
+      `\n⊘ Lernwelt "${worldName}" wurde bereits entpackt - überspringe`,
+      "yellow",
+    );
+    removeDir(tempExtractDir);
+    return { worldName, skipped: true };
+  }
 
   // Zielverzeichnis erstellen
   const worldDir = path.join(LEARNING_WORLDS_DIR, worldName);
@@ -268,6 +288,7 @@ function processMBZ(mbzPath) {
     worldName,
     worldDescription: atf.world.worldDescription || "",
     elementCount: successCount,
+    skipped: false,
   };
 }
 
@@ -328,6 +349,7 @@ function main() {
   log("=".repeat(60) + "\n", "cyan");
 
   // Verzeichnisse sicherstellen
+  ensureDir(MBZ_INPUT_DIR);
   ensureDir(LEARNING_WORLDS_DIR);
 
   // MBZ-Dateien finden
@@ -346,20 +368,22 @@ function main() {
       process.exit(1);
     }
   } else {
-    // Alle MBZ-Dateien im LearningWorlds Ordner finden
-    const files = fs.readdirSync(LEARNING_WORLDS_DIR);
-    mbzFiles = files
-      .filter((f) => f.endsWith(".mbz"))
-      .map((f) => path.join(LEARNING_WORLDS_DIR, f));
+    // Alle MBZ-Dateien im MBZ Input-Ordner finden
+    if (fs.existsSync(MBZ_INPUT_DIR)) {
+      const files = fs.readdirSync(MBZ_INPUT_DIR);
+      mbzFiles = files
+        .filter((f) => f.endsWith(".mbz"))
+        .map((f) => path.join(MBZ_INPUT_DIR, f));
+    }
 
     if (mbzFiles.length === 0) {
-      log("✗ Keine MBZ-Dateien gefunden in public/LearningWorlds/", "red");
+      log("✗ Keine MBZ-Dateien gefunden in public/MBZ/", "red");
       log("\nVerwendung:", "yellow");
       log(
         "  node scripts/extractLearningWorlds.js [pfad/zur/datei.mbz]",
         "yellow",
       );
-      log("  oder lege MBZ-Dateien in public/LearningWorlds/\n", "yellow");
+      log("  oder lege MBZ-Dateien in public/MBZ/\n", "yellow");
       process.exit(1);
     }
   }
@@ -368,11 +392,16 @@ function main() {
 
   // Verarbeite alle MBZ-Dateien
   const processedWorlds = [];
+  const skippedWorlds = [];
 
   mbzFiles.forEach((mbzFile) => {
     const result = processMBZ(mbzFile);
     if (result) {
-      processedWorlds.push(result);
+      if (result.skipped) {
+        skippedWorlds.push(result);
+      } else {
+        processedWorlds.push(result);
+      }
     }
   });
 
@@ -385,10 +414,13 @@ function main() {
   removeDir(TEMP_DIR);
 
   log("\n" + "=".repeat(60), "green");
-  log(
-    `  ✓ Erfolgreich: ${processedWorlds.length}/${mbzFiles.length} Lernwelten verarbeitet`,
-    "green",
-  );
+  log(`  ✓ Neu entpackt: ${processedWorlds.length} Lernwelt(en)`, "green");
+  if (skippedWorlds.length > 0) {
+    log(
+      `  ⊘ Übersprungen: ${skippedWorlds.length} (bereits vorhanden)`,
+      "yellow",
+    );
+  }
   log("=".repeat(60) + "\n", "green");
 }
 
