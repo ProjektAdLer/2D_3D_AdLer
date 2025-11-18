@@ -17,3 +17,10 @@ claude.md
 # Environment variables for configuration at container runtime
 /public/env-config.js
 env-config.js
+
+# MBZ input files (large binary files)
+/public/MBZ/*.mbz
+
+# Extracted learning worlds (generated from MBZ files)
+/public/LearningWorlds/*/
+!/public/LearningWorlds/worlds.json
