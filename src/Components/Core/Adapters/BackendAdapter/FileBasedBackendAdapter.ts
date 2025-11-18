@@ -213,41 +213,87 @@ export default class FileBasedBackendAdapter implements IBackendPort {
   }
 
   /**
+   * Load progress from localStorage for a specific world
+   */
+  private loadProgressFromLocalStorage(worldID: number): {
+    [elementID: number]: { scored: boolean; timestamp: string };
+  } {
+    const key = `adler_progress_${worldID}`;
+    const stored = localStorage.getItem(key);
+    if (!stored) {
+      return {};
+    }
+    try {
+      const parsed = JSON.parse(stored);
+      return parsed.elements || {};
+    } catch (error) {
+      console.error("Failed to parse progress from localStorage:", error);
+      return {};
+    }
+  }
+
+  /**
+   * Save progress to localStorage for a specific world
+   */
+  private saveProgressToLocalStorage(
+    worldID: number,
+    elementID: number,
+    scored: boolean,
+  ): void {
+    const key = `adler_progress_${worldID}`;
+    const progress = this.loadProgressFromLocalStorage(worldID);
+    progress[elementID] = {
+      scored,
+      timestamp: new Date().toISOString(),
+    };
+    localStorage.setItem(
+      key,
+      JSON.stringify({
+        worldID,
+        elements: progress,
+      }),
+    );
+  }
+
+  /**
    * Gets world status (completion state)
-   * For file-based backend, we don't track progress - return all elements as not scored
+   * For file-based backend, progress is loaded from localStorage
    */
   async getWorldStatus(
     userToken: string,
     worldID: number,
   ): Promise<LearningWorldStatusTO> {
     const awt = await this.loadWorldData(worldID);
+    const progress = this.loadProgressFromLocalStorage(worldID);
 
-    // Return all elements as not completed
+    // Return elements with their completion status from localStorage
     return {
       worldID,
       elements: awt.world.elements.map((element) => ({
         elementID: element.elementId,
-        hasScored: false,
+        hasScored: progress[element.elementId]?.scored || false,
       })),
     };
   }
 
   /**
    * Gets element score
-   * For file-based backend, we don't track scores - always return not scored
+   * For file-based backend, check localStorage for score
    */
   async getElementScore({
     elementID,
+    worldID,
   }: ElementDataParams): Promise<LearningElementScoreTO> {
+    const progress = this.loadProgressFromLocalStorage(worldID);
     return {
       elementID,
-      success: false,
+      success: progress[elementID]?.scored || false,
     };
   }
 
   /**
    * Scores an element
-   * For file-based backend, scoring is not persisted
+   * For file-based backend, scoring is persisted to localStorage
    */
   async scoreElement(
     userToken: string,
@@ -255,8 +301,9 @@ export default class FileBasedBackendAdapter implements IBackendPort {
     courseID: ComponentID,
   ): Promise<boolean> {
     console.log(
-      `FileBasedBackendAdapter: scoreElement called (not persisted) - Element ${elementID}`,
+      `FileBasedBackendAdapter: scoreElement - Element ${elementID} in World ${courseID}`,
     );
+    this.saveProgressToLocalStorage(courseID, elementID, true);
     return true;
   }
 
