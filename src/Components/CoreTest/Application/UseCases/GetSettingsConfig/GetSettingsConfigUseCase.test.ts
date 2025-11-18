@@ -32,6 +32,10 @@ describe("GetSettingsConfigUseCase", () => {
   });
 
   beforeEach(() => {
+    // Reset mocks
+    jest.clearAllMocks();
+    localStoragePortMock.getItem.mockReturnValue(null);
+
     systemUnderTest = CoreDIContainer.get(
       USECASE_TYPES.IGetSettingsConfigUseCase,
     );

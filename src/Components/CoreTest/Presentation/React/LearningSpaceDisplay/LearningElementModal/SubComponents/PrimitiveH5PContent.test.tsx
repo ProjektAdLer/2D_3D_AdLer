@@ -73,6 +73,7 @@ describe("PrimitiveH5PContent", () => {
 
   test("should be invisible if isVisible is false", () => {
     viewModel.isVisible.Value = false;
+    viewModel.cookieConsent.Value = "accepted"; // Set cookie consent in ViewModel
 
     const container = render(
       <Provider container={CoreDIContainer}>
@@ -120,6 +121,7 @@ describe("PrimitiveH5PContent", () => {
   test("should show cookie consent blocker when user has not consented", () => {
     viewModel.filePath.Value =
       "wwwroot\\courses\\2\\World_For_Evaluation\\h5p\\H5P-Test";
+    viewModel.cookieConsent.Value = "declined"; // Set cookie consent in ViewModel
 
     const settings = new SettingsTO();
     settings.cookieConsent = "declined";
@@ -140,6 +142,7 @@ describe("PrimitiveH5PContent", () => {
   test("should show primitive H5P content when user has consented", () => {
     viewModel.filePath.Value =
       "wwwroot\\courses\\2\\World_For_Evaluation\\h5p\\H5P-Test";
+    viewModel.cookieConsent.Value = "accepted"; // Set cookie consent in ViewModel
 
     const settings = new SettingsTO();
     settings.cookieConsent = "accepted";
@@ -171,10 +174,16 @@ describe("PrimitiveH5PContent", () => {
   test("should show primitive H5P content after user accepts consent", async () => {
     viewModel.filePath.Value =
       "wwwroot\\courses\\2\\World_For_Evaluation\\h5p\\H5P-Test";
+    viewModel.cookieConsent.Value = "declined"; // Set initial cookie consent in ViewModel
 
     const settings = new SettingsTO();
     settings.cookieConsent = "declined";
     mockController.getUserSettings.mockReturnValue(settings);
+
+    // Mock setCookieConsent to update the ViewModel
+    mockController.setCookieConsent.mockImplementation((accepted: boolean) => {
+      viewModel.cookieConsent.Value = accepted ? "accepted" : "declined";
+    });
 
     // Mock H5P utils to prevent errors
     const element = document.createElement("div");
@@ -212,6 +221,7 @@ describe("PrimitiveH5PContent", () => {
   test("should not render primitive H5P player when consent is not given", () => {
     viewModel.filePath.Value =
       "wwwroot\\courses\\2\\World_For_Evaluation\\h5p\\H5P-Test";
+    viewModel.cookieConsent.Value = "declined"; // Set cookie consent in ViewModel
 
     const settings = new SettingsTO();
     settings.cookieConsent = "declined";
