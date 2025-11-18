@@ -1,7 +1,8 @@
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, BrowserWindow, ipcMain, Menu, dialog } = require("electron");
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
+const mbzExtractor = require("./mbzExtractor");
 
 let mainWindow;
 let server;
@@ -92,6 +93,102 @@ function createWindow() {
   });
 }
 
+function createMenu() {
+  const template = [
+    {
+      label: "Datei",
+      submenu: [
+        {
+          label: "MBZ importieren...",
+          accelerator: "CmdOrCtrl+O",
+          click: async () => {
+            const result = await dialog.showOpenDialog(mainWindow, {
+              properties: ["openFile"],
+              filters: [
+                { name: "Moodle Backup", extensions: ["mbz"] },
+                { name: "Alle Dateien", extensions: ["*"] },
+              ],
+            });
+
+            if (!result.canceled && result.filePaths.length > 0) {
+              mainWindow.webContents.send(
+                "import-mbz-file",
+                result.filePaths[0],
+              );
+            }
+          },
+        },
+        {
+          label: "Lernwelten verwalten...",
+          accelerator: "CmdOrCtrl+M",
+          click: () => {
+            mainWindow.webContents.send("open-world-manager");
+          },
+        },
+        { type: "separator" },
+        { role: "quit", label: "Beenden" },
+      ],
+    },
+    {
+      label: "Bearbeiten",
+      submenu: [
+        { role: "undo", label: "Rückgängig" },
+        { role: "redo", label: "Wiederholen" },
+        { type: "separator" },
+        { role: "cut", label: "Ausschneiden" },
+        { role: "copy", label: "Kopieren" },
+        { role: "paste", label: "Einfügen" },
+        { role: "selectAll", label: "Alles auswählen" },
+      ],
+    },
+    {
+      label: "Ansicht",
+      submenu: [
+        { role: "reload", label: "Neu laden" },
+        { role: "forceReload", label: "Erzwinge Neu laden" },
+        { type: "separator" },
+        { role: "resetZoom", label: "Zoom zurücksetzen" },
+        { role: "zoomIn", label: "Vergrößern" },
+        { role: "zoomOut", label: "Verkleinern" },
+        { type: "separator" },
+        { role: "togglefullscreen", label: "Vollbild umschalten" },
+      ],
+    },
+    {
+      label: "Hilfe",
+      submenu: [
+        {
+          label: "Über AdLer Engine",
+          click: () => {
+            mainWindow.webContents.send("show-about");
+          },
+        },
+      ],
+    },
+  ];
+
+  // macOS-spezifisches App-Menü
+  if (process.platform === "darwin") {
+    template.unshift({
+      label: app.name,
+      submenu: [
+        { role: "about", label: `Über ${app.name}` },
+        { type: "separator" },
+        { role: "services", label: "Dienste" },
+        { type: "separator" },
+        { role: "hide", label: `${app.name} ausblenden` },
+        { role: "hideOthers", label: "Andere ausblenden" },
+        { role: "unhide", label: "Alle einblenden" },
+        { type: "separator" },
+        { role: "quit", label: "Beenden" },
+      ],
+    });
+  }
+
+  const menu = Menu.buildFromTemplate(template);
+  Menu.setApplicationMenu(menu);
+}
+
 app.whenReady().then(() => {
   // Enable GPU acceleration
   app.commandLine.appendSwitch("enable-gpu-rasterization");
@@ -109,8 +206,60 @@ app.whenReady().then(() => {
     return app.getVersion();
   });
 
+  // MBZ Import Handler
+  ipcMain.handle("import-mbz", async (event, mbzPath) => {
+    try {
+      const userDataPath = app.getPath("userData");
+      const learningWorldsPath = path.join(userDataPath, "LearningWorlds");
+
+      const result = await mbzExtractor.extractMBZToUserData(
+        mbzPath,
+        learningWorldsPath,
+        (progress) => {
+          event.sender.send("import-progress", progress);
+        },
+      );
+
+      return result;
+    } catch (error) {
+      return {
+        success: false,
+        error: error.message,
+      };
+    }
+  });
+
+  // List Worlds Handler
+  ipcMain.handle("list-worlds", async () => {
+    try {
+      const userDataPath = app.getPath("userData");
+      const learningWorldsPath = path.join(userDataPath, "LearningWorlds");
+
+      return mbzExtractor.listInstalledWorlds(learningWorldsPath);
+    } catch (error) {
+      console.error("Error listing worlds:", error);
+      return [];
+    }
+  });
+
+  // Delete World Handler
+  ipcMain.handle("delete-world", async (event, worldName) => {
+    try {
+      const userDataPath = app.getPath("userData");
+      const learningWorldsPath = path.join(userDataPath, "LearningWorlds");
+
+      return await mbzExtractor.deleteWorld(learningWorldsPath, worldName);
+    } catch (error) {
+      return {
+        success: false,
+        error: error.message,
+      };
+    }
+  });
+
   createExpressServer();
   createWindow();
+  createMenu();
 
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) {

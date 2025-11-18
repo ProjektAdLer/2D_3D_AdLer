@@ -19,6 +19,7 @@ import i18next from "i18next";
 import NarrativeFrameworkLoadingScreenContainer from "~ReactComponents/GeneralComponents/NarrativeFrameworkLoadingScreenContainer/NarrativeFrameworkLoadingScreenContainer";
 import Settings from "./Settings";
 import Privacy from "./Privacy";
+import WorldManagerModal from "~ReactComponents/GeneralComponents/WorldManagerModal/WorldManagerModal";
 
 export interface IAppProps {}
 
@@ -73,6 +74,7 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
         />
         <LearningSpace />
         <InternetLossModal />
+        <WorldManagerModal />
       </>
     );
   } else if (location?.pathname.includes("/worldmenu")) {
@@ -92,6 +94,7 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
         />
         <LearningWorldMenu />
         <InternetLossModal />
+        <WorldManagerModal />
       </>
     );
   } else if (location?.pathname.includes("/spacemenu")) {
@@ -99,6 +102,7 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
       <>
         <LearningSpaceMenu />
         <InternetLossModal />
+        <WorldManagerModal />
       </>
     );
   } else if (location?.pathname.includes("/avatarEditor")) {
@@ -106,18 +110,21 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
       <>
         <AvatarEditor />
         <InternetLossModal />
+        <WorldManagerModal />
       </>
     );
   } else if (location?.pathname.includes("/settings")) {
     return (
       <>
         <Settings />
+        <WorldManagerModal />
       </>
     );
   } else if (location?.pathname.includes("/privacy")) {
     return (
       <>
         <Privacy />
+        <WorldManagerModal />
       </>
     );
   } else {
@@ -125,6 +132,7 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
       <>
         <WelcomePage />
         <InternetLossModal />
+        <WorldManagerModal />
       </>
     );
   }

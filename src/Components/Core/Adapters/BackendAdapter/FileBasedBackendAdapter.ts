@@ -91,6 +91,15 @@ export default class FileBasedBackendAdapter implements IBackendPort {
   }
 
   /**
+   * Forces reload of worlds.json (useful after importing new worlds)
+   */
+  public async reloadWorldsIndex(): Promise<void> {
+    this.worldsIndex = null;
+    this.worldCache.clear();
+    await this.loadWorldsIndex();
+  }
+
+  /**
    * Loads a world.json file for a specific world
    */
   private async loadWorldData(worldID: number): Promise<AWT> {
