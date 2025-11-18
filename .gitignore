@@ -24,3 +24,6 @@ env-config.js
 # Extracted learning worlds (generated from MBZ files)
 /public/LearningWorlds/*/
 !/public/LearningWorlds/worlds.json
+
+# Claude Code project instructions
+claude.md

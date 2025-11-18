@@ -7,9 +7,11 @@ import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import ISettingsPort from "../../../../Core/Application/Ports/Interfaces/ISettingsPort";
+import ILocalStoragePort from "../../../../Core/Application/Ports/Interfaces/ILocalStoragePort";
 
 const entityContainerMock = mock<IEntityContainer>();
 const loggerMock = mock<Logger>();
+const localStoragePortMock = mock<ILocalStoragePort>();
 
 describe("SetSettingsConfigUseCase", () => {
   let systemUnderTest: SetSettingsConfigUseCase;
@@ -20,6 +22,9 @@ describe("SetSettingsConfigUseCase", () => {
       CORE_TYPES.IEntityContainer,
     ).toConstantValue(entityContainerMock);
     CoreDIContainer.rebind(CORE_TYPES.ILogger).toConstantValue(loggerMock);
+    CoreDIContainer.rebind<ILocalStoragePort>(
+      PORT_TYPES.ILocalStoragePort,
+    ).toConstantValue(localStoragePortMock);
   });
 
   beforeEach(() => {
@@ -73,7 +78,6 @@ describe("SetSettingsConfigUseCase", () => {
   });
 
   test("cookieConsent is saved to localStorage when set to accepted", () => {
-    localStorage.clear();
     const settingsEntity = {
       volume: 0.5,
       language: "de",
@@ -85,12 +89,17 @@ describe("SetSettingsConfigUseCase", () => {
     systemUnderTest.execute({
       cookieConsent: "accepted",
     });
-    expect(localStorage.getItem("adler_cookie_consent")).toBe("accepted");
-    expect(localStorage.getItem("adler_cookie_consent_timestamp")).toBeTruthy();
+    expect(localStoragePortMock.setItem).toHaveBeenCalledWith(
+      "adler_cookie_consent",
+      "accepted",
+    );
+    expect(localStoragePortMock.setItem).toHaveBeenCalledWith(
+      "adler_cookie_consent_timestamp",
+      expect.any(String),
+    );
   });
 
   test("cookieConsent is saved to localStorage when set to declined", () => {
-    localStorage.clear();
     const settingsEntity = {
       volume: 0.5,
       language: "de",
@@ -102,8 +111,14 @@ describe("SetSettingsConfigUseCase", () => {
     systemUnderTest.execute({
       cookieConsent: "declined",
     });
-    expect(localStorage.getItem("adler_cookie_consent")).toBe("declined");
-    expect(localStorage.getItem("adler_cookie_consent_timestamp")).toBeTruthy();
+    expect(localStoragePortMock.setItem).toHaveBeenCalledWith(
+      "adler_cookie_consent",
+      "declined",
+    );
+    expect(localStoragePortMock.setItem).toHaveBeenCalledWith(
+      "adler_cookie_consent_timestamp",
+      expect.any(String),
+    );
   });
 
   test("partial settings update preserves existing values", () => {
@@ -123,5 +138,45 @@ describe("SetSettingsConfigUseCase", () => {
     expect(settingsEntity.highGraphicsQualityEnabled).toBe(false);
     expect(settingsEntity.breakTimeNotificationsEnabled).toBe(false);
     expect(settingsEntity.cookieConsent).toBe("accepted");
+  });
+
+  test("all settings are persisted to localStorage", () => {
+    const settingsEntity = {
+      volume: 0.75,
+      graphicsQuality: 2,
+      language: "en",
+      highGraphicsQualityEnabled: true,
+      breakTimeNotificationsEnabled: false,
+      cookieConsent: "accepted" as const,
+      lightsEnabled: true,
+    };
+    entityContainerMock.getEntitiesOfType.mockReturnValue([settingsEntity]);
+    systemUnderTest.execute({
+      volume: 0.75,
+    });
+    expect(localStoragePortMock.setItem).toHaveBeenCalledWith(
+      "adler_volume",
+      "0.75",
+    );
+    expect(localStoragePortMock.setItem).toHaveBeenCalledWith(
+      "adler_graphics_quality",
+      "2",
+    );
+    expect(localStoragePortMock.setItem).toHaveBeenCalledWith(
+      "adler_language",
+      "en",
+    );
+    expect(localStoragePortMock.setItem).toHaveBeenCalledWith(
+      "adler_high_graphics_quality_enabled",
+      "true",
+    );
+    expect(localStoragePortMock.setItem).toHaveBeenCalledWith(
+      "adler_break_time_notifications_enabled",
+      "false",
+    );
+    expect(localStoragePortMock.setItem).toHaveBeenCalledWith(
+      "adler_lights_enabled",
+      "true",
+    );
   });
 });

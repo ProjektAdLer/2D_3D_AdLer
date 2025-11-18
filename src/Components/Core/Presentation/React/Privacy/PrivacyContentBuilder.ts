@@ -1,10 +1,10 @@
 import { injectable } from "inversify";
-import CookieModalController from "./CookieModalController";
-import ICookieModalController from "./ICookieModalController";
-import CookieModalViewModel from "./CookieModalViewModel";
-import CookieModalPresenter from "./CookieModalPresenter";
-import ICookieModalPresenter from "./ICookieModalPresenter";
-import PresentationBuilder from "../../../PresentationBuilder/PresentationBuilder";
+import PrivacyContentViewModel from "./PrivacyContentViewModel";
+import PrivacyContentController from "./PrivacyContentController";
+import IPrivacyContentController from "./IPrivacyContentController";
+import PrivacyContentPresenter from "./PrivacyContentPresenter";
+import IPrivacyContentPresenter from "./IPrivacyContentPresenter";
+import PresentationBuilder from "src/Components/Core/Presentation/PresentationBuilder/PresentationBuilder";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import AbstractPort from "src/Components/Core/Application/Ports/AbstractPort/AbstractPort";
 import ISettingsAdapter from "src/Components/Core/Application/Ports/SettingsPort/ISettingsAdapter";
@@ -14,18 +14,18 @@ import type IGetSettingsConfigUseCase from "src/Components/Core/Application/UseC
 import { HistoryWrapper } from "~ReactComponents/ReactRelated/ReactEntryPoint/HistoryWrapper";
 
 @injectable()
-export default class CookieModalBuilder extends PresentationBuilder<
-  CookieModalViewModel,
-  ICookieModalController,
+export default class PrivacyContentBuilder extends PresentationBuilder<
+  PrivacyContentViewModel,
+  IPrivacyContentController,
   undefined,
-  ICookieModalPresenter
+  IPrivacyContentPresenter
 > {
   constructor() {
     super(
-      CookieModalViewModel,
-      CookieModalController,
+      PrivacyContentViewModel,
+      PrivacyContentController,
       undefined,
-      CookieModalPresenter,
+      PrivacyContentPresenter,
     );
   }
 

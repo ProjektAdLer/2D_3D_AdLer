@@ -124,6 +124,7 @@ describe("VideoComponent", () => {
     vm.parentWorldID.Value = 1;
     vm.id.Value = 1;
     vm.filePath.Value = "XXXX";
+    vm.cookieConsent.Value = "accepted"; // Set cookie consent in ViewModel
 
     await act(async () => {
       component = render(
@@ -188,6 +189,7 @@ describe("VideoComponent", () => {
     const vm = new LearningElementModalViewModel();
     vm.id.Value = 1;
     vm.filePath.Value = "https://www.youtube.com/watch?v=123";
+    vm.cookieConsent.Value = "accepted"; // Set cookie consent in ViewModel
 
     const settings = new SettingsTO();
     settings.cookieConsent = "accepted";
@@ -212,10 +214,16 @@ describe("VideoComponent", () => {
     const vm = new LearningElementModalViewModel();
     vm.id.Value = 1;
     vm.filePath.Value = "https://www.youtube.com/watch?v=123";
+    vm.cookieConsent.Value = "declined"; // Set initial cookie consent in ViewModel
 
     const settings = new SettingsTO();
     settings.cookieConsent = "declined";
     mockController.getUserSettings.mockReturnValue(settings);
+
+    // Mock setCookieConsent to update the ViewModel
+    mockController.setCookieConsent.mockImplementation((accepted: boolean) => {
+      vm.cookieConsent.Value = accepted ? "accepted" : "declined";
+    });
 
     await act(async () => {
       component = render(

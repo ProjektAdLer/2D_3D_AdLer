@@ -7,10 +7,12 @@ import CORE_TYPES from "../../../../Core/DependencyInjection/CoreTypes";
 import PORT_TYPES from "../../../../Core/DependencyInjection/Ports/PORT_TYPES";
 import USECASE_TYPES from "../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import ISettingsPort from "../../../../Core/Application/Ports/Interfaces/ISettingsPort";
+import ILocalStoragePort from "../../../../Core/Application/Ports/Interfaces/ILocalStoragePort";
 
 const entityContainerMock = mock<IEntityContainer>();
 const settingsPortMock = mock<ISettingsPort>();
 const loggerMock = mock<Logger>();
+const localStoragePortMock = mock<ILocalStoragePort>();
 
 describe("GetSettingsConfigUseCase", () => {
   let systemUnderTest: GetSettingsConfigUseCase;
@@ -24,9 +26,16 @@ describe("GetSettingsConfigUseCase", () => {
     CoreDIContainer.rebind<ISettingsPort>(
       PORT_TYPES.ISettingsPort,
     ).toConstantValue(settingsPortMock);
+    CoreDIContainer.rebind<ILocalStoragePort>(
+      PORT_TYPES.ILocalStoragePort,
+    ).toConstantValue(localStoragePortMock);
   });
 
   beforeEach(() => {
+    // Reset mocks
+    jest.clearAllMocks();
+    localStoragePortMock.getItem.mockReturnValue(null);
+
     systemUnderTest = CoreDIContainer.get(
       USECASE_TYPES.IGetSettingsConfigUseCase,
     );
@@ -47,7 +56,7 @@ describe("GetSettingsConfigUseCase", () => {
     expect(loggerMock.log).toHaveBeenCalledTimes(1);
     expect(loggerMock.log).toHaveBeenCalledWith(
       "TRACE",
-      "GetSettingsConfigUseCase: User got settings: Volume:0.5, Language: de, HighGraphicsQualityEnabled: true, BreakTimeNotificationsEnabled: true, CookieConsent: undefined.",
+      "GetSettingsConfigUseCase: User got settings: Volume:0.5, Language: de, HighGraphicsQualityEnabled: true, BreakTimeNotificationsEnabled: true, CookieConsent: undefined, Lights: true.",
     );
   });
 
@@ -63,22 +72,47 @@ describe("GetSettingsConfigUseCase", () => {
     expect(loggerMock.log).toHaveBeenCalledTimes(1);
     expect(loggerMock.log).toHaveBeenCalledWith(
       "TRACE",
-      "GetSettingsConfigUseCase: User got settings: Volume:0.42, Language: en, HighGraphicsQualityEnabled: false, BreakTimeNotificationsEnabled: false, CookieConsent: undefined.",
+      "GetSettingsConfigUseCase: User got settings: Volume:0.42, Language: en, HighGraphicsQualityEnabled: false, BreakTimeNotificationsEnabled: false, CookieConsent: undefined, Lights: true.",
     );
   });
 
   test("if entityContainer returns no SettingsEntity and localStorage has cookieConsent, it is loaded", () => {
-    localStorage.setItem("adler_cookie_consent", "accepted");
+    localStoragePortMock.getItem.mockReturnValue("accepted");
     entityContainerMock.getEntitiesOfType.mockReturnValue([undefined!]);
     const result = systemUnderTest.execute();
     expect(result.cookieConsent).toBe("accepted");
   });
 
   test("if entityContainer returns no SettingsEntity and localStorage has declined cookieConsent, it is loaded", () => {
-    localStorage.setItem("adler_cookie_consent", "declined");
+    localStoragePortMock.getItem.mockImplementation((key: string) => {
+      if (key === "adler_cookie_consent") return "declined";
+      return null;
+    });
     entityContainerMock.getEntitiesOfType.mockReturnValue([undefined!]);
     const result = systemUnderTest.execute();
     expect(result.cookieConsent).toBe("declined");
+  });
+
+  test("all settings are loaded from localStorage when no entity exists", () => {
+    localStoragePortMock.getItem.mockImplementation((key: string) => {
+      const values: { [key: string]: string } = {
+        adler_volume: "0.8",
+        adler_graphics_quality: "3",
+        adler_language: "en",
+        adler_high_graphics_quality_enabled: "false",
+        adler_break_time_notifications_enabled: "true",
+        adler_lights_enabled: "false",
+      };
+      return values[key] || null;
+    });
+    entityContainerMock.getEntitiesOfType.mockReturnValue([undefined!]);
+    const result = systemUnderTest.execute();
+    expect(result.volume).toBe(0.8);
+    expect(result.graphicsQuality).toBe(3);
+    expect(result.language).toBe("en");
+    expect(result.highGraphicsQualityEnabled).toBe(false);
+    expect(result.breakTimeNotificationsEnabled).toBe(true);
+    expect(result.lightsEnabled).toBe(false);
   });
 
   test("cookieConsent is returned in settings when entity has it set", () => {

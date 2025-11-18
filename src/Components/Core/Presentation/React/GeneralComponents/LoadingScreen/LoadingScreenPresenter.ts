@@ -1,6 +1,7 @@
 import LoadingScreenViewModel from "./LoadingScreenViewModel";
 import ILoadingScreenPresenter from "./ILoadingScreenPresenter";
 import { injectable } from "inversify";
+import { CursorState } from "src/Components/Core/Domain/Types/CursorStateTypes";
 
 @injectable()
 export default class LoadingScreenPresenter implements ILoadingScreenPresenter {
@@ -8,10 +9,12 @@ export default class LoadingScreenPresenter implements ILoadingScreenPresenter {
   showLoadingScreen() {
     this.viewModel.isOpen.Value = true;
     this.viewModel.loadStep.Value = "";
+    this.viewModel.cursorState.Value = CursorState.loading_start;
   }
 
   releaseLoadingLock() {
     this.viewModel.isReadyToBeClosed.Value = true;
+    this.viewModel.cursorState.Value = CursorState.loading_end;
   }
 
   lockLoadingLock() {

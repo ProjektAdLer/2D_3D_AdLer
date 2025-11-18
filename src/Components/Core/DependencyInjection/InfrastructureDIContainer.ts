@@ -11,6 +11,9 @@ import BackendAdapter from "../Adapters/BackendAdapter/BackendAdapter";
 import { config } from "src/config";
 import MockBackendAdapter from "../Adapters/BackendAdapter/MockBackendAdapter";
 import FileBasedBackendAdapter from "../Adapters/BackendAdapter/FileBasedBackendAdapter";
+import ILocalStoragePort from "../Application/Ports/Interfaces/ILocalStoragePort";
+import LocalStoragePort from "../Adapters/LocalStoragePort/LocalStoragePort";
+import PORT_TYPES from "./Ports/PORT_TYPES";
 
 const infrastructureDIContainer = new ContainerModule((bind) => {
   bind<IEntityContainer>(CORE_TYPES.IEntityContainer)
@@ -39,6 +42,11 @@ const infrastructureDIContainer = new ContainerModule((bind) => {
       .to(BackendAdapter)
       .inSingletonScope();
   }
+
+  // LocalStorage Adapter
+  bind<ILocalStoragePort>(PORT_TYPES.ILocalStoragePort)
+    .to(LocalStoragePort)
+    .inSingletonScope();
 });
 
 export default infrastructureDIContainer;

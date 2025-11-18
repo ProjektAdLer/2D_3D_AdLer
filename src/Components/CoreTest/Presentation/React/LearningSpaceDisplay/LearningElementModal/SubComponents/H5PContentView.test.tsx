@@ -88,6 +88,7 @@ describe("H5PContentView", () => {
 
   test("should be invisible if isVisible is false", () => {
     viewModel.isVisible.Value = false;
+    viewModel.cookieConsent.Value = "accepted"; // Set cookie consent in ViewModel
 
     const container = render(
       <Provider container={CoreDIContainer}>
@@ -156,6 +157,7 @@ describe("H5PContentView", () => {
   test("should show H5P content when user has consented", () => {
     viewModel.filePath.Value =
       "wwwroot\\courses\\2\\World_For_Evaluation\\h5p\\H5P-Test";
+    viewModel.cookieConsent.Value = "accepted"; // Set cookie consent in ViewModel
 
     const settings = new SettingsTO();
     settings.cookieConsent = "accepted";
@@ -187,10 +189,18 @@ describe("H5PContentView", () => {
   test("should show H5P content after user accepts consent", async () => {
     viewModel.filePath.Value =
       "wwwroot\\courses\\2\\World_For_Evaluation\\h5p\\H5P-Test";
+    viewModel.cookieConsent.Value = "declined"; // Set initial cookie consent in ViewModel
 
     const settings = new SettingsTO();
     settings.cookieConsent = "declined";
     elementModalControllerMock.getUserSettings.mockReturnValue(settings);
+
+    // Mock setCookieConsent to update the ViewModel
+    elementModalControllerMock.setCookieConsent.mockImplementation(
+      (accepted: boolean) => {
+        viewModel.cookieConsent.Value = accepted ? "accepted" : "declined";
+      },
+    );
 
     // Mock H5P utils to prevent errors
     const element = document.createElement("div");

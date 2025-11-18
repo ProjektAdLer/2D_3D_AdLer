@@ -1,14 +1,14 @@
-import PrivacyPresenter from "../../../../Core/Presentation/React/Privacy/PrivacyPresenter";
-import PrivacyViewModel from "../../../../Core/Presentation/React/Privacy/PrivacyViewModel";
+import PrivacyContentPresenter from "../../../../Core/Presentation/React/Privacy/PrivacyContentPresenter";
+import PrivacyContentViewModel from "../../../../Core/Presentation/React/Privacy/PrivacyContentViewModel";
 import SettingsTO from "src/Components/Core/Application/DataTransferObjects/SettingsTO";
 
-describe("PrivacyPresenter", () => {
-  let presenter: PrivacyPresenter;
-  let viewModel: PrivacyViewModel;
+describe("PrivacyContentPresenter", () => {
+  let presenter: PrivacyContentPresenter;
+  let viewModel: PrivacyContentViewModel;
 
   beforeEach(() => {
-    viewModel = new PrivacyViewModel();
-    presenter = new PrivacyPresenter(viewModel);
+    viewModel = new PrivacyContentViewModel();
+    presenter = new PrivacyContentPresenter(viewModel);
   });
 
   test("should update viewModel when settings are updated with accepted consent", () => {

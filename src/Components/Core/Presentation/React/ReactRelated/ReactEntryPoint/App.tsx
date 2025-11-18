@@ -8,6 +8,7 @@ import { Location, Update } from "history";
 import LearningWorldMenu from "./LearningWorldMenu";
 import { useInjection } from "inversify-react";
 import IGetLoginStatusUseCase from "src/Components/Core/Application/UseCases/GetLoginStatus/IGetLoginStatusUseCase";
+import IGetSettingsConfigUseCase from "src/Components/Core/Application/UseCases/GetSettingsConfig/IGetSettingsConfigUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import InternetLossModal from "~ReactComponents/GeneralComponents/InternetLossModal/InternetLossModal";
 import LoadingScreen from "~ReactComponents/GeneralComponents/LoadingScreen/LoadingScreen";
@@ -26,6 +27,9 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
   const getLoginStatusUseCase = useInjection<IGetLoginStatusUseCase>(
     USECASE_TYPES.IGetLoginStatusUseCase,
   );
+  const getSettingsConfigUseCase = useInjection<IGetSettingsConfigUseCase>(
+    USECASE_TYPES.IGetSettingsConfigUseCase,
+  );
 
   useEffect(() => {
     const unlisten = history.listen((update: Update) => {
@@ -43,6 +47,14 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
       history.replace("/");
     }
   }, [getLoginStatusUseCase]);
+
+  // Load settings on app initialization to apply saved language
+  useEffect(() => {
+    const settings = getSettingsConfigUseCase.execute();
+    if (settings.language) {
+      i18next.changeLanguage(settings.language);
+    }
+  }, [getSettingsConfigUseCase]);
 
   if (location?.pathname.includes("/spacedisplay")) {
     return (

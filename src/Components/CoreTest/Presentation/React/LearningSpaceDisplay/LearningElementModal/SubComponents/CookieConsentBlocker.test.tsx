@@ -2,7 +2,6 @@ import { fireEvent, render } from "@testing-library/react";
 import React from "react";
 import CookieConsentBlocker from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/SubComponents/CookieConsentBlocker";
 import type ILearningElementModalController from "../../../../../../Core/Presentation/React/LearningSpaceDisplay/LearningElementModal/ILearningElementModalController";
-import SettingsTO from "../../../../../../Core/Application/DataTransferObjects/SettingsTO";
 
 // Mock react-i18next
 jest.mock("react-i18next", () => ({
@@ -12,35 +11,23 @@ jest.mock("react-i18next", () => ({
 }));
 
 describe("CookieConsentBlocker", () => {
-  let mockOnConsent: jest.Mock;
   let mockController: jest.Mocked<ILearningElementModalController>;
 
   beforeEach(() => {
-    mockOnConsent = jest.fn();
     mockController = {
-      setUserSettings: jest.fn(),
+      setCookieConsent: jest.fn(),
     } as jest.Mocked<ILearningElementModalController>;
     jest.clearAllMocks();
   });
 
   test("should render consent blocker UI", () => {
-    const result = render(
-      <CookieConsentBlocker
-        onConsent={mockOnConsent}
-        controller={mockController}
-      />,
-    );
+    const result = render(<CookieConsentBlocker controller={mockController} />);
 
     expect(result.getByTestId("cookie-consent-blocker")).toBeInTheDocument();
   });
 
   test("should display consent required heading", () => {
-    const result = render(
-      <CookieConsentBlocker
-        onConsent={mockOnConsent}
-        controller={mockController}
-      />,
-    );
+    const result = render(<CookieConsentBlocker controller={mockController} />);
 
     expect(
       result.getByText("externalContentConsentRequired"),
@@ -48,12 +35,7 @@ describe("CookieConsentBlocker", () => {
   });
 
   test("should display consent description", () => {
-    const result = render(
-      <CookieConsentBlocker
-        onConsent={mockOnConsent}
-        controller={mockController}
-      />,
-    );
+    const result = render(<CookieConsentBlocker controller={mockController} />);
 
     expect(
       result.getByText("externalContentConsentDescription"),
@@ -61,12 +43,7 @@ describe("CookieConsentBlocker", () => {
   });
 
   test("should toggle details visibility when clicking show/hide button", () => {
-    const result = render(
-      <CookieConsentBlocker
-        onConsent={mockOnConsent}
-        controller={mockController}
-      />,
-    );
+    const result = render(<CookieConsentBlocker controller={mockController} />);
 
     const toggleButton = result.getByTestId(
       "external-content-consent-details-toggle",
@@ -100,57 +77,24 @@ describe("CookieConsentBlocker", () => {
     ).not.toBeInTheDocument();
   });
 
-  test("should call controller.setUserSettings when accept button is clicked", () => {
-    const result = render(
-      <CookieConsentBlocker
-        onConsent={mockOnConsent}
-        controller={mockController}
-      />,
-    );
+  test("should call controller.setCookieConsent when accept button is clicked", () => {
+    const result = render(<CookieConsentBlocker controller={mockController} />);
 
     const acceptButton = result.getByTestId("external-content-consent-accept");
     fireEvent.click(acceptButton);
 
-    const expectedSettings = new SettingsTO();
-    expectedSettings.cookieConsent = "accepted";
-    expect(mockController.setUserSettings).toHaveBeenCalledWith(
-      expectedSettings,
-    );
-  });
-
-  test("should call onConsent callback when accept button is clicked", () => {
-    const result = render(
-      <CookieConsentBlocker
-        onConsent={mockOnConsent}
-        controller={mockController}
-      />,
-    );
-
-    const acceptButton = result.getByTestId("external-content-consent-accept");
-    fireEvent.click(acceptButton);
-
-    expect(mockOnConsent).toHaveBeenCalledTimes(1);
+    expect(mockController.setCookieConsent).toHaveBeenCalledWith(true);
   });
 
   test("should display accept button with correct text", () => {
-    const result = render(
-      <CookieConsentBlocker
-        onConsent={mockOnConsent}
-        controller={mockController}
-      />,
-    );
+    const result = render(<CookieConsentBlocker controller={mockController} />);
 
     const acceptButton = result.getByTestId("external-content-consent-accept");
     expect(acceptButton).toHaveTextContent("externalContentConsentAccept");
   });
 
   test("should show 'show more' text initially", () => {
-    const result = render(
-      <CookieConsentBlocker
-        onConsent={mockOnConsent}
-        controller={mockController}
-      />,
-    );
+    const result = render(<CookieConsentBlocker controller={mockController} />);
 
     const toggleButton = result.getByTestId(
       "external-content-consent-details-toggle",
@@ -159,12 +103,7 @@ describe("CookieConsentBlocker", () => {
   });
 
   test("should show 'hide details' text when details are visible", () => {
-    const result = render(
-      <CookieConsentBlocker
-        onConsent={mockOnConsent}
-        controller={mockController}
-      />,
-    );
+    const result = render(<CookieConsentBlocker controller={mockController} />);
 
     const toggleButton = result.getByTestId(
       "external-content-consent-details-toggle",

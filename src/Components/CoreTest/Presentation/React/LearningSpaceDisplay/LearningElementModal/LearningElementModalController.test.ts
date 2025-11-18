@@ -144,39 +144,4 @@ describe("LearningElementModalController", () => {
       learningworldcompletionModalMock.onModalVisibility,
     ).toHaveBeenCalled();
   });
-
-  test("getUserSettings should return settings with cookieConsent", () => {
-    const result = systemUnderTest.getUserSettings();
-
-    expect(result).toBeDefined();
-    expect(result).toHaveProperty("cookieConsent");
-  });
-
-  test("setUserSettings should accept settings with cookieConsent accepted", () => {
-    const settings = new SettingsTO();
-    settings.cookieConsent = "accepted";
-
-    expect(() => {
-      systemUnderTest.setUserSettings(settings);
-    }).not.toThrow();
-  });
-
-  test("setUserSettings should accept settings with cookieConsent declined", () => {
-    const settings = new SettingsTO();
-    settings.cookieConsent = "declined";
-
-    expect(() => {
-      systemUnderTest.setUserSettings(settings);
-    }).not.toThrow();
-  });
-
-  test("getUserSettings returns current cookieConsent state", () => {
-    const settings = new SettingsTO();
-    settings.cookieConsent = "accepted";
-
-    systemUnderTest.setUserSettings(settings);
-    const result = systemUnderTest.getUserSettings();
-
-    expect(result.cookieConsent).toBeDefined();
-  });
 });

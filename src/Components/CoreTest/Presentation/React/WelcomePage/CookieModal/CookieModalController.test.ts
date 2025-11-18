@@ -1,27 +1,21 @@
 import CookieModalController from "../../../../../Core/Presentation/React/WelcomePage/CookieModal/CookieModalController";
+import CookieModalViewModel from "../../../../../Core/Presentation/React/WelcomePage/CookieModal/CookieModalViewModel";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import type ISetSettingsConfigUseCase from "../../../../../Core/Application/UseCases/SetSettingsConfig/ISetSettingsConfigUseCase";
-import type IGetSettingsConfigUseCase from "../../../../../Core/Application/UseCases/GetSettingsConfig/IGetSettingsConfigUseCase";
 
 describe("CookieModalController", () => {
   let systemUnderTest: CookieModalController;
+  let viewModel: CookieModalViewModel;
   let setSettingsConfigUseCase: ISetSettingsConfigUseCase;
-  let getSettingsConfigUseCase: IGetSettingsConfigUseCase;
 
   beforeEach(() => {
-    // Clear localStorage before each test
     localStorage.clear();
+    viewModel = new CookieModalViewModel();
     setSettingsConfigUseCase = CoreDIContainer.get<ISetSettingsConfigUseCase>(
       USECASE_TYPES.ISetSettingsConfigUseCase,
     );
-    getSettingsConfigUseCase = CoreDIContainer.get<IGetSettingsConfigUseCase>(
-      USECASE_TYPES.IGetSettingsConfigUseCase,
-    );
-    systemUnderTest = new CookieModalController(
-      setSettingsConfigUseCase,
-      getSettingsConfigUseCase,
-    );
+    systemUnderTest = new CookieModalController(viewModel);
   });
 
   afterEach(() => {
@@ -29,104 +23,22 @@ describe("CookieModalController", () => {
   });
 
   describe("accept", () => {
-    test("should store 'accepted' in localStorage", () => {
+    test("should call setSettingsConfigUseCase with 'accepted'", () => {
+      const executeSpy = jest.spyOn(setSettingsConfigUseCase, "execute");
+
       systemUnderTest.accept();
 
-      expect(localStorage.getItem("adler_cookie_consent")).toBe("accepted");
-    });
-
-    test("should store timestamp in localStorage", () => {
-      const beforeTimestamp = Date.now();
-      systemUnderTest.accept();
-      const afterTimestamp = Date.now();
-
-      const storedTimestamp = localStorage.getItem(
-        "adler_cookie_consent_timestamp",
-      );
-      expect(storedTimestamp).toBeTruthy();
-      const timestamp = parseInt(storedTimestamp!);
-      expect(timestamp).toBeGreaterThanOrEqual(beforeTimestamp);
-      expect(timestamp).toBeLessThanOrEqual(afterTimestamp);
+      expect(executeSpy).toHaveBeenCalledWith({ cookieConsent: "accepted" });
     });
   });
 
   describe("decline", () => {
-    test("should store 'declined' in localStorage", () => {
+    test("should call setSettingsConfigUseCase with 'declined'", () => {
+      const executeSpy = jest.spyOn(setSettingsConfigUseCase, "execute");
+
       systemUnderTest.decline();
 
-      expect(localStorage.getItem("adler_cookie_consent")).toBe("declined");
-    });
-
-    test("should store timestamp in localStorage", () => {
-      const beforeTimestamp = Date.now();
-      systemUnderTest.decline();
-      const afterTimestamp = Date.now();
-
-      const storedTimestamp = localStorage.getItem(
-        "adler_cookie_consent_timestamp",
-      );
-      expect(storedTimestamp).toBeTruthy();
-      const timestamp = parseInt(storedTimestamp!);
-      expect(timestamp).toBeGreaterThanOrEqual(beforeTimestamp);
-      expect(timestamp).toBeLessThanOrEqual(afterTimestamp);
-    });
-  });
-
-  describe("getConsent", () => {
-    test("should return null when no consent is stored", () => {
-      expect(CookieModalController.getConsent()).toBeNull();
-    });
-
-    test("should return 'accepted' when user accepted", () => {
-      systemUnderTest.accept();
-      expect(CookieModalController.getConsent()).toBe("accepted");
-    });
-
-    test("should return 'declined' when user declined", () => {
-      systemUnderTest.decline();
-      expect(CookieModalController.getConsent()).toBe("declined");
-    });
-  });
-
-  describe("hasConsent", () => {
-    test("should return false when no consent is stored", () => {
-      expect(CookieModalController.hasConsent()).toBe(false);
-    });
-
-    test("should return true when user accepted", () => {
-      systemUnderTest.accept();
-      expect(CookieModalController.hasConsent()).toBe(true);
-    });
-
-    test("should return false when user declined", () => {
-      systemUnderTest.decline();
-      expect(CookieModalController.hasConsent()).toBe(false);
-    });
-  });
-
-  describe("hasDeclined", () => {
-    test("should return false when no consent is stored", () => {
-      expect(CookieModalController.hasDeclined()).toBe(false);
-    });
-
-    test("should return false when user accepted", () => {
-      systemUnderTest.accept();
-      expect(CookieModalController.hasDeclined()).toBe(false);
-    });
-
-    test("should return true when user declined", () => {
-      systemUnderTest.decline();
-      expect(CookieModalController.hasDeclined()).toBe(true);
-    });
-  });
-
-  describe("resetConsent", () => {
-    test("should remove consent from localStorage", () => {
-      systemUnderTest.accept();
-      CookieModalController.resetConsent();
-
-      expect(localStorage.getItem("adler_cookie_consent")).toBeNull();
-      expect(localStorage.getItem("adler_cookie_consent_timestamp")).toBeNull();
+      expect(executeSpy).toHaveBeenCalledWith({ cookieConsent: "declined" });
     });
   });
 });

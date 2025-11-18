@@ -12,6 +12,8 @@ export default class LearningElementModalViewModel {
 
   hasScored = new Observable<boolean>();
 
+  cookieConsent = new Observable<"accepted" | "declined" | null>(null);
+
   readonly openDelay: number = 1600;
 
   parentSpaceID = new Observable<ComponentID>();
