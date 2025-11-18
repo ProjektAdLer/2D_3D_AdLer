@@ -423,7 +423,21 @@ describe("FileBasedBackendAdapter", () => {
   });
 
   describe("getAdaptivityElementQuestionResponse", () => {
-    test("should return default correct response", async () => {
+    beforeEach(() => {
+      // Mock worlds.json load
+      fetchMock.mockResolvedValueOnce({
+        ok: true,
+        json: async () => mockWorldsJson,
+      } as Response);
+
+      // Mock world.json load
+      fetchMock.mockResolvedValueOnce({
+        ok: true,
+        json: async () => mockWorldData,
+      } as Response);
+    });
+
+    test("should return default response when element has no adaptivityContent", async () => {
       const submissionData: AdaptivityElementQuestionSubmissionTO = {
         elementID: 1,
         taskID: 1,
@@ -437,17 +451,33 @@ describe("FileBasedBackendAdapter", () => {
         submissionData,
       );
 
+      // Returns default response because mock element has no adaptivityContent
       expect(result.elementScore.elementId).toBe(1);
-      expect(result.elementScore.success).toBe(true);
+      expect(result.elementScore.success).toBe(false);
       expect(result.gradedTask.taskId).toBe(1);
-      expect(result.gradedTask.taskStatus).toBe("Correct");
+      expect(result.gradedTask.taskStatus).toBe("Incorrect");
       expect(result.gradedQuestion.id).toBe(1);
-      expect(result.gradedQuestion.status).toBe("Correct");
-      expect(result.gradedQuestion.answers).toBeUndefined();
+      expect(result.gradedQuestion.status).toBe("Incorrect");
+      // Default response includes empty answers array
+      expect(result.gradedQuestion.answers).toBeDefined();
     });
   });
 
   describe("getAdaptivityElementStatusResponse", () => {
+    beforeEach(() => {
+      // Mock worlds.json load
+      fetchMock.mockResolvedValueOnce({
+        ok: true,
+        json: async () => mockWorldsJson,
+      } as Response);
+
+      // Mock world.json load
+      fetchMock.mockResolvedValueOnce({
+        ok: true,
+        json: async () => mockWorldData,
+      } as Response);
+    });
+
     test("should return default status", async () => {
       const result = await systemUnderTest.getAdaptivityElementStatusResponse({
         userToken: "token",
@@ -558,9 +588,10 @@ describe("FileBasedBackendAdapter", () => {
         },
       } as Response);
 
+      // Should handle gracefully and return empty courses array
       await expect(
         systemUnderTest.getCoursesAvailableForUser("token"),
-      ).rejects.toThrow();
+      ).resolves.toEqual({ courses: [] });
     });
   });
 });
