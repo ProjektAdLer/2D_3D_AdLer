@@ -14,6 +14,7 @@ const fs = require("fs");
 const path = require("path");
 const { execSync } = require("child_process");
 const AdmZip = require("adm-zip");
+const xml2js = require("xml2js");
 
 // Konfiguration
 const PUBLIC_DIR = path.join(__dirname, "..", "public");
@@ -82,12 +83,17 @@ function extractMBZ(mbzPath, targetDir) {
     // Ignoriere den Fehler und prüfe stattdessen, ob die Datei da ist
   }
 
-  // Prüfe ob ATF_Document.json vorhanden ist
+  // Prüfe ob ATF_Document.json oder DSL_Document.json vorhanden ist
   const atfPath = path.join(targetDir, "ATF_Document.json");
-  if (fs.existsSync(atfPath)) {
+  const dslPath = path.join(targetDir, "DSL_Document.json");
+
+  if (fs.existsSync(atfPath) || fs.existsSync(dslPath)) {
     return true;
   } else {
-    log(`✗ ATF_Document.json nicht im Archiv gefunden`, "red");
+    log(
+      `✗ Weder ATF_Document.json noch DSL_Document.json im Archiv gefunden`,
+      "red",
+    );
     return false;
   }
 }
@@ -140,13 +146,60 @@ function findFile(dir, fileName) {
 }
 
 /**
+ * Erstellt ein Mapping von ElementUUID zu Dateipfad aus files.xml (für DSL-Format)
+ */
+async function buildFileMapping(tempDir) {
+  const filesXmlPath = path.join(tempDir, "files.xml");
+
+  if (!fs.existsSync(filesXmlPath)) {
+    return null; // Kein files.xml = ATF-Format
+  }
+
+  try {
+    const xmlContent = fs.readFileSync(filesXmlPath, "utf-8");
+    const parser = new xml2js.Parser();
+    const result = await parser.parseStringPromise(xmlContent);
+
+    const mapping = new Map();
+
+    if (result.files && result.files.file) {
+      result.files.file.forEach((file) => {
+        const elementUUID = file.elementUUID?.[0];
+        const contenthash = file.contenthash?.[0];
+        const source = file.source?.[0];
+
+        if (elementUUID && contenthash && source) {
+          // Datei ist in files/XX/XXXXXX... gespeichert (XX = erste 2 Zeichen)
+          const hashPrefix = contenthash.substring(0, 2);
+          const filePath = path.join(tempDir, "files", hashPrefix, contenthash);
+
+          mapping.set(elementUUID, {
+            path: filePath,
+            originalName: source,
+          });
+        }
+      });
+    }
+
+    return mapping;
+  } catch (error) {
+    log(
+      `  ⚠ Warnung: files.xml konnte nicht gelesen werden: ${error.message}`,
+      "yellow",
+    );
+    return null;
+  }
+}
+
+/**
  * Verarbeitet ein einzelnes Lernelement
  */
-function processElement(element, tempDir, elementsDir) {
+function processElement(element, tempDir, elementsDir, fileMapping = null) {
   const elementId = element.elementId;
   const elementName = element.elementName;
   const elementType = element.elementFileType;
   const category = element.elementCategory;
+  const elementUUID = element.elementUUID;
 
   // Externe URLs überspringen
   if (element.url && element.url.startsWith("http")) {
@@ -164,10 +217,24 @@ function processElement(element, tempDir, elementsDir) {
   }
 
   // Quelldatei finden
-  const sourceFileName = `${elementName}.${elementType}`;
-  const sourceFile = findFile(tempDir, sourceFileName);
+  let sourceFile = null;
+
+  // DSL-Format: Verwende fileMapping
+  if (fileMapping && elementUUID) {
+    const fileInfo = fileMapping.get(elementUUID);
+    if (fileInfo) {
+      sourceFile = fileInfo.path;
+    }
+  }
+
+  // ATF-Format oder Fallback: Suche nach Dateiname
+  if (!sourceFile) {
+    const sourceFileName = `${elementName}.${elementType}`;
+    sourceFile = findFile(tempDir, sourceFileName);
+  }
 
   if (!sourceFile) {
+    const sourceFileName = `${elementName}.${elementType}`;
     log(`  ⚠ Warnung: Datei nicht gefunden: ${sourceFileName}`, "yellow");
 
     // Debug: Zeige ähnliche Dateien zur Fehlersuche
@@ -196,8 +263,9 @@ function processElement(element, tempDir, elementsDir) {
     elementType === "h5p"
   ) {
     const h5pTargetDir = path.join(elementsDir, String(elementId));
+    const displayName = `${elementName}.${elementType}`;
 
-    log(`  → Entpacke H5P: ${sourceFileName} → elements/${elementId}/`, "blue");
+    log(`  → Entpacke H5P: ${displayName} → elements/${elementId}/`, "blue");
 
     if (extractH5P(sourceFile, h5pTargetDir)) {
       log(`  ✓ Element ${elementId} (${elementName}): H5P entpackt`, "green");
@@ -234,7 +302,7 @@ function isWorldAlreadyExtracted(worldName) {
 /**
  * Verarbeitet eine MBZ-Datei
  */
-function processMBZ(mbzPath, skipExisting = true) {
+async function processMBZ(mbzPath, skipExisting = true) {
   const mbzFileName = path.basename(mbzPath, ".mbz");
   log(`\n${"=".repeat(60)}`, "cyan");
   log(`Verarbeite: ${mbzFileName}.mbz`, "cyan");
@@ -251,19 +319,29 @@ function processMBZ(mbzPath, skipExisting = true) {
   }
   log("✓ MBZ entpackt", "green");
 
-  // ATF_Document.json lesen
-  log("\n2. Lese ATF_Document.json...", "blue");
+  // ATF_Document.json oder DSL_Document.json lesen
+  log("\n2. Lese Lernwelt-Metadaten...", "blue");
   const atfPath = path.join(tempExtractDir, "ATF_Document.json");
+  const dslPath = path.join(tempExtractDir, "DSL_Document.json");
 
-  if (!fs.existsSync(atfPath)) {
-    log("✗ ATF_Document.json nicht gefunden!", "red");
+  let documentPath = null;
+  let documentType = null;
+
+  if (fs.existsSync(atfPath)) {
+    documentPath = atfPath;
+    documentType = "ATF";
+  } else if (fs.existsSync(dslPath)) {
+    documentPath = dslPath;
+    documentType = "DSL";
+  } else {
+    log("✗ Weder ATF_Document.json noch DSL_Document.json gefunden!", "red");
     removeDir(tempExtractDir);
     return false;
   }
 
-  const atf = JSON.parse(fs.readFileSync(atfPath, "utf-8"));
-  const worldName = atf.world.worldName;
-  log(`✓ Lernwelt: ${worldName}`, "green");
+  const worldData = JSON.parse(fs.readFileSync(documentPath, "utf-8"));
+  const worldName = worldData.world.worldName;
+  log(`✓ Lernwelt: ${worldName} (${documentType}-Format)`, "green");
 
   // Duplikats-Prüfung
   if (skipExisting && isWorldAlreadyExtracted(worldName)) {
@@ -280,35 +358,44 @@ function processMBZ(mbzPath, skipExisting = true) {
   const elementsDir = path.join(worldDir, "elements");
   ensureDir(elementsDir);
 
+  // File-Mapping für DSL-Format erstellen
+  log("\n3. Erstelle File-Mapping...", "blue");
+  const fileMapping = await buildFileMapping(tempExtractDir);
+  if (fileMapping) {
+    log(`✓ ${fileMapping.size} Dateien im Mapping gefunden`, "green");
+  } else {
+    log("✓ ATF-Format (kein Mapping benötigt)", "green");
+  }
+
   // Elemente verarbeiten
-  log(`\n3. Verarbeite ${atf.world.elements.length} Elemente...`, "blue");
+  log(`\n4. Verarbeite ${worldData.world.elements.length} Elemente...`, "blue");
   let successCount = 0;
 
-  atf.world.elements.forEach((element) => {
-    if (processElement(element, tempExtractDir, elementsDir)) {
+  worldData.world.elements.forEach((element) => {
+    if (processElement(element, tempExtractDir, elementsDir, fileMapping)) {
       successCount++;
     }
   });
 
   log(
-    `\n✓ ${successCount}/${atf.world.elements.length} Elemente erfolgreich verarbeitet`,
+    `\n✓ ${successCount}/${worldData.world.elements.length} Elemente erfolgreich verarbeitet`,
     "green",
   );
 
-  // ATF als world.json speichern
-  log("\n4. Speichere world.json...", "blue");
+  // Dokument als world.json speichern
+  log("\n5. Speichere world.json...", "blue");
   const worldJsonPath = path.join(worldDir, "world.json");
 
-  // Optional: Type von ATF zu AWT ändern
-  if (atf.$type === "ATF") {
-    atf.$type = "AWT";
+  // Optional: Type von ATF/DSL zu AWT ändern (für Backend-Kompatibilität)
+  if (worldData.$type === "ATF" || worldData.$type === "DSL") {
+    worldData.$type = "AWT";
   }
 
-  fs.writeFileSync(worldJsonPath, JSON.stringify(atf, null, 2), "utf-8");
+  fs.writeFileSync(worldJsonPath, JSON.stringify(worldData, null, 2), "utf-8");
   log(`✓ Gespeichert: ${worldName}/world.json`, "green");
 
   // Aufräumen
-  log("\n5. Räume auf...", "blue");
+  log("\n6. Räume auf...", "blue");
   removeDir(tempExtractDir);
   log("✓ Temporäre Dateien gelöscht", "green");
 
@@ -317,7 +404,7 @@ function processMBZ(mbzPath, skipExisting = true) {
 
   return {
     worldName,
-    worldDescription: atf.world.worldDescription || "",
+    worldDescription: worldData.world.worldDescription || "",
     elementCount: successCount,
     skipped: false,
   };
@@ -374,7 +461,7 @@ function updateWorldsIndex(processedWorlds) {
 /**
  * Hauptfunktion
  */
-function main() {
+async function main() {
   log("\n" + "=".repeat(60), "cyan");
   log("  AdLer Learning World Extractor", "cyan");
   log("=".repeat(60) + "\n", "cyan");
@@ -425,8 +512,8 @@ function main() {
   const processedWorlds = [];
   const skippedWorlds = [];
 
-  mbzFiles.forEach((mbzFile) => {
-    const result = processMBZ(mbzFile);
+  for (const mbzFile of mbzFiles) {
+    const result = await processMBZ(mbzFile);
     if (result) {
       if (result.skipped) {
         skippedWorlds.push(result);
@@ -434,7 +521,7 @@ function main() {
         processedWorlds.push(result);
       }
     }
-  });
+  }
 
   // worlds.json aktualisieren
   if (processedWorlds.length > 0) {
