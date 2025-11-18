@@ -14,12 +14,14 @@ import AvatarCameraViewModel from "../../../../../Core/Presentation/Babylon/Avat
 import IGetUserLocationUseCase from "../../../../../Core/Application/UseCases/GetUserLocation/IGetUserLocationUseCase";
 import LearningSpaceTO from "../../../../../Core/Application/DataTransferObjects/LearningSpaceTO";
 import { LearningSpaceTemplateType } from "../../../../../Core/Domain/Types/LearningSpaceTemplateType";
+import IGetSettingsConfigUseCase from "../../../../../Core/Application/UseCases/GetSettingsConfig/IGetSettingsConfigUseCase";
 
 const presentationDirectorMock = mock<IPresentationDirector>();
 const presentationBuilderMock = mock<IPresentationBuilder>();
 const navigationMock = mock<INavigation>();
 const loadSpaceUseCaseMock = mock<ILoadLearningSpaceUseCase>();
 const getUserLocationUseCaseMock = mock<IGetUserLocationUseCase>();
+const getSettingsUseCaseMock = mock<IGetSettingsConfigUseCase>();
 
 const getUserLocationUseCaseReturnValue = {
   spaceID: 1,
@@ -53,6 +55,9 @@ describe("LearningSpaceScene", () => {
     CoreDIContainer.rebind(
       USECASE_TYPES.IGetUserLocationUseCase,
     ).toConstantValue(getUserLocationUseCaseMock);
+    CoreDIContainer.rebind(
+      USECASE_TYPES.IGetSettingsConfigUseCase,
+    ).toConstantValue(getSettingsUseCaseMock);
   });
 
   beforeEach(() => {
@@ -76,6 +81,9 @@ describe("LearningSpaceScene", () => {
     getUserLocationUseCaseMock.execute.mockReturnValue(
       getUserLocationUseCaseReturnValue,
     );
+    getSettingsUseCaseMock.execute.mockReturnValue({
+      lightsEnabled: true,
+    });
 
     expect(
       async () => await systemUnderTest["initializeScene"](),
@@ -107,5 +115,26 @@ describe("LearningSpaceScene", () => {
     systemUnderTest["onLearningSpaceLoaded"](spaceData);
 
     expect(systemUnderTest["spaceData"]).toBe(spaceData);
+  });
+
+  test("initializeScene initializes wwith one light source if lightsEnabled is false", async () => {
+    systemUnderTest["scene"] = new Scene(new NullEngine());
+    presentationBuilderMock.getPresenter.mockReturnValue(
+      mock<ILearningSpacePresenter>(),
+    );
+    presentationBuilderMock.getViewModel.mockReturnValue(
+      new AvatarCameraViewModel(),
+    );
+    getUserLocationUseCaseMock.execute.mockReturnValue(
+      getUserLocationUseCaseReturnValue,
+    );
+    getSettingsUseCaseMock.execute.mockReturnValue({
+      lightsEnabled: false,
+    });
+
+    await systemUnderTest["initializeScene"]();
+
+    const lightSources = systemUnderTest["scene"].lights;
+    expect(lightSources.length).toBe(1);
   });
 });
