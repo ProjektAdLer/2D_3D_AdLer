@@ -49,7 +49,6 @@ export const config = {
   useFileBasedBackend: parseBool(
     process.env.REACT_APP_USE_FILEBASED_BACKEND || false,
   ),
-  isShowcase: parseBool(process.env.REACT_APP_IS_SHOWCASE || false),
   version: version,
 } as {
   isDebug: boolean;
@@ -58,6 +57,5 @@ export const config = {
   moodleURL: string;
   useFakeBackend: boolean;
   useFileBasedBackend: boolean;
-  isShowcase: boolean;
   version: string;
 };
