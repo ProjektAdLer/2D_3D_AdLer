@@ -35,12 +35,15 @@ export default function RangeSlider(props: RangeSliderProps) {
 
   const intervalDelay = 300; // delay between value in-/decrements in ms
 
-  useEffect(() => {
-    props.callback(value);
-    if (props.display) {
-      setDisplayText(props.display(value));
-    }
-  }, [props, value]);
+  useEffect(
+    () => {
+      props.callback(value);
+      if (props.display) {
+        setDisplayText(props.display(value));
+      }
+    }, // eslint-disable-next-line
+    [value],
+  );
 
   return (
     <div
