@@ -13,7 +13,57 @@ function createExpressServer() {
   const expressApp = express();
   const buildPath = path.join(__dirname, "../build");
 
+  // Check for external LearningWorlds in userData
+  const userDataPath = app.getPath("userData");
+  const externalWorldsPath = path.join(userDataPath, "LearningWorlds");
+
+  console.log(`[Express] userData path: ${externalWorldsPath}`);
+  console.log(
+    `[Express] build path: ${path.join(buildPath, "LearningWorlds")}`,
+  );
+
+  // Create userData/LearningWorlds directory if it doesn't exist
+  if (!fs.existsSync(externalWorldsPath)) {
+    fs.mkdirSync(externalWorldsPath, { recursive: true });
+  }
+
+  // Check if worlds.json exists in userData
+  const userDataWorldsJson = path.join(externalWorldsPath, "worlds.json");
+  if (fs.existsSync(userDataWorldsJson)) {
+    console.log(
+      `[Express] Found worlds.json in userData:`,
+      fs.readFileSync(userDataWorldsJson, "utf-8"),
+    );
+  } else {
+    console.log(`[Express] No worlds.json in userData`);
+  }
+
+  // Custom middleware to serve LearningWorlds with userData priority
+  // IMPORTANT: This MUST come BEFORE the build static middleware
+  const embeddedWorldsPath = path.join(buildPath, "LearningWorlds");
+  expressApp.use("/LearningWorlds", (req, res, next) => {
+    // Try userData first
+    const userDataFile = path.join(externalWorldsPath, req.path);
+    if (fs.existsSync(userDataFile) && fs.statSync(userDataFile).isFile()) {
+      console.log(`[Express] Serving from userData: ${req.path}`);
+      return res.sendFile(userDataFile);
+    }
+
+    // Fallback to build directory
+    const buildFile = path.join(embeddedWorldsPath, req.path);
+    if (fs.existsSync(buildFile) && fs.statSync(buildFile).isFile()) {
+      console.log(`[Express] Serving from build: ${req.path}`);
+      return res.sendFile(buildFile);
+    }
+
+    // If it's a directory request, try with express.static
+    express.static(externalWorldsPath)(req, res, () => {
+      express.static(embeddedWorldsPath)(req, res, next);
+    });
+  });
+
   // Serve static files from build directory with caching
+  // IMPORTANT: This must come AFTER /LearningWorlds middleware
   expressApp.use(
     express.static(buildPath, {
       maxAge: "1d", // Cache for 1 day
@@ -21,22 +71,6 @@ function createExpressServer() {
       lastModified: true,
     }),
   );
-
-  // Check for external LearningWorlds in userData
-  const userDataPath = app.getPath("userData");
-  const externalWorldsPath = path.join(userDataPath, "LearningWorlds");
-
-  // Create userData/LearningWorlds directory if it doesn't exist
-  if (!fs.existsSync(externalWorldsPath)) {
-    fs.mkdirSync(externalWorldsPath, { recursive: true });
-  }
-
-  // Serve external LearningWorlds with priority (overrides embedded ones)
-  expressApp.use("/LearningWorlds", express.static(externalWorldsPath));
-
-  // Fallback to embedded LearningWorlds
-  const embeddedWorldsPath = path.join(buildPath, "LearningWorlds");
-  expressApp.use("/LearningWorlds", express.static(embeddedWorldsPath));
 
   // SPA fallback - serve index.html for all routes that don't match static files
   // Using middleware instead of route to avoid Express 5 path-to-regexp issues

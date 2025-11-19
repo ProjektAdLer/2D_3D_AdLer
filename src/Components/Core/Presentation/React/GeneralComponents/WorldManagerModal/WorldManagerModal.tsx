@@ -77,19 +77,13 @@ export default function WorldManagerModal() {
           progress: 100,
         });
 
-        // Reload worlds list
+        // Reload worlds list in modal
         await loadWorlds();
 
-        // Trigger page reload to refresh available worlds in the app
+        // Force hard reload to clear cache and load new worlds.json
         setTimeout(() => {
           window.location.reload();
-        }, 2000);
-
-        // Clear progress after showing success
-        setTimeout(() => {
-          setImportProgress(null);
-          setImportingFile(null);
-        }, 3000);
+        }, 1500);
       } else {
         setImportProgress({
           message: `Fehler: ${result.error}`,
@@ -128,8 +122,13 @@ export default function WorldManagerModal() {
       const result = await window.electronAPI!.deleteWorld(worldName);
 
       if (result.success) {
-        // Reload worlds list
+        // Reload worlds list in modal
         await loadWorlds();
+
+        // Force page reload to update available worlds in the app
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
       } else {
         alert(`Fehler beim Löschen: ${result.error}`);
       }
