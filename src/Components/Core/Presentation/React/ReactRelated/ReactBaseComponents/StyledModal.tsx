@@ -2,6 +2,7 @@ import React from "react";
 import StyledContainer from "./StyledContainer";
 import closeIcon from "../../../../../../Assets/icons/close.svg";
 import CloseButton from "./CloseButton";
+import tailwindMerge from "../../../Utils/TailwindMerge";
 
 type Props = Partial<{
   hasFooter?: boolean;
@@ -51,7 +52,7 @@ export default function StyledModal({
       className="z-50 flex items-center justify-center"
     >
       <div
-        className="fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center h-full bg-blacktrans"
+        className="fixed bottom-0 left-0 right-0 top-0 flex h-full items-center justify-center bg-blacktrans"
         style={lefthalfshift ? { width: "50%" } : {}}
         onClick={onClose}
         // onKeyDown={onClose}
@@ -62,9 +63,9 @@ export default function StyledModal({
           onClick={(event) => {
             event.stopPropagation();
           }}
-          className="z-50 p-2 rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto max-w-[95%] max-h-[95%] overflow-hidden flex flex-col"
+          className="z-50 flex max-h-[95%] max-w-[95%] flex-col overflow-hidden rounded-lg bg-gradient-to-br from-adlerbggradientfrom to-adlerbggradientto p-2"
         >
-          <div className="flex items-center justify-center w-full gap-2 p-1 pb-3 text-xl font-bold text-adlerdarkblue lg:roboto-black lg:text-2xl h-fit mobile-landscape:text-sm mobile-portrait:text-sm">
+          <div className="lg:roboto-black flex h-fit w-full items-center justify-center gap-2 p-1 pb-3 text-xl font-bold text-adlerdarkblue lg:text-2xl mobile-landscape:text-sm mobile-portrait:text-sm">
             <div className="w-full">{title}</div>
             {canClose && (
               <CloseButton
@@ -75,14 +76,14 @@ export default function StyledModal({
               >
                 <img
                   src={closeIcon}
-                  className="lg:w-10 md:w-8 sm:w-6"
+                  className="sm:w-6 md:w-8 lg:w-10"
                   alt="CloseButton"
                 ></img>
               </CloseButton>
             )}
           </div>
           {/*Content*/}
-          <div className="px-1 overflow-auto rounded-lg font-regular h-fit scrollGutter mobile-portrait:text-xs mobile-landscape:text-xs">
+          <div className="font-regular scrollGutter h-fit overflow-auto rounded-lg px-1 mobile-landscape:text-xs mobile-portrait:text-xs">
             {children}
           </div>
           {/*Optional Footer*/}
