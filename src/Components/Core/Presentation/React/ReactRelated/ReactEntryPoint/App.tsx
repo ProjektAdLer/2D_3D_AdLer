@@ -19,7 +19,7 @@ import i18next from "i18next";
 import NarrativeFrameworkLoadingScreenContainer from "~ReactComponents/GeneralComponents/NarrativeFrameworkLoadingScreenContainer/NarrativeFrameworkLoadingScreenContainer";
 import Settings from "./Settings";
 import Privacy from "./Privacy";
-import WorldManagerModal from "~ReactComponents/GeneralComponents/WorldManagerModal/WorldManagerModal";
+import WorldManagerModal from "~ReactComponents/GeneralComponents/WorldManagement/WorldManagerModal";
 
 export interface IAppProps {}
 

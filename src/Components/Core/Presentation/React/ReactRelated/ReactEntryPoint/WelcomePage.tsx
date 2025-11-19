@@ -11,6 +11,7 @@ import avatarButtonBackground from "../../../../../../Assets/misc/WelcomeScreenB
 import learningWorldMenuButtonBackground from "../../../../../../Assets/misc/WelcomeScreenButtonBackgrounds/LearningWorldButtonBackground.jpg";
 import HelpDeskButton from "~ReactComponents/GeneralComponents/HelpDeskButton/HelpDeskButton";
 import HelpDeskModal from "~ReactComponents/GeneralComponents/HelpDeskModal/HelpDeskModal";
+import WorldManagementButton from "~ReactComponents/GeneralComponents/WorldManagement/Buttons/WorldManagementButton";
 import { useTranslation } from "react-i18next";
 import LogoutComponent from "~ReactComponents/WelcomePage/SignInAndOutComponent/LogoutComponent";
 import WelcomePageButton from "~ReactComponents/WelcomePage/WelcomePageButton/WelcomePageButtonView";
@@ -64,6 +65,10 @@ export default function WelcomePage() {
         src={logo}
         alt="Adler Logo"
       />
+
+      <div className="col-start-1 row-start-1 flex gap-2 justify-self-start">
+        <WorldManagementButton />
+      </div>
 
       <HelpDeskButton className="col-start-8 row-start-1 justify-self-end" />
       <HelpDeskModal />
