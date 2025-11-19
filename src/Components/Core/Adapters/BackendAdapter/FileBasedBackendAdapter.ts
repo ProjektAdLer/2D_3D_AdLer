@@ -76,7 +76,6 @@ export default class FileBasedBackendAdapter implements IBackendPort {
       // Add cache buster to ensure we get the latest worlds.json
       const cacheBuster = `?t=${Date.now()}`;
       const url = this.baseUrl + "worlds.json" + cacheBuster;
-      console.log(`FileBasedBackendAdapter: Loading worlds.json from ${url}`);
 
       const response = await fetch(url, {
         cache: "no-store", // Force bypass cache
@@ -93,10 +92,6 @@ export default class FileBasedBackendAdapter implements IBackendPort {
       }
 
       this.worldsIndex = await response.json();
-      console.log(
-        `FileBasedBackendAdapter: Loaded ${this.worldsIndex!.worlds.length} worlds:`,
-        this.worldsIndex!.worlds.map((w) => w.worldName),
-      );
     } catch (error) {
       console.error(
         "FileBasedBackendAdapter: Error loading worlds.json",
