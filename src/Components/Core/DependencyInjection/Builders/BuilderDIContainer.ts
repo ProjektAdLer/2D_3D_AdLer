@@ -32,6 +32,7 @@ import DecorationBuilder from "../../Presentation/Babylon/Decoration/DecorationB
 import StandInDecorationBuilder from "../../Presentation/Babylon/StandInDecoration/StandInDecorationBuilder";
 import HelpDeskModalBuilder from "~ReactComponents/GeneralComponents/HelpDeskModal/HelpDeskModalBuilder";
 import HelpDeskButtonBuilder from "~ReactComponents/GeneralComponents/HelpDeskButton/HelpDeskButtonBuilder";
+import WorldManagerModalBuilder from "~ReactComponents/GeneralComponents/WorldManagement/WorldManagerModalBuilder";
 import AdaptivityElementBuilder from "../../Presentation/Adaptivity/AdaptivityElement/AdaptivityElementBuilder";
 import BreakTimeNotificationBuilder from "../../Presentation/Adaptivity/BreakTimeNotification/BreakTimeNotificationBuilder";
 import LoadingScreenBuilder from "~ReactComponents/GeneralComponents/LoadingScreen/LoadingScreenBuilder";
@@ -71,6 +72,9 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IHelpDeskModalBuilder).to(
     HelpDeskModalBuilder,
+  );
+  bind<IPresentationBuilder>(BUILDER_TYPES.IWorldManagerModalBuilder).to(
+    WorldManagerModalBuilder,
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.ILoadingScreenBuilder).to(
     LoadingScreenBuilder,
