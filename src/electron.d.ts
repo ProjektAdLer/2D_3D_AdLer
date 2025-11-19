@@ -52,6 +52,12 @@ declare global {
       // Delete world
       deleteWorld: (worldName: string) => Promise<DeleteResult>;
 
+      // Open file dialog for MBZ import
+      openMBZFileDialog: () => Promise<{ success: boolean; filePath?: string }>;
+
+      // Open world manager modal
+      openWorldManager: () => void;
+
       // Event listeners
       onImportMBZFile: (callback: (filePath: string) => void) => void;
       onImportProgress: (callback: (progress: ImportProgress) => void) => void;

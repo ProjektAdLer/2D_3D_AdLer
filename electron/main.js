@@ -17,25 +17,9 @@ function createExpressServer() {
   const userDataPath = app.getPath("userData");
   const externalWorldsPath = path.join(userDataPath, "LearningWorlds");
 
-  console.log(`[Express] userData path: ${externalWorldsPath}`);
-  console.log(
-    `[Express] build path: ${path.join(buildPath, "LearningWorlds")}`,
-  );
-
   // Create userData/LearningWorlds directory if it doesn't exist
   if (!fs.existsSync(externalWorldsPath)) {
     fs.mkdirSync(externalWorldsPath, { recursive: true });
-  }
-
-  // Check if worlds.json exists in userData
-  const userDataWorldsJson = path.join(externalWorldsPath, "worlds.json");
-  if (fs.existsSync(userDataWorldsJson)) {
-    console.log(
-      `[Express] Found worlds.json in userData:`,
-      fs.readFileSync(userDataWorldsJson, "utf-8"),
-    );
-  } else {
-    console.log(`[Express] No worlds.json in userData`);
   }
 
   // Custom middleware to serve LearningWorlds with userData priority
@@ -45,14 +29,12 @@ function createExpressServer() {
     // Try userData first
     const userDataFile = path.join(externalWorldsPath, req.path);
     if (fs.existsSync(userDataFile) && fs.statSync(userDataFile).isFile()) {
-      console.log(`[Express] Serving from userData: ${req.path}`);
       return res.sendFile(userDataFile);
     }
 
     // Fallback to build directory
     const buildFile = path.join(embeddedWorldsPath, req.path);
     if (fs.existsSync(buildFile) && fs.statSync(buildFile).isFile()) {
-      console.log(`[Express] Serving from build: ${req.path}`);
       return res.sendFile(buildFile);
     }
 
@@ -121,6 +103,9 @@ function createWindow() {
   if (process.env.NODE_ENV === "development") {
     mainWindow.webContents.openDevTools();
   }
+
+  // Always open DevTools for debugging
+  mainWindow.webContents.openDevTools();
 
   mainWindow.on("closed", () => {
     mainWindow = null;
@@ -288,6 +273,31 @@ app.whenReady().then(() => {
         success: false,
         error: error.message,
       };
+    }
+  });
+
+  // Open MBZ File Dialog Handler
+  ipcMain.handle("open-mbz-file-dialog", async () => {
+    const result = await dialog.showOpenDialog(mainWindow, {
+      properties: ["openFile"],
+      filters: [
+        { name: "Moodle Backup", extensions: ["mbz"] },
+        { name: "Alle Dateien", extensions: ["*"] },
+      ],
+    });
+
+    if (!result.canceled && result.filePaths.length > 0) {
+      mainWindow.webContents.send("import-mbz-file", result.filePaths[0]);
+      return { success: true, filePath: result.filePaths[0] };
+    }
+
+    return { success: false };
+  });
+
+  // Open World Manager Handler - listen to button clicks and broadcast to modal
+  ipcMain.on("open-world-manager", () => {
+    if (mainWindow) {
+      mainWindow.webContents.send("open-world-manager");
     }
   });
 

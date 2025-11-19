@@ -21,6 +21,12 @@ contextBridge.exposeInMainWorld("electronAPI", {
   // Delete world
   deleteWorld: (worldName) => ipcRenderer.invoke("delete-world", worldName),
 
+  // Open file dialog for MBZ import
+  openMBZFileDialog: () => ipcRenderer.invoke("open-mbz-file-dialog"),
+
+  // Open world manager
+  openWorldManager: () => ipcRenderer.send("open-world-manager"),
+
   // Listen to events from main process
   onImportMBZFile: (callback) =>
     ipcRenderer.on("import-mbz-file", (event, filePath) => callback(filePath)),
