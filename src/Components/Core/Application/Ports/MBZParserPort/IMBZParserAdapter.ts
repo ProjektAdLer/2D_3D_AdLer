@@ -1,0 +1,31 @@
+/**
+ * Parsed world data from MBZ file
+ */
+export interface ParsedWorldData {
+  worldID: number;
+  worldName: string;
+  worldFolder: string;
+  elementCount: number;
+  sizeInBytes: number;
+  warnings: string[];
+}
+
+/**
+ * Port interface for MBZ parsing operations (wraps MBZImporter).
+ * This interface allows the Application layer to parse MBZ files without depending on the Adapters layer.
+ */
+export default interface IMBZParserAdapter {
+  /**
+   * Parse and import an MBZ file into storage
+   * @param file The MBZ file to parse
+   * @returns Parsed world data with metadata
+   */
+  parseMBZ(file: File): Promise<ParsedWorldData>;
+
+  /**
+   * Validate if a file is a valid MBZ file
+   * @param file The file to validate
+   * @returns True if the file appears to be a valid MBZ
+   */
+  validateMBZ(file: File): Promise<boolean>;
+}
