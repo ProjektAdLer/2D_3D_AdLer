@@ -5,6 +5,16 @@ import WorldManagerModalController from "./WorldManagerModalController";
 import WorldManagerModalPresenter from "./WorldManagerModalPresenter";
 import type IWorldManagerModalController from "./IWorldManagerModalController";
 import type IWorldManagerModalPresenter from "./IWorldManagerModalPresenter";
+import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
+import USECASE_TYPES from "../../../../DependencyInjection/UseCases/USECASE_TYPES";
+import PORT_TYPES from "../../../../DependencyInjection/Ports/PORT_TYPES";
+import type IImportLearningWorldUseCase from "../../../../Application/UseCases/ImportLearningWorld/IImportLearningWorldUseCase";
+import type IDeleteLearningWorldUseCase from "../../../../Application/UseCases/DeleteLearningWorld/IDeleteLearningWorldUseCase";
+import type IExportLearningWorldUseCase from "../../../../Application/UseCases/ExportLearningWorld/IExportLearningWorldUseCase";
+import type ILoadLocalWorldsListUseCase from "../../../../Application/UseCases/LoadLocalWorldsList/ILoadLocalWorldsListUseCase";
+import type IGetWorldsStorageInfoUseCase from "../../../../Application/UseCases/GetWorldsStorageInfo/IGetWorldsStorageInfoUseCase";
+import type IWorldManagementPort from "../../../../Application/Ports/Interfaces/IWorldManagementPort";
+import { HistoryWrapper } from "~ReactComponents/ReactRelated/ReactEntryPoint/HistoryWrapper";
 
 /**
  * Builder for WorldManagerModal
@@ -20,23 +30,63 @@ export default class WorldManagerModalBuilder extends PresentationBuilder<
   constructor() {
     super(
       WorldManagerModalViewModel,
-      WorldManagerModalController,
+      undefined, // Controller wird in buildController() manuell erstellt
       undefined,
       WorldManagerModalPresenter,
     );
   }
 
   /**
-   * Override buildPresenter to wire up the controller with the presenter
+   * Override buildController to inject Use Cases
+   */
+  override buildController(): void {
+    if (!this.viewModel) {
+      throw new Error("Cannot build controller without view model");
+    }
+
+    // Get Use Cases from DI container
+    const importWorldUseCase = CoreDIContainer.get<IImportLearningWorldUseCase>(
+      USECASE_TYPES.IImportLearningWorldUseCase,
+    );
+    const deleteWorldUseCase = CoreDIContainer.get<IDeleteLearningWorldUseCase>(
+      USECASE_TYPES.IDeleteLearningWorldUseCase,
+    );
+    const exportWorldUseCase = CoreDIContainer.get<IExportLearningWorldUseCase>(
+      USECASE_TYPES.IExportLearningWorldUseCase,
+    );
+    const loadLocalWorldsListUseCase =
+      CoreDIContainer.get<ILoadLocalWorldsListUseCase>(
+        USECASE_TYPES.ILoadLocalWorldsListUseCase,
+      );
+    const getStorageInfoUseCase =
+      CoreDIContainer.get<IGetWorldsStorageInfoUseCase>(
+        USECASE_TYPES.IGetWorldsStorageInfoUseCase,
+      );
+
+    // Create controller with injected Use Cases
+    this.controller = new WorldManagerModalController(
+      this.viewModel,
+      importWorldUseCase,
+      deleteWorldUseCase,
+      exportWorldUseCase,
+      loadLocalWorldsListUseCase,
+      getStorageInfoUseCase,
+    );
+  }
+
+  /**
+   * Override buildPresenter to register it with the WorldManagementPort
    */
   override buildPresenter(): void {
     super.buildPresenter();
 
-    // Wire presenter to controller
-    if (this.presenter && this.controller) {
-      (this.controller as WorldManagerModalController).setPresenter(
-        this.presenter,
-      );
-    }
+    // Register presenter with WorldManagementPort so it receives notifications from Use Cases
+    const worldManagementPort = CoreDIContainer.get<IWorldManagementPort>(
+      PORT_TYPES.IWorldManagementPort,
+    );
+    worldManagementPort.registerAdapter(
+      this.presenter!,
+      HistoryWrapper.currentLocationScope(),
+    );
   }
 }
