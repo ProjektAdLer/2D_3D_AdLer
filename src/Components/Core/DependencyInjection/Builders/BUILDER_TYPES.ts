@@ -68,6 +68,7 @@ const BUILDER_TYPES = {
   IBadgeOverviewModalBuilder: Symbol("IBadgeOverviewModalBuilder"),
   ISettingContentBuilder: Symbol("ISettingContentBuilder"),
   IPrivacyContentBuilder: Symbol("IPrivacyContentBuilder"),
+  IWorldManagerModalBuilder: Symbol("IWorldManagerModalBuilder"),
 };
 
 export default BUILDER_TYPES;
