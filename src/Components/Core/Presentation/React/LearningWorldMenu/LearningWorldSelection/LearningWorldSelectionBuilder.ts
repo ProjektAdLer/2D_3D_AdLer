@@ -9,7 +9,7 @@ import ILearningWorldSelectionPresenter from "./ILearningWorldSelectionPresenter
 import LearningWorldSelectionController from "./LearningWorldSelectionController";
 import LearningWorldSelectionPresenter from "./LearningWorldSelectionPresenter";
 import LearningWorldSelectionViewModel from "./LearningWorldSelectionViewModel";
-import { HistoryWrapper } from "~ReactComponents/ReactRelated/ReactEntryPoint/HistoryWrapper";
+import { LocationScope } from "~ReactComponents/ReactRelated/ReactEntryPoint/HistoryWrapper";
 
 @injectable()
 export default class LearningWorldSelectionBuilder extends PresentationBuilder<
@@ -23,14 +23,14 @@ export default class LearningWorldSelectionBuilder extends PresentationBuilder<
       LearningWorldSelectionViewModel,
       LearningWorldSelectionController,
       undefined,
-      LearningWorldSelectionPresenter
+      LearningWorldSelectionPresenter,
     );
   }
 
   override buildPresenter(): void {
     super.buildPresenter();
     CoreDIContainer.get<AbstractPort<ILearningWorldAdapter>>(
-      PORT_TYPES.ILearningWorldPort
-    ).registerAdapter(this.presenter!, HistoryWrapper.currentLocationScope());
+      PORT_TYPES.ILearningWorldPort,
+    ).registerAdapter(this.presenter!, LocationScope._global);
   }
 }

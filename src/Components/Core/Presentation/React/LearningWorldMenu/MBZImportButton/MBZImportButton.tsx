@@ -1,10 +1,13 @@
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useInjection } from "inversify-react";
 import StyledButton from "../../ReactRelated/ReactBaseComponents/StyledButton";
 import LocalStore from "../../../../Adapters/LocalStore/LocalStore";
 import MBZImporter from "../../../../Adapters/LocalStore/MBZImporter";
 import StyledModal from "../../ReactRelated/ReactBaseComponents/StyledModal";
 import plusIcon from "../../../../../../Assets/icons/plus.svg";
+import USECASE_TYPES from "../../../../DependencyInjection/UseCases/USECASE_TYPES";
+import type ILoadUserLearningWorldsInfoUseCase from "../../../../Application/UseCases/LoadUserLearningWorldsInfo/ILoadUserLearningWorldsInfoUseCase";
 
 /**
  * MBZImportButton provides a UI for importing MBZ (Moodle Backup) files
@@ -15,11 +18,16 @@ import plusIcon from "../../../../../../Assets/icons/plus.svg";
  * 2. File input opens
  * 3. User selects .mbz file
  * 4. MBZImporter extracts and stores in IndexedDB
- * 5. Page reloads to refresh world list
+ * 5. Learning world list is refreshed via UseCase
  */
 export default function MBZImportButton() {
   const { t: translate } = useTranslation("worldMenu");
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const loadUserWorldsInfoUseCase =
+    useInjection<ILoadUserLearningWorldsInfoUseCase>(
+      USECASE_TYPES.ILoadUserLearningWorldsInfoUseCase,
+    );
 
   const [isImporting, setIsImporting] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -100,10 +108,10 @@ export default function MBZImportButton() {
     }
   };
 
-  const handleSuccessModalClose = () => {
+  const handleSuccessModalClose = async () => {
     setShowSuccessModal(false);
-    // Reload page to refresh world list
-    window.location.reload();
+    // Refresh world list via UseCase instead of reloading
+    await loadUserWorldsInfoUseCase.executeAsync();
   };
 
   const handleErrorModalClose = () => {
@@ -143,9 +151,9 @@ export default function MBZImportButton() {
           title={String(
             translate("importButton.successTitle", "Import Successful"),
           )}
-          isOpen={showSuccessModal}
+          showModal={showSuccessModal}
           onClose={handleSuccessModalClose}
-          showCloseButton={false}
+          canClose={false}
         >
           <div className="space-y-4">
             <p>
@@ -178,7 +186,7 @@ export default function MBZImportButton() {
             <p className="text-sm text-adlerblue">
               {translate(
                 "importButton.reloadMessage",
-                "The page will reload to show the new world.",
+                "Click OK to refresh the world list.",
               )}
             </p>
 
@@ -193,9 +201,9 @@ export default function MBZImportButton() {
       {showErrorModal && importResult && (
         <StyledModal
           title={String(translate("importButton.errorTitle", "Import Failed"))}
-          isOpen={showErrorModal}
+          showModal={showErrorModal}
           onClose={handleErrorModalClose}
-          showCloseButton={false}
+          canClose={false}
         >
           <div className="space-y-4">
             <p>

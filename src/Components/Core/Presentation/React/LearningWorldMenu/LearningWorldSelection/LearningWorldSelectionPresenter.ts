@@ -12,12 +12,12 @@ export default class LearningWorldSelectionPresenter
   private loadWorldUseCase: ILoadLearningWorldUseCase;
   constructor(private viewModel: LearningWorldSelectionViewModel) {
     this.loadWorldUseCase = CoreDIContainer.get<ILoadLearningWorldUseCase>(
-      USECASE_TYPES.ILoadLearningWorldUseCase
+      USECASE_TYPES.ILoadLearningWorldUseCase,
     );
   }
 
   onUserInitialLearningWorldsInfoLoaded(
-    userWorlds: UserInitialLearningWorldsInfoTO
+    userWorlds: UserInitialLearningWorldsInfoTO,
   ): void {
     this.viewModel.userWorlds.Value = [];
     userWorlds.worldInfo.forEach((world) => {
@@ -29,14 +29,12 @@ export default class LearningWorldSelectionPresenter
     });
   }
   onUserLearningWorldsInfoLoaded(userWorlds: UserLearningWorldsInfoTO): void {
-    this.viewModel.userWorlds.Value = [];
-    userWorlds.worldInfo.forEach((world) => {
-      this.viewModel.userWorlds.Value.push({
-        id: world.worldID,
-        name: world.worldName,
-        isCompleted: world.isCompleted,
-      });
-    });
+    const newWorlds = userWorlds.worldInfo.map((world) => ({
+      id: world.worldID,
+      name: world.worldName,
+      isCompleted: world.isCompleted,
+    }));
+    this.viewModel.userWorlds.Value = newWorlds;
     this.viewModel.newData.Value = true;
 
     if (userWorlds.worldInfo.length !== 0) {
