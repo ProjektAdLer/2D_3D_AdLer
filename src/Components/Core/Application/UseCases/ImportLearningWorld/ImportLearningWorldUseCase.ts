@@ -12,6 +12,7 @@ import type IMBZParserAdapter from "../../Ports/MBZParserPort/IMBZParserAdapter"
 import type IWorldStorageAdapter from "../../Ports/WorldStoragePort/IWorldStorageAdapter";
 import type ILoadUserLearningWorldsInfoUseCase from "../LoadUserLearningWorldsInfo/ILoadUserLearningWorldsInfoUseCase";
 import WorldImportResultTO from "../../DataTransferObjects/WorldImportResultTO";
+import type { ProgressCallback } from "../../Ports/MBZParserPort/IMBZParserAdapter";
 
 @injectable()
 export default class ImportLearningWorldUseCase
@@ -63,7 +64,10 @@ export default class ImportLearningWorldUseCase
       }
 
       // Parse MBZ file (this also stores it in LocalStore)
-      const parsedData = await this.mbzParser.parseMBZ(params.file);
+      const parsedData = await this.mbzParser.parseMBZ(
+        params.file,
+        params.onProgress,
+      );
 
       this.logger.log(
         LogLevelTypes.INFO,

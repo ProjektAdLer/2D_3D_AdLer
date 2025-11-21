@@ -1,6 +1,7 @@
 import { inject, injectable } from "inversify";
 import IMBZParserAdapter, {
   ParsedWorldData,
+  ProgressCallback,
 } from "../../Application/Ports/MBZParserPort/IMBZParserAdapter";
 import MBZImporter from "../LocalStore/MBZImporter";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
@@ -17,7 +18,10 @@ export default class MBZParserAdapter implements IMBZParserAdapter {
     private worldStorage: IWorldStorageAdapter,
   ) {}
 
-  async parseMBZ(file: File): Promise<ParsedWorldData> {
+  async parseMBZ(
+    file: File,
+    onProgress?: ProgressCallback,
+  ): Promise<ParsedWorldData> {
     // Ensure storage is initialized
     await this.worldStorage.init();
 
@@ -30,7 +34,7 @@ export default class MBZParserAdapter implements IMBZParserAdapter {
     await localStore.init();
 
     const importer = new MBZImporter(localStore);
-    const result = await importer.importMBZ(file);
+    const result = await importer.importMBZ(file, onProgress);
 
     if (!result.success) {
       throw new Error(

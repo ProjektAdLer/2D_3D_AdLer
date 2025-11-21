@@ -109,10 +109,21 @@ export default class WorldManagerModalController
     this.viewModel.isImporting.Value = true;
     this.viewModel.importError.Value = null;
     this.viewModel.importSuccess.Value = null;
+    this.viewModel.importProgress.Value = 0;
+    this.viewModel.importStatus.Value = "Starte Import...";
 
     try {
       // Use Case handles import and notifies presenter via port
-      await this.importWorldUseCase.executeAsync({ file });
+      // Progress callback updates ViewModel in real-time
+      await this.importWorldUseCase.executeAsync({
+        file,
+        onProgress: (current, total, status) => {
+          this.viewModel.importProgress.Value = Math.round(
+            (current / total) * 100,
+          );
+          this.viewModel.importStatus.Value = status;
+        },
+      });
 
       // Mark that changes were made
       this.hasChanges = true;
@@ -124,6 +135,8 @@ export default class WorldManagerModalController
       ]);
     } catch (error) {
       console.error("Failed to import world:", error);
+      this.viewModel.importProgress.Value = 0;
+      this.viewModel.importStatus.Value = "";
       // Error is already handled by Use Case and sent via port
     }
   }
@@ -132,11 +145,37 @@ export default class WorldManagerModalController
    * Exports a world as ZIP
    */
   async onExportWorld(worldID: number): Promise<void> {
+    this.viewModel.isExporting.Value = true;
+    this.viewModel.exportProgress.Value = 0;
+    this.viewModel.exportStatus.Value = "Starte Export...";
+    this.viewModel.exportingWorldID.Value = worldID;
+
     try {
       // Use Case handles export and notifies presenter via port (which triggers download)
-      await this.exportWorldUseCase.executeAsync({ worldID });
+      // Progress callback updates ViewModel in real-time
+      await this.exportWorldUseCase.executeAsync({
+        worldID,
+        onProgress: (current, total, status) => {
+          this.viewModel.exportProgress.Value = Math.round(
+            (current / total) * 100,
+          );
+          this.viewModel.exportStatus.Value = status;
+        },
+      });
+
+      // Reset export state after short delay to show completion
+      setTimeout(() => {
+        this.viewModel.isExporting.Value = false;
+        this.viewModel.exportProgress.Value = 0;
+        this.viewModel.exportStatus.Value = "";
+        this.viewModel.exportingWorldID.Value = null;
+      }, 1500);
     } catch (error) {
       console.error("Failed to export world:", error);
+      this.viewModel.isExporting.Value = false;
+      this.viewModel.exportProgress.Value = 0;
+      this.viewModel.exportStatus.Value = "";
+      this.viewModel.exportingWorldID.Value = null;
       alert(
         `Fehler beim Exportieren der Lernwelt: ${error instanceof Error ? error.message : "Unbekannter Fehler"}`,
       );

@@ -30,6 +30,13 @@ export default class WorldManagerModalPresenter
         elementCount: result.elementCount,
       };
       this.viewModel.importError.Value = null;
+
+      // Auto-dismiss success message after 3 seconds and reset state
+      setTimeout(() => {
+        this.viewModel.importSuccess.Value = null;
+        this.viewModel.importProgress.Value = 0;
+        this.viewModel.importStatus.Value = "";
+      }, 3000);
     } else {
       this.viewModel.importError.Value = result.errors.join(", ");
       this.viewModel.importSuccess.Value = null;

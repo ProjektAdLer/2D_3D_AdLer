@@ -46,6 +46,15 @@ export interface ImportResult {
 }
 
 /**
+ * Progress callback for import operations
+ */
+export type ImportProgressCallback = (
+  current: number,
+  total: number,
+  status: string,
+) => void;
+
+/**
  * Extracted file from tar.gz
  * Currently not used as interface, but kept for future reference
  */
@@ -80,19 +89,25 @@ export default class MBZImporter {
   /**
    * Import an MBZ file into IndexedDB
    * @param file The MBZ file from user selection
+   * @param onProgress Optional callback for progress updates
    * @returns Import result with worldID and statistics
    */
-  async importMBZ(file: File): Promise<ImportResult> {
+  async importMBZ(
+    file: File,
+    onProgress?: ImportProgressCallback,
+  ): Promise<ImportResult> {
     this.warnings = [];
     this.errors = [];
 
     try {
       // Step 1: Extract MBZ (tar.gz format)
       console.log("[MBZImporter] Loading MBZ file...");
+      onProgress?.(0, 100, "Extrahiere MBZ-Datei...");
       const extractedFiles = await this.extractMBZ(file);
 
       // Step 2: Find and read world document
       console.log("[MBZImporter] Reading world document...");
+      onProgress?.(10, 100, "Lese Weltdokument...");
       const worldDoc = this.readWorldDocument(extractedFiles);
 
       if (!worldDoc) {
@@ -109,18 +124,29 @@ export default class MBZImporter {
       console.log(`[MBZImporter] Assigned worldID: ${worldID}`);
 
       // Step 4: Build file mapping for DSL format
+      onProgress?.(15, 100, "Erstelle Datei-Mapping...");
       const fileMapping = this.buildFileMapping(extractedFiles);
 
       // Step 5: Save world.json
+      onProgress?.(20, 100, "Speichere Weltdaten...");
       await this.saveWorldJson(worldDoc, worldID);
 
       // Step 6: Process and save all element files
-      console.log(
-        `[MBZImporter] Processing ${worldDoc.world.elements.length} elements...`,
-      );
+      const totalElements = worldDoc.world.elements.length;
+      console.log(`[MBZImporter] Processing ${totalElements} elements...`);
       let successCount = 0;
 
-      for (const element of worldDoc.world.elements) {
+      for (let i = 0; i < totalElements; i++) {
+        const element = worldDoc.world.elements[i];
+
+        // Calculate progress: 20% initial setup, 70% for elements, 10% for finalization
+        const progress = 20 + Math.round((i / totalElements) * 70);
+        onProgress?.(
+          progress,
+          100,
+          `Verarbeite Element ${i + 1}/${totalElements}: ${element.elementName}`,
+        );
+
         const result = await this.processElement(
           element,
           extractedFiles,
@@ -137,6 +163,7 @@ export default class MBZImporter {
       );
 
       // Step 7: Save world metadata
+      onProgress?.(95, 100, "Speichere Metadaten...");
       await this.localStore.saveWorldMetadata(worldID, {
         worldName,
         worldFolder: worldName,
@@ -144,6 +171,7 @@ export default class MBZImporter {
         elementCount: successCount,
       });
 
+      onProgress?.(100, 100, "Import abgeschlossen!");
       console.log("[MBZImporter] Import completed successfully");
 
       return {

@@ -32,8 +32,14 @@ export default function WorldManagerModal({
   const [loading] = useObservable(viewModel.loading);
   const [storageInfo] = useObservable(viewModel.storageInfo);
   const [isImporting] = useObservable(viewModel.isImporting);
+  const [importProgress] = useObservable(viewModel.importProgress);
+  const [importStatus] = useObservable(viewModel.importStatus);
   const [importError] = useObservable(viewModel.importError);
   const [importSuccess] = useObservable(viewModel.importSuccess);
+  const [isExporting] = useObservable(viewModel.isExporting);
+  const [exportProgress] = useObservable(viewModel.exportProgress);
+  const [exportStatus] = useObservable(viewModel.exportStatus);
+  const [exportingWorldID] = useObservable(viewModel.exportingWorldID);
 
   const safeWorlds = worlds || [];
   const safeLoading = loading || false;
@@ -97,7 +103,7 @@ export default function WorldManagerModal({
           <div>
             <StyledButton
               onClick={handleImportClick}
-              disabled={isImporting || !!importSuccess}
+              disabled={isImporting}
               className="bg-adlerblue text-white hover:bg-adlerdarkblue"
               icon={plusIcon}
               shape="freeFloatCenter"
@@ -105,6 +111,42 @@ export default function WorldManagerModal({
               {isImporting ? "Importiere..." : "Lernwelt importieren (.mbz)"}
             </StyledButton>
           </div>
+
+          {/* Import Progress */}
+          {isImporting && (
+            <div className="rounded bg-blue-50 p-4">
+              <div className="mb-2 flex items-center justify-between">
+                <span className="text-sm font-semibold text-adlerblue">
+                  {importStatus || "Importiere..."}
+                </span>
+                <span className="text-sm text-gray-600">{importProgress}%</span>
+              </div>
+              <div className="h-2 w-full overflow-hidden rounded-full bg-gray-200">
+                <div
+                  className="h-full bg-adlerblue transition-all duration-300"
+                  style={{ width: `${importProgress}%` }}
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Export Progress */}
+          {isExporting && (
+            <div className="rounded bg-green-50 p-4">
+              <div className="mb-2 flex items-center justify-between">
+                <span className="text-sm font-semibold text-green-700">
+                  {exportStatus || "Exportiere..."}
+                </span>
+                <span className="text-sm text-gray-600">{exportProgress}%</span>
+              </div>
+              <div className="h-2 w-full overflow-hidden rounded-full bg-gray-200">
+                <div
+                  className="h-full bg-green-600 transition-all duration-300"
+                  style={{ width: `${exportProgress}%` }}
+                />
+              </div>
+            </div>
+          )}
 
           {/* Loading State */}
           {safeLoading && (

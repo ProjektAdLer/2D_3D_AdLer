@@ -37,9 +37,17 @@ export default class WorldManagerModalViewModel {
 
   // Import/Export states
   public isImporting = new Observable<boolean>(false);
+  public importProgress = new Observable<number>(0); // 0-100
+  public importStatus = new Observable<string>(""); // Status message during import
   public importError = new Observable<string | null>(null);
   public importSuccess = new Observable<{
     worldName: string;
     elementCount: number;
   } | null>(null);
+
+  // Export states
+  public isExporting = new Observable<boolean>(false);
+  public exportProgress = new Observable<number>(0); // 0-100
+  public exportStatus = new Observable<string>(""); // Status message during export
+  public exportingWorldID = new Observable<number | null>(null); // Track which world is being exported
 }

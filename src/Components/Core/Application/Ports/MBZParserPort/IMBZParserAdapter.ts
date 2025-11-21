@@ -11,6 +11,15 @@ export interface ParsedWorldData {
 }
 
 /**
+ * Progress callback for MBZ parsing
+ */
+export type ProgressCallback = (
+  current: number,
+  total: number,
+  status: string,
+) => void;
+
+/**
  * Port interface for MBZ parsing operations (wraps MBZImporter).
  * This interface allows the Application layer to parse MBZ files without depending on the Adapters layer.
  */
@@ -18,9 +27,10 @@ export default interface IMBZParserAdapter {
   /**
    * Parse and import an MBZ file into storage
    * @param file The MBZ file to parse
+   * @param onProgress Optional callback for progress updates
    * @returns Parsed world data with metadata
    */
-  parseMBZ(file: File): Promise<ParsedWorldData>;
+  parseMBZ(file: File, onProgress?: ProgressCallback): Promise<ParsedWorldData>;
 
   /**
    * Validate if a file is a valid MBZ file
