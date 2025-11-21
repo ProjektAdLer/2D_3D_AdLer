@@ -40,9 +40,13 @@ export function createH5POptions(viewModel: LearningElementModalViewModel) {
 
   const options = {
     h5pJsonPath: h5pJsonPath,
+    contentJsonPath: h5pJsonPath + "/content",
+    librariesPath: h5pJsonPath,
     frameJs: frameJs,
     frameCss: frameCss,
+    embedType: "div" as const, // Use div instead of iframe for IndexedDB compatibility
   };
+
   return options;
 }
 

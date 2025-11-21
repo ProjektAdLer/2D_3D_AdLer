@@ -10,6 +10,7 @@ import {
 } from "./H5pUtils";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import CookieConsentBlocker from "./CookieConsentBlocker";
+import H5PIndexedDBServer from "../../../../../Adapters/H5PIndexedDBServer/H5PIndexedDBServer";
 
 // variable cannot be react state because state update is asynchronious and wont trigger with resizeObserver ~ sb
 let lastRenderedWidth: number = 0;
@@ -45,6 +46,17 @@ export default function H5PContent({
 
     const setup = async () => {
       if (h5pContainerRef.current) {
+        // Wait for Service Worker to be ready before loading H5P
+        // This ensures IndexedDB-based H5P files can be served
+        try {
+          await H5PIndexedDBServer.getInstance().init();
+        } catch (error) {
+          console.warn(
+            "[PrimitiveH5PContent] Service Worker not available:",
+            error,
+          );
+        }
+
         // Clear any existing H5P content first
         h5pContainerRef.current.innerHTML = "";
 
