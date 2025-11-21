@@ -26,8 +26,13 @@
     "noWorlds": "No learning worlds available",
     "refresh": "Refresh",
     "close": "Close",
+    "closeTooltip": "Close window",
     "preinstalled": "Preinstalled",
     "elements": "Elements",
-    "delete": "Delete"
+    "delete": "Delete",
+    "deleteTooltip": "Delete learning world",
+    "export": "Export",
+    "exportTooltip": "Export learning world",
+    "importTooltip": "Import learning world (.mbz)"
   }
 }

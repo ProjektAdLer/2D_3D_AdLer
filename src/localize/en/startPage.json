@@ -20,6 +20,7 @@
   "loginFailAdvise": "Please double check your inputs.",
   "loginButton": "Log in",
   "moodleButton": "AdLerLMS",
+  "worldManagerButton": "World Manager",
   "loginName": "Logged in as {{userName}}",
   "logout": "Log out",
 

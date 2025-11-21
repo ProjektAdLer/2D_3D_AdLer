@@ -20,6 +20,7 @@
   "loginFailAdvise": "Bitte überprüfen sie Ihre Eingaben.",
   "loginButton": "Login",
   "moodleButton": "Zum AdLerLMS",
+  "worldManagerButton": "Weltenverwaltung",
   "loginName": "Eingeloggt als {{userName}}",
   "logout": "Ausloggen",
 

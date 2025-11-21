@@ -26,8 +26,13 @@
     "noWorlds": "Keine Lernwelten vorhanden",
     "refresh": "Aktualisieren",
     "close": "Schließen",
+    "closeTooltip": "Fenster schließen",
     "preinstalled": "Vorinstalliert",
     "elements": "Elemente",
-    "delete": "Löschen"
+    "delete": "Löschen",
+    "deleteTooltip": "Lernwelt löschen",
+    "export": "Exportieren",
+    "exportTooltip": "Lernwelt exportieren",
+    "importTooltip": "Lernwelt importieren (.mbz)"
   }
 }
