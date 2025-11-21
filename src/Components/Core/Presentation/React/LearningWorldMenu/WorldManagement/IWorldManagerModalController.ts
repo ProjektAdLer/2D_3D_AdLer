@@ -20,6 +20,18 @@ export default interface IWorldManagerModalController {
   onDeleteWorld(worldID: number): Promise<void>;
 
   /**
+   * Imports a world from an MBZ file
+   * @param file The MBZ file to import
+   */
+  onImportWorld(file: File): Promise<void>;
+
+  /**
+   * Exports a world from IndexedDB as ZIP
+   * @param worldID The ID of the world to export
+   */
+  onExportWorld(worldID: number): Promise<void>;
+
+  /**
    * Refreshes the world list
    */
   onRefresh(): Promise<void>;
