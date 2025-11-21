@@ -68,4 +68,8 @@ export default class WorldStorageAdapter implements IWorldStorageAdapter {
   async getFile(worldID: number, path: string): Promise<Blob | null> {
     return await this.localStore.getFile(worldID, path);
   }
+
+  async getAllFiles(worldID: number): Promise<{ path: string; blob: Blob }[]> {
+    return await this.localStore.getAllFiles(worldID);
+  }
 }

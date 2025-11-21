@@ -41,12 +41,22 @@ export default class ExportLearningWorldUseCase
         return;
       }
 
-      // Get world.json file
-      const worldJsonBlob = await this.worldStorage.getFile(
-        params.worldID,
-        "world.json",
-      );
-      if (!worldJsonBlob) {
+      // Get all files for this world from storage
+      const allFiles = await this.worldStorage.getAllFiles(params.worldID);
+
+      if (allFiles.length === 0) {
+        const error = `No files found for world ${params.worldID}`;
+        this.worldManagementPort.onWorldManagementError(error);
+        this.logger.log(
+          LogLevelTypes.ERROR,
+          `ExportLearningWorldUseCase: ${error}`,
+        );
+        return;
+      }
+
+      // Verify that world.json exists
+      const hasWorldJson = allFiles.some((file) => file.path === "world.json");
+      if (!hasWorldJson) {
         const error = `world.json not found for world ${params.worldID}`;
         this.worldManagementPort.onWorldManagementError(error);
         this.logger.log(
@@ -56,44 +66,12 @@ export default class ExportLearningWorldUseCase
         return;
       }
 
-      // Parse world.json to get list of element files
-      const worldJsonText = await worldJsonBlob.text();
-      const worldData = JSON.parse(worldJsonText);
-
-      // Collect all files to export
-      const filesToExport: { path: string; blob: Blob }[] = [];
-      filesToExport.push({ path: "world.json", blob: worldJsonBlob });
-
-      // Collect element files
-      if (worldData.world && worldData.world.elements) {
-        for (const element of worldData.world.elements) {
-          if (element.url) {
-            // Element files are stored with "elements/" prefix
-            const elementPath = `elements/${element.url}`;
-            const elementBlob = await this.worldStorage.getFile(
-              params.worldID,
-              elementPath,
-            );
-            if (elementBlob) {
-              filesToExport.push({ path: elementPath, blob: elementBlob });
-            } else {
-              this.logger.log(
-                LogLevelTypes.WARN,
-                `ExportLearningWorldUseCase: Element file not found: ${elementPath}`,
-              );
-            }
-          }
-        }
-      }
-
-      // Create ZIP file using JSZip or similar library
-      // For now, we'll create a simple ZIP structure
-      // Note: This requires the 'jszip' library to be installed
+      // Create ZIP file using JSZip
       const JSZip = (await import("jszip")).default;
       const zip = new JSZip();
 
       // Add all files to ZIP
-      for (const file of filesToExport) {
+      for (const file of allFiles) {
         zip.file(file.path, file.blob);
       }
 
@@ -102,7 +80,7 @@ export default class ExportLearningWorldUseCase
 
       this.logger.log(
         LogLevelTypes.INFO,
-        `ExportLearningWorldUseCase: Successfully exported world "${metadata.worldName}" (${filesToExport.length} files)`,
+        `ExportLearningWorldUseCase: Successfully exported world "${metadata.worldName}" (${allFiles.length} files)`,
       );
 
       // Notify presentation layer with the ZIP blob

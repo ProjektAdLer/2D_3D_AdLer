@@ -314,6 +314,40 @@ export default class LocalStore {
   }
 
   /**
+   * Get all file paths and blobs for a specific world
+   * @param worldID The world ID
+   * @returns Array of objects containing path and blob for each file
+   */
+  async getAllFiles(worldID: number): Promise<{ path: string; blob: Blob }[]> {
+    const db = await this.ensureDB();
+
+    try {
+      const tx = db.transaction("files", "readonly");
+      const store = tx.objectStore("files");
+      const index = store.index("by-world");
+
+      const files: { path: string; blob: Blob }[] = [];
+      let cursor = await index.openCursor(worldID);
+
+      while (cursor) {
+        if (cursor.value.blob && cursor.value.path) {
+          files.push({
+            path: cursor.value.path,
+            blob: cursor.value.blob,
+          });
+        }
+        cursor = await cursor.continue();
+      }
+
+      await tx.done;
+      return files;
+    } catch (error) {
+      console.error(`Failed to get all files for world ${worldID}:`, error);
+      return [];
+    }
+  }
+
+  /**
    * Close the database connection
    */
   close(): void {

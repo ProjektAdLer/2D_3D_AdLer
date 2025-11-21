@@ -83,4 +83,11 @@ export default interface IWorldStorageAdapter {
    * @param path Relative path within the world
    */
   getFile(worldID: number, path: string): Promise<Blob | null>;
+
+  /**
+   * Get all files for a specific world
+   * @param worldID The world ID
+   * @returns Array of objects containing path and blob for each file
+   */
+  getAllFiles(worldID: number): Promise<{ path: string; blob: Blob }[]>;
 }
