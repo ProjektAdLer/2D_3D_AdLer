@@ -16,5 +16,18 @@
   "NoAvailableCoursesReturnHomeText": "Du bist momentan in keinen Kurs eingeschrieben.<br/>Bitte gehe zurück zum Startbildschirm.<br/>Gehe dann zur AdLer-Moodle Webseite und<br/>schreibe dich in einen Kurs ein<br/>oder frage deinen Dozenten nach der Einschreibung.",
 
   "worldButtonToolTip": "\nEinfachclick: Öffnet die Metadaten dieser Lernwelt. \nDoppelclick: Öffnet die Lernwelt.",
-  "worldOpenButtonToolTip": "Öffnet die ausgewählte Lernwelt"
+  "worldOpenButtonToolTip": "Öffnet die ausgewählte Lernwelt",
+
+  "worldManagement": {
+    "title": "Weltenverwaltung",
+    "storage": "Speicher",
+    "used": "belegt",
+    "loading": "Lade Welten...",
+    "noWorlds": "Keine Lernwelten vorhanden",
+    "refresh": "Aktualisieren",
+    "close": "Schließen",
+    "preinstalled": "Vorinstalliert",
+    "elements": "Elemente",
+    "delete": "Löschen"
+  }
 }

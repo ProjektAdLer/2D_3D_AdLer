@@ -16,5 +16,18 @@
   "NoAvailableCoursesReturnHomeText": "You're currently not enlisted to a course.<br/>Please return to the welcome screen.<br/>The go to the AdLer Moodle and<br/>enlist yourself in a course<br/>or ask your teacher for enlisting.",
 
   "worldButtonToolTip": "Opens the learning worlds metadata",
-  "worldOpenButtonToolTip": "Opens the selected learning world"
+  "worldOpenButtonToolTip": "Opens the selected learning world",
+
+  "worldManagement": {
+    "title": "World Management",
+    "storage": "Storage",
+    "used": "used",
+    "loading": "Loading Worlds...",
+    "noWorlds": "No learning worlds available",
+    "refresh": "Refresh",
+    "close": "Close",
+    "preinstalled": "Preinstalled",
+    "elements": "Elements",
+    "delete": "Delete"
+  }
 }
