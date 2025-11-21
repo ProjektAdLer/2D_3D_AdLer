@@ -7,6 +7,7 @@ import learningEngineStringImage from "../../../../../../Assets/graphics/learnin
 import avatarEditorStringImage from "../../../../../../Assets/graphics/avatar-editor.png";
 import settingsIcon from "../../../../../../Assets/icons/settings.svg";
 import privacyIcon from "../../../../../../Assets/icons/locked.svg";
+import worldManagementIcon from "../../../../../../Assets/icons/world.svg";
 import avatarButtonBackground from "../../../../../../Assets/misc/WelcomeScreenButtonBackgrounds/AvatarEditorButtonBackground.jpg";
 import learningWorldMenuButtonBackground from "../../../../../../Assets/misc/WelcomeScreenButtonBackgrounds/LearningWorldButtonBackground.jpg";
 import HelpDeskButton from "~ReactComponents/GeneralComponents/HelpDeskButton/HelpDeskButton";
@@ -21,9 +22,14 @@ import { useInjection } from "inversify-react";
 import ILoginUseCase from "src/Components/Core/Application/UseCases/Login/ILoginUseCase";
 import ILoadAvatarConfigUseCase from "src/Components/Core/Application/UseCases/LoadAvatarConfig/ILoadAvatarConfigUseCase";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
+import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import StyledButton from "../ReactBaseComponents/StyledButton";
 import history from "history/browser";
 import CookieModal from "~ReactComponents/WelcomePage/CookieModal/CookieModal";
+import WorldManagerModal from "~ReactComponents/LearningWorldMenu/WorldManagement/WorldManagerModal";
+import WorldManagerModalViewModel from "~ReactComponents/LearningWorldMenu/WorldManagement/WorldManagerModalViewModel";
+import type IWorldManagerModalController from "~ReactComponents/LearningWorldMenu/WorldManagement/IWorldManagerModalController";
+import useBuilder from "../CustomHooks/useBuilder";
 
 export default function WelcomePage() {
   const { t: translate } = useTranslation("start");
@@ -33,6 +39,12 @@ export default function WelcomePage() {
   const loadAvatarConfigUseCase = useInjection<ILoadAvatarConfigUseCase>(
     USECASE_TYPES.ILoadAvatarConfigUseCase,
   );
+
+  // WorldManager Modal
+  const [worldManagerViewModel, worldManagerController] = useBuilder<
+    WorldManagerModalViewModel,
+    IWorldManagerModalController
+  >(BUILDER_TYPES.IWorldManagerModalBuilder);
 
   // Automatic login in file-based backend mode
   useEffect(() => {
@@ -65,9 +77,41 @@ export default function WelcomePage() {
         alt="Adler Logo"
       />
 
-      <HelpDeskButton className="col-start-8 row-start-1 justify-self-end" />
+      {/* WorldManager Button - Top Left (file-based backend only) */}
+      {isFileBasedBackend && (
+        <StyledButton
+          shape="freeFloatCenter"
+          containerClassName="w-full h-full"
+          onClick={() => worldManagerController?.onOpenModal()}
+          className="relative col-span-1 col-start-1 row-span-1 row-start-1 m-2 flex w-32 gap-2 2xl:w-44 mobile-portrait:w-24"
+          title="Weltenverwaltung"
+          data-testid="worldManagerButton"
+        >
+          <img
+            className="w-8 lg:w-12 onek:w-14"
+            src={worldManagementIcon}
+            alt="icon"
+          />
+          <p className="text-2xs font-bold xl:text-sm 2xl:pl-2 2xl:text-lg">
+            {translate("worldManagerButton")}
+          </p>
+        </StyledButton>
+      )}
+
+      {/* HelpDesk Button - Top Right */}
+      <div className="col-start-8 row-start-1 flex gap-2 justify-self-end">
+        <HelpDeskButton />
+      </div>
       <HelpDeskModal />
       <CookieModal />
+
+      {/* WorldManager Modal */}
+      {worldManagerController && worldManagerViewModel && (
+        <WorldManagerModal
+          viewModel={worldManagerViewModel}
+          controller={worldManagerController}
+        />
+      )}
 
       <section className="flex flex-col items-center text-adlerdarkblue tablet-portrait:col-span-8 tablet-portrait:col-start-1 portrait:col-span-6 portrait:col-start-2 portrait:row-span-2 portrait:row-start-1 portrait:mt-32 portrait:self-center landscape:col-span-6 landscape:col-start-2 landscape:row-start-1 lg:landscape:col-span-6 lg:landscape:col-start-2 lg:landscape:row-start-1 xl:landscape:col-span-6 xl:landscape:col-start-2">
         <video
