@@ -4,6 +4,7 @@ import StyledButton from "../../ReactRelated/ReactBaseComponents/StyledButton";
 import LocalStore from "../../../../Adapters/LocalStore/LocalStore";
 import MBZImporter from "../../../../Adapters/LocalStore/MBZImporter";
 import StyledModal from "../../ReactRelated/ReactBaseComponents/StyledModal";
+import plusIcon from "../../../../../../Assets/icons/plus.svg";
 
 /**
  * MBZImportButton provides a UI for importing MBZ (Moodle Backup) files
@@ -123,13 +124,17 @@ export default function MBZImportButton() {
 
       {/* Import button */}
       <StyledButton
+        shape="smallSquare"
         onClick={handleButtonClick}
         disabled={isImporting}
         className="bg-adlerlightblue hover:bg-adlerblue"
+        title={String(translate("importButton.label", "Import World (.mbz)"))}
       >
-        {isImporting
-          ? translate("importButton.importing", "Importing...")
-          : translate("importButton.label", "Import World (.mbz)")}
+        <img
+          className="w-10 xl:w-12 mobile-landscape:w-6"
+          src={plusIcon}
+          alt={String(translate("importButton.label", "Import World (.mbz)"))}
+        />
       </StyledButton>
 
       {/* Success modal */}
