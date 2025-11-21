@@ -226,6 +226,53 @@ export default class LocalStore {
   }
 
   /**
+   * Calculate the total size of a world in bytes
+   * @param worldID The world ID
+   * @returns Total size in bytes
+   */
+  async getWorldSize(worldID: number): Promise<number> {
+    const db = await this.ensureDB();
+
+    try {
+      const tx = db.transaction("files", "readonly");
+      const store = tx.objectStore("files");
+      const index = store.index("by-world");
+
+      let totalSize = 0;
+      let cursor = await index.openCursor(worldID);
+
+      while (cursor) {
+        if (cursor.value.blob) {
+          totalSize += cursor.value.blob.size;
+        }
+        cursor = await cursor.continue();
+      }
+
+      await tx.done;
+      return totalSize;
+    } catch (error) {
+      console.error(`Failed to calculate world size for ${worldID}:`, error);
+      return 0;
+    }
+  }
+
+  /**
+   * Get sizes for all worlds in IndexedDB
+   * @returns Map of worldID to size in bytes
+   */
+  async getAllWorldSizes(): Promise<Map<number, number>> {
+    const worlds = await this.getAllWorlds();
+    const sizes = new Map<number, number>();
+
+    for (const world of worlds) {
+      const size = await this.getWorldSize(world.worldID);
+      sizes.set(world.worldID, size);
+    }
+
+    return sizes;
+  }
+
+  /**
    * Get storage usage information
    * @returns Object with used bytes and quota (if available)
    */
