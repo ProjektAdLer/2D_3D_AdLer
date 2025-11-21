@@ -40,14 +40,12 @@ export default class GetWorldsStorageInfoUseCase
         used,
         quota,
         available,
-        this.formatBytes(used),
-        this.formatBytes(quota),
         Math.round(usedPercent * 100) / 100,
       );
 
       this.logger.log(
         LogLevelTypes.INFO,
-        `GetWorldsStorageInfoUseCase: Storage used: ${storageInfoTO.usedFormatted} / ${storageInfoTO.quotaFormatted} (${storageInfoTO.usedPercent}%)`,
+        `GetWorldsStorageInfoUseCase: Storage used: ${used} / ${quota} bytes (${storageInfoTO.usedPercent}%)`,
       );
 
       // Notify presentation layer via port
@@ -65,18 +63,5 @@ export default class GetWorldsStorageInfoUseCase
 
       this.worldManagementPort.onWorldManagementError(errorMessage);
     }
-  }
-
-  /**
-   * Format bytes to human-readable string
-   */
-  private formatBytes(bytes: number): string {
-    if (bytes === 0) return "0 Bytes";
-
-    const k = 1024;
-    const sizes = ["Bytes", "KB", "MB", "GB", "TB"];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-
-    return Math.round((bytes / Math.pow(k, i)) * 100) / 100 + " " + sizes[i];
   }
 }

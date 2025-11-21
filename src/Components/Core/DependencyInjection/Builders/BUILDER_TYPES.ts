@@ -69,6 +69,7 @@ const BUILDER_TYPES = {
   ISettingContentBuilder: Symbol("ISettingContentBuilder"),
   IPrivacyContentBuilder: Symbol("IPrivacyContentBuilder"),
   IWorldManagerModalBuilder: Symbol("IWorldManagerModalBuilder"),
+  IMBZImportButtonBuilder: Symbol("IMBZImportButtonBuilder"),
 };
 
 export default BUILDER_TYPES;

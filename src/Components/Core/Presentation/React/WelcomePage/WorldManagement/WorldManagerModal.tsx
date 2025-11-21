@@ -39,7 +39,6 @@ export default function WorldManagerModal({
   const [isExporting] = useObservable(viewModel.isExporting);
   const [exportProgress] = useObservable(viewModel.exportProgress);
   const [exportStatus] = useObservable(viewModel.exportStatus);
-  const [exportingWorldID] = useObservable(viewModel.exportingWorldID);
 
   const safeWorlds = worlds || [];
   const safeLoading = loading || false;

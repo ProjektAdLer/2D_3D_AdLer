@@ -22,37 +22,46 @@ type RangeSliderProps = {
 } & AdLerUIComponent;
 
 export default function RangeSlider(props: RangeSliderProps) {
-  const [value, setValue] = useState<number>(
-    props.initialValue ? props.initialValue : props.min,
-  );
-  const [step] = useState<number>(props.step ?? 0);
-  const [displayFactor] = useState<number>(props.displayFactor ?? 1);
-  const [fractionDigits] = useState<number>(props.fractionDigits ?? 0);
+  const {
+    initialValue,
+    min,
+    step: stepProp,
+    displayFactor: displayFactorProp,
+    fractionDigits: fractionDigitsProp,
+    enableInputField: enableInputFieldProp,
+    callback,
+    display,
+    className,
+    buttons,
+    max,
+  } = props;
+
+  const [value, setValue] = useState<number>(initialValue ? initialValue : min);
+  const [step] = useState<number>(stepProp ?? 0);
+  const [displayFactor] = useState<number>(displayFactorProp ?? 1);
+  const [fractionDigits] = useState<number>(fractionDigitsProp ?? 0);
   const [intervalID, setIntervalID] = useState<NodeJS.Timeout>();
   const [intervalActive, setIntervalActive] = useState<boolean>(false);
-  const [enableInputField] = useState<boolean>(props.enableInputField ?? true);
+  const [enableInputField] = useState<boolean>(enableInputFieldProp ?? true);
   const [displayText, setDisplayText] = useState<string>("");
 
   const intervalDelay = 300; // delay between value in-/decrements in ms
 
   useEffect(() => {
-    props.callback(value);
-  }, [value]);
+    callback(value);
+  }, [value, callback]);
 
   useEffect(() => {
-    if (props.display) {
-      setDisplayText(props.display(value));
+    if (display) {
+      setDisplayText(display(value));
     }
-  }, [props.display, value]);
+  }, [display, value]);
 
   return (
     <div
-      className={tailwindMerge(
-        props.className,
-        "flex grow items-center gap-4 p-2",
-      )}
+      className={tailwindMerge(className, "flex grow items-center gap-4 p-2")}
     >
-      {props.buttons && (
+      {buttons && (
         <StyledButton
           shape={"square"}
           className="w-10"
@@ -61,9 +70,7 @@ export default function RangeSlider(props: RangeSliderProps) {
             setIntervalID(
               setInterval(() => {
                 setIntervalActive(true);
-                setValue((value) =>
-                  value - step >= props.min ? value - step : props.min,
-                );
+                setValue((value) => (value - step >= min ? value - step : min));
               }, intervalDelay),
             );
           }}
@@ -73,18 +80,14 @@ export default function RangeSlider(props: RangeSliderProps) {
           }}
           onClick={() => {
             if (!intervalActive) {
-              setValue((value) =>
-                value - step >= props.min ? value - step : props.min,
-              );
+              setValue((value) => (value - step >= min ? value - step : min));
             }
             setIntervalActive(false);
             clearInterval(intervalID);
           }}
         >
-          {props.buttons.imageLeft && (
-            <img src={props.buttons?.imageLeft} alt="" />
-          )}
-          {!props.buttons.imageLeft && "-"}
+          {buttons.imageLeft && <img src={buttons?.imageLeft} alt="" />}
+          {!buttons.imageLeft && "-"}
         </StyledButton>
       )}
       <div className="flex grow !flex-col items-center justify-center pb-8 text-xl font-bold">
@@ -93,31 +96,31 @@ export default function RangeSlider(props: RangeSliderProps) {
             type="number"
             className="numberInputField mb-1.5"
             data-testid="rangeInputField_number"
-            min={props.min * displayFactor}
-            max={props.max * displayFactor}
+            min={min * displayFactor}
+            max={max * displayFactor}
             value={(value * displayFactor).toFixed(fractionDigits)}
             onChange={(e) => {
               let inputValue = parseFloat(e.target.value);
               if (Number.isNaN(inputValue)) {
                 return;
               }
-              if (inputValue > props.max * displayFactor) {
-                inputValue = props.max * displayFactor;
-              } else if (inputValue < props.min * displayFactor) {
-                inputValue = props.min * displayFactor;
+              if (inputValue > max * displayFactor) {
+                inputValue = max * displayFactor;
+              } else if (inputValue < min * displayFactor) {
+                inputValue = min * displayFactor;
               }
               setValue(inputValue / displayFactor);
             }}
           ></input>
         )}
-        {!enableInputField && !props.display && <>{value}</>}
-        {!enableInputField && props.display && <>{displayText}</>}
+        {!enableInputField && !display && <>{value}</>}
+        {!enableInputField && display && <>{displayText}</>}
         <input
           className="rangeSlider"
           type="range"
-          min={props.min}
-          max={props.max}
-          step={props.step}
+          min={min}
+          max={max}
+          step={step}
           value={value}
           name="Slider"
           alt="SliderComponent"
@@ -126,7 +129,7 @@ export default function RangeSlider(props: RangeSliderProps) {
           }}
         ></input>
       </div>
-      {props.buttons && (
+      {buttons && (
         <StyledButton
           shape={"square"}
           className="w-10"
@@ -135,9 +138,7 @@ export default function RangeSlider(props: RangeSliderProps) {
             setIntervalID(
               setInterval(() => {
                 setIntervalActive(true);
-                setValue((value) =>
-                  value + step <= props.max ? value + step : props.max,
-                );
+                setValue((value) => (value + step <= max ? value + step : max));
               }, intervalDelay),
             );
           }}
@@ -147,18 +148,14 @@ export default function RangeSlider(props: RangeSliderProps) {
           }}
           onClick={() => {
             if (!intervalActive) {
-              setValue((value) =>
-                value + step <= props.max ? value + step : props.max,
-              );
+              setValue((value) => (value + step <= max ? value + step : max));
             }
             setIntervalActive(false);
             clearInterval(intervalID);
           }}
         >
-          {props.buttons.imageRight && (
-            <img src={props.buttons?.imageRight} alt="" />
-          )}
-          {!props.buttons.imageRight && "+"}
+          {buttons.imageRight && <img src={buttons?.imageRight} alt="" />}
+          {!buttons.imageRight && "+"}
         </StyledButton>
       )}
     </div>

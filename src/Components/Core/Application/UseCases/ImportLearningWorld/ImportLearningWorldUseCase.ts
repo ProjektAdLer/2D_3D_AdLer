@@ -12,7 +12,6 @@ import type IMBZParserAdapter from "../../Ports/MBZParserPort/IMBZParserAdapter"
 import type IWorldStorageAdapter from "../../Ports/WorldStoragePort/IWorldStorageAdapter";
 import type ILoadUserLearningWorldsInfoUseCase from "../LoadUserLearningWorldsInfo/ILoadUserLearningWorldsInfoUseCase";
 import WorldImportResultTO from "../../DataTransferObjects/WorldImportResultTO";
-import type { ProgressCallback } from "../../Ports/MBZParserPort/IMBZParserAdapter";
 
 @injectable()
 export default class ImportLearningWorldUseCase

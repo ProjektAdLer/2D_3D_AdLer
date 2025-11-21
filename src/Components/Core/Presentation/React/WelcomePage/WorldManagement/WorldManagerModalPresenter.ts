@@ -8,6 +8,7 @@ import IWorldManagementAdapter from "../../../../Application/Ports/WorldManageme
 import WorldImportResultTO from "../../../../Application/DataTransferObjects/WorldImportResultTO";
 import LocalWorldInfoTO from "../../../../Application/DataTransferObjects/LocalWorldInfoTO";
 import StorageInfoTO from "../../../../Application/DataTransferObjects/StorageInfoTO";
+import { formatBytes } from "../../../Utils/formatBytes";
 
 /**
  * Presenter for WorldManagerModal
@@ -82,8 +83,8 @@ export default class WorldManagerModalPresenter
       used: storageInfo.used,
       quota: storageInfo.quota,
       available: storageInfo.available,
-      usedFormatted: storageInfo.usedFormatted,
-      quotaFormatted: storageInfo.quotaFormatted,
+      usedFormatted: formatBytes(storageInfo.used),
+      quotaFormatted: formatBytes(storageInfo.quota),
       usedPercent: Math.round(storageInfo.usedPercent),
     };
 
@@ -100,7 +101,8 @@ export default class WorldManagerModalPresenter
       worldFolder: world.worldFolder,
       elementCount: world.elementCount,
       sizeInBytes: world.sizeInBytes,
-      sizeFormatted: world.sizeFormatted,
+      sizeFormatted:
+        world.source === "public" ? "N/A" : formatBytes(world.sizeInBytes),
       source: world.source,
     }));
 

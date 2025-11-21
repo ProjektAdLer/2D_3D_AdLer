@@ -57,7 +57,8 @@ import LevelUpModalBuilder from "~ReactComponents/LearningSpaceDisplay/LevelUpMo
 import BadgeOverviewModalBuilder from "~ReactComponents/LearningSpaceDisplay/BadgeOverviewModal/BadgeOverviewModalBuilder";
 import SettingContentBuilder from "~ReactComponents/Settings/SettingContentBuilder";
 import PrivacyContentBuilder from "~ReactComponents/Privacy/PrivacyContentBuilder";
-import WorldManagerModalBuilder from "~ReactComponents/LearningWorldMenu/WorldManagement/WorldManagerModalBuilder";
+import WorldManagerModalBuilder from "~ReactComponents/WelcomePage/WorldManagement/WorldManagerModalBuilder";
+import MBZImportButtonBuilder from "~ReactComponents/WelcomePage/MBZImportButton/MBZImportButtonBuilder";
 
 const BuilderDIContainer = new ContainerModule((bind) => {
   bind<IPresentationDirector>(BUILDER_TYPES.IPresentationDirector).to(
@@ -222,6 +223,9 @@ const BuilderDIContainer = new ContainerModule((bind) => {
   );
   bind<IPresentationBuilder>(BUILDER_TYPES.IWorldManagerModalBuilder).to(
     WorldManagerModalBuilder,
+  );
+  bind<IPresentationBuilder>(BUILDER_TYPES.IMBZImportButtonBuilder).to(
+    MBZImportButtonBuilder,
   );
 });
 

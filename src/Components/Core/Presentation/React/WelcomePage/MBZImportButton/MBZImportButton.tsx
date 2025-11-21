@@ -1,122 +1,57 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { useInjection } from "inversify-react";
 import StyledButton from "../../ReactRelated/ReactBaseComponents/StyledButton";
-import LocalStore from "../../../../Adapters/LocalStore/LocalStore";
-import MBZImporter from "../../../../Adapters/LocalStore/MBZImporter";
 import StyledModal from "../../ReactRelated/ReactBaseComponents/StyledModal";
 import plusIcon from "../../../../../../Assets/icons/plus.svg";
-import USECASE_TYPES from "../../../../DependencyInjection/UseCases/USECASE_TYPES";
-import type ILoadUserLearningWorldsInfoUseCase from "../../../../Application/UseCases/LoadUserLearningWorldsInfo/ILoadUserLearningWorldsInfoUseCase";
+import MBZImportButtonViewModel, {
+  type ImportResult,
+} from "./MBZImportButtonViewModel";
+import type IMBZImportButtonController from "./IMBZImportButtonController";
+import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
+import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
+import BUILDER_TYPES from "../../../../DependencyInjection/Builders/BUILDER_TYPES";
 
 /**
  * MBZImportButton provides a UI for importing MBZ (Moodle Backup) files
  * into IndexedDB for offline use.
  *
- * Process:
- * 1. User clicks button
- * 2. File input opens
- * 3. User selects .mbz file
- * 4. MBZImporter extracts and stores in IndexedDB
- * 5. Learning world list is refreshed via UseCase
+ * This component follows the MVC pattern:
+ * - View: Displays UI and handles user interactions
+ * - Controller: Processes interactions and coordinates Use Cases
+ * - Presenter: Transforms data from Use Cases to ViewModel format
  */
 export default function MBZImportButton() {
   const { t: translate } = useTranslation("worldMenu");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const loadUserWorldsInfoUseCase =
-    useInjection<ILoadUserLearningWorldsInfoUseCase>(
-      USECASE_TYPES.ILoadUserLearningWorldsInfoUseCase,
-    );
+  // Get ViewModel and Controller from Builder
+  const [viewModel, controller] = useBuilder<
+    MBZImportButtonViewModel,
+    IMBZImportButtonController
+  >(BUILDER_TYPES.IMBZImportButtonBuilder);
 
-  const [isImporting, setIsImporting] = useState(false);
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
-  const [showErrorModal, setShowErrorModal] = useState(false);
-  const [importResult, setImportResult] = useState<{
-    worldName: string;
-    elementCount: number;
-    errors: string[];
-    warnings: string[];
-  } | null>(null);
+  // Set file input ref in controller so it can trigger clicks
+  if (controller) {
+    controller.fileInputRef = fileInputRef.current;
+  }
 
-  const handleButtonClick = () => {
-    fileInputRef.current?.click();
-  };
+  // Observe ViewModel properties
+  const [isImporting] = useObservable<boolean>(viewModel?.isImporting);
+  const [showSuccessModal] = useObservable<boolean>(
+    viewModel?.showSuccessModal,
+  );
+  const [showErrorModal] = useObservable<boolean>(viewModel?.showErrorModal);
+  const [importResult] = useObservable<ImportResult>(viewModel?.importResult);
+  const [importProgress] = useObservable<number>(viewModel?.importProgress);
+  const [importStatus] = useObservable<string>(viewModel?.importStatus);
 
   const handleFileSelected = async (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-
-    // Check file extension
-    if (!file.name.toLowerCase().endsWith(".mbz")) {
-      setImportResult({
-        worldName: "",
-        elementCount: 0,
-        errors: ["Please select a valid .mbz file"],
-        warnings: [],
-      });
-      setShowErrorModal(true);
-      return;
+    const file = event.target.files?.[0] || null;
+    if (controller) {
+      await controller.onFileSelected(file);
     }
-
-    setIsImporting(true);
-
-    try {
-      // Initialize LocalStore and MBZImporter
-      const localStore = new LocalStore();
-      await localStore.init();
-
-      const importer = new MBZImporter(localStore);
-
-      // Import the MBZ file
-      const result = await importer.importMBZ(file);
-
-      if (result.success) {
-        setImportResult({
-          worldName: result.worldName,
-          elementCount: result.elementCount,
-          errors: result.errors,
-          warnings: result.warnings,
-        });
-        setShowSuccessModal(true);
-      } else {
-        setImportResult({
-          worldName: result.worldName,
-          elementCount: result.elementCount,
-          errors: result.errors,
-          warnings: result.warnings,
-        });
-        setShowErrorModal(true);
-      }
-    } catch (error) {
-      console.error("MBZ Import failed:", error);
-      setImportResult({
-        worldName: "",
-        elementCount: 0,
-        errors: [error instanceof Error ? error.message : "Unknown error"],
-        warnings: [],
-      });
-      setShowErrorModal(true);
-    } finally {
-      setIsImporting(false);
-      // Reset file input
-      if (fileInputRef.current) {
-        fileInputRef.current.value = "";
-      }
-    }
-  };
-
-  const handleSuccessModalClose = async () => {
-    setShowSuccessModal(false);
-    // Refresh world list via UseCase instead of reloading
-    await loadUserWorldsInfoUseCase.executeAsync();
-  };
-
-  const handleErrorModalClose = () => {
-    setShowErrorModal(false);
-    setImportResult(null);
   };
 
   return (
@@ -133,7 +68,7 @@ export default function MBZImportButton() {
       {/* Import button */}
       <StyledButton
         shape="smallSquare"
-        onClick={handleButtonClick}
+        onClick={() => controller?.onImportButtonClick()}
         disabled={isImporting}
         className="bg-adlerlightblue hover:bg-adlerblue"
         title={String(translate("importButton.label", "Import World (.mbz)"))}
@@ -145,6 +80,24 @@ export default function MBZImportButton() {
         />
       </StyledButton>
 
+      {/* Import progress indicator */}
+      {isImporting && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="rounded-lg bg-white p-6 shadow-xl">
+            <h3 className="mb-4 text-lg font-semibold">
+              {translate("importButton.importing", "Importing...")}
+            </h3>
+            <div className="mb-2 h-4 w-64 overflow-hidden rounded-full bg-gray-200">
+              <div
+                className="h-full bg-adlerblue transition-all duration-300"
+                style={{ width: `${importProgress}%` }}
+              />
+            </div>
+            <p className="text-sm text-gray-600">{importStatus}</p>
+          </div>
+        </div>
+      )}
+
       {/* Success modal */}
       {showSuccessModal && importResult && (
         <StyledModal
@@ -152,7 +105,7 @@ export default function MBZImportButton() {
             translate("importButton.successTitle", "Import Successful"),
           )}
           showModal={showSuccessModal}
-          onClose={handleSuccessModalClose}
+          onClose={() => controller?.onSuccessModalClose()}
           canClose={false}
         >
           <div className="space-y-4">
@@ -190,7 +143,10 @@ export default function MBZImportButton() {
               )}
             </p>
 
-            <StyledButton onClick={handleSuccessModalClose} className="w-full">
+            <StyledButton
+              onClick={() => controller?.onSuccessModalClose()}
+              className="w-full"
+            >
               {translate("importButton.ok", "OK")}
             </StyledButton>
           </div>
@@ -202,7 +158,7 @@ export default function MBZImportButton() {
         <StyledModal
           title={String(translate("importButton.errorTitle", "Import Failed"))}
           showModal={showErrorModal}
-          onClose={handleErrorModalClose}
+          onClose={() => controller?.onErrorModalClose()}
           canClose={false}
         >
           <div className="space-y-4">
@@ -226,7 +182,10 @@ export default function MBZImportButton() {
               </div>
             )}
 
-            <StyledButton onClick={handleErrorModalClose} className="w-full">
+            <StyledButton
+              onClick={() => controller?.onErrorModalClose()}
+              className="w-full"
+            >
               {translate("importButton.close", "Close")}
             </StyledButton>
           </div>

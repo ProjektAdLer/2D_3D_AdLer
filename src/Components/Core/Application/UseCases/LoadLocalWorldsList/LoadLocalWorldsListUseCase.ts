@@ -46,7 +46,6 @@ export default class LoadLocalWorldsListUseCase
             world.worldFolder,
             world.elementCount || 0,
             sizeInBytes,
-            this.formatBytes(sizeInBytes),
             "indexeddb",
             world.importTimestamp,
           ),
@@ -72,7 +71,6 @@ export default class LoadLocalWorldsListUseCase
                 course.courseName,
                 0, // Element count not available for public worlds
                 0, // Size not calculable for public folder
-                "N/A",
                 "public",
                 0, // No import timestamp for public worlds
               ),
@@ -112,18 +110,5 @@ export default class LoadLocalWorldsListUseCase
 
       this.worldManagementPort.onWorldManagementError(errorMessage);
     }
-  }
-
-  /**
-   * Format bytes to human-readable string
-   */
-  private formatBytes(bytes: number): string {
-    if (bytes === 0) return "0 Bytes";
-
-    const k = 1024;
-    const sizes = ["Bytes", "KB", "MB", "GB"];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-
-    return Math.round((bytes / Math.pow(k, i)) * 100) / 100 + " " + sizes[i];
   }
 }

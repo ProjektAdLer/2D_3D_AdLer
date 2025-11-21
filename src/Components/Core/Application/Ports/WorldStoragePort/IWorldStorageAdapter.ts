@@ -1,4 +1,4 @@
-import { WorldMetadata } from "../../../Adapters/LocalStore/LocalStore";
+import WorldMetadataTO from "../../DataTransferObjects/WorldMetadataTO";
 
 /**
  * Port interface for world storage operations (wraps LocalStore).
@@ -23,14 +23,14 @@ export default interface IWorldStorageAdapter {
    */
   saveWorldMetadata(
     worldID: number,
-    metadata: Omit<WorldMetadata, "worldID">,
+    metadata: Omit<WorldMetadataTO, "worldID">,
   ): Promise<void>;
 
   /**
    * Get world metadata
    * @param worldID The world ID
    */
-  getWorldMetadata(worldID: number): Promise<WorldMetadata | null>;
+  getWorldMetadata(worldID: number): Promise<WorldMetadataTO | null>;
 
   /**
    * Delete a world and all its files
@@ -41,7 +41,7 @@ export default interface IWorldStorageAdapter {
   /**
    * Get all worlds stored
    */
-  getAllWorlds(): Promise<WorldMetadata[]>;
+  getAllWorlds(): Promise<WorldMetadataTO[]>;
 
   /**
    * Get the size of a specific world in bytes

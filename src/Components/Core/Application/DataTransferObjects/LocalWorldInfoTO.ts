@@ -5,7 +5,6 @@ export default class LocalWorldInfoTO {
     public worldFolder: string,
     public elementCount: number,
     public sizeInBytes: number,
-    public sizeFormatted: string,
     public source: "indexeddb" | "public",
     public importTimestamp: number,
   ) {}

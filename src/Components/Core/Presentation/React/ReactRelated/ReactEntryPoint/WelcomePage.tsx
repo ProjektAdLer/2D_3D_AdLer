@@ -26,9 +26,9 @@ import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import StyledButton from "../ReactBaseComponents/StyledButton";
 import history from "history/browser";
 import CookieModal from "~ReactComponents/WelcomePage/CookieModal/CookieModal";
-import WorldManagerModal from "~ReactComponents/LearningWorldMenu/WorldManagement/WorldManagerModal";
-import WorldManagerModalViewModel from "~ReactComponents/LearningWorldMenu/WorldManagement/WorldManagerModalViewModel";
-import type IWorldManagerModalController from "~ReactComponents/LearningWorldMenu/WorldManagement/IWorldManagerModalController";
+import WorldManagerModal from "~ReactComponents/WelcomePage/WorldManagement/WorldManagerModal";
+import WorldManagerModalViewModel from "~ReactComponents/WelcomePage/WorldManagement/WorldManagerModalViewModel";
+import type IWorldManagerModalController from "~ReactComponents/WelcomePage/WorldManagement/IWorldManagerModalController";
 import useBuilder from "../CustomHooks/useBuilder";
 
 export default function WelcomePage() {

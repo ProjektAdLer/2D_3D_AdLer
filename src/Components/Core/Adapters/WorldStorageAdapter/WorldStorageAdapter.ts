@@ -1,10 +1,12 @@
 import { injectable } from "inversify";
 import IWorldStorageAdapter from "../../Application/Ports/WorldStoragePort/IWorldStorageAdapter";
+import WorldMetadataTO from "../../Application/DataTransferObjects/WorldMetadataTO";
 import LocalStore, { WorldMetadata } from "../LocalStore/LocalStore";
 
 /**
  * Adapter that wraps LocalStore and implements IWorldStorageAdapter.
  * This allows the Application layer to use storage functionality without directly depending on LocalStore.
+ * Converts between LocalStore's WorldMetadata and Application layer's WorldMetadataTO.
  */
 @injectable()
 export default class WorldStorageAdapter implements IWorldStorageAdapter {
@@ -24,21 +26,49 @@ export default class WorldStorageAdapter implements IWorldStorageAdapter {
 
   async saveWorldMetadata(
     worldID: number,
-    metadata: Omit<WorldMetadata, "worldID">,
+    metadata: Omit<WorldMetadataTO, "worldID">,
   ): Promise<void> {
-    await this.localStore.saveWorldMetadata(worldID, metadata);
+    // Convert TO to LocalStore format
+    const localStoreMetadata: Omit<WorldMetadata, "worldID"> = {
+      worldName: metadata.worldName,
+      worldFolder: metadata.worldFolder,
+      importTimestamp: metadata.importTimestamp,
+      elementCount: metadata.elementCount,
+    };
+    await this.localStore.saveWorldMetadata(worldID, localStoreMetadata);
   }
 
-  async getWorldMetadata(worldID: number): Promise<WorldMetadata | null> {
-    return await this.localStore.getWorldMetadata(worldID);
+  async getWorldMetadata(worldID: number): Promise<WorldMetadataTO | null> {
+    const metadata = await this.localStore.getWorldMetadata(worldID);
+    if (!metadata) return null;
+
+    // Convert LocalStore format to TO
+    return new WorldMetadataTO(
+      metadata.worldID,
+      metadata.worldName,
+      metadata.worldFolder,
+      metadata.importTimestamp,
+      metadata.elementCount,
+    );
   }
 
   async deleteWorld(worldID: number): Promise<void> {
     await this.localStore.deleteWorld(worldID);
   }
 
-  async getAllWorlds(): Promise<WorldMetadata[]> {
-    return await this.localStore.getAllWorlds();
+  async getAllWorlds(): Promise<WorldMetadataTO[]> {
+    const worlds = await this.localStore.getAllWorlds();
+    // Convert all LocalStore formats to TOs
+    return worlds.map(
+      (world) =>
+        new WorldMetadataTO(
+          world.worldID,
+          world.worldName,
+          world.worldFolder,
+          world.importTimestamp,
+          world.elementCount,
+        ),
+    );
   }
 
   async getWorldSize(worldID: number): Promise<number> {
