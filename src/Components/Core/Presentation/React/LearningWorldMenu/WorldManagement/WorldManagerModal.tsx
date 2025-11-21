@@ -27,14 +27,12 @@ export default function WorldManagerModal({
   const [loading] = useObservable(viewModel.loading);
   const [storageInfo] = useObservable(viewModel.storageInfo);
 
-  if (!showModal) return null;
-
   return (
     <StyledModal
-      isOpen={showModal}
+      showModal={showModal}
       onClose={() => controller.onCloseModal()}
       title={String(translate("worldManagement.title", "Weltenverwaltung"))}
-      showCloseButton={true}
+      canClose={true}
     >
       <div className="flex flex-col gap-4">
         {/* Storage Information */}

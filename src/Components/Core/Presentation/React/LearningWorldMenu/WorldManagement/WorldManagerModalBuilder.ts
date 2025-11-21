@@ -25,4 +25,18 @@ export default class WorldManagerModalBuilder extends PresentationBuilder<
       WorldManagerModalPresenter,
     );
   }
+
+  /**
+   * Override buildPresenter to wire up the controller with the presenter
+   */
+  override buildPresenter(): void {
+    super.buildPresenter();
+
+    // Wire presenter to controller
+    if (this.presenter && this.controller) {
+      (this.controller as WorldManagerModalController).setPresenter(
+        this.presenter,
+      );
+    }
+  }
 }
