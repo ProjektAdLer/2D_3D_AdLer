@@ -15,11 +15,14 @@
     "bind-decorator": "^1.0.11",
     "clsx": "^2.1.1",
     "earcut": "^3.0.0",
+    "fflate": "^0.8.2",
     "h5p-standalone": "^3.7.0",
     "history": "^5.3.0",
     "i18next": "^22.5.1",
+    "idb": "^8.0.3",
     "inversify": "6.0.2",
     "inversify-react": "^1.1.1",
+    "jszip": "^3.10.1",
     "license-checker-rseidelsohn": "^4.4.2",
     "path-browserify": "^1.0.1",
     "pdfobject": "^2.2.8",
@@ -33,7 +36,8 @@
     "recast-detour": "^1.6.3",
     "reflect-metadata": "^0.2.2",
     "tailwind-merge": "^2.5.2",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
+    "workbox-webpack-plugin": "^7.4.0"
   },
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
@@ -72,11 +76,8 @@
     "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/react": "16.0",
     "@testing-library/user-event": "^14.5.2",
-    "@types/dagre": "^0.7.52",
     "@types/adm-zip": "^0.5.5",
-    "@types/xml2js": "^0.4.14",
-    "adm-zip": "^0.5.16",
-    "xml2js": "^0.6.2",
+    "@types/dagre": "^0.7.52",
     "@types/earcut": "^2.1.4",
     "@types/glob": "^8.1.0",
     "@types/inversify": "^2.0.33",
@@ -88,6 +89,8 @@
     "@types/react-router-dom": "^5.3.3",
     "@types/uuid": "^10.0.0",
     "@types/webpack-env": "^1.18.5",
+    "@types/xml2js": "^0.4.14",
+    "adm-zip": "^0.5.16",
     "babel-plugin-transform-require-context": "^0.1.1",
     "babel-plugin-transform-typescript-metadata": "^0.3.2",
     "coveralls": "^3.1.1",
@@ -112,7 +115,8 @@
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "tsconfig-paths-webpack-plugin": "^4.1.0",
-    "typescript": "^4.9.3"
+    "typescript": "^4.9.3",
+    "xml2js": "^0.6.2"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
