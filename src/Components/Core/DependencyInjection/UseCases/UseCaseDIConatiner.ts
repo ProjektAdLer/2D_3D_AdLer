@@ -86,6 +86,16 @@ import ISetSettingsConfigUseCase from "../../Application/UseCases/SetSettingsCon
 import SetSettingsConfigUseCase from "../../Application/UseCases/SetSettingsConfig/SetSettingsConfigUseCase";
 import IGetSettingsConfigUseCase from "../../Application/UseCases/GetSettingsConfig/IGetSettingsConfigUseCase";
 import GetSettingsConfigUseCase from "../../Application/UseCases/GetSettingsConfig/GetSettingsConfigUseCase";
+import IImportLearningWorldUseCase from "../../Application/UseCases/ImportLearningWorld/IImportLearningWorldUseCase";
+import ImportLearningWorldUseCase from "../../Application/UseCases/ImportLearningWorld/ImportLearningWorldUseCase";
+import IDeleteLearningWorldUseCase from "../../Application/UseCases/DeleteLearningWorld/IDeleteLearningWorldUseCase";
+import DeleteLearningWorldUseCase from "../../Application/UseCases/DeleteLearningWorld/DeleteLearningWorldUseCase";
+import IExportLearningWorldUseCase from "../../Application/UseCases/ExportLearningWorld/IExportLearningWorldUseCase";
+import ExportLearningWorldUseCase from "../../Application/UseCases/ExportLearningWorld/ExportLearningWorldUseCase";
+import ILoadLocalWorldsListUseCase from "../../Application/UseCases/LoadLocalWorldsList/ILoadLocalWorldsListUseCase";
+import LoadLocalWorldsListUseCase from "../../Application/UseCases/LoadLocalWorldsList/LoadLocalWorldsListUseCase";
+import IGetWorldsStorageInfoUseCase from "../../Application/UseCases/GetWorldsStorageInfo/IGetWorldsStorageInfoUseCase";
+import GetWorldsStorageInfoUseCase from "../../Application/UseCases/GetWorldsStorageInfo/GetWorldsStorageInfoUseCase";
 
 const UseCaseDIContainer = new ContainerModule((bind) => {
   // Use Cases
@@ -307,6 +317,26 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
 
   bind<IGetSettingsConfigUseCase>(USECASE_TYPES.IGetSettingsConfigUseCase)
     .to(GetSettingsConfigUseCase)
+    .inSingletonScope();
+
+  bind<IImportLearningWorldUseCase>(USECASE_TYPES.IImportLearningWorldUseCase)
+    .to(ImportLearningWorldUseCase)
+    .inSingletonScope();
+
+  bind<IDeleteLearningWorldUseCase>(USECASE_TYPES.IDeleteLearningWorldUseCase)
+    .to(DeleteLearningWorldUseCase)
+    .inSingletonScope();
+
+  bind<IExportLearningWorldUseCase>(USECASE_TYPES.IExportLearningWorldUseCase)
+    .to(ExportLearningWorldUseCase)
+    .inSingletonScope();
+
+  bind<ILoadLocalWorldsListUseCase>(USECASE_TYPES.ILoadLocalWorldsListUseCase)
+    .to(LoadLocalWorldsListUseCase)
+    .inSingletonScope();
+
+  bind<IGetWorldsStorageInfoUseCase>(USECASE_TYPES.IGetWorldsStorageInfoUseCase)
+    .to(GetWorldsStorageInfoUseCase)
     .inSingletonScope();
 });
 

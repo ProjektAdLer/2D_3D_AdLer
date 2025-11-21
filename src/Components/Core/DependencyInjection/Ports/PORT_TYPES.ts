@@ -5,6 +5,9 @@ const PORT_TYPES = {
   INotificationPort: Symbol("INotificationPort"),
   ISettingsPort: Symbol("ISettingsPort"),
   ILocalStoragePort: Symbol("ILocalStoragePort"),
+  IWorldManagementPort: Symbol("IWorldManagementPort"),
+  IWorldStorageAdapter: Symbol("IWorldStorageAdapter"),
+  IMBZParserAdapter: Symbol("IMBZParserAdapter"),
 };
 
 export default PORT_TYPES;

@@ -80,6 +80,11 @@ const USECASE_TYPES = {
   IGetExperiencePointsUseCase: Symbol("IGetExperiencePointsUseCase"),
   ISetSettingsConfigUseCase: Symbol("ISetSettingsConfigUseCase"),
   IGetSettingsConfigUseCase: Symbol("IGetSettingsConfigUseCase"),
+  IImportLearningWorldUseCase: Symbol("IImportLearningWorldUseCase"),
+  IDeleteLearningWorldUseCase: Symbol("IDeleteLearningWorldUseCase"),
+  IExportLearningWorldUseCase: Symbol("IExportLearningWorldUseCase"),
+  ILoadLocalWorldsListUseCase: Symbol("ILoadLocalWorldsListUseCase"),
+  IGetWorldsStorageInfoUseCase: Symbol("IGetWorldsStorageInfoUseCase"),
 };
 
 export default USECASE_TYPES;
