@@ -10,7 +10,7 @@ import IBackendPort from "../Application/Ports/Interfaces/IBackendPort";
 import BackendAdapter from "../Adapters/BackendAdapter/BackendAdapter";
 import { config } from "src/config";
 import MockBackendAdapter from "../Adapters/BackendAdapter/MockBackendAdapter";
-import FileBasedBackendAdapter from "../Adapters/BackendAdapter/FileBasedBackendAdapter";
+import HybridBackendAdapter from "../Adapters/BackendAdapter/HybridBackendAdapter";
 import ILocalStoragePort from "../Application/Ports/Interfaces/ILocalStoragePort";
 import LocalStoragePort from "../Adapters/LocalStoragePort/LocalStoragePort";
 import PORT_TYPES from "./Ports/PORT_TYPES";
@@ -31,7 +31,7 @@ const infrastructureDIContainer = new ContainerModule((bind) => {
   // Backend Adapter
   if (config.useFileBasedBackend) {
     bind<IBackendPort>(CORE_TYPES.IBackendAdapter)
-      .to(FileBasedBackendAdapter)
+      .to(HybridBackendAdapter)
       .inSingletonScope();
   } else if (config.useFakeBackend) {
     bind<IBackendPort>(CORE_TYPES.IBackendAdapter)

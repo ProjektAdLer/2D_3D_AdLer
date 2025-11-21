@@ -3,6 +3,7 @@ import MenuHeaderBar from "~ReactComponents/GeneralComponents/MenuHeaderBar/Menu
 import LearningWorldDetail from "~ReactComponents/LearningWorldMenu/LearningWorldDetail/LearningWorldDetail";
 import WorldSelection from "~ReactComponents/LearningWorldMenu/LearningWorldSelection/LearningWorldSelection";
 import ReturnHomeModal from "~ReactComponents/LearningWorldMenu/ReturnHomeModal/ReturnHomeModal";
+import MBZImportButton from "~ReactComponents/LearningWorldMenu/MBZImportButton/MBZImportButton";
 
 export default function LearningWorldMenu() {
   return (
@@ -13,7 +14,10 @@ export default function LearningWorldMenu() {
       />
       <div className="grid min-h-0 flex-1 grid-cols-[1fr_1fr] grid-rows-1 lg:rounded-lg mobile-landscape:overflow-hidden portrait:grid-cols-1 portrait:grid-rows-[1fr_2fr] portrait:gap-4">
         <ReturnHomeModal />
-        <WorldSelection className="col-start-1 m-2 rounded-lg p-2 lg:p-8 mobile-landscape:max-h-full mobile-landscape:overflow-auto portrait:col-span-1 portrait:col-start-1 portrait:row-start-1 portrait:overflow-auto" />
+        <div className="col-start-1 m-2 flex flex-col gap-2 rounded-lg p-2 lg:p-8 mobile-landscape:max-h-full mobile-landscape:overflow-auto portrait:col-span-1 portrait:col-start-1 portrait:row-start-1 portrait:overflow-auto">
+          <MBZImportButton />
+          <WorldSelection className="flex-1 overflow-auto" />
+        </div>
         <LearningWorldDetail className="col-start-2 flex p-2 lg:p-8 mobile-landscape:min-h-0 mobile-landscape:overflow-hidden portrait:col-start-1 portrait:row-start-2 portrait:min-h-0 portrait:overflow-hidden" />
       </div>
     </div>
