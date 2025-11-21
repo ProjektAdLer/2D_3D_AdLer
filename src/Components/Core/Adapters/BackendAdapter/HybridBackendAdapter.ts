@@ -18,6 +18,7 @@ import AWT from "./Types/AWT";
 import { ComponentID } from "../../Domain/Types/EntityTypes";
 import PORT_TYPES from "../../DependencyInjection/Ports/PORT_TYPES";
 import type ILocalStoragePort from "../../Application/Ports/Interfaces/ILocalStoragePort";
+import H5PIndexedDBServer from "../H5PIndexedDBServer/H5PIndexedDBServer";
 import type IWorldStorageAdapter from "../../Application/Ports/WorldStoragePort/IWorldStorageAdapter";
 
 /**
@@ -213,15 +214,14 @@ export default class HybridBackendAdapter implements IBackendPort {
 
       if (worldExists) {
         let elementPath: string;
-
-        // Check if H5P (folder) or regular file
-        if (
+        const isH5P =
           element.elementCategory === "h5p" ||
           element.elementCategory === "primitiveH5P" ||
-          element.elementFileType === "h5p"
-        ) {
-          // For H5P, we need to check if the folder exists by looking for index.html
-          elementPath = `elements/${elementID}/index.html`;
+          element.elementFileType === "h5p";
+
+        if (isH5P) {
+          // For H5P, check if h5p.json exists (main H5P descriptor file)
+          elementPath = `elements/${elementID}/h5p.json`;
         } else {
           // Regular files
           elementPath = `elements/${elementID}.${element.elementFileType}`;
@@ -234,21 +234,22 @@ export default class HybridBackendAdapter implements IBackendPort {
             `HybridBackendAdapter: Element ${elementID} loaded from IndexedDB`,
           );
 
-          // Create object URL for the blob
-          const objectUrl = URL.createObjectURL(fileBlob);
+          if (isH5P) {
+            // For H5P, use the Service Worker to serve files from IndexedDB
+            // Return the base path that the Service Worker will intercept
+            const h5pServer = H5PIndexedDBServer.getInstance();
+            const h5pBasePath = h5pServer.getH5PBaseUrl(worldID, elementID);
 
-          // For H5P, return the folder path (without index.html)
-          if (
-            element.elementCategory === "h5p" ||
-            element.elementCategory === "primitiveH5P" ||
-            element.elementFileType === "h5p"
-          ) {
-            // Return base path - the H5P viewer will handle it
-            // Note: This may need adjustment depending on how H5P viewer works with blob URLs
+            console.log(
+              `HybridBackendAdapter: H5P element ${elementID} will be served via Service Worker from: ${h5pBasePath}`,
+            );
+
+            return h5pBasePath;
+          } else {
+            // For regular files, create object URL
+            const objectUrl = URL.createObjectURL(fileBlob);
             return objectUrl;
           }
-
-          return objectUrl;
         }
       }
     } catch (error) {

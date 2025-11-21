@@ -4,6 +4,8 @@
     <meta charset="utf-8" />
     <!-- Config file is injected for configuration at container startup -->
     <script src="%PUBLIC_URL%/env-config.js"></script>
+    <!-- H5P Polyfill - must load early to provide missing utility functions -->
+    <script src="%PUBLIC_URL%/h5p-polyfill.js"></script>
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta
       name="viewport"
