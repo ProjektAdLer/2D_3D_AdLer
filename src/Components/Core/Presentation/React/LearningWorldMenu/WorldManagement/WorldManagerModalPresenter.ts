@@ -4,154 +4,110 @@ import WorldManagerModalViewModel, {
   WorldInfo,
   StorageInfo,
 } from "./WorldManagerModalViewModel";
-import LocalStore from "../../../../Adapters/LocalStore/LocalStore";
-import { formatBytes } from "../../../Utils/formatBytes";
-import CoreDIContainer from "../../../../DependencyInjection/CoreDIContainer";
-import CORE_TYPES from "../../../../DependencyInjection/CoreTypes";
-import type IBackendPort from "../../../../Application/Ports/Interfaces/IBackendPort";
+import IWorldManagementAdapter from "../../../../Application/Ports/WorldManagementPort/IWorldManagementAdapter";
+import WorldImportResultTO from "../../../../Application/DataTransferObjects/WorldImportResultTO";
+import LocalWorldInfoTO from "../../../../Application/DataTransferObjects/LocalWorldInfoTO";
+import StorageInfoTO from "../../../../Application/DataTransferObjects/StorageInfoTO";
 
 /**
  * Presenter for WorldManagerModal
- * Loads world data from both IndexedDB and public folder,
- * calculates storage statistics, and manages data flow to ViewModel
+ * Implements IWorldManagementAdapter to receive data from Use Cases via Ports.
+ * Transforms TOs to ViewModel format and updates the View.
  */
 @injectable()
 export default class WorldManagerModalPresenter
-  implements IWorldManagerModalPresenter
+  implements IWorldManagerModalPresenter, IWorldManagementAdapter
 {
-  private localStore: LocalStore;
-  private backendAdapter: IBackendPort;
+  constructor(private viewModel: WorldManagerModalViewModel) {}
 
-  constructor(private viewModel: WorldManagerModalViewModel) {
-    this.localStore = new LocalStore();
-    this.localStore.init().catch((error) => {
-      console.error(
-        "WorldManagerModalPresenter: Failed to init LocalStore:",
-        error,
-      );
-    });
+  /**
+   * Called by WorldManagementPort when a world is imported
+   */
+  onWorldImported(result: WorldImportResultTO): void {
+    if (result.success) {
+      this.viewModel.importSuccess.Value = {
+        worldName: result.worldName,
+        elementCount: result.elementCount,
+      };
+      this.viewModel.importError.Value = null;
+    } else {
+      this.viewModel.importError.Value = result.errors.join(", ");
+      this.viewModel.importSuccess.Value = null;
+    }
+    this.viewModel.isImporting.Value = false;
+  }
 
-    // Get backendAdapter from DI container
-    this.backendAdapter = CoreDIContainer.get<IBackendPort>(
-      CORE_TYPES.IBackendAdapter,
+  /**
+   * Called by WorldManagementPort when a world is deleted
+   */
+  onWorldDeleted(worldID: number): void {
+    // Remove world from ViewModel
+    this.viewModel.worlds.Value = this.viewModel.worlds.Value.filter(
+      (world) => world.worldID !== worldID,
     );
   }
 
   /**
-   * Loads all worlds and storage information
+   * Called by WorldManagementPort when a world is exported
    */
-  async loadWorlds(): Promise<void> {
-    this.viewModel.loading.Value = true;
+  onWorldExported(worldID: number, fileData: Blob): void {
+    // Trigger download in browser
+    const world = this.viewModel.worlds.Value.find(
+      (w) => w.worldID === worldID,
+    );
+    const fileName = world ? `${world.worldName}.zip` : `world_${worldID}.zip`;
 
-    try {
-      const worldInfos: WorldInfo[] = [];
-
-      // 1. Load IndexedDB worlds with size calculation
-      const indexedDBWorlds = await this.localStore.getAllWorlds();
-
-      for (const world of indexedDBWorlds) {
-        const sizeInBytes = await this.localStore.getWorldSize(world.worldID);
-
-        worldInfos.push({
-          worldID: world.worldID,
-          worldName: world.worldName,
-          worldFolder: world.worldFolder,
-          elementCount: world.elementCount || 0,
-          sizeInBytes,
-          sizeFormatted: formatBytes(sizeInBytes),
-          source: "indexeddb",
-        });
-      }
-
-      // 2. Load public folder worlds
-      try {
-        const userToken = "dummy-token"; // File-based backend doesn't need real token
-        const coursesResponse =
-          await this.backendAdapter.getCoursesAvailableForUser(userToken);
-
-        // Filter out worlds already in IndexedDB to avoid duplicates
-        const indexedDBWorldIDs = new Set(
-          indexedDBWorlds.map((w) => w.worldID),
-        );
-
-        for (const course of coursesResponse.courses) {
-          if (!indexedDBWorldIDs.has(course.courseID)) {
-            worldInfos.push({
-              worldID: course.courseID,
-              worldName: course.courseName,
-              worldFolder: course.courseName,
-              elementCount: 0, // Not available for public worlds
-              sizeInBytes: 0, // Not calculable for public folder
-              sizeFormatted: "N/A",
-              source: "public",
-            });
-          }
-        }
-      } catch (error) {
-        console.warn(
-          "Failed to load public worlds, showing IndexedDB worlds only:",
-          error,
-        );
-      }
-
-      // 3. Load storage information
-      const storageInfo = await this.loadStorageInfo();
-
-      // 4. Sort: IndexedDB worlds first, then by name
-      worldInfos.sort((a, b) => {
-        if (a.source !== b.source) {
-          return a.source === "indexeddb" ? -1 : 1;
-        }
-        return a.worldName.localeCompare(b.worldName);
-      });
-
-      // Update ViewModel
-      this.viewModel.worlds.Value = worldInfos;
-      this.viewModel.storageInfo.Value = storageInfo;
-    } catch (error) {
-      console.error("Failed to load worlds:", error);
-      this.viewModel.worlds.Value = [];
-      this.viewModel.storageInfo.Value = null;
-    } finally {
-      this.viewModel.loading.Value = false;
-    }
+    const url = URL.createObjectURL(fileData);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   }
 
   /**
-   * Loads storage quota and usage information
+   * Called by WorldManagementPort when storage info is loaded
    */
-  private async loadStorageInfo(): Promise<StorageInfo | null> {
-    try {
-      const info = await this.localStore.getStorageInfo();
+  onStorageInfoLoaded(storageInfo: StorageInfoTO): void {
+    const storageInfoVM: StorageInfo = {
+      used: storageInfo.used,
+      quota: storageInfo.quota,
+      available: storageInfo.available,
+      usedFormatted: storageInfo.usedFormatted,
+      quotaFormatted: storageInfo.quotaFormatted,
+      usedPercent: Math.round(storageInfo.usedPercent),
+    };
 
-      if (info.used !== undefined && info.quota !== undefined) {
-        const used = info.used;
-        const quota = info.quota;
-        const available = info.available || quota - used;
-        const usedPercent = quota > 0 ? (used / quota) * 100 : 0;
-
-        return {
-          used,
-          quota,
-          available,
-          usedFormatted: formatBytes(used),
-          quotaFormatted: formatBytes(quota),
-          usedPercent: Math.round(usedPercent),
-        };
-      }
-
-      return null;
-    } catch (error) {
-      console.error("Failed to load storage info:", error);
-      return null;
-    }
+    this.viewModel.storageInfo.Value = storageInfoVM;
   }
 
   /**
-   * Deletes a world from IndexedDB
+   * Called by WorldManagementPort when local worlds list is loaded
    */
-  async deleteWorld(worldID: number): Promise<void> {
-    await this.localStore.deleteWorld(worldID);
-    console.log(`World ${worldID} deleted successfully`);
+  onLocalWorldsListLoaded(worlds: LocalWorldInfoTO[]): void {
+    const worldInfos: WorldInfo[] = worlds.map((world) => ({
+      worldID: world.worldID,
+      worldName: world.worldName,
+      worldFolder: world.worldFolder,
+      elementCount: world.elementCount,
+      sizeInBytes: world.sizeInBytes,
+      sizeFormatted: world.sizeFormatted,
+      source: world.source,
+    }));
+
+    this.viewModel.worlds.Value = worldInfos;
+    this.viewModel.loading.Value = false;
+  }
+
+  /**
+   * Called by WorldManagementPort when an error occurs
+   */
+  onWorldManagementError(error: string): void {
+    console.error("WorldManagerModalPresenter: Error from Use Case:", error);
+    this.viewModel.importError.Value = error;
+    this.viewModel.isImporting.Value = false;
+    this.viewModel.loading.Value = false;
   }
 }
