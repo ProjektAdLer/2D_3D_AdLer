@@ -19,8 +19,11 @@ export default class SettingContentPresenter
     this.viewModel.lightsEnabled.Value = newSettings.lightsEnabled!;
 
     // Update i18next language when settings are loaded
+    // Defer to avoid setState during render
     if (newSettings.language) {
-      i18next.changeLanguage(newSettings.language);
+      setTimeout(() => {
+        i18next.changeLanguage(newSettings.language!);
+      }, 0);
     }
   }
 }

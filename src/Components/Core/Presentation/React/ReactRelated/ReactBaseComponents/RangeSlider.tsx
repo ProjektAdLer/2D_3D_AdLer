@@ -37,10 +37,13 @@ export default function RangeSlider(props: RangeSliderProps) {
 
   useEffect(() => {
     props.callback(value);
+  }, [value]);
+
+  useEffect(() => {
     if (props.display) {
       setDisplayText(props.display(value));
     }
-  }, [props, value]);
+  }, [props.display, value]);
 
   return (
     <div
