@@ -27,3 +27,6 @@ env-config.js
 
 # Claude Code project instructions
 claude.md
+
+# Documentation (generated)
+/docs
