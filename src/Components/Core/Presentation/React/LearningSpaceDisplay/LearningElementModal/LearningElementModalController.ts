@@ -93,37 +93,29 @@ export default class LearningElementModalController
     if (isCompleted && !isChild) {
       const xapiData = event.data.statement as XAPIData;
 
+      // Initialisiere result-Objekt, falls es nicht existiert
+      if (!statement.result) {
+        statement.result = {} as Result;
+      }
+
       statement.result.success =
         statement?.result?.score?.scaled === 1 || false;
 
-      await CoreDIContainer.get<IScoreH5PElementUseCase>(
-        USECASE_TYPES.IScoreH5PLearningElementUseCase,
-      ).executeAsync({
-        // @ts-ignore
-        xapiData: xapiData,
-        elementID: this.viewModel.id.Value,
-      });
-    }
-  }
-
-  // ignored coverage because tests on this listener function are too hard without strong typing for H5P
-  // TODO: remove ignore
-  /* istanbul ignore next */
-  xAPICompletedListener(t: any): void {
-    if (
-      ("completed" === t.getVerb(undefined) || "answered" === t.getVerb()) &&
-      !t.getVerifiedStatementValue(["context", "contextActivities", "parent"])
-    ) {
-      let n = t.getScore(),
-        r = t.getMaxScore(),
-        i = t.getVerifiedStatementValue([
-          "object",
-          "definition",
-          "extensions",
-          "http://h5p.org/x-api/h5p-local-content-id",
-        ]);
-      // @ts-ignore
-      e.setFinished(i, n, r);
+      // Füge try-catch für bessere Fehlerbehandlung hinzu
+      try {
+        await CoreDIContainer.get<IScoreH5PElementUseCase>(
+          USECASE_TYPES.IScoreH5PLearningElementUseCase,
+        ).executeAsync({
+          // @ts-ignore
+          xapiData: xapiData,
+          elementID: this.viewModel.id.Value,
+        });
+      } catch (error) {
+        console.warn(
+          `Failed to score H5P element ${this.viewModel.id.Value}:`,
+          error,
+        );
+      }
     }
   }
 

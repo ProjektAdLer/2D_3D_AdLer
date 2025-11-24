@@ -69,18 +69,31 @@ export default function H5PContent({
           };
         }
 
+        // FIX: Attach event listeners directly to the H5P instance instead of externalDispatcher
+        // When using div (not iframe), H5P events don't bubble to externalDispatcher automatically
         //@ts-ignore
-        H5P.externalDispatcher.on("xAPI", controller.h5pEventCalled);
-        // @ts-ignore
-        H5P.xAPICompletedListener = controller.xAPICompletedListener;
+        if (
+          //@ts-ignore
+          typeof H5P !== "undefined" &&
+          //@ts-ignore
+          H5P.instances &&
+          //@ts-ignore
+          H5P.instances.length > 0
+        ) {
+          // Get the most recent instance (the one we just created)
+          //@ts-ignore
+          const instance = H5P.instances[H5P.instances.length - 1];
+
+          // Attach xAPI event listener directly to the instance
+          instance.on("xAPI", (event: any) => {
+            controller.h5pEventCalled(event);
+          });
+        }
       }
     };
     debug();
 
     return () => {
-      // Remove event listener
-      //@ts-ignore
-      H5P.externalDispatcher.off("xAPI");
       //@ts-ignore
       H5PIntegration.contents = {};
     };

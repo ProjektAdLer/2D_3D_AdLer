@@ -81,6 +81,7 @@ describe("LearningElementModalController", () => {
 
   test("should handle a XAPI call with a statement", async () => {
     viewModel.isScoreable.Value = true;
+    viewModel.id.Value = 123;
     await systemUnderTest.h5pEventCalled({
       data: {
         statement: {
@@ -103,6 +104,7 @@ describe("LearningElementModalController", () => {
           success: false,
         },
       },
+      elementID: 123,
     });
   });
 
@@ -143,5 +145,122 @@ describe("LearningElementModalController", () => {
     expect(
       learningworldcompletionModalMock.onModalVisibility,
     ).toHaveBeenCalled();
+  });
+
+  test("should handle XAPI call without result object", async () => {
+    viewModel.isScoreable.Value = true;
+    viewModel.id.Value = 456;
+
+    await systemUnderTest.h5pEventCalled({
+      data: {
+        statement: {
+          verb: {
+            id: "http://adlnet.gov/expapi/verbs/completed",
+          },
+          // No result object
+        },
+      },
+    });
+
+    expect(scoreH5PUseCaseMock.executeAsync).toBeCalledWith({
+      xapiData: {
+        verb: {
+          id: "http://adlnet.gov/expapi/verbs/completed",
+        },
+        result: {
+          success: false,
+        },
+      },
+      elementID: 456,
+    });
+  });
+
+  test("should handle XAPI call with result but no score", async () => {
+    viewModel.isScoreable.Value = true;
+    viewModel.id.Value = 789;
+
+    await systemUnderTest.h5pEventCalled({
+      data: {
+        statement: {
+          verb: {
+            id: "http://adlnet.gov/expapi/verbs/answered",
+          },
+          result: {
+            // No score property
+          },
+        },
+      },
+    });
+
+    expect(scoreH5PUseCaseMock.executeAsync).toBeCalledWith({
+      xapiData: {
+        verb: {
+          id: "http://adlnet.gov/expapi/verbs/answered",
+        },
+        result: {
+          success: false,
+        },
+      },
+      elementID: 789,
+    });
+  });
+
+  test("should handle errors from scoreH5PUseCase gracefully", async () => {
+    const consoleWarnSpy = jest.spyOn(console, "warn").mockImplementation();
+    scoreH5PUseCaseMock.executeAsync.mockRejectedValueOnce(
+      new Error("Backend error"),
+    );
+
+    viewModel.isScoreable.Value = true;
+    viewModel.id.Value = 999;
+
+    await systemUnderTest.h5pEventCalled({
+      data: {
+        statement: {
+          verb: {
+            id: "http://adlnet.gov/expapi/verbs/answered",
+          },
+          result: {
+            success: true,
+          },
+        },
+      },
+    });
+
+    expect(consoleWarnSpy).toHaveBeenCalledWith(
+      "Failed to score H5P element 999:",
+      expect.any(Error),
+    );
+
+    consoleWarnSpy.mockRestore();
+  });
+
+  test("should not call useCase for child events", async () => {
+    viewModel.isScoreable.Value = true;
+    viewModel.id.Value = 321;
+
+    await systemUnderTest.h5pEventCalled({
+      data: {
+        statement: {
+          verb: {
+            id: "http://adlnet.gov/expapi/verbs/answered",
+          },
+          result: {
+            success: true,
+          },
+          context: {
+            contextActivities: {
+              parent: [
+                {
+                  id: "http://example.com/parent",
+                },
+              ],
+            },
+          },
+        },
+      },
+    });
+
+    expect(scoreH5PUseCaseMock.executeAsync).not.toHaveBeenCalled();
   });
 });

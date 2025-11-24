@@ -63,10 +63,54 @@ export default function H5PContent({
         const el = h5pContainerRef.current;
 
         await new H5PPlayer(el, createH5POptions(viewModel));
+
+        // Load H5P polyfill for missing utility functions
+        //@ts-ignore
+        if (typeof H5P !== "undefined" && !H5P.isEmpty) {
+          //@ts-ignore
+          H5P.isEmpty = function (value) {
+            if (value === null || value === undefined) return true;
+            if (typeof value === "string") return value.trim() === "";
+            if (Array.isArray(value)) return value.length === 0;
+            if (typeof value === "object")
+              return Object.keys(value).length === 0;
+            return false;
+          };
+          //@ts-ignore
+          H5P.trim = function (str) {
+            return (str || "").trim();
+          };
+        }
+
+        // FIX: Attach event listeners directly to the H5P instance instead of externalDispatcher
+        // When using div (not iframe), H5P events don't bubble to externalDispatcher automatically
+        //@ts-ignore
+        if (
+          //@ts-ignore
+          typeof H5P !== "undefined" &&
+          //@ts-ignore
+          H5P.instances &&
+          //@ts-ignore
+          H5P.instances.length > 0
+        ) {
+          // Get the most recent instance (the one we just created)
+          //@ts-ignore
+          const instance = H5P.instances[H5P.instances.length - 1];
+
+          // Attach xAPI event listener directly to the instance
+          instance.on("xAPI", (event: any) => {
+            controller.h5pEventCalled(event);
+          });
+        }
       }
     };
     setup();
-  }, [viewModel, hasConsent]);
+
+    return () => {
+      //@ts-ignore
+      H5PIntegration.contents = {};
+    };
+  }, [viewModel, hasConsent, controller]);
 
   useEffect(() => {
     const observer = new ResizeObserver((entries) => {
