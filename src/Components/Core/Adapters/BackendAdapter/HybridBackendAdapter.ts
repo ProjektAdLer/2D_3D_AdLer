@@ -375,6 +375,134 @@ export default class HybridBackendAdapter implements IBackendPort {
   }
 
   /**
+   * Load adaptivity element progress from localStorage for a specific world
+   */
+  private loadAdaptivityProgressFromLocalStorage(worldID: number): {
+    [elementID: number]: {
+      tasks: { [taskID: number]: { status: string } };
+      questions: {
+        [questionID: number]: {
+          status: string;
+          answers: Array<{ checked: boolean; correct: boolean }>;
+        };
+      };
+    };
+  } {
+    const key = `adler_adaptivity_progress_${worldID}`;
+    const stored = this.localStoragePort.getItem(key);
+    if (!stored) {
+      return {};
+    }
+    try {
+      const parsed = JSON.parse(stored);
+      return parsed.elements || {};
+    } catch (error) {
+      console.error(
+        "Failed to parse adaptivity progress from localStorage:",
+        error,
+      );
+      return {};
+    }
+  }
+
+  /**
+   * Save adaptivity element progress to localStorage for a specific world
+   */
+  private saveAdaptivityProgressToLocalStorage(
+    worldID: number,
+    elementID: number,
+    taskID: number,
+    questionID: number,
+    questionStatus: string,
+    taskStatus: string,
+    answers: Array<{ checked: boolean; correct: boolean }>,
+  ): void {
+    const key = `adler_adaptivity_progress_${worldID}`;
+    const progress = this.loadAdaptivityProgressFromLocalStorage(worldID);
+
+    // Initialize element if not exists
+    if (!progress[elementID]) {
+      progress[elementID] = { tasks: {}, questions: {} };
+    }
+
+    // Update question status
+    progress[elementID].questions[questionID] = {
+      status: questionStatus,
+      answers: answers,
+    };
+
+    // Update task status
+    progress[elementID].tasks[taskID] = {
+      status: taskStatus,
+    };
+
+    this.localStoragePort.setItem(
+      key,
+      JSON.stringify({
+        worldID,
+        elements: progress,
+      }),
+    );
+  }
+
+  /**
+   * Checks if a question meets the required difficulty for a task
+   */
+  private isRequiredQuestionCorrect(
+    task: any,
+    questionID: number,
+    worldID: number,
+    elementID: number,
+  ): boolean {
+    const question = task.adaptivityQuestions.find(
+      (q: any) => q.questionId === questionID,
+    );
+    if (!question) return false;
+
+    const taskDifficulty = task.requiredDifficulty;
+    const questionDifficulty = question.questionDifficulty;
+
+    if (taskDifficulty === undefined || questionDifficulty === undefined) {
+      return false;
+    }
+
+    // Check if question difficulty meets or exceeds required difficulty
+    if (questionDifficulty < taskDifficulty) {
+      return false;
+    }
+
+    // Check if question is correctly answered in progress
+    const progress = this.loadAdaptivityProgressFromLocalStorage(worldID);
+    const elementProgress = progress[elementID];
+    if (!elementProgress) return false;
+
+    const questionStatus = elementProgress.questions[questionID]?.status;
+    return questionStatus === "Correct";
+  }
+
+  /**
+   * Checks if all required tasks are complete for an adaptivity element
+   */
+  private areAllRequiredTasksComplete(
+    element: any,
+    worldID: number,
+    elementID: number,
+  ): boolean {
+    const progress = this.loadAdaptivityProgressFromLocalStorage(worldID);
+    const elementProgress = progress[elementID];
+    if (!elementProgress) return false;
+
+    const requiredTasks = element.adaptivityContent.adaptivityTasks.filter(
+      (task: any) => task.optional === false,
+    );
+
+    return requiredTasks.every((task: any) => {
+      const taskStatus = elementProgress.tasks[task.taskId]?.status;
+      return taskStatus === "Correct";
+    });
+  }
+
+  /**
    * Gets world status (completion state)
    * For hybrid backend, progress is loaded from localStorage
    */
@@ -538,18 +666,83 @@ export default class HybridBackendAdapter implements IBackendPort {
       }
     });
 
+    // Determine question status
+    const questionStatus = isCorrect ? "Correct" : "Incorrect";
+
+    // Check if task was already completed before
+    const progress = this.loadAdaptivityProgressFromLocalStorage(worldID);
+    const elementProgress = progress[submissionData.elementID];
+    const previousTaskStatus =
+      elementProgress?.tasks[submissionData.taskID]?.status;
+
+    // Determine task status based on required difficulty
+    let taskStatus = previousTaskStatus === "Correct" ? "Correct" : "Incorrect";
+
+    if (isCorrect) {
+      // Save progress first
+      this.saveAdaptivityProgressToLocalStorage(
+        worldID,
+        submissionData.elementID,
+        submissionData.taskID,
+        submissionData.questionID,
+        questionStatus,
+        taskStatus, // Keep previous status if already correct
+        gradedAnswers,
+      );
+
+      // Check if the task is complete (required difficulty met)
+      const isTaskComplete = this.isRequiredQuestionCorrect(
+        task,
+        submissionData.questionID,
+        worldID,
+        submissionData.elementID,
+      );
+
+      if (isTaskComplete) {
+        taskStatus = "Correct";
+        // Update task status in localStorage
+        this.saveAdaptivityProgressToLocalStorage(
+          worldID,
+          submissionData.elementID,
+          submissionData.taskID,
+          submissionData.questionID,
+          questionStatus,
+          taskStatus,
+          gradedAnswers,
+        );
+      }
+    } else {
+      // Save incorrect answer, but keep task status if it was already correct
+      this.saveAdaptivityProgressToLocalStorage(
+        worldID,
+        submissionData.elementID,
+        submissionData.taskID,
+        submissionData.questionID,
+        questionStatus,
+        taskStatus, // Keep task status (might be "Correct" from a previous answer)
+        gradedAnswers,
+      );
+    }
+
+    // Check if all required tasks are complete
+    const allRequiredTasksComplete = this.areAllRequiredTasksComplete(
+      element,
+      worldID,
+      submissionData.elementID,
+    );
+
     return {
       elementScore: {
         elementId: submissionData.elementID,
-        success: isCorrect,
+        success: allRequiredTasksComplete,
       },
       gradedTask: {
         taskId: submissionData.taskID,
-        taskStatus: isCorrect ? "Correct" : "Incorrect",
+        taskStatus: taskStatus,
       },
       gradedQuestion: {
         id: submissionData.questionID,
-        status: isCorrect ? "Correct" : "Incorrect",
+        status: questionStatus,
         answers: gradedAnswers,
       },
     };
@@ -584,7 +777,7 @@ export default class HybridBackendAdapter implements IBackendPort {
 
   /**
    * Get adaptivity element status
-   * For hybrid backend, progress is not persisted, always return fresh state
+   * For hybrid backend, progress is loaded from localStorage
    */
   async getAdaptivityElementStatusResponse({
     elementID,
@@ -607,11 +800,16 @@ export default class HybridBackendAdapter implements IBackendPort {
       };
     }
 
-    // Build task and question structure with "Not Attempted" status
+    // Load progress from localStorage
+    const progress = this.loadAdaptivityProgressFromLocalStorage(worldID!);
+    const elementProgress = progress[elementID];
+
+    // Build task structure with status from localStorage
     const tasks = element.adaptivityContent.adaptivityTasks.map(
       (task: any) => ({
         taskId: task.taskId,
-        taskStatus: "Not Attempted",
+        taskStatus:
+          elementProgress?.tasks[task.taskId]?.status || "Not Attempted",
       }),
     );
 
@@ -623,24 +821,32 @@ export default class HybridBackendAdapter implements IBackendPort {
 
     element.adaptivityContent.adaptivityTasks.forEach((task: any) => {
       task.adaptivityQuestions.forEach((question: any) => {
-        // Create default answers array based on number of choices
-        const defaultAnswers = (question.choices || []).map(() => ({
-          checked: false,
-          correct: false,
-        }));
+        // Get saved answers or default answers
+        const savedQuestion = elementProgress?.questions[question.questionId];
+        const answers =
+          savedQuestion?.answers ||
+          (question.choices || []).map(() => ({
+            checked: false,
+            correct: false,
+          }));
 
         questions.push({
           id: question.questionId,
-          status: "Not Attempted",
-          answers: defaultAnswers,
+          status: savedQuestion?.status || "Not Attempted",
+          answers: answers,
         });
       });
     });
 
+    // Check if all required tasks are complete
+    const allRequiredTasksComplete = elementProgress
+      ? this.areAllRequiredTasksComplete(element, worldID!, elementID)
+      : false;
+
     return {
       element: {
         elementID,
-        success: false,
+        success: allRequiredTasksComplete,
       },
       questions,
       tasks,
