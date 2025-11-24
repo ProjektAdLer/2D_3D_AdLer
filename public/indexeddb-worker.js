@@ -1,14 +1,14 @@
 /**
- * Service Worker for serving H5P files from IndexedDB
+ * Service Worker for serving files from IndexedDB
  *
- * This worker intercepts requests to H5P files and serves them from IndexedDB
- * instead of the network. This allows H5P content imported via MBZ to work
- * without being in the public folder.
+ * This worker intercepts requests to learning content files (H5P, PDFs, images, etc.)
+ * and serves them from IndexedDB instead of the network. This allows content imported
+ * via MBZ to work without being in the public folder.
  *
  * URL Format: /indexeddb/world/{worldID}/elements/{elementID}/{filename}
  */
 
-const CACHE_NAME = "h5p-indexeddb-cache-v2"; // Increment to force update
+const CACHE_NAME = "indexeddb-cache-v3"; // Increment to force update
 const DB_NAME = "adler-offline-storage"; // Must match LocalStore.ts
 const DB_VERSION = 1;
 
@@ -31,27 +31,21 @@ async function getFileFromIndexedDB(worldID, path) {
     // Key format matches LocalStore: "{worldID}/{path}"
     const key = `${worldID}/${path}`;
 
-    console.log(`[H5P Worker] Looking for key: ${key}`);
-
     const request = store.get(key);
 
     return new Promise((resolve, reject) => {
       request.onsuccess = () => {
         const result = request.result;
         if (result && result.blob) {
-          console.log(
-            `[H5P Worker] Found file: ${key}, size: ${result.blob.size} bytes`,
-          );
           resolve(result.blob);
         } else {
-          console.warn(`[H5P Worker] File not found for key: ${key}`);
           resolve(null);
         }
       };
       request.onerror = () => reject(request.error);
     });
   } catch (error) {
-    console.error("[H5P Worker] Error reading from IndexedDB:", error);
+    console.error("[IndexedDB Worker] Error reading from IndexedDB:", error);
     return null;
   }
 }
@@ -85,10 +79,6 @@ async function handleIndexedDBRequest(request) {
   const worldID = pathParts[2];
   const remainingPath = pathParts.slice(3).join("/"); // e.g., "elements/5/index.html"
 
-  console.log(
-    `[H5P Worker] Fetching from IndexedDB: world=${worldID}, path=${remainingPath}`,
-  );
-
   try {
     const blob = await getFileFromIndexedDB(worldID, remainingPath);
 
@@ -105,17 +95,19 @@ async function handleIndexedDBRequest(request) {
         jpeg: "image/jpeg",
         gif: "image/gif",
         svg: "image/svg+xml",
+        webp: "image/webp",
         mp4: "video/mp4",
         mp3: "audio/mpeg",
         webm: "video/webm",
         ogg: "audio/ogg",
+        wav: "audio/wav",
+        pdf: "application/pdf",
+        woff: "font/woff",
+        woff2: "font/woff2",
+        ttf: "font/ttf",
       };
 
       const contentType = contentTypes[extension] || "application/octet-stream";
-
-      console.log(
-        `[H5P Worker] File found: ${remainingPath} (${blob.size} bytes, ${contentType})`,
-      );
 
       return new Response(blob, {
         status: 200,
@@ -125,24 +117,23 @@ async function handleIndexedDBRequest(request) {
         },
       });
     } else {
-      console.warn(`[H5P Worker] File not found: ${remainingPath}`);
       return new Response("File not found in IndexedDB", { status: 404 });
     }
   } catch (error) {
-    console.error("[H5P Worker] Error:", error);
+    console.error("[IndexedDB Worker] Error:", error);
     return new Response(`Error: ${error.message}`, { status: 500 });
   }
 }
 
 // Install event
 self.addEventListener("install", (event) => {
-  console.log("[H5P Worker] Installing v2...");
+  console.log("[IndexedDB Worker] Installing v3...");
   self.skipWaiting(); // Force immediate activation
 });
 
 // Activate event
 self.addEventListener("activate", (event) => {
-  console.log("[H5P Worker] Activating v2...");
+  console.log("[IndexedDB Worker] Activating v3...");
   event.waitUntil(
     // Clean up old caches
     caches

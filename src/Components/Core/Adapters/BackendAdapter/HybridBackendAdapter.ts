@@ -230,25 +230,18 @@ export default class HybridBackendAdapter implements IBackendPort {
         const fileBlob = await this.worldStorage.getFile(worldID, elementPath);
 
         if (fileBlob) {
-          console.log(
-            `HybridBackendAdapter: Element ${elementID} loaded from IndexedDB`,
-          );
+          // Use Service Worker for all file types from IndexedDB
+          // This provides consistent behavior and avoids blob URL issues
+          const h5pServer = H5PIndexedDBServer.getInstance();
 
           if (isH5P) {
-            // For H5P, use the Service Worker to serve files from IndexedDB
-            // Return the base path that the Service Worker will intercept
-            const h5pServer = H5PIndexedDBServer.getInstance();
+            // For H5P, return the base path (directory)
             const h5pBasePath = h5pServer.getH5PBaseUrl(worldID, elementID);
-
-            console.log(
-              `HybridBackendAdapter: H5P element ${elementID} will be served via Service Worker from: ${h5pBasePath}`,
-            );
-
             return h5pBasePath;
           } else {
-            // For regular files, create object URL
-            const objectUrl = URL.createObjectURL(fileBlob);
-            return objectUrl;
+            // For regular files (PDFs, images, videos, etc.), return the complete file path
+            const filePath = `/indexeddb/world/${worldID}/elements/${elementID}.${element.elementFileType}`;
+            return filePath;
           }
         }
       }

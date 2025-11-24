@@ -26,7 +26,6 @@ export default class H5PIndexedDBServer {
    */
   async init(): Promise<void> {
     if (this.isReady) {
-      console.log("[H5P IndexedDB Server] Already initialized");
       return;
     }
 
@@ -40,7 +39,7 @@ export default class H5PIndexedDBServer {
     try {
       // Register Service Worker
       const registration = await navigator.serviceWorker.register(
-        "/h5p-indexeddb-worker.js",
+        "/indexeddb-worker.js",
         {
           scope: "/",
         },
@@ -48,15 +47,10 @@ export default class H5PIndexedDBServer {
 
       this.serviceWorkerRegistration = registration;
 
-      console.log(
-        "[H5P IndexedDB Server] Service Worker registered successfully",
-      );
-
       // Wait for Service Worker to be active
       await this.waitForServiceWorkerActive(registration);
 
       this.isReady = true;
-      console.log("[H5P IndexedDB Server] Ready");
     } catch (error) {
       console.error(
         "[H5P IndexedDB Server] Failed to register Service Worker:",
@@ -121,7 +115,6 @@ export default class H5PIndexedDBServer {
       await this.serviceWorkerRegistration.unregister();
       this.serviceWorkerRegistration = null;
       this.isReady = false;
-      console.log("[H5P IndexedDB Server] Service Worker unregistered");
     }
   }
 }
