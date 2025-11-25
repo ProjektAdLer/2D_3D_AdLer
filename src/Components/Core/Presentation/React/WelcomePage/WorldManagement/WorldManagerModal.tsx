@@ -55,12 +55,8 @@ export default function WorldManagerModal({
   const [importStatus] = useObservable(viewModel.importStatus);
   const [importError] = useObservable(viewModel.importError);
   const [importSuccess] = useObservable(viewModel.importSuccess);
-  const [isExporting] = useObservable(viewModel.isExporting);
-  const [exportProgress] = useObservable(viewModel.exportProgress);
-  const [exportStatus] = useObservable(viewModel.exportStatus);
   const [deleteConfirmation] = useObservable(viewModel.deleteConfirmation);
   const [deleteError] = useObservable(viewModel.deleteError);
-  const [exportError] = useObservable(viewModel.exportError);
   const [pendingDownload] = useObservable(viewModel.pendingDownload);
   const [shouldReloadPage] = useObservable(viewModel.shouldReloadPage);
 
@@ -109,14 +105,6 @@ export default function WorldManagerModal({
     }
     return undefined;
   }, [deleteError, controller]);
-
-  useEffect(() => {
-    if (exportError) {
-      const timer = setTimeout(() => controller.clearExportError(), 5000);
-      return () => clearTimeout(timer);
-    }
-    return undefined;
-  }, [exportError, controller]);
 
   useEffect(() => {
     if (packageExportError) {
@@ -231,7 +219,6 @@ export default function WorldManagerModal({
           {importSuccess && <ImportSuccessMessage success={importSuccess} />}
           {importError && <ImportErrorMessage error={importError} />}
           {deleteError && <DeleteErrorMessage error={deleteError} />}
-          {exportError && <ExportErrorMessage error={exportError} />}
           {packageExportError && (
             <ExportErrorMessage error={packageExportError} />
           )}
@@ -344,12 +331,6 @@ export default function WorldManagerModal({
               status={importStatus}
             />
           )}
-          {isExporting && (
-            <ExportProgress
-              progress={exportProgress || 0}
-              status={exportStatus}
-            />
-          )}
 
           {/* Loading State */}
           {safeLoading && (
@@ -377,7 +358,6 @@ export default function WorldManagerModal({
                   key={world.worldID}
                   world={world}
                   onDelete={() => controller.onDeleteWorld(world.worldID)}
-                  onExport={() => controller.onExportWorld(world.worldID)}
                   isPublishMode={isPublishMode}
                   isSelected={safeSelectedIDs.has(world.worldID)}
                   onToggleSelect={() =>

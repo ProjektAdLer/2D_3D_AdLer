@@ -1,13 +1,11 @@
 import { useTranslation } from "react-i18next";
 import StyledButton from "../../../ReactRelated/ReactBaseComponents/StyledButton";
-import exportIcon from "../../../../../../../Assets/icons/log-export.svg";
 import deleteIcon from "../../../../../../../Assets/icons/close.svg";
 import type { WorldInfo } from "../WorldManagerModalViewModel";
 
 export interface WorldListItemProps {
   world: WorldInfo;
   onDelete: () => void;
-  onExport: () => void;
   /** Whether publish mode is active (shows checkbox) */
   isPublishMode?: boolean;
   /** Whether this world is selected (for publish mode) */
@@ -39,7 +37,6 @@ function formatDate(timestamp: number | undefined): string | null {
 export default function WorldListItem({
   world,
   onDelete,
-  onExport,
   isPublishMode = false,
   isSelected = false,
   onToggleSelect,
@@ -97,28 +94,16 @@ export default function WorldListItem({
       {!isPublishMode && (
         <div className="flex shrink-0 gap-2">
           {world.source === "indexeddb" && (
-            <>
-              <StyledButton
-                onClick={onExport}
-                className="bg-adlerblue !px-2 !py-1 !text-xs text-white hover:bg-adlerdarkblue"
-                icon={exportIcon}
-                shape="freeFloatCenter"
-              >
-                <span className="text-xs">
-                  {translate("worldManagement.export", "Exportieren")}
-                </span>
-              </StyledButton>
-              <StyledButton
-                onClick={onDelete}
-                className="bg-red-500 !px-2 !py-1 !text-xs text-white hover:bg-red-600"
-                icon={deleteIcon}
-                shape="freeFloatCenter"
-              >
-                <span className="text-xs">
-                  {translate("worldManagement.delete", "Löschen")}
-                </span>
-              </StyledButton>
-            </>
+            <StyledButton
+              onClick={onDelete}
+              className="bg-red-500 !px-2 !py-1 !text-xs text-white hover:bg-red-600"
+              icon={deleteIcon}
+              shape="freeFloatCenter"
+            >
+              <span className="text-xs">
+                {translate("worldManagement.delete", "Löschen")}
+              </span>
+            </StyledButton>
           )}
         </div>
       )}
