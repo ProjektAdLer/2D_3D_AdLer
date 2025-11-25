@@ -42,22 +42,24 @@ export default class WorldManagerModalController
   }
 
   /**
-   * Closes the modal and reloads page if changes were made
+   * Closes the modal and signals page reload if changes were made
    */
   onCloseModal(): void {
     this.viewModel.showModal.Value = false;
 
-    // Reload page if worlds were imported or deleted to refresh entities
+    // Signal page reload if worlds were imported or deleted to refresh entities
+    // The View handles the actual reload
     if (this.hasChanges) {
       console.log(
-        "WorldManagerModalController: Reloading page to refresh world entities",
+        "WorldManagerModalController: Signaling page reload to refresh world entities",
       );
-      window.location.reload();
+      this.viewModel.shouldReloadPage.Value = true;
     }
   }
 
   /**
-   * Deletes a world after user confirmation
+   * Initiates delete confirmation by setting ViewModel state
+   * The View shows the confirmation dialog and calls confirmDelete/cancelDelete
    */
   async onDeleteWorld(worldID: number): Promise<void> {
     // Find world info for confirmation dialog
@@ -72,22 +74,34 @@ export default class WorldManagerModalController
 
     // Only allow deleting IndexedDB worlds
     if (world.source !== "indexeddb") {
-      alert("Vorinstallierte Lernwelten können nicht gelöscht werden.");
+      // Set error state - View handles display
+      this.viewModel.deleteError.Value = "preinstalled_cannot_delete";
       return;
     }
 
-    // Confirmation dialog
-    const confirmed = window.confirm(
-      `Möchten Sie die Lernwelt "${world.worldName}" wirklich löschen?\n\nDies wird ${world.sizeFormatted} Speicherplatz freigeben.`,
-    );
+    // Set confirmation state - View shows the dialog
+    this.viewModel.deleteConfirmation.Value = {
+      worldID: world.worldID,
+      worldName: world.worldName,
+      sizeFormatted: world.sizeFormatted,
+    };
+  }
 
-    if (!confirmed) {
-      return;
-    }
+  /**
+   * Called by View when user confirms deletion
+   */
+  async confirmDelete(): Promise<void> {
+    const confirmation = this.viewModel.deleteConfirmation.Value;
+    if (!confirmation) return;
+
+    // Clear confirmation dialog
+    this.viewModel.deleteConfirmation.Value = null;
 
     try {
       // Use Case handles deletion and notifies presenter via port
-      await this.deleteWorldUseCase.executeAsync({ worldID });
+      await this.deleteWorldUseCase.executeAsync({
+        worldID: confirmation.worldID,
+      });
 
       // Mark that changes were made
       this.hasChanges = true;
@@ -96,10 +110,24 @@ export default class WorldManagerModalController
       await this.getStorageInfoUseCase.executeAsync();
     } catch (error) {
       console.error("Failed to delete world:", error);
-      alert(
-        `Fehler beim Löschen der Lernwelt: ${error instanceof Error ? error.message : "Unbekannter Fehler"}`,
-      );
+      // Set error state - View handles display with i18n
+      this.viewModel.deleteError.Value =
+        error instanceof Error ? error.message : "unknown_error";
     }
+  }
+
+  /**
+   * Called by View when user cancels deletion
+   */
+  cancelDelete(): void {
+    this.viewModel.deleteConfirmation.Value = null;
+  }
+
+  /**
+   * Clears the delete error (called by View after displaying)
+   */
+  clearDeleteError(): void {
+    this.viewModel.deleteError.Value = null;
   }
 
   /**
@@ -110,7 +138,7 @@ export default class WorldManagerModalController
     this.viewModel.importError.Value = null;
     this.viewModel.importSuccess.Value = null;
     this.viewModel.importProgress.Value = 0;
-    this.viewModel.importStatus.Value = "Starte Import...";
+    this.viewModel.importStatus.Value = "import_starting";
 
     try {
       // Use Case handles import and notifies presenter via port
@@ -147,11 +175,12 @@ export default class WorldManagerModalController
   async onExportWorld(worldID: number): Promise<void> {
     this.viewModel.isExporting.Value = true;
     this.viewModel.exportProgress.Value = 0;
-    this.viewModel.exportStatus.Value = "Starte Export...";
+    this.viewModel.exportStatus.Value = "export_starting";
     this.viewModel.exportingWorldID.Value = worldID;
+    this.viewModel.exportError.Value = null;
 
     try {
-      // Use Case handles export and notifies presenter via port (which triggers download)
+      // Use Case handles export and notifies presenter via port (which sets pendingDownload)
       // Progress callback updates ViewModel in real-time
       await this.exportWorldUseCase.executeAsync({
         worldID,
@@ -176,10 +205,17 @@ export default class WorldManagerModalController
       this.viewModel.exportProgress.Value = 0;
       this.viewModel.exportStatus.Value = "";
       this.viewModel.exportingWorldID.Value = null;
-      alert(
-        `Fehler beim Exportieren der Lernwelt: ${error instanceof Error ? error.message : "Unbekannter Fehler"}`,
-      );
+      // Set error state - View handles display with i18n
+      this.viewModel.exportError.Value =
+        error instanceof Error ? error.message : "unknown_error";
     }
+  }
+
+  /**
+   * Clears the export error (called by View after displaying)
+   */
+  clearExportError(): void {
+    this.viewModel.exportError.Value = null;
   }
 
   /**
@@ -192,5 +228,12 @@ export default class WorldManagerModalController
       this.loadLocalWorldsListUseCase.executeAsync(),
       this.getStorageInfoUseCase.executeAsync(),
     ]);
+  }
+
+  /**
+   * Clears the pending download (called by View after download triggered)
+   */
+  clearPendingDownload(): void {
+    this.viewModel.pendingDownload.Value = null;
   }
 }

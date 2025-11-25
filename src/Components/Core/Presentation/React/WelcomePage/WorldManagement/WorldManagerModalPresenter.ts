@@ -57,22 +57,20 @@ export default class WorldManagerModalPresenter
 
   /**
    * Called by WorldManagementPort when a world is exported
+   * Sets pendingDownload in ViewModel - View handles the actual download
    */
   onWorldExported(worldID: number, fileData: Blob): void {
-    // Trigger download in browser
+    // Find world name for the file name
     const world = this.viewModel.worlds.Value.find(
       (w) => w.worldID === worldID,
     );
     const fileName = world ? `${world.worldName}.zip` : `world_${worldID}.zip`;
 
-    const url = URL.createObjectURL(fileData);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = fileName;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    // Set pending download state - View will trigger the actual download
+    this.viewModel.pendingDownload.Value = {
+      fileName,
+      fileData,
+    };
   }
 
   /**

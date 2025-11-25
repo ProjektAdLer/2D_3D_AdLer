@@ -33,6 +33,21 @@
     "deleteTooltip": "Delete learning world",
     "export": "Export",
     "exportTooltip": "Export learning world",
-    "importTooltip": "Import learning world (.mbz)"
+    "importTooltip": "Import learning world (.mbz)",
+    "importButton": "Import learning world (.mbz)",
+    "importing": "Importing...",
+    "importStarting": "Starting import...",
+    "importSuccess": "{{worldName}} imported successfully!",
+    "importFailed": "Import failed",
+    "exporting": "Exporting...",
+    "exportStarting": "Starting export...",
+    "exportFailed": "Export failed: {{error}}",
+    "dropZone": "Drop files here",
+    "cannotDeletePreinstalled": "Preinstalled learning worlds cannot be deleted.",
+    "deleteFailed": "Delete failed: {{error}}",
+    "deleteConfirmTitle": "Delete learning world?",
+    "deleteConfirmMessage": "Are you sure you want to delete the learning world \"{{worldName}}\"? This will free {{size}} of storage.",
+    "confirmDelete": "Yes, delete",
+    "cancelDelete": "Cancel"
   }
 }

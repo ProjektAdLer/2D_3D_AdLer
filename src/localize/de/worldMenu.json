@@ -33,6 +33,21 @@
     "deleteTooltip": "Lernwelt löschen",
     "export": "Exportieren",
     "exportTooltip": "Lernwelt exportieren",
-    "importTooltip": "Lernwelt importieren (.mbz)"
+    "importTooltip": "Lernwelt importieren (.mbz)",
+    "importButton": "Lernwelt importieren (.mbz)",
+    "importing": "Importiere...",
+    "importStarting": "Starte Import...",
+    "importSuccess": "{{worldName}} erfolgreich importiert!",
+    "importFailed": "Import fehlgeschlagen",
+    "exporting": "Exportiere...",
+    "exportStarting": "Starte Export...",
+    "exportFailed": "Export fehlgeschlagen: {{error}}",
+    "dropZone": "Dateien hier ablegen",
+    "cannotDeletePreinstalled": "Vorinstallierte Lernwelten können nicht gelöscht werden.",
+    "deleteFailed": "Fehler beim Löschen: {{error}}",
+    "deleteConfirmTitle": "Lernwelt löschen?",
+    "deleteConfirmMessage": "Möchten Sie die Lernwelt \"{{worldName}}\" wirklich löschen? Dies wird {{size}} Speicherplatz freigeben.",
+    "confirmDelete": "Ja, löschen",
+    "cancelDelete": "Abbrechen"
   }
 }
