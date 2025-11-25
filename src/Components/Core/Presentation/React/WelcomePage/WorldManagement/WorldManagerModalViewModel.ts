@@ -11,6 +11,10 @@ export interface WorldInfo {
   sizeInBytes: number;
   sizeFormatted: string;
   source: "indexeddb" | "public";
+  /** Timestamp when the world was imported (only for IndexedDB worlds) */
+  importedAt?: number;
+  /** Timestamp when the world was last updated (re-imported) */
+  updatedAt?: number;
 }
 
 /**
@@ -70,4 +74,12 @@ export default class WorldManagerModalViewModel {
 
   // Page reload flag - View handles the actual reload
   public shouldReloadPage = new Observable<boolean>(false);
+
+  // Publish mode (Dozentenmodus) states
+  public isPublishMode = new Observable<boolean>(false);
+  public selectedWorldIDs = new Observable<Set<number>>(new Set());
+  public isExportingPackage = new Observable<boolean>(false);
+  public packageExportProgress = new Observable<number>(0);
+  public packageExportStatus = new Observable<string>("");
+  public packageExportError = new Observable<string | null>(null);
 }
