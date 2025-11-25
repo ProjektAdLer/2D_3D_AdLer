@@ -10,7 +10,6 @@ import USECASE_TYPES from "../../../../DependencyInjection/UseCases/USECASE_TYPE
 import PORT_TYPES from "../../../../DependencyInjection/Ports/PORT_TYPES";
 import type IImportLearningWorldUseCase from "../../../../Application/UseCases/ImportLearningWorld/IImportLearningWorldUseCase";
 import type IDeleteLearningWorldUseCase from "../../../../Application/UseCases/DeleteLearningWorld/IDeleteLearningWorldUseCase";
-import type IExportLearningWorldUseCase from "../../../../Application/UseCases/ExportLearningWorld/IExportLearningWorldUseCase";
 import type IExportWorldPackageUseCase from "../../../../Application/UseCases/ExportWorldPackage/IExportWorldPackageUseCase";
 import type ILoadLocalWorldsListUseCase from "../../../../Application/UseCases/LoadLocalWorldsList/ILoadLocalWorldsListUseCase";
 import type IGetWorldsStorageInfoUseCase from "../../../../Application/UseCases/GetWorldsStorageInfo/IGetWorldsStorageInfoUseCase";
@@ -52,9 +51,6 @@ export default class WorldManagerModalBuilder extends PresentationBuilder<
     const deleteWorldUseCase = CoreDIContainer.get<IDeleteLearningWorldUseCase>(
       USECASE_TYPES.IDeleteLearningWorldUseCase,
     );
-    const exportWorldUseCase = CoreDIContainer.get<IExportLearningWorldUseCase>(
-      USECASE_TYPES.IExportLearningWorldUseCase,
-    );
     const exportWorldPackageUseCase =
       CoreDIContainer.get<IExportWorldPackageUseCase>(
         USECASE_TYPES.IExportWorldPackageUseCase,
@@ -73,7 +69,6 @@ export default class WorldManagerModalBuilder extends PresentationBuilder<
       this.viewModel,
       importWorldUseCase,
       deleteWorldUseCase,
-      exportWorldUseCase,
       exportWorldPackageUseCase,
       loadLocalWorldsListUseCase,
       getStorageInfoUseCase,

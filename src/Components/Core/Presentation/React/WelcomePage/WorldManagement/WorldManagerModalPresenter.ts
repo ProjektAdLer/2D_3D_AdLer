@@ -56,24 +56,6 @@ export default class WorldManagerModalPresenter
   }
 
   /**
-   * Called by WorldManagementPort when a world is exported
-   * Sets pendingDownload in ViewModel - View handles the actual download
-   */
-  onWorldExported(worldID: number, fileData: Blob): void {
-    // Find world name for the file name
-    const world = this.viewModel.worlds.Value.find(
-      (w) => w.worldID === worldID,
-    );
-    const fileName = world ? `${world.worldName}.zip` : `world_${worldID}.zip`;
-
-    // Set pending download state - View will trigger the actual download
-    this.viewModel.pendingDownload.Value = {
-      fileName,
-      fileData,
-    };
-  }
-
-  /**
    * Called by WorldManagementPort when a world package is exported
    * Sets pendingDownload with LearningWorlds.zip - View handles the actual download
    */

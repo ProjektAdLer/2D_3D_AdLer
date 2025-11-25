@@ -41,17 +41,6 @@ export default interface IWorldManagerModalController {
   onImportWorld(file: File): Promise<void>;
 
   /**
-   * Exports a world from IndexedDB as ZIP
-   * @param worldID The ID of the world to export
-   */
-  onExportWorld(worldID: number): Promise<void>;
-
-  /**
-   * Clears the export error state
-   */
-  clearExportError(): void;
-
-  /**
    * Refreshes the world list
    */
   onRefresh(): Promise<void>;

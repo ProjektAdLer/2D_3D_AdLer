@@ -3,7 +3,6 @@ import IWorldManagerModalController from "./IWorldManagerModalController";
 import WorldManagerModalViewModel from "./WorldManagerModalViewModel";
 import type IImportLearningWorldUseCase from "../../../../Application/UseCases/ImportLearningWorld/IImportLearningWorldUseCase";
 import type IDeleteLearningWorldUseCase from "../../../../Application/UseCases/DeleteLearningWorld/IDeleteLearningWorldUseCase";
-import type IExportLearningWorldUseCase from "../../../../Application/UseCases/ExportLearningWorld/IExportLearningWorldUseCase";
 import type IExportWorldPackageUseCase from "../../../../Application/UseCases/ExportWorldPackage/IExportWorldPackageUseCase";
 import type ILoadLocalWorldsListUseCase from "../../../../Application/UseCases/LoadLocalWorldsList/ILoadLocalWorldsListUseCase";
 import type IGetWorldsStorageInfoUseCase from "../../../../Application/UseCases/GetWorldsStorageInfo/IGetWorldsStorageInfoUseCase";
@@ -22,7 +21,6 @@ export default class WorldManagerModalController
     private viewModel: WorldManagerModalViewModel,
     private importWorldUseCase: IImportLearningWorldUseCase,
     private deleteWorldUseCase: IDeleteLearningWorldUseCase,
-    private exportWorldUseCase: IExportLearningWorldUseCase,
     private exportWorldPackageUseCase: IExportWorldPackageUseCase,
     private loadLocalWorldsListUseCase: ILoadLocalWorldsListUseCase,
     private getStorageInfoUseCase: IGetWorldsStorageInfoUseCase,
@@ -169,55 +167,6 @@ export default class WorldManagerModalController
       this.viewModel.importStatus.Value = "";
       // Error is already handled by Use Case and sent via port
     }
-  }
-
-  /**
-   * Exports a world as ZIP
-   */
-  async onExportWorld(worldID: number): Promise<void> {
-    this.viewModel.isExporting.Value = true;
-    this.viewModel.exportProgress.Value = 0;
-    this.viewModel.exportStatus.Value = "export_starting";
-    this.viewModel.exportingWorldID.Value = worldID;
-    this.viewModel.exportError.Value = null;
-
-    try {
-      // Use Case handles export and notifies presenter via port (which sets pendingDownload)
-      // Progress callback updates ViewModel in real-time
-      await this.exportWorldUseCase.executeAsync({
-        worldID,
-        onProgress: (current, total, status) => {
-          this.viewModel.exportProgress.Value = Math.round(
-            (current / total) * 100,
-          );
-          this.viewModel.exportStatus.Value = status;
-        },
-      });
-
-      // Reset export state after short delay to show completion
-      setTimeout(() => {
-        this.viewModel.isExporting.Value = false;
-        this.viewModel.exportProgress.Value = 0;
-        this.viewModel.exportStatus.Value = "";
-        this.viewModel.exportingWorldID.Value = null;
-      }, 1500);
-    } catch (error) {
-      console.error("Failed to export world:", error);
-      this.viewModel.isExporting.Value = false;
-      this.viewModel.exportProgress.Value = 0;
-      this.viewModel.exportStatus.Value = "";
-      this.viewModel.exportingWorldID.Value = null;
-      // Set error state - View handles display with i18n
-      this.viewModel.exportError.Value =
-        error instanceof Error ? error.message : "unknown_error";
-    }
-  }
-
-  /**
-   * Clears the export error (called by View after displaying)
-   */
-  clearExportError(): void {
-    this.viewModel.exportError.Value = null;
   }
 
   /**

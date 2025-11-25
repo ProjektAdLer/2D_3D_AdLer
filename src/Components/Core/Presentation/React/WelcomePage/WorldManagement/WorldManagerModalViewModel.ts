@@ -49,12 +49,6 @@ export default class WorldManagerModalViewModel {
     elementCount: number;
   } | null>(null);
 
-  // Export states
-  public isExporting = new Observable<boolean>(false);
-  public exportProgress = new Observable<number>(0); // 0-100
-  public exportStatus = new Observable<string>(""); // Status message during export
-  public exportingWorldID = new Observable<number | null>(null); // Track which world is being exported
-
   // Delete confirmation dialog state (managed by View, not browser alert)
   public deleteConfirmation = new Observable<{
     worldID: number;
@@ -64,7 +58,6 @@ export default class WorldManagerModalViewModel {
 
   // Error states for UI display (instead of browser alerts)
   public deleteError = new Observable<string | null>(null);
-  public exportError = new Observable<string | null>(null);
 
   // Download state - View handles the actual download trigger
   public pendingDownload = new Observable<{
