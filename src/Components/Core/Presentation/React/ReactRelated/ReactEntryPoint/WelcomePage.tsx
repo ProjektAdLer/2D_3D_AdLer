@@ -81,9 +81,9 @@ export default function WelcomePage() {
       {isFileBasedBackend && (
         <StyledButton
           shape="freeFloatCenter"
-          containerClassName="w-full h-full"
+          containerClassName=""
           onClick={() => worldManagerController?.onOpenModal()}
-          className="relative col-span-1 col-start-1 row-span-1 row-start-1 m-2 flex w-32 gap-2 2xl:w-44 mobile-portrait:w-24"
+          className="my-2 flex"
           title="Weltenverwaltung"
           data-testid="worldManagerButton"
         >
