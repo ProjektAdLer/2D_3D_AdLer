@@ -8,7 +8,6 @@ export default interface IWorldManagementPort
   extends IAbstractPort<IWorldManagementAdapter> {
   onWorldImported(result: WorldImportResultTO): void;
   onWorldDeleted(worldID: number): void;
-  onWorldExported(worldID: number, fileData: Blob): void;
   onWorldPackageExported(fileData: Blob): void;
   onStorageInfoLoaded(storageInfo: StorageInfoTO): void;
   onLocalWorldsListLoaded(worlds: LocalWorldInfoTO[]): void;
