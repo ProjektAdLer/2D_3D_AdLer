@@ -16,7 +16,7 @@ export function ImportSuccessMessage({ success }: ImportSuccessMessageProps) {
   const { t: translate } = useTranslation("worldMenu");
 
   return (
-    <div className="rounded bg-green-100 p-4">
+    <div className="rounded-lg bg-green-100 p-4">
       <p className="font-semibold text-green-800">
         ✓{" "}
         {translate("worldManagement.importSuccess", {
@@ -42,7 +42,7 @@ export function ImportErrorMessage({ error }: ErrorMessageProps) {
   const { t: translate } = useTranslation("worldMenu");
 
   return (
-    <div className="rounded bg-red-100 p-4">
+    <div className="rounded-lg bg-red-100 p-4">
       <p className="font-semibold text-red-800">
         ✗ {translate("worldManagement.importFailed", "Import fehlgeschlagen")}
       </p>
@@ -58,7 +58,7 @@ export function DeleteErrorMessage({ error }: ErrorMessageProps) {
   const { t: translate } = useTranslation("worldMenu");
 
   return (
-    <div className="rounded bg-red-100 p-4">
+    <div className="rounded-lg bg-red-100 p-4">
       <p className="font-semibold text-red-800">
         ✗{" "}
         {error === "preinstalled_cannot_delete"
@@ -81,7 +81,7 @@ export function ExportErrorMessage({ error }: ErrorMessageProps) {
   const { t: translate } = useTranslation("worldMenu");
 
   return (
-    <div className="rounded bg-red-100 p-4">
+    <div className="rounded-lg bg-red-100 p-4">
       <p className="font-semibold text-red-800">
         ✗{" "}
         {translate("worldManagement.exportFailed", {

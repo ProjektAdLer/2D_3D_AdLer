@@ -16,7 +16,7 @@ export default function ImportProgress({
   const { t: translate } = useTranslation("worldMenu");
 
   return (
-    <div className="rounded bg-blue-50 p-4">
+    <div className="rounded-lg bg-blue-50 p-4">
       <div className="mb-2 flex items-center justify-between">
         <span className="text-sm font-semibold text-adlerblue">
           {status === "import_starting"

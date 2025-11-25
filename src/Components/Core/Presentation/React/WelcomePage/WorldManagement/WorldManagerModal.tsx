@@ -20,6 +20,7 @@ import {
   ImportErrorMessage,
   DeleteErrorMessage,
   ExportErrorMessage,
+  DeleteProgress,
 } from "./Components";
 
 export interface WorldManagerModalProps {
@@ -57,6 +58,8 @@ export default function WorldManagerModal({
   const [importSuccess] = useObservable(viewModel.importSuccess);
   const [deleteConfirmation] = useObservable(viewModel.deleteConfirmation);
   const [deleteError] = useObservable(viewModel.deleteError);
+  const [isDeleting] = useObservable(viewModel.isDeleting);
+  const [deleteStatus] = useObservable(viewModel.deleteStatus);
   const [pendingDownload] = useObservable(viewModel.pendingDownload);
   const [shouldReloadPage] = useObservable(viewModel.shouldReloadPage);
 
@@ -197,6 +200,17 @@ export default function WorldManagerModal({
     };
   }, [showModal, controller]);
 
+  // Check if any status/dialog content should be shown
+  const hasStatusContent =
+    importSuccess ||
+    importError ||
+    deleteError ||
+    packageExportError ||
+    deleteConfirmation ||
+    isExportingPackage ||
+    isImporting ||
+    isDeleting;
+
   return (
     <>
       {/* Hidden file input */}
@@ -214,25 +228,7 @@ export default function WorldManagerModal({
         title={String(translate("worldManagement.title", "Weltenverwaltung"))}
         canClose={true}
       >
-        <div className="flex w-full min-w-[800px] max-w-[1200px] flex-col gap-4">
-          {/* Status Messages */}
-          {importSuccess && <ImportSuccessMessage success={importSuccess} />}
-          {importError && <ImportErrorMessage error={importError} />}
-          {deleteError && <DeleteErrorMessage error={deleteError} />}
-          {packageExportError && (
-            <ExportErrorMessage error={packageExportError} />
-          )}
-
-          {/* Delete Confirmation Dialog */}
-          {deleteConfirmation && (
-            <DeleteConfirmation
-              worldName={deleteConfirmation.worldName}
-              sizeFormatted={deleteConfirmation.sizeFormatted}
-              onConfirm={() => controller.confirmDelete()}
-              onCancel={() => controller.cancelDelete()}
-            />
-          )}
-
+        <div className="flex w-full min-w-[800px] max-w-[1200px] flex-col gap-4 p-4">
           {/* Import Button with Drop Zone */}
           <div className={tailwindMerge("flex")}>
             <StyledButton
@@ -250,7 +246,7 @@ export default function WorldManagerModal({
                   )}
             </StyledButton>
             <label
-              className="ml-4 flex-auto content-center border-2 border-dashed border-adlerdarkblue text-center text-gray-500"
+              className="ml-4 flex-auto content-center rounded-lg border-2 border-dashed border-adlerdarkblue text-center text-gray-500"
               id="drop-zone"
               onClick={(event) => {
                 event.preventDefault();
@@ -260,8 +256,8 @@ export default function WorldManagerModal({
             </label>
           </div>
 
-          {/* Publish Mode Toggle */}
-          <div className="flex items-center justify-between rounded bg-gray-50 p-3">
+          {/* Publish Mode Toggle - transparent background */}
+          <div className="flex items-center justify-between py-2">
             <label className="flex cursor-pointer items-center gap-3">
               <input
                 type="checkbox"
@@ -316,22 +312,6 @@ export default function WorldManagerModal({
             )}
           </div>
 
-          {/* Package Export Progress */}
-          {isExportingPackage && (
-            <ExportProgress
-              progress={packageExportProgress || 0}
-              status={packageExportStatus}
-            />
-          )}
-
-          {/* Progress Indicators */}
-          {isImporting && (
-            <ImportProgress
-              progress={importProgress || 0}
-              status={importStatus}
-            />
-          )}
-
           {/* Loading State */}
           {safeLoading && (
             <div className="flex items-center justify-center py-8">
@@ -367,6 +347,79 @@ export default function WorldManagerModal({
               ))}
             </div>
           )}
+
+          {/* Status/Dialog Area - Expands when content exists, with fade animations */}
+          <div
+            className={tailwindMerge(
+              "overflow-hidden transition-all duration-300 ease-in-out",
+              hasStatusContent
+                ? "max-h-[500px] opacity-100"
+                : "max-h-0 opacity-0",
+            )}
+          >
+            <div className="space-y-3">
+              {/* Status Messages with fade animation */}
+              {importSuccess && (
+                <div className="animate-fadeIn">
+                  <ImportSuccessMessage success={importSuccess} />
+                </div>
+              )}
+              {importError && (
+                <div className="animate-fadeIn">
+                  <ImportErrorMessage error={importError} />
+                </div>
+              )}
+              {deleteError && (
+                <div className="animate-fadeIn">
+                  <DeleteErrorMessage error={deleteError} />
+                </div>
+              )}
+              {packageExportError && (
+                <div className="animate-fadeIn">
+                  <ExportErrorMessage error={packageExportError} />
+                </div>
+              )}
+
+              {/* Delete Confirmation Dialog with fade animation */}
+              {deleteConfirmation && (
+                <div className="animate-fadeIn">
+                  <DeleteConfirmation
+                    worldName={deleteConfirmation.worldName}
+                    sizeFormatted={deleteConfirmation.sizeFormatted}
+                    onConfirm={() => controller.confirmDelete()}
+                    onCancel={() => controller.cancelDelete()}
+                  />
+                </div>
+              )}
+
+              {/* Delete Progress with fade animation */}
+              {isDeleting && (
+                <div className="animate-fadeIn">
+                  <DeleteProgress status={deleteStatus} />
+                </div>
+              )}
+
+              {/* Package Export Progress with fade animation */}
+              {isExportingPackage && (
+                <div className="animate-fadeIn">
+                  <ExportProgress
+                    progress={packageExportProgress || 0}
+                    status={packageExportStatus}
+                  />
+                </div>
+              )}
+
+              {/* Import Progress with fade animation */}
+              {isImporting && (
+                <div className="animate-fadeIn">
+                  <ImportProgress
+                    progress={importProgress || 0}
+                    status={importStatus}
+                  />
+                </div>
+              )}
+            </div>
+          </div>
 
           {/* Storage Information */}
           {storageInfo && (

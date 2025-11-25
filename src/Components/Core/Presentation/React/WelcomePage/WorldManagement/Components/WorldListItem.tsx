@@ -48,7 +48,7 @@ export default function WorldListItem({
   const displayDate = updateDate || importDate;
 
   return (
-    <div className="flex items-center justify-between rounded border border-gray-200 bg-white p-3 shadow-sm transition hover:shadow-md">
+    <div className="flex items-center justify-between rounded-xl border border-gray-200 bg-white p-3 shadow-sm transition hover:shadow-md">
       {/* Checkbox for publish mode */}
       {isPublishMode && (
         <div className="mr-3 flex items-center">

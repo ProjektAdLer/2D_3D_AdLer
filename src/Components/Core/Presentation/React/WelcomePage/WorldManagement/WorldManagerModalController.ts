@@ -94,8 +94,10 @@ export default class WorldManagerModalController
     const confirmation = this.viewModel.deleteConfirmation.Value;
     if (!confirmation) return;
 
-    // Clear confirmation dialog
+    // Clear confirmation dialog and start delete progress
     this.viewModel.deleteConfirmation.Value = null;
+    this.viewModel.isDeleting.Value = true;
+    this.viewModel.deleteStatus.Value = "deleting";
 
     try {
       // Use Case handles deletion and notifies presenter via port
@@ -106,11 +108,22 @@ export default class WorldManagerModalController
       // Mark that changes were made
       this.hasChanges = true;
 
+      // Show completion status briefly
+      this.viewModel.deleteStatus.Value = "delete_complete";
+
       // Reload storage info after deletion
       await this.getStorageInfoUseCase.executeAsync();
+
+      // Clear delete progress after a short delay
+      setTimeout(() => {
+        this.viewModel.isDeleting.Value = false;
+        this.viewModel.deleteStatus.Value = "";
+      }, 1000);
     } catch (error) {
       console.error("Failed to delete world:", error);
       // Set error state - View handles display with i18n
+      this.viewModel.isDeleting.Value = false;
+      this.viewModel.deleteStatus.Value = "";
       this.viewModel.deleteError.Value =
         error instanceof Error ? error.message : "unknown_error";
     }

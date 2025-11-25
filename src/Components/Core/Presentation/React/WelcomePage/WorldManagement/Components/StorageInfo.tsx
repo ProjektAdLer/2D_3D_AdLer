@@ -18,7 +18,7 @@ export default function StorageInfo({
   const { t: translate } = useTranslation("worldMenu");
 
   return (
-    <div className="bg-adlerbgbright rounded p-4">
+    <div className="pt-4">
       <div className="mb-2 flex items-center justify-between">
         <span className="text-sm font-semibold">
           {translate("worldManagement.storage", "Speicher")}

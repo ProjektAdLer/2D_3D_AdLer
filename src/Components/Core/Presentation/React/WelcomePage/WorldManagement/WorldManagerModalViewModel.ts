@@ -59,6 +59,10 @@ export default class WorldManagerModalViewModel {
   // Error states for UI display (instead of browser alerts)
   public deleteError = new Observable<string | null>(null);
 
+  // Delete progress states (for indeterminate progress during deletion)
+  public isDeleting = new Observable<boolean>(false);
+  public deleteStatus = new Observable<string>("");
+
   // Download state - View handles the actual download trigger
   public pendingDownload = new Observable<{
     fileName: string;

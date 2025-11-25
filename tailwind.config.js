@@ -192,6 +192,18 @@ module.exports = {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-200%)" },
         },
+        indeterminate: {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(400%)" },
+        },
+        fadeIn: {
+          "0%": { opacity: "0", transform: "translateY(-8px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        fadeOut: {
+          "0%": { opacity: "1", transform: "translateY(0)" },
+          "100%": { opacity: "0", transform: "translateY(-8px)" },
+        },
       },
       animation: {
         loadtileone: "bluetogoldone 8s ease-in-out 0s infinite",
@@ -202,11 +214,13 @@ module.exports = {
         loadtilesix: "bluetogoldsix 8s ease-in-out 0s infinite",
         loadtileseven: "bluetogoldseven 8s ease-in-out 0s infinite",
         loadtileeight: "bluetogoldeight 8s ease-in-out 0s infinite",
-        loadtilenine: "bluetogoldnine 8s ease-in-out 0s infinite",
         loadtileten: "bluetogoldten 8s ease-in-out 0s infinite",
         wiggle: "wiggle 2s ease-in-out infinite",
         buttonTransition: "buttonTransition 0.5s linear 4",
         marquee: "marquee 2s linear 1",
+        indeterminate: "indeterminate 1.5s ease-in-out infinite",
+        fadeIn: "fadeIn 0.2s ease-out forwards",
+        fadeOut: "fadeOut 0.2s ease-in forwards",
       },
       colors: {
         babylonbg: "#33334d", //Babylon Default Hintergrundfarbe

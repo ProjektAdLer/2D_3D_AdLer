@@ -16,7 +16,7 @@ export default function ExportProgress({
   const { t: translate } = useTranslation("worldMenu");
 
   return (
-    <div className="rounded bg-green-50 p-4">
+    <div className="rounded-lg bg-green-50 p-4">
       <div className="mb-2 flex items-center justify-between">
         <span className="text-sm font-semibold text-green-700">
           {status === "export_starting"

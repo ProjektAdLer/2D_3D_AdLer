@@ -21,7 +21,7 @@ export default function DeleteConfirmation({
   const { t: translate } = useTranslation("worldMenu");
 
   return (
-    <div className="rounded border-2 border-red-300 bg-red-50 p-4">
+    <div className="rounded-lg border-2 border-red-300 bg-red-50 p-4">
       <p className="mb-3 font-semibold text-red-800">
         {translate("worldManagement.deleteConfirmTitle", "Lernwelt löschen?")}
       </p>

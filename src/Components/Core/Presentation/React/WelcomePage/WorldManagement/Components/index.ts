@@ -18,6 +18,9 @@ export type { DeleteConfirmationProps } from "./DeleteConfirmation";
 export { default as StorageInfo } from "./StorageInfo";
 export type { StorageInfoProps } from "./StorageInfo";
 
+export { default as DeleteProgress } from "./DeleteProgress";
+export type { DeleteProgressProps } from "./DeleteProgress";
+
 export {
   ImportSuccessMessage,
   ImportErrorMessage,
