@@ -92,6 +92,8 @@ import IDeleteLearningWorldUseCase from "../../Application/UseCases/DeleteLearni
 import DeleteLearningWorldUseCase from "../../Application/UseCases/DeleteLearningWorld/DeleteLearningWorldUseCase";
 import IExportLearningWorldUseCase from "../../Application/UseCases/ExportLearningWorld/IExportLearningWorldUseCase";
 import ExportLearningWorldUseCase from "../../Application/UseCases/ExportLearningWorld/ExportLearningWorldUseCase";
+import IExportWorldPackageUseCase from "../../Application/UseCases/ExportWorldPackage/IExportWorldPackageUseCase";
+import ExportWorldPackageUseCase from "../../Application/UseCases/ExportWorldPackage/ExportWorldPackageUseCase";
 import ILoadLocalWorldsListUseCase from "../../Application/UseCases/LoadLocalWorldsList/ILoadLocalWorldsListUseCase";
 import LoadLocalWorldsListUseCase from "../../Application/UseCases/LoadLocalWorldsList/LoadLocalWorldsListUseCase";
 import IGetWorldsStorageInfoUseCase from "../../Application/UseCases/GetWorldsStorageInfo/IGetWorldsStorageInfoUseCase";
@@ -329,6 +331,10 @@ const UseCaseDIContainer = new ContainerModule((bind) => {
 
   bind<IExportLearningWorldUseCase>(USECASE_TYPES.IExportLearningWorldUseCase)
     .to(ExportLearningWorldUseCase)
+    .inSingletonScope();
+
+  bind<IExportWorldPackageUseCase>(USECASE_TYPES.IExportWorldPackageUseCase)
+    .to(ExportWorldPackageUseCase)
     .inSingletonScope();
 
   bind<ILoadLocalWorldsListUseCase>(USECASE_TYPES.ILoadLocalWorldsListUseCase)

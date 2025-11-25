@@ -41,6 +41,15 @@ export default class WorldManagementPort
     });
   }
 
+  public onWorldPackageExported(fileData: Blob): void {
+    this.mappedAdapters.forEach((adapter) => {
+      adapter.forEach((value) => {
+        if (value.onWorldPackageExported)
+          value.onWorldPackageExported(fileData);
+      });
+    });
+  }
+
   public onStorageInfoLoaded(storageInfo: StorageInfoTO): void {
     this.mappedAdapters.forEach((adapter) => {
       adapter.forEach((value) => {
