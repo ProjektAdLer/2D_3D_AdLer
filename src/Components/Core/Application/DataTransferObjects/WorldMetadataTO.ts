@@ -9,5 +9,6 @@ export default class WorldMetadataTO {
     public worldFolder: string,
     public importTimestamp: number,
     public elementCount?: number,
+    public updatedTimestamp?: number,
   ) {}
 }

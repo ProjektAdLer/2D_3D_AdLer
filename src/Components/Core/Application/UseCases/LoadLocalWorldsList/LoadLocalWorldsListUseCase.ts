@@ -48,6 +48,7 @@ export default class LoadLocalWorldsListUseCase
             sizeInBytes,
             "indexeddb",
             world.importTimestamp,
+            world.updatedTimestamp,
           ),
         );
       }

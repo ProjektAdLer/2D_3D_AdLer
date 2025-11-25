@@ -7,5 +7,6 @@ export default class LocalWorldInfoTO {
     public sizeInBytes: number,
     public source: "indexeddb" | "public",
     public importTimestamp: number,
+    public updatedTimestamp?: number,
   ) {}
 }
