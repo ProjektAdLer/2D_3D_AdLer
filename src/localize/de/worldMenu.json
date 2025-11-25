@@ -31,8 +31,6 @@
     "elements": "Elemente",
     "delete": "Löschen",
     "deleteTooltip": "Lernwelt löschen",
-    "export": "Exportieren",
-    "exportTooltip": "Lernwelt exportieren",
     "importTooltip": "Lernwelt importieren (.mbz)",
     "importButton": "Lernwelt importieren (.mbz)",
     "importing": "Importiere...",
