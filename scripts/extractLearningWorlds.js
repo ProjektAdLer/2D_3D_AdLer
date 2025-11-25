@@ -399,6 +399,9 @@ async function processMBZ(mbzPath, skipExisting = true) {
   removeDir(tempExtractDir);
   log("✓ Temporäre Dateien gelöscht", "green");
 
+  // Manifest generieren (für Browser-Export)
+  generateWorldManifest(worldDir, worldName);
+
   log(`\n${"✓".repeat(30)} FERTIG ${"✓".repeat(30)}`, "green");
   log(`Lernwelt verfügbar unter: LearningWorlds/${worldName}/\n`, "cyan");
 
@@ -408,6 +411,61 @@ async function processMBZ(mbzPath, skipExisting = true) {
     elementCount: successCount,
     skipped: false,
   };
+}
+
+/**
+ * Sammelt alle Dateien eines Verzeichnisses rekursiv
+ * @param {string} dir - Verzeichnis zum Durchsuchen
+ * @param {string} basePath - Basispfad für relative Pfade
+ * @returns {string[]} - Liste der relativen Dateipfade
+ */
+function collectFilesRecursively(dir, basePath = "") {
+  const files = [];
+
+  if (!fs.existsSync(dir)) return files;
+
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+
+  for (const entry of entries) {
+    const relativePath = basePath ? `${basePath}/${entry.name}` : entry.name;
+
+    if (entry.isDirectory()) {
+      // Rekursiv in Unterverzeichnisse
+      files.push(
+        ...collectFilesRecursively(path.join(dir, entry.name), relativePath),
+      );
+    } else if (entry.isFile()) {
+      files.push(relativePath);
+    }
+  }
+
+  return files;
+}
+
+/**
+ * Generiert manifest.json für eine Welt (Liste aller Dateien)
+ * Wird für den Export von Public-Welten im Browser benötigt
+ */
+function generateWorldManifest(worldDir, worldName) {
+  const manifestPath = path.join(worldDir, "manifest.json");
+
+  log(`\n7. Generiere manifest.json...`, "blue");
+
+  // Alle Dateien im Weltverzeichnis sammeln
+  const allFiles = collectFilesRecursively(worldDir);
+
+  // Manifest erstellen
+  const manifest = {
+    worldName,
+    generatedAt: new Date().toISOString(),
+    fileCount: allFiles.length,
+    files: allFiles.sort(), // Sortiert für bessere Lesbarkeit
+  };
+
+  fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2), "utf-8");
+  log(`✓ manifest.json generiert (${allFiles.length} Dateien)`, "green");
+
+  return manifest;
 }
 
 /**
