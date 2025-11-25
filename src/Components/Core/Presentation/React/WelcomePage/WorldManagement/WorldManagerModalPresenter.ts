@@ -74,6 +74,25 @@ export default class WorldManagerModalPresenter
   }
 
   /**
+   * Called by WorldManagementPort when a world package is exported
+   * Sets pendingDownload with LearningWorlds.zip - View handles the actual download
+   */
+  onWorldPackageExported(fileData: Blob): void {
+    // Set pending download state for the package export
+    this.viewModel.pendingDownload.Value = {
+      fileName: "LearningWorlds.zip",
+      fileData,
+    };
+
+    // Reset export states after short delay
+    setTimeout(() => {
+      this.viewModel.isExportingPackage.Value = false;
+      this.viewModel.packageExportProgress.Value = 0;
+      this.viewModel.packageExportStatus.Value = "";
+    }, 1500);
+  }
+
+  /**
    * Called by WorldManagementPort when storage info is loaded
    */
   onStorageInfoLoaded(storageInfo: StorageInfoTO): void {
@@ -102,6 +121,8 @@ export default class WorldManagerModalPresenter
       sizeFormatted:
         world.source === "public" ? "N/A" : formatBytes(world.sizeInBytes),
       source: world.source,
+      importedAt: world.importTimestamp || undefined,
+      updatedAt: world.updatedTimestamp || undefined,
     }));
 
     this.viewModel.worlds.Value = worldInfos;

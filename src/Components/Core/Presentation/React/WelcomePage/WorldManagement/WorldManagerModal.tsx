@@ -6,6 +6,7 @@ import StyledButton from "../../ReactRelated/ReactBaseComponents/StyledButton";
 import WorldManagerModalViewModel from "./WorldManagerModalViewModel";
 import type IWorldManagerModalController from "./IWorldManagerModalController";
 import plusIcon from "../../../../../../Assets/icons/plus.svg";
+import exportIcon from "../../../../../../Assets/icons/log-export.svg";
 import tailwindMerge from "../../../Utils/TailwindMerge";
 
 // Import sub-components
@@ -63,8 +64,19 @@ export default function WorldManagerModal({
   const [pendingDownload] = useObservable(viewModel.pendingDownload);
   const [shouldReloadPage] = useObservable(viewModel.shouldReloadPage);
 
+  // Publish mode states
+  const [isPublishMode] = useObservable(viewModel.isPublishMode);
+  const [selectedWorldIDs] = useObservable(viewModel.selectedWorldIDs);
+  const [isExportingPackage] = useObservable(viewModel.isExportingPackage);
+  const [packageExportProgress] = useObservable(
+    viewModel.packageExportProgress,
+  );
+  const [packageExportStatus] = useObservable(viewModel.packageExportStatus);
+  const [packageExportError] = useObservable(viewModel.packageExportError);
+
   const safeWorlds = worlds || [];
   const safeLoading = loading || false;
+  const safeSelectedIDs = selectedWorldIDs || new Set<number>();
 
   // Handle page reload when signaled by controller
   useEffect(() => {
@@ -105,6 +117,17 @@ export default function WorldManagerModal({
     }
     return undefined;
   }, [exportError, controller]);
+
+  useEffect(() => {
+    if (packageExportError) {
+      const timer = setTimeout(
+        () => controller.clearPackageExportError(),
+        5000,
+      );
+      return () => clearTimeout(timer);
+    }
+    return undefined;
+  }, [packageExportError, controller]);
 
   // File input handler
   const handleImportClick = () => {
@@ -209,6 +232,9 @@ export default function WorldManagerModal({
           {importError && <ImportErrorMessage error={importError} />}
           {deleteError && <DeleteErrorMessage error={deleteError} />}
           {exportError && <ExportErrorMessage error={exportError} />}
+          {packageExportError && (
+            <ExportErrorMessage error={packageExportError} />
+          )}
 
           {/* Delete Confirmation Dialog */}
           {deleteConfirmation && (
@@ -246,6 +272,70 @@ export default function WorldManagerModal({
               {translate("worldManagement.dropZone", "Dateien hier ablegen")}
             </label>
           </div>
+
+          {/* Publish Mode Toggle */}
+          <div className="flex items-center justify-between rounded bg-gray-50 p-3">
+            <label className="flex cursor-pointer items-center gap-3">
+              <input
+                type="checkbox"
+                checked={isPublishMode}
+                onChange={() => controller.togglePublishMode()}
+                className="h-5 w-5 cursor-pointer rounded border-gray-300 text-adlerblue focus:ring-adlerblue"
+              />
+              <span className="font-medium text-gray-700">
+                {translate(
+                  "worldManagement.publishMode",
+                  "Veröffentlichungsmodus (Dozenten)",
+                )}
+              </span>
+            </label>
+
+            {/* Publish Mode Controls */}
+            {isPublishMode && (
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-gray-500">
+                  {safeSelectedIDs.size} / {safeWorlds.length}{" "}
+                  {translate("worldManagement.selected", "ausgewählt")}
+                </span>
+                <StyledButton
+                  onClick={() => controller.selectAllWorlds()}
+                  className="!px-2 !py-1 !text-xs"
+                  shape="freeFloatCenter"
+                >
+                  {translate("worldManagement.selectAll", "Alle")}
+                </StyledButton>
+                <StyledButton
+                  onClick={() => controller.deselectAllWorlds()}
+                  className="!px-2 !py-1 !text-xs"
+                  shape="freeFloatCenter"
+                >
+                  {translate("worldManagement.deselectAll", "Keine")}
+                </StyledButton>
+                <StyledButton
+                  onClick={() => controller.exportSelectedWorldsPackage()}
+                  disabled={safeSelectedIDs.size === 0 || isExportingPackage}
+                  className="bg-adlerblue !px-3 !py-1 text-white hover:bg-adlerdarkblue disabled:opacity-50"
+                  icon={exportIcon}
+                  shape="freeFloatCenter"
+                >
+                  {isExportingPackage
+                    ? translate("worldManagement.exporting", "Exportiere...")
+                    : translate(
+                        "worldManagement.exportPackage",
+                        "Paket exportieren",
+                      )}
+                </StyledButton>
+              </div>
+            )}
+          </div>
+
+          {/* Package Export Progress */}
+          {isExportingPackage && (
+            <ExportProgress
+              progress={packageExportProgress || 0}
+              status={packageExportStatus}
+            />
+          )}
 
           {/* Progress Indicators */}
           {isImporting && (
@@ -288,6 +378,11 @@ export default function WorldManagerModal({
                   world={world}
                   onDelete={() => controller.onDeleteWorld(world.worldID)}
                   onExport={() => controller.onExportWorld(world.worldID)}
+                  isPublishMode={isPublishMode}
+                  isSelected={safeSelectedIDs.has(world.worldID)}
+                  onToggleSelect={() =>
+                    controller.toggleWorldSelection(world.worldID)
+                  }
                 />
               ))}
             </div>
