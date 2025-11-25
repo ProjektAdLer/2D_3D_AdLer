@@ -154,6 +154,26 @@ async function main() {
     // Add .nojekyll file for GitHub Pages
     fs.writeFileSync(path.join(tempDir, ".nojekyll"), "");
 
+    // Remove .gitignore files from subdirectories that would prevent LearningWorlds from being committed
+    log("🗑️", "Removing .gitignore files from subdirectories...", colors.cyan);
+    const removeGitignoreRecursively = (dir) => {
+      const entries = fs.readdirSync(dir, { withFileTypes: true });
+      for (const entry of entries) {
+        const fullPath = path.join(dir, entry.name);
+        if (entry.isDirectory() && entry.name !== ".git") {
+          // Check for .gitignore in this directory and remove it
+          const gitignorePath = path.join(fullPath, ".gitignore");
+          if (fs.existsSync(gitignorePath)) {
+            fs.unlinkSync(gitignorePath);
+            log("✅", `Removed: ${gitignorePath}`, colors.green);
+          }
+          // Recurse into subdirectories
+          removeGitignoreRecursively(fullPath);
+        }
+      }
+    };
+    removeGitignoreRecursively(tempDir);
+
     // Add CNAME file for custom domain
     log("📝", "Creating CNAME file for custom domain...", colors.cyan);
     fs.writeFileSync(path.join(tempDir, "CNAME"), CUSTOM_DOMAIN);
