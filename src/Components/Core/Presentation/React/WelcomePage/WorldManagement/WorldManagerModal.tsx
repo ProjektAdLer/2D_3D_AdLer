@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import useObservable from "../../ReactRelated/CustomHooks/useObservable";
 import StyledModal from "../../ReactRelated/ReactBaseComponents/StyledModal";
@@ -10,6 +10,7 @@ import type IWorldManagerModalController from "./IWorldManagerModalController";
 import plusIcon from "../../../../../../Assets/icons/plus.svg";
 import exportIcon from "../../../../../../Assets/icons/log-export.svg";
 import deleteIcon from "../../../../../../Assets/icons/close.svg";
+import tailwindMerge from "../../../Utils/TailwindMerge";
 
 export interface WorldManagerModalProps {
   viewModel: WorldManagerModalViewModel;
@@ -58,6 +59,70 @@ export default function WorldManagerModal({
     }
   };
 
+  useEffect(() => {
+    const dropZone = document.getElementById("drop-zone");
+
+    const dropHandler = async (e: DragEvent) => {
+      if (!e.dataTransfer) return;
+      if ([...e.dataTransfer.items].some((item) => item.kind === "file")) {
+        e.preventDefault();
+      }
+      let file = e.dataTransfer.files?.[0];
+      if (file && file.name.endsWith(".mbz")) {
+        await controller.onImportWorld(file);
+      }
+    };
+
+    const dragOverHandler = (e: DragEvent) => {
+      if (!e.dataTransfer) return;
+
+      for (const item of e.dataTransfer.items) {
+        e.preventDefault();
+        if (
+          item.kind === "file" &&
+          (item.type.includes("mbz") || item.type === "")
+        ) {
+          e.dataTransfer.dropEffect = "copy";
+        } else {
+          e.dataTransfer.dropEffect = "none";
+        }
+      }
+    };
+
+    const preventDefaultDrops = (e: DragEvent) => {
+      if (!e.dataTransfer) return;
+      if ([...e.dataTransfer.items].some((item) => item.kind === "file")) {
+        e.preventDefault();
+      }
+    };
+
+    // cancels dragover event to enable drop event to occur
+    const dragOverHandlerWindow = (e: DragEvent) => {
+      if (!e.dataTransfer) return;
+      const fileItems = [...e.dataTransfer.items].filter(
+        (item) => item.kind === "file",
+      );
+      if (fileItems.length > 0) {
+        e.preventDefault();
+        if (e.target instanceof Node && !dropZone?.contains(e.target)) {
+          e.dataTransfer.dropEffect = "none";
+        }
+      }
+    };
+
+    dropZone?.addEventListener("dragover", dragOverHandler);
+    dropZone?.addEventListener("drop", dropHandler);
+    window.addEventListener("dragover", dragOverHandlerWindow);
+    window.addEventListener("drop", preventDefaultDrops);
+
+    return () => {
+      window.removeEventListener("drop", preventDefaultDrops);
+      window.removeEventListener("dragover", dragOverHandlerWindow);
+      dropZone?.removeEventListener("drop", dropHandler);
+      dropZone?.removeEventListener("dragover", dragOverHandler);
+    };
+  }, [showModal, controller]);
+
   return (
     <>
       {/* Hidden file input */}
@@ -99,7 +164,7 @@ export default function WorldManagerModal({
           )}
 
           {/* Import Button */}
-          <div>
+          <div className={tailwindMerge("flex")}>
             <StyledButton
               onClick={handleImportClick}
               disabled={isImporting}
@@ -109,6 +174,15 @@ export default function WorldManagerModal({
             >
               {isImporting ? "Importiere..." : "Lernwelt importieren (.mbz)"}
             </StyledButton>
+            <label
+              className="ml-4 flex-auto content-center border-2 border-dashed border-adlerdarkblue text-center text-gray-500"
+              id="drop-zone"
+              onClick={(event) => {
+                event.preventDefault();
+              }}
+            >
+              Drop files here, please
+            </label>
           </div>
 
           {/* Import Progress */}
