@@ -7,7 +7,6 @@ import learningEngineStringImage from "../../../../../../Assets/graphics/learnin
 import avatarEditorStringImage from "../../../../../../Assets/graphics/avatar-editor.png";
 import settingsIcon from "../../../../../../Assets/icons/settings.svg";
 import privacyIcon from "../../../../../../Assets/icons/locked.svg";
-import worldManagementIcon from "../../../../../../Assets/icons/world.svg";
 import avatarButtonBackground from "../../../../../../Assets/misc/WelcomeScreenButtonBackgrounds/AvatarEditorButtonBackground.jpg";
 import learningWorldMenuButtonBackground from "../../../../../../Assets/misc/WelcomeScreenButtonBackgrounds/LearningWorldButtonBackground.jpg";
 import HelpDeskButton from "~ReactComponents/GeneralComponents/HelpDeskButton/HelpDeskButton";
@@ -27,6 +26,7 @@ import StyledButton from "../ReactBaseComponents/StyledButton";
 import history from "history/browser";
 import CookieModal from "~ReactComponents/WelcomePage/CookieModal/CookieModal";
 import WorldManagerModal from "~ReactComponents/WelcomePage/WorldManagement/WorldManagerModal";
+import WorldManagementButton from "~ReactComponents/WelcomePage/WorldManagement/WorldManagementButton";
 import WorldManagerModalViewModel from "~ReactComponents/WelcomePage/WorldManagement/WorldManagerModalViewModel";
 import type IWorldManagerModalController from "~ReactComponents/WelcomePage/WorldManagement/IWorldManagerModalController";
 import useBuilder from "../CustomHooks/useBuilder";
@@ -78,24 +78,8 @@ export default function WelcomePage() {
       />
 
       {/* WorldManager Button - Top Left (file-based backend only) */}
-      {isFileBasedBackend && (
-        <StyledButton
-          shape="freeFloatCenter"
-          containerClassName=""
-          onClick={() => worldManagerController?.onOpenModal()}
-          className="my-2 flex"
-          title="Weltenverwaltung"
-          data-testid="worldManagerButton"
-        >
-          <img
-            className="w-8 lg:w-12 onek:w-14"
-            src={worldManagementIcon}
-            alt="icon"
-          />
-          <p className="text-2xs font-bold xl:text-sm 2xl:pl-2 2xl:text-lg">
-            {translate("worldManagerButton")}
-          </p>
-        </StyledButton>
+      {isFileBasedBackend && worldManagerController && (
+        <WorldManagementButton controller={worldManagerController} />
       )}
 
       {/* HelpDesk Button - Top Right */}

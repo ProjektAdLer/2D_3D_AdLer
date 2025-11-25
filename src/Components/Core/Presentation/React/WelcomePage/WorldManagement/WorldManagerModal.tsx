@@ -3,14 +3,23 @@ import { useTranslation } from "react-i18next";
 import useObservable from "../../ReactRelated/CustomHooks/useObservable";
 import StyledModal from "../../ReactRelated/ReactBaseComponents/StyledModal";
 import StyledButton from "../../ReactRelated/ReactBaseComponents/StyledButton";
-import WorldManagerModalViewModel, {
-  WorldInfo,
-} from "./WorldManagerModalViewModel";
+import WorldManagerModalViewModel from "./WorldManagerModalViewModel";
 import type IWorldManagerModalController from "./IWorldManagerModalController";
 import plusIcon from "../../../../../../Assets/icons/plus.svg";
-import exportIcon from "../../../../../../Assets/icons/log-export.svg";
-import deleteIcon from "../../../../../../Assets/icons/close.svg";
 import tailwindMerge from "../../../Utils/TailwindMerge";
+
+// Import sub-components
+import {
+  WorldListItem,
+  ImportProgress,
+  ExportProgress,
+  DeleteConfirmation,
+  StorageInfo,
+  ImportSuccessMessage,
+  ImportErrorMessage,
+  DeleteErrorMessage,
+  ExportErrorMessage,
+} from "./Components";
 
 export interface WorldManagerModalProps {
   viewModel: WorldManagerModalViewModel;
@@ -20,6 +29,13 @@ export interface WorldManagerModalProps {
 /**
  * WorldManagerModal - Modal for managing learning worlds
  * Supports import, export, and deletion of worlds
+ *
+ * This component follows the MVC pattern and uses sub-components for:
+ * - WorldListItem: Individual world entries
+ * - ImportProgress/ExportProgress: Progress indicators
+ * - DeleteConfirmation: Deletion confirmation dialog
+ * - StorageInfo: Storage usage display
+ * - StatusMessages: Success/error notifications
  */
 export default function WorldManagerModal({
   viewModel,
@@ -28,6 +44,7 @@ export default function WorldManagerModal({
   const { t: translate } = useTranslation("worldMenu");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  // Observable state from ViewModel
   const [showModal] = useObservable(viewModel.showModal);
   const [worlds] = useObservable(viewModel.worlds);
   const [loading] = useObservable(viewModel.loading);
@@ -89,6 +106,7 @@ export default function WorldManagerModal({
     return undefined;
   }, [exportError, controller]);
 
+  // File input handler
   const handleImportClick = () => {
     fileInputRef.current?.click();
   };
@@ -104,6 +122,7 @@ export default function WorldManagerModal({
     }
   };
 
+  // Drag and drop handling
   useEffect(() => {
     const dropZone = document.getElementById("drop-zone");
 
@@ -112,7 +131,7 @@ export default function WorldManagerModal({
       if ([...e.dataTransfer.items].some((item) => item.kind === "file")) {
         e.preventDefault();
       }
-      let file = e.dataTransfer.files?.[0];
+      const file = e.dataTransfer.files?.[0];
       if (file && file.name.endsWith(".mbz")) {
         await controller.onImportWorld(file);
       }
@@ -141,7 +160,6 @@ export default function WorldManagerModal({
       }
     };
 
-    // cancels dragover event to enable drop event to occur
     const dragOverHandlerWindow = (e: DragEvent) => {
       if (!e.dataTransfer) return;
       const fileItems = [...e.dataTransfer.items].filter(
@@ -186,100 +204,23 @@ export default function WorldManagerModal({
         canClose={true}
       >
         <div className="flex w-full min-w-[800px] max-w-[1200px] flex-col gap-4">
-          {/* Import Success Message */}
-          {importSuccess && (
-            <div className="rounded bg-green-100 p-4">
-              <p className="font-semibold text-green-800">
-                ✓{" "}
-                {translate("worldManagement.importSuccess", {
-                  worldName: importSuccess.worldName,
-                })}
-              </p>
-              <p className="text-sm text-green-700">
-                {importSuccess.elementCount}{" "}
-                {translate("worldManagement.elements", "Elemente")}
-              </p>
-            </div>
-          )}
-
-          {/* Import Error Message */}
-          {importError && (
-            <div className="rounded bg-red-100 p-4">
-              <p className="font-semibold text-red-800">
-                ✗{" "}
-                {translate(
-                  "worldManagement.importFailed",
-                  "Import fehlgeschlagen",
-                )}
-              </p>
-              <p className="text-sm text-red-700">{importError}</p>
-            </div>
-          )}
-
-          {/* Delete Error Message */}
-          {deleteError && (
-            <div className="rounded bg-red-100 p-4">
-              <p className="font-semibold text-red-800">
-                ✗{" "}
-                {deleteError === "preinstalled_cannot_delete"
-                  ? translate(
-                      "worldManagement.cannotDeletePreinstalled",
-                      "Vorinstallierte Lernwelten können nicht gelöscht werden.",
-                    )
-                  : translate("worldManagement.deleteFailed", {
-                      error: deleteError,
-                    })}
-              </p>
-            </div>
-          )}
-
-          {/* Export Error Message */}
-          {exportError && (
-            <div className="rounded bg-red-100 p-4">
-              <p className="font-semibold text-red-800">
-                ✗{" "}
-                {translate("worldManagement.exportFailed", {
-                  error: exportError,
-                })}
-              </p>
-            </div>
-          )}
+          {/* Status Messages */}
+          {importSuccess && <ImportSuccessMessage success={importSuccess} />}
+          {importError && <ImportErrorMessage error={importError} />}
+          {deleteError && <DeleteErrorMessage error={deleteError} />}
+          {exportError && <ExportErrorMessage error={exportError} />}
 
           {/* Delete Confirmation Dialog */}
           {deleteConfirmation && (
-            <div className="rounded border-2 border-red-300 bg-red-50 p-4">
-              <p className="mb-3 font-semibold text-red-800">
-                {translate(
-                  "worldManagement.deleteConfirmTitle",
-                  "Lernwelt löschen?",
-                )}
-              </p>
-              <p className="mb-4 text-sm text-red-700">
-                {translate("worldManagement.deleteConfirmMessage", {
-                  worldName: deleteConfirmation.worldName,
-                  size: deleteConfirmation.sizeFormatted,
-                })}
-              </p>
-              <div className="flex gap-2">
-                <StyledButton
-                  onClick={() => controller.confirmDelete()}
-                  className="bg-red-500 text-white hover:bg-red-600"
-                  shape="freeFloatCenter"
-                >
-                  {translate("worldManagement.confirmDelete", "Ja, löschen")}
-                </StyledButton>
-                <StyledButton
-                  onClick={() => controller.cancelDelete()}
-                  className="bg-gray-300 text-gray-700 hover:bg-gray-400"
-                  shape="freeFloatCenter"
-                >
-                  {translate("worldManagement.cancelDelete", "Abbrechen")}
-                </StyledButton>
-              </div>
-            </div>
+            <DeleteConfirmation
+              worldName={deleteConfirmation.worldName}
+              sizeFormatted={deleteConfirmation.sizeFormatted}
+              onConfirm={() => controller.confirmDelete()}
+              onCancel={() => controller.cancelDelete()}
+            />
           )}
 
-          {/* Import Button */}
+          {/* Import Button with Drop Zone */}
           <div className={tailwindMerge("flex")}>
             <StyledButton
               onClick={handleImportClick}
@@ -306,52 +247,18 @@ export default function WorldManagerModal({
             </label>
           </div>
 
-          {/* Import Progress */}
+          {/* Progress Indicators */}
           {isImporting && (
-            <div className="rounded bg-blue-50 p-4">
-              <div className="mb-2 flex items-center justify-between">
-                <span className="text-sm font-semibold text-adlerblue">
-                  {importStatus === "import_starting"
-                    ? translate(
-                        "worldManagement.importStarting",
-                        "Starte Import...",
-                      )
-                    : importStatus ||
-                      translate("worldManagement.importing", "Importiere...")}
-                </span>
-                <span className="text-sm text-gray-600">{importProgress}%</span>
-              </div>
-              <div className="h-2 w-full overflow-hidden rounded-full bg-gray-200">
-                <div
-                  className="h-full bg-adlerblue transition-all duration-300"
-                  style={{ width: `${importProgress}%` }}
-                />
-              </div>
-            </div>
+            <ImportProgress
+              progress={importProgress || 0}
+              status={importStatus}
+            />
           )}
-
-          {/* Export Progress */}
           {isExporting && (
-            <div className="rounded bg-green-50 p-4">
-              <div className="mb-2 flex items-center justify-between">
-                <span className="text-sm font-semibold text-green-700">
-                  {exportStatus === "export_starting"
-                    ? translate(
-                        "worldManagement.exportStarting",
-                        "Starte Export...",
-                      )
-                    : exportStatus ||
-                      translate("worldManagement.exporting", "Exportiere...")}
-                </span>
-                <span className="text-sm text-gray-600">{exportProgress}%</span>
-              </div>
-              <div className="h-2 w-full overflow-hidden rounded-full bg-gray-200">
-                <div
-                  className="h-full bg-green-600 transition-all duration-300"
-                  style={{ width: `${exportProgress}%` }}
-                />
-              </div>
-            </div>
+            <ExportProgress
+              progress={exportProgress || 0}
+              status={exportStatus}
+            />
           )}
 
           {/* Loading State */}
@@ -376,102 +283,26 @@ export default function WorldManagerModal({
           {!safeLoading && safeWorlds.length > 0 && (
             <div className="max-h-96 space-y-2 overflow-y-auto">
               {safeWorlds.map((world) => (
-                <WorldRow
+                <WorldListItem
                   key={world.worldID}
                   world={world}
                   onDelete={() => controller.onDeleteWorld(world.worldID)}
                   onExport={() => controller.onExportWorld(world.worldID)}
-                  translate={translate}
                 />
               ))}
             </div>
           )}
 
-          {/* Storage Information - at the bottom */}
+          {/* Storage Information */}
           {storageInfo && (
-            <div className="bg-adlerbgbright rounded p-4">
-              <div className="mb-2 flex items-center justify-between">
-                <span className="text-sm font-semibold">
-                  {translate("worldManagement.storage", "Speicher")}
-                </span>
-                <span className="text-sm text-gray-600">
-                  {storageInfo.usedFormatted} / {storageInfo.quotaFormatted}
-                </span>
-              </div>
-              <div className="h-2 w-full overflow-hidden rounded-full bg-gray-200">
-                <div
-                  className="h-full bg-adlerblue transition-all duration-300"
-                  style={{ width: `${storageInfo.usedPercent}%` }}
-                />
-              </div>
-              <p className="mt-1 text-xs text-gray-500">
-                {storageInfo.usedPercent}%{" "}
-                {translate("worldManagement.used", "belegt")}
-              </p>
-            </div>
+            <StorageInfo
+              usedFormatted={storageInfo.usedFormatted}
+              quotaFormatted={storageInfo.quotaFormatted}
+              usedPercent={storageInfo.usedPercent}
+            />
           )}
         </div>
       </StyledModal>
     </>
-  );
-}
-
-/**
- * WorldRow - Single row displaying world information
- */
-interface WorldRowProps {
-  world: WorldInfo;
-  onDelete: () => void;
-  onExport: () => void;
-  translate: any;
-}
-
-function WorldRow({ world, onDelete, onExport, translate }: WorldRowProps) {
-  return (
-    <div className="flex items-center justify-between rounded border border-gray-200 bg-white p-3 shadow-sm transition hover:shadow-md">
-      <div className="mr-4 min-w-0 flex-1">
-        <div className="flex items-center gap-2">
-          <p className="truncate font-bold text-gray-800">{world.worldName}</p>
-          {world.source === "public" && (
-            <span className="whitespace-nowrap rounded bg-blue-100 px-2 py-1 text-xs font-medium text-blue-700">
-              {translate("worldManagement.preinstalled", "Vorinstalliert")}
-            </span>
-          )}
-        </div>
-        <p className="mt-1 text-sm text-gray-600">
-          {world.elementCount}{" "}
-          {translate("worldManagement.elements", "Elemente")} ·{" "}
-          {world.sizeFormatted}
-        </p>
-      </div>
-
-      {/* Action buttons */}
-      <div className="flex shrink-0 gap-2">
-        {world.source === "indexeddb" && (
-          <>
-            <StyledButton
-              onClick={onExport}
-              className="bg-adlerblue !px-2 !py-1 !text-xs text-white hover:bg-adlerdarkblue"
-              icon={exportIcon}
-              shape="freeFloatCenter"
-            >
-              <span className="text-xs">
-                {translate("worldManagement.export", "Exportieren")}
-              </span>
-            </StyledButton>
-            <StyledButton
-              onClick={onDelete}
-              className="bg-red-500 !px-2 !py-1 !text-xs text-white hover:bg-red-600"
-              icon={deleteIcon}
-              shape="freeFloatCenter"
-            >
-              <span className="text-xs">
-                {translate("worldManagement.delete", "Löschen")}
-              </span>
-            </StyledButton>
-          </>
-        )}
-      </div>
-    </div>
   );
 }
