@@ -60,4 +60,39 @@ export default interface IWorldManagerModalController {
    * Clears the pending download state (called by View after download triggered)
    */
   clearPendingDownload(): void;
+
+  // ========== Publish Mode (Dozentenmodus) ==========
+
+  /**
+   * Toggles the publish mode on/off
+   * When enabled, shows checkboxes for multi-select
+   */
+  togglePublishMode(): void;
+
+  /**
+   * Toggles selection of a specific world
+   * @param worldID The ID of the world to toggle
+   */
+  toggleWorldSelection(worldID: number): void;
+
+  /**
+   * Selects all worlds
+   */
+  selectAllWorlds(): void;
+
+  /**
+   * Deselects all worlds
+   */
+  deselectAllWorlds(): void;
+
+  /**
+   * Exports selected worlds as a LearningWorlds.zip package
+   * ready for deployment on a web server
+   */
+  exportSelectedWorldsPackage(): Promise<void>;
+
+  /**
+   * Clears the package export error state
+   */
+  clearPackageExportError(): void;
 }

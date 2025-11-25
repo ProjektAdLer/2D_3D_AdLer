@@ -4,6 +4,7 @@ import WorldManagerModalViewModel from "./WorldManagerModalViewModel";
 import type IImportLearningWorldUseCase from "../../../../Application/UseCases/ImportLearningWorld/IImportLearningWorldUseCase";
 import type IDeleteLearningWorldUseCase from "../../../../Application/UseCases/DeleteLearningWorld/IDeleteLearningWorldUseCase";
 import type IExportLearningWorldUseCase from "../../../../Application/UseCases/ExportLearningWorld/IExportLearningWorldUseCase";
+import type IExportWorldPackageUseCase from "../../../../Application/UseCases/ExportWorldPackage/IExportWorldPackageUseCase";
 import type ILoadLocalWorldsListUseCase from "../../../../Application/UseCases/LoadLocalWorldsList/ILoadLocalWorldsListUseCase";
 import type IGetWorldsStorageInfoUseCase from "../../../../Application/UseCases/GetWorldsStorageInfo/IGetWorldsStorageInfoUseCase";
 
@@ -22,6 +23,7 @@ export default class WorldManagerModalController
     private importWorldUseCase: IImportLearningWorldUseCase,
     private deleteWorldUseCase: IDeleteLearningWorldUseCase,
     private exportWorldUseCase: IExportLearningWorldUseCase,
+    private exportWorldPackageUseCase: IExportWorldPackageUseCase,
     private loadLocalWorldsListUseCase: ILoadLocalWorldsListUseCase,
     private getStorageInfoUseCase: IGetWorldsStorageInfoUseCase,
   ) {}
@@ -235,5 +237,94 @@ export default class WorldManagerModalController
    */
   clearPendingDownload(): void {
     this.viewModel.pendingDownload.Value = null;
+  }
+
+  // ========== Publish Mode (Dozentenmodus) ==========
+
+  /**
+   * Toggles publish mode on/off
+   */
+  togglePublishMode(): void {
+    const newValue = !this.viewModel.isPublishMode.Value;
+    this.viewModel.isPublishMode.Value = newValue;
+
+    // Clear selections when disabling publish mode
+    if (!newValue) {
+      this.viewModel.selectedWorldIDs.Value = new Set();
+    }
+  }
+
+  /**
+   * Toggles selection of a specific world
+   */
+  toggleWorldSelection(worldID: number): void {
+    const current = new Set(this.viewModel.selectedWorldIDs.Value);
+    if (current.has(worldID)) {
+      current.delete(worldID);
+    } else {
+      current.add(worldID);
+    }
+    this.viewModel.selectedWorldIDs.Value = current;
+  }
+
+  /**
+   * Selects all worlds
+   */
+  selectAllWorlds(): void {
+    const allIDs = this.viewModel.worlds.Value.map((w) => w.worldID);
+    this.viewModel.selectedWorldIDs.Value = new Set(allIDs);
+  }
+
+  /**
+   * Deselects all worlds
+   */
+  deselectAllWorlds(): void {
+    this.viewModel.selectedWorldIDs.Value = new Set();
+  }
+
+  /**
+   * Exports selected worlds as a LearningWorlds.zip package
+   */
+  async exportSelectedWorldsPackage(): Promise<void> {
+    const selectedIDs = Array.from(this.viewModel.selectedWorldIDs.Value);
+
+    if (selectedIDs.length === 0) {
+      this.viewModel.packageExportError.Value = "no_worlds_selected";
+      return;
+    }
+
+    this.viewModel.isExportingPackage.Value = true;
+    this.viewModel.packageExportProgress.Value = 0;
+    this.viewModel.packageExportStatus.Value = "package_export_starting";
+    this.viewModel.packageExportError.Value = null;
+
+    try {
+      // Call Use Case with progress callback
+      await this.exportWorldPackageUseCase.executeAsync({
+        worldIDs: selectedIDs,
+        onProgress: (current, total, status) => {
+          this.viewModel.packageExportProgress.Value = Math.round(
+            (current / total) * 100,
+          );
+          this.viewModel.packageExportStatus.Value = status;
+        },
+      });
+
+      // Note: Reset of export states is handled by presenter after successful export
+    } catch (error) {
+      console.error("Failed to export worlds package:", error);
+      this.viewModel.isExportingPackage.Value = false;
+      this.viewModel.packageExportProgress.Value = 0;
+      this.viewModel.packageExportStatus.Value = "";
+      this.viewModel.packageExportError.Value =
+        error instanceof Error ? error.message : "unknown_error";
+    }
+  }
+
+  /**
+   * Clears the package export error
+   */
+  clearPackageExportError(): void {
+    this.viewModel.packageExportError.Value = null;
   }
 }
