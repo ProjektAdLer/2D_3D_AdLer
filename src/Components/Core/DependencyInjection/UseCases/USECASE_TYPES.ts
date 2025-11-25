@@ -82,7 +82,6 @@ const USECASE_TYPES = {
   IGetSettingsConfigUseCase: Symbol("IGetSettingsConfigUseCase"),
   IImportLearningWorldUseCase: Symbol("IImportLearningWorldUseCase"),
   IDeleteLearningWorldUseCase: Symbol("IDeleteLearningWorldUseCase"),
-  IExportLearningWorldUseCase: Symbol("IExportLearningWorldUseCase"),
   IExportWorldPackageUseCase: Symbol("IExportWorldPackageUseCase"),
   ILoadLocalWorldsListUseCase: Symbol("ILoadLocalWorldsListUseCase"),
   IGetWorldsStorageInfoUseCase: Symbol("IGetWorldsStorageInfoUseCase"),
