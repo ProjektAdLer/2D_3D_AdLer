@@ -1,3 +1,5 @@
+import type { ValidationResult } from "../../Services/MBZValidator";
+
 /**
  * Parsed world data from MBZ file
  */
@@ -34,8 +36,9 @@ export default interface IMBZParserAdapter {
 
   /**
    * Validate if a file is a valid MBZ file
+   * Enhanced validation with detailed error reporting
    * @param file The file to validate
-   * @returns True if the file appears to be a valid MBZ
+   * @returns Validation result with detailed errors and warnings
    */
-  validateMBZ(file: File): Promise<boolean>;
+  validateMBZ(file: File): Promise<ValidationResult>;
 }

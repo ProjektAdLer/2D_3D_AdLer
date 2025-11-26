@@ -6,6 +6,7 @@ import AbstractPort from "../AbstractPort/AbstractPort";
 import WorldImportResultTO from "../../DataTransferObjects/WorldImportResultTO";
 import LocalWorldInfoTO from "../../DataTransferObjects/LocalWorldInfoTO";
 import StorageInfoTO from "../../DataTransferObjects/StorageInfoTO";
+import type { ValidationResult } from "../../Services/MBZValidator";
 
 @injectable()
 export default class WorldManagementPort
@@ -63,6 +64,15 @@ export default class WorldManagementPort
     this.mappedAdapters.forEach((adapter) => {
       adapter.forEach((value) => {
         if (value.onWorldManagementError) value.onWorldManagementError(error);
+      });
+    });
+  }
+
+  public onImportValidationFailed(validationResult: ValidationResult): void {
+    this.mappedAdapters.forEach((adapter) => {
+      adapter.forEach((value) => {
+        if (value.onImportValidationFailed)
+          value.onImportValidationFailed(validationResult);
       });
     });
   }

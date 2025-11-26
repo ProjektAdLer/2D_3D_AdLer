@@ -3,6 +3,7 @@ import StorageInfoTO from "../../DataTransferObjects/StorageInfoTO";
 import WorldImportResultTO from "../../DataTransferObjects/WorldImportResultTO";
 import { IAbstractPort } from "./IAbstractPort";
 import IWorldManagementAdapter from "../WorldManagementPort/IWorldManagementAdapter";
+import type { ValidationResult } from "../../Services/MBZValidator";
 
 export default interface IWorldManagementPort
   extends IAbstractPort<IWorldManagementAdapter> {
@@ -12,4 +13,5 @@ export default interface IWorldManagementPort
   onStorageInfoLoaded(storageInfo: StorageInfoTO): void;
   onLocalWorldsListLoaded(worlds: LocalWorldInfoTO[]): void;
   onWorldManagementError(error: string): void;
+  onImportValidationFailed(validationResult: ValidationResult): void;
 }
