@@ -6,6 +6,9 @@ import IMBZParserAdapter, {
 import MBZImporter from "../LocalStore/MBZImporter";
 import PORT_TYPES from "~DependencyInjection/Ports/PORT_TYPES";
 import type IWorldStorageAdapter from "../../Application/Ports/WorldStoragePort/IWorldStorageAdapter";
+import MBZValidator, {
+  ValidationResult,
+} from "../../Application/Services/MBZValidator";
 
 /**
  * Adapter that wraps MBZImporter and implements IMBZParserAdapter.
@@ -13,10 +16,14 @@ import type IWorldStorageAdapter from "../../Application/Ports/WorldStoragePort/
  */
 @injectable()
 export default class MBZParserAdapter implements IMBZParserAdapter {
+  private validator: MBZValidator;
+
   constructor(
     @inject(PORT_TYPES.IWorldStorageAdapter)
     private worldStorage: IWorldStorageAdapter,
-  ) {}
+  ) {
+    this.validator = new MBZValidator();
+  }
 
   async parseMBZ(
     file: File,
@@ -33,7 +40,7 @@ export default class MBZParserAdapter implements IMBZParserAdapter {
     const localStore = new LocalStore();
     await localStore.init();
 
-    const importer = new MBZImporter(localStore);
+    const importer = new MBZImporter(localStore, this.validator);
     const result = await importer.importMBZ(file, onProgress);
 
     if (!result.success) {
@@ -57,18 +64,23 @@ export default class MBZParserAdapter implements IMBZParserAdapter {
     };
   }
 
-  async validateMBZ(file: File): Promise<boolean> {
-    // Basic validation: check file extension and size
-    if (!file.name.endsWith(".mbz") && !file.name.endsWith(".tar.gz")) {
-      return false;
+  async validateMBZ(file: File): Promise<ValidationResult> {
+    // Phase 1: Pre-extraction validation (fast checks before reading file content)
+
+    // Step 1: Validate file size
+    const sizeResult = this.validator.validateFileSize(file);
+    if (!sizeResult.isValid) {
+      return sizeResult;
     }
 
-    // Check file is not empty
-    if (file.size === 0) {
-      return false;
+    // Step 2: Validate file type (extension + magic numbers)
+    const typeResult = await this.validator.validateFileType(file);
+    if (!typeResult.isValid) {
+      return typeResult;
     }
 
-    // File seems valid (detailed validation happens during parsing)
-    return true;
+    // File passes pre-extraction validation
+    // Detailed validation (structure, world document) happens during parsing
+    return { isValid: true, errors: [], warnings: [] };
   }
 }

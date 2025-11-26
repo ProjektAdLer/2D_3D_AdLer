@@ -1,5 +1,6 @@
 import { gunzipSync, unzipSync } from "fflate";
 import LocalStore from "./LocalStore";
+import MBZValidator from "../../Application/Services/MBZValidator";
 
 /**
  * Represents the world data structure from ATF/DSL/AWT format
@@ -71,19 +72,27 @@ export type ImportProgressCallback = (
  *
  * Process:
  * 1. Decompress gzip layer
- * 2. Parse TAR archive
- * 3. Read ATF_Document.json or DSL_Document.json
- * 4. Extract element files (images, PDFs, H5P archives, etc.)
- * 5. Store all files as blobs in IndexedDB via LocalStore
- * 6. Generate worldID and save metadata
+ * 2. Parse TAR archive (with decompression bomb protection)
+ * 3. Validate file structure and paths
+ * 4. Read and validate ATF_Document.json or DSL_Document.json
+ * 5. Extract element files (images, PDFs, H5P archives, etc.)
+ * 6. Store all files as blobs in IndexedDB via LocalStore
+ * 7. Generate worldID and save metadata
  */
 export default class MBZImporter {
   private localStore: LocalStore;
+  private validator: MBZValidator;
   private warnings: string[] = [];
   private errors: string[] = [];
 
-  constructor(localStore: LocalStore) {
+  // Security limits
+  private readonly MAX_H5P_SIZE = 200 * 1024 * 1024; // 200 MB per H5P file
+  private readonly MAX_H5P_EXTRACTED = 500 * 1024 * 1024; // 500 MB extracted
+  private readonly MAX_XML_SIZE = 10 * 1024 * 1024; // 10 MB for files.xml
+
+  constructor(localStore: LocalStore, validator: MBZValidator) {
     this.localStore = localStore;
+    this.validator = validator;
   }
 
   /**
@@ -105,7 +114,26 @@ export default class MBZImporter {
       onProgress?.(0, 100, "Extrahiere MBZ-Datei...");
       const extractedFiles = await this.extractMBZ(file);
 
-      // Step 2: Find and read world document
+      // Step 2: Post-extraction validation
+      console.log("[MBZImporter] Validating structure...");
+      onProgress?.(5, 100, "Validiere Dateistruktur...");
+
+      // Validate file structure
+      const structureResult =
+        this.validator.validateMBZStructure(extractedFiles);
+      if (!structureResult.isValid) {
+        throw new Error(
+          structureResult.errors.map((e) => e.message).join(", "),
+        );
+      }
+
+      // Validate file paths for security
+      const pathResult = this.validator.validateFilePaths(extractedFiles);
+      if (!pathResult.isValid) {
+        throw new Error(pathResult.errors.map((e) => e.message).join(", "));
+      }
+
+      // Step 3: Find and read world document
       console.log("[MBZImporter] Reading world document...");
       onProgress?.(10, 100, "Lese Weltdokument...");
       const worldDoc = this.readWorldDocument(extractedFiles);
@@ -114,6 +142,18 @@ export default class MBZImporter {
         throw new Error(
           "No valid world document found (ATF_Document.json or DSL_Document.json)",
         );
+      }
+
+      // Step 4: Validate world document structure
+      console.log("[MBZImporter] Validating world document...");
+      const docResult = this.validator.validateWorldDocument(worldDoc);
+      if (!docResult.isValid) {
+        throw new Error(docResult.errors.map((e) => e.message).join(", "));
+      }
+
+      // Collect warnings
+      if (docResult.warnings.length > 0) {
+        this.warnings.push(...docResult.warnings.map((w) => w.message));
       }
 
       const worldName = worldDoc.world.worldName;
@@ -229,12 +269,13 @@ export default class MBZImporter {
   }
 
   /**
-   * Parse TAR archive
+   * Parse TAR archive with decompression bomb protection
    * Simple TAR parser for extracting files
    */
   private parseTar(data: Uint8Array): Map<string, Uint8Array> {
     const files = new Map<string, Uint8Array>();
     let offset = 0;
+    let totalExtractedSize = 0;
 
     while (offset < data.length) {
       // TAR header is 512 bytes
@@ -264,6 +305,14 @@ export default class MBZImporter {
         .trim()
         .replace(/\0/g, "");
       const fileSize = parseInt(sizeStr, 8) || 0;
+
+      // Decompression bomb protection: track total extracted size
+      totalExtractedSize += fileSize;
+      const bombResult =
+        this.validator.validateDecompressionBomb(totalExtractedSize);
+      if (!bombResult.isValid) {
+        throw new Error(bombResult.errors[0].message);
+      }
 
       // Skip header
       offset += 512;
@@ -359,7 +408,7 @@ export default class MBZImporter {
   }
 
   /**
-   * Build file mapping from files.xml (DSL format only)
+   * Build file mapping from files.xml (DSL format only) with XML safety
    */
   private buildFileMapping(
     files: Map<string, Uint8Array>,
@@ -372,9 +421,29 @@ export default class MBZImporter {
     try {
       const xmlContent = new TextDecoder().decode(filesXmlData);
 
-      // Parse XML to extract elementUUID -> contenthash mapping
+      // XML size limit (prevent billion laughs attack)
+      if (xmlContent.length > this.MAX_XML_SIZE) {
+        console.warn(
+          `[MBZImporter] files.xml too large (${(xmlContent.length / 1024 / 1024).toFixed(2)} MB), skipping`,
+        );
+        this.warnings.push("files.xml too large - using ATF fallback");
+        return null;
+      }
+
+      // DOMParser is safe in browsers (no XXE by default)
       const parser = new DOMParser();
       const xmlDoc = parser.parseFromString(xmlContent, "text/xml");
+
+      // Check for parser errors
+      const parserError = xmlDoc.querySelector("parsererror");
+      if (parserError) {
+        console.warn(
+          "[MBZImporter] XML parsing error:",
+          parserError.textContent,
+        );
+        this.warnings.push("Could not parse files.xml - using ATF fallback");
+        return null;
+      }
 
       const mapping = new Map<string, string>();
 
@@ -505,7 +574,7 @@ export default class MBZImporter {
   }
 
   /**
-   * Process H5P element (extract nested ZIP)
+   * Process H5P element (extract nested ZIP) with size limits
    */
   private async processH5PElement(
     element: LearningElement,
@@ -515,11 +584,37 @@ export default class MBZImporter {
     const { elementId, elementName } = element;
 
     try {
+      // Check compressed H5P size before extraction
+      if (h5pData.length > this.MAX_H5P_SIZE) {
+        const sizeInMB = (h5pData.length / 1024 / 1024).toFixed(2);
+        const maxSizeInMB = (this.MAX_H5P_SIZE / 1024 / 1024).toFixed(0);
+        const msg = `Element ${elementId} (${elementName}): H5P file too large (${sizeInMB} MB, max: ${maxSizeInMB} MB)`;
+        console.error(`[MBZImporter] ${msg}`);
+        this.errors.push(msg);
+        return false;
+      }
+
       // Load H5P file as nested ZIP using fflate
       console.log(`[MBZImporter] Element ${elementId}: Extracting H5P...`);
 
       const unzipped = unzipSync(h5pData);
       const fileCount = Object.keys(unzipped).length;
+
+      // Track total extracted size
+      let totalExtractedSize = 0;
+      for (const fileData of Object.values(unzipped)) {
+        totalExtractedSize += fileData.length;
+      }
+
+      // Check extracted size limit
+      if (totalExtractedSize > this.MAX_H5P_EXTRACTED) {
+        const sizeInMB = (totalExtractedSize / 1024 / 1024).toFixed(2);
+        const maxSizeInMB = (this.MAX_H5P_EXTRACTED / 1024 / 1024).toFixed(0);
+        const msg = `Element ${elementId} (${elementName}): H5P extracted size too large (${sizeInMB} MB, max: ${maxSizeInMB} MB)`;
+        console.error(`[MBZImporter] ${msg}`);
+        this.errors.push(msg);
+        return false;
+      }
 
       console.log(
         `[MBZImporter] Element ${elementId}: Extracting H5P with ${fileCount} files`,
