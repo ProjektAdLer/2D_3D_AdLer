@@ -46,6 +46,25 @@
     "deleteConfirmTitle": "Lernwelt löschen?",
     "deleteConfirmMessage": "Möchten Sie die Lernwelt \"{{worldName}}\" wirklich löschen? Dies wird {{size}} Speicherplatz freigeben.",
     "confirmDelete": "Ja, löschen",
-    "cancelDelete": "Abbrechen"
+    "cancelDelete": "Abbrechen",
+    "validationErrors": {
+      "FILE_TOO_LARGE": "Die Datei ist zu groß. Maximum: 950 MB.",
+      "INVALID_EXTENSION": "Ungültiges Dateiformat. Bitte lade eine .mbz Datei hoch.",
+      "INVALID_GZIP_MAGIC": "Die Datei ist keine gültige MBZ-Datei. Bitte prüfe das Dateiformat.",
+      "DECOMPRESSION_BOMB": "Die Datei ist zu groß entpackt. Möglicherweise beschädigt.",
+      "INVALID_FILE_PATH": "Die MBZ-Datei enthält ungültige Dateipfade.",
+      "MISSING_WORLD_DOCUMENT": "Die MBZ-Datei enthält kein gültiges Weltdokument.",
+      "INVALID_WORLD_TYPE": "Das Weltdokument hat einen ungültigen Typ.",
+      "MISSING_WORLD_OBJECT": "Das Weltdokument ist unvollständig.",
+      "MISSING_WORLD_NAME": "Das Weltdokument enthält keinen Weltnamen.",
+      "WORLD_NAME_TOO_LONG": "Der Weltname ist zu lang (max. 200 Zeichen).",
+      "INVALID_SPACES": "Das Weltdokument enthält keine gültige Raum-Liste.",
+      "INVALID_ELEMENTS": "Das Weltdokument enthält keine gültige Element-Liste.",
+      "INVALID_ELEMENT_STRUCTURE": "Mindestens ein Element ist unvollständig.",
+      "INVALID_ELEMENT_ID": "Mindestens ein Element hat eine ungültige ID.",
+      "FILE_READ_ERROR": "Die Datei konnte nicht gelesen werden."
+    },
+    "showTechnicalDetails": "Technische Details anzeigen",
+    "hideTechnicalDetails": "Technische Details ausblenden"
   }
 }

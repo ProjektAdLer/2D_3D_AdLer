@@ -46,6 +46,25 @@
     "deleteConfirmTitle": "Delete learning world?",
     "deleteConfirmMessage": "Are you sure you want to delete the learning world \"{{worldName}}\"? This will free {{size}} of storage.",
     "confirmDelete": "Yes, delete",
-    "cancelDelete": "Cancel"
+    "cancelDelete": "Cancel",
+    "validationErrors": {
+      "FILE_TOO_LARGE": "File is too large. Maximum: 950 MB.",
+      "INVALID_EXTENSION": "Invalid file format. Please upload an .mbz file.",
+      "INVALID_GZIP_MAGIC": "The file is not a valid MBZ file. Please check the file format.",
+      "DECOMPRESSION_BOMB": "File is too large when extracted. Possibly corrupted.",
+      "INVALID_FILE_PATH": "The MBZ file contains invalid file paths.",
+      "MISSING_WORLD_DOCUMENT": "The MBZ file does not contain a valid world document.",
+      "INVALID_WORLD_TYPE": "The world document has an invalid type.",
+      "MISSING_WORLD_OBJECT": "The world document is incomplete.",
+      "MISSING_WORLD_NAME": "The world document does not contain a world name.",
+      "WORLD_NAME_TOO_LONG": "The world name is too long (max. 200 characters).",
+      "INVALID_SPACES": "The world document does not contain a valid space list.",
+      "INVALID_ELEMENTS": "The world document does not contain a valid element list.",
+      "INVALID_ELEMENT_STRUCTURE": "At least one element is incomplete.",
+      "INVALID_ELEMENT_ID": "At least one element has an invalid ID.",
+      "FILE_READ_ERROR": "The file could not be read."
+    },
+    "showTechnicalDetails": "Show technical details",
+    "hideTechnicalDetails": "Hide technical details"
   }
 }
