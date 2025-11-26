@@ -30,6 +30,15 @@ export interface StorageInfo {
 }
 
 /**
+ * Import error details (hybrid error display: simple message + technical details)
+ */
+export interface ImportErrorDetails {
+  message: string; // User-friendly error message
+  technicalDetails?: string; // Optional technical details for debugging
+  showDetails: boolean; // Whether to show/hide technical details (toggle state)
+}
+
+/**
  * ViewModel for WorldManagerModal
  * Contains observable data for the world management UI
  */
@@ -43,7 +52,7 @@ export default class WorldManagerModalViewModel {
   public isImporting = new Observable<boolean>(false);
   public importProgress = new Observable<number>(0); // 0-100
   public importStatus = new Observable<string>(""); // Status message during import
-  public importError = new Observable<string | null>(null);
+  public importError = new Observable<ImportErrorDetails | null>(null);
   public importSuccess = new Observable<{
     worldName: string;
     elementCount: number;

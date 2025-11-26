@@ -3,12 +3,15 @@ import IWorldManagerModalPresenter from "./IWorldManagerModalPresenter";
 import WorldManagerModalViewModel, {
   WorldInfo,
   StorageInfo,
+  ImportErrorDetails,
 } from "./WorldManagerModalViewModel";
 import IWorldManagementAdapter from "../../../../Application/Ports/WorldManagementPort/IWorldManagementAdapter";
 import WorldImportResultTO from "../../../../Application/DataTransferObjects/WorldImportResultTO";
 import LocalWorldInfoTO from "../../../../Application/DataTransferObjects/LocalWorldInfoTO";
 import StorageInfoTO from "../../../../Application/DataTransferObjects/StorageInfoTO";
 import { formatBytes } from "../../../Utils/formatBytes";
+import ValidationErrorBuilder from "../../../../Application/Utils/ValidationErrorBuilder";
+import type { ValidationResult } from "../../../../Application/Services/MBZValidator";
 
 /**
  * Presenter for WorldManagerModal
@@ -39,7 +42,10 @@ export default class WorldManagerModalPresenter
         this.viewModel.importStatus.Value = "";
       }, 3000);
     } else {
-      this.viewModel.importError.Value = result.errors.join(", ");
+      this.viewModel.importError.Value = {
+        message: result.errors.join(", "),
+        showDetails: false,
+      };
       this.viewModel.importSuccess.Value = null;
     }
     this.viewModel.isImporting.Value = false;
@@ -116,8 +122,42 @@ export default class WorldManagerModalPresenter
    */
   onWorldManagementError(error: string): void {
     console.error("WorldManagerModalPresenter: Error from Use Case:", error);
-    this.viewModel.importError.Value = error;
+    this.viewModel.importError.Value = {
+      message: error,
+      showDetails: false,
+    };
     this.viewModel.isImporting.Value = false;
     this.viewModel.loading.Value = false;
+  }
+
+  /**
+   * Called by WorldManagementPort when validation fails
+   * Creates a hybrid error message: user-friendly message + optional technical details
+   */
+  onImportValidationFailed(validationResult: ValidationResult): void {
+    console.error(
+      "WorldManagerModalPresenter: Validation failed:",
+      validationResult.errors,
+    );
+
+    // Build user-friendly error message using ValidationErrorBuilder
+    const mainErrorMessage = ValidationErrorBuilder.createErrorSummary(
+      validationResult.errors,
+    );
+
+    // Collect technical details from all errors
+    const technicalDetails = ValidationErrorBuilder.formatTechnicalDetails(
+      validationResult.errors,
+    );
+
+    // Update ViewModel with error details
+    const errorDetails: ImportErrorDetails = {
+      message: mainErrorMessage,
+      technicalDetails,
+      showDetails: false, // Initially collapsed
+    };
+
+    this.viewModel.importError.Value = errorDetails;
+    this.viewModel.isImporting.Value = false;
   }
 }
