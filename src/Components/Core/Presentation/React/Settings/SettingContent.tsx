@@ -12,6 +12,7 @@ import englishIcon from "../../../../../Assets/graphics/english-flag.png";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import emptyCheckBox from "../../../../../Assets/icons/empty-box.svg";
 import greenSwosh from "../../../../../Assets/icons/check-solution.svg";
+import { useCallback } from "react";
 
 export default function SettingContent({ className }: AdLerUIComponent) {
   const [viewModel, controller] = useBuilder<
@@ -27,6 +28,13 @@ export default function SettingContent({ className }: AdLerUIComponent) {
   );
   const [lightsEnabled] = useObservable(viewModel.lightsEnabled);
   const [language] = useObservable(viewModel.language);
+
+  const volumeCallback = useCallback(
+    (value: number) => {
+      controller.onVolumeChange(value);
+    },
+    [controller],
+  );
 
   if (!viewModel || !controller) return null;
 
@@ -81,9 +89,7 @@ export default function SettingContent({ className }: AdLerUIComponent) {
           max={1}
           initialValue={viewModel.volume.Value}
           step={0.01}
-          callback={(value) => {
-            controller.onVolumeChange(value);
-          }}
+          callback={volumeCallback}
           displayFactor={100}
         />
         <div className="flex flex-row items-center justify-center pb-8">
