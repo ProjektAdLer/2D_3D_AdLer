@@ -37,16 +37,26 @@ export default class ImportLearningWorldUseCase
     );
 
     try {
-      // Validate MBZ file
-      const isValid = await this.mbzParser.validateMBZ(params.file);
-      if (!isValid) {
-        const error = "Invalid MBZ file format";
-        this.worldManagementPort.onWorldManagementError(error);
+      // Enhanced validation with detailed results
+      const validationResult = await this.mbzParser.validateMBZ(params.file);
+
+      if (!validationResult.isValid) {
+        // Use new port method for detailed error display
+        this.worldManagementPort.onImportValidationFailed(validationResult);
+
         this.logger.log(
           LogLevelTypes.ERROR,
-          `ImportLearningWorldUseCase: ${error}`,
+          `ImportLearningWorldUseCase: Validation failed - ${validationResult.errors.map((e) => e.code).join(", ")}`,
         );
         return;
+      }
+
+      // Log warnings if any
+      if (validationResult.warnings.length > 0) {
+        this.logger.log(
+          LogLevelTypes.WARN,
+          `ImportLearningWorldUseCase: Validation warnings - ${validationResult.warnings.map((w) => w.code).join(", ")}`,
+        );
       }
 
       // Check storage space
