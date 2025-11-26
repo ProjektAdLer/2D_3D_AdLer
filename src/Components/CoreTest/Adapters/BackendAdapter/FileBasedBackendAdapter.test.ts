@@ -1,15 +1,16 @@
 import { mock } from "jest-mock-extended";
-import { config } from "../../../../config";
-import FileBasedBackendAdapter from "../../../Core/Adapters/BackendAdapter/FileBasedBackendAdapter";
+import HybridBackendAdapter from "../../../Core/Adapters/BackendAdapter/HybridBackendAdapter";
 import { XAPIEvent } from "../../../Core/Application/UseCases/ScoreH5PLearningElement/IScoreH5PLearningElementUseCase";
 import AdaptivityElementQuestionSubmissionTO from "../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionSubmissionTO";
 import { BackendAvatarConfigTO } from "../../../Core/Application/DataTransferObjects/BackendAvatarConfigTO";
 import ILocalStoragePort from "../../../Core/Application/Ports/Interfaces/ILocalStoragePort";
+import WorldStorageAdapter from "../../../Core/Adapters/WorldStorageAdapter/WorldStorageAdapter";
 
 // Mock fetch globally
 global.fetch = jest.fn();
 
 const localStoragePortMock = mock<ILocalStoragePort>();
+//const worldStorageAdapterMock = mock<IWorldStorageAdapter>();
 
 const mockWorldsJson = {
   worlds: [
@@ -96,11 +97,14 @@ const mockWorldData = {
 };
 
 describe("FileBasedBackendAdapter", () => {
-  let systemUnderTest: FileBasedBackendAdapter;
+  let systemUnderTest: HybridBackendAdapter;
   const fetchMock = global.fetch as jest.MockedFunction<typeof fetch>;
 
   beforeEach(() => {
-    systemUnderTest = new FileBasedBackendAdapter(localStoragePortMock);
+    systemUnderTest = new HybridBackendAdapter(
+      localStoragePortMock,
+      new WorldStorageAdapter(),
+    );
     fetchMock.mockClear();
     localStoragePortMock.getItem.mockReturnValue(null);
   });
@@ -422,7 +426,7 @@ describe("FileBasedBackendAdapter", () => {
         password: "test",
       });
 
-      expect(result).toBe("file-based-dummy-token");
+      expect(result).toBe("hybrid-dummy-token");
     });
   });
 
@@ -645,7 +649,10 @@ describe("FileBasedBackendAdapter", () => {
       process.env.PUBLIC_URL = "/test-path";
 
       // Recreate adapter to pick up new PUBLIC_URL
-      const testAdapter = new FileBasedBackendAdapter();
+      const testAdapter = new HybridBackendAdapter(
+        localStoragePortMock,
+        new WorldStorageAdapter(),
+      );
 
       fetchMock.mockResolvedValueOnce({
         ok: true,
