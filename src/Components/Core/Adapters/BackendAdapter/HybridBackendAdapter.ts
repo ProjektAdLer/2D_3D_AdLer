@@ -17,7 +17,10 @@ import BackendAdapterUtils from "./BackendAdapterUtils";
 import AWT from "./Types/AWT";
 import { ComponentID } from "../../Domain/Types/EntityTypes";
 import PORT_TYPES from "../../DependencyInjection/Ports/PORT_TYPES";
+import CORE_TYPES from "../../DependencyInjection/CoreTypes";
 import type ILocalStoragePort from "../../Application/Ports/Interfaces/ILocalStoragePort";
+import type ILoggerPort from "../../Application/Ports/Interfaces/ILoggerPort";
+import { LogLevelTypes } from "../../Domain/Types/LogLevelTypes";
 import H5PIndexedDBServer from "../H5PIndexedDBServer/H5PIndexedDBServer";
 import type IWorldStorageAdapter from "../../Application/Ports/WorldStoragePort/IWorldStorageAdapter";
 
@@ -62,6 +65,8 @@ export default class HybridBackendAdapter implements IBackendPort {
     private localStoragePort: ILocalStoragePort,
     @inject(PORT_TYPES.IWorldStorageAdapter)
     private worldStorage: IWorldStorageAdapter,
+    @inject(CORE_TYPES.ILogger)
+    private logger: ILoggerPort,
   ) {
     // Base URL for fetching files from public folder
     const publicUrl = process.env.PUBLIC_URL || "";
@@ -69,9 +74,9 @@ export default class HybridBackendAdapter implements IBackendPort {
 
     // Initialize WorldStorageAdapter for IndexedDB access
     this.worldStorage.init().catch((error) => {
-      console.error(
-        "HybridBackendAdapter: Failed to initialize WorldStorageAdapter:",
-        error,
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        `HybridBackendAdapter: Failed to initialize WorldStorageAdapter: ${error}`,
       );
     });
   }
@@ -91,7 +96,10 @@ export default class HybridBackendAdapter implements IBackendPort {
       }
       this.worldsIndex = await response.json();
     } catch (error) {
-      console.error("HybridBackendAdapter: Error loading worlds.json", error);
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        `HybridBackendAdapter: Error loading worlds.json: ${error}`,
+      );
       // Fallback: empty worlds list
       this.worldsIndex = { worlds: [] };
     }
@@ -111,7 +119,8 @@ export default class HybridBackendAdapter implements IBackendPort {
       const worldExists = await this.worldStorage.worldExists(worldID);
 
       if (worldExists) {
-        console.log(
+        this.logger.log(
+          LogLevelTypes.DEBUG,
           `HybridBackendAdapter: Loading world ${worldID} from IndexedDB`,
         );
         const worldBlob = await this.worldStorage.getFile(
@@ -129,14 +138,15 @@ export default class HybridBackendAdapter implements IBackendPort {
         }
       }
     } catch (error) {
-      console.warn(
-        `HybridBackendAdapter: Failed to load from IndexedDB, falling back to public folder`,
-        error,
+      this.logger.log(
+        LogLevelTypes.WARN,
+        `HybridBackendAdapter: Failed to load from IndexedDB, falling back to public folder: ${error}`,
       );
     }
 
     // Step 2: Fallback to public folder
-    console.log(
+    this.logger.log(
+      LogLevelTypes.DEBUG,
       `HybridBackendAdapter: Loading world ${worldID} from public folder`,
     );
     await this.loadWorldsIndex();
@@ -169,9 +179,9 @@ export default class HybridBackendAdapter implements IBackendPort {
 
       return awt;
     } catch (error) {
-      console.error(
-        `HybridBackendAdapter: Error loading world ${worldID}`,
-        error,
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        `HybridBackendAdapter: Error loading world ${worldID}: ${error}`,
       );
       throw error;
     }
@@ -246,14 +256,15 @@ export default class HybridBackendAdapter implements IBackendPort {
         }
       }
     } catch (error) {
-      console.warn(
-        `HybridBackendAdapter: Failed to load element ${elementID} from IndexedDB, falling back to public folder`,
-        error,
+      this.logger.log(
+        LogLevelTypes.WARN,
+        `HybridBackendAdapter: Failed to load element ${elementID} from IndexedDB, falling back to public folder: ${error}`,
       );
     }
 
     // Step 2: Fallback to public folder
-    console.log(
+    this.logger.log(
+      LogLevelTypes.DEBUG,
       `HybridBackendAdapter: Element ${elementID} loaded from public folder`,
     );
 
@@ -312,9 +323,9 @@ export default class HybridBackendAdapter implements IBackendPort {
 
       return { courses: uniqueCourses };
     } catch (error) {
-      console.warn(
-        "HybridBackendAdapter: Failed to load worlds from IndexedDB",
-        error,
+      this.logger.log(
+        LogLevelTypes.WARN,
+        `HybridBackendAdapter: Failed to load worlds from IndexedDB: ${error}`,
       );
       // Fallback to public worlds only
       return { courses: publicWorlds };
@@ -346,7 +357,10 @@ export default class HybridBackendAdapter implements IBackendPort {
       const parsed = JSON.parse(stored);
       return parsed.elements || {};
     } catch (error) {
-      console.error("Failed to parse progress from localStorage:", error);
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        `Failed to parse progress from localStorage: ${error}`,
+      );
       return {};
     }
   }
@@ -397,9 +411,9 @@ export default class HybridBackendAdapter implements IBackendPort {
       const parsed = JSON.parse(stored);
       return parsed.elements || {};
     } catch (error) {
-      console.error(
-        "Failed to parse adaptivity progress from localStorage:",
-        error,
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        `Failed to parse adaptivity progress from localStorage: ${error}`,
       );
       return {};
     }
@@ -547,7 +561,8 @@ export default class HybridBackendAdapter implements IBackendPort {
     elementID: ComponentID,
     courseID: ComponentID,
   ): Promise<boolean> {
-    console.log(
+    this.logger.log(
+      LogLevelTypes.DEBUG,
       `HybridBackendAdapter: scoreElement - Element ${elementID} in World ${courseID}`,
     );
     this.saveProgressToLocalStorage(courseID, elementID, true);
@@ -556,13 +571,11 @@ export default class HybridBackendAdapter implements IBackendPort {
 
   /**
    * Scores H5P element
-   * For hybrid backend, scoring is not persisted
+   * For hybrid backend, scoring is persisted to localStorage based on xAPI evaluation
+   * Returns true if the event was processed successfully (even if no scoring occurred)
+   * The actual scoring only happens for completed/answered events with positive results
    */
   async scoreH5PElement(data: ScoreH5PElementParams): Promise<boolean> {
-    console.log(
-      `HybridBackendAdapter: scoreH5PElement called (not persisted) - H5P ${data.h5pID}`,
-    );
-
     // Basic xAPI evaluation for UI feedback
     const xapiEvent = data.rawH5PEvent;
 
@@ -571,19 +584,34 @@ export default class HybridBackendAdapter implements IBackendPort {
     const isAnswered =
       xapiEvent.verb?.id === "http://adlnet.gov/expapi/verbs/answered";
 
+    // Only process scoring for answered/completed events
     if (isAnswered || isCompleted) {
+      let scoredSuccessfully = false;
       const result = xapiEvent.result;
+
       if (result) {
         if (typeof result.success === "boolean") {
-          return result.success;
-        }
-        if (result.score && typeof result.score.scaled === "number") {
-          return result.score.scaled >= 0.6;
+          scoredSuccessfully = result.success;
+        } else if (result.score && typeof result.score.scaled === "number") {
+          scoredSuccessfully = result.score.scaled >= 0.6;
         }
       }
+
+      // Persist the score to localStorage if successful
+      if (scoredSuccessfully) {
+        this.saveProgressToLocalStorage(data.courseID, data.h5pID, true);
+        this.logger.log(
+          LogLevelTypes.DEBUG,
+          `HybridBackendAdapter: scoreH5PElement - H5P ${data.h5pID} scored successfully`,
+        );
+      }
+
+      return scoredSuccessfully;
     }
 
-    return false;
+    // For non-scoring events (interacted, progressed, etc.), just return true
+    // to indicate the event was processed without error
+    return true;
   }
 
   /**
@@ -591,7 +619,8 @@ export default class HybridBackendAdapter implements IBackendPort {
    * For hybrid backend, no authentication - return dummy token
    */
   async loginUser(userCredentials: UserCredentialParams): Promise<string> {
-    console.log(
+    this.logger.log(
+      LogLevelTypes.INFO,
       `HybridBackendAdapter: Login (no authentication) - User: ${userCredentials.username}`,
     );
     // Return a dummy token
@@ -616,7 +645,10 @@ export default class HybridBackendAdapter implements IBackendPort {
     ) as any;
 
     if (!element || !element.adaptivityContent) {
-      console.error(`Adaptivity element ${submissionData.elementID} not found`);
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        `Adaptivity element ${submissionData.elementID} not found`,
+      );
       return this.getDefaultAdaptivityResponse(submissionData, false);
     }
 
@@ -626,7 +658,10 @@ export default class HybridBackendAdapter implements IBackendPort {
     );
 
     if (!task) {
-      console.error(`Task ${submissionData.taskID} not found`);
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        `Task ${submissionData.taskID} not found`,
+      );
       return this.getDefaultAdaptivityResponse(submissionData, false);
     }
 
@@ -636,7 +671,10 @@ export default class HybridBackendAdapter implements IBackendPort {
     );
 
     if (!question) {
-      console.error(`Question ${submissionData.questionID} not found`);
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        `Question ${submissionData.questionID} not found`,
+      );
       return this.getDefaultAdaptivityResponse(submissionData, false);
     }
 
@@ -864,19 +902,21 @@ export default class HybridBackendAdapter implements IBackendPort {
     if (stored) {
       try {
         const parsed = JSON.parse(stored);
-        console.log(
+        this.logger.log(
+          LogLevelTypes.DEBUG,
           "HybridBackendAdapter: getAvatarConfig - loaded from localStorage",
         );
         return Object.assign(new BackendAvatarConfigTO(), parsed);
       } catch (error) {
-        console.error(
-          "Failed to parse avatar config from localStorage:",
-          error,
+        this.logger.log(
+          LogLevelTypes.ERROR,
+          `Failed to parse avatar config from localStorage: ${error}`,
         );
       }
     }
 
-    console.log(
+    this.logger.log(
+      LogLevelTypes.DEBUG,
       "HybridBackendAdapter: getAvatarConfig - returning default avatar",
     );
 
@@ -926,12 +966,16 @@ export default class HybridBackendAdapter implements IBackendPort {
     const key = "adler_avatar_config";
     try {
       this.localStoragePort.setItem(key, JSON.stringify(avatarConfig));
-      console.log(
+      this.logger.log(
+        LogLevelTypes.DEBUG,
         "HybridBackendAdapter: updateAvatarConfig - saved to localStorage",
       );
       return true;
     } catch (error) {
-      console.error("Failed to save avatar config to localStorage:", error);
+      this.logger.log(
+        LogLevelTypes.ERROR,
+        `Failed to save avatar config to localStorage: ${error}`,
+      );
       return false;
     }
   }
