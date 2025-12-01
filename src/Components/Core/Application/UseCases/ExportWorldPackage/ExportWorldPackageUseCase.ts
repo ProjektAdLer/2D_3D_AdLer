@@ -154,20 +154,31 @@ export default class ExportWorldPackageUseCase
 
     for (let i = 0; i < worldIDs.length; i++) {
       const worldID = worldIDs[i];
-      const progress = (i / worldIDs.length) * 100;
-      onProgress(progress, `Lade Welt ${i + 1}/${worldIDs.length}...`);
+      const baseProgress = (i / worldIDs.length) * 100;
+      const progressPerWorld = 100 / worldIDs.length;
 
       try {
         // Check if world exists in IndexedDB
         const existsInIndexedDB = await this.worldStorage.worldExists(worldID);
 
         if (existsInIndexedDB) {
-          // Load from IndexedDB
+          // Load from IndexedDB (fast, no sub-progress needed)
+          onProgress(baseProgress, `Lade Welt ${i + 1}/${worldIDs.length}...`);
           const worldData = await this.loadWorldFromIndexedDB(worldID);
           worldsData.push(worldData);
         } else {
-          // Load from public folder
-          const worldData = await this.loadWorldFromPublic(worldID);
+          // Load from public folder (slow, needs sub-progress)
+          const worldData = await this.loadWorldFromPublic(
+            worldID,
+            (fileProgress, status) => {
+              const totalProgress =
+                baseProgress + (fileProgress / 100) * progressPerWorld;
+              onProgress(
+                totalProgress,
+                `Welt ${i + 1}/${worldIDs.length}: ${status}`,
+              );
+            },
+          );
           worldsData.push(worldData);
         }
       } catch (error) {
@@ -228,8 +239,14 @@ export default class ExportWorldPackageUseCase
 
   /**
    * Load a world from public folder using manifest.json
+   * Uses parallel batch loading for better performance with large file counts
    */
-  private async loadWorldFromPublic(worldID: number): Promise<WorldExportData> {
+  private async loadWorldFromPublic(
+    worldID: number,
+    onProgress?: (progress: number, status: string) => void,
+  ): Promise<WorldExportData> {
+    onProgress?.(0, "Lade Weltindex...");
+
     // First, load the worlds.json to find the world info
     const indexResponse = await fetch(this.baseUrl + "worlds.json");
     if (!indexResponse.ok) {
@@ -264,19 +281,39 @@ export default class ExportWorldPackageUseCase
           (f: string) => f !== "manifest.json",
         );
 
-        for (const filePath of filesToLoad) {
-          try {
-            const fileResponse = await fetch(`${worldBaseUrl}${filePath}`);
-            if (fileResponse.ok) {
-              const blob = await fileResponse.blob();
-              files.push({ path: filePath, blob });
+        // Load files in parallel batches for better performance
+        const BATCH_SIZE = 20; // Number of concurrent fetch requests
+        let loadedCount = 0;
+        const totalFiles = filesToLoad.length;
+
+        for (let i = 0; i < filesToLoad.length; i += BATCH_SIZE) {
+          const batch = filesToLoad.slice(i, i + BATCH_SIZE);
+
+          const batchResults = await Promise.allSettled(
+            batch.map(async (filePath: string) => {
+              const fileResponse = await fetch(`${worldBaseUrl}${filePath}`);
+              if (fileResponse.ok) {
+                const blob = await fileResponse.blob();
+                return { path: filePath, blob };
+              }
+              return null;
+            }),
+          );
+
+          // Process batch results
+          for (const result of batchResults) {
+            if (result.status === "fulfilled" && result.value) {
+              files.push(result.value);
             }
-          } catch (error) {
-            this.logger.log(
-              LogLevelTypes.WARN,
-              `ExportWorldPackageUseCase: Failed to load file ${filePath}: ${error}`,
-            );
+            loadedCount++;
           }
+
+          // Update progress
+          const progress = (loadedCount / totalFiles) * 100;
+          onProgress?.(
+            progress,
+            `Lade Dateien... ${loadedCount}/${totalFiles}`,
+          );
         }
 
         // Get world info from world.json
@@ -293,6 +330,8 @@ export default class ExportWorldPackageUseCase
             // Use default values
           }
         }
+
+        onProgress?.(100, "Welt geladen");
 
         return {
           originalWorldID: worldID,
@@ -313,7 +352,7 @@ export default class ExportWorldPackageUseCase
     }
 
     // Fallback: Load world.json and element files individually (limited H5P support)
-    return this.loadWorldFromPublicFallback(worldID, worldInfo);
+    return this.loadWorldFromPublicFallback(worldID, worldInfo, onProgress);
   }
 
   /**
@@ -323,9 +362,12 @@ export default class ExportWorldPackageUseCase
   private async loadWorldFromPublicFallback(
     worldID: number,
     worldInfo: WorldsIndexEntry,
+    onProgress?: (progress: number, status: string) => void,
   ): Promise<WorldExportData> {
     const worldBaseUrl = `${this.baseUrl}${worldInfo.worldFolder}/`;
     const files: Array<{ path: string; blob: Blob }> = [];
+
+    onProgress?.(0, "Lade world.json...");
 
     // Load world.json
     const worldJsonUrl = `${worldBaseUrl}world.json`;
@@ -346,6 +388,8 @@ export default class ExportWorldPackageUseCase
 
     // Load all element files
     const elements = worldJson.world?.elements || [];
+    let loadedElements = 0;
+
     for (const element of elements) {
       try {
         const elementFiles = await this.loadElementFilesFromPublic(
@@ -361,7 +405,15 @@ export default class ExportWorldPackageUseCase
           `ExportWorldPackageUseCase: Failed to load element ${element.elementId}: ${error}`,
         );
       }
+      loadedElements++;
+      const progress = (loadedElements / elements.length) * 100;
+      onProgress?.(
+        progress,
+        `Lade Elemente... ${loadedElements}/${elements.length}`,
+      );
     }
+
+    onProgress?.(100, "Welt geladen");
 
     return {
       originalWorldID: worldID,
