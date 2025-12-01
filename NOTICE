@@ -1,1 +1,15 @@
-Copyright 2023 Projekt AdLer
+AdLer Engine
+Copyright 2021-2025 Projekt AdLer
+
+This product includes software developed by Projekt AdLer
+(https://projekt-adler.eu).
+
+Licensed under the Apache License, Version 2.0.
+
+This software uses third-party libraries which are listed in 
+THIRD-PARTY-LICENSES.txt or third-party-licenses.txt.
+
+Major dependencies include:
+- BabylonJS (Apache-2.0) - https://www.babylonjs.com/
+- React (MIT) - https://reactjs.org/
+- Inversify (MIT) - https://inversify.io/

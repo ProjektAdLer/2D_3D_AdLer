@@ -178,6 +178,37 @@ async function main() {
     log("📝", "Creating CNAME file for custom domain...", colors.cyan);
     fs.writeFileSync(path.join(tempDir, "CNAME"), CUSTOM_DOMAIN);
 
+    // Copy license files
+    log("📜", "Adding license files...", colors.cyan);
+    const projectRoot = buildDir.replace(/[/\\]build$/, "");
+
+    // Copy Apache 2.0 LICENSE
+    const licenseFile = path.join(projectRoot, "LICENSE");
+    if (fs.existsSync(licenseFile)) {
+      fs.copyFileSync(licenseFile, path.join(tempDir, "LICENSE"));
+      log("✅", "Copied LICENSE (Apache-2.0)", colors.green);
+    }
+
+    // Copy NOTICE file if it exists
+    const noticeFile = path.join(projectRoot, "NOTICE");
+    if (fs.existsSync(noticeFile)) {
+      fs.copyFileSync(noticeFile, path.join(tempDir, "NOTICE"));
+      log("✅", "Copied NOTICE", colors.green);
+    }
+
+    // Copy third-party license information
+    const thirdPartyLicenses = path.join(
+      projectRoot,
+      "third-party-licenses.txt",
+    );
+    if (fs.existsSync(thirdPartyLicenses)) {
+      fs.copyFileSync(
+        thirdPartyLicenses,
+        path.join(tempDir, "THIRD-PARTY-LICENSES.txt"),
+      );
+      log("✅", "Copied THIRD-PARTY-LICENSES.txt", colors.green);
+    }
+
     // Add all files and commit
     log("💾", "Committing changes...", colors.cyan);
     exec("git add .");
