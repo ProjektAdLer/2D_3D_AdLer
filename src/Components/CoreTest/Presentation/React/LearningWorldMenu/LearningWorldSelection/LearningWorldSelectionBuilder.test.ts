@@ -17,7 +17,7 @@ describe("WorldSelectionBuilder", () => {
     CoreDIContainer.snapshot();
 
     CoreDIContainer.rebind(PORT_TYPES.ILearningWorldPort).toConstantValue(
-      worldPortMock
+      worldPortMock,
     );
   });
 
@@ -43,7 +43,7 @@ describe("WorldSelectionBuilder", () => {
     expect(worldPortMock.registerAdapter).toBeCalledTimes(1);
     expect(worldPortMock.registerAdapter).toBeCalledWith(
       systemUnderTest["presenter"],
-      LocationScope.worldMenu
+      LocationScope._global,
     );
   });
 });

@@ -40,6 +40,9 @@ Object.defineProperty(window, "localStorage", {
   value: localStorageMock,
 });
 
+// Mock H5PIntegration global object for cleanup
+(global as any).H5PIntegration = { contents: {} };
+
 describe("PrimitiveH5PContent", () => {
   let mockController: jest.Mocked<ILearningElementModalController>;
 
