@@ -5,6 +5,7 @@ import OpencastVideoHost from "./VideoHosters/OpencastVideoHost";
 import VimeoVideoHost from "./VideoHosters/VimeoVideoHost";
 import CookieConsentBlocker from "./CookieConsentBlocker";
 import ILearningElementModalController from "../ILearningElementModalController";
+import LocalVideoHost from "./VideoHosters/LocalVideoHost";
 
 export default function VideoComponent({
   viewModel,
@@ -37,6 +38,7 @@ function getVideoComponent(filepath: string) {
   const youtubeRegex = /youtu/;
   const opencastRegex = /paella/;
   const vimeoRegex = /vimeo/;
+  const localVideoRegex = /.mp4$|.avi$|.mov$|.webm$/;
 
   if (youtubeRegex.test(filepath)) {
     return <YoutubeVideoHost url={filepath} />;
@@ -44,6 +46,8 @@ function getVideoComponent(filepath: string) {
     return <OpencastVideoHost url={filepath} />;
   } else if (vimeoRegex.test(filepath)) {
     return <VimeoVideoHost url={filepath} />;
+  } else if (localVideoRegex.test(filepath)) {
+    return <LocalVideoHost url={filepath} />;
   } else {
     return "No Video Component found for given URL" + filepath;
   }
