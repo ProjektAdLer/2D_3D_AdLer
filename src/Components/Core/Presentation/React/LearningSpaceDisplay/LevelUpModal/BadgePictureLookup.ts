@@ -42,28 +42,88 @@ const badgePicturesCampus: { [key: number]: { [lang: string]: string } } = {
 };
 
 const badgePicturesSuburb: { [key: number]: { [lang: string]: string } } = {
-  1: require("../../../../../../../src/Assets/badges/badge-1.png"),
-  2: require("../../../../../../../src/Assets/badges/badge-1.png"),
-  3: require("../../../../../../../src/Assets/badges/badge-1.png"),
-  4: require("../../../../../../../src/Assets/badges/badge-1.png"),
-  5: require("../../../../../../../src/Assets/badges/badge-1.png"),
-  6: require("../../../../../../../src/Assets/badges/badge-1.png"),
-  7: require("../../../../../../../src/Assets/badges/badge-1.png"),
-  8: require("../../../../../../../src/Assets/badges/badge-1.png"),
-  9: require("../../../../../../../src/Assets/badges/badge-1.png"),
-  10: require("../../../../../../../src/Assets/badges/badge-1.png"),
+  1: {
+    de: require("../../../../../../../src/Assets/badges/badge-1.png"),
+    en: require("../../../../../../../src/Assets/badges/badge-1.png"),
+  },
+  2: {
+    de: require("../../../../../../../src/Assets/badges/badge-1.png"),
+    en: require("../../../../../../../src/Assets/badges/badge-1.png"),
+  },
+  3: {
+    de: require("../../../../../../../src/Assets/badges/badge-1.png"),
+    en: require("../../../../../../../src/Assets/badges/badge-1.png"),
+  },
+  4: {
+    de: require("../../../../../../../src/Assets/badges/badge-1.png"),
+    en: require("../../../../../../../src/Assets/badges/badge-1.png"),
+  },
+  5: {
+    de: require("../../../../../../../src/Assets/badges/badge-1.png"),
+    en: require("../../../../../../../src/Assets/badges/badge-1.png"),
+  },
+  6: {
+    de: require("../../../../../../../src/Assets/badges/badge-1.png"),
+    en: require("../../../../../../../src/Assets/badges/badge-1.png"),
+  },
+  7: {
+    de: require("../../../../../../../src/Assets/badges/badge-1.png"),
+    en: require("../../../../../../../src/Assets/badges/badge-1.png"),
+  },
+  8: {
+    de: require("../../../../../../../src/Assets/badges/badge-1.png"),
+    en: require("../../../../../../../src/Assets/badges/badge-1.png"),
+  },
+  9: {
+    de: require("../../../../../../../src/Assets/badges/badge-1.png"),
+    en: require("../../../../../../../src/Assets/badges/badge-1.png"),
+  },
+  10: {
+    de: require("../../../../../../../src/Assets/badges/badge-1.png"),
+    en: require("../../../../../../../src/Assets/badges/badge-1.png"),
+  },
 };
 
 const badgePicturesCompany: { [key: number]: { [lang: string]: string } } = {
-  1: require("../../../../../../../src/Assets/badges/badge-1.png"),
-  2: require("../../../../../../../src/Assets/badges/badge-1.png"),
-  3: require("../../../../../../../src/Assets/badges/badge-1.png"),
-  4: require("../../../../../../../src/Assets/badges/badge-1.png"),
-  5: require("../../../../../../../src/Assets/badges/badge-1.png"),
-  6: require("../../../../../../../src/Assets/badges/badge-1.png"),
-  7: require("../../../../../../../src/Assets/badges/badge-1.png"),
-  8: require("../../../../../../../src/Assets/badges/badge-1.png"),
-  9: require("../../../../../../../src/Assets/badges/badge-1.png"),
-  10: require("../../../../../../../src/Assets/badges/badge-1.png"),
+  1: {
+    de: require("../../../../../../../src/Assets/badges/corporate/b-cor-lvl1-prakti.png"),
+    en: require("../../../../../../../src/Assets/badges/corporate-en/b-cor-lvl1-prakti-en.png"),
+  },
+  2: {
+    de: require("../../../../../../../src/Assets/badges/corporate/b-cor-lvl2-teamlove.png"),
+    en: require("../../../../../../../src/Assets/badges/corporate-en/b-cor-lvl2-teamlove-en.png"),
+  },
+  3: {
+    de: require("../../../../../../../src/Assets/badges/corporate/b-cor-lvl3-work-life-balance.png"),
+    en: require("../../../../../../../src/Assets/badges/corporate-en/b-cor-lvl3-work-life-balance-en.png"),
+  },
+  4: {
+    de: require("../../../../../../../src/Assets/badges/corporate/b-cor-lvl4-projekthilfe.png"),
+    en: require("../../../../../../../src/Assets/badges/corporate-en/b-cor-lvl4-projekthilfe-en.png"),
+  },
+  5: {
+    de: require("../../../../../../../src/Assets/badges/corporate/b-cor-lvl5-abteilungswiki.png"),
+    en: require("../../../../../../../src/Assets/badges/corporate-en/b-cor-lvl5-abteilungswiki-en.png"),
+  },
+  6: {
+    de: require("../../../../../../../src/Assets/badges/corporate/b-cor-lvl6-produktivitaetsass.png"),
+    en: require("../../../../../../../src/Assets/badges/corporate-en/b-cor-lvl6-produktivitaetsass-en.png"),
+  },
+  7: {
+    de: require("../../../../../../../src/Assets/badges/corporate/b-cor-lvl7-meeting-wunder.png"),
+    en: require("../../../../../../../src/Assets/badges/corporate-en/b-cor-lvl7-meeting-wunder-en.png"),
+  },
+  8: {
+    de: require("../../../../../../../src/Assets/badges/corporate/b-cor-lvl8-strategiegenie.png"),
+    en: require("../../../../../../../src/Assets/badges/corporate-en/b-cor-lvl8-strategiegenie-en.png"),
+  },
+  9: {
+    de: require("../../../../../../../src/Assets/badges/corporate/b-cor-lvl9-wissensleitung.png"),
+    en: require("../../../../../../../src/Assets/badges/corporate-en/b-cor-lvl9-wissensleitung-en.png"),
+  },
+  10: {
+    de: require("../../../../../../../src/Assets/badges/corporate/b-cor-lvl10-ceo-in-spe.png"),
+    en: require("../../../../../../../src/Assets/badges/corporate-en/b-cor-lvl10-ceo-in-spe-en.png"),
+  },
 };
 export { badgePicturesCampus, badgePicturesSuburb, badgePicturesCompany };
