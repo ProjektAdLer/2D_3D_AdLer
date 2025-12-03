@@ -182,6 +182,7 @@ export default class MockBackendAdapter implements IBackendPort {
       22: baseUrl + "Lernelemente.pdf",
       23: baseUrl + "3D_Adaptivitaetselement.pdf",
       24: "https://youtu.be/gG0RuXkE7ps",
+      25: baseUrl + "Video.mp4",
     };
 
     if (elementID in showcaseElements) {
