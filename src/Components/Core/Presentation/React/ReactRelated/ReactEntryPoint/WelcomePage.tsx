@@ -25,6 +25,10 @@ import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import StyledButton from "../ReactBaseComponents/StyledButton";
 import history from "history/browser";
 import CookieModal from "~ReactComponents/WelcomePage/CookieModal/CookieModal";
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILoggerPort";
+import CORE_TYPES from "~DependencyInjection/CoreTypes";
+import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 import WorldManagerModal from "~ReactComponents/WelcomePage/WorldManagement/WorldManagerModal";
 import WorldManagementButton from "~ReactComponents/WelcomePage/WorldManagement/WorldManagementButton";
 import WorldManagerModalViewModel from "~ReactComponents/WelcomePage/WorldManagement/WorldManagerModalViewModel";
@@ -58,7 +62,7 @@ export default function WelcomePage() {
           // Load avatar configuration after successful login
           await loadAvatarConfigUseCase.executeAsync();
         } catch (error) {
-          console.error("Auto-login failed:", error);
+          logger.log(LogLevelTypes.ERROR, `Showcase login failed: ${error} `);
         }
       };
 
