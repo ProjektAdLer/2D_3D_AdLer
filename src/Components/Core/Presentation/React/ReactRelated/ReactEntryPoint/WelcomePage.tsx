@@ -43,6 +43,7 @@ export default function WelcomePage() {
   const loadAvatarConfigUseCase = useInjection<ILoadAvatarConfigUseCase>(
     USECASE_TYPES.ILoadAvatarConfigUseCase,
   );
+  const logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
 
   // WorldManager Modal
   const [worldManagerViewModel, worldManagerController] = useBuilder<
