@@ -24,6 +24,10 @@ import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import StyledButton from "../ReactBaseComponents/StyledButton";
 import history from "history/browser";
 import CookieModal from "~ReactComponents/WelcomePage/CookieModal/CookieModal";
+import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
+import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILoggerPort";
+import CORE_TYPES from "~DependencyInjection/CoreTypes";
+import { LogLevelTypes } from "src/Components/Core/Domain/Types/LogLevelTypes";
 
 export default function WelcomePage() {
   const { t: translate } = useTranslation("start");
@@ -32,6 +36,7 @@ export default function WelcomePage() {
   const loadAvatarConfigUseCase = useInjection<ILoadAvatarConfigUseCase>(
     USECASE_TYPES.ILoadAvatarConfigUseCase,
   );
+  const logger = CoreDIContainer.get<ILoggerPort>(CORE_TYPES.ILogger);
 
   // Automatic login in showcase mode
   useEffect(() => {
@@ -45,7 +50,7 @@ export default function WelcomePage() {
           // Load avatar configuration after successful login
           await loadAvatarConfigUseCase.executeAsync();
         } catch (error) {
-          console.error("Showcase login failed:", error);
+          logger.log(LogLevelTypes.ERROR, `Showcase login failed: ${error} `);
         }
       };
 

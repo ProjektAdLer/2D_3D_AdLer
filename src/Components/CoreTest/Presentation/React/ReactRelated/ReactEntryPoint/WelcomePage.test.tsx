@@ -8,6 +8,8 @@ import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIConta
 import { mock } from "jest-mock-extended";
 import ILoginUseCase from "../../../../../Core/Application/UseCases/Login/ILoginUseCase";
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
+import Logger from "../../../../../Core/Adapters/Logger/Logger";
+import CORE_TYPES from "../../../../../Core/DependencyInjection/CoreTypes";
 
 jest.mock(
   "../../../../../Core/Presentation/React/WelcomePage/LMSButton/LMSButtonView.tsx",
@@ -34,6 +36,7 @@ jest.mock(
 );
 
 const mockLoginUseCase = mock<ILoginUseCase>();
+const loggerMock = mock<Logger>();
 
 describe("Welcome Page", () => {
   beforeAll(() => {
@@ -41,6 +44,7 @@ describe("Welcome Page", () => {
     CoreDIContainer.rebind(USECASE_TYPES.ILoginUseCase).toConstantValue(
       mockLoginUseCase,
     );
+    CoreDIContainer.rebind(CORE_TYPES.ILogger).toConstantValue(loggerMock);
   });
 
   afterAll(() => {
@@ -169,5 +173,25 @@ describe("Welcome Page", () => {
       .getByRole("img", { name: /adler logo/i })
       .parentElement?.querySelector("section:nth-child(4)");
     expect(buttonSectionShowcase).toBeInTheDocument();
+  });
+
+  test(" should call logger with error if showcase login fails", async () => {
+    process.env.REACT_APP_IS_SHOWCASE = "true";
+    const mockError = new Error("Login failed");
+    mockLoginUseCase.executeAsync.mockRejectedValueOnce(mockError);
+
+    render(
+      <Provider container={CoreDIContainer}>
+        <WelcomePage />
+      </Provider>,
+    );
+
+    // Wait for the async effect to complete
+    await new Promise(process.nextTick);
+
+    expect(loggerMock.log).toHaveBeenCalledWith(
+      "ERROR",
+      `Showcase login failed: ${mockError} `,
+    );
   });
 });
