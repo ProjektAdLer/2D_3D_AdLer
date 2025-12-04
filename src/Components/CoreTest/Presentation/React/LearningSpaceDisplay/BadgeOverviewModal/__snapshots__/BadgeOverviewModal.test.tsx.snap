@@ -366,6 +366,7 @@ Object {
                   <img
                     alt="0"
                     class="h-16 w-16 object-contain"
+                    src="b-cor-lvl1-prakti.png"
                   />
                 </div>
                 <div
@@ -374,6 +375,7 @@ Object {
                   <img
                     alt="1"
                     class="h-16 w-16 object-contain"
+                    src="b-cor-lvl2-teamlove.png"
                   />
                 </div>
                 <div
@@ -382,6 +384,7 @@ Object {
                   <img
                     alt="2"
                     class="h-16 w-16 object-contain"
+                    src="b-cor-lvl3-work-life-balance.png"
                   />
                 </div>
                 <div
@@ -390,6 +393,7 @@ Object {
                   <img
                     alt="3"
                     class="h-16 w-16 object-contain"
+                    src="b-cor-lvl4-projekthilfe.png"
                   />
                 </div>
                 <div
@@ -398,6 +402,7 @@ Object {
                   <img
                     alt="4"
                     class="h-16 w-16 object-contain"
+                    src="b-cor-lvl5-abteilungswiki.png"
                   />
                 </div>
                 <div
@@ -406,6 +411,7 @@ Object {
                   <img
                     alt="5"
                     class="h-16 w-16 object-contain"
+                    src="b-cor-lvl6-produktivitaetsass.png"
                   />
                 </div>
                 <div
@@ -414,6 +420,7 @@ Object {
                   <img
                     alt="6"
                     class="h-16 w-16 object-contain"
+                    src="b-cor-lvl7-meeting-wunder.png"
                   />
                 </div>
                 <div
@@ -422,6 +429,7 @@ Object {
                   <img
                     alt="7"
                     class="h-16 w-16 object-contain"
+                    src="b-cor-lvl8-strategiegenie.png"
                   />
                 </div>
                 <div
@@ -430,6 +438,7 @@ Object {
                   <img
                     alt="8"
                     class="h-16 w-16 object-contain"
+                    src="b-cor-lvl9-wissensleitung.png"
                   />
                 </div>
                 <div
@@ -438,6 +447,7 @@ Object {
                   <img
                     alt="9"
                     class="h-16 w-16 object-contain"
+                    src="b-cor-lvl10-ceo-in-spe.png"
                   />
                 </div>
               </div>
@@ -488,6 +498,7 @@ Object {
                 <img
                   alt="0"
                   class="h-16 w-16 object-contain"
+                  src="b-cor-lvl1-prakti.png"
                 />
               </div>
               <div
@@ -496,6 +507,7 @@ Object {
                 <img
                   alt="1"
                   class="h-16 w-16 object-contain"
+                  src="b-cor-lvl2-teamlove.png"
                 />
               </div>
               <div
@@ -504,6 +516,7 @@ Object {
                 <img
                   alt="2"
                   class="h-16 w-16 object-contain"
+                  src="b-cor-lvl3-work-life-balance.png"
                 />
               </div>
               <div
@@ -512,6 +525,7 @@ Object {
                 <img
                   alt="3"
                   class="h-16 w-16 object-contain"
+                  src="b-cor-lvl4-projekthilfe.png"
                 />
               </div>
               <div
@@ -520,6 +534,7 @@ Object {
                 <img
                   alt="4"
                   class="h-16 w-16 object-contain"
+                  src="b-cor-lvl5-abteilungswiki.png"
                 />
               </div>
               <div
@@ -528,6 +543,7 @@ Object {
                 <img
                   alt="5"
                   class="h-16 w-16 object-contain"
+                  src="b-cor-lvl6-produktivitaetsass.png"
                 />
               </div>
               <div
@@ -536,6 +552,7 @@ Object {
                 <img
                   alt="6"
                   class="h-16 w-16 object-contain"
+                  src="b-cor-lvl7-meeting-wunder.png"
                 />
               </div>
               <div
@@ -544,6 +561,7 @@ Object {
                 <img
                   alt="7"
                   class="h-16 w-16 object-contain"
+                  src="b-cor-lvl8-strategiegenie.png"
                 />
               </div>
               <div
@@ -552,6 +570,7 @@ Object {
                 <img
                   alt="8"
                   class="h-16 w-16 object-contain"
+                  src="b-cor-lvl9-wissensleitung.png"
                 />
               </div>
               <div
@@ -560,6 +579,7 @@ Object {
                 <img
                   alt="9"
                   class="h-16 w-16 object-contain"
+                  src="b-cor-lvl10-ceo-in-spe.png"
                 />
               </div>
             </div>
@@ -667,6 +687,7 @@ Object {
                   <img
                     alt="0"
                     class="h-16 w-16 object-contain"
+                    src="badge-1.png"
                   />
                 </div>
                 <div
@@ -675,6 +696,7 @@ Object {
                   <img
                     alt="1"
                     class="h-16 w-16 object-contain"
+                    src="badge-1.png"
                   />
                 </div>
                 <div
@@ -683,6 +705,7 @@ Object {
                   <img
                     alt="2"
                     class="h-16 w-16 object-contain"
+                    src="badge-1.png"
                   />
                 </div>
                 <div
@@ -691,6 +714,7 @@ Object {
                   <img
                     alt="3"
                     class="h-16 w-16 object-contain"
+                    src="badge-1.png"
                   />
                 </div>
                 <div
@@ -699,6 +723,7 @@ Object {
                   <img
                     alt="4"
                     class="h-16 w-16 object-contain"
+                    src="badge-1.png"
                   />
                 </div>
                 <div
@@ -707,6 +732,7 @@ Object {
                   <img
                     alt="5"
                     class="h-16 w-16 object-contain"
+                    src="badge-1.png"
                   />
                 </div>
                 <div
@@ -715,6 +741,7 @@ Object {
                   <img
                     alt="6"
                     class="h-16 w-16 object-contain"
+                    src="badge-1.png"
                   />
                 </div>
                 <div
@@ -723,6 +750,7 @@ Object {
                   <img
                     alt="7"
                     class="h-16 w-16 object-contain"
+                    src="badge-1.png"
                   />
                 </div>
                 <div
@@ -731,6 +759,7 @@ Object {
                   <img
                     alt="8"
                     class="h-16 w-16 object-contain"
+                    src="badge-1.png"
                   />
                 </div>
                 <div
@@ -739,6 +768,7 @@ Object {
                   <img
                     alt="9"
                     class="h-16 w-16 object-contain"
+                    src="badge-1.png"
                   />
                 </div>
               </div>
@@ -789,6 +819,7 @@ Object {
                 <img
                   alt="0"
                   class="h-16 w-16 object-contain"
+                  src="badge-1.png"
                 />
               </div>
               <div
@@ -797,6 +828,7 @@ Object {
                 <img
                   alt="1"
                   class="h-16 w-16 object-contain"
+                  src="badge-1.png"
                 />
               </div>
               <div
@@ -805,6 +837,7 @@ Object {
                 <img
                   alt="2"
                   class="h-16 w-16 object-contain"
+                  src="badge-1.png"
                 />
               </div>
               <div
@@ -813,6 +846,7 @@ Object {
                 <img
                   alt="3"
                   class="h-16 w-16 object-contain"
+                  src="badge-1.png"
                 />
               </div>
               <div
@@ -821,6 +855,7 @@ Object {
                 <img
                   alt="4"
                   class="h-16 w-16 object-contain"
+                  src="badge-1.png"
                 />
               </div>
               <div
@@ -829,6 +864,7 @@ Object {
                 <img
                   alt="5"
                   class="h-16 w-16 object-contain"
+                  src="badge-1.png"
                 />
               </div>
               <div
@@ -837,6 +873,7 @@ Object {
                 <img
                   alt="6"
                   class="h-16 w-16 object-contain"
+                  src="badge-1.png"
                 />
               </div>
               <div
@@ -845,6 +882,7 @@ Object {
                 <img
                   alt="7"
                   class="h-16 w-16 object-contain"
+                  src="badge-1.png"
                 />
               </div>
               <div
@@ -853,6 +891,7 @@ Object {
                 <img
                   alt="8"
                   class="h-16 w-16 object-contain"
+                  src="badge-1.png"
                 />
               </div>
               <div
@@ -861,6 +900,7 @@ Object {
                 <img
                   alt="9"
                   class="h-16 w-16 object-contain"
+                  src="badge-1.png"
                 />
               </div>
             </div>
