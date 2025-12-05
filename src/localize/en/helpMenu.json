@@ -1,7 +1,7 @@
 {
   "explanation": "If problems arise, or something is unclear you can:",
   "manual": "access the user documentation of the 3d-learning environment",
-  "bug": "report a bug",
+  "bug": "report a bug (by creating a new Github issue)",
   "logData": "download the log to attach it to your bug report",
   "manualPDF": "AdLer Engine<br/>User Manual",
   "bugReport": "Bug Report",
