@@ -27,6 +27,8 @@ export interface ValidationWarning {
 /**
  * World document interface (ATF/DSL/AWT format)
  */
+// Used for documentation purposes - validates against this structure
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface WorldDocument {
   $type: string;
   fileVersion?: string;
@@ -37,7 +39,7 @@ interface WorldDocument {
     worldUUID?: string;
     worldDescription?: string;
     theme?: string;
-    spaces: any[];
+    spaces: unknown[];
     elements: LearningElement[];
   };
 }
@@ -200,7 +202,7 @@ export default class MBZValidator {
     const errors: ValidationError[] = [];
     const seenErrors = new Set<string>(); // Avoid duplicate errors
 
-    for (const [path, _] of files.entries()) {
+    for (const [path] of files.entries()) {
       // Check for path traversal attempts
       if (path.includes("..") || path.startsWith("/")) {
         if (!seenErrors.has("PATH_TRAVERSAL")) {
@@ -215,7 +217,8 @@ export default class MBZValidator {
       }
 
       // Check for null bytes and control characters
-      if (/[\x00-\x1F]/.test(path)) {
+      // eslint-disable-next-line no-control-regex
+      if (/[\x00-\x1f]/.test(path)) {
         if (!seenErrors.has("CONTROL_CHARS")) {
           errors.push({
             code: "INVALID_FILE_PATH",

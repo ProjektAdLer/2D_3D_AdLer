@@ -69,7 +69,7 @@ export default function WelcomePage() {
 
       performAutoLogin();
     }
-  }, [isFileBasedBackend, loginUseCase, loadAvatarConfigUseCase]);
+  }, [isFileBasedBackend, loginUseCase, loadAvatarConfigUseCase, logger]);
 
   return (
     <div
