@@ -1,0 +1,11 @@
+{
+  "worlds": [
+    {
+      "worldID": 1,
+      "worldName": "AdLer_in_a_Nutshell",
+      "worldFolder": "AdLer_in_a_Nutshell",
+      "description": "Dieser Workshop soll Interessierten eine Einführung und einen Überblick über das Projekt AdLer geben.",
+      "elementCount": 24
+    }
+  ]
+}

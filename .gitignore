@@ -19,12 +19,11 @@ GEMINI.md
 /public/env-config.js
 env-config.js
 
-# MBZ input files (large binary files)
-/public/MBZ/*.mbz
+# MBZ folder is no longer needed
+/public/MBZ/
 
-# Extracted learning worlds (generated from MBZ files)
-/public/LearningWorlds/*/
-!/public/LearningWorlds/worlds.json
+# Learning worlds - keep the default world in the repo
+!/public/LearningWorlds/AdLer_in_a_Nutshell/
 
 # Claude Code project instructions
 claude.md

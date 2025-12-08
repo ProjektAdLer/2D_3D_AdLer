@@ -1,0 +1,924 @@
+{
+  "$type": "AWT",
+  "fileVersion": "2.3.0",
+  "amgVersion": "2.3.1",
+  "author": "Antonia Dörringer, Daniel Glaab, Lukas Schaab",
+  "language": "de",
+  "world": {
+    "$type": "LearningWorld",
+    "evaluationLink": "",
+    "theme": "CampusKempten",
+    "enrolmentKey": "",
+    "worldName": "AdLer_in_a_Nutshell",
+    "worldUUID": "7b084861-935f-4528-a23a-27606d697c5f",
+    "worldDescription": "Dieser Workshop soll Interessierten eine Einführung und einen Überblick über das Projekt AdLer geben.",
+    "worldGoals": [
+      "Die Autorinnen und Autoren können eigenständig eine 3D-Lernwelt erstellen,",
+      "indem sie die verschiedenen Funktionen des AdLer-Autorentools nutzen,",
+      "um die Lernwelt im Sinne der Motivationsförderung in ihrer Hochschullehre verwenden zu können."
+    ],
+    "topics": [],
+    "spaces": [
+      {
+        "$type": "LearningSpace",
+        "spaceGoals": [],
+        "spaceStory": {
+          "$type": "SimpleSpaceStory",
+          "introStory": {
+            "$type": "SimpleSpaceStoryElement",
+            "storyTexts": [
+              "Hallo liebe Gäste!\nMein Name ist Lukas.\nIch möchte Ihnen heute das Projekt AdLer und seine beiden Anwendungen näher bringen.",
+              "Zuerst blicken wir in die Vergangenheit. Erwarten Sie Dramatik und Spannung in unserem kurzen Einführungsvideo!",
+              "Laufen Sie gerne durch den Raum und erkunden Sie diesen genauer. Das tun Sie mit einem Klick, an die Stelle, zu der Ihr Avatar laufen soll.",
+              "Über den Menü Button, im oberen linken Eck der Anwendung, können Sie sich mit dem Button \"Steuerung\" einen Überblick über diese machen. ",
+              "Laufen Sie doch einmal zum gelb leuchtenden Fernseher. Sobald dieser orange leuchtet, können Sie ihn per Mausklick auswählen und den verknüpften Videoinhalt ansehen.",
+              "Falls Sie in Ihrer Farbsicht eingeschränkt sind, achten Sie einfach auf die Veränderung der Umrandung der Lernelemente. Diese geschieht, wenn Sie nah genug an einem Element stehen.",
+              "Und jetzt: Viel Spaß mit der AdLer 3D-Lernumgebung!\nUm diese Unterhaltung zu beenden, klicken Sie auf den Button: \"Danke und mach's gut!\""
+            ],
+            "elementModel": "a-npc-teama-male",
+            "modalFacialExpression": "welcome",
+            "storyNpcName": "Lukas"
+          },
+          "outroStory": {
+            "$type": "SimpleSpaceStoryElement",
+            "storyTexts": [
+              "So, das war nun ein kurzer Blick in die Vergangenheit. Es gibt einiges zu tun, aber wie Lukas schon sagte: \"...das schaffen wir!\". ",
+              "Ich wünschte, ich könnte auch bereits einen Blick in eine Glaskugel wagen, um zu schauen, ob ich bei Ihnen im Anschluss an unsere Veranstaltung in zufriedene, freudig erregte oder gelangweilte Gesichter schaue...",
+              "Wir werden sehen! Nun auf zu den nächsten Räumen!\nUm zu diesen zu gelangen, bewegen Sie Ihren Avatar zur nun geöffneten, roten Ausgangstür und wählen diese dann per Mausklick aus. Daraufhin, erscheint ein Fenster, in welchem Sie den nun freigeschalteten nächsten Raum auswählen können.",
+              "Sie haben den Überblick verloren, weil ihnen alles zu nah heran gezoomt ist? Versuchen Sie einmal mithilfe des Mausrads oder der Scrollgeste auf Ihrem Trackpad oder Mobilgerät die Kamera weiter vom Raum zu entfernen. So finden Sie sich sicher schnell zurecht."
+            ],
+            "elementModel": "a-npc-teama-male",
+            "modalFacialExpression": "shocked",
+            "storyNpcName": ""
+          }
+        },
+        "spaceName": "Vorgeschichte",
+        "requiredPointsToComplete": 1,
+        "spaceId": 1,
+        "spaceUUID": "2ec82993-0cd2-4936-a83f-914314cb18da",
+        "spaceDescription": "Unser Lukas muss sich einigen Herausforderungen stellen...",
+        "spaceSlotContents": [null, 1, null, null, null, null],
+        "requiredSpacesToEnter": "",
+        "spaceTemplate": "R_20X20_6L",
+        "spaceTemplateStyle": "LearningArea"
+      },
+      {
+        "$type": "LearningSpace",
+        "spaceGoals": [
+          "Die Autorinnen und Autoren können das AdLer-Projekt hinsichtlich seiner administrativen Struktur und der Inhalte beschreiben."
+        ],
+        "spaceStory": {
+          "$type": "SimpleSpaceStory",
+          "introStory": {
+            "$type": "SimpleSpaceStoryElement",
+            "storyTexts": [
+              "Wo fange ich bei der Vorstellung von AdLer denn nur an? Nun vielleicht bei grundsätzlichen Informationen! Warum haben wir das Projekt, im Jahr 2022, überhaupt gestartet? Was war unsere Motivation und welche Ziele möchten wir mit AdLer erreichen?",
+              "Ach ja, und vielleicht sollte ich auch erwähnen, wer \"Wir\" sind, wenn ich von „Wir“ spreche.",
+              "Nun! Lasst uns loslegen!"
+            ],
+            "elementModel": "a-npc-teama-male",
+            "modalFacialExpression": "thumbsup",
+            "storyNpcName": "Lukas"
+          },
+          "outroStory": null
+        },
+        "spaceName": "Vorstellung von AdLer im Allgemeinen",
+        "requiredPointsToComplete": 5,
+        "spaceId": 2,
+        "spaceUUID": "61852063-6d26-46c6-9936-e3c1eca48626",
+        "spaceDescription": "Erhalten eines Überblicks über das gesamte Projekt AdLer und seiner Mitwirkenden.",
+        "spaceSlotContents": [2, null, 3, null, 4, null, 5, 6],
+        "requiredSpacesToEnter": "1",
+        "spaceTemplate": "R_20X30_8L",
+        "spaceTemplateStyle": "EatingArea"
+      },
+      {
+        "$type": "LearningSpace",
+        "spaceGoals": [
+          "Die Autorinnen und Autoren können das AdLer-Projekt hinsichtlich seiner administrativen Struktur und der Inhalte beschreiben.                "
+        ],
+        "spaceStory": {
+          "$type": "SimpleSpaceStory",
+          "introStory": {
+            "$type": "SimpleSpaceStoryElement",
+            "storyTexts": [
+              "Wir kommen nun zum ersten Tool, das im Rahmen des Projekts entstanden ist.",
+              "Ich muss gestehen, ich bin etwas nervös, da ich zwar das Tool vorstelle, selbst aber gar nicht daran mitgewirkt habe.",
+              "Das Autorentool ermöglicht Lehrpersonen ihre Inhalte in einer nutzendenfreundlichen Umgebung in Lernelementen und Lernräumen innerhalb einer Lernwelt in Form zu bringen.",
+              "Ich wünsche Ihnen viel Spaß beim erkunden!"
+            ],
+            "elementModel": "a-npc-teama-male",
+            "modalFacialExpression": "angry",
+            "storyNpcName": ""
+          },
+          "outroStory": null
+        },
+        "spaceName": "Autorentool",
+        "requiredPointsToComplete": 9,
+        "spaceId": 3,
+        "spaceUUID": "42cf722e-83e7-489c-a1b1-3bf1eff1ce2f",
+        "spaceDescription": "Was ist das Autorentool und wie ist es aufgebaut?",
+        "spaceSlotContents": [7, 8, 9, 10, 11, 12, 13, 14, 15, null],
+        "requiredSpacesToEnter": "2",
+        "spaceTemplate": "L_32X31_10L",
+        "spaceTemplateStyle": "FnE"
+      },
+      {
+        "$type": "LearningSpace",
+        "spaceGoals": [
+          "Die Autorinnen und Autoren können die Möglichkeiten der 3D-Darstellung eines Lernraums beschreiben,\num bei der zukünftigen Gestaltung einer eigenen Lernwelt im Autorentool fundierte Entscheidungen treffen zu können."
+        ],
+        "spaceStory": {
+          "$type": "SimpleSpaceStory",
+          "introStory": {
+            "$type": "SimpleSpaceStoryElement",
+            "storyTexts": [
+              "Nun zum zweiten Tool, das im Rahmen des Projekts entstanden ist.",
+              "Verzeiht mir meine Aufgregung, aber als Mitglied des Teams, das sich in den vergangenen Jahren intensiv mit der Erstellung dieses Tools beschäftigt hat, geht mir einfach das Herz auf, wenn ich darüber berichten darf.",
+              "Der Raum befasst sich außerdem mit der Anbindung an unser AdLer-LMS (Learning Management System) - Moodle.",
+              "Mit dieser Anbindung ist es uns möglich ein Duplikat des im Autorentool erstellten Kurses, auch auf einem LMS in dessen Oberfläche anzubieten.",
+              "Aber sehen Sie selbst!"
+            ],
+            "elementModel": "a-npc-nerddark-male",
+            "modalFacialExpression": "welcome",
+            "storyNpcName": "Günni"
+          },
+          "outroStory": null
+        },
+        "spaceName": "Moodle und 3D-Lernumgebung",
+        "requiredPointsToComplete": 8,
+        "spaceId": 4,
+        "spaceUUID": "ae6c2561-fb3a-4340-a27f-e272081e0cc0",
+        "spaceDescription": "Was ist die 3D-Lernumgebung und wie ist sie aufgebaut?",
+        "spaceSlotContents": [
+          16,
+          null,
+          17,
+          18,
+          null,
+          19,
+          20,
+          null,
+          21,
+          22,
+          null,
+          23,
+          null
+        ],
+        "requiredSpacesToEnter": "2",
+        "spaceTemplate": "T_40X32_13L",
+        "spaceTemplateStyle": "Presentation"
+      },
+      {
+        "$type": "LearningSpace",
+        "spaceGoals": [],
+        "spaceStory": {
+          "$type": "SimpleSpaceStory",
+          "introStory": {
+            "$type": "SimpleSpaceStoryElement",
+            "storyTexts": [
+              "Es war mir eine Freude, Ihnen das Projekt AdLer vorzustellen.",
+              "Ich glaube, ich deute ihre Blicke richtig und sehe entzückte Gesichter. \nWie schön! Glückliche Gäste - glücklicher Gastgeber.",
+              "Ich hoffe Sie konnten vieles aus dieser kleinen Vorstellung unseres Projekts mitnehmen.\nWir sind sehr stolz auf das was wir geschaffen haben und freuen uns darauf, dass der AdLer in Zukunft in der Lehre eingesetzt wird.",
+              "Gehaben Sie sich wohl und herzlichsten Dank für Ihren Besuch!"
+            ],
+            "elementModel": "a-npc-teama-male",
+            "modalFacialExpression": "happy",
+            "storyNpcName": ""
+          },
+          "outroStory": null
+        },
+        "spaceName": "Abschluss",
+        "requiredPointsToComplete": 1,
+        "spaceId": 5,
+        "spaceUUID": "0e9b8c71-4493-447c-aa75-2c1a313c67f8",
+        "spaceDescription": "Das AdLer Team kommt zum Jour fixe zusammen und Lukas präsentiert den Inhalt des Workshops.",
+        "spaceSlotContents": [null, null, null, 24, null, null],
+        "requiredSpacesToEnter": "(3)^(4)",
+        "spaceTemplate": "R_20X20_6L",
+        "spaceTemplateStyle": "TechnicalArea"
+      }
+    ],
+    "elements": [
+      {
+        "$type": "LearningElement",
+        "elementDescription": "Projektleiter Jörg hat alle Hände voll zu tun und bittet Lukas um Hilfe.",
+        "elementGoals": [""],
+        "elementMaxScore": 1,
+        "elementModel": "l-random",
+        "learningSpaceParentId": 1,
+        "url": "https://youtu.be/0hfMiMUI_HE",
+        "elementId": 1,
+        "elementUUID": "b8eb0832-c298-473c-ae2f-d2380e46b438",
+        "elementName": "Was zuvor geschah",
+        "elementCategory": "video",
+        "elementFileType": "url",
+        "elementEstimatedTimeMinutes": 1,
+        "elementDifficulty": 0
+      },
+      {
+        "$type": "LearningElement",
+        "elementDescription": "Grafische Darstellung des AdLer Logos und AdLer Schriftzugs",
+        "elementGoals": [""],
+        "elementMaxScore": 1,
+        "elementModel": "l-picture-paintingeasel-1",
+        "learningSpaceParentId": 2,
+        "url": "",
+        "elementId": 2,
+        "elementUUID": "84a664bb-fb16-4190-89bc-3fa67e396c12",
+        "elementName": "Projektname",
+        "elementCategory": "image",
+        "elementFileType": "jpg",
+        "elementEstimatedTimeMinutes": 1,
+        "elementDifficulty": 0
+      },
+      {
+        "$type": "LearningElement",
+        "elementDescription": "Interaktives Lernelement mit verschiedenen Folien und einer Abschlussfrage.",
+        "elementGoals": [""],
+        "elementMaxScore": 1,
+        "elementModel": "l-h5p-daylightprojector-1",
+        "learningSpaceParentId": 2,
+        "url": "",
+        "elementId": 3,
+        "elementUUID": "6c324c62-1557-4e28-a1f7-c2df227c3c8c",
+        "elementName": "Thema und Ziele",
+        "elementCategory": "h5p",
+        "elementFileType": "h5p",
+        "elementEstimatedTimeMinutes": 2,
+        "elementDifficulty": 0
+      },
+      {
+        "$type": "AdaptivityElement",
+        "elementId": 4,
+        "elementUUID": "a8e01a67-ea55-40d8-8c65-216111d8cd8d",
+        "elementName": "Quiz - Vorstellung",
+        "elementDescription": "Adaptivitätselement zur Wissensüberprüfung und geben von Hinweisen, bei Nichtbestehen. Kann aus Single- und Multiple-Choice Fragen bestehen.",
+        "elementGoals": [""],
+        "elementCategory": "adaptivity",
+        "elementFileType": "adaptivity",
+        "elementMaxScore": 1,
+        "elementModel": "a-npc-alerobot",
+        "learningSpaceParentId": 2,
+        "adaptivityContent": {
+          "$type": "adaptivityContent",
+          "introText": "",
+          "adaptivityTasks": [
+            {
+              "$type": "adaptivityTask",
+              "taskId": 1,
+              "taskUUID": "cb615ef3-9c53-4c05-82f4-6b9f4b69fd7a",
+              "taskTitle": "Projektname",
+              "optional": false,
+              "requiredDifficulty": 0,
+              "adaptivityQuestions": [
+                {
+                  "$type": "adaptivityQuestion",
+                  "questionType": "multipleResponse",
+                  "questionId": 1,
+                  "questionUUID": "70fb6476-cbbf-4b3c-835f-46f2e8641455",
+                  "questionDifficulty": 0,
+                  "questionText": "Wählen Sie den korrekten Projektnamen aus.",
+                  "adaptivityRules": [
+                    {
+                      "$type": "correctnessTrigger",
+                      "triggerId": 1,
+                      "triggerCondition": "incorrect",
+                      "adaptivityAction": {
+                        "$type": "AdaptivityReferenceAction",
+                        "elementId": 2,
+                        "hintText": "Das war leider nicht korrekt. Am besten sehen Sie sich das Lernelement \"Projektname\" nahe der Eingangstür dieses Raumes noch einmal an. Danach finden sie sicher die korrekte Lösung!"
+                      }
+                    }
+                  ],
+                  "choices": [
+                    {
+                      "$type": "AdaptivityQuestionAnswer",
+                      "answerText": "AdLer - Adaptive digitale Lernräume",
+                      "isCorrect": true
+                    },
+                    {
+                      "$type": "AdaptivityQuestionAnswer",
+                      "answerText": "AdLer - Adaptierbare digitale Lernräume",
+                      "isCorrect": false
+                    },
+                    {
+                      "$type": "AdaptivityQuestionAnswer",
+                      "answerText": "ALder - Anzeigbare Lernräume erster Riege",
+                      "isCorrect": false
+                    },
+                    {
+                      "$type": "AdaptivityQuestionAnswer",
+                      "answerText": "ALster - Auch Leichtbiermischgetränke schmecken erfüllend richtig",
+                      "isCorrect": false
+                    }
+                  ]
+                },
+                {
+                  "$type": "adaptivityQuestion",
+                  "questionType": "multipleResponse",
+                  "questionId": 2,
+                  "questionUUID": "5ff9d6f5-7af0-4649-9443-44d5f8682a78",
+                  "questionDifficulty": 100,
+                  "questionText": "Welche Buchstaben des Projektnamens sind Großbuchstaben?",
+                  "adaptivityRules": [
+                    {
+                      "$type": "correctnessTrigger",
+                      "triggerId": 1,
+                      "triggerCondition": "incorrect",
+                      "adaptivityAction": {
+                        "$type": "CommentAction",
+                        "commentText": "Beinahe! Wenn Sie mehr Informationen zum Projekt benötigen dann besuchen Sie uns doch auf unserer Homepage: https://projekt-adler.eu\n"
+                      }
+                    }
+                  ],
+                  "choices": [
+                    {
+                      "$type": "AdaptivityQuestionAnswer",
+                      "answerText": "A/a",
+                      "isCorrect": true
+                    },
+                    {
+                      "$type": "AdaptivityQuestionAnswer",
+                      "answerText": "D/d",
+                      "isCorrect": false
+                    },
+                    {
+                      "$type": "AdaptivityQuestionAnswer",
+                      "answerText": "L/l",
+                      "isCorrect": true
+                    },
+                    {
+                      "$type": "AdaptivityQuestionAnswer",
+                      "answerText": "E/e",
+                      "isCorrect": false
+                    },
+                    {
+                      "$type": "AdaptivityQuestionAnswer",
+                      "answerText": "R/r",
+                      "isCorrect": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "$type": "adaptivityTask",
+              "taskId": 2,
+              "taskUUID": "3eaea188-f017-40de-bfa6-498fb6219cd5",
+              "taskTitle": "Team",
+              "optional": false,
+              "requiredDifficulty": 100,
+              "adaptivityQuestions": [
+                {
+                  "$type": "adaptivityQuestion",
+                  "questionType": "multipleResponse",
+                  "questionId": 3,
+                  "questionUUID": "136a80d8-fc2f-4046-97ad-5e16ded8d167",
+                  "questionDifficulty": 100,
+                  "questionText": "Wie viele Personen zeigt das Foto des AdLer-Teams?",
+                  "adaptivityRules": [
+                    {
+                      "$type": "correctnessTrigger",
+                      "triggerId": 1,
+                      "triggerCondition": "incorrect",
+                      "adaptivityAction": {
+                        "$type": "CommentAction",
+                        "commentText": "Leider knapp daneben! Überlegen Sie noch einmal ganz genau..."
+                      }
+                    }
+                  ],
+                  "choices": [
+                    {
+                      "$type": "AdaptivityQuestionAnswer",
+                      "answerText": "7",
+                      "isCorrect": false
+                    },
+                    {
+                      "$type": "AdaptivityQuestionAnswer",
+                      "answerText": "25",
+                      "isCorrect": false
+                    },
+                    {
+                      "$type": "AdaptivityQuestionAnswer",
+                      "answerText": "23",
+                      "isCorrect": true
+                    },
+                    {
+                      "$type": "AdaptivityQuestionAnswer",
+                      "answerText": "16",
+                      "isCorrect": false
+                    }
+                  ]
+                },
+                {
+                  "$type": "adaptivityQuestion",
+                  "questionType": "multipleResponse",
+                  "questionId": 4,
+                  "questionUUID": "fe837225-2757-484f-a632-d5e4bd457776",
+                  "questionDifficulty": 200,
+                  "questionText": "Denken Sie an das Teamfoto. Wie viele Personen tragen eine Brille?",
+                  "adaptivityRules": [
+                    {
+                      "$type": "correctnessTrigger",
+                      "triggerId": 1,
+                      "triggerCondition": "incorrect",
+                      "adaptivityAction": {
+                        "$type": "CommentAction",
+                        "commentText": "Es ist nicht leicht zu erkennen, aber schauen Sie noch einmal ganz genau hin!"
+                      }
+                    }
+                  ],
+                  "choices": [
+                    {
+                      "$type": "AdaptivityQuestionAnswer",
+                      "answerText": "6",
+                      "isCorrect": false
+                    },
+                    {
+                      "$type": "AdaptivityQuestionAnswer",
+                      "answerText": "8",
+                      "isCorrect": true
+                    },
+                    {
+                      "$type": "AdaptivityQuestionAnswer",
+                      "answerText": "12",
+                      "isCorrect": false
+                    },
+                    {
+                      "$type": "AdaptivityQuestionAnswer",
+                      "answerText": "4",
+                      "isCorrect": false
+                    }
+                  ]
+                },
+                {
+                  "$type": "adaptivityQuestion",
+                  "questionType": "multipleResponse",
+                  "questionId": 5,
+                  "questionUUID": "5fcfd9ef-07ef-4916-87b8-24410c210506",
+                  "questionDifficulty": 0,
+                  "questionText": "Wo steht das Team auf dem Foto?",
+                  "adaptivityRules": [],
+                  "choices": [
+                    {
+                      "$type": "AdaptivityQuestionAnswer",
+                      "answerText": "In der Warteschlange zur \"Silver Star\" im Europa-Park Rust",
+                      "isCorrect": false
+                    },
+                    {
+                      "$type": "AdaptivityQuestionAnswer",
+                      "answerText": "Vor dem Brandenburger Tor in Berlin",
+                      "isCorrect": false
+                    },
+                    {
+                      "$type": "AdaptivityQuestionAnswer",
+                      "answerText": "Auf dem Dach den Campus II der TH Aschaffenburg",
+                      "isCorrect": true
+                    },
+                    {
+                      "$type": "AdaptivityQuestionAnswer",
+                      "answerText": "Im Eingangsbereich eines Fast Food Restaurants",
+                      "isCorrect": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "$type": "adaptivityTask",
+              "taskId": 3,
+              "taskUUID": "2765395c-f7fc-468a-8b5e-bbc6db5e7f6c",
+              "taskTitle": "Standorte",
+              "optional": false,
+              "requiredDifficulty": 0,
+              "adaptivityQuestions": [
+                {
+                  "$type": "adaptivityQuestion",
+                  "questionType": "multipleResponse",
+                  "questionId": 6,
+                  "questionUUID": "0f621202-84a5-46bd-b53b-d8215330a95b",
+                  "questionDifficulty": 0,
+                  "questionText": "An welchem Ort hat die Stiftung Innovation in der Hochschullehre ihren Sitz?",
+                  "adaptivityRules": [
+                    {
+                      "$type": "correctnessTrigger",
+                      "triggerId": 1,
+                      "triggerCondition": "incorrect",
+                      "adaptivityAction": {
+                        "$type": "AdaptivityReferenceAction",
+                        "elementId": 5,
+                        "hintText": "Da haben Sie wohl etwas durcheinander gebracht. Kein Problem! Sie können jederzeit zum betreffenden Lernelement zurückkehren und es sich noch einmal ansehen. Versuchen Sie es doch einmal, dann fällt Ihnen die Lösung sicher leicht!"
+                      }
+                    }
+                  ],
+                  "choices": [
+                    {
+                      "$type": "AdaptivityQuestionAnswer",
+                      "answerText": "Kempten",
+                      "isCorrect": false
+                    },
+                    {
+                      "$type": "AdaptivityQuestionAnswer",
+                      "answerText": "Aschaffenburg",
+                      "isCorrect": false
+                    },
+                    {
+                      "$type": "AdaptivityQuestionAnswer",
+                      "answerText": "Koblenz",
+                      "isCorrect": false
+                    },
+                    {
+                      "$type": "AdaptivityQuestionAnswer",
+                      "answerText": "Hamburg",
+                      "isCorrect": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "$type": "adaptivityTask",
+              "taskId": 4,
+              "taskUUID": "067e8e27-2675-4a91-ac33-c6301c82843f",
+              "taskTitle": "Thema und Ziele",
+              "optional": false,
+              "requiredDifficulty": 100,
+              "adaptivityQuestions": [
+                {
+                  "$type": "adaptivityQuestion",
+                  "questionType": "multipleResponse",
+                  "questionId": 7,
+                  "questionUUID": "baf41c2e-e63f-4d41-9b71-672e039e3f78",
+                  "questionDifficulty": 100,
+                  "questionText": "Unter welches Spielgenre fällt die AdLer 3D-Spielumgebung?",
+                  "adaptivityRules": [
+                    {
+                      "$type": "correctnessTrigger",
+                      "triggerId": 1,
+                      "triggerCondition": "incorrect",
+                      "adaptivityAction": {
+                        "$type": "CommentAction",
+                        "commentText": "Einige der Antwortmöglichkeiten könnten im weitesten Sinne auch in Betracht gezogen werden. Doch nur eine der Möglichkeiten wird explizit im passenden Lernelement genannt. Schauen sie ruhig noch einmal hinein. Die Lösung wird sich Ihnen schnell offenbaren."
+                      }
+                    }
+                  ],
+                  "choices": [
+                    {
+                      "$type": "AdaptivityQuestionAnswer",
+                      "answerText": "Rollenspiel",
+                      "isCorrect": false
+                    },
+                    {
+                      "$type": "AdaptivityQuestionAnswer",
+                      "answerText": "Serious Game",
+                      "isCorrect": true
+                    },
+                    {
+                      "$type": "AdaptivityQuestionAnswer",
+                      "answerText": "Adventure",
+                      "isCorrect": false
+                    },
+                    {
+                      "$type": "AdaptivityQuestionAnswer",
+                      "answerText": "Actionspiel",
+                      "isCorrect": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "elementEstimatedTimeMinutes": 3,
+        "elementDifficulty": null
+      },
+      {
+        "$type": "LearningElement",
+        "elementDescription": "Deutschlandkarte mit den eingezeichneten Standorten der Verbundpartner.",
+        "elementGoals": [""],
+        "elementMaxScore": 1,
+        "elementModel": "l-text-comicshelfsmall-1",
+        "learningSpaceParentId": 2,
+        "url": "",
+        "elementId": 5,
+        "elementUUID": "c0b8c960-b896-4a22-81f0-1032675a3818",
+        "elementName": "Standorte",
+        "elementCategory": "pdf",
+        "elementFileType": "pdf",
+        "elementEstimatedTimeMinutes": 1,
+        "elementDifficulty": 0
+      },
+      {
+        "$type": "LearningElement",
+        "elementDescription": "Foto des AdLer Teams beim Verbundtreffen im Mai 2023.",
+        "elementGoals": [""],
+        "elementMaxScore": 1,
+        "elementModel": "l-image-sciencebio-1",
+        "learningSpaceParentId": 2,
+        "url": "",
+        "elementId": 6,
+        "elementUUID": "c8528398-6b63-4b93-9de9-b13e9de244d9",
+        "elementName": "Team",
+        "elementCategory": "image",
+        "elementFileType": "jpg",
+        "elementEstimatedTimeMinutes": 1,
+        "elementDifficulty": 0
+      },
+      {
+        "$type": "LearningElement",
+        "elementDescription": "In diesem Bild wird erklärt, was im Rahmen des AdLer-\nProjekts unter Lernwelten verstanden wird.",
+        "elementGoals": [""],
+        "elementMaxScore": 1,
+        "elementModel": "l-image-sciencegeo-1",
+        "learningSpaceParentId": 3,
+        "url": "",
+        "elementId": 7,
+        "elementUUID": "d309a6b5-70b8-4b16-aedb-f6ae73149473",
+        "elementName": "Lernwelt Allgemeines",
+        "elementCategory": "image",
+        "elementFileType": "png",
+        "elementEstimatedTimeMinutes": 1,
+        "elementDifficulty": 0
+      },
+      {
+        "$type": "LearningElement",
+        "elementDescription": "In diesem interaktiven Lernelement wird der Aufbau des Autorentools zur Erstellung einer Lernwelt vorgestellt.",
+        "elementGoals": [""],
+        "elementMaxScore": 1,
+        "elementModel": "l-h5p-deskpc-3",
+        "learningSpaceParentId": 3,
+        "url": "",
+        "elementId": 8,
+        "elementUUID": "4547bd2d-d4e2-4e1c-91ab-c9428c5cb3ab",
+        "elementName": "Lernwelt",
+        "elementCategory": "h5p",
+        "elementFileType": "h5p",
+        "elementEstimatedTimeMinutes": 5,
+        "elementDifficulty": 200
+      },
+      {
+        "$type": "LearningElement",
+        "elementDescription": "Das Video erklärt die Bedeutung von Lernräumen und welche charakteristischen Eigenschaften diesen zugeschrieben werden können.",
+        "elementGoals": [""],
+        "elementMaxScore": 1,
+        "elementModel": "l-video-television-1",
+        "learningSpaceParentId": 3,
+        "url": "https://youtu.be/CsV6FdHyltg",
+        "elementId": 9,
+        "elementUUID": "5d3d557a-13f0-4a9b-8879-780a0a5191c4",
+        "elementName": "Lernraum - Allgemeines",
+        "elementCategory": "video",
+        "elementFileType": "url",
+        "elementEstimatedTimeMinutes": 2,
+        "elementDifficulty": 0
+      },
+      {
+        "$type": "LearningElement",
+        "elementDescription": "Mit diesem Bild werden verschiedene mögliche Wege der Zielerreichung gezeigt.",
+        "elementGoals": [""],
+        "elementMaxScore": 1,
+        "elementModel": "l-h5p-blackboard-2",
+        "learningSpaceParentId": 3,
+        "url": "",
+        "elementId": 10,
+        "elementUUID": "f369d75c-7d76-4e25-a8a1-69ec9cbe5623",
+        "elementName": "Lernraum - Lernpfad",
+        "elementCategory": "image",
+        "elementFileType": "png",
+        "elementEstimatedTimeMinutes": 1,
+        "elementDifficulty": 0
+      },
+      {
+        "$type": "LearningElement",
+        "elementDescription": "Dieses Video erklärt den Aufbau der Eingabeunterstützung, die im Autorentool für das Formulieren von Lernzielen bereitgestellt wird.",
+        "elementGoals": [""],
+        "elementMaxScore": 1,
+        "elementModel": "l-video-movieprojector-1",
+        "learningSpaceParentId": 3,
+        "url": "https://youtu.be/9PPilIV71d8",
+        "elementId": 11,
+        "elementUUID": "a7417671-2921-4067-aede-1c1686042a78",
+        "elementName": "Lernraum - Lernziele",
+        "elementCategory": "video",
+        "elementFileType": "url",
+        "elementEstimatedTimeMinutes": 2,
+        "elementDifficulty": 100
+      },
+      {
+        "$type": "LearningElement",
+        "elementDescription": "In diesem Video wird der Aufbau von Grundrissen vorgestellt und welchen Nutzen diese haben.",
+        "elementGoals": [""],
+        "elementMaxScore": 1,
+        "elementModel": "l-video-television-1",
+        "learningSpaceParentId": 3,
+        "url": "https://youtu.be/5AfULkLnROY",
+        "elementId": 12,
+        "elementUUID": "ee43392c-1833-4f1a-a7e4-043eae44e369",
+        "elementName": "Lernraum - Grundrisse",
+        "elementCategory": "video",
+        "elementFileType": "url",
+        "elementEstimatedTimeMinutes": 2,
+        "elementDifficulty": 100
+      },
+      {
+        "$type": "LearningElement",
+        "elementDescription": "In diesem PDF wird das Storyelement vorgestellt, mit welchem das Erzählen einer Geschichte innerhalb einer Lernwelt ermöglicht wird.",
+        "elementGoals": [""],
+        "elementMaxScore": 1,
+        "elementModel": "l-h5p-daylightprojector-1",
+        "learningSpaceParentId": 3,
+        "url": "",
+        "elementId": 13,
+        "elementUUID": "87aff41f-87f0-45a1-b289-116bc685a26b",
+        "elementName": "Storyelement",
+        "elementCategory": "pdf",
+        "elementFileType": "pdf",
+        "elementEstimatedTimeMinutes": 2,
+        "elementDifficulty": 100
+      },
+      {
+        "$type": "LearningElement",
+        "elementDescription": "In diesem PDF werden die Lernelemente thematisiert, welche die Möglichkeit bieten, Lernenden unterschiedliche multimediale Inhalte bereitzustellen.",
+        "elementGoals": [""],
+        "elementMaxScore": 1,
+        "elementModel": "l-text-libraryshelf-1",
+        "learningSpaceParentId": 3,
+        "url": "",
+        "elementId": 14,
+        "elementUUID": "fb7c8f20-f1f5-4c21-acbe-704a042e2e2d",
+        "elementName": "Lernelement",
+        "elementCategory": "pdf",
+        "elementFileType": "pdf",
+        "elementEstimatedTimeMinutes": 3,
+        "elementDifficulty": 0
+      },
+      {
+        "$type": "LearningElement",
+        "elementDescription": "Dieser Text stellt das Adaptivitätselement vor, mit welchem individuelles Lernen ermöglicht werden soll.",
+        "elementGoals": [""],
+        "elementMaxScore": 1,
+        "elementModel": "l-text-libraryshelf-1",
+        "learningSpaceParentId": 3,
+        "url": "",
+        "elementId": 15,
+        "elementUUID": "28fae8c0-41e2-432f-801b-4e36f69babe2",
+        "elementName": "Adaptivitätselement",
+        "elementCategory": "pdf",
+        "elementFileType": "pdf",
+        "elementEstimatedTimeMinutes": 3,
+        "elementDifficulty": 100
+      },
+      {
+        "$type": "LearningElement",
+        "elementDescription": "Informationsfolie zur Darstellung der Lernpfade innerhalb des Menüs der 3D-Umgebung.",
+        "elementGoals": [""],
+        "elementMaxScore": 1,
+        "elementModel": "l-image-sciencewhiteboard-1",
+        "learningSpaceParentId": 4,
+        "url": "",
+        "elementId": 16,
+        "elementUUID": "40670307-4a66-426b-a042-19fd927ce257",
+        "elementName": "Darstellung Lernpfad",
+        "elementCategory": "image",
+        "elementFileType": "jpg",
+        "elementEstimatedTimeMinutes": 1,
+        "elementDifficulty": 0
+      },
+      {
+        "$type": "LearningElement",
+        "elementDescription": "Informationsfolie zu Story Elementen in der 3D-Umgebung.",
+        "elementGoals": [""],
+        "elementMaxScore": 1,
+        "elementModel": "l-text-comicshelfbig-1",
+        "learningSpaceParentId": 4,
+        "url": "",
+        "elementId": 17,
+        "elementUUID": "193db6f9-efd2-4d17-9eb6-57ba63081dbe",
+        "elementName": "Story Element",
+        "elementCategory": "pdf",
+        "elementFileType": "pdf",
+        "elementEstimatedTimeMinutes": 1,
+        "elementDifficulty": 0
+      },
+      {
+        "$type": "LearningElement",
+        "elementDescription": "Informationstext zur Anzeige von Inhalten von AdLer im LMS - Moodle.",
+        "elementGoals": [""],
+        "elementMaxScore": 1,
+        "elementModel": "l-text-bookshelf-2",
+        "learningSpaceParentId": 4,
+        "url": "",
+        "elementId": 18,
+        "elementUUID": "66858527-985c-42ac-b31a-0f002c6d9290",
+        "elementName": "Moodle",
+        "elementCategory": "text",
+        "elementFileType": "txt",
+        "elementEstimatedTimeMinutes": 1,
+        "elementDifficulty": 0
+      },
+      {
+        "$type": "LearningElement",
+        "elementDescription": "Prüfen Sie ihr wissen zur 3D-Lernumgebung in diesem interaktiven Quiz.",
+        "elementGoals": [""],
+        "elementMaxScore": 1,
+        "elementModel": "l-h5p-deskpc-3",
+        "learningSpaceParentId": 4,
+        "url": "",
+        "elementId": 19,
+        "elementUUID": "416ed300-fc68-4fbb-baa9-21903c13e7d1",
+        "elementName": "3D-Lernumgebung",
+        "elementCategory": "h5p",
+        "elementFileType": "h5p",
+        "elementEstimatedTimeMinutes": 2,
+        "elementDifficulty": 100
+      },
+      {
+        "$type": "LearningElement",
+        "elementDescription": "Informationsfolie zur Darstellung von Lernzielen in der 3D-Umgebung.",
+        "elementGoals": [""],
+        "elementMaxScore": 1,
+        "elementModel": "l-image-sciencewhiteboard-1",
+        "learningSpaceParentId": 4,
+        "url": "",
+        "elementId": 20,
+        "elementUUID": "a00c2e87-0fba-464c-8390-081324171cb2",
+        "elementName": "Lernziele",
+        "elementCategory": "image",
+        "elementFileType": "jpg",
+        "elementEstimatedTimeMinutes": 1,
+        "elementDifficulty": 0
+      },
+      {
+        "$type": "LearningElement",
+        "elementDescription": "Videopräsentation mit einer Auflistung der verschiedenen Grundrisse der AdLer Anwendungen. Außerdem werden verschiedene Themes und der Avatar gezeigt.",
+        "elementGoals": [""],
+        "elementMaxScore": 1,
+        "elementModel": "l-video-vrdesk-1",
+        "learningSpaceParentId": 4,
+        "url": "https://youtu.be/8bcZdUicYeY",
+        "elementId": 21,
+        "elementUUID": "e2fd2aa5-38d0-44e5-ab0b-734befd457b3",
+        "elementName": "Grundrisse Themes Avatar und 3D",
+        "elementCategory": "video",
+        "elementFileType": "url",
+        "elementEstimatedTimeMinutes": 1,
+        "elementDifficulty": 0
+      },
+      {
+        "$type": "LearningElement",
+        "elementDescription": "Informationsfolie zur Darstellung von Lernelementen in der 3D-Umgebung.",
+        "elementGoals": [""],
+        "elementMaxScore": 1,
+        "elementModel": "l-random",
+        "learningSpaceParentId": 4,
+        "url": "",
+        "elementId": 22,
+        "elementUUID": "f79ec7d2-dc22-4dc1-8bf0-19a2ee4ea71a",
+        "elementName": "Lernelemente",
+        "elementCategory": "pdf",
+        "elementFileType": "pdf",
+        "elementEstimatedTimeMinutes": 1,
+        "elementDifficulty": null
+      },
+      {
+        "$type": "LearningElement",
+        "elementDescription": "Informationsfolie zur Funktion und Darstellung des Adaptivitätselements in der 3D-Umgebung.",
+        "elementGoals": [""],
+        "elementMaxScore": 1,
+        "elementModel": "l-text-comicshelfsmall-1",
+        "learningSpaceParentId": 4,
+        "url": "",
+        "elementId": 23,
+        "elementUUID": "d5dfdb2f-0cd5-4ba0-826a-6571f07f0afa",
+        "elementName": "3D-Umgebung Adaptivitätselement",
+        "elementCategory": "pdf",
+        "elementFileType": "pdf",
+        "elementEstimatedTimeMinutes": 1,
+        "elementDifficulty": 0
+      },
+      {
+        "$type": "LearningElement",
+        "elementDescription": "Es ist Mittwoch. Das Jour fixe steht an. Das Team AdLer Aschaffenburg ist zusammen gekommen, um Lukas bei dessen Präsentation zu lauschen.",
+        "elementGoals": [""],
+        "elementMaxScore": 1,
+        "elementModel": "l-video-movieprojector-1",
+        "learningSpaceParentId": 5,
+        "url": "https://youtu.be/gG0RuXkE7ps",
+        "elementId": 24,
+        "elementUUID": "7eaadfcb-291f-4424-b4bf-60c9383ca8b9",
+        "elementName": "Vielen Dank",
+        "elementCategory": "video",
+        "elementFileType": "url",
+        "elementEstimatedTimeMinutes": 1,
+        "elementDifficulty": null
+      }
+    ],
+    "frameStory": {
+      "$type": "FrameStory",
+      "frameStoryIntro": "Es war einmal ein Team bestehend aus Mitgliedern der TH Aschaffenburg, der Hochschule Kempten und dem zfh in Koblenz. Betraut mit der Aufgabe Adaptive Lernräume zu gestalten, wuchsen sie in wenigen Jahren über sich hinaus...",
+      "frameStoryOutro": "Ausgerüstet mit der Erfahrung eines umfangreichen, preisgekrönten Projekts, endete die Gemeinschaft des AdLers zum 31.12.2025 und die Gefährt*innen zogen ihrer Wege..."
+    },
+    "worldId": 1
+  }
+}
