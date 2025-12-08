@@ -12,23 +12,33 @@ The AdLer Engine uses [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- added animation for learning elements for successfully completing them
-- added cookie banner
-- added content blocking for h5ps and videos based on users cookie decision
-
 ### Changed
 
 ### Removed
 
 ### Fixed
 
-- fixed falty badge lookup in learning space
-
 ### Deprecated
 
 ### Security
 
 </details>
+
+## Version 3.0.0 - 08.12.2025
+
+### Added
+
+- added animation for learning elements for successfully completing them
+- added cookie banner
+- added content blocking for h5ps and videos based on users cookie decision
+
+### Changed
+
+- bug report leads to github page for longevity functionality
+
+### Fixed
+
+- fixed falty badge lookup in learning space
 
 ## Version 2.11.0 - 05.11.2025
 
