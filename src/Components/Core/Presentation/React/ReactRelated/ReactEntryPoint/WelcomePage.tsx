@@ -56,7 +56,7 @@ export default function WelcomePage() {
 
       performShowcaseLogin();
     }
-  }, [isShowcase, loginUseCase, loadAvatarConfigUseCase]);
+  }, [isShowcase, loginUseCase, loadAvatarConfigUseCase, logger]);
 
   return (
     <div
