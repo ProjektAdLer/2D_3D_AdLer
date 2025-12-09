@@ -1,5 +1,5 @@
 import SideBarController from "../../../../../Core/Presentation/React/LearningSpaceDisplay/SideBar/SideBarController";
-import history from "history/browser";
+import history from "~ReactEntryPoint/history";
 import { mock } from "jest-mock-extended";
 import IControlsExplanationModalPresenter from "../../../../../Core/Presentation/React/GeneralComponents/ControlsExplanationModal/IControlsExplanationModalPresenter";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";

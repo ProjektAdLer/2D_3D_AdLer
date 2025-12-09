@@ -1,4 +1,4 @@
-import history from "history/browser";
+import history from "~ReactEntryPoint/history";
 import { inject, injectable } from "inversify";
 import { IAbstractPort } from "../Interfaces/IAbstractPort";
 import type ILoggerPort from "../Interfaces/ILoggerPort";

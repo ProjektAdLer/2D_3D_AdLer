@@ -1,6 +1,6 @@
 import type { ComponentID } from "src/Components/Core/Domain/Types/EntityTypes";
 import IExitModalController from "./IExitModalController";
-import history from "history/browser";
+import history from "~ReactEntryPoint/history";
 import bind from "bind-decorator";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
@@ -14,10 +14,10 @@ export default class ExitModalController implements IExitModalController {
 
   constructor(private viewModel: ExitModalViewModel) {
     this.getUserLocation = CoreDIContainer.get(
-      USECASE_TYPES.IGetUserLocationUseCase
+      USECASE_TYPES.IGetUserLocationUseCase,
     );
     this.setUserLocation = CoreDIContainer.get(
-      USECASE_TYPES.ISetUserLocationUseCase
+      USECASE_TYPES.ISetUserLocationUseCase,
     );
   }
 

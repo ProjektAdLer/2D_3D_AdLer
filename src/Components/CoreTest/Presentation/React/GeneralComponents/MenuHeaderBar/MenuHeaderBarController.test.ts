@@ -1,5 +1,5 @@
 import MenuHeaderBarController from "../../../../../Core/Presentation/React/GeneralComponents/MenuHeaderBar/MenuHeaderBarController";
-import history from "history/browser";
+import history from "~ReactEntryPoint/history";
 
 const mockHistoryBack = jest.spyOn(history, "back");
 const mockHistoryPush = jest.spyOn(history, "push");

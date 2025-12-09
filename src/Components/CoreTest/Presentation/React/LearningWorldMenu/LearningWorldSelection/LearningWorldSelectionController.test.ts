@@ -4,7 +4,7 @@ import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIConta
 import USECASE_TYPES from "../../../../../Core/DependencyInjection/UseCases/USECASE_TYPES";
 import LearningWorldSelectionController from "../../../../../Core/Presentation/React/LearningWorldMenu/LearningWorldSelection/LearningWorldSelectionController";
 import LearningWorldSelectionViewModel from "../../../../../Core/Presentation/React/LearningWorldMenu/LearningWorldSelection/LearningWorldSelectionViewModel";
-import history from "history/browser";
+import history from "~ReactEntryPoint/history";
 
 const viewModel = new LearningWorldSelectionViewModel();
 const loadWorldUseCaseMock = mock<ILoadLearningWorldUseCase>();

@@ -1,4 +1,4 @@
-import history from "history/browser";
+import history from "~ReactEntryPoint/history";
 import Observable from "../../../../../../Lib/Observable";
 import { CursorState } from "src/Components/Core/Domain/Types/CursorStateTypes";
 

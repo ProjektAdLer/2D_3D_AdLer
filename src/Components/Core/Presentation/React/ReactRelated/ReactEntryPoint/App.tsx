@@ -3,7 +3,7 @@ import LearningSpace from "./LearningSpace";
 import LearningSpaceMenu from "./LearningSpaceMenu";
 import React, { useEffect, useState } from "react";
 import WelcomePage from "./WelcomePage";
-import history from "history/browser";
+import history from "~ReactEntryPoint/history";
 import { Location, Update } from "history";
 import LearningWorldMenu from "./LearningWorldMenu";
 import { useInjection } from "inversify-react";

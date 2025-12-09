@@ -1,4 +1,4 @@
-import history from "history/browser";
+import history from "~ReactEntryPoint/history";
 import ExitModalController from "../../../../../Core/Presentation/React/LearningSpaceDisplay/ExitModal/ExitModalController";
 import ExitModalViewModel from "../../../../../Core/Presentation/React/LearningSpaceDisplay/ExitModal/ExitModalViewModel";
 import { mock } from "jest-mock-extended";
@@ -17,10 +17,10 @@ describe("ExitModalController", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind(
-      USECASE_TYPES.ISetUserLocationUseCase
+      USECASE_TYPES.ISetUserLocationUseCase,
     ).toConstantValue(setUserLocationMock);
     CoreDIContainer.rebind(
-      USECASE_TYPES.IGetUserLocationUseCase
+      USECASE_TYPES.IGetUserLocationUseCase,
     ).toConstantValue(getUserLocationMock);
   });
 

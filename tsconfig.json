@@ -28,7 +28,10 @@
     "baseUrl": ".",
     "paths": {
       "~ReactComponents/*": ["src/Components/Core/Presentation/React/*"],
-      "~DependencyInjection/*": ["src/Components/Core/DependencyInjection/*"]
+      "~DependencyInjection/*": ["src/Components/Core/DependencyInjection/*"],
+      "~ReactEntryPoint/*": [
+        "src/Components/Core/Presentation/React/ReactRelated/ReactEntryPoint/*"
+      ]
     }
   },
   "include": ["src", "public/ThirdParty", "src/draco-configuration.ts"],

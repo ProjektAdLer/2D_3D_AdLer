@@ -1,5 +1,5 @@
 import IMenuHeaderBarController from "./IMenuHeaderBarController";
-import history from "history/browser";
+import history from "~ReactEntryPoint/history";
 
 export default class MenuHeaderBarController
   implements IMenuHeaderBarController

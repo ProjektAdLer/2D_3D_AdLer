@@ -1,5 +1,5 @@
 import { Location } from "history";
-import history from "history/browser";
+import history from "~ReactEntryPoint/history";
 
 export enum LocationScope {
   homeScreen = "/",

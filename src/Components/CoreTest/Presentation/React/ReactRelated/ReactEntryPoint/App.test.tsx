@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
 import App from "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/App";
-import history from "history/browser";
+import history from "~ReactEntryPoint/history";
 import React from "react";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import IGetLoginStatusUseCase from "../../../../../Core/Application/UseCases/GetLoginStatus/IGetLoginStatusUseCase";
@@ -11,19 +11,19 @@ import { Provider } from "inversify-react";
 
 jest.mock(
   "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/LearningWorldMenu.tsx",
-  () => "mocked"
+  () => "mocked",
 );
 jest.mock(
   "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/LearningSpace.tsx",
-  () => "mocked"
+  () => "mocked",
 );
 jest.mock(
   "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/LearningSpaceMenu.tsx",
-  () => "mocked"
+  () => "mocked",
 );
 jest.mock(
   "../../../../../Core/Presentation/React/ReactRelated/ReactEntryPoint/WelcomePage.tsx",
-  () => "mocked"
+  () => "mocked",
 );
 const getLoginStatusUseCaseMock = mock<IGetLoginStatusUseCase>();
 
@@ -31,7 +31,7 @@ describe("App", () => {
   beforeAll(() => {
     CoreDIContainer.snapshot();
     CoreDIContainer.rebind<IGetLoginStatusUseCase>(
-      USECASE_TYPES.IGetLoginStatusUseCase
+      USECASE_TYPES.IGetLoginStatusUseCase,
     ).toConstantValue(getLoginStatusUseCaseMock);
   });
   beforeEach(() => {
@@ -48,7 +48,7 @@ describe("App", () => {
     render(
       <Provider container={CoreDIContainer}>
         <App />
-      </Provider>
+      </Provider>,
     );
   });
 
@@ -56,7 +56,7 @@ describe("App", () => {
     render(
       <Provider container={CoreDIContainer}>
         <App />
-      </Provider>
+      </Provider>,
     );
     history.push("/spacedisplay");
     expect(history.location.pathname).toBe("/spacedisplay");
@@ -70,7 +70,7 @@ describe("App", () => {
     render(
       <Provider container={CoreDIContainer}>
         <App />
-      </Provider>
+      </Provider>,
     );
     expect(history.location.pathname).toBe("/");
   });
@@ -79,7 +79,7 @@ describe("App", () => {
     render(
       <Provider container={CoreDIContainer}>
         <App />
-      </Provider>
+      </Provider>,
     );
     history.push("/spacemenu");
     expect(history.location.pathname).toBe("/spacemenu");
@@ -89,7 +89,7 @@ describe("App", () => {
     render(
       <Provider container={CoreDIContainer}>
         <App />
-      </Provider>
+      </Provider>,
     );
     history.push("/worldmenu");
     expect(history.location.pathname).toBe("/worldmenu");
@@ -99,7 +99,7 @@ describe("App", () => {
     render(
       <Provider container={CoreDIContainer}>
         <App />
-      </Provider>
+      </Provider>,
     );
     history.push("/spacemenu");
     expect(history.location.pathname).toBe("/spacemenu");

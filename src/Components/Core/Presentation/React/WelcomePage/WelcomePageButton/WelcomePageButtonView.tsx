@@ -2,7 +2,7 @@ import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import WelcomePageButtonViewModel from "./WelcomePageButtonViewModel";
-import history from "history/browser";
+import history from "~ReactEntryPoint/history";
 import useObservable from "~ReactComponents/ReactRelated/CustomHooks/useObservable";
 import { useInjection } from "inversify-react";
 import IGetLoginStatusUseCase from "src/Components/Core/Application/UseCases/GetLoginStatus/IGetLoginStatusUseCase";

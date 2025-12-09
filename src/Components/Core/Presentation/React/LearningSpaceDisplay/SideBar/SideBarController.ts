@@ -1,4 +1,4 @@
-import history from "history/browser";
+import history from "~ReactEntryPoint/history";
 import ISideBarController from "./ISideBarController";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import PRESENTATION_TYPES from "~DependencyInjection/Presentation/PRESENTATION_TYPES";

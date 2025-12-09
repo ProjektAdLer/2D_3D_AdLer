@@ -1,7 +1,7 @@
 import { AdLerUIComponent } from "src/Components/Core/Types/ReactTypes";
 import StyledButton from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledButton";
 import StyledModal from "~ReactComponents/ReactRelated/ReactBaseComponents/StyledModal";
-import history from "history/browser";
+import history from "~ReactEntryPoint/history";
 import homeIcon from "../../../../../../Assets/icons/home.svg";
 import useBuilder from "~ReactComponents/ReactRelated/CustomHooks/useBuilder";
 import ReturnHomeModalViewModel from "./ReturnHomeModalViewModel";

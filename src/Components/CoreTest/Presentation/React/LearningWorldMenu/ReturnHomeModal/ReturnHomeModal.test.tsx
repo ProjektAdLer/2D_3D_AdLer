@@ -1,4 +1,4 @@
-import history from "history/browser";
+import history from "~ReactEntryPoint/history";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
 import ReturnHomeModalViewModel from "../../../../../Core/Presentation/React/LearningWorldMenu/ReturnHomeModal/ReturnHomeModalViewModel";
 import React from "react";

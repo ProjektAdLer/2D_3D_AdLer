@@ -1,4 +1,4 @@
-import history from "history/browser";
+import history from "~ReactEntryPoint/history";
 import { mock } from "jest-mock-extended";
 import AbstractPort from "../../../../Core/Application/Ports/AbstractPort/AbstractPort";
 import Logger from "../../../../Core/Adapters/Logger/Logger";

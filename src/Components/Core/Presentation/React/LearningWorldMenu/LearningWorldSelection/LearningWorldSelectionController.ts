@@ -3,7 +3,7 @@ import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import ILearningWorldSelectionController from "./ILearningWorldSelectionController";
 import LearningWorldSelectionViewModel from "./LearningWorldSelectionViewModel";
-import history from "history/browser";
+import history from "~ReactEntryPoint/history";
 import bind from "bind-decorator";
 
 export default class LearningWorldSelectionController

@@ -23,7 +23,7 @@ import ILoadAvatarConfigUseCase from "src/Components/Core/Application/UseCases/L
 import USECASE_TYPES from "~DependencyInjection/UseCases/USECASE_TYPES";
 import BUILDER_TYPES from "~DependencyInjection/Builders/BUILDER_TYPES";
 import StyledButton from "../ReactBaseComponents/StyledButton";
-import history from "history/browser";
+import history from "~ReactEntryPoint/history";
 import CookieModal from "~ReactComponents/WelcomePage/CookieModal/CookieModal";
 import CoreDIContainer from "~DependencyInjection/CoreDIContainer";
 import ILoggerPort from "src/Components/Core/Application/Ports/Interfaces/ILoggerPort";

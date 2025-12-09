@@ -2,7 +2,7 @@ import { fireEvent, render, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import React from "react";
 import useBuilderMock from "../../ReactRelated/CustomHooks/useBuilder/useBuilderMock";
-import history from "history/browser";
+import history from "~ReactEntryPoint/history";
 import { Provider } from "inversify-react";
 import CoreDIContainer from "../../../../../Core/DependencyInjection/CoreDIContainer";
 import { mock } from "jest-mock-extended";

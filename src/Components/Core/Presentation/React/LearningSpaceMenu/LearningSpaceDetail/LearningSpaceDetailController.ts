@@ -1,5 +1,5 @@
 import ILearningSpaceDetailController from "./ILearningSpaceDetailController";
-import history from "history/browser";
+import history from "~ReactEntryPoint/history";
 import LearningSpaceDetailViewModel from "./LearningSpaceDetailViewModel";
 import bind from "bind-decorator";
 
