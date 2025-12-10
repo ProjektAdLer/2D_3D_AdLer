@@ -175,8 +175,8 @@ describe("Welcome Page", () => {
     expect(buttonSectionShowcase).toBeInTheDocument();
   });
 
-  test(" should call logger with error if showcase login fails", async () => {
-    process.env.REACT_APP_IS_SHOWCASE = "true";
+  test("should call logger with error if filebased backend login fails", async () => {
+    process.env.REACT_APP_USE_FILEBASED_BACKEND = "true";
     const mockError = new Error("Login failed");
     mockLoginUseCase.executeAsync.mockRejectedValueOnce(mockError);
 

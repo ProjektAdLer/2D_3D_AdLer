@@ -1,5 +1,6 @@
 import "reflect-metadata";
 import "@testing-library/jest-dom";
+import "fake-indexeddb/auto";
 
 import { config } from "./src/config";
 import { toBeNullOrEqual } from "./src/Components/CoreTest/JestExtensions/toBeNullOrAny";

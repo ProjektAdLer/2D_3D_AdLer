@@ -4,13 +4,15 @@ import { XAPIEvent } from "../../../Core/Application/UseCases/ScoreH5PLearningEl
 import AdaptivityElementQuestionSubmissionTO from "../../../Core/Application/DataTransferObjects/AdaptivityElement/AdaptivityElementQuestionSubmissionTO";
 import { BackendAvatarConfigTO } from "../../../Core/Application/DataTransferObjects/BackendAvatarConfigTO";
 import ILocalStoragePort from "../../../Core/Application/Ports/Interfaces/ILocalStoragePort";
-import WorldStorageAdapter from "../../../Core/Adapters/WorldStorageAdapter/WorldStorageAdapter";
+import IWorldStorageAdapter from "../../../Core/Application/Ports/WorldStoragePort/IWorldStorageAdapter";
+import ILoggerPort from "../../../Core/Application/Ports/Interfaces/ILoggerPort";
 
 // Mock fetch globally
 global.fetch = jest.fn();
 
 const localStoragePortMock = mock<ILocalStoragePort>();
-//const worldStorageAdapterMock = mock<IWorldStorageAdapter>();
+const worldStorageAdapterMock = mock<IWorldStorageAdapter>();
+const loggerMock = mock<ILoggerPort>();
 
 const mockWorldsJson = {
   worlds: [
@@ -101,9 +103,15 @@ describe("FileBasedBackendAdapter", () => {
   const fetchMock = global.fetch as jest.MockedFunction<typeof fetch>;
 
   beforeEach(() => {
+    // Setup worldStorageAdapter mock to return empty results by default
+    worldStorageAdapterMock.init.mockResolvedValue();
+    worldStorageAdapterMock.getAllWorlds.mockResolvedValue([]);
+    worldStorageAdapterMock.worldExists.mockResolvedValue(false);
+
     systemUnderTest = new HybridBackendAdapter(
       localStoragePortMock,
-      new WorldStorageAdapter(),
+      worldStorageAdapterMock,
+      loggerMock,
     );
     fetchMock.mockClear();
     localStoragePortMock.getItem.mockReturnValue(null);
@@ -401,7 +409,7 @@ describe("FileBasedBackendAdapter", () => {
       expect(result).toBe(false);
     });
 
-    test("should return false for unknown verb type", async () => {
+    test("should return true for unknown verb type (event processed successfully without scoring)", async () => {
       const h5pMock = mock<XAPIEvent>();
       h5pMock.verb = {
         id: "http://adlnet.gov/expapi/verbs/unknown",
@@ -415,7 +423,9 @@ describe("FileBasedBackendAdapter", () => {
         rawH5PEvent: h5pMock,
       });
 
-      expect(result).toBe(false);
+      // For non-scoring events (interacted, progressed, unknown, etc.),
+      // return true to indicate the event was processed without error
+      expect(result).toBe(true);
     });
   });
 
@@ -651,7 +661,8 @@ describe("FileBasedBackendAdapter", () => {
       // Recreate adapter to pick up new PUBLIC_URL
       const testAdapter = new HybridBackendAdapter(
         localStoragePortMock,
-        new WorldStorageAdapter(),
+        worldStorageAdapterMock,
+        loggerMock,
       );
 
       fetchMock.mockResolvedValueOnce({
