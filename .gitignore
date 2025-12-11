@@ -17,3 +17,9 @@ env-config.js
 
 # Claude Code project instructions
 claude.md
+
+# AI instructions
+GEMINI.md
+
+# Documentation (generated)
+/docs

@@ -34,8 +34,8 @@ Diese Tabelle wird zu jedem neuen Release von oben aktualisiert.
 ## Verfügbare Commands
 
 - `$ npm start` startet den Dev-Server
-- `$ npm run build` erstellt die HTML-Dateien
-- `$ npm run build-showcase` erstellt eine Demo-Version mit Mock-Daten
+- `$ npm run build` erstellt den herkömmlichen Web-Build, der mit der AdLer-Backend-Infrastruktur funktioniert
+- `$ npm run build-filebased` erstellt die Webserver-Edition von AdLer, die standalone ohne Backend genutzt werden kann. Diese Variante ist im Repository [2D_3D_AdLer-Filebased](https://github.com/ProjektAdLer/2D_3D_AdLer-Filebased) verfügbar, nicht im Main-Repository.
 - `$ npm run test` startet die Tests
 
 ## Debugging
